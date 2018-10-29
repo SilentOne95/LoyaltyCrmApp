@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">Sketch - loyality app</string>
+    <string name="app_name">Loyalty app</string>
+    <!-- Menu categories -->
+    <string name="nav_header_title">My header title</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_account">My Account</string>
+    <string name="menu_products">Products</string>
+    <string name="menu_coupons">Coupons</string>
+    <string name="menu_map">Shops</string>
+    <string name="menu_terms">Terms &amp; Conditions</string>
+    <string name="menu_contact">Contact</string>
 </resources>
