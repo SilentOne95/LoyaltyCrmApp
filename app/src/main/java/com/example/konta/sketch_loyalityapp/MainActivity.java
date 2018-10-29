@@ -10,10 +10,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    static final ArrayList<Item> itemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        for (int i = 0; i < 10; i++){
+            itemList.add(new Item("Product Name", R.drawable.product_image));
+        }
+        GridItemAdapter adapter = new GridItemAdapter(this, itemList);
+        final GridView gridView = findViewById(R.id.grid_view);
+        gridView.setAdapter(adapter);
     }
 
     @Override
