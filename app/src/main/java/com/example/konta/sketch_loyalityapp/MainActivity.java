@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
@@ -74,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
-
     }
 
     @Override
