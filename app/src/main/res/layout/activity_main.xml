@@ -23,22 +23,10 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-        <ImageView
-            android:id="@+id/image_special_offer"
+        <FrameLayout
+            android:id="@+id/switch_view_layout"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            app:srcCompat="@drawable/special_offer" />
-
-        <GridView
-            android:id="@+id/grid_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:verticalSpacing="16dp"
-            android:horizontalSpacing="8dp"
-            android:layout_margin="8dp"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth"
-            android:gravity="center" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

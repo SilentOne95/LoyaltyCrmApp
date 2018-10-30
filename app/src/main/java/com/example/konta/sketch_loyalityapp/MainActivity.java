@@ -2,6 +2,8 @@ package com.example.konta.sketch_loyalityapp;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -10,14 +12,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    static final ArrayList<Item> itemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+        // Display chosen screen as a default one after app is launched
+        displaySelectedScreen(R.id.nav_home);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -66,20 +67,14 @@ public class MainActivity extends AppCompatActivity {
                         // Close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
+                        // Update the UI based on the item selected
+                        displaySelectedScreen(menuItem.getItemId());
 
                         return true;
                     }
                 }
         );
 
-        for (int i = 0; i < 10; i++){
-            itemList.add(new Item("Product Name", R.drawable.product_image));
-        }
-        GridItemAdapter adapter = new GridItemAdapter(this, itemList);
-        final GridView gridView = findViewById(R.id.grid_view);
-        gridView.setAdapter(adapter);
     }
 
     @Override
@@ -90,5 +85,30 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void displaySelectedScreen(int itemId) {
+        // Creating fragment object
+        Fragment fragment = null;
+
+        // Initializing the fragment object which is selected
+        switch (itemId) {
+            case R.id.nav_home:
+                fragment = new HomeFragment();
+                break;
+            case R.id.nav_products:
+                fragment = new ProductsFragment();
+                break;
+            case R.id.nav_coupons:
+                fragment = new CouponsFragment();
+                break;
+        }
+
+        // Replacing the fragment
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.switch_view_layout, fragment);
+            ft.commit();
+        }
     }
 }
