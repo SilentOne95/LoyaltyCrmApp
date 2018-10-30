@@ -18,7 +18,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         for (int i = 0; i < 10; i++) {
@@ -28,7 +28,6 @@ public class HomeFragment extends Fragment {
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
 
-        // Inflate the layout for this fragment
         return rootView;
     }
 
