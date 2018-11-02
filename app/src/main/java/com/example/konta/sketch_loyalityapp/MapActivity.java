@@ -1,6 +1,7 @@
 package com.example.konta.sketch_loyalityapp;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,27 +10,29 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MapActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_map);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setTitle("Map");
+
+        Toolbar toolbar = findViewById(R.id.map_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.map_drawer_layout);
 
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
@@ -55,10 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        // Display chosen screen as a default one after app is launched
-        displaySelectedScreen(R.id.nav_home);
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.map_nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -78,10 +78,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        getMenuInflater().inflate(R.menu.map_drawer_view, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected (MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.action_settings:
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -111,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         // Replacing the fragment
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.switch_view_layout, fragment);
+            ft.replace(R.id.map_switch_view_layout, fragment);
             ft.commit();
         }
     }

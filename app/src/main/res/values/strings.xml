@@ -9,4 +9,5 @@
     <string name="menu_map">Shops</string>
     <string name="menu_terms">Terms &amp; Conditions</string>
     <string name="menu_contact">Contact</string>
+    <string name="action_settings">Settings</string>
 </resources>
