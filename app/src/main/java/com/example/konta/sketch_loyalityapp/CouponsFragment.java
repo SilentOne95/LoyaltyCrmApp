@@ -1,6 +1,5 @@
 package com.example.konta.sketch_loyalityapp;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,10 +11,6 @@ import android.widget.GridView;
 
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CouponsFragment extends Fragment {
 
     static final ArrayList<Item> itemList = new ArrayList<>();
@@ -30,7 +25,7 @@ public class CouponsFragment extends Fragment {
             itemList.add(new Item("Product Name", R.drawable.product_image));
         }
         GridItemAdapter adapter = new GridItemAdapter(getActivity(), itemList);
-        MyGridView gridView = rootView.findViewById(R.id.grid_view);
+        final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
 
         return rootView;

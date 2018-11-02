@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
             itemList.add(new Item("Product Name", R.drawable.product_image));
         }
         GridItemAdapter adapter = new GridItemAdapter(getActivity(), itemList);
-        MyGridView gridView = rootView.findViewById(R.id.grid_view);
+        final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
 
         return rootView;
