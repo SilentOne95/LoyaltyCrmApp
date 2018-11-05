@@ -38,7 +38,8 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".MapActivity" />
+        <activity android:name=".TestActivity" />
     </application>
 
 </manifest>

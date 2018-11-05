@@ -1,6 +1,5 @@
 package com.example.konta.sketch_loyalityapp;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -103,9 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new CouponsFragment();
                 break;
             case R.id.nav_map:
-                openMapActivity();
+                fragment = new GoogleMapFragment();
                 break;
-
         }
 
         // Replacing the fragment
@@ -114,11 +112,5 @@ public class MainActivity extends AppCompatActivity {
             ft.replace(R.id.switch_view_layout, fragment);
             ft.commit();
         }
-    }
-
-    public void openMapActivity() {
-        // Sending intent to start new Activity - map
-        Intent intent = new Intent(this, MapActivity.class);
-        startActivity(intent);
     }
 }
