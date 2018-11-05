@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp;
+package com.example.konta.sketch_loyalityapp.Utils;
 
 public class Item {
 
@@ -6,9 +6,9 @@ public class Item {
     private int mImageResourceId;
 
     /**
-     * Create a new GridViewItem object.
+     * Create a new GridViewItem or Navigation Drawer object.
      *
-     * @param itemTitle is the name of the product
+     * @param itemTitle is the name of the product or category
      * @param imageResourceId is drawable reference ID that corresponds to the Android version
      */
     public Item(String itemTitle, int imageResourceId) {
@@ -16,13 +16,9 @@ public class Item {
         mImageResourceId = imageResourceId;
     }
 
-    /**
-     * Get the title of the item.
-     */
+    /** Get the title of the item. */
     public String getItemTitle() { return mItemTitle; }
 
-    /**
-     * Get the image reource Id.
-     */
+    /** Get the image resource Id. */
     public int getResourceId() { return mImageResourceId; }
 }

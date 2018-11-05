@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HomeFragment">
+    tools:context=".UI.HomeFragment">
 
     <ImageView
         android:id="@+id/image_special_offer"
@@ -14,7 +14,7 @@
         android:layout_height="150dp"
         android:contentDescription="Sample image"/>
 
-    <com.example.konta.sketch_loyalityapp.MyGridView
+    <com.example.konta.sketch_loyalityapp.Utils.CustomGridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

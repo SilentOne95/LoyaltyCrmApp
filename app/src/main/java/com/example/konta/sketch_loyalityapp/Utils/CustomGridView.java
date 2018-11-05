@@ -1,19 +1,23 @@
-package com.example.konta.sketch_loyalityapp;
+package com.example.konta.sketch_loyalityapp.Utils;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
-public class MyGridView extends GridView {
-    public MyGridView(Context context) {
+/**
+ * Custom class that prevents from height changes due to nested ScrollViews.
+ */
+public class CustomGridView extends GridView {
+
+    public CustomGridView(Context context) {
         super(context);
     }
 
-    public MyGridView(Context context, AttributeSet attrs) {
+    public CustomGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyGridView(Context context, AttributeSet attrs, int defStyle) {
+    public CustomGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

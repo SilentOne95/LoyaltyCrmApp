@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp;
+package com.example.konta.sketch_loyalityapp.Utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

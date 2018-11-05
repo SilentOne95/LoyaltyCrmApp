@@ -1,5 +1,6 @@
-package com.example.konta.sketch_loyalityapp;
+package com.example.konta.sketch_loyalityapp.UI;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.konta.sketch_loyalityapp.R;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 public class MainActivity extends AppCompatActivity {
 
+    private static final String BACK_STACK_ROOT_TAG = "root_fragment";
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -54,11 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        // Display chosen screen as a default one after app is launched
-        displaySelectedScreen(R.id.nav_home);
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
+        NavigationView mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -74,6 +79,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        Menu menu = mNavigationView.getMenu();
+        menu.add(0,0,0, "Home").setIcon(R.drawable.ic_menu_home);
+        menu.add(0,1,0, "My Account").setIcon(R.drawable.ic_menu_account);
+        menu.add(0,2,0, "Products").setIcon(R.drawable.ic_menu_cube);
+        menu.add(0,3,0, "Coupons").setIcon(R.drawable.ic_menu_coupon);
+        menu.add(0,4,0, "Shops").setIcon(R.drawable.ic_menu_marker);
+        menu.add(0,5,0, "Terms & Conditions").setIcon(R.drawable.ic_menu_terms);
+        menu.add(0,6,0, "Contact").setIcon(R.drawable.ic_menu_info);
+
+        // Display chosen screen as a default one after app is launched
+        displaySelectedScreen(R.id.nav_home);
     }
 
     @Override
@@ -92,16 +109,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Initializing the fragment object which is selected
         switch (itemId) {
-            case R.id.nav_home:
+            case 0:
                 fragment = new HomeFragment();
                 break;
-            case R.id.nav_products:
+            case 2:
                 fragment = new ProductsFragment();
                 break;
-            case R.id.nav_coupons:
+            case 3:
                 fragment = new CouponsFragment();
                 break;
-            case R.id.nav_map:
+            case 4:
                 fragment = new GoogleMapFragment();
                 break;
         }
@@ -112,5 +129,22 @@ public class MainActivity extends AppCompatActivity {
             ft.replace(R.id.switch_view_layout, fragment);
             ft.commit();
         }
+    }
+
+    public String loadJSONFromAsset(Context context) {
+        String json = null;
+
+        try {
+            InputStream inputStream = context.getAssets().open("category.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }

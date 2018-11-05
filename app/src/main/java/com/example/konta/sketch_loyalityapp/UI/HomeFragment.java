@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp;
+package com.example.konta.sketch_loyalityapp.UI;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.example.konta.sketch_loyalityapp.Utils.GridItemAdapter;
+import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.Utils.Item;
+
 import java.util.ArrayList;
 
-public class ProductsFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
     static final ArrayList<Item> itemList = new ArrayList<>();
 
@@ -19,7 +23,7 @@ public class ProductsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_products, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         for (int i = 0; i < 10; i++) {
             itemList.add(new Item("Product Name", R.drawable.product_image));
@@ -30,10 +34,11 @@ public class ProductsFragment extends Fragment {
 
         return rootView;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Products");
+        getActivity().setTitle("Home");
     }
 }

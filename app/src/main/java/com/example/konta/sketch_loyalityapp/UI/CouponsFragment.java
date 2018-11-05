@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp;
+package com.example.konta.sketch_loyalityapp.UI;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+
+import com.example.konta.sketch_loyalityapp.Utils.GridItemAdapter;
+import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.Utils.Item;
 
 import java.util.ArrayList;
 
