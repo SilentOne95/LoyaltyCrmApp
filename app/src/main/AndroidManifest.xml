@@ -32,14 +32,11 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD0cgFREV2aq8kVwL7ZlVPGFC_Pf1MGTlI" />
+            android:value="MyApp_ApiKey" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
-        <activity android:name=".MapActivity" />
-        <activity android:name=".TestActivity" />
     </application>
 
 </manifest>
