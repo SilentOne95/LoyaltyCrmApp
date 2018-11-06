@@ -5,16 +5,21 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.MapView;
 
-public class CustomClass extends MapView {
+/**
+ * Fixing problem with moving map upwards and downwards as parent of MapFragment (NestedScrollView)
+ * was taking control over certain touch events.
+ */
+public class CustomMapFrameLayout extends FrameLayout {
 
-    public CustomClass(@NonNull Context context) {
+    public CustomMapFrameLayout(@NonNull Context context) {
         super(context);
     }
 
-    public CustomClass(@NonNull Context context, @Nullable AttributeSet attributeSet) {
+    public CustomMapFrameLayout(@NonNull Context context, @Nullable AttributeSet attributeSet) {
         super(context, attributeSet, 0);
     }
 
