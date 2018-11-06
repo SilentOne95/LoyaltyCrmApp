@@ -67,28 +67,29 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        NavigationView mNavigationView = findViewById(R.id.nav_view);
+        final NavigationView mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        // Set item as selected to persist highlight
-                        menuItem.setChecked(true);
                         // Close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
                         // Update the UI based on the item selected
                         displaySelectedScreen(menuItem.getItemId());
 
+                        // Uncheck all checked menu items
+                        int size = mNavigationView.getMenu().size();
+                        for (int i = 0; i < size; i++) {
+                            mNavigationView.getMenu().getItem(i).setChecked(false);
+                        }
+                        // Set item as selected to persist highlight
+                        menuItem.setChecked(true);
+
                         return true;
                     }
                 }
         );
-
-        // Display chosen screen as a default one after app is launched
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.switch_view_layout, new HomeFragment());
-        ft.commit();
 
         // Reading JSON file from assets
         try {
@@ -122,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        // Display chosen screen as a default one after app is launched
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.switch_view_layout, new HomeFragment());
+        ft.commit();
+        mNavigationView.getMenu().getItem(0).setChecked(true);
     }
 
     @Override
