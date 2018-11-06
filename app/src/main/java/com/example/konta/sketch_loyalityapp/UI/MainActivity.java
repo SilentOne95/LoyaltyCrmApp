@@ -1,6 +1,6 @@
 package com.example.konta.sketch_loyalityapp.UI;
 
-import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -17,13 +17,18 @@ import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String BACK_STACK_ROOT_TAG = "root_fragment";
     private DrawerLayout mDrawerLayout;
+    private String json;
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,14 +85,37 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        Menu menu = mNavigationView.getMenu();
-        menu.add(0,0,0, "Home").setIcon(R.drawable.ic_menu_home);
-        menu.add(0,1,0, "My Account").setIcon(R.drawable.ic_menu_account);
-        menu.add(0,2,0, "Products").setIcon(R.drawable.ic_menu_cube);
-        menu.add(0,3,0, "Coupons").setIcon(R.drawable.ic_menu_coupon);
-        menu.add(0,4,0, "Shops").setIcon(R.drawable.ic_menu_marker);
-        menu.add(0,5,0, "Terms & Conditions").setIcon(R.drawable.ic_menu_terms);
-        menu.add(0,6,0, "Contact").setIcon(R.drawable.ic_menu_info);
+        try {
+            InputStream inputStream = this.getAssets().open("category.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray array = object.getJSONArray("menu");
+
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject insideObj = array.getJSONObject(i);
+                String title = insideObj.getString("categoryTitle");
+                String icon = insideObj.getString("categoryIcon");
+
+                Resources resources = this.getResources();
+                final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
+                menu = mNavigationView.getMenu();
+                menu.add(0, i, 0, title).setIcon(resourceId);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // Display chosen screen as a default one after app is launched
         displaySelectedScreen(R.id.nav_home);
@@ -129,22 +157,5 @@ public class MainActivity extends AppCompatActivity {
             ft.replace(R.id.switch_view_layout, fragment);
             ft.commit();
         }
-    }
-
-    public String loadJSONFromAsset(Context context) {
-        String json = null;
-
-        try {
-            InputStream inputStream = context.getAssets().open("category.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return json;
     }
 }
