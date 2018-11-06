@@ -85,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+        // Display chosen screen as a default one after app is launched
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.switch_view_layout, new HomeFragment());
+        ft.commit();
+
+        // Reading JSON file from assets
         try {
             InputStream inputStream = this.getAssets().open("category.json");
             int size = inputStream.available();
@@ -93,11 +99,11 @@ public class MainActivity extends AppCompatActivity {
             inputStream.close();
             json = new String(buffer, "UTF-8");
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // Extracting objects that has been built up from parsing the given JSON file
         try {
             JSONObject object = new JSONObject(json);
             JSONArray array = object.getJSONArray("menu");
@@ -116,9 +122,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        // Display chosen screen as a default one after app is launched
-        displaySelectedScreen(R.id.nav_home);
     }
 
     @Override
