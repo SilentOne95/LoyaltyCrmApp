@@ -1,0 +1,17 @@
+{
+  "layoutTitle": "Home",
+  "specialImage": "special_offer",
+  "offers": [
+    {"offerTitle": "Offer 1", "offerImage": "product_image"},
+    {"offerTitle": "Offer 2", "offerImage": "product_image"},
+    {"offerTitle": "Offer 3", "offerImage": "product_image"},
+    {"offerTitle": "Offer 4", "offerImage": "product_image"},
+    {"offerTitle": "Offer 5", "offerImage": "product_image"},
+    {"offerTitle": "Offer 6", "offerImage": "product_image"},
+    {"offerTitle": "Offer 7", "offerImage": "product_image"},
+    {"offerTitle": "Offer 8", "offerImage": "product_image"},
+    {"offerTitle": "Offer 9", "offerImage": "product_image"},
+    {"offerTitle": "Offer 10", "offerImage": "product_image"}
+  ],
+  "numColumns": 2
+}
