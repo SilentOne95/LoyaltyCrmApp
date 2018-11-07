@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private String json;
-    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Reading JSON file from assets
         try {
-            InputStream inputStream = this.getAssets().open("category.json");
+            InputStream inputStream = this.getAssets().open("menu.json");
             int size = inputStream.available();
             byte[] buffer = new byte[size];
             inputStream.read(buffer);
@@ -107,17 +106,29 @@ public class MainActivity extends AppCompatActivity {
         // Extracting objects that has been built up from parsing the given JSON file
         try {
             JSONObject object = new JSONObject(json);
-            JSONArray array = object.getJSONArray("menu");
+            JSONArray arrayOne = object.getJSONArray("sectionOne");
 
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject insideObj = array.getJSONObject(i);
+            for (int i = 0; i < arrayOne.length(); i++) {
+                JSONObject insideObj = arrayOne.getJSONObject(i);
                 String title = insideObj.getString("categoryTitle");
                 String icon = insideObj.getString("categoryIcon");
 
                 Resources resources = this.getResources();
                 final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
-                menu = mNavigationView.getMenu();
-                menu.add(0, i, 0, title).setIcon(resourceId);
+                Menu menuOne = mNavigationView.getMenu();
+                menuOne.add(0, i, 0, title).setIcon(resourceId);
+            }
+
+            JSONArray arrayTwo = object.getJSONArray("sectionTwo");
+            for (int i = 0; i < arrayTwo.length(); i++) {
+                JSONObject insideObj = arrayTwo.getJSONObject(i);
+                String title = insideObj.getString("categoryTitle");
+                String icon = insideObj.getString("categoryIcon");
+
+                Resources resources = this.getResources();
+                final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
+                Menu menuTwo = mNavigationView.getMenu();
+                menuTwo.add(1, i, 0, title).setIcon(resourceId);
             }
 
         } catch (JSONException e) {

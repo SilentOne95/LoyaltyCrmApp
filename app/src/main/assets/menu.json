@@ -1,11 +1,13 @@
 {
-	"menu": [
+	"sectionOne": [
         {"categoryTitle": "Home", "categoryIcon": "ic_menu_home"},
-		{"categoryTitle": "My Account", "categoryIcon": "ic_menu_account"},
 		{"categoryTitle": "Products", "categoryIcon": "ic_menu_cube"},
 		{"categoryTitle": "Coupons", "categoryIcon": "ic_menu_coupon"},
 		{"categoryTitle": "Shops", "categoryIcon": "ic_menu_marker"},
-		{"categoryTitle": "Terms & Conditions", "categoryIcon": "ic_menu_terms"},
-		{"categoryTitle": "Contact", "categoryIcon": "ic_menu_info"}
+        {"categoryTitle": "My Account", "categoryIcon": "ic_menu_account"}
+	],
+	"sectionTwo": [
+      {"categoryTitle": "Terms & Conditions", "categoryIcon": "ic_menu_terms"},
+      {"categoryTitle": "Contact", "categoryIcon": "ic_menu_info"}
 	]
 }
