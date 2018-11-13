@@ -161,13 +161,13 @@ public class MainActivity extends AppCompatActivity {
             case 0:
                 fragment = new HomeFragment();
                 break;
-            case 2:
+            case 1:
                 fragment = new ProductsFragment();
                 break;
-            case 3:
+            case 2:
                 fragment = new CouponsFragment();
                 break;
-            case 4:
+            case 3:
                 fragment = new GoogleMapFragment();
                 break;
         }
