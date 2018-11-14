@@ -20,23 +20,28 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.Utils.MyClusterItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
 
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    private SupportMapFragment mapFragment;
     private GoogleMap mMap;
     View mView;
 
@@ -45,13 +50,21 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
     Location mLastLocation;
     Marker mCurrentLocationMarker;
 
+    private static final LatLng WARSAW = new LatLng(52.237049, 21.017532);
+    private static final LatLng WARSAW2 = new LatLng(52.33333, 21.212121);
+    private static final LatLng WARSAW3 = new LatLng(51.974544, 20.938222);
+    private static final LatLng WARSAW4 = new LatLng(51.974544, 21.212121);
+    private static final LatLng WARSAW5 = new LatLng(52.33333, 20.938222);
+    private static final LatLng WARSAW6 = new LatLng(52.33333, 21.017532);
+    private ClusterManager<MyClusterItem> mClusterManager;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_google_map, container, false);
 
-        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment == null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -105,6 +118,40 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+        // Setting couple markers
+        Marker mWarsaw = mMap.addMarker(new MarkerOptions()
+                .position(WARSAW)
+                .title("Warsaw")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+        mWarsaw.setTag(0);
+        Marker mWarsaw2 = mMap.addMarker(new MarkerOptions()
+                .position(WARSAW2)
+                .title("Warsaw2")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+        mWarsaw2.setTag(0);
+        Marker mWarsaw3 = mMap.addMarker(new MarkerOptions()
+                .position(WARSAW3)
+                .title("Warsaw3")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        mWarsaw3.setTag(0);
+        Marker mWarsaw4 = mMap.addMarker(new MarkerOptions()
+                .position(WARSAW4)
+                .title("Warsaw4")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        mWarsaw4.setTag(0);
+        Marker mWarsaw5 = mMap.addMarker(new MarkerOptions()
+                .position(WARSAW5)
+                .title("Warsaw5")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+        mWarsaw5.setTag(0);
+        Marker mWarsaw6 = mMap.addMarker(new MarkerOptions()
+                .position(WARSAW6)
+                .title("Warsaw6")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+        mWarsaw6.setTag(0);
+
+        setUpCluster();
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -201,6 +248,51 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
                     Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_LONG).show();
                 }
             }
+        }
+    }
+
+    private void setUpCluster() {
+        // Add default geo location to set camera on certain country
+        LatLng poland = new LatLng(51.940554, 19.069815);
+
+        // Move and zoom camera to certain position
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(poland).zoom(5.8f).build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.animateCamera(cameraUpdate);
+        
+        // Initialize the manager with the context and the map
+        mClusterManager = new ClusterManager<>(getContext(), mMap);
+        
+        // Point the map's listeners at the listeners implemented by the cluster manager
+        mMap.setOnCameraIdleListener(mClusterManager);
+        mMap.setOnMarkerClickListener(mClusterManager);
+        
+        // Add cluster items (markers) to the cluster manager
+        addItemsClusterManager();
+    }
+
+    private void addItemsClusterManager() {
+        // Set some lat/lng coordinates to start with
+        double lat = 51.514516;
+        double lng = 19.191919;
+
+        // Set the title and snippet strings
+        String title = "This is the title";
+        String snippet = "and this is the snippet";
+
+        // Create a cluster item for the marker and set the title and snippet using the const
+        MyClusterItem infoWindowItem = new MyClusterItem(lat, lng, title, snippet);
+
+        // Add the cluster item (marker) to the cluster manager
+        mClusterManager.addItem(infoWindowItem);
+
+        // Add ten cluster items in close proximity, for purposes of this example
+        for (int i = 0; i < 10; i++) {
+            double offset = i / 60d;
+            lat = lat + offset;
+            lng = lng + offset;
+            MyClusterItem offsetItem = new MyClusterItem(lat, lng);
+            mClusterManager.addItem(offsetItem);
         }
     }
 }
