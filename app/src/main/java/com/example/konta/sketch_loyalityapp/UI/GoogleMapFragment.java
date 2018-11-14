@@ -31,11 +31,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterManager;
 
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
@@ -44,18 +41,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
 
     private GoogleMap mMap;
     View mView;
-
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mCurrentLocationMarker;
-
-    private static final LatLng WARSAW = new LatLng(52.237049, 21.017532);
-    private static final LatLng WARSAW2 = new LatLng(52.33333, 21.212121);
-    private static final LatLng WARSAW3 = new LatLng(51.974544, 20.938222);
-    private static final LatLng WARSAW4 = new LatLng(51.974544, 21.212121);
-    private static final LatLng WARSAW5 = new LatLng(52.33333, 20.938222);
-    private static final LatLng WARSAW6 = new LatLng(52.33333, 21.017532);
     private ClusterManager<MyClusterItem> mClusterManager;
 
     @Override
@@ -119,38 +106,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
             mMap.setMyLocationEnabled(true);
         }
 
-        // Setting couple markers
-        Marker mWarsaw = mMap.addMarker(new MarkerOptions()
-                .position(WARSAW)
-                .title("Warsaw")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-        mWarsaw.setTag(0);
-        Marker mWarsaw2 = mMap.addMarker(new MarkerOptions()
-                .position(WARSAW2)
-                .title("Warsaw2")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-        mWarsaw2.setTag(0);
-        Marker mWarsaw3 = mMap.addMarker(new MarkerOptions()
-                .position(WARSAW3)
-                .title("Warsaw3")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        mWarsaw3.setTag(0);
-        Marker mWarsaw4 = mMap.addMarker(new MarkerOptions()
-                .position(WARSAW4)
-                .title("Warsaw4")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-        mWarsaw4.setTag(0);
-        Marker mWarsaw5 = mMap.addMarker(new MarkerOptions()
-                .position(WARSAW5)
-                .title("Warsaw5")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
-        mWarsaw5.setTag(0);
-        Marker mWarsaw6 = mMap.addMarker(new MarkerOptions()
-                .position(WARSAW6)
-                .title("Warsaw6")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        mWarsaw6.setTag(0);
-
         setUpCluster();
     }
 
@@ -182,20 +137,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) { }
 
     @Override
-    public void onLocationChanged(Location location) {
-
-        mLastLocation = location;
-        if (mCurrentLocationMarker != null) {
-            mCurrentLocationMarker.remove();
-        }
-
-        // Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        mCurrentLocationMarker = mMap.addMarker(markerOptions);
-    }
+    public void onLocationChanged(Location location) { }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private void checkLocationPermission() {
@@ -287,7 +229,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         mClusterManager.addItem(infoWindowItem);
 
         // Add ten cluster items in close proximity, for purposes of this example
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             double offset = i / 60d;
             lat = lat + offset;
             lng = lng + offset;
