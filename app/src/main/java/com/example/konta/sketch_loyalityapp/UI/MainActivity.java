@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private String json;
+    GoogleMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.switch_view_layout, new HomeFragment());
         ft.commit();
         mNavigationView.getMenu().getItem(0).setChecked(true);
+
+        mapFragment = new GoogleMapFragment();
     }
 
     @Override
@@ -177,6 +180,16 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.switch_view_layout, fragment);
             ft.commit();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == GoogleMapFragment.MY_PERMISSIONS_REQUEST_LOCATION) {
+            mapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
