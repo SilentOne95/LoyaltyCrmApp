@@ -39,8 +39,9 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    private GoogleMap mMap;
     View mView;
+    SupportMapFragment mapFragment;
+    private GoogleMap mMap;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     private ClusterManager<MyClusterItem> mClusterManager;
@@ -51,7 +52,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_google_map, container, false);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment == null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -73,7 +74,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onResume() {
         super.onResume();
-        setUpMapIfNeeded();
     }
 
     @Override
@@ -81,9 +81,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         super.onPause();
         if (mGoogleApiClient != null)
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
-    }
-
-    private void setUpMapIfNeeded() {
     }
 
     @Override
@@ -201,22 +198,22 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         CameraPosition cameraPosition = new CameraPosition.Builder().target(poland).zoom(5.8f).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.animateCamera(cameraUpdate);
-        
+
         // Initialize the manager with the context and the map
         mClusterManager = new ClusterManager<>(getContext(), mMap);
-        
+
         // Point the map's listeners at the listeners implemented by the cluster manager
         mMap.setOnCameraIdleListener(mClusterManager);
         mMap.setOnMarkerClickListener(mClusterManager);
-        
+
         // Add cluster items (markers) to the cluster manager
         addItemsClusterManager();
     }
 
     private void addItemsClusterManager() {
         // Set some lat/lng coordinates to start with
-        double lat = 51.514516;
-        double lng = 19.191919;
+        double lat = 48.514516;
+        double lng = 17.191919;
 
         // Set the title and snippet strings
         String title = "This is the title";
@@ -229,10 +226,18 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         mClusterManager.addItem(infoWindowItem);
 
         // Add ten cluster items in close proximity, for purposes of this example
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             double offset = i / 60d;
             lat = lat + offset;
             lng = lng + offset;
+            MyClusterItem offsetItem = new MyClusterItem(lat, lng);
+            mClusterManager.addItem(offsetItem);
+        }
+
+        for (int i = 0; i < 30; i++) {
+            double offset = i / 60d;
+            lat = lat - offset;
+            lng = lng - offset;
             MyClusterItem offsetItem = new MyClusterItem(lat, lng);
             mClusterManager.addItem(offsetItem);
         }
