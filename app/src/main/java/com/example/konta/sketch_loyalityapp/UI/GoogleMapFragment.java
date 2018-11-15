@@ -1,15 +1,12 @@
 package com.example.konta.sketch_loyalityapp.UI;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -39,9 +36,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    View mView;
-    SupportMapFragment mapFragment;
     private GoogleMap mMap;
+    View mView;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     private ClusterManager<MyClusterItem> mClusterManager;
@@ -52,7 +48,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_google_map, container, false);
 
-        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment == null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -79,6 +75,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onPause() {
         super.onPause();
+
+        // Stop location updates when Activity is no longer active
         if (mGoogleApiClient != null)
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
     }
@@ -138,32 +136,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            // Show an explanation to the user *asynchronously* -- don't block
-            // this thread waiting for the user's response! After the user
-            // sees the explanation, try again to request the permission.
-            new AlertDialog.Builder(getActivity())
-                    .setTitle("Location Permission Needed")
-                    .setMessage("This app needs the location permission")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            //Prompt the user once explanation has been shown
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                    MY_PERMISSIONS_REQUEST_LOCATION );
-                        }
-                    })
-                    .create()
-                    .show();
-        } else {
-            // No explanation needed, we can request the permission
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-        }
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                MY_PERMISSIONS_REQUEST_LOCATION);
     }
 
     @Override
@@ -212,8 +186,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
 
     private void addItemsClusterManager() {
         // Set some lat/lng coordinates to start with
-        double lat = 48.514516;
-        double lng = 17.191919;
+        double lat = 51.514516;
+        double lng = 19.191919;
 
         // Set the title and snippet strings
         String title = "This is the title";
@@ -226,18 +200,10 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback,
         mClusterManager.addItem(infoWindowItem);
 
         // Add ten cluster items in close proximity, for purposes of this example
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 20; i++) {
             double offset = i / 60d;
             lat = lat + offset;
             lng = lng + offset;
-            MyClusterItem offsetItem = new MyClusterItem(lat, lng);
-            mClusterManager.addItem(offsetItem);
-        }
-
-        for (int i = 0; i < 30; i++) {
-            double offset = i / 60d;
-            lat = lat - offset;
-            lng = lng - offset;
             MyClusterItem offsetItem = new MyClusterItem(lat, lng);
             mClusterManager.addItem(offsetItem);
         }
