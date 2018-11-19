@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ProductsFragment">
+    tools:context=".UI.ProductsFragment"
+    android:focusableInTouchMode="true">
 
     <com.example.konta.sketch_loyalityapp.Utils.CustomGridView
         android:id="@+id/grid_view"
@@ -16,6 +17,6 @@
         android:horizontalSpacing="24dp"
         android:gravity="center"
         android:stretchMode="columnWidth"
-        android:scrollbars="none"/>
+        android:scrollbars="none" />
 
 </FrameLayout>

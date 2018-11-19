@@ -6,8 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,16 +37,17 @@
 
         <!-- Layout to contain contents of main body of screen -->
         <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            tools:openDrawer="start"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            tools:openDrawer="start">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <FrameLayout
                 android:id="@+id/switch_view_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?attr/actionBarSize"/>
+                android:layout_height="match_parent" />
 
         </android.support.v4.widget.NestedScrollView>
 

@@ -9,7 +9,9 @@
     <ImageView
         android:id="@+id/special_offer_image"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="150dp"
+        android:focusableInTouchMode="true"
+        android:contentDescription="Dummy Dat" />
 
     <com.example.konta.sketch_loyalityapp.Utils.CustomGridView
         android:id="@+id/grid_view"

@@ -140,8 +140,6 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.switch_view_layout, new HomeFragment());
         ft.commit();
         mNavigationView.getMenu().getItem(0).setChecked(true);
-
-        mapFragment = new GoogleMapFragment();
     }
 
     @Override

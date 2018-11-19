@@ -1,9 +1,11 @@
 package com.example.konta.sketch_loyalityapp.UI;
 
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,7 @@ public class ProductsFragment extends Fragment {
     private String json;
     private String layoutTitle;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,6 +78,7 @@ public class ProductsFragment extends Fragment {
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);
+        gridView.setNestedScrollingEnabled(false);
 
         return rootView;
     }
