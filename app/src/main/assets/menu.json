@@ -1,13 +1,42 @@
 {
-	"sectionOne": [
-        {"categoryTitle": "Home", "categoryIcon": "ic_menu_home"},
-		{"categoryTitle": "Products", "categoryIcon": "ic_menu_cube"},
-		{"categoryTitle": "Coupons", "categoryIcon": "ic_menu_coupon"},
-		{"categoryTitle": "Shops", "categoryIcon": "ic_menu_marker"},
-        {"categoryTitle": "My Account", "categoryIcon": "ic_menu_account"}
-	],
-	"sectionTwo": [
-      {"categoryTitle": "Terms & Conditions", "categoryIcon": "ic_menu_terms"},
-      {"categoryTitle": "Contact", "categoryIcon": "ic_menu_info"}
-	]
+  "dropdownMenu": [{
+    "menuTitle": "Menu 1",
+    "menuIcon": "ic_menu_home",
+    "submenuInfo": null
+  },
+    {
+      "menuTitle": "Menu 2",
+      "menuIcon": "ic_menu_cube",
+      "submenuInfo": [{
+        "submenuTitle": "Submenu 2-1",
+        "submenuIcon": null
+      },
+        {
+          "submenuTitle": "Submenu 2-2",
+          "submenuIcon": null
+        },
+        {
+          "submenuTitle": "Submenu 2-3",
+          "submenuIcon": null
+        }
+      ]
+    },
+    {
+      "menuTitle": "Menu 3",
+      "menuIcon": "ic_menu_info",
+      "submenuInfo": [{
+        "submenuTitle": "Submenu 3-1",
+        "submenuIcon": null
+      },
+        {
+          "submenuTitle": "Submenu 3-2",
+          "submenuIcon": null
+        },
+        {
+          "submenuTitle": "Submenu 3-3",
+          "submenuIcon": null
+        }
+      ]
+    }
+  ]
 }
