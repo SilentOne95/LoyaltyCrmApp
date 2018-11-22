@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.Utils;
+package com.example.konta.sketch_loyalityapp.Adapters;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.Utils.Item;
+import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
 import java.util.ArrayList;
 

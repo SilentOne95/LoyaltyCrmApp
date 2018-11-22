@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.Utils;
+package com.example.konta.sketch_loyalityapp.ModelClasses;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
-
-import com.google.android.gms.maps.MapView;
 
 /**
  * Fixing problem with moving map upwards and downwards as parent of MapFragment (NestedScrollView)

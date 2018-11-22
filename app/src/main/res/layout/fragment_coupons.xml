@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".UI.CouponsFragment">
 
-    <com.example.konta.sketch_loyalityapp.Utils.CustomGridView
+    <com.example.konta.sketch_loyalityapp.ModelClasses.CustomGridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

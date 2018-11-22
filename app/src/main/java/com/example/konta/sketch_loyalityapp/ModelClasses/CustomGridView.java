@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.Utils;
+package com.example.konta.sketch_loyalityapp.ModelClasses;
 
 import android.content.Context;
 import android.util.AttributeSet;

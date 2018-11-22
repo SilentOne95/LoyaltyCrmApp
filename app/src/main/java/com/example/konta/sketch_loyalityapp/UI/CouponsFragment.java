@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.example.konta.sketch_loyalityapp.Utils.GridItemAdapter;
+import com.example.konta.sketch_loyalityapp.Adapters.GridItemAdapter;
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.Utils.Item;
+import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;

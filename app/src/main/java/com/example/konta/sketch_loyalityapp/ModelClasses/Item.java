@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.Utils;
+package com.example.konta.sketch_loyalityapp.ModelClasses;
 
 public class Item {
 
