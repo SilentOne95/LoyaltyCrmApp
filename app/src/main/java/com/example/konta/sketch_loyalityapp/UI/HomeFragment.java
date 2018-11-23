@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
     private String json;
     private String layoutTitle;
     private int resourceSpecialOffer;
+    int columns = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -40,6 +41,32 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Reading JSON file from assets
+        readFromAssets();
+
+        // Extracting objects that has been built up from parsing the given JSON file,
+        // preparing and displaying data in Navigation Drawer using custom adapter
+        extractDataFromJson();
+
+        ImageView specialOfferImage = rootView.findViewById(R.id.special_offer_image);
+        specialOfferImage.setImageResource(resourceSpecialOffer);
+
+        GridItemAdapter adapter = new GridItemAdapter(getActivity(), itemList);
+        final GridView gridView = rootView.findViewById(R.id.grid_view);
+        gridView.setNumColumns(columns);
+        gridView.setAdapter(adapter);
+        gridView.setNestedScrollingEnabled(false);
+
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getActivity().setTitle(layoutTitle);
+    }
+
+    private void readFromAssets() {
         try {
             InputStream inputStream = getActivity().getAssets().open("home.json");
             int size = inputStream.available();
@@ -51,9 +78,9 @@ public class HomeFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        // Extracting objects that has been built up from parsing the given JSON file
-        int columns = 0;
+    private void extractDataFromJson() {
         try {
             JSONObject object = new JSONObject(json);
             JSONArray array = object.getJSONArray("offers");
@@ -80,23 +107,5 @@ public class HomeFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        ImageView specialOfferImage = rootView.findViewById(R.id.special_offer_image);
-        specialOfferImage.setImageResource(resourceSpecialOffer);
-
-        GridItemAdapter adapter = new GridItemAdapter(getActivity(), itemList);
-        final GridView gridView = rootView.findViewById(R.id.grid_view);
-        gridView.setNumColumns(columns);
-        gridView.setAdapter(adapter);
-        gridView.setNestedScrollingEnabled(false);
-
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        getActivity().setTitle(layoutTitle);
     }
 }

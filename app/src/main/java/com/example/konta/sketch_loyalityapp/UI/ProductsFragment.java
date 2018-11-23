@@ -29,6 +29,7 @@ public class ProductsFragment extends Fragment {
     static final ArrayList<Item> itemList = new ArrayList<>();
     private String json;
     private String layoutTitle;
+    int columns = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -38,6 +39,29 @@ public class ProductsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_products, container, false);
 
         // Reading JSON file from assets
+        readFromAssets();
+
+        // Extracting objects that has been built up from parsing the given JSON file,
+        // preparing and displaying data in Navigation Drawer using custom adapter
+        extractDataFromJson();
+
+        GridItemAdapter adapter = new GridItemAdapter(getActivity(), itemList);
+        final GridView gridView = rootView.findViewById(R.id.grid_view);
+        gridView.setNumColumns(columns);
+        gridView.setAdapter(adapter);
+        gridView.setNestedScrollingEnabled(false);
+
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getActivity().setTitle(layoutTitle);
+    }
+
+    private void readFromAssets() {
         try {
             InputStream inputStream = getActivity().getAssets().open("products.json");
             int size = inputStream.available();
@@ -49,9 +73,9 @@ public class ProductsFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        // Extracting objects that has been built up from parsing the given JSON file
-        int columns = 0;
+    private void extractDataFromJson() {
         try {
             JSONObject object = new JSONObject(json);
             JSONArray array = object.getJSONArray("products");
@@ -73,20 +97,5 @@ public class ProductsFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        GridItemAdapter adapter = new GridItemAdapter(getActivity(), itemList);
-        final GridView gridView = rootView.findViewById(R.id.grid_view);
-        gridView.setNumColumns(columns);
-        gridView.setAdapter(adapter);
-        gridView.setNestedScrollingEnabled(false);
-
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        getActivity().setTitle(layoutTitle);
     }
 }

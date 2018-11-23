@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 JSONArray submenuArray = insideMenuObj.getJSONArray("submenuInfo");
 
                 // Check if menu item has submenu items
-                hasChild = submenuArray != null;
+                hasChild = submenuArray != null && submenuArray.length() > 0;
 
                 // Get icon of menu item
                 Resources resources = this.getResources();
