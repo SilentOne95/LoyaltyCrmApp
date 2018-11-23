@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.UI;
 
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +18,12 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.Adapters.ExpandableListAdapter;
 import com.example.konta.sketch_loyalityapp.ModelClasses.MenuModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ExpandableListView expandableListView;
     List<MenuModel> menuList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> submenuList = new HashMap<>();
+    private String json;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         expandableListView = findViewById(R.id.expandable_list_view);
+
+        // Reading JSON file from assets
+        readFromAssets();
+
+        // Extracting objects that has been built up from parsing the given JSON file,
+        // preparing and displaying data in Navigation Drawer using custom adapter
         prepareMenuData();
         populateExpandableList();
 
@@ -56,46 +70,68 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ft.commit();
     }
 
+    private void readFromAssets() {
+        try {
+            InputStream inputStream = this.getAssets().open("menu.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            json = new String(buffer, "UTF-8");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void prepareMenuData() {
-        // First menuItem with no submenuItem
-        MenuModel menuModel = new MenuModel("Menu 1", true, false, R.drawable.ic_menu_home);
-        menuList.add(menuModel);
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray menuArray = object.getJSONArray("dropdownMenu");
 
-        if (!menuModel.hasChildren) {
-            submenuList.put(menuModel, null);
-        }
+            boolean hasChild;
+            MenuModel menuModel;
+            MenuModel childModel;
 
-        // Second menuItem with 3 submenuItem
-        menuModel = new MenuModel("Menu 2", true, true, R.drawable.ic_menu_cube);
-        menuList.add(menuModel);
-        List<MenuModel> childModelsList = new ArrayList<>();
-        MenuModel childModel = new MenuModel("Submenu 2-1", false, false);
-        childModelsList.add(childModel);
+            // Iterate through every menu items and its children and add them to the separate arrays
+            for (int i = 0; i < menuArray.length(); i++) {
+                JSONObject insideMenuObj = menuArray.getJSONObject(i);
+                String menuTitle = insideMenuObj.getString("menuTitle");
+                String menuIcon = insideMenuObj.getString("menuIcon");
 
-        childModel = new MenuModel("Submenu 2-2", false, false);
-        childModelsList.add(childModel);
+                JSONArray submenuArray = insideMenuObj.getJSONArray("submenuInfo");
 
-        childModel = new MenuModel("Submenu 2-3", false, false);
-        childModelsList.add(childModel);
+                // Check if menu item has submenu items
+                hasChild = submenuArray != null;
 
+                // Get icon of menu item
+                Resources resources = this.getResources();
+                final int menuResourceId = resources.getIdentifier(menuIcon, "drawable", this.getPackageName());
 
-        if (menuModel.hasChildren) {
-            submenuList.put(menuModel, childModelsList);
-        }
+                // Add new menu item to an array
+                menuModel = new MenuModel(menuTitle, true, hasChild, menuResourceId);
+                menuList.add(menuModel);
+                submenuList.put(menuModel, null);
 
-        // Third menuItem with 2 submenuItem
-        childModelsList = new ArrayList<>();
-        menuModel = new MenuModel("Menu 3", true, true, R.drawable.ic_menu_info);
-        menuList.add(menuModel);
-        childModel = new MenuModel("Submenu 3-1", false, false);
-        childModelsList.add(childModel);
+                // Extract all submenu items from JSON and add them to an array
+                if (submenuArray != null) {
+                    List<MenuModel> childModelsList = new ArrayList<>();
 
+                    for (int j = 0; j < submenuArray.length(); j++) {
+                        JSONObject insideSubmenuObj = submenuArray.getJSONObject(j);
+                        String submenuTitle = insideSubmenuObj.getString("submenuTitle");
 
-        childModel = new MenuModel("Submenu 3-2", false, false);
-        childModelsList.add(childModel);
+                        childModel = new MenuModel(submenuTitle, false, false);
+                        childModelsList.add(childModel);
 
-        if (menuModel.hasChildren) {
-            submenuList.put(menuModel, childModelsList);
+                        submenuList.put(menuModel, childModelsList);
+                    }
+                } else {
+                    submenuList.put(menuModel, null);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

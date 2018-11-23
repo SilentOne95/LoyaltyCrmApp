@@ -2,7 +2,7 @@
   "dropdownMenu": [{
     "menuTitle": "Menu 1",
     "menuIcon": "ic_menu_home",
-    "submenuInfo": null
+    "submenuInfo": []
   },
     {
       "menuTitle": "Menu 2",
@@ -13,10 +13,6 @@
       },
         {
           "submenuTitle": "Submenu 2-2",
-          "submenuIcon": null
-        },
-        {
-          "submenuTitle": "Submenu 2-3",
           "submenuIcon": null
         }
       ]
