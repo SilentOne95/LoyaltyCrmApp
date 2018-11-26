@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private String json;
+    GoogleMapFragment googleMapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,5 +163,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menuItem.setChecked(true);
 
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == GoogleMapFragment.MY_PERMISSIONS_REQUEST_LOCATION) {
+            googleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
