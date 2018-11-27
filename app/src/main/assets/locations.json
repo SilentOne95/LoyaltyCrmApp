@@ -1,0 +1,105 @@
+{
+  "shops": [{
+    "shopId": 1,
+    "shopTitle": "Shop 1",
+    "shopLocationLat": 52.202922,
+    "shopLocationLng": 20.937649
+  },
+    {
+      "shopId": 2,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.215751,
+      "shopLocationLng": 20.950734
+    },
+    {
+      "shopId": 3,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.216166,
+      "shopLocationLng": 20.956920
+    },
+    {
+      "shopId": 4,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.223294,
+      "shopLocationLng": 20.984089
+    },
+    {
+      "shopId": 5,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.183697,
+      "shopLocationLng": 21.003534
+    },
+    {
+      "shopId": 6,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.242503,
+      "shopLocationLng": 20.905013
+    },
+    {
+      "shopId": 7,
+      "shopTitle": "Shop 7",
+      "shopLocationLat": 52.260555,
+      "shopLocationLng": 20.986467
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.242253,
+      "shopLocationLng": 20.988830
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.227841,
+      "shopLocationLng": 20.996356
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.230145,
+      "shopLocationLng": 21.002792
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.234608,
+      "shopLocationLng": 20.998546
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.236539,
+      "shopLocationLng": 21.008505
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.236984,
+      "shopLocationLng": 21.011906
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.231406,
+      "shopLocationLng": 21.013721
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.233857,
+      "shopLocationLng": 21.020281
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.225232,
+      "shopLocationLng": 21.016264
+    },
+    {
+      "shopId": 8,
+      "shopTitle": "Shop 1",
+      "shopLocationLat": 52.220846,
+      "shopLocationLng": 21.013710
+    }
+  ]
+}
