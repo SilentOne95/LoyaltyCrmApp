@@ -8,10 +8,16 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -23,19 +29,41 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.List;
 
-public class GoogleMapFragment extends SupportMapFragment implements OnMapReadyCallback {
+public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
+    View mView;
     GoogleMap mGoogleMap;
     LocationRequest mLocationRequest;
     Location mLastLocation;
     FusedLocationProviderClient mFusedLocationClient;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        mView = inflater.inflate(R.layout.fragment_google_map, container, false);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            mapFragment = SupportMapFragment.newInstance();
+            fragmentTransaction.replace(R.id.map, mapFragment).commit();
+        }
+        mapFragment.getMapAsync(this);
+
+        return mView;
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+        getActivity().setTitle("Map");
     }
 
     @Override
@@ -77,18 +105,6 @@ public class GoogleMapFragment extends SupportMapFragment implements OnMapReadyC
             super.onLocationResult(locationResult);
         }
     };
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        setUpIfNeeded();
-    }
-
-    private void setUpIfNeeded() {
-        if (mGoogleMap == null)
-            getMapAsync(this);
-    }
 
     @Override
     public void onPause() {
