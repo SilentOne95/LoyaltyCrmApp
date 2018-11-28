@@ -9,8 +9,9 @@ public class MyClusterItem implements ClusterItem {
     private String mTitle;
     private String mSnippet;
 
-    public MyClusterItem(double lat, double lng) {
+    public MyClusterItem(double lat, double lng, String title) {
         mPosition = new LatLng(lat, lng);
+        mTitle = title;
     }
 
     public MyClusterItem(double lat, double lng, String title, String snippet) {

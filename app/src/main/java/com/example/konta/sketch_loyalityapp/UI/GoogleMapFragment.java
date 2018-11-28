@@ -17,16 +17,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.konta.sketch_loyalityapp.ModelClasses.MyClusterItem;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
@@ -36,6 +50,9 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     LocationRequest mLocationRequest;
     Location mLastLocation;
     FusedLocationProviderClient mFusedLocationClient;
+    private String json = null;
+    private ClusterManager<MyClusterItem> mClusterManager;
+
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     @Nullable
@@ -47,7 +64,9 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+
         if (mapFragment == null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -55,6 +74,12 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             fragmentTransaction.replace(R.id.map, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
+
+        // Reading JSON file from assets
+        readFromAssets();
+        // Extracting objects that has been built up from parsing the given JSON file
+        // and adding markers (items) to cluster
+        extractDataFromJson();
 
         return mView;
     }
@@ -81,7 +106,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 // Location Permission already granted
-                mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+                        mLocationCallback, Looper.myLooper());
                 mGoogleMap.setMyLocationEnabled(true);
             } else {
                 // Request Location Permission
@@ -92,6 +118,14 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             mGoogleMap.setMyLocationEnabled(true);
         }
+
+        // Add default geo location to set camera on certain country
+        LatLng poland = new LatLng(51.940554, 19.069815);
+
+        // Move and zoom camera to certain position
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(poland).zoom(5.8f).build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mGoogleMap.animateCamera(cameraUpdate);
     }
 
     LocationCallback mLocationCallback = new LocationCallback() {
@@ -139,7 +173,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
-                        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                        mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+                                mLocationCallback, Looper.myLooper());
                         mGoogleMap.setMyLocationEnabled(true);
                     }
                 } else {
@@ -148,5 +183,48 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    private void readFromAssets() {
+        try {
+            InputStream inputStream = getActivity().getAssets().open("locations.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            json = new String(buffer, "UTF-8");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void extractDataFromJson() {
+        try {
+            JSONObject object = new JSONObject(json);
+            JSONArray array = object.getJSONArray("locations");
+
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject insideObj = array.getJSONObject(i);
+                int shopId = insideObj.getInt("shopId");
+                String shopTitle = insideObj.getString("shopTitle");
+
+                JSONArray shopCoordinates = insideObj.getJSONArray("shopCoordinates");
+                double shopLatitude = shopCoordinates.getDouble(0);
+                double shopLongitude = shopCoordinates.getDouble(1);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setUpCluster() {
+        // Initialize the manager with the context and the map
+        mClusterManager = new ClusterManager<>(getContext(), mGoogleMap);
+
+        // Point the map's listeners at the listeners implemented by the cluster manager
+        mGoogleMap.setOnCameraIdleListener(mClusterManager);
+        mGoogleMap.setOnMarkerClickListener(mClusterManager);
+
     }
 }

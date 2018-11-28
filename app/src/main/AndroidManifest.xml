@@ -21,14 +21,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".UI.LaunchActivity"
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".UI.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".UI.BottomSheet" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -40,8 +45,6 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
-        <activity android:name=".UI.BottomSheet"></activity>
     </application>
 
 </manifest>
