@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.UI;
 
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.R;
 
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private String json;
     GoogleMapFragment googleMapFragment;
+
+    View mBottomSheet;
+    BottomSheetBehavior mBottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ft.replace(R.id.switch_view_layout, new HomeFragment());
         ft.commit();
         navigationView.getMenu().getItem(0).setChecked(true);
+
+        // Bottom Sheet set up
+        mBottomSheet = findViewById(R.id.bottom_sheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
+        mBottomSheetBehavior.setPeekHeight(0);
+        mBottomSheetBehavior.setHideable(true);
     }
 
     private void readFromAssets() {
