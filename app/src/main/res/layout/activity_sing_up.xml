@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7c7c7c"
-    tools:context=".UI.LogInActivity">
+    tools:context=".UI.SignUpActivity">
 
     <ImageView
         android:id="@+id/sample_image_view"
@@ -14,20 +14,20 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:padding="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/log_in_text_view"
+        android:src="@drawable/ic_sample_lock"
+        app:layout_constraintBottom_toTopOf="@+id/sign_in_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_sample_lock" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/log_in_text_view"
+        android:id="@+id/sign_in_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Logowanie"
+        android:text="Rejestracja"
         android:textColor="#fff"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -42,44 +42,36 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#3b5998"
-        android:text="Zaloguj przez Facebook"
-        android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/sign_login_edit_text"
+        android:text="Zarejestruj przez Facebook"
+        app:layout_constraintBottom_toTopOf="@+id/login_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/log_in_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_text_view" />
 
     <TextView
         android:id="@+id/login_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Login"
         android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/sign_login_edit_text"
-        app:layout_constraintStart_toStartOf="@+id/sign_login_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/facebook_button" />
+        app:layout_constraintBottom_toTopOf="@+id/login_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/login_edit_text" />
 
     <EditText
-        android:id="@+id/sign_login_edit_text"
+        android:id="@+id/login_edit_text"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="#fff"
         android:ems="10"
         android:hint="Login"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/sing_password_text_view"
+        android:background="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/password_edit_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,76 +81,126 @@
         android:id="@+id/password_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Password"
+        android:layout_marginBottom="8dp"
+        android:text="Hasło"
         android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/sing_password_text_view"
-        app:layout_constraintStart_toStartOf="@+id/sing_password_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/sign_login_edit_text" />
+        app:layout_constraintBottom_toTopOf="@+id/password_edit_view"
+        app:layout_constraintStart_toStartOf="@+id/password_edit_view" />
 
     <EditText
-        android:id="@+id/sing_password_text_view"
+        android:id="@+id/password_edit_view"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="#fff"
+        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Password"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:hint="Hasło"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/log_in_button"
+        android:background="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/email_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_login_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/login_edit_text" />
+
+    <TextView
+        android:id="@+id/email_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Adres e-mail"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/email_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/email_edit_text" />
+
+    <EditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="E-mail"
+        android:background="#fff"
+        android:inputType="textEmailAddress|textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/phone_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_edit_view" />
+
+    <TextView
+        android:id="@+id/phone_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Nr telefonu"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/phone_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/phone_edit_text" />
+
+    <EditText
+        android:id="@+id/phone_edit_text"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textPersonName|phone"
+        android:hint="Nr telefonu"
+        android:background="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/sing_in_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
 
     <Button
-        android:id="@+id/log_in_button"
+        android:id="@+id/sing_in_button"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:background="#000"
-        android:text="Zaloguj"
-        android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/remind_pass_text_click"
+        android:text="Zarejestruj"
+        app:layout_constraintBottom_toTopOf="@+id/newsletter_checkbox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sing_password_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_edit_text" />
+
+    <CheckBox
+        android:id="@+id/newsletter_checkbox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Zapisz się na newsletter i otrzymuj informacje o najnowszych ofertach"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/log_in_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sing_in_button" />
 
     <TextView
-        android:id="@+id/remind_pass_text_click"
+        android:id="@+id/log_in_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Przypomnij hasło"
+        android:text="Logowanie"
         android:textColor="#fff"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/sign_up_text_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/log_in_button" />
-
-    <TextView
-        android:id="@+id/sign_up_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="50dp"
-        android:text="Rejestracja"
-        android:textColor="#fff"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/remind_pass_text_click" />
+        app:layout_constraintTop_toBottomOf="@+id/newsletter_checkbox" />
 
 </android.support.constraint.ConstraintLayout>

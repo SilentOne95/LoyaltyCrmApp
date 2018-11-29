@@ -52,7 +52,8 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
         >
-        <activity android:name=".UI.LoginActivity"></activity>
+        <activity android:name=".UI.LogInActivity" />
+        <activity android:name=".UI.SignUpActivity"></activity>
     </application>
 
 </manifest>

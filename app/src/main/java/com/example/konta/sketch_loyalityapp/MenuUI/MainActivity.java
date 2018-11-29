@@ -16,9 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.UI.LoginActivity;
+import com.example.konta.sketch_loyalityapp.UI.LogInActivity;
 import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.UI.SignUpActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -131,32 +133,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    private void displaySelectedScreen(int itemId) {
+    private void displaySelectedScreen(int groupId, int itemId) {
         // Creating fragment object
         Fragment fragment = null;
 
         // Initializing the fragment object which is selected
-        switch (itemId) {
-            case 0:
-                Intent intentLogIn = new Intent(MainActivity.this, LoginActivity.class);
-                MainActivity.this.startActivity(intentLogIn);
-                break;
-            case 1:
-                fragment = new HomeFragment();
-                break;
-            case 2:
-                fragment = new ProductsFragment();
-                break;
-            case 3:
-                fragment = new CouponsFragment();
-                break;
-            case 4:
-                fragment = new GoogleMapFragment();
-                break;
-            case 5:
-                Intent intentWebView = new Intent(MainActivity.this, WebsiteActivity.class);
-                MainActivity.this.startActivity(intentWebView);
-                break;
+        if (groupId == 0){
+            switch (itemId) {
+                case 0:
+                    Intent intentLogIn = new Intent(MainActivity.this, LogInActivity.class);
+                    MainActivity.this.startActivity(intentLogIn);
+                    break;
+                case 1:
+                    fragment = new HomeFragment();
+                    break;
+                case 2:
+                    fragment = new ProductsFragment();
+                    break;
+                case 3:
+                    fragment = new CouponsFragment();
+                    break;
+                case 4:
+                    fragment = new GoogleMapFragment();
+                    break;
+                case 5:
+                    Intent intentWebView = new Intent(MainActivity.this, WebsiteActivity.class);
+                    MainActivity.this.startActivity(intentWebView);
+                    break;
+            }
+        } else {
+            switch (itemId) {
+                case 0:
+                    Toast.makeText(getApplicationContext(), "Terms & Conditions", Toast.LENGTH_LONG).show();
+                    break;
+                case 1:
+                    Toast.makeText(getApplicationContext(), "Contact", Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
 
         // Replacing the fragment
@@ -180,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawers();
 
         // Update the UI based on the item selected
-        displaySelectedScreen(menuItem.getItemId());
+        displaySelectedScreen(menuItem.getGroupId(), menuItem.getItemId());
 
         // Uncheck all checked menu items
         int size = navigationView.getMenu().size();
