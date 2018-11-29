@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.UI;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -135,17 +136,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Initializing the fragment object which is selected
         switch (itemId) {
-            case 0:
+            case 1:
                 fragment = new HomeFragment();
                 break;
-            case 1:
+            case 2:
                 fragment = new ProductsFragment();
                 break;
-            case 2:
+            case 3:
                 fragment = new CouponsFragment();
                 break;
-            case 3:
+            case 4:
                 fragment = new GoogleMapFragment();
+                break;
+            case 5:
+                Intent intent = new Intent(MainActivity.this, WebsiteActivity.class);
+                MainActivity.this.startActivity(intent);
                 break;
         }
 
