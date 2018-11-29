@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.UI;
+package com.example.konta.sketch_loyalityapp.MenuUI;
 
 import android.content.res.Resources;
 import android.os.Build;

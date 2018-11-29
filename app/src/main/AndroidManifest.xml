@@ -29,17 +29,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".UI.MainActivity"
+            android:name=".MenuUI.MainActivity"
             android:theme="@style/AppTheme.BaseTheme.NoActionBar" />
-
         <activity android:name=".UI.BottomSheet" />
-
-        <activity android:name=".UI.WebsiteActivity"
-            android:theme="@style/AppTheme.WebView" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UI.MainActivity"/>
+        <activity
+            android:name=".MenuUI.WebsiteActivity"
+            android:theme="@style/AppTheme.WebView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuUI.MainActivity" />
         </activity>
 
         <meta-data
@@ -51,7 +50,9 @@
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />>
+            android:required="false" />
+        >
+        <activity android:name=".UI.LoginActivity"></activity>
     </application>
 
 </manifest>

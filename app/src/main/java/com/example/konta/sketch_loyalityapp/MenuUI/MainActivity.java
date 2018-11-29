@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.UI;
+package com.example.konta.sketch_loyalityapp.MenuUI;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.konta.sketch_loyalityapp.UI.LoginActivity;
 import com.example.konta.sketch_loyalityapp.R;
 
 import org.json.JSONArray;
@@ -136,6 +137,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Initializing the fragment object which is selected
         switch (itemId) {
+            case 0:
+                Intent intentLogIn = new Intent(MainActivity.this, LoginActivity.class);
+                MainActivity.this.startActivity(intentLogIn);
+                break;
             case 1:
                 fragment = new HomeFragment();
                 break;
@@ -149,8 +154,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new GoogleMapFragment();
                 break;
             case 5:
-                Intent intent = new Intent(MainActivity.this, WebsiteActivity.class);
-                MainActivity.this.startActivity(intent);
+                Intent intentWebView = new Intent(MainActivity.this, WebsiteActivity.class);
+                MainActivity.this.startActivity(intentWebView);
                 break;
         }
 
