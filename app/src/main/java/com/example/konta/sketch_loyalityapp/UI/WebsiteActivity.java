@@ -14,6 +14,9 @@ public class WebsiteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_website);
 
+        // Entering / exiting animations for activities
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+
         WebView mWebView = findViewById(R.id.webview);
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.loadUrl("https://www.google.com");
