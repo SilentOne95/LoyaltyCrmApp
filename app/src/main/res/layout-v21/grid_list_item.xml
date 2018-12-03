@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/grid_item_rounded_corners">
-    
+    android:background="@drawable/grid_item_shadow"
+    android:elevation="8dp">
+
     <ImageView
         android:id="@+id/grid_item_image"
         android:layout_width="100dp"

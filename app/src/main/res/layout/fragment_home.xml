@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    android:padding="16dp"
     tools:context=".MenuUIFragments.HomeFragment">
 
     <ImageView
@@ -11,19 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:focusableInTouchMode="true"
-        android:contentDescription="Dummy Dat" />
+        android:contentDescription="Dummy Data" />
 
     <com.example.konta.sketch_loyalityapp.ModelClasses.CustomGridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
         android:verticalSpacing="16dp"
         android:horizontalSpacing="24dp"
         android:gravity="center"
-        android:numColumns="2"
         android:stretchMode="columnWidth"
         android:scrollbars="none"/>
 

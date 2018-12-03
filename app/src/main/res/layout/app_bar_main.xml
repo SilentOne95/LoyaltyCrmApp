@@ -7,7 +7,7 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background_main"
+    android:background="#fff"
     tools:context=".MenuUIFragments.MainActivity">
 
     <!-- Appbar - flag_scroll -->
