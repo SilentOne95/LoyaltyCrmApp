@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.UI.LogInActivity;
 import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.UI.SignUpActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
