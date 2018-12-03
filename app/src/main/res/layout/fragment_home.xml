@@ -14,7 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:focusableInTouchMode="true"
-        android:contentDescription="Dummy Data" />
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/info_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sprawdź aktualne \noferty"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="#000"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"/>
 
     <com.example.konta.sketch_loyalityapp.ModelClasses.CustomGridView
         android:id="@+id/grid_view"
