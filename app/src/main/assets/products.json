@@ -1,16 +1,8 @@
 {
   "layoutTitle": "Products",
-  "products": [
-    {"productTitle": "Product 1", "productImage": "product_image"},
-    {"productTitle": "Product 2", "productImage": "product_image"},
-    {"productTitle": "Product 3", "productImage": "product_image"},
-    {"productTitle": "Product 4", "productImage": "product_image"},
-    {"productTitle": "Product 5", "productImage": "product_image"},
-    {"productTitle": "Product 6", "productImage": "product_image"},
-    {"productTitle": "Product 7", "productImage": "product_image"},
-    {"productTitle": "Product 8", "productImage": "product_image"},
-    {"productTitle": "Product 9", "productImage": "product_image"},
-    {"productTitle": "Product 10", "productImage": "product_image"}
-  ],
+  "products": [{
+    "productTitle": "Product",
+    "productImage": "image_product"
+  }],
   "numColumns": 2
 }

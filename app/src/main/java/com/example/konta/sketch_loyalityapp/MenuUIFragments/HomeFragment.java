@@ -83,22 +83,22 @@ public class HomeFragment extends Fragment {
     private void extractDataFromJson() {
         try {
             JSONObject object = new JSONObject(json);
-            JSONArray array = object.getJSONArray("offers");
-
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject insideObj = array.getJSONObject(i);
-                String title = insideObj.getString("offerTitle");
-                String image = insideObj.getString("offerImage");
-
-                Resources resources = this.getResources();
-                final int resourceId = resources
-                        .getIdentifier(image, "drawable", getActivity().getPackageName());
-                itemList.add(new Item(title, resourceId));
-            }
-
             layoutTitle = object.getString("layoutTitle");
 
+            JSONArray array = object.getJSONArray("offers");
+            JSONObject insideObj = array.getJSONObject(0);
+
+            String title = insideObj.getString("offerTitle");
+            String image = insideObj.getString("offerImage");
+
             Resources resources = this.getResources();
+            final int resourceId = resources
+                    .getIdentifier(image, "drawable", getActivity().getPackageName());
+
+            for (int i = 1; i < 11; i++) {
+                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i)), resourceId));
+            }
+
             String specialOfferImage = object.getString("specialImage");
             resourceSpecialOffer = resources
                     .getIdentifier(specialOfferImage, "drawable", getActivity().getPackageName());

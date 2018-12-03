@@ -1,16 +1,8 @@
 {
   "layoutTitle": "Coupons",
-  "coupons": [
-    {"couponTitle": "Coupon 1", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 2", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 3", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 4", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 5", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 6", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 7", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 8", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 9", "couponImage": "product_image"},
-    {"couponTitle": "Coupon 10", "couponImage": "product_image"}
-  ],
+  "coupons": [{
+    "couponTitle": "Coupon",
+    "couponImage": "image_coupon"
+  }],
   "numColumns": 1
 }

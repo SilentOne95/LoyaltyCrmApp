@@ -22,7 +22,7 @@
 
     <!-- Launch screen theme. -->
     <style name="AppTheme.Launcher" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:windowBackground">@drawable/layout_launch_screen</item>
     </style>
 
     <!-- Temporary theme for WebView, Contact and Terms & Conditions activities. -->

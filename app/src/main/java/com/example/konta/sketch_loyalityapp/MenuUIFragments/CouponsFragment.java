@@ -74,20 +74,21 @@ public class CouponsFragment extends Fragment {
     private void extractDataFromJson() {
         try {
             JSONObject object = new JSONObject(json);
+            layoutTitle = object.getString("layoutTitle");
+
             JSONArray array = object.getJSONArray("coupons");
+            JSONObject insideObj = array.getJSONObject(0);
 
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject insideObj = array.getJSONObject(i);
-                String title = insideObj.getString("couponTitle");
-                String image = insideObj.getString("couponImage");
+            String title = insideObj.getString("couponTitle");
+            String image = insideObj.getString("couponImage");
 
-                Resources resources = this.getResources();
-                final int resourceId = resources
-                        .getIdentifier(image, "drawable", getActivity().getPackageName());
-                itemList.add(new Item(title, resourceId));
+            Resources resources = this.getResources();
+            final int resourceId = resources
+                    .getIdentifier(image, "drawable", getActivity().getPackageName());
+            for (int i = 1; i < 11; i++) {
+                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i)), resourceId));
             }
 
-            layoutTitle = object.getString("layoutTitle");
             columns = object.getInt("numColumns");
 
         } catch (JSONException e) {

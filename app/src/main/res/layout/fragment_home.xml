@@ -6,15 +6,16 @@
     android:orientation="vertical"
     android:clipToPadding="false"
     android:clipChildren="false"
-    android:padding="16dp"
     tools:context=".MenuUIFragments.HomeFragment">
 
     <ImageView
         android:id="@+id/special_offer_image"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
         android:focusableInTouchMode="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"/>
 
     <TextView
         android:id="@+id/info_text_view"
@@ -34,6 +35,8 @@
         android:layout_height="wrap_content"
         android:verticalSpacing="16dp"
         android:horizontalSpacing="24dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
         android:gravity="center"
         android:stretchMode="columnWidth"
         android:scrollbars="none"/>

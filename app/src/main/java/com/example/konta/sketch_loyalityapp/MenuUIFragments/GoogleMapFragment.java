@@ -51,6 +51,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
     Location mLastLocation;
     FusedLocationProviderClient mFusedLocationClient;
     private String json = null;
+    private String layoutTitle;
     private ClusterManager<MyClusterItem> mClusterManager;
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -88,7 +89,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Map");
+        getActivity().setTitle(layoutTitle);
     }
 
     @Override
@@ -206,6 +207,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
     private void extractDataFromJson() {
         try {
             JSONObject object = new JSONObject(json);
+            layoutTitle = object.getString("layoutTitle");
+
             JSONArray array = object.getJSONArray("locations");
 
             for (int i = 0; i < array.length(); i++) {
