@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.MenuUI;
+package com.example.konta.sketch_loyalityapp.MenuUIActivities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

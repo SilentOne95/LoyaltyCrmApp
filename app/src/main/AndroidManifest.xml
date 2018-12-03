@@ -20,8 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.BaseTheme">
+
         <activity
-            android:name=".UI.LaunchActivity"
+            android:name=".SupportUI.LaunchActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,16 +30,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MenuUI.MainActivity"
+            android:name=".MenuUIFragments.MainActivity"
             android:theme="@style/AppTheme.BaseTheme.NoActionBar" />
-        <activity android:name=".UI.BottomSheet" />
+        <activity android:name=".SupportUI.BottomSheet" />
+
+        <activity android:name=".LoginUI.LogInActivity" />
+        <activity android:name=".LoginUI.SignUpActivity" />
+
         <activity
-            android:name=".MenuUI.WebsiteActivity"
-            android:theme="@style/AppTheme.WebView">
+            android:name=".MenuUIActivities.WebsiteActivity"
+            android:theme="@style/AppTheme.Activities">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuUI.MainActivity" />
+                android:value=".MenuUIFragments.MainActivity" />
+        </activity>
+
+        <activity android:name=".MenuUIActivities.TermsConditionsActivity"
+            android:theme="@style/AppTheme.Activities">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuUIFragments.MainActivity" />
+        </activity>
+
+        <activity android:name=".MenuUIActivities.ContactActivity"
+            android:theme="@style/AppTheme.Activities">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuUIFragments.MainActivity" />
         </activity>
 
         <meta-data
@@ -51,9 +71,7 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-        >
-        <activity android:name=".UI.LogInActivity" />
-        <activity android:name=".UI.SignUpActivity"/>
+
     </application>
 
 </manifest>

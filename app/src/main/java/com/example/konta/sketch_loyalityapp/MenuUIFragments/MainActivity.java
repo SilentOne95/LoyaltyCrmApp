@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.MenuUI;
+package com.example.konta.sketch_loyalityapp.MenuUIFragments;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -16,11 +16,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.UI.LogInActivity;
+import com.example.konta.sketch_loyalityapp.MenuUIActivities.ContactActivity;
+import com.example.konta.sketch_loyalityapp.MenuUIActivities.TermsConditionsActivity;
+import com.example.konta.sketch_loyalityapp.MenuUIActivities.WebsiteActivity;
+import com.example.konta.sketch_loyalityapp.LoginUI.LogInActivity;
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.UI.SignUpActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -164,10 +165,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             switch (itemId) {
                 case 0:
-                    Toast.makeText(getApplicationContext(), "Terms & Conditions", Toast.LENGTH_LONG).show();
+                    Intent intentTermsConditionsView = new Intent(MainActivity.this, TermsConditionsActivity.class);
+                    MainActivity.this.startActivity(intentTermsConditionsView);
                     break;
                 case 1:
-                    Toast.makeText(getApplicationContext(), "Contact", Toast.LENGTH_LONG).show();
+                    Intent intentContactView = new Intent(MainActivity.this, ContactActivity.class);
+                    MainActivity.this.startActivity(intentContactView);
                     break;
             }
         }

@@ -1,10 +1,10 @@
-package com.example.konta.sketch_loyalityapp.UI;
+package com.example.konta.sketch_loyalityapp.SupportUI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.konta.sketch_loyalityapp.MenuUI.MainActivity;
+import com.example.konta.sketch_loyalityapp.MenuUIFragments.MainActivity;
 
 public class LaunchActivity extends AppCompatActivity {
 

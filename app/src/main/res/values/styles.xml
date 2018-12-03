@@ -25,6 +25,6 @@
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
-    <!-- WebView Activity theme. -->
-    <style name="AppTheme.WebView" parent="AppTheme"/>
+    <!-- Temporary theme for WebView, Contact and Terms & Conditions activities. -->
+    <style name="AppTheme.Activities" parent="AppTheme" />
 </resources>

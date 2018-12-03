@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.MenuUI;
+package com.example.konta.sketch_loyalityapp.MenuUIFragments;
 
 import android.Manifest;
 import android.content.pm.PackageManager;

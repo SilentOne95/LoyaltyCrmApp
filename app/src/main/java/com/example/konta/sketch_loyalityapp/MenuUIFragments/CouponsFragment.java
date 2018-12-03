@@ -1,11 +1,9 @@
-package com.example.konta.sketch_loyalityapp.MenuUI;
+package com.example.konta.sketch_loyalityapp.MenuUIFragments;
 
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,19 +22,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class ProductsFragment extends Fragment {
+public class CouponsFragment extends Fragment {
 
     static final ArrayList<Item> itemList = new ArrayList<>();
     private String json;
     private String layoutTitle;
     int columns = 0;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_products, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_coupons, container, false);
 
         // Reading JSON file from assets
         readFromAssets();
@@ -49,7 +46,6 @@ public class ProductsFragment extends Fragment {
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);
-        gridView.setNestedScrollingEnabled(false);
 
         return rootView;
     }
@@ -63,7 +59,7 @@ public class ProductsFragment extends Fragment {
 
     private void readFromAssets() {
         try {
-            InputStream inputStream = getActivity().getAssets().open("products.json");
+            InputStream inputStream = getActivity().getAssets().open("coupons.json");
             int size = inputStream.available();
             byte[] buffer = new byte[size];
             inputStream.read(buffer);
@@ -78,12 +74,12 @@ public class ProductsFragment extends Fragment {
     private void extractDataFromJson() {
         try {
             JSONObject object = new JSONObject(json);
-            JSONArray array = object.getJSONArray("products");
+            JSONArray array = object.getJSONArray("coupons");
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject insideObj = array.getJSONObject(i);
-                String title = insideObj.getString("productTitle");
-                String image = insideObj.getString("productImage");
+                String title = insideObj.getString("couponTitle");
+                String image = insideObj.getString("couponImage");
 
                 Resources resources = this.getResources();
                 final int resourceId = resources
