@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c6c6c6">
+    android:background="#e6e6e6">
 
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,13 +28,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/sign_in_text_view"
+            android:id="@+id/sign_up_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            android:text="Rejestracja"
+            android:text="Sign Up"
             android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -50,7 +50,7 @@
             android:text="Login"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/login_edit_text"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_up_text_view" />
 
         <EditText
             android:id="@+id/login_edit_text"
@@ -59,7 +59,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="#fff"
+            android:background="@drawable/edittext_rounded_corners"
             android:ems="10"
             android:hint="Login"
             android:paddingStart="10dp"
@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Hasło"
+            android:text="Password"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/password_edit_view"
             app:layout_constraintTop_toBottomOf="@+id/login_edit_text" />
@@ -86,9 +86,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="#fff"
+            android:background="@drawable/edittext_rounded_corners"
             android:ems="10"
-            android:hint="Hasło"
+            android:hint="Password"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:inputType="textPassword"
@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Adres e-mail"
+            android:text="E-mail address"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/email_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/password_edit_view" />
@@ -113,7 +113,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="#fff"
+            android:background="@drawable/edittext_rounded_corners"
             android:ems="10"
             android:hint="E-mail"
             android:paddingStart="10dp"
@@ -128,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Nr telefonu"
+            android:text="Phone number"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/phone_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
@@ -140,9 +140,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="#fff"
+            android:background="@drawable/edittext_rounded_corners"
             android:ems="10"
-            android:hint="Nr telefonu"
+            android:hint="Phone number"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:inputType="textPersonName|phone"
@@ -152,12 +152,12 @@
 
         <CheckBox
             android:id="@+id/newsletter_checkbox"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="Zapisz się na newsletter i otrzymuj informacje o najnowszych ofertach"
+            android:text="Sign up for a newsletter to stay updated on all newly released products or daily specials"
             android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -170,8 +170,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
-            android:background="#000"
-            android:text="Zarejestruj"
+            android:background="@drawable/sing_button_rounded_corners"
+            android:text="Sign Up"
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +186,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="24dp"
-            android:text="Logowanie"
+            android:text="Log In"
             android:textColor="#000"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
