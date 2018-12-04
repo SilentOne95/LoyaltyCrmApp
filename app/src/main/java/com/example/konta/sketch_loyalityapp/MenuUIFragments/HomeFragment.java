@@ -1,12 +1,16 @@
 package com.example.konta.sketch_loyalityapp.MenuUIFragments;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +86,8 @@ public class HomeFragment extends Fragment {
 
     private void extractDataFromJson() {
         try {
+            Resources resources = this.getResources();
+
             JSONObject object = new JSONObject(json);
             layoutTitle = object.getString("layoutTitle");
 
@@ -93,15 +99,19 @@ public class HomeFragment extends Fragment {
                 String title = insideObj.getString("categoryTitle");
                 String image = insideObj.getString("categoryImage");
 
-                Resources resources = this.getResources();
-                final int resourceId = resources
+                final int resourceCategoryImage = resources
                         .getIdentifier(image, "drawable", getActivity().getPackageName());
 
-                itemList.add(new Item(title, resourceId));
+                Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceCategoryImage);
+                RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
+                bitmapDrawable.setCornerRadius(30);
+
+                itemList.add(new Item(title, bitmapDrawable));
             }
 
             String specialOfferImage = object.getString("specialImage");
-            Resources resources = this.getResources();
+            resources = this.getResources();
+
             resourceSpecialOffer = resources.getIdentifier(specialOfferImage, "drawable", getActivity().getPackageName());
             columns = object.getInt("numColumns");
 

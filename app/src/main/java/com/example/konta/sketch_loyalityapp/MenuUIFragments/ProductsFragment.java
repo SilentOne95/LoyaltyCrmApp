@@ -1,12 +1,16 @@
 package com.example.konta.sketch_loyalityapp.MenuUIFragments;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,21 +81,26 @@ public class ProductsFragment extends Fragment {
 
     private void extractDataFromJson() {
         try {
+            Resources resources = this.getResources();
+
             JSONObject object = new JSONObject(json);
             layoutTitle = object.getString("layoutTitle");
 
             JSONArray array = object.getJSONArray("products");
-            JSONObject insideObj = array.getJSONObject(0);
 
+            JSONObject insideObj = array.getJSONObject(0);
             String title = insideObj.getString("productTitle");
             String image = insideObj.getString("productImage");
 
-            Resources resources = this.getResources();
-            final int resourceId = resources
+            final int resourceCategoryImage = resources
                     .getIdentifier(image, "drawable", getActivity().getPackageName());
 
+            Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceCategoryImage);
+            RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
+            bitmapDrawable.setCornerRadius(30);
+
             for (int i = 0; i < 10; i++) {
-                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i+1)), resourceId));
+                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i + 1)), bitmapDrawable));
             }
 
             columns = object.getInt("numColumns");
