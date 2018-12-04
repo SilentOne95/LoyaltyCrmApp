@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7c7c7c">
+    android:background="#c6c6c6">
 
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,7 +36,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:text="Logowanie"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Login"
-            android:textColor="#fff"
+            android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/sign_login_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/facebook_button" />
 
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Hasło"
-            android:textColor="#fff"
+            android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/sing_password_text_view"
             app:layout_constraintTop_toBottomOf="@+id/sign_login_edit_text" />
 
@@ -133,7 +133,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:text="Przypomnij hasło"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +148,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="32dp"
             android:text="Rejestracja"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

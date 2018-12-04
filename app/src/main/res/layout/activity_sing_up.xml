@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7c7c7c">
+    android:background="#c6c6c6">
 
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,26 +35,12 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:text="Rejestracja"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sample_image_view" />
-
-        <Button
-            android:id="@+id/facebook_button"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:textColor="#fff"
-            android:background="#3b5998"
-            android:text="Zarejestruj przez Facebook"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_text_view" />
 
         <TextView
             android:id="@+id/login_text_view"
@@ -62,9 +48,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Login"
-            android:textColor="#fff"
+            android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/login_edit_text"
-            app:layout_constraintTop_toBottomOf="@+id/facebook_button" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_text_view" />
 
         <EditText
             android:id="@+id/login_edit_text"
@@ -89,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Hasło"
-            android:textColor="#fff"
+            android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/password_edit_view"
             app:layout_constraintTop_toBottomOf="@+id/login_edit_text" />
 
@@ -116,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Adres e-mail"
-            android:textColor="#fff"
+            android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/email_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/password_edit_view" />
 
@@ -143,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Nr telefonu"
-            android:textColor="#fff"
+            android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/phone_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
 
@@ -172,7 +158,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="Zapisz się na newsletter i otrzymuj informacje o najnowszych ofertach"
-            android:textColor="#fff"
+            android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phone_edit_text" />
@@ -201,7 +187,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="24dp"
             android:text="Logowanie"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

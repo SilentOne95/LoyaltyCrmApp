@@ -90,8 +90,8 @@ public class ProductsFragment extends Fragment {
             final int resourceId = resources
                     .getIdentifier(image, "drawable", getActivity().getPackageName());
 
-            for (int i = 1; i < 11; i++) {
-                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i)), resourceId));
+            for (int i = 0; i < 10; i++) {
+                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i+1)), resourceId));
             }
 
             columns = object.getInt("numColumns");
