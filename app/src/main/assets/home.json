@@ -4,7 +4,7 @@
   "categories": [
     {"categoryTitle": "Products", "categoryImage": "image_product"},
     {"categoryTitle": "Coupons", "categoryImage": "image_coupon"},
-    {"categoryTitle": "Offer", "categoryImage": "image_offer"},
+    {"categoryTitle": "Offers", "categoryImage": "image_offer"},
     {"categoryTitle": "Contact", "categoryImage": "image_phone"}
   ],
   "numColumns": 2
