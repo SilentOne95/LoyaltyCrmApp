@@ -85,23 +85,24 @@ public class HomeFragment extends Fragment {
             JSONObject object = new JSONObject(json);
             layoutTitle = object.getString("layoutTitle");
 
-            JSONArray array = object.getJSONArray("offers");
-            JSONObject insideObj = array.getJSONObject(0);
+            JSONArray array = object.getJSONArray("categories");
 
-            String title = insideObj.getString("offerTitle");
-            String image = insideObj.getString("offerImage");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject insideObj = array.getJSONObject(i);
 
-            Resources resources = this.getResources();
-            final int resourceId = resources
-                    .getIdentifier(image, "drawable", getActivity().getPackageName());
+                String title = insideObj.getString("categoryTitle");
+                String image = insideObj.getString("categoryImage");
 
-            for (int i = 0; i < 10; i++) {
-                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i+1)), resourceId));
+                Resources resources = this.getResources();
+                final int resourceId = resources
+                        .getIdentifier(image, "drawable", getActivity().getPackageName());
+
+                itemList.add(new Item(title, resourceId));
             }
 
             String specialOfferImage = object.getString("specialImage");
-            resourceSpecialOffer = resources
-                    .getIdentifier(specialOfferImage, "drawable", getActivity().getPackageName());
+            Resources resources = this.getResources();
+            resourceSpecialOffer = resources.getIdentifier(specialOfferImage, "drawable", getActivity().getPackageName());
             columns = object.getInt("numColumns");
 
         } catch (JSONException e) {

@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Bottom Sheet set up
         mBottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(200);
+        mBottomSheetBehavior.setPeekHeight(0);
         mBottomSheetBehavior.setHideable(true);
     }
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    private void displaySelectedScreen(int groupId, int itemId) {
+    public void displaySelectedScreen(int groupId, int itemId) {
         // Creating fragment object
         Fragment fragment = null;
 

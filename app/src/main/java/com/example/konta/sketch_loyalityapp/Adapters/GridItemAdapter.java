@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,13 +36,14 @@ public class GridItemAdapter extends ArrayAdapter<Item> {
      */
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
 
         View listItemView = convertView;
 
         class ViewHolder {
             private ImageView imageView;
             private TextView titleView;
+            private Button button;
         }
 
         ViewHolder holder;
@@ -53,6 +56,7 @@ public class GridItemAdapter extends ArrayAdapter<Item> {
             holder = new ViewHolder();
             holder.imageView = listItemView.findViewById(R.id.grid_item_image);
             holder.titleView = listItemView.findViewById(R.id.grid_item_text);
+            holder.button = listItemView.findViewById(R.id.view_details_button);
             listItemView.setTag(holder);
         } else {
             holder = (ViewHolder) listItemView.getTag();
@@ -63,6 +67,12 @@ public class GridItemAdapter extends ArrayAdapter<Item> {
 
         holder.imageView.setImageResource(currentItem.getResourceId());
         holder.titleView.setText(currentItem.getItemTitle());
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return listItemView;
     }
