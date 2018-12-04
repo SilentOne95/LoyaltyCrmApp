@@ -104,7 +104,7 @@ public class HomeFragment extends Fragment {
 
                 Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceCategoryImage);
                 RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
-                bitmapDrawable.setCornerRadius(30);
+                bitmapDrawable.setCornerRadius(20);
 
                 itemList.add(new Item(title, bitmapDrawable));
             }

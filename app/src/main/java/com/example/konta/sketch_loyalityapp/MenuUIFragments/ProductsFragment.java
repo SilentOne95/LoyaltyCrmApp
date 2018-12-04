@@ -97,7 +97,7 @@ public class ProductsFragment extends Fragment {
 
             Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceCategoryImage);
             RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
-            bitmapDrawable.setCornerRadius(30);
+            bitmapDrawable.setCornerRadius(20);
 
             for (int i = 0; i < 10; i++) {
                 itemList.add(new Item(title.concat(" ").concat(Integer.toString(i + 1)), bitmapDrawable));
