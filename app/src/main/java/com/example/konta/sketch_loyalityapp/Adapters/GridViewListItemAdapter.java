@@ -16,7 +16,7 @@ import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
 import java.util.ArrayList;
 
-public class GridItemAdapter extends ArrayAdapter<Item> {
+public class GridViewListItemAdapter extends ArrayAdapter<Item> {
 
     /**
      * This is a custom constructor.
@@ -25,7 +25,7 @@ public class GridItemAdapter extends ArrayAdapter<Item> {
      * @param context of the app
      * @param gridItem A list of objects to display in a list
      */
-    public GridItemAdapter(@NonNull Activity context, @NonNull ArrayList<Item> gridItem) {
+    public GridViewListItemAdapter(@NonNull Activity context, @NonNull ArrayList<Item> gridItem) {
         // Initialize the ArrayAdapter's internal storage for the context
         super(context, 0, gridItem);
     }

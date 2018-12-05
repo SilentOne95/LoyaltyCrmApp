@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.switch_view_layout, new HomeFragment());
         ft.commit();
-        navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.getMenu().getItem(1).setChecked(true);
 
         // Bottom Sheet set up
         mBottomSheet = findViewById(R.id.bottom_sheet);
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewPager viewPager = findViewById(R.id.view_pager);
         BottomSheetViewPagerAdapter customAdapter = new BottomSheetViewPagerAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(customAdapter);
-
     }
 
     private void readFromAssets() {

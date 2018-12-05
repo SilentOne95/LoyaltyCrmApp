@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.example.konta.sketch_loyalityapp.Adapters.GridItemAdapter;
+import com.example.konta.sketch_loyalityapp.Adapters.GridViewListItemAdapter;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
         ImageView specialOfferImage = rootView.findViewById(R.id.special_offer_image);
         specialOfferImage.setImageResource(resourceSpecialOffer);
 
-        GridItemAdapter adapter = new GridItemAdapter(getActivity(), itemList);
+        GridViewListItemAdapter adapter = new GridViewListItemAdapter(getActivity(), itemList);
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);
