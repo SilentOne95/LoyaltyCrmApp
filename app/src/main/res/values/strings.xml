@@ -1,12 +1,70 @@
 <resources>
+    <!-- App name -->
     <string name="app_name">Loyalty app</string>
 
+    <!-- Navigation Drawer strings -->
     <string name="nav_header_title">My header title</string>
-
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
 
+    <!-- Including Log In and Sign Up strings-->
+    <string name="login_text">Login</string>
+    <string name="log_in_facebook_button">Log In with Facebook</string>
+    <string name="password_text">Password</string>
+    <string name="log_in_text">Log In</string>
+    <string name="forgot_password_text">Forgot password?</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="email_address_text">E-mail address</string>
+    <string name="email_text">E-mail</string>
+    <string name="phone_number_text">Phone number</string>
+    <string name="newsletter_checkbox_text">Sign up for a newsletter to stay updated on all newly
+        released products or daily specials.</string>
+   
+    <!-- Including fragment home -->
+    <string name="check_offers_text">Check offers!</string>
+    
+    <!-- Including grid list item string -->
+    <string name="check_button">Check</string>
+    
+    <!-- Image content descriptions -->
+    <string name="sign_up_image_desc">Sign Up logo image</string>
+    <string name="grid_list_item_content_desc">Resource passed with JSON, will be populated
+        in 2 different category activities.</string>
+    <string name="fragment_home_special_image_desc">Highlighted special offer image</string>
+
+    <!-- Test strings -->
     <string name="first_fragment">Left</string>
     <string name="second_fragment">Right</string>
-    <string name="lorem_ipsum">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</string>
+    <string name="lorem_ipsum">
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
+        amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore
+        et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
+        nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
+        sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+        consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et
+        dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
+        pariatur? Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis
+        et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+        voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
+        sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
+        labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
+        nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+    </string>
 </resources>

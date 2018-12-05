@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scaleType="fitCenter"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/grid_list_item_content_desc" />
 
     <TextView
         android:id="@+id/grid_item_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test test"
         android:textColor="#000"
         android:textSize="16sp"
         android:layout_gravity="center_horizontal"
@@ -32,7 +32,7 @@
         android:layout_gravity="end"
         android:layout_margin="16dp"
         android:background="@drawable/button_rounded_corners"
-        android:text="Sprawdź"
+        android:text="@string/check_button"
         android:textColor="#fff"/>
 
 </LinearLayout>

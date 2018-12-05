@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General values -->
+    <dimen name="zero">0dp</dimen>
+    <dimen name="small_value">8dp</dimen>
+    <dimen name="mid_value">16dp</dimen>
+    <dimen name="big_value">24dp</dimen>
+
+    <!-- Corner radius -->
+    <dimen name="rounded_corner_radius">3dp</dimen>
+</resources>
