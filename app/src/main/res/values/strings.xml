@@ -7,7 +7,7 @@
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
 
-    <!-- Including Log In and Sign Up strings-->
+    <!-- Log In and Sign Up strings-->
     <string name="login_text">Login</string>
     <string name="log_in_facebook_button">Log In with Facebook</string>
     <string name="password_text">Password</string>
@@ -19,18 +19,23 @@
     <string name="phone_number_text">Phone number</string>
     <string name="newsletter_checkbox_text">Sign up for a newsletter to stay updated on all newly
         released products or daily specials.</string>
-   
-    <!-- Including fragment home -->
+
+    <!-- Fragment home strings -->
     <string name="check_offers_text">Check offers!</string>
-    
-    <!-- Including grid list item string -->
+
+    <!-- Grid list item string -->
     <string name="check_button">Check</string>
-    
+
     <!-- Image content descriptions -->
     <string name="sign_up_image_desc">Sign Up logo image</string>
     <string name="grid_list_item_content_desc">Resource passed with JSON, will be populated
         in 2 different category activities.</string>
     <string name="fragment_home_special_image_desc">Highlighted special offer image</string>
+
+    <!-- Bottom Sheet strings -->
+    <string name="category_second">Second</string>
+    <string name="category_first">First</string>
+    <string name="peek_text">Peek</string>
 
     <!-- Test strings -->
     <string name="first_fragment">Left</string>
@@ -67,4 +72,5 @@
         consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
         nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
     </string>
+
 </resources>

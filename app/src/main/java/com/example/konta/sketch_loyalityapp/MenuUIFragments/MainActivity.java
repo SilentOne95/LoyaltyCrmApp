@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.konta.sketch_loyalityapp.Adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.ContactActivity;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.TermsConditionsActivity;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.WebsiteActivity;
@@ -36,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private String json;
     GoogleMapFragment googleMapFragment;
-
     View mBottomSheet;
     BottomSheetBehavior mBottomSheetBehavior;
 
@@ -73,8 +74,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Bottom Sheet set up
         mBottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(0);
+        mBottomSheetBehavior.setPeekHeight(100);
         mBottomSheetBehavior.setHideable(true);
+
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        BottomSheetViewPagerAdapter customAdapter = new BottomSheetViewPagerAdapter(this, getSupportFragmentManager());
+        viewPager.setAdapter(customAdapter);
+
     }
 
     private void readFromAssets() {
