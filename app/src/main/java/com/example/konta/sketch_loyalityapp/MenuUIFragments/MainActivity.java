@@ -15,12 +15,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.Adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.ContactActivity;
@@ -81,12 +78,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBottomSheetBehavior.setPeekHeight(100);
         mBottomSheetBehavior.setHideable(true);
 
+        // Custom TabLayout with ViewPager set up
         ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(new BottomSheetViewPagerAdapter(this, getSupportFragmentManager()));
+        BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(MainActivity.this, getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        // Setting up custom TabLayout view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(pagerAdapter.getTabView(i));
+        }
     }
 
     private void readFromAssets() {

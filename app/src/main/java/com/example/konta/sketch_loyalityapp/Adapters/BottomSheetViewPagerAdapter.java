@@ -1,17 +1,16 @@
 package com.example.konta.sketch_loyalityapp.Adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.AdditionalUI.FirstFragment;
-import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.AdditionalUI.SecondFragment;
+import com.example.konta.sketch_loyalityapp.R;
 
 public class BottomSheetViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -23,6 +22,16 @@ public class BottomSheetViewPagerAdapter extends FragmentPagerAdapter {
     public BottomSheetViewPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
+    }
+
+    public View getTabView(int position) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.tab_view_custom, null);
+
+        TextView textView = view.findViewById(R.id.tab_view_text);
+        textView.setText(tabTitles[position]);
+        textView.setCompoundDrawablesWithIntrinsicBounds(imageResId[position], 0, 0, 0);
+
+        return view;
     }
 
     @Override
@@ -37,20 +46,5 @@ public class BottomSheetViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return PAGE_COUNT;
-    }
-
-    // This determines the title for each tab
-    @Override
-    public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
-        Drawable image = mContext.getResources().getDrawable(imageResId[position]);
-        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-
-        // Replace blank spaces with image icon
-        SpannableString sb = new SpannableString("   "
-                + mContext.getResources().getString(tabTitles[position]));
-        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
-        sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return sb;
     }
 }

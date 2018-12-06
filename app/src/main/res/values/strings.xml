@@ -26,16 +26,18 @@
     <!-- Grid list item string -->
     <string name="check_button">Check</string>
 
+    <!-- Bottom Sheet strings -->
+    <string name="category_second">Second</string>
+    <string name="category_first">First</string>
+    <string name="peek_text">Peek</string>
+
     <!-- Image content descriptions -->
     <string name="sign_up_image_desc">Sign Up logo image</string>
     <string name="grid_list_item_content_desc">Resource passed with JSON, will be populated
         in 2 different category activities.</string>
     <string name="fragment_home_special_image_desc">Highlighted special offer image</string>
+    <string name="tab_view_image_desc">TabView icon in BottomSheet</string>
 
-    <!-- Bottom Sheet strings -->
-    <string name="category_second">Second</string>
-    <string name="category_first">First</string>
-    <string name="peek_text">Peek</string>
 
     <!-- Test strings -->
     <string name="first_fragment">Left</string>

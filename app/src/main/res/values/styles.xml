@@ -28,10 +28,4 @@
     <!-- Temporary theme for WebView, Contact and Terms & Conditions activities. -->
     <style name="AppTheme.Activities"/>
 
-    <!-- TabLayout custom style -->
-    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textAlignment">center</item>
-    </style>
-
 </resources>
