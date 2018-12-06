@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
         ImageView specialOfferImage = rootView.findViewById(R.id.special_offer_image);
         specialOfferImage.setImageResource(resourceSpecialOffer);
 
-        GridViewListItemAdapter adapter = new GridViewListItemAdapter(getActivity(), itemList);
+        GridViewListItemAdapter adapter = new GridViewListItemAdapter(getActivity(), itemList, true);
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);

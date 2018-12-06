@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class GridViewListItemAdapter extends ArrayAdapter<Item> {
 
+    private boolean mShowDescription;
+
     /**
      * This is a custom constructor.
      * The context is used to inflate the layout file.
@@ -25,9 +27,10 @@ public class GridViewListItemAdapter extends ArrayAdapter<Item> {
      * @param context of the app
      * @param gridItem A list of objects to display in a list
      */
-    public GridViewListItemAdapter(@NonNull Activity context, @NonNull ArrayList<Item> gridItem) {
+    public GridViewListItemAdapter(@NonNull Activity context, @NonNull ArrayList<Item> gridItem, boolean showDescription) {
         // Initialize the ArrayAdapter's internal storage for the context
         super(context, 0, gridItem);
+        mShowDescription = showDescription;
     }
 
     /**
@@ -41,7 +44,7 @@ public class GridViewListItemAdapter extends ArrayAdapter<Item> {
 
         class ViewHolder {
             private ImageView imageView;
-            private TextView titleView;
+            private TextView titleView, descriptionText, discountMarker;
             private Button button;
         }
 
@@ -52,10 +55,20 @@ public class GridViewListItemAdapter extends ArrayAdapter<Item> {
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.grid_list_item, parent, false);
+
             holder = new ViewHolder();
             holder.imageView = listItemView.findViewById(R.id.grid_item_image);
-            holder.titleView = listItemView.findViewById(R.id.grid_item_text);
+            holder.discountMarker = listItemView.findViewById(R.id.discount_marker_text_view);
+            holder.titleView = listItemView.findViewById(R.id.grid_item_title_text);
+            holder.descriptionText = listItemView.findViewById(R.id.grid_item_content_description);
             holder.button = listItemView.findViewById(R.id.view_details_button);
+
+            // Depending on view, decide if those views should be shown or not
+            if (mShowDescription) {
+                holder.descriptionText.setVisibility(View.GONE);
+                holder.discountMarker.setVisibility(View.GONE);
+            }
+
             listItemView.setTag(holder);
         } else {
             holder = (ViewHolder) listItemView.getTag();

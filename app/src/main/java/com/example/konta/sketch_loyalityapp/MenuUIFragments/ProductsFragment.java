@@ -49,7 +49,7 @@ public class ProductsFragment extends Fragment {
         // preparing and displaying data in Navigation Drawer using custom adapter
         extractDataFromJson();
 
-        GridViewListItemAdapter adapter = new GridViewListItemAdapter(getActivity(), itemList);
+        GridViewListItemAdapter adapter = new GridViewListItemAdapter(getActivity(), itemList, true);
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);

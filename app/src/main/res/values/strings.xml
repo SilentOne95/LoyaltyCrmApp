@@ -79,5 +79,9 @@
         consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
         nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
     </string>
+    <string name="short_lorem_ipsum">
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam.
+    </string>
 
 </resources>
