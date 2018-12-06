@@ -26,5 +26,5 @@
     </style>
 
     <!-- Temporary theme for WebView, Contact and Terms & Conditions activities. -->
-    <style name="AppTheme.Activities" parent="AppTheme" />
+    <style name="AppTheme.Activities"/>
 </resources>

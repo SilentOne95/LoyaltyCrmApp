@@ -40,21 +40,21 @@
 
         <activity
             android:name=".MenuUIActivities.WebsiteActivity"
-            android:theme="@style/AppTheme.Activities">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuUIFragments.MainActivity" />
         </activity>
 
         <activity android:name=".MenuUIActivities.TermsConditionsActivity"
-            android:theme="@style/AppTheme.Activities">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuUIFragments.MainActivity" />
         </activity>
 
         <activity android:name=".MenuUIActivities.ContactActivity"
-            android:theme="@style/AppTheme.Activities">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuUIFragments.MainActivity" />

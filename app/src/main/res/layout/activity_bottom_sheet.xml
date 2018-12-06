@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="350dp"
     android:orientation="vertical"
-    android:background="#bcbcbc"
     android:clickable="true"
     android:focusable="true"
+    android:background="#d2d2d2"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <TextView
