@@ -37,7 +37,7 @@
         in 2 different category activities.</string>
     <string name="fragment_home_special_image_desc">Highlighted special offer image</string>
     <string name="tab_view_image_desc">TabView icon in BottomSheet</string>
-
+    <string name="coupon_details_image_desc">Coupon details image</string>
 
     <!-- Test strings -->
     <string name="first_fragment">Left</string>

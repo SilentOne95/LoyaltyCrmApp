@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".AdditionalUI.CouponDetailsActivity"
+    android:background="#e6e6e6">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/coupon_details_image_desc"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_coupon" />
+
+            <TextView
+                android:id="@+id/discount_marker_text_view"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_alignEnd="@+id/imageView"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/rounded_corners_label_discount"
+                android:gravity="center"
+                android:text="-20%"
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp">
+
+            <TextView
+                android:id="@+id/valid_until_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="valid until:"
+                android:textColor="#969696"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/valid_date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="20.06.18"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/valid_until_text_view"
+                app:layout_constraintStart_toEndOf="@+id/valid_until_text_view"
+                app:layout_constraintTop_toTopOf="@+id/valid_until_text_view" />
+
+            <TextView
+                android:id="@+id/product_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Product Title -20%"
+                android:textColor="#000"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/valid_until_text_view" />
+
+            <TextView
+                android:id="@+id/price_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Price:"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_title_text_view" />
+
+            <TextView
+                android:id="@+id/price_amount_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="39,99 zł"
+                android:textColor="#fcd23a"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/price_text_view"
+                app:layout_constraintStart_toEndOf="@+id/price_text_view"
+                app:layout_constraintTop_toTopOf="@+id/price_text_view" />
+
+            <Button
+                android:id="@+id/show_coupon_button"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:text="Button"
+                android:textAllCaps="false"
+                android:background="@drawable/rounded_corners_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/price_text_view" />
+
+            <TextView
+                android:id="@+id/product_description_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="#000"
+                android:text="@string/lorem_ipsum"
+                app:layout_constraintTop_toBottomOf="@+id/show_coupon_button" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+
+</ScrollView>
