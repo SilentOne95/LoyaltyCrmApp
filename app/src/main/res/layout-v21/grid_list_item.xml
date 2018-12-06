@@ -33,6 +33,7 @@
         android:layout_margin="16dp"
         android:background="@drawable/rounded_corners_button"
         android:text="@string/check_button"
-        android:textColor="#fff"/>
+        android:textAllCaps="false"
+        android:textColor="#fff" />
 
 </LinearLayout>

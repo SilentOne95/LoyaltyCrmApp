@@ -23,6 +23,11 @@
     <!-- Fragment home strings -->
     <string name="check_offers_text">Check offers!</string>
 
+    <!-- Activity Coupon details strings -->
+    <string name="valid_until_text">valid until:</string>
+    <string name="price_text">Price:</string>
+    <string name="show_my_coupon_text">Show my coupon</string>
+
     <!-- Grid list item string -->
     <string name="check_button">Check</string>
 
