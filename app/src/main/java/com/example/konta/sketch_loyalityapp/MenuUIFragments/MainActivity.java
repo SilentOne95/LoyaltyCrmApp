@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -14,9 +15,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.Adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.ContactActivity;
@@ -78,8 +82,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBottomSheetBehavior.setHideable(true);
 
         ViewPager viewPager = findViewById(R.id.view_pager);
-        BottomSheetViewPagerAdapter customAdapter = new BottomSheetViewPagerAdapter(this, getSupportFragmentManager());
-        viewPager.setAdapter(customAdapter);
+        viewPager.setAdapter(new BottomSheetViewPagerAdapter(this, getSupportFragmentManager()));
+
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     private void readFromAssets() {

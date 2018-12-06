@@ -4,11 +4,11 @@
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="350dp"
-    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
     android:clickable="true"
     android:focusable="true"
-    android:background="#d2d2d2"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    android:orientation="vertical"
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
     <TextView
         android:id="@+id/bottom_sheet_peek"
@@ -16,26 +16,24 @@
         android:layout_height="40dp"
         android:gravity="center"
         android:text="@string/peek_text"
-        android:textColor="@color/black" />
+        android:textColor="#fff" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#fff">
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/CustomTabLayout" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top" />
-
-        </android.support.v4.view.ViewPager>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
