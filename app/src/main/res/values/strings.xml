@@ -43,11 +43,12 @@
     <string name="fragment_home_special_image_desc">Highlighted special offer image</string>
     <string name="tab_view_image_desc">TabView icon in BottomSheet</string>
     <string name="coupon_details_image_desc">Coupon details image</string>
+    <string name="coupon_details_code_text">Promo code:</string>
 
     <!-- Test strings -->
     <string name="first_fragment">Left</string>
     <string name="second_fragment">Right</string>
-    <string name="lorem_ipsum">
+    <string name="long_lorem_ipsum">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem
         accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
         veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
@@ -75,6 +76,18 @@
         ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
         sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
         labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
+        nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+    </string>
+    <string name="mid_lorem_ipsum">
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
+        amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore
+        et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
         exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
         consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
         nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?

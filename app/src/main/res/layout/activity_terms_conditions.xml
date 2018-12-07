@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,8 +9,8 @@
     <TextView
         android:id="@+id/terms_conditions_text_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/lorem_ipsum"
+        android:layout_height="wrap_content"
+        android:text="@string/long_lorem_ipsum"
         android:padding="16dp"/>
 
-</android.support.constraint.ConstraintLayout>
+</ScrollView>
