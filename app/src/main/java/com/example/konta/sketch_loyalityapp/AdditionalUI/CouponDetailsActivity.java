@@ -12,8 +12,10 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
 
@@ -34,6 +36,16 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
 
         backgroundButton = (GradientDrawable) showCouponCodeButton.getBackground();
 
+        // Temporary solution to hide code when activity is stopped or paused
+        getBasicButtonStyle();
+    }
+
+    @Override
+    public void onClick(View v) {
+        replaceButtonStyle();
+    }
+
+    private void replaceButtonStyle() {
         // Setting up text which will be displayed on button when it's clicked
         staticCodeText = new SpannableString(getResources().getString(R.string.coupon_details_code_text));
         staticCodeText.setSpan(new ForegroundColorSpan(Color.BLACK), 0, staticCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -42,11 +54,14 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
         promoCodeText.setSpan(new ForegroundColorSpan(Color.BLUE), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         promoCodeText.setSpan(new RelativeSizeSpan(1.2f), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         promoCodeText.setSpan(new StyleSpan(Typeface.BOLD), 0, promoCodeText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-    }
 
-    @Override
-    public void onClick(View v) {
+        // Set new text and color
         showCouponCodeButton.setText(TextUtils.concat(staticCodeText, "  ", promoCodeText));
         backgroundButton.setColor(Color.parseColor("#e6e6e6"));
+    }
+
+    private void getBasicButtonStyle() {
+        showCouponCodeButton.setText(getResources().getText(R.string.show_my_coupon_text));
+        backgroundButton.setColor(Color.parseColor("#fcd23a"));
     }
 }
