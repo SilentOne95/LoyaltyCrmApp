@@ -15,6 +15,8 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GridViewListItemAdapter extends ArrayAdapter<Item> {
 
@@ -78,6 +80,8 @@ public class GridViewListItemAdapter extends ArrayAdapter<Item> {
         Item currentItem = getItem(position);
 
         holder.imageView.setImageDrawable(currentItem.getBitmapDrawable());
+        String generateInt = Integer.toString(new Random().nextInt(51) + 5);
+        holder.discountMarker.setText("-".concat(generateInt).concat("%"));
         holder.titleView.setText(currentItem.getItemTitle());
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
