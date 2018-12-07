@@ -33,7 +33,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
         mBottomSheetBehavior.setPeekHeight(100);
         mBottomSheetBehavior.setHideable(true);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        mBottomSheet.setOnClickListener(this);
 
         // Custom TabLayout with ViewPager set up
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -232,6 +234,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             googleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (mBottomSheetBehavior.getState()) {
+            case BottomSheetBehavior.STATE_COLLAPSED:
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case BottomSheetBehavior.STATE_EXPANDED:
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            default:
+                break;
         }
     }
 }

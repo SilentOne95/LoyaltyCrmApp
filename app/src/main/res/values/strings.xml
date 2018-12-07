@@ -23,6 +23,10 @@
     <!-- Fragment home strings -->
     <string name="check_offers_text">Check offers!</string>
 
+    <!-- Fragment coupons strings -->
+    <string name="no_coupons_text">Unfortunately, you do not have active coupons\n :(</string>
+    <string name="try_again_later_coupons_text">Try again later</string>
+
     <!-- Activity Coupon details strings -->
     <string name="valid_until_text">valid until:</string>
     <string name="price_text">Price:</string>

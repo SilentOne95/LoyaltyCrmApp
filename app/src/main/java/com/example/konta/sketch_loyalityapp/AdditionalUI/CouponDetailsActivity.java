@@ -49,7 +49,7 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
         staticCodeText.setSpan(new ForegroundColorSpan(Color.BLACK), 0, staticCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         promoCodeText = new SpannableString("CWVZ85F");
-        promoCodeText.setSpan(new ForegroundColorSpan(Color.BLUE), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        promoCodeText.setSpan(new ForegroundColorSpan(Color.parseColor("#3700b3")), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         promoCodeText.setSpan(new RelativeSizeSpan(1.2f), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         promoCodeText.setSpan(new StyleSpan(Typeface.BOLD), 0, promoCodeText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 

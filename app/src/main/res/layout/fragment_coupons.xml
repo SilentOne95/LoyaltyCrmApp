@@ -6,6 +6,7 @@
     android:clipToPadding="false"
     android:clipChildren="false"
     android:padding="16dp"
+    android:background="#e6e6e6"
     tools:context=".MenuUIFragments.CouponsFragment">
 
     <com.example.konta.sketch_loyalityapp.ModelClasses.CustomGridView
@@ -17,5 +18,35 @@
         android:gravity="center"
         android:stretchMode="columnWidth"
         android:scrollbars="none"/>
+
+    <LinearLayout
+        android:id="@+id/empty_state_coupons_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="#e6e6e6"
+        android:layout_margin="24dp">
+
+        <TextView
+            android:id="@+id/empty_state_coupons_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_coupons_text"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textColor="#3700b3"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/empty_state_coupons_text_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/try_again_later_coupons_text"
+            android:textAlignment="center"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
 
 </FrameLayout>
