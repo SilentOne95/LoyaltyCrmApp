@@ -12,8 +12,5 @@ public class TermsConditionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms_conditions);
         setTitle("Terms & Conditions");
-
-        // Entering / exiting animations for activities
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 }
