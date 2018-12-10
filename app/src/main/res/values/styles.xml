@@ -19,16 +19,44 @@
     <style name="AppTheme.Launcher" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/layout_launch_screen</item>
     </style>
-
-    <!-- Grid list item -->
-    <style name="grid_list_item_image">
+    <!-- Basic style for images -->
+    <style name="basic_image_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:adjustViewBounds">true</item>
         <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
     </style>
 
+    <!-- Fragment home -->
+    <style name="home_special_offer_image" parent="basic_image_style">
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:layout_marginBottom">@dimen/mid_value</item>
+    </style>
+
+    <style name="home_info_text_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:layout_marginBottom">@dimen/big_value</item>
+    </style>
+
+    <style name="home_grid_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:verticalSpacing">@dimen/mid_value</item>
+        <item name="android:horizontalSpacing">@dimen/big_value</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:padding">@dimen/mid_value</item>
+        <item name="android:gravity">center</item>
+        <item name="android:stretchMode">columnWidth</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <!-- Grid list item -->
     <style name="grid_list_item_marker">
         <item name="android:layout_width">@dimen/discount_marker_width</item>
         <item name="android:layout_height">@dimen/discount_marker_height</item>

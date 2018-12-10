@@ -10,36 +10,16 @@
 
     <ImageView
         android:id="@+id/special_offer_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:focusableInTouchMode="true"
-        android:layout_marginBottom="16dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/fragment_home_special_image_desc" />
+        android:contentDescription="@string/fragment_home_special_image_desc"
+        style="@style/home_special_offer_image"/>
 
     <TextView
         android:id="@+id/info_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/check_offers_text"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="#000"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"/>
+        style="@style/home_info_text_view"/>
 
     <com.example.konta.sketch_loyalityapp.ModelClasses.CustomGridView
         android:id="@+id/grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:verticalSpacing="16dp"
-        android:horizontalSpacing="24dp"
-        android:clipToPadding="false"
-        android:padding="16dp"
-        android:gravity="center"
-        android:stretchMode="columnWidth"
-        android:scrollbars="none"/>
+        style="@style/home_grid_view"/>
 
 </LinearLayout>
