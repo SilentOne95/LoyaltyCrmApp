@@ -23,7 +23,7 @@
         android:background="@drawable/rounded_corners_label_discount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/grid_list_item_marker"/>
+        style="@style/basic_grid_list_item_marker"/>
 
     <TextView
         android:id="@+id/grid_item_title_text"

@@ -20,7 +20,7 @@
         <item name="android:windowBackground">@drawable/layout_launch_screen</item>
     </style>
 
-    <!-- Basic style for images -->
+    <!-- Basic styles -->
     <style name="basic_image_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -38,15 +38,23 @@
         <item name="android:scrollbars">none</item>
     </style>
 
-    <!-- Fragment home -->
+    <style name="basic_grid_list_item_marker">
+        <item name="android:layout_width">@dimen/discount_marker_width</item>
+        <item name="android:layout_height">@dimen/discount_marker_height</item>
+        <item name="android:layout_marginEnd">@dimen/big_value</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Home fragment -->
     <style name="home_special_offer_image" parent="basic_image_style">
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:layout_marginBottom">@dimen/mid_value</item>
     </style>
 
-    <style name="home_info_text_view">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="home_info_text_view" parent="layout_wrap_content">
         <item name="android:textAppearance">?android:textAppearanceLarge</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:layout_gravity">center_horizontal</item>
@@ -60,7 +68,7 @@
         <item name="android:padding">@dimen/mid_value</item>
     </style>
 
-    <!-- Fragment coupons -->
+    <!-- Coupons fragment  -->
     <style name="coupons_empty_state_text_one">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -78,20 +86,61 @@
         <item name="android:layout_marginTop">@dimen/mid_value</item>
     </style>
 
-    <!-- Grid list item -->
-    <style name="grid_list_item_marker">
-        <item name="android:layout_width">@dimen/discount_marker_width</item>
-        <item name="android:layout_height">@dimen/discount_marker_height</item>
-        <item name="android:layout_marginEnd">@dimen/big_value</item>
-        <item name="android:gravity">center</item>
+    <!-- Coupon details activity -->
+    <style name="details_valid_text" parent="layout_wrap_content">
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+    </style>
+
+    <style name="details_valid_date_text_view">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+    </style>
+
+    <style name="details_product_title" parent="layout_wrap_content">
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/very_big_text_size</item>
+    </style>
+
+    <style name="details_price_text" parent="layout_wrap_content">
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/big_text_size</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="details_price_amount" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="grid_list_item_title">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="details_old_price_amount" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="details_show_coupon_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/coupon_details_button_height</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="details_product_description_text">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <!-- Grid list item -->
+    <style name="grid_list_item_title" parent="layout_wrap_content">
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_margin">@dimen/mid_value</item>
         <item name="android:layout_marginStart">@dimen/mid_value</item>
@@ -113,7 +162,12 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <!-- wrap_content layout size -->
+    <style name="layout_wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

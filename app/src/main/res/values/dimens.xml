@@ -8,8 +8,9 @@
 
     <dimen name="very_small_text_size">12sp</dimen>
     <dimen name="small_text_size">14sp</dimen>
-    <dimen name="mid_text_size">18sp</dimen>
-    <dimen name="big_text_size">22sp</dimen>
+    <dimen name="mid_text_size">16sp</dimen>
+    <dimen name="big_text_size">20sp</dimen>
+    <dimen name="very_big_text_size">24sp</dimen>
 
     <!-- Corner radius -->
     <dimen name="rounded_corner_radius">3dp</dimen>
@@ -26,5 +27,8 @@
 
     <!-- Navigation drawer header -->
     <dimen name="nav_header_height">200dp</dimen>
+
+    <!-- Coupon details button -->
+    <dimen name="coupon_details_button_height">40dp</dimen>
 
 </resources>
