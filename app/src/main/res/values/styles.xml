@@ -1,31 +1,22 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
+    <style name="BaseAppTheme" parent="Theme.AppCompat">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_home_indicator</item>
     </style>
 
     <!-- Collapsing toolbar application theme. -->
-    <style name="AppTheme.BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="AppTheme.BaseTheme.NoActionBar">
+    <style name="BaseAppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <!-- Launch screen theme. -->
     <style name="AppTheme.Launcher" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/layout_launch_screen</item>
     </style>
-
-    <!-- Temporary theme for WebView, Contact and Terms & Conditions activities. -->
-    <style name="AppTheme.Activities"/>
 
 </resources>

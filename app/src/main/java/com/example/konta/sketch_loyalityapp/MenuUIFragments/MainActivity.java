@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -35,10 +35,10 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
     private String json;
-    GoogleMapFragment googleMapFragment;
+    GoogleMapFragment mGoogleMapFragment;
     View mBottomSheet;
     BottomSheetBehavior mBottomSheetBehavior;
 
@@ -49,9 +49,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         // Reading JSON file from assets
         readFromAssets();
@@ -60,22 +65,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // preparing and displaying data in Navigation Drawer using custom adapter
         prepareMenuData();
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
         // Display chosen screen as a default one after app is launched
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.switch_view_layout, new HomeFragment());
         ft.commit();
-        navigationView.getMenu().getItem(1).setChecked(true);
+        mNavigationView.getMenu().getItem(1).setChecked(true);
 
         // Bottom Sheet set up
         mBottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(100);
+        mBottomSheetBehavior.setPeekHeight(0);
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         mBottomSheet.setOnClickListener(this);
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 Resources resources = this.getResources();
                 final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
-                Menu menuOne = navigationView.getMenu();
+                Menu menuOne = mNavigationView.getMenu();
                 menuOne.add(0, i, 0, title).setIcon(resourceId);
             }
 
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 Resources resources = this.getResources();
                 final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
-                Menu menuTwo = navigationView.getMenu();
+                Menu menuTwo = mNavigationView.getMenu();
                 menuTwo.add(1, i, 0, title).setIcon(resourceId);
             }
 
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected (MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -211,15 +210,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // Close drawer when item is tapped
-        drawerLayout.closeDrawers();
+        mDrawerLayout.closeDrawers();
 
         // Update the UI based on the item selected
         displaySelectedScreen(menuItem.getGroupId(), menuItem.getItemId());
 
         // Uncheck all checked menu items
-        int size = navigationView.getMenu().size();
+        int size = mNavigationView.getMenu().size();
         for (int i = 0; i < size; i++) {
-            navigationView.getMenu().getItem(i).setChecked(false);
+            mNavigationView.getMenu().getItem(i).setChecked(false);
         }
         // Set item as selected to persist highlight
         menuItem.setChecked(true);
@@ -231,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == GoogleMapFragment.MY_PERMISSIONS_REQUEST_LOCATION) {
-            googleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            mGoogleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
