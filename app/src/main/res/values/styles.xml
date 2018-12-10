@@ -6,7 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@android:color/black</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_home_indicator</item>
-        <item name="android:textColor">#939393</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <!-- Collapsing toolbar application theme. -->
@@ -19,12 +19,23 @@
     <style name="AppTheme.Launcher" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/layout_launch_screen</item>
     </style>
+
     <!-- Basic style for images -->
     <style name="basic_image_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:scaleType">fitCenter</item>
         <item name="android:adjustViewBounds">true</item>
+    </style>
+
+    <style name="basic_grid_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:verticalSpacing">@dimen/mid_value</item>
+        <item name="android:horizontalSpacing">@dimen/big_value</item>
+        <item name="android:gravity">center</item>
+        <item name="android:stretchMode">columnWidth</item>
+        <item name="android:scrollbars">none</item>
     </style>
 
     <!-- Fragment home -->
@@ -44,16 +55,27 @@
         <item name="android:layout_marginBottom">@dimen/big_value</item>
     </style>
 
-    <style name="home_grid_view">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:verticalSpacing">@dimen/mid_value</item>
-        <item name="android:horizontalSpacing">@dimen/big_value</item>
+    <style name="home_grid_view" parent="basic_grid_view_style">
         <item name="android:clipToPadding">false</item>
         <item name="android:padding">@dimen/mid_value</item>
-        <item name="android:gravity">center</item>
-        <item name="android:stretchMode">columnWidth</item>
-        <item name="android:scrollbars">none</item>
+    </style>
+
+    <!-- Fragment coupons -->
+    <style name="coupons_empty_state_text_one">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+        <item name="android:textColor">@color/colorEmptyStateText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="coupons_empty_state_text_two">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
     </style>
 
     <!-- Grid list item -->

@@ -5,18 +5,12 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:clipChildren="false"
-    android:padding="16dp"
-    tools:context=".MenuUIFragments.ProductsFragment"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:padding="@dimen/mid_value"
+    tools:context=".MenuUIFragments.ProductsFragment">
 
     <com.example.konta.sketch_loyalityapp.ModelClasses.CustomGridView
         android:id="@+id/grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:verticalSpacing="16dp"
-        android:horizontalSpacing="24dp"
-        android:gravity="center"
-        android:stretchMode="columnWidth"
-        android:scrollbars="none" />
+        style="@style/basic_grid_view_style"/>
 
 </FrameLayout>
