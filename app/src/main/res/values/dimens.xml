@@ -28,7 +28,13 @@
     <!-- Navigation drawer header -->
     <dimen name="nav_header_height">200dp</dimen>
 
-    <!-- Coupon details button -->
+    <!-- Coupon details activity -->
     <dimen name="coupon_details_button_height">40dp</dimen>
+
+    <!-- Log In activity -->
+    <dimen name="log_in_fields_width">300dp</dimen>
+    <dimen name="log_in_fields_height">40dp</dimen>
+    <dimen name="log_in_fields_padding">10dp</dimen>
+    <dimen name="log_in_button_margin_bottom">48dp</dimen>
 
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e6e6e6"
+    android:background="@color/colorFragmentBackground"
     tools:context=".MenuUIActivities.ContactActivity">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/long_lorem_ipsum"
-        android:textColor="#000"
-        android:padding="16dp"/>
+        android:textColor="@color/colorBlack"
+        android:padding="@dimen/mid_value"/>
 
 </ScrollView>

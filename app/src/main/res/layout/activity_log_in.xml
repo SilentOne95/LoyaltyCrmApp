@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e6e6e6">
+    android:background="@color/colorFragmentBackground">
 
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,148 +14,89 @@
         android:layout_height="wrap_content"
         tools:context=".LoginUI.LogInActivity">
 
-
         <ImageView
             android:id="@+id/sample_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:padding="15dp"
+            app:srcCompat="@drawable/ic_sample_lock"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_sample_lock" />
+            android:contentDescription="@string/company_logo_desc"
+            style="@style/log_in_company_image"/>
 
         <TextView
             android:id="@+id/log_in_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/login_text"
-            android:textColor="#000"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:text="@string/log_in_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sample_image_view" />
+            app:layout_constraintTop_toBottomOf="@+id/sample_image_view"
+            style="@style/log_in_text_header"/>
 
         <Button
             android:id="@+id/facebook_button"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
             android:background="@drawable/rounded_corners_facebook"
             android:text="@string/log_in_facebook_button"
-            android:textAllCaps="false"
-            android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/log_in_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/log_in_text_view"
+            style="@style/log_in_facebook_button"/>
 
         <TextView
             android:id="@+id/login_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/login_text"
-            android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/sign_login_edit_text"
-            app:layout_constraintTop_toBottomOf="@+id/facebook_button" />
+            app:layout_constraintTop_toBottomOf="@+id/facebook_button"
+            style="@style/log_in_text_view"/>
 
         <EditText
             android:id="@+id/sign_login_edit_text"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_corners_edittext"
-            android:ems="10"
+            android:background="@drawable/rounded_corners_edit_text"
             android:hint="@string/login_text"
-            android:inputType="textPersonName"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/login_text_view"
+            style="@style/login_field_edit_text" />
 
         <TextView
             android:id="@+id/password_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/password_text"
-            android:textColor="#000"
             app:layout_constraintStart_toStartOf="@+id/sing_password_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/sign_login_edit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_login_edit_text"
+            style="@style/log_in_text_view"/>
 
         <EditText
             android:id="@+id/sing_password_text_view"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_corners_edittext"
-            android:ems="10"
+            android:background="@drawable/rounded_corners_edit_text"
             android:hint="@string/password_text"
-            android:inputType="textPassword"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/password_text_view"
+            style="@style/password_field_text_view"/>
 
         <Button
             android:id="@+id/log_in_button"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
             android:background="@drawable/rounded_corners_sign_button"
             android:text="@string/log_in_text"
-            android:textAllCaps="false"
-            android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sing_password_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/sing_password_text_view"
+            style="@style/log_in_button"/>
 
         <TextView
-            android:id="@+id/remind_pass_text_click"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
+            android:id="@+id/remind_password_text_click"
             android:text="@string/forgot_password_text"
-            android:textColor="#000"
-            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/log_in_button" />
+            app:layout_constraintTop_toBottomOf="@+id/log_in_button"
+            style="@style/log_in_remind_password_text_view"/>
 
         <TextView
             android:id="@+id/sign_up_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="32dp"
             android:text="@string/sign_up_text"
-            android:textColor="#000"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remind_pass_text_click" />
+            app:layout_constraintTop_toBottomOf="@+id/remind_password_text_click"
+            style="@style/sign_up_text_view"/>
 
     </android.support.constraint.ConstraintLayout>
 
