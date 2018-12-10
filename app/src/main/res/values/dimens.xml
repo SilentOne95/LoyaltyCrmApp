@@ -6,6 +6,17 @@
     <dimen name="mid_value">16dp</dimen>
     <dimen name="big_value">24dp</dimen>
 
+    <dimen name="small_text_size">14sp</dimen>
+    <dimen name="mid_text_size">18sp</dimen>
+    <dimen name="big_text_size">22sp</dimen>
+
     <!-- Corner radius -->
     <dimen name="rounded_corner_radius">3dp</dimen>
+
+    <!-- Grid list item -->
+    <dimen name="discount_marker_width">70dp</dimen>
+    <dimen name="discount_marker_height">50dp</dimen>
+    <dimen name="grid_list_item_width">90dp</dimen>
+    <dimen name="grid_list_item_height">30dp</dimen>
+    <dimen name="grid_list_item_elevation">8dp</dimen>
 </resources>
