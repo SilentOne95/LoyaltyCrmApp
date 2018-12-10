@@ -87,7 +87,8 @@ public class GridViewListItemAdapter extends ArrayAdapter<Item> {
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), CouponDetailsActivity.class);
+                getContext().startActivity(intent);
             }
         });
 

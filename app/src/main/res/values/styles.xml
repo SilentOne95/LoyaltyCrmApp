@@ -85,7 +85,7 @@
         <item name="android:layout_marginEnd">@dimen/big_value</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/big_text_size</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">bold</item>
     </style>
 

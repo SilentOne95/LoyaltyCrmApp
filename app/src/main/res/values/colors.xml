@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#ccc</color>
     <color name="colorAccent">#ffa726</color>
 
-    <color name="colorBlack">#000</color>
+    <color name="colorBlack">#000000</color>
 
     <color name="colorText">#939393</color>
     <color name="colorFragmentBackground">#e6e6e6</color>

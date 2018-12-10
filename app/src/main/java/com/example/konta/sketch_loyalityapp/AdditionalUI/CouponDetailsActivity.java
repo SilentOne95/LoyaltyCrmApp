@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.AdditionalUI;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -49,17 +50,19 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
         staticCodeText.setSpan(new ForegroundColorSpan(Color.BLACK), 0, staticCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         promoCodeText = new SpannableString("CWVZ85F");
-        promoCodeText.setSpan(new ForegroundColorSpan(Color.parseColor("#3700b3")), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        promoCodeText.setSpan(new RelativeSizeSpan(1.2f), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        promoCodeText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         promoCodeText.setSpan(new StyleSpan(Typeface.BOLD), 0, promoCodeText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
 
         // Set new text and color
         showCouponCodeButton.setText(TextUtils.concat(staticCodeText, "  ", promoCodeText));
-        backgroundButton.setColor(Color.parseColor("#e6e6e6"));
+        backgroundButton.setStroke(5, getResources().getColor(R.color.colorBlack));
+        backgroundButton.setColor(getResources().getColor(R.color.colorPrimary));
     }
 
     private void getBasicButtonStyle() {
         showCouponCodeButton.setText(getResources().getText(R.string.show_my_coupon_text));
-        backgroundButton.setColor(Color.parseColor("#fcd23a"));
+        backgroundButton.setColor(getResources().getColor(R.color.colorAccent));
+        backgroundButton.setStroke(3, getResources().getColor(R.color.colorAccent));
     }
 }
