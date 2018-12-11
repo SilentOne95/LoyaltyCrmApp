@@ -37,4 +37,7 @@
     <dimen name="log_in_fields_padding">10dp</dimen>
     <dimen name="log_in_button_margin_bottom">48dp</dimen>
 
+    <!-- Sign Up activity -->
+    <dimen name="sign_up_checkbox_width">320dp</dimen>
+
 </resources>
