@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Bottom Sheet set up
         mBottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(0);
+        mBottomSheetBehavior.setPeekHeight(240);
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         mBottomSheet.setOnClickListener(this);
@@ -221,8 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mNavigationView.getMenu().getItem(i).setChecked(false);
         }
         // Set item as selected to persist highlight
-        menuItem.setCheckable(true);
-        menuItem.setChecked(true);
+        menuItem.setChecked(true).setCheckable(true);
 
         return true;
     }
