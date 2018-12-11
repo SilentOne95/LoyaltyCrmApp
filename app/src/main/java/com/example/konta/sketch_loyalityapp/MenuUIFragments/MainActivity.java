@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.switch_view_layout, new HomeFragment());
         ft.commit();
-        mNavigationView.getMenu().getItem(1).setChecked(true);
+        mNavigationView.getMenu().getItem(1).setChecked(true).setCheckable(true);
 
         // Bottom Sheet set up
         mBottomSheet = findViewById(R.id.bottom_sheet);
@@ -221,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mNavigationView.getMenu().getItem(i).setChecked(false);
         }
         // Set item as selected to persist highlight
+        menuItem.setCheckable(true);
         menuItem.setChecked(true);
 
         return true;

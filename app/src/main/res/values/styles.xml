@@ -75,7 +75,7 @@
 
     <style name="home_info_text_view" parent="layout_wrap_content">
         <item name="android:textAppearance">?android:textAppearanceLarge</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_marginTop">@dimen/mid_value</item>
@@ -256,7 +256,7 @@
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:background">@color/colorWhite</item>
     </style>
-    
+
     <!-- Grid list item -->
     <style name="grid_list_item_title" parent="layout_wrap_content">
         <item name="android:layout_gravity">center_horizontal</item>
@@ -265,6 +265,9 @@
         <item name="android:layout_marginTop">@dimen/big_value</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
+    </style>
+    <style name="test">
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="grid_list_item_content_desc">

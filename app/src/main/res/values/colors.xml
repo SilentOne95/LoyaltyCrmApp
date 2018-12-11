@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#ccc</color>
-    <color name="colorAccent">#ffa726</color>
+    <color name="colorAccent">#ff9800</color>
     <color name="colorAccentDark">#c66900</color>
 
     <color name="colorBlack">#000</color>
@@ -14,4 +14,6 @@
 
     <color name="colorFacebookBlue">#3b5998</color>
     <color name="colorFacebookBlueRipple">#2a3f6c</color>
+
+    <color name="colorNavViewStateFalse">#5e5e5e</color>
 </resources>
