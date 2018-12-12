@@ -6,23 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/grid_item_shadow"
-    android:elevation="@dimen/grid_list_item_elevation">
+    android:elevation="@dimen/grid_item_elevation">
 
     <ImageView
         android:id="@+id/grid_item_image"
-        android:src="@drawable/image_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/grid_list_item_content_desc"
         style="@style/basic_image_style"/>
-
-    <TextView
-        android:id="@+id/grid_item_discount_marker"
-        android:background="@drawable/rounded_corners_label_discount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/basic_grid_list_item_marker"/>
 
     <TextView
         android:id="@+id/grid_item_title_text"

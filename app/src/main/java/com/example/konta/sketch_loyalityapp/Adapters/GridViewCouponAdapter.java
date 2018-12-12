@@ -19,7 +19,7 @@ import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GridViewListItemAdapter extends ArrayAdapter<Item> {
+public class GridViewCouponAdapter extends ArrayAdapter<Item> {
 
     private boolean mShowDescription;
 
@@ -30,7 +30,7 @@ public class GridViewListItemAdapter extends ArrayAdapter<Item> {
      * @param context of the app
      * @param gridItem A list of objects to display in a list
      */
-    public GridViewListItemAdapter(@NonNull Activity context, @NonNull ArrayList<Item> gridItem, boolean showDescription) {
+    public GridViewCouponAdapter(@NonNull Activity context, @NonNull ArrayList<Item> gridItem, boolean showDescription) {
         // Initialize the ArrayAdapter's internal storage for the context
         super(context, 0, gridItem);
         mShowDescription = showDescription;
@@ -57,19 +57,18 @@ public class GridViewListItemAdapter extends ArrayAdapter<Item> {
         // otherwise, if convertView is null, then inflate a new list item layout.
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.grid_list_item_product, parent, false);
+                    R.layout.grid_list_item_coupon, parent, false);
 
             holder = new ViewHolder();
             holder.imageView = listItemView.findViewById(R.id.grid_item_image);
             holder.discountMarker = listItemView.findViewById(R.id.grid_item_discount_marker);
-            holder.titleView = listItemView.findViewById(R.id.grid_item_title_text);
-            holder.descriptionText = listItemView.findViewById(R.id.grid_item_content_description);
-            holder.button = listItemView.findViewById(R.id.grid_item_view_details_button);
+            holder.titleView = listItemView.findViewById(R.id.grid_item_coupon_title);
+            holder.descriptionText = listItemView.findViewById(R.id.grid_item_coupon_description_text);
+            holder.button = listItemView.findViewById(R.id.grid_item_show_details_button);
 
             // Depending on view, decide if those views should be shown or not
-            if (mShowDescription) {
+            if (!mShowDescription) {
                 holder.descriptionText.setVisibility(View.GONE);
-                holder.discountMarker.setVisibility(View.GONE);
             }
 
             listItemView.setTag(holder);

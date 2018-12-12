@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.example.konta.sketch_loyalityapp.Adapters.GridViewListItemAdapter;
+import com.example.konta.sketch_loyalityapp.Adapters.GridViewProductAdapter;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
@@ -49,7 +49,7 @@ public class ProductsFragment extends Fragment {
         // preparing and displaying data in Navigation Drawer using custom adapter
         extractDataFromJson();
 
-        GridViewListItemAdapter adapter = new GridViewListItemAdapter(getActivity(), itemList, true);
+        GridViewProductAdapter adapter = new GridViewProductAdapter(getActivity(), itemList, true);
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);

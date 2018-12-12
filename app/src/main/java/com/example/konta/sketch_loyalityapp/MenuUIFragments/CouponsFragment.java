@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
-import com.example.konta.sketch_loyalityapp.Adapters.GridViewListItemAdapter;
+import com.example.konta.sketch_loyalityapp.Adapters.GridViewCouponAdapter;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
@@ -46,7 +46,7 @@ public class CouponsFragment extends Fragment {
         // preparing and displaying data in Navigation Drawer using custom adapter
         extractDataFromJson();
 
-        GridViewListItemAdapter adapter = new GridViewListItemAdapter(getActivity(), itemList, false);
+        GridViewCouponAdapter adapter = new GridViewCouponAdapter(getActivity(), itemList, true);
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setEmptyView(rootView.findViewById(R.id.empty_state_coupons_container));
         gridView.setNumColumns(columns);

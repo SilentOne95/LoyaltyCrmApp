@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/grid_item_shadow"
-    android:elevation="@dimen/grid_list_item_elevation">
+    android:elevation="@dimen/grid_item_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,6 @@
 
             <ImageView
                 android:id="@+id/grid_item_image"
-                android:src="@drawable/image_coupon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,10 +39,10 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/big_value">
+            android:layout_margin="@dimen/mid_value">
 
             <TextView
-                android:id="@+id/grid_item_product_title"
+                android:id="@+id/grid_item_coupon_title"
                 android:text="Product Title -20%"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -53,7 +52,7 @@
                 android:id="@+id/grid_item_price_text"
                 android:text="@string/price_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/grid_item_product_title"
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_coupon_title"
                 style="@style/grid_item_coupon_price_text"/>
 
             <TextView
@@ -73,21 +72,21 @@
                 style="@style/grid_item_coupon_old_price_amount"/>
 
             <TextView
-                android:id="@+id/grid_item_product_description_text"
-                android:text="@string/mid_lorem_ipsum"
+                android:id="@+id/grid_item_coupon_description_text"
+                android:text="@string/short_lorem_ipsum"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text"
                 style="@style/grid_item_product_description_text"/>
 
             <Button
-                android:id="@+id/grid_item_show_coupon_button"
+                android:id="@+id/grid_item_show_code_button"
                 android:background="@drawable/rounded_corners_button"
                 android:text="@string/button_check_coupon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/grid_item_product_description_text"
-                style="@style/grid_item_coupon_show_button" />
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_coupon_description_text"
+                style="@style/grid_item_coupon_show_code_button" />
 
             <Button
                 android:id="@+id/grid_item_show_details_button"
@@ -95,8 +94,8 @@
                 android:text="@string/button_check_details"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/grid_item_product_description_text"
-                style="@style/grid_item_coupon_details_button" />
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_coupon_description_text"
+                style="@style/grid_item_coupon_show_details_button" />
 
         </android.support.constraint.ConstraintLayout>
 

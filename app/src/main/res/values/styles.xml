@@ -67,6 +67,11 @@
         <item name="android:paddingEnd">@dimen/log_in_fields_padding</item>
     </style>
 
+    <style name="basic_min_size_button">
+        <item name="android:minWidth">@dimen/zero</item>
+        <item name="android:minHeight">@dimen/zero</item>
+    </style>
+
     <!-- Home fragment -->
     <style name="home_special_offer_image" parent="basic_image_style">
         <item name="android:focusableInTouchMode">true</item>
@@ -264,8 +269,6 @@
     <style name="grid_item_product_title" parent="layout_wrap_content">
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_margin">@dimen/mid_value</item>
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
@@ -277,9 +280,9 @@
         <item name="android:padding">@dimen/mid_value</item>
     </style>
 
-    <style name="grid_item_product_button">
-        <item name="android:layout_width">@dimen/grid_list_item_width</item>
-        <item name="android:layout_height">@dimen/grid_list_item_height</item>
+    <style name="grid_item_product_button" parent="basic_min_size_button">
+        <item name="android:layout_width">@dimen/grid_item_button_code_width</item>
+        <item name="android:layout_height">@dimen/grid_item_height</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
@@ -293,7 +296,7 @@
     </style>
 
     <style name="grid_item_coupon_price_text" parent="layout_wrap_content">
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/big_text_size</item>
     </style>
@@ -315,24 +318,24 @@
     <style name="grid_item_product_description_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
-    <style name="grid_item_coupon_button">
-        <item name="android:layout_width">@dimen/grid_list_item_width</item>
-        <item name="android:layout_height">@dimen/grid_list_item_height</item>
+    <style name="grid_item_coupon_button" parent="basic_min_size_button">
+        <item name="android:layout_height">@dimen/grid_item_height</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginBottom">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="grid_item_coupon_show_button" parent="grid_item_coupon_button">
+    <style name="grid_item_coupon_show_code_button" parent="grid_item_coupon_button">
+        <item name="android:layout_width">@dimen/grid_item_button_code_width</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
-    <style name="grid_item_coupon_details_button" parent="grid_item_coupon_button">
+    <style name="grid_item_coupon_show_details_button" parent="grid_item_coupon_button">
+        <item name="android:layout_width">@dimen/grid_item_button_details_width</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
