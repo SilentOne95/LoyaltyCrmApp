@@ -260,8 +260,8 @@
     <!-- Bottom Sheet activity -->
 
 
-    <!-- Grid list item -->
-    <style name="grid_list_item_title" parent="layout_wrap_content">
+    <!-- Grid list item product -->
+    <style name="grid_item_product_title" parent="layout_wrap_content">
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_margin">@dimen/mid_value</item>
         <item name="android:layout_marginStart">@dimen/mid_value</item>
@@ -270,20 +270,70 @@
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
-    <style name="grid_list_item_content_desc">
+    <style name="grid_item_product_content_desc">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/small_text_size</item>
         <item name="android:padding">@dimen/mid_value</item>
     </style>
 
-    <style name="grid_list_item_button">
+    <style name="grid_item_product_button">
         <item name="android:layout_width">@dimen/grid_list_item_width</item>
         <item name="android:layout_height">@dimen/grid_list_item_height</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <!-- Grid list item coupon -->
+    <style name="grid_item_coupon_title" parent="layout_wrap_content">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/very_big_text_size</item>
+    </style>
+
+    <style name="grid_item_coupon_price_text" parent="layout_wrap_content">
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+    </style>
+
+    <style name="grid_item_coupon_price_amount" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="grid_item_coupon_old_price_amount" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="grid_item_product_description_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="grid_item_coupon_button">
+        <item name="android:layout_width">@dimen/grid_list_item_width</item>
+        <item name="android:layout_height">@dimen/grid_list_item_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="grid_item_coupon_show_button" parent="grid_item_coupon_button">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="grid_item_coupon_details_button" parent="grid_item_coupon_button">
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <!-- wrap_content layout size -->

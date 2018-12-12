@@ -57,14 +57,14 @@ public class GridViewListItemAdapter extends ArrayAdapter<Item> {
         // otherwise, if convertView is null, then inflate a new list item layout.
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.grid_list_item, parent, false);
+                    R.layout.grid_list_item_product, parent, false);
 
             holder = new ViewHolder();
             holder.imageView = listItemView.findViewById(R.id.grid_item_image);
-            holder.discountMarker = listItemView.findViewById(R.id.discount_marker_text_view);
+            holder.discountMarker = listItemView.findViewById(R.id.grid_item_discount_marker);
             holder.titleView = listItemView.findViewById(R.id.grid_item_title_text);
             holder.descriptionText = listItemView.findViewById(R.id.grid_item_content_description);
-            holder.button = listItemView.findViewById(R.id.view_details_button);
+            holder.button = listItemView.findViewById(R.id.grid_item_view_details_button);
 
             // Depending on view, decide if those views should be shown or not
             if (mShowDescription) {

@@ -33,8 +33,9 @@
     <string name="show_my_coupon_text">Show my coupon</string>
     <string name="coupon_details_code_text">Promo code:</string>
 
-    <!-- Grid list item string -->
-    <string name="check_button">Check</string>
+    <!-- Grid list item strings -->
+    <string name="button_check_coupon">Check</string>
+    <string name="button_check_details">View details</string>
 
     <!-- Bottom Sheet strings -->
     <string name="bottom_place_title_text">Current place title</string>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/grid_item_coupon"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corners_grid_item">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/grid_item_image"
+                android:src="@drawable/image_coupon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/grid_list_item_content_desc"
+                style="@style/basic_image_style"/>
+
+            <TextView
+                android:id="@+id/grid_item_discount_marker"
+                android:background="@drawable/rounded_corners_label_discount"
+                android:text="-20%"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/basic_grid_list_item_marker"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_value">
+
+            <TextView
+                android:id="@+id/grid_item_product_title"
+                android:text="Product Title -20%"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/grid_item_coupon_title" />
+
+            <TextView
+                android:id="@+id/grid_item_price_text"
+                android:text="@string/price_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_product_title"
+                style="@style/grid_item_coupon_price_text"/>
+
+            <TextView
+                android:id="@+id/grid_item_price_amount"
+                android:text="39,99 zł"
+                app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
+                app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
+                app:layout_constraintTop_toTopOf="@+id/grid_item_price_text"
+                style="@style/grid_item_coupon_price_amount" />
+
+            <TextView
+                android:id="@+id/grid_item_old_price_amount"
+                android:background="@drawable/strike_through"
+                android:text="1035 zł"
+                app:layout_constraintStart_toEndOf="@+id/grid_item_price_amount"
+                app:layout_constraintTop_toTopOf="@+id/grid_item_price_amount"
+                style="@style/grid_item_coupon_old_price_amount"/>
+
+            <TextView
+                android:id="@+id/grid_item_product_description_text"
+                android:text="@string/mid_lorem_ipsum"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text"
+                style="@style/grid_item_product_description_text"/>
+
+            <Button
+                android:id="@+id/grid_item_show_coupon_button"
+                android:background="@drawable/rounded_corners_button"
+                android:text="@string/button_check_coupon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_product_description_text"
+                style="@style/grid_item_coupon_show_button" />
+
+            <Button
+                android:id="@+id/grid_item_show_details_button"
+                android:background="@drawable/rounded_corners_button_white"
+                android:text="@string/button_check_details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_product_description_text"
+                style="@style/grid_item_coupon_details_button" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
