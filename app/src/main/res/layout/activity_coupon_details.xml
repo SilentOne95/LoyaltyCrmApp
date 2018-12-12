@@ -21,7 +21,7 @@
                 android:id="@+id/imageView"
                 android:src="@drawable/image_coupon"
                 android:contentDescription="@string/coupon_details_image_desc"
-                style="@style/basic_image_style"/>
+                style="@style/details_image_view"/>
 
             <TextView
                 android:id="@+id/discount_marker_text_view"

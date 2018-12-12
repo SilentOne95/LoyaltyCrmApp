@@ -21,13 +21,6 @@
     </style>
 
     <!-- Basic styles -->
-    <style name="basic_image_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:adjustViewBounds">true</item>
-    </style>
-
     <style name="basic_grid_view_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -73,7 +66,11 @@
     </style>
 
     <!-- Home fragment -->
-    <style name="home_special_offer_image" parent="basic_image_style">
+    <style name="home_special_offer_image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:layout_marginBottom">@dimen/mid_value</item>
     </style>
@@ -111,6 +108,13 @@
     </style>
 
     <!-- Coupon details activity -->
+    <style name="details_image_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
     <style name="details_valid_text" parent="layout_wrap_content">
         <item name="android:layout_marginTop">@dimen/small_value</item>
     </style>
@@ -266,6 +270,13 @@
 
 
     <!-- Grid list item product -->
+    <style name="grid_item_product_image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
     <style name="grid_item_product_title" parent="layout_wrap_content">
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_margin">@dimen/mid_value</item>
@@ -290,6 +301,13 @@
     </style>
 
     <!-- Grid list item coupon -->
+    <style name="grid_item_coupon_image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
     <style name="grid_item_coupon_title" parent="layout_wrap_content">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/very_big_text_size</item>
