@@ -55,8 +55,8 @@
     <string name="bottom_sheet_marker_icon">Marker icon next to place title in BottomSheet</string>
 
     <!-- Test strings -->
-    <string name="first_fragment">Left</string>
-    <string name="second_fragment">Right</string>
+    <string name="first_fragment">Open hours</string>
+    <string name="second_fragment">Contact info</string>
     <string name="long_lorem_ipsum">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem
         accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore

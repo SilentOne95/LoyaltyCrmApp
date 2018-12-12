@@ -69,7 +69,7 @@
     <style name="home_special_offer_image">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:scaleType">fitCenter</item>
+        <item name="android:scaleType">centerCrop</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:layout_marginBottom">@dimen/mid_value</item>
@@ -111,7 +111,7 @@
     <style name="details_image_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:scaleType">fitCenter</item>
+        <item name="android:scaleType">centerCrop</item>
         <item name="android:adjustViewBounds">true</item>
     </style>
 

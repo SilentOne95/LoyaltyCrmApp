@@ -20,8 +20,11 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:src="@drawable/image_coupon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:contentDescription="@string/coupon_details_image_desc"
-                style="@style/details_image_view"/>
+                style="@style/details_image_view" />
 
             <TextView
                 android:id="@+id/discount_marker_text_view"

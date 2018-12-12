@@ -10,73 +10,59 @@
     android:orientation="vertical"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:id="@+id/bottom_sheet_peek"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/bottom_sheet_marker_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/bottom_sheet_place_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/bottom_sheet_place_title"
-            app:srcCompat="@drawable/ic_marker"
-            android:contentDescription="@string/bottom_sheet_marker_icon" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/bottom_sheet_place_title"
-            android:layout_width="0dp"
+            android:id="@+id/bottom_sheet_icon_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:padding="8dp"
+            android:drawableStart="@drawable/ic_marker"
+            android:drawablePadding="16dp"
+            android:gravity="center_vertical"
             android:text="@string/bottom_place_title_text"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/big_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/bottom_sheet_marker_icon"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="@dimen/big_text_size" />
 
         <TextView
             android:id="@+id/bottom_sheet_place_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center_vertical"
             android:text="@string/bottom_place_address_text"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/mid_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_place_title" />
+            android:textSize="@dimen/small_text_size" />
 
         <TextView
             android:id="@+id/bottom_sheet_place_hours"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/small_value"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
             android:text="@string/bottom_place_open_hours_text"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/mid_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/bottom_sheet_place_address"
-            app:layout_constraintStart_toStartOf="@+id/bottom_sheet_place_address"
-            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_place_address" />
+            android:textSize="@dimen/mid_text_size" />
 
         <View
             android:id="@+id/view"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_place_hours"
-            android:background="@color/colorAccent"/>
+            android:layout_gravity="bottom"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorAccent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,7 +73,8 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            app:tabTextAppearance="@color/colorAccent"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
