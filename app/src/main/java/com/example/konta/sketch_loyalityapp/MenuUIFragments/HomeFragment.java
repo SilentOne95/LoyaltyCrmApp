@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-    static final ArrayList<Item> itemList = new ArrayList<>();
+    private static ArrayList<Item> itemList;
     private String json;
     private String layoutTitle;
     private int resourceSpecialOffer;
@@ -76,6 +76,7 @@ public class HomeFragment extends Fragment {
     private void extractDataFromJson() {
         try {
             Resources resources = this.getResources();
+            itemList = new ArrayList<>();
 
             JSONObject object = new JSONObject(json);
             layoutTitle = object.getString("componentTitleCurrent");

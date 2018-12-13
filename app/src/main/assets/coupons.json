@@ -2,7 +2,12 @@
   "componentTitleCurrent": "Coupons",
   "coupons": [{
     "contentTitle": "Coupon",
-    "contentImage": "image_coupon"
+    "contentImage": "image_coupon",
+    "contentBasicPrice": 109.99,
+    "contentFinalPrice": 39.99,
+    "contentDiscount": "-20%",
+    "contentValidDate": "2019-02-13",
+    "contentDescription": "Lorem ipsum"
   }],
   "numberOfColumns": 1
 }

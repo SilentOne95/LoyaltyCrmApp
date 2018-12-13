@@ -2,7 +2,8 @@
   "componentTitleCurrent": "Products",
   "products": [{
     "contentTitle": "Product",
-    "contentImage": "image_product"
+    "contentImage": "image_product",
+    "contentPrice": 1099.99
   }],
   "numberOfColumns": 1
 }
