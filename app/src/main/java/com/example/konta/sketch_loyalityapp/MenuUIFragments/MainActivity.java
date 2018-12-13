@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.Adapters.BottomSheetViewPagerAdapter;
+import com.example.konta.sketch_loyalityapp.Data.SampleData;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.ContactActivity;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.TermsConditionsActivity;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.WebsiteActivity;
@@ -30,9 +31,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private DrawerLayout mDrawerLayout;
@@ -41,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     GoogleMapFragment mGoogleMapFragment;
     View mBottomSheet;
     BottomSheetBehavior mBottomSheetBehavior;
+
+    // Temporary variables using to get json data from assets
+    private SampleData sampleData = new SampleData();
+    private static final String jsonFileData = "menu.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView.setNavigationItemSelectedListener(this);
 
         // Reading JSON file from assets
-        readFromAssets();
+        json = sampleData.readFromAssets(jsonFileData, this);
 
         // Extracting objects that has been built up from parsing the given JSON file,
         // preparing and displaying data in Navigation Drawer using custom adapter
@@ -91,20 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(pagerAdapter.getTabView(i));
-        }
-    }
-
-    private void readFromAssets() {
-        try {
-            InputStream inputStream = this.getAssets().open("menu.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            json = new String(buffer, "UTF-8");
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.konta.sketch_loyalityapp.Adapters.GridViewProductAdapter;
+import com.example.konta.sketch_loyalityapp.Data.SampleData;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
@@ -35,6 +36,10 @@ public class ProductsFragment extends Fragment {
     private String layoutTitle;
     int columns = 0;
 
+    // Temporary variables using to get json data from assets
+    private SampleData sampleData = new SampleData();
+    private static final String jsonFileData = "products.json";
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -43,7 +48,7 @@ public class ProductsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_products, container, false);
 
         // Reading JSON file from assets
-        readFromAssets();
+        json = sampleData.readFromAssets(jsonFileData, this.getContext());
 
         // Extracting objects that has been built up from parsing the given JSON file,
         // preparing and displaying data in Navigation Drawer using custom adapter
@@ -63,20 +68,6 @@ public class ProductsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle(layoutTitle);
-    }
-
-    private void readFromAssets() {
-        try {
-            InputStream inputStream = getActivity().getAssets().open("products.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            json = new String(buffer, "UTF-8");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void extractDataFromJson() {

@@ -18,6 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.example.konta.sketch_loyalityapp.Adapters.GridViewProductAdapter;
+import com.example.konta.sketch_loyalityapp.Data.SampleData;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
@@ -25,8 +26,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -37,6 +36,10 @@ public class HomeFragment extends Fragment {
     private int resourceSpecialOffer;
     int columns = 0;
 
+    // Temporary variables using to get json data from assets
+    private SampleData sampleData = new SampleData();
+    private static final String jsonFileData = "home.json";
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -45,7 +48,7 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Reading JSON file from assets
-        readFromAssets();
+        json = sampleData.readFromAssets(jsonFileData, this.getContext());
 
         // Extracting objects that has been built up from parsing the given JSON file,
         // preparing and displaying data in Navigation Drawer using custom adapter
@@ -68,20 +71,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle(layoutTitle);
-    }
-
-    private void readFromAssets() {
-        try {
-            InputStream inputStream = getActivity().getAssets().open("home.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            json = new String(buffer, "UTF-8");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void extractDataFromJson() {
@@ -110,7 +99,6 @@ public class HomeFragment extends Fragment {
             }
 
             String specialOfferImage = object.getString("specialImage");
-            resources = this.getResources();
 
             resourceSpecialOffer = resources.getIdentifier(specialOfferImage, "drawable", getActivity().getPackageName());
             columns = object.getInt("numColumns");
