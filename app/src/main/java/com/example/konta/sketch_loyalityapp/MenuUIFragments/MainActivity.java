@@ -103,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             for (int i = 0; i < arrayOne.length(); i++) {
                 JSONObject insideObj = arrayOne.getJSONObject(i);
-                String title = insideObj.getString("categoryTitle");
-                String icon = insideObj.getString("categoryIcon");
+                String title = insideObj.getString("componentTitle");
+                String icon = insideObj.getString("menuIcon");
 
                 Resources resources = this.getResources();
                 final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
@@ -112,16 +112,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 menuOne.add(0, i, 0, title).setIcon(resourceId);
             }
 
-            JSONArray arrayTwo = object.getJSONArray("sectionTwo");
-            for (int i = 0; i < arrayTwo.length(); i++) {
-                JSONObject insideObj = arrayTwo.getJSONObject(i);
-                String title = insideObj.getString("categoryTitle");
-                String icon = insideObj.getString("categoryIcon");
+            if (object.getJSONArray("sectionTwo") != null){
+                JSONArray arrayTwo = object.getJSONArray("sectionTwo");
+                for (int i = 0; i < arrayTwo.length(); i++) {
+                    JSONObject insideObj = arrayTwo.getJSONObject(i);
+                    String title = insideObj.getString("componentTitle");
+                    String icon = insideObj.getString("menuIcon");
 
-                Resources resources = this.getResources();
-                final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
-                Menu menuTwo = mNavigationView.getMenu();
-                menuTwo.add(1, i, 0, title).setIcon(resourceId);
+                    Resources resources = this.getResources();
+                    final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
+                    Menu menuTwo = mNavigationView.getMenu();
+                    menuTwo.add(1, i, 0, title).setIcon(resourceId);
+                }
             }
 
         } catch (JSONException e) {

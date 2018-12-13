@@ -1,8 +1,8 @@
 {
-  "layoutTitle": "Products",
+  "componentTitleCurrent": "Products",
   "products": [{
-    "productTitle": "Product",
-    "productImage": "image_product"
+    "contentTitle": "Product",
+    "contentImage": "image_product"
   }],
-  "numColumns": 1
+  "numberOfColumns": 1
 }

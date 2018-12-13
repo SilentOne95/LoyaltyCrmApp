@@ -80,13 +80,15 @@ public class GridViewCouponAdapter extends ArrayAdapter<Item> {
         Item currentItem = getItem(position);
 
         holder.imageView.setImageDrawable(currentItem.getBitmapDrawable());
-        String generateInt = Integer.toString(new Random().nextInt(51) + 5);
+        final String generateInt = Integer.toString(new Random().nextInt(51) + 5);
         holder.discountMarker.setText("-".concat(generateInt).concat("%"));
         holder.titleView.setText(currentItem.getItemTitle());
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CouponDetailsActivity.class);
+                intent.putExtra("EXTRA_ELEMENT_ID", position);
+                intent.putExtra("EXTRA_AMOUNT_DISCOUNT", generateInt);
                 getContext().startActivity(intent);
             }
         });

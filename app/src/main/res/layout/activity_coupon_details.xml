@@ -29,7 +29,6 @@
             <TextView
                 android:id="@+id/discount_marker_text_view"
                 android:background="@drawable/rounded_corners_label_discount"
-                android:text="-20%"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/basic_grid_list_item_marker"/>

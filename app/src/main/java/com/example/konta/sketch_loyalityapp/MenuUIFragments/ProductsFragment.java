@@ -25,8 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class ProductsFragment extends Fragment {
@@ -75,13 +73,13 @@ public class ProductsFragment extends Fragment {
             Resources resources = this.getResources();
 
             JSONObject object = new JSONObject(json);
-            layoutTitle = object.getString("layoutTitle");
+            layoutTitle = object.getString("componentTitleCurrent");
 
             JSONArray array = object.getJSONArray("products");
 
             JSONObject insideObj = array.getJSONObject(0);
-            String title = insideObj.getString("productTitle");
-            String image = insideObj.getString("productImage");
+            String title = insideObj.getString("contentTitle");
+            String image = insideObj.getString("contentImage");
 
             final int resourceCategoryImage = resources
                     .getIdentifier(image, "drawable", getActivity().getPackageName());
@@ -94,7 +92,7 @@ public class ProductsFragment extends Fragment {
                 itemList.add(new Item(title.concat(" ").concat(Integer.toString(i + 1)), bitmapDrawable));
             }
 
-            columns = object.getInt("numColumns");
+            columns = object.getInt("numberOfColumns");
 
         } catch (JSONException e) {
             e.printStackTrace();

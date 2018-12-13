@@ -207,9 +207,9 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
     private void extractDataFromJson() {
         try {
             JSONObject object = new JSONObject(json);
-            layoutTitle = object.getString("layoutTitle");
+            layoutTitle = object.getString("componentTitleCurrent");
 
-            JSONArray array = object.getJSONArray("locations");
+            JSONArray array = object.getJSONArray("shops");
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject insideObj = array.getJSONObject(i);

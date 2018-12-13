@@ -78,15 +78,15 @@ public class HomeFragment extends Fragment {
             Resources resources = this.getResources();
 
             JSONObject object = new JSONObject(json);
-            layoutTitle = object.getString("layoutTitle");
+            layoutTitle = object.getString("componentTitleCurrent");
 
-            JSONArray array = object.getJSONArray("categories");
+            JSONArray array = object.getJSONArray("components");
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject insideObj = array.getJSONObject(i);
 
-                String title = insideObj.getString("categoryTitle");
-                String image = insideObj.getString("categoryImage");
+                String title = insideObj.getString("componentTitle");
+                String image = insideObj.getString("componentImage");
 
                 final int resourceCategoryImage = resources
                         .getIdentifier(image, "drawable", getActivity().getPackageName());
@@ -98,10 +98,10 @@ public class HomeFragment extends Fragment {
                 itemList.add(new Item(title, bitmapDrawable));
             }
 
-            String specialOfferImage = object.getString("specialImage");
+            String specialOfferImage = object.getString("specialOfferImage");
 
             resourceSpecialOffer = resources.getIdentifier(specialOfferImage, "drawable", getActivity().getPackageName());
-            columns = object.getInt("numColumns");
+            columns = object.getInt("numberOfColumns");
 
         } catch (JSONException e) {
             e.printStackTrace();

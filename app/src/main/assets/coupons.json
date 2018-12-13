@@ -1,8 +1,8 @@
 {
-  "layoutTitle": "Coupons",
+  "componentTitleCurrent": "Coupons",
   "coupons": [{
-    "couponTitle": "Coupon",
-    "couponImage": "image_coupon"
+    "contentTitle": "Coupon",
+    "contentImage": "image_coupon"
   }],
-  "numColumns": 1
+  "numberOfColumns": 1
 }

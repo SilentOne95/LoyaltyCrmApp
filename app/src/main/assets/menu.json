@@ -1,14 +1,14 @@
 {
   "sectionOne": [
-    {"categoryTitle": "My Account", "categoryIcon": "ic_menu_account"},
-    {"categoryTitle": "Home", "categoryIcon": "ic_menu_home"},
-    {"categoryTitle": "Products", "categoryIcon": "ic_menu_cube"},
-    {"categoryTitle": "Coupons", "categoryIcon": "ic_menu_coupon"},
-    {"categoryTitle": "Shops", "categoryIcon": "ic_menu_marker"},
-    {"categoryTitle": "Website", "categoryIcon": "ic_menu_web"}
+    {"componentTitle": "My Account", "menuIcon": "ic_menu_account", "componentType": "LogIn"},
+    {"componentTitle": "Home", "menuIcon": "ic_menu_home", "componentType": "Home"},
+    {"componentTitle": "Products", "menuIcon": "ic_menu_cube", "componentType": "Products"},
+    {"componentTitle": "Coupons", "menuIcon": "ic_menu_coupon", "componentType": "Coupons"},
+    {"componentTitle": "Shops", "menuIcon": "ic_menu_marker", "componentType": "Map"},
+    {"componentTitle": "Website", "menuIcon": "ic_menu_web", "componentType": "Internet"}
   ],
   "sectionTwo": [
-    {"categoryTitle": "Terms & Conditions", "categoryIcon": "ic_menu_terms"},
-    {"categoryTitle": "Contact", "categoryIcon": "ic_menu_info"}
+    {"componentTitle": "Terms & Conditions", "menuIcon": "ic_menu_terms", "componentType": "Terms"},
+    {"componentTitle": "Contact", "menuIcon": "ic_menu_info", "componentType": "Contact"}
   ]
 }

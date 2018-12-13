@@ -1,11 +1,11 @@
 {
-  "layoutTitle": "Home",
-  "specialImage": "image_main",
-  "categories": [
-    {"categoryTitle": "Products", "categoryImage": "image_product"},
-    {"categoryTitle": "Coupons", "categoryImage": "image_coupon"},
-    {"categoryTitle": "Offers", "categoryImage": "image_offer"},
-    {"categoryTitle": "Contact", "categoryImage": "image_phone"}
+  "componentTitleCurrent": "Home",
+  "specialOfferImage": "image_main",
+  "components": [
+    {"componentTitle": "Products", "componentImage": "image_product"},
+    {"componentTitle": "Coupons", "componentImage": "image_coupon"},
+    {"componentTitle": "Offers", "componentImage": "image_offer"},
+    {"componentTitle": "Contact", "componentImage": "image_phone"}
   ],
-  "numColumns": 2
+  "numberOfColumns": 2
 }
