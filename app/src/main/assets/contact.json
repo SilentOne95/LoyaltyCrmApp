@@ -1,0 +1,10 @@
+{
+  "componentTitleCurrent": "Contact",
+  "contentTitle": "Contact info",
+  "contentBody": {
+    "companyTitle": "Title",
+    "companyAddress": "Address",
+    "companyEmail": "Email",
+    "companyPhone": "Phone"
+    }
+}
