@@ -7,7 +7,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -68,9 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         prepareMenuData();
 
         // Display chosen screen as a default one after app is launched
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.switch_view_layout, new HomeFragment());
-        ft.commit();
+        displaySelectedScreen(0,1);
         mNavigationView.getMenu().getItem(1).setChecked(true).setCheckable(true);
 
         // Bottom Sheet set up
@@ -184,9 +181,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Replacing the fragment
         if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.switch_view_layout, fragment);
-            ft.commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.switch_view_layout, fragment)
+                    .commit();
         }
     }
 

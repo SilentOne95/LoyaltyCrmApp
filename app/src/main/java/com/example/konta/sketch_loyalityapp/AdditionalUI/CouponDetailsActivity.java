@@ -1,6 +1,5 @@
 package com.example.konta.sketch_loyalityapp.AdditionalUI;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -12,16 +11,12 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.Data.SampleData;
 import com.example.konta.sketch_loyalityapp.R;
-
-import org.json.JSONException;
 
 import java.util.Locale;
 
@@ -64,6 +59,15 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
 
         // Temporary solution to hide code when activity is stopped or paused
         getBasicButtonStyle();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
