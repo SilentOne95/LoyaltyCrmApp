@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,8 +37,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView mNavigationView;
     private String json;
     GoogleMapFragment mGoogleMapFragment;
-    View mBottomSheet;
-    BottomSheetBehavior mBottomSheetBehavior;
+    private BottomSheetBehavior mBottomSheetBehavior;
+
+    // Arrays to store key-value pairs to store specified type assigned to view
+    private SparseArray<String> menuSectionOneArray = new SparseArray<>();
+    private SparseArray<String> menuSectionTwoArray = new SparseArray<>();
 
     // Temporary variables using to get json data from assets
     private SampleData sampleData = new SampleData();
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView.getMenu().getItem(1).setChecked(true).setCheckable(true);
 
         // Bottom Sheet set up
-        mBottomSheet = findViewById(R.id.bottom_sheet);
+        View mBottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
         mBottomSheetBehavior.setPeekHeight(0);
         mBottomSheetBehavior.setHideable(true);
@@ -107,6 +111,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
                 Menu menuOne = mNavigationView.getMenu();
                 menuOne.add(0, i, 0, title).setIcon(resourceId);
+
+                // Put type of views into an array
+                String type = insideObj.getString("componentType");
+                menuSectionOneArray.append(i, type);
             }
 
             if (object.getJSONArray("sectionTwo") != null){
@@ -120,6 +128,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
                     Menu menuTwo = mNavigationView.getMenu();
                     menuTwo.add(1, i, 0, title).setIcon(resourceId);
+
+                    // Put type of views into an array
+                    String type = insideObj.getString("componentType");
+                    menuSectionTwoArray.append(i, type);
                 }
             }
 
@@ -138,45 +150,80 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    public void displaySelectedScreen(int groupId, int itemId) {
-        // Creating fragment object
-        Fragment fragment = null;
-
+    private void displaySelectedScreen(int groupId, int itemId) {
         // Initializing the fragment object which is selected
         if (groupId == 0){
             switch (itemId) {
                 case 0:
-                    Intent intentLogIn = new Intent(MainActivity.this, LogInActivity.class);
-                    MainActivity.this.startActivity(intentLogIn);
+                    getRelevantLayoutType(0,0);
                     break;
                 case 1:
-                    fragment = new HomeFragment();
+                    getRelevantLayoutType(0,1);
                     break;
                 case 2:
-                    fragment = new ProductsFragment();
+                    getRelevantLayoutType(0,2);
                     break;
                 case 3:
-                    fragment = new CouponsFragment();
+                    getRelevantLayoutType(0,3);
                     break;
                 case 4:
-                    fragment = new GoogleMapFragment();
+                    getRelevantLayoutType(0,4);
                     break;
                 case 5:
-                    Intent intentWebView = new Intent(MainActivity.this, WebsiteActivity.class);
-                    MainActivity.this.startActivity(intentWebView);
+                    getRelevantLayoutType(0,5);
                     break;
             }
         } else {
             switch (itemId) {
                 case 0:
-                    Intent intentTermsConditionsView = new Intent(MainActivity.this, TermsConditionsActivity.class);
-                    MainActivity.this.startActivity(intentTermsConditionsView);
+                    getRelevantLayoutType(1,0);
                     break;
                 case 1:
-                    Intent intentContactView = new Intent(MainActivity.this, ContactActivity.class);
-                    MainActivity.this.startActivity(intentContactView);
+                    getRelevantLayoutType(1,1);
                     break;
             }
+        }
+    }
+
+    private void getRelevantLayoutType(int sectionNumber, int position) {
+        String layoutType;
+        Fragment fragment = null;
+
+        if (sectionNumber == 0) {
+            layoutType = menuSectionOneArray.get(position);
+        } else {
+            layoutType = menuSectionTwoArray.get(position);
+        }
+
+        switch (layoutType) {
+            case "LogIn":
+                Intent intentLogIn = new Intent(MainActivity.this, LogInActivity.class);
+                MainActivity.this.startActivity(intentLogIn);
+                break;
+            case "Home":
+                fragment = new HomeFragment();
+                break;
+            case "Products":
+                fragment = new ProductsFragment();
+                break;
+            case "Coupons":
+                fragment = new CouponsFragment();
+                break;
+            case "Map":
+                fragment = new GoogleMapFragment();
+                break;
+            case "Internet":
+                Intent intentWebView = new Intent(MainActivity.this, WebsiteActivity.class);
+                MainActivity.this.startActivity(intentWebView);
+                break;
+            case "Terms":
+                Intent intentTermsConditionsView = new Intent(MainActivity.this, TermsConditionsActivity.class);
+                MainActivity.this.startActivity(intentTermsConditionsView);
+                break;
+            case "Contact":
+                Intent intentContactView = new Intent(MainActivity.this, ContactActivity.class);
+                MainActivity.this.startActivity(intentContactView);
+                break;
         }
 
         // Replacing the fragment
