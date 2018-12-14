@@ -54,9 +54,9 @@ public class ProductsFragment extends Fragment {
 
         GridViewProductAdapter adapter = new GridViewProductAdapter(getActivity(), itemList, true);
         final GridView gridView = rootView.findViewById(R.id.grid_view);
+        gridView.setEmptyView(rootView.findViewById(R.id.empty_state_products_container));
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);
-        gridView.setNestedScrollingEnabled(false);
 
         return rootView;
     }

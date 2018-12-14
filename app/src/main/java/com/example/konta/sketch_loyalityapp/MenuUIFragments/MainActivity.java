@@ -54,9 +54,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 

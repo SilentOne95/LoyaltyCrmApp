@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:clipChildren="false"
+    android:focusableInTouchMode="true"
     android:padding="@dimen/mid_value"
     android:background="@color/colorFragmentBackground"
     tools:context=".MenuUIFragments.CouponsFragment">
@@ -29,7 +30,7 @@
 
         <TextView
             android:id="@+id/empty_state_coupons_text_two"
-            android:text="@string/try_again_later_coupons_text"
+            android:text="@string/try_again_later_text"
             style="@style/coupons_empty_state_text_two"/>
 
     </LinearLayout>

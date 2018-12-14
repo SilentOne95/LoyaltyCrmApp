@@ -7,10 +7,32 @@
     android:clipChildren="false"
     android:focusableInTouchMode="true"
     android:padding="@dimen/mid_value"
+    android:background="@color/colorFragmentBackground"
     tools:context=".MenuUIFragments.ProductsFragment">
 
     <com.example.konta.sketch_loyalityapp.ModelClasses.CustomGridView
         android:id="@+id/grid_view"
         style="@style/basic_grid_view_style"/>
+
+    <LinearLayout
+        android:id="@+id/empty_state_products_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@color/colorFragmentBackground"
+        android:layout_margin="@dimen/big_value">
+
+        <TextView
+            android:id="@+id/empty_state_products_text"
+            android:text="@string/no_products_text"
+            style="@style/coupons_empty_state_text_one"/>
+
+        <TextView
+            android:id="@+id/empty_state_products_text_two"
+            android:text="@string/try_again_later_text"
+            style="@style/coupons_empty_state_text_two"/>
+
+    </LinearLayout>
 
 </FrameLayout>
