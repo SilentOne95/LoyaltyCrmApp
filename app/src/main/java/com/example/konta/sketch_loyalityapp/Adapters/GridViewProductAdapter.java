@@ -1,6 +1,7 @@
 package com.example.konta.sketch_loyalityapp.Adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.konta.sketch_loyalityapp.AdditionalUI.CouponDetailsActivity;
+import com.example.konta.sketch_loyalityapp.ProductDetailsActivity;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
@@ -80,7 +83,8 @@ public class GridViewProductAdapter extends ArrayAdapter<Item> {
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
+                getContext().startActivity(intent);
             }
         });
 

@@ -107,7 +107,7 @@
         <item name="android:layout_marginTop">@dimen/mid_value</item>
     </style>
 
-    <!-- Coupon details activity -->
+    <!-- Coupon and Product details activity -->
     <style name="details_image_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

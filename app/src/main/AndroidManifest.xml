@@ -20,7 +20,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme.NoActionBar">
-
         <activity
             android:name=".AdditionalUI.LaunchActivity"
             android:theme="@style/AppTheme.Launcher">
@@ -61,7 +60,14 @@
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuUIFragments.MainActivity"/>
+                android:value=".MenuUIFragments.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ProductDetailsActivity"
+            android:theme="@style/BaseAppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuUIFragments.MainActivity" />
         </activity>
 
         <meta-data
@@ -70,6 +76,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
