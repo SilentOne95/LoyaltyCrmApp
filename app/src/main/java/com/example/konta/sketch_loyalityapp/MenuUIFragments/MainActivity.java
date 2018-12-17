@@ -20,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.Adapters.BottomSheetViewPagerAdapter;
-import com.example.konta.sketch_loyalityapp.Data.SampleData;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.ContactActivity;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.TermsConditionsActivity;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.WebsiteActivity;

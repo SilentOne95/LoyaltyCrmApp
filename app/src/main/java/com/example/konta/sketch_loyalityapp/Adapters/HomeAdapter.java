@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.AdditionalUI.ProductDetailsActivity;
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.ModelClasses.ItemProduct;
+import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
 import java.util.ArrayList;
 
-public class GridViewProductAdapter extends ArrayAdapter<ItemProduct> {
+public class HomeAdapter extends ArrayAdapter<Item> {
 
     private boolean mShowDescription;
 
@@ -29,7 +29,7 @@ public class GridViewProductAdapter extends ArrayAdapter<ItemProduct> {
      * @param context of the app
      * @param gridItem A list of objects to display in a list
      */
-    public GridViewProductAdapter(@NonNull Activity context, @NonNull ArrayList<ItemProduct> gridItem, boolean showDescription) {
+    public HomeAdapter(@NonNull Activity context, @NonNull ArrayList<Item> gridItem, boolean showDescription) {
         // Initialize the ArrayAdapter's internal storage for the context
         super(context, 0, gridItem);
         mShowDescription = showDescription;
@@ -46,7 +46,7 @@ public class GridViewProductAdapter extends ArrayAdapter<ItemProduct> {
 
         class ViewHolder {
             private ImageView imageView;
-            private TextView titleView, price, descriptionText;
+            private TextView titleView, descriptionText;
             private Button button;
         }
 
@@ -56,12 +56,11 @@ public class GridViewProductAdapter extends ArrayAdapter<ItemProduct> {
         // otherwise, if convertView is null, then inflate a new list item layout.
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.grid_list_item_product, parent, false);
+                    R.layout.grid_list_item_home, parent, false);
 
             holder = new ViewHolder();
             holder.imageView = listItemView.findViewById(R.id.grid_item_image);
             holder.titleView = listItemView.findViewById(R.id.grid_item_title_text);
-            holder.price = listItemView.findViewById(R.id.grid_item_price_amount);
             holder.descriptionText = listItemView.findViewById(R.id.grid_item_content_description);
             holder.button = listItemView.findViewById(R.id.grid_item_view_details_button);
 
@@ -76,12 +75,10 @@ public class GridViewProductAdapter extends ArrayAdapter<ItemProduct> {
         }
 
         // Get the {@link GridViewItem} object located at this position in the list
-        ItemProduct currentItem = getItem(position);
+        Item currentItem = getItem(position);
 
-        holder.imageView.setImageDrawable(currentItem.getItemBitmapDrawable());
+        holder.imageView.setImageDrawable(currentItem.getBitmapDrawable());
         holder.titleView.setText(currentItem.getItemTitle());
-        holder.price.setText(String.valueOf(currentItem.getItemPrice()));
-        holder.descriptionText.setText(currentItem.getItemDescription());
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

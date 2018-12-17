@@ -19,7 +19,7 @@ import android.widget.GridView;
 import com.example.konta.sketch_loyalityapp.Adapters.GridViewProductAdapter;
 import com.example.konta.sketch_loyalityapp.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
+import com.example.konta.sketch_loyalityapp.ModelClasses.ItemProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class ProductsFragment extends Fragment {
 
-    private static ArrayList<Item> itemList;
+    private static ArrayList<ItemProduct> itemList;
     private String json;
     private String layoutTitle;
     int columns = 0;
@@ -75,12 +75,11 @@ public class ProductsFragment extends Fragment {
             JSONObject object = new JSONObject(json);
             layoutTitle = object.getString("componentTitleCurrent");
 
+            // Get sample image and description
+            String image = object.getString("contentImage");
+            String description = object.getString("contentDescription");
+
             JSONArray array = object.getJSONArray("products");
-
-            JSONObject insideObj = array.getJSONObject(0);
-            String title = insideObj.getString("contentTitle");
-            String image = insideObj.getString("contentImage");
-
             final int resourceCategoryImage = resources
                     .getIdentifier(image, "drawable", getActivity().getPackageName());
 
@@ -88,8 +87,11 @@ public class ProductsFragment extends Fragment {
             RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
             bitmapDrawable.setCornerRadius(20);
 
-            for (int i = 0; i < 10; i++) {
-                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i + 1)), bitmapDrawable));
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject insideObj = array.getJSONObject(i);
+                String title = insideObj.getString("contentTitle");
+                double price = insideObj.getDouble("contentPrice");
+                itemList.add(new ItemProduct(title, bitmapDrawable, price, description));
             }
 
             columns = object.getInt("numberOfColumns");

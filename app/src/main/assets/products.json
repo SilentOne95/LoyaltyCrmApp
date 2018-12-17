@@ -1,11 +1,37 @@
 {
   "componentTitleCurrent": "Products",
+  "contentImage": "image_product",
+  "contentDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantiumdoloremque laudantium, totam rem aperiam.",
   "products": [{
-    "contentTitle": "Product",
-    "contentImage": "image_product",
-    "contentPrice": 1099.99,
-    "contentDescription": "Lorem ipsum"
-
+    "contentTitle": "Product 1",
+    "contentPrice": 199.99
+  }, {
+    "contentTitle": "Product 2",
+    "contentPrice": 459.99
+  }, {
+    "contentTitle": "Product 3",
+    "contentPrice": 1299.99
+  }, {
+    "contentTitle": "Product 4",
+    "contentPrice": 53.99
+  }, {
+    "contentTitle": "Product 5",
+    "contentPrice": 10.99
+  }, {
+    "contentTitle": "Product 6",
+    "contentPrice": 798.99
+  }, {
+    "contentTitle": "Product 7",
+    "contentPrice": 1991.99
+  }, {
+    "contentTitle": "Product 8",
+    "contentPrice": 123.99
+  }, {
+    "contentTitle": "Product 9",
+    "contentPrice": 458.99
+  }, {
+    "contentTitle": "Product 10",
+    "contentPrice": 999.99
   }],
   "numberOfColumns": 1
 }

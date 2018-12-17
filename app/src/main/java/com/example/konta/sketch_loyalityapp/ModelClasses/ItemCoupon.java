@@ -27,38 +27,24 @@ public class ItemCoupon {
         mItemDescription = itemDescription;
     }
 
-    /**
-     * Get the title of the item.
-     */
+    /** Get the title of the item. */
     public String getItemTitle() { return mItemTitle; }
 
-    /**
-     * Get the image resource Id.
-     */
+    /** Get the image resource Id. */
     public RoundedBitmapDrawable getItemBitmapDrawable() { return mItemBitmapDrawable; }
 
-    /**
-     * Get the discount of the item.
-     */
+    /** Get the discount of the item. */
     public int getItemDiscount() { return  mItemDiscount; }
 
-    /**
-     * Get the basic price of the item.
-     */
+    /** Get the basic price of the item. */
     public double getItemBasicPrice() { return mItemBasicPrice; }
 
-    /**
-     * Get the final price of the item.
-     */
+    /** Get the final price of the item. */
     public double getItemFinalPrice() { return mItemFinalPrice; }
 
-    /**
-     * Get the valid date of the item.
-     */
+    /** Get the valid date of the item. */
     public String getItemValidDate() { return mItemValidDate; }
 
-    /**
-     * Get the description of the item.
-     */
+    /** Get the description of the item. */
     public String getItemDescription() { return mItemDescription; }
 }
