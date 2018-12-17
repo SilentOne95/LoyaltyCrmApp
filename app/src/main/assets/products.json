@@ -3,7 +3,9 @@
   "products": [{
     "contentTitle": "Product",
     "contentImage": "image_product",
-    "contentPrice": 1099.99
+    "contentPrice": 1099.99,
+    "contentDescription": "Lorem ipsum"
+
   }],
   "numberOfColumns": 1
 }

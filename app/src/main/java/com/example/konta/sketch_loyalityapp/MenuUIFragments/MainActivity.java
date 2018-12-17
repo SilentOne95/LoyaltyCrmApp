@@ -25,6 +25,7 @@ import com.example.konta.sketch_loyalityapp.MenuUIActivities.ContactActivity;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.TermsConditionsActivity;
 import com.example.konta.sketch_loyalityapp.MenuUIActivities.WebsiteActivity;
 import com.example.konta.sketch_loyalityapp.LoginUI.LogInActivity;
+import com.example.konta.sketch_loyalityapp.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 
 import org.json.JSONArray;
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SparseArray<String> menuSectionTwoArray = new SparseArray<>();
 
     // Temporary variables using to get json data from assets
-    private SampleData sampleData = new SampleData();
     private static final String jsonFileData = "menu.json";
 
     @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView.setNavigationItemSelectedListener(this);
 
         // Reading JSON file from assets
-        json = sampleData.readFromAssets(jsonFileData, this);
+        json = ((MyApplication) getApplication()).readFromAssets(jsonFileData);
 
         // Extracting objects that has been built up from parsing the given JSON file,
         // preparing and displaying data in Navigation Drawer using custom adapter

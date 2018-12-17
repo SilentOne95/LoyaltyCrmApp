@@ -1,9 +1,10 @@
-package com.example.konta.sketch_loyalityapp;
+package com.example.konta.sketch_loyalityapp.AdditionalUI;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.example.konta.sketch_loyalityapp.R;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 

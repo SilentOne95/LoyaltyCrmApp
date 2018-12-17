@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.konta.sketch_loyalityapp.Adapters.GridViewCouponAdapter;
-import com.example.konta.sketch_loyalityapp.Data.SampleData;
+import com.example.konta.sketch_loyalityapp.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
@@ -33,7 +33,6 @@ public class CouponsFragment extends Fragment {
     int columns = 0;
 
     // Temporary variables using to get json data from assets
-    private SampleData sampleData = new SampleData();
     private static final String jsonFileData = "coupons.json";
 
     @Override
@@ -43,7 +42,7 @@ public class CouponsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_coupons, container, false);
 
         // Reading JSON file from assets
-        json = sampleData.readFromAssets(jsonFileData, this.getContext());
+        json = ((MyApplication) getActivity().getApplication()).readFromAssets(jsonFileData);
 
         // Extracting objects that has been built up from parsing the given JSON file,
         // preparing and displaying data in Navigation Drawer using custom adapter

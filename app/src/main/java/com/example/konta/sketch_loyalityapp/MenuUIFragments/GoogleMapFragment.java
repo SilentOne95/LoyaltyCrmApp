@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.ModelClasses.MyClusterItem;
+import com.example.konta.sketch_loyalityapp.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -39,8 +40,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -55,6 +54,9 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
     private ClusterManager<MyClusterItem> mClusterManager;
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    // Temporary variables using to get json data from assets
+    private static final String jsonFileData = "locations.json";
 
     @Nullable
     @Override
@@ -77,7 +79,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
         mapFragment.getMapAsync(this);
 
         // Reading JSON file from assets
-        readFromAssets();
+        json = ((MyApplication) getActivity().getApplication()).readFromAssets(jsonFileData);
+
         // Extracting objects that has been built up from parsing the given JSON file
         // and adding markers (items) to cluster
         extractDataFromJson();
@@ -187,20 +190,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
                     Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
                 }
             }
-        }
-    }
-
-    private void readFromAssets() {
-        try {
-            InputStream inputStream = getActivity().getAssets().open("locations.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            json = new String(buffer, "UTF-8");
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
