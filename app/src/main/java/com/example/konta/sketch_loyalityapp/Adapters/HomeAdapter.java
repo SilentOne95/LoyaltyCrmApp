@@ -82,8 +82,7 @@ public class HomeAdapter extends ArrayAdapter<Item> {
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
-                getContext().startActivity(intent);
+
             }
         });
 

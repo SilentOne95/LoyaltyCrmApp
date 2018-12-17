@@ -77,7 +77,7 @@ public class ProductsFragment extends Fragment {
 
             // Get sample image and description
             String image = object.getString("contentImage");
-            String description = object.getString("contentDescription");
+            String description = object.getString("contentShortDescription");
 
             JSONArray array = object.getJSONArray("products");
             final int resourceCategoryImage = resources

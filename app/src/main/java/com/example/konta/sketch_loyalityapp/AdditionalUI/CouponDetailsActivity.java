@@ -45,7 +45,6 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon_details);
-        setTitle(layoutTitle);
 
         // Temporary solution - setting up sample data
         Bundle extras = getIntent().getExtras();
@@ -60,6 +59,7 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
         // preparing and displaying data
         extractDataFromJson();
 
+        setTitle(layoutTitle);
         setDataToRelatedViews();
 
         showCouponCodeButton = findViewById(R.id.show_coupon_button);

@@ -86,6 +86,7 @@ public class GridViewProductAdapter extends ArrayAdapter<ItemProduct> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
+                intent.putExtra("EXTRA_ELEMENT_ID", position);
                 getContext().startActivity(intent);
             }
         });
