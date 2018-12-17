@@ -80,7 +80,7 @@ public class GridViewProductAdapter extends ArrayAdapter<ItemProduct> {
 
         holder.imageView.setImageDrawable(currentItem.getItemBitmapDrawable());
         holder.titleView.setText(currentItem.getItemTitle());
-        holder.price.setText(String.valueOf(currentItem.getItemPrice()));
+        holder.price.setText(String.valueOf(currentItem.getItemPrice()).concat(" ").concat("zł"));
         holder.descriptionText.setText(currentItem.getItemDescription());
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override

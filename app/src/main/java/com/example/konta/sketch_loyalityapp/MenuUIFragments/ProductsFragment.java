@@ -48,7 +48,7 @@ public class ProductsFragment extends Fragment {
         json = ((MyApplication) getActivity().getApplication()).readFromAssets(jsonFileData);
 
         // Extracting objects that has been built up from parsing the given JSON file,
-        // preparing and displaying data in Navigation Drawer using custom adapter
+        // preparing and displaying data using custom adapter
         extractDataFromJson();
 
         GridViewProductAdapter adapter = new GridViewProductAdapter(getActivity(), itemList, true);

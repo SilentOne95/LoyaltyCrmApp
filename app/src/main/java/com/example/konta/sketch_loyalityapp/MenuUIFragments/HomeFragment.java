@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
         json = ((MyApplication) getActivity().getApplication()).readFromAssets(jsonFileData);
 
         // Extracting objects that has been built up from parsing the given JSON file,
-        // preparing and displaying data in Navigation Drawer using custom adapter
+        // preparing and displaying data using custom adapter
         extractDataFromJson();
 
         ImageView specialOfferImage = rootView.findViewById(R.id.special_offer_image);

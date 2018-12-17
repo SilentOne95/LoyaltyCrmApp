@@ -45,7 +45,7 @@ public class CouponsFragment extends Fragment {
         json = ((MyApplication) getActivity().getApplication()).readFromAssets(jsonFileData);
 
         // Extracting objects that has been built up from parsing the given JSON file,
-        // preparing and displaying data in Navigation Drawer using custom adapter
+        // preparing and displaying data using custom adapter
         extractDataFromJson();
 
         GridViewCouponAdapter adapter = new GridViewCouponAdapter(getActivity(), itemList, true);
@@ -74,7 +74,7 @@ public class CouponsFragment extends Fragment {
 
             // Get sample image and description
             String image = object.getString("contentImage");
-            String description = object.getString("contentDescription");
+            String description = object.getString("contentShortDescription");
 
             final int resourceCategoryImage = resources
                     .getIdentifier(image, "drawable", getActivity().getPackageName());

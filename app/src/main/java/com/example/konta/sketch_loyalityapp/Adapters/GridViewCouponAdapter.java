@@ -84,8 +84,8 @@ public class GridViewCouponAdapter extends ArrayAdapter<ItemCoupon> {
         holder.imageView.setImageDrawable(currentItem.getItemBitmapDrawable());
         holder.discountMarker.setText("-".concat(Integer.toString(currentItem.getItemDiscount())).concat("%"));
         holder.titleView.setText(currentItem.getItemTitle());
-        holder.basicPrice.setText(String.valueOf(currentItem.getItemBasicPrice()));
-        holder.newPrice.setText(String.valueOf(currentItem.getItemFinalPrice()));
+        holder.basicPrice.setText(String.valueOf(currentItem.getItemBasicPrice()).concat(" ").concat("zł"));
+        holder.newPrice.setText(String.valueOf(currentItem.getItemFinalPrice()).concat(" ").concat("zł"));
         holder.descriptionText.setText(currentItem.getItemDescription());
         holder.showDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
