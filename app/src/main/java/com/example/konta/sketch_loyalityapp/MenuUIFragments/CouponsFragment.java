@@ -15,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.konta.sketch_loyalityapp.Adapters.GridViewCouponAdapter;
+import com.example.konta.sketch_loyalityapp.ModelClasses.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class CouponsFragment extends Fragment {
 
-    private static ArrayList<Item> itemList;
+    private static ArrayList<ItemCoupon> itemList;
     private String json;
     private String layoutTitle;
     int columns = 0;
@@ -72,11 +72,9 @@ public class CouponsFragment extends Fragment {
             JSONObject object = new JSONObject(json);
             layoutTitle = object.getString("componentTitleCurrent");
 
-            JSONArray array = object.getJSONArray("coupons");
-
-            JSONObject insideObj = array.getJSONObject(0);
-            String title = insideObj.getString("contentTitle");
-            String image = insideObj.getString("contentImage");
+            // Get sample image and description
+            String image = object.getString("contentImage");
+            String description = object.getString("contentDescription");
 
             final int resourceCategoryImage = resources
                     .getIdentifier(image, "drawable", getActivity().getPackageName());
@@ -85,8 +83,17 @@ public class CouponsFragment extends Fragment {
             RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
             bitmapDrawable.setCornerRadius(15);
 
-            for (int i = 0; i < 10; i++) {
-                itemList.add(new Item(title.concat(" ").concat(Integer.toString(i + 1)), bitmapDrawable));
+            JSONArray array = object.getJSONArray("coupons");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject insideObj = array.getJSONObject(i);
+                String title = insideObj.getString("contentTitle");
+                double basicPrice = insideObj.getDouble("contentBasicPrice");
+                double finalPrice = insideObj.getDouble("contentFinalPrice");
+                int discount = insideObj.getInt("contentDiscount");
+                String date = insideObj.getString("contentValidDate");
+
+                itemList.add(new ItemCoupon(title, bitmapDrawable, discount, basicPrice,
+                        finalPrice, date, description));
             }
 
             columns = object.getInt("numberOfColumns");

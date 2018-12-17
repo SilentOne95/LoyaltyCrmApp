@@ -29,7 +29,6 @@
             <TextView
                 android:id="@+id/grid_item_discount_marker"
                 android:background="@drawable/rounded_corners_label_discount"
-                android:text="-20%"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/basic_grid_list_item_marker"/>
@@ -43,7 +42,6 @@
 
             <TextView
                 android:id="@+id/grid_item_coupon_title"
-                android:text="Product Title -20%"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/grid_item_coupon_title" />
@@ -57,7 +55,6 @@
 
             <TextView
                 android:id="@+id/grid_item_price_amount"
-                android:text="39,99 zł"
                 app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
                 app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
                 app:layout_constraintTop_toTopOf="@+id/grid_item_price_text"
@@ -66,14 +63,12 @@
             <TextView
                 android:id="@+id/grid_item_old_price_amount"
                 android:background="@drawable/strike_through"
-                android:text="1035 zł"
                 app:layout_constraintStart_toEndOf="@+id/grid_item_price_amount"
                 app:layout_constraintTop_toTopOf="@+id/grid_item_price_amount"
                 style="@style/grid_item_coupon_old_price_amount"/>
 
             <TextView
                 android:id="@+id/grid_item_coupon_description_text"
-                android:text="@string/short_lorem_ipsum"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text"

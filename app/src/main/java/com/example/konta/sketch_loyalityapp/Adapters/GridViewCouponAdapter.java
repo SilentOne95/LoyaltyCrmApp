@@ -13,13 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.AdditionalUI.CouponDetailsActivity;
+import com.example.konta.sketch_loyalityapp.ModelClasses.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.ModelClasses.Item;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class GridViewCouponAdapter extends ArrayAdapter<Item> {
+public class GridViewCouponAdapter extends ArrayAdapter<ItemCoupon> {
 
     private boolean mShowDescription;
 
@@ -30,7 +29,8 @@ public class GridViewCouponAdapter extends ArrayAdapter<Item> {
      * @param context of the app
      * @param gridItem A list of objects to display in a list
      */
-    public GridViewCouponAdapter(@NonNull Activity context, @NonNull ArrayList<Item> gridItem, boolean showDescription) {
+    public GridViewCouponAdapter(@NonNull Activity context, @NonNull ArrayList<ItemCoupon> gridItem,
+                                 boolean showDescription) {
         // Initialize the ArrayAdapter's internal storage for the context
         super(context, 0, gridItem);
         mShowDescription = showDescription;
@@ -47,8 +47,8 @@ public class GridViewCouponAdapter extends ArrayAdapter<Item> {
 
         class ViewHolder {
             private ImageView imageView;
-            private TextView titleView, descriptionText, discountMarker;
-            private Button button;
+            private TextView titleView, descriptionText, discountMarker, basicPrice, newPrice;
+            private Button showDetailsButton;
         }
 
         ViewHolder holder;
@@ -63,8 +63,10 @@ public class GridViewCouponAdapter extends ArrayAdapter<Item> {
             holder.imageView = listItemView.findViewById(R.id.grid_item_image);
             holder.discountMarker = listItemView.findViewById(R.id.grid_item_discount_marker);
             holder.titleView = listItemView.findViewById(R.id.grid_item_coupon_title);
+            holder.basicPrice = listItemView.findViewById(R.id.grid_item_old_price_amount);
+            holder.newPrice = listItemView.findViewById(R.id.grid_item_price_amount);
             holder.descriptionText = listItemView.findViewById(R.id.grid_item_coupon_description_text);
-            holder.button = listItemView.findViewById(R.id.grid_item_show_details_button);
+            holder.showDetailsButton = listItemView.findViewById(R.id.grid_item_show_details_button);
 
             // Depending on view, decide if those views should be shown or not
             if (!mShowDescription) {
@@ -77,18 +79,19 @@ public class GridViewCouponAdapter extends ArrayAdapter<Item> {
         }
 
         // Get the {@link GridViewItem} object located at this position in the list
-        Item currentItem = getItem(position);
+        ItemCoupon currentItem = getItem(position);
 
-        holder.imageView.setImageDrawable(currentItem.getBitmapDrawable());
-        final String generateInt = Integer.toString(new Random().nextInt(51) + 5);
-        holder.discountMarker.setText("-".concat(generateInt).concat("%"));
+        holder.imageView.setImageDrawable(currentItem.getItemBitmapDrawable());
+        holder.discountMarker.setText("-".concat(Integer.toString(currentItem.getItemDiscount())).concat("%"));
         holder.titleView.setText(currentItem.getItemTitle());
-        holder.button.setOnClickListener(new View.OnClickListener() {
+        holder.basicPrice.setText(String.valueOf(currentItem.getItemBasicPrice()));
+        holder.newPrice.setText(String.valueOf(currentItem.getItemFinalPrice()));
+        holder.descriptionText.setText(currentItem.getItemDescription());
+        holder.showDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CouponDetailsActivity.class);
                 intent.putExtra("EXTRA_ELEMENT_ID", position);
-                intent.putExtra("EXTRA_AMOUNT_DISCOUNT", generateInt);
                 getContext().startActivity(intent);
             }
         });

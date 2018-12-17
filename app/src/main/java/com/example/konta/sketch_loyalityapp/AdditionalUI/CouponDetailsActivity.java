@@ -14,11 +14,8 @@ import android.text.style.StyleSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
-
-import java.util.Locale;
 
 public class CouponDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,8 +25,6 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
 
     // Temporary variables using to get json data from assets
     private int couponPosition = 0;
-    private String couponDiscount = null;
-    private String couponTitleConst = "Coupon";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +36,7 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
         Bundle extras = getIntent().getExtras();
         if (extras != null){
             couponPosition = extras.getInt("EXTRA_ELEMENT_ID");
-            couponDiscount = extras.getString("EXTRA_AMOUNT_DISCOUNT");
         }
-
-        TextView couponMarker = findViewById(R.id.discount_marker_text_view);
-        couponMarker.setText("-".concat(couponDiscount).concat("%"));
-
-        TextView couponTitle = findViewById(R.id.product_title_text_view);
-        String outputTitle = String.format(Locale.getDefault(),"%s %d", couponTitleConst, couponPosition + 1);
-        couponTitle.setText(outputTitle);
-
 
         showCouponCodeButton = findViewById(R.id.show_coupon_button);
         showCouponCodeButton.setOnClickListener(this);
