@@ -51,6 +51,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     FusedLocationProviderClient mFusedLocationClient;
     private String json = null;
     private String layoutTitle;
+    private ClusterManager<ItemLocation> mClusterManager;
     private SparseArray<ItemLocation> mListOfMarkers = new SparseArray<>();
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -131,14 +132,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mGoogleMap.animateCamera(cameraUpdate);
 
-        // Add markers to map
-//        for (int i = 0; i < mListOfMarkers.size(); i++) {
-//            ItemLocation marker = mListOfMarkers.get(i);
-//            mGoogleMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(marker.getItemLat(), marker.getItemLng()))
-//                    .title(marker.getTitle()))
-//                    .setTag(i);
-//        }
+        // Add markers to map and set up ClusterManager
         setUpCluster();
 
         // Handle events related to BottomSheet
@@ -232,12 +226,17 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
     private void setUpCluster() {
         // Initialize the manager with the context and the map
-        ClusterManager<ItemLocation> mClusterManager = new ClusterManager<>(getContext(), mGoogleMap);
+        mClusterManager = new ClusterManager<>(getContext(), mGoogleMap);
 
         // Point the map's listeners at the listeners implemented by the cluster manager
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
         mGoogleMap.setOnMarkerClickListener(mClusterManager);
 
+        // Setting up markers using json data
+        addMarkersToCluster();
+    }
+
+    private void addMarkersToCluster() {
         // Add ten cluster items in close proximity, for purposes of this example.
         for (int i = 0; i < mListOfMarkers.size(); i++) {
             ItemLocation offsetItem = new ItemLocation(
