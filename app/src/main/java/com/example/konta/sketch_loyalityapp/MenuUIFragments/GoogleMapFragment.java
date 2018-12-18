@@ -1,7 +1,6 @@
 package com.example.konta.sketch_loyalityapp.MenuUIFragments;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -140,7 +139,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                updateBottomSheetState(marker);
                 return true;
             }
         });
@@ -231,9 +229,5 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         // Point the map's listeners at the listeners implemented by the cluster manager
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
         mGoogleMap.setOnMarkerClickListener(mClusterManager);
-    }
-
-    private void updateBottomSheetState(Marker marker) {
-
     }
 }
