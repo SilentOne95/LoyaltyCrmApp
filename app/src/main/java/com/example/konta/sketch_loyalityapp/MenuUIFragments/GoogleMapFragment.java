@@ -12,12 +12,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.ModelClasses.MyClusterItem;
+import com.example.konta.sketch_loyalityapp.ModelClasses.ItemLocation;
 import com.example.konta.sketch_loyalityapp.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -33,7 +34,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterManager;
 
 import org.json.JSONArray;
@@ -51,7 +51,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     FusedLocationProviderClient mFusedLocationClient;
     private String json = null;
     private String layoutTitle;
-    private ClusterManager<MyClusterItem> mClusterManager;
+    private SparseArray<ItemLocation> mListOfMarkers = new SparseArray<>();
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
@@ -131,9 +131,15 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mGoogleMap.animateCamera(cameraUpdate);
 
-        mGoogleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(51.940544, 19.069815))
-                .title("Test"));
+        // Add markers to map
+//        for (int i = 0; i < mListOfMarkers.size(); i++) {
+//            ItemLocation marker = mListOfMarkers.get(i);
+//            mGoogleMap.addMarker(new MarkerOptions()
+//                    .position(new LatLng(marker.getItemLat(), marker.getItemLng()))
+//                    .title(marker.getTitle()))
+//                    .setTag(i);
+//        }
+        setUpCluster();
 
         // Handle events related to BottomSheet
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -216,6 +222,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                 JSONArray shopCoordinates = insideObj.getJSONArray("shopCoordinates");
                 double shopLatitude = shopCoordinates.getDouble(0);
                 double shopLongitude = shopCoordinates.getDouble(1);
+
+                mListOfMarkers.append(i, new ItemLocation(shopTitle, shopLatitude, shopLongitude));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -224,10 +232,18 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
     private void setUpCluster() {
         // Initialize the manager with the context and the map
-        mClusterManager = new ClusterManager<>(getContext(), mGoogleMap);
+        ClusterManager<ItemLocation> mClusterManager = new ClusterManager<>(getContext(), mGoogleMap);
 
         // Point the map's listeners at the listeners implemented by the cluster manager
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
         mGoogleMap.setOnMarkerClickListener(mClusterManager);
+
+        // Add ten cluster items in close proximity, for purposes of this example.
+        for (int i = 0; i < mListOfMarkers.size(); i++) {
+            ItemLocation offsetItem = new ItemLocation(
+                    mListOfMarkers.get(i).getItemLat(),
+                    mListOfMarkers.get(i).getItemLng());
+            mClusterManager.addItem(offsetItem);
+        }
     }
 }
