@@ -1,6 +1,7 @@
 package com.example.konta.sketch_loyalityapp.MenuUIFragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -42,7 +43,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
     View mView;
     GoogleMap mGoogleMap;
@@ -134,6 +135,15 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
         mGoogleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(51.940544, 19.069815))
                 .title("Test"));
+
+        // Handle events related to BottomSheet
+        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                updateBottomSheetState(marker);
+                return true;
+            }
+        });
     }
 
     LocationCallback mLocationCallback = new LocationCallback() {
@@ -223,8 +233,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, G
         mGoogleMap.setOnMarkerClickListener(mClusterManager);
     }
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
+    private void updateBottomSheetState(Marker marker) {
+
     }
 }

@@ -70,6 +70,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuUIFragments.MainActivity" />
         </activity>
+        <activity android:name=".AdditionalUI.BottomSheet" />
 
         <meta-data
             android:name="com.google.android.gms.version"
