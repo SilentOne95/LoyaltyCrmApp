@@ -10,7 +10,7 @@
     android:background="@color/colorFragmentBackground"
     tools:context=".MenuUIFragments.CouponsFragment">
 
-    <com.example.konta.sketch_loyalityapp.ModelClasses.CustomGridView
+    <com.example.konta.sketch_loyalityapp.Utils.CustomGridView
         android:id="@+id/grid_view"
         style="@style/basic_grid_view_style"/>
 

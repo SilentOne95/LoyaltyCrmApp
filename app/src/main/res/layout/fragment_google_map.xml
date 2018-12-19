@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.konta.sketch_loyalityapp.ModelClasses.CustomMapFrameLayout
+<com.example.konta.sketch_loyalityapp.Utils.CustomMapFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"

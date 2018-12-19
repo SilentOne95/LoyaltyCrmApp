@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.konta.sketch_loyalityapp.Utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.ModelClasses.ItemLocation;
 import com.example.konta.sketch_loyalityapp.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
@@ -134,6 +135,10 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
         // Add markers to map and set up ClusterManager
         setUpCluster();
+
+        // Set custom cluster style
+        final CustomClusterRenderer renderer = new CustomClusterRenderer(getContext(), mGoogleMap, mClusterManager);
+        mClusterManager.setRenderer(renderer);
 
         // Handle events related to BottomSheet
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
