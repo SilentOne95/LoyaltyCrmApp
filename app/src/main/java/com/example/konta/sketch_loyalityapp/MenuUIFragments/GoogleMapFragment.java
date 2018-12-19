@@ -144,6 +144,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                // Set BottomSheet state collapsed when marker is clicked
                 ((MainActivity) getActivity()).changeBottomSheetState(1);
                 return true;
             }
@@ -152,6 +153,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                // Set BottomSheet state hidden when map is clicked
                 ((MainActivity) getActivity()).changeBottomSheetState(0);
             }
         });
@@ -230,7 +232,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                 double shopLatitude = shopCoordinates.getDouble(0);
                 double shopLongitude = shopCoordinates.getDouble(1);
 
-                mListOfMarkers.append(i, new ItemLocation(shopTitle, shopLatitude, shopLongitude));
+                mListOfMarkers.append(i,
+                        new ItemLocation(shopLatitude, shopLongitude, Integer.toString(shopId)));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -252,10 +255,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     private void addMarkersToCluster() {
         // Add ten cluster items in close proximity, for purposes of this example.
         for (int i = 0; i < mListOfMarkers.size(); i++) {
-            ItemLocation offsetItem = new ItemLocation(
-                    mListOfMarkers.get(i).getItemLat(),
-                    mListOfMarkers.get(i).getItemLng());
-            mClusterManager.addItem(offsetItem);
+            ItemLocation marker = new ItemLocation(mListOfMarkers.get(i).getPosition(), mListOfMarkers.get(i).getTitle());
+            mClusterManager.addItem(marker);
         }
     }
 }

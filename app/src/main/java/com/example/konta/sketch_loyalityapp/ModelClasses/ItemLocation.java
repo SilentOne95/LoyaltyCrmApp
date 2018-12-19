@@ -5,20 +5,17 @@ import com.google.maps.android.clustering.ClusterItem;
 
 public class ItemLocation implements ClusterItem {
 
-    private String mItemTitle;
-    private double mItemLat;
-    private double mItemLng;
     private LatLng mPosition;
+    private String mId;
 
-    public ItemLocation(double itemLat, double itemLng) {
+    public ItemLocation(double itemLat, double itemLng, String id) {
         mPosition = new LatLng(itemLat, itemLng);
+        mId = id;
     }
 
-    public ItemLocation(String itemTitle, double itemLat, double itemLng) {
-        mItemTitle = itemTitle;
-        mItemLat = itemLat;
-        mItemLng = itemLng;
-        mPosition = new LatLng(itemLat, itemLng);
+    public ItemLocation(LatLng position, String id) {
+        mPosition = position;
+        mId = id;
     }
 
     /** Getters associated with ClusterItem */
@@ -29,17 +26,11 @@ public class ItemLocation implements ClusterItem {
 
     @Override
     public String getTitle() {
-        return mItemTitle;
+        return mId;
     }
 
     @Override
     public String getSnippet() {
         return null;
     }
-
-    /** Get the latitude the item. */
-    public double getItemLat() { return mItemLat; }
-
-    /** Get the longitude of the item. */
-    public double getItemLng() { return mItemLng; }
 }
