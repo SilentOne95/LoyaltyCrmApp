@@ -144,7 +144,15 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                ((MainActivity) getActivity()).changeBottomSheetState(1);
                 return true;
+            }
+        });
+
+        mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                ((MainActivity) getActivity()).changeBottomSheetState(0);
             }
         });
     }

@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     GoogleMapFragment mGoogleMapFragment;
     private BottomSheetBehavior mBottomSheetBehavior;
 
+
     // Arrays to store key-value pairs to store specified type assigned to view
     private SparseArray<String> menuSectionOneArray = new SparseArray<>();
     private SparseArray<String> menuSectionTwoArray = new SparseArray<>();
@@ -76,13 +77,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         displaySelectedScreen(0,1);
         mNavigationView.getMenu().getItem(1).setChecked(true).setCheckable(true);
 
-        // Bottom Sheet set up
+        // Set up BottomSheet
         View mBottomSheet = findViewById(R.id.bottom_sheet);
+        mBottomSheet.setOnClickListener(this);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
         mBottomSheetBehavior.setPeekHeight(100);
         mBottomSheetBehavior.setHideable(true);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        mBottomSheet.setOnClickListener(this);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
         // Custom TabLayout with ViewPager set up
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -284,6 +285,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             default:
                 break;
+        }
+    }
+
+    public void changeBottomSheetState(int state) {
+        if (state == 1 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_COLLAPSED) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        } else if (state == 0 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN){
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
     }
 }
