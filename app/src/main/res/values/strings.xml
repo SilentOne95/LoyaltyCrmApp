@@ -120,7 +120,7 @@
     </string>
 
     <!-- Bottom Sheet contact info tab temporary strings -->
-    <string name="contact_info_phone_number">+48 123–456–789</string>
+    <string name="contact_info_phone_number">+48 123 456 789</string>
     <string name="contact_info_email">email@address.com</string>
 
 </resources>

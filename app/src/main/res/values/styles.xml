@@ -342,15 +342,18 @@
     <style name="contact_info_phone_text" parent="basic_bottom_sheet_text">
         <item name="android:layout_marginStart">@dimen/mid_value</item>
         <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:padding">@dimen/very_small_value</item>
     </style>
 
     <style name="contact_info_phone_view" parent="basic_bottom_sheet_text">
         <item name="android:layout_marginTop">@dimen/big_value</item>
         <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:padding">@dimen/very_small_value</item>
     </style>
 
     <style name="contact_info_email" parent="basic_bottom_sheet_text">
         <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:padding">@dimen/very_small_value</item>
     </style>
 
     <!-- General grid list item -->
