@@ -65,6 +65,11 @@
         <item name="android:minHeight">@dimen/zero</item>
     </style>
 
+    <style name="basic_day_of_the_week_text" parent="layout_wrap_content">
+        <item name="android:textSize">@dimen/mid_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
     <!-- Home fragment -->
     <style name="home_special_offer_image">
         <item name="android:layout_width">match_parent</item>
@@ -267,7 +272,21 @@
     </style>
 
     <!-- Bottom Sheet activity -->
+    <style name="vertical_divider_line">
+        <item name="android:layout_width">@dimen/vertical_divider_width</item>
+        <item name="android:layout_height">@dimen/zero</item>
+        <item name="android:layout_marginTop">@dimen/very_big_value</item>
+        <item name="android:layout_marginBottom">@dimen/very_big_value</item>
+        <item name="android:background">@color/colorBlack</item>
+    </style>
 
+    <style name="bottom_sheet_first_day_text_style" parent="basic_day_of_the_week_text">
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
+    </style>
+
+    <style name="bottom_sheet_last_day_text_style" parent="basic_day_of_the_week_text">
+        <item name="android:layout_marginBottom">@dimen/mid_value</item>
+    </style>
 
     <!-- General grid list item -->
     <style name="general_grid_item_image">
