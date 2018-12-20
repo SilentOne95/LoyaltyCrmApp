@@ -2,6 +2,7 @@
 <resources>
     <!-- General values -->
     <dimen name="zero">0dp</dimen>
+    <dimen name="very_small_value">4dp</dimen>
     <dimen name="small_value">8dp</dimen>
     <dimen name="mid_value">16dp</dimen>
     <dimen name="big_value">24dp</dimen>
@@ -43,6 +44,12 @@
     <dimen name="sign_up_checkbox_width">320dp</dimen>
 
     <!-- Bottom Sheet layout -->
+    <dimen name="bottom_sheet_general_info_layout_height">400dp</dimen>
+    <dimen name="bottom_sheet_general_text_icon_height">40dp</dimen>
+    <dimen name="bottom_sheet_horizontal_divider_height">2dp</dimen>
+
+    <!-- Bottom Sheet tabs -->
+    <dimen name="bottom_sheet_tab_height">40dp</dimen>
     <dimen name="vertical_divider_width">1dp</dimen>
 
 </resources>

@@ -272,6 +272,49 @@
     </style>
 
     <!-- Bottom Sheet activity -->
+    <style name="bottom_sheet_general_icon_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:drawablePadding">@dimen/mid_value</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="bottom_sheet_general_place_address">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/bottom_sheet_general_text_icon_height</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginBottom">@dimen/very_small_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="bottom_sheet_general_opening_hours">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="bottom_sheet_horizontal_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/bottom_sheet_horizontal_divider_height</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <!-- Bottom Sheet first Tab -->
     <style name="vertical_divider_line">
         <item name="android:layout_width">@dimen/vertical_divider_width</item>
         <item name="android:layout_height">@dimen/zero</item>

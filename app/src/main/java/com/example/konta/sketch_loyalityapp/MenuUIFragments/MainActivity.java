@@ -154,48 +154,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void displaySelectedScreen(int groupId, int itemId) {
-        // Initializing the fragment object which is selected
-        if (groupId == 0){
-            switch (itemId) {
-                case 0:
-                    getRelevantLayoutType(0,0);
-                    break;
-                case 1:
-                    getRelevantLayoutType(0,1);
-                    break;
-                case 2:
-                    getRelevantLayoutType(0,2);
-                    break;
-                case 3:
-                    getRelevantLayoutType(0,3);
-                    break;
-                case 4:
-                    getRelevantLayoutType(0,4);
-                    break;
-                case 5:
-                    getRelevantLayoutType(0,5);
-                    break;
-            }
-        } else {
-            switch (itemId) {
-                case 0:
-                    getRelevantLayoutType(1,0);
-                    break;
-                case 1:
-                    getRelevantLayoutType(1,1);
-                    break;
-            }
-        }
-    }
-
-    private void getRelevantLayoutType(int sectionNumber, int position) {
         String layoutType;
         Fragment fragment = null;
 
-        if (sectionNumber == 0) {
-            layoutType = menuSectionOneArray.get(position);
+        if (groupId == 0) {
+            layoutType = menuSectionOneArray.get(itemId);
         } else {
-            layoutType = menuSectionTwoArray.get(position);
+            layoutType = menuSectionTwoArray.get(itemId);
         }
 
         switch (layoutType) {

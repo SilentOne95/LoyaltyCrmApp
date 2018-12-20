@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="@dimen/bottom_sheet_general_info_layout_height"
     android:background="@color/colorWhite"
     android:clickable="true"
     android:focusable="true"
@@ -20,62 +20,36 @@
 
         <TextView
             android:id="@+id/bottom_sheet_icon_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_marker"
-            android:drawablePadding="16dp"
-            android:gravity="center_vertical"
             android:text="@string/bottom_place_title_text"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/big_text_size" />
+            style="@style/bottom_sheet_general_icon_text"/>
 
         <TextView
             android:id="@+id/bottom_sheet_place_address"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center_vertical"
             android:text="@string/bottom_place_address_text"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/small_text_size" />
+            style="@style/bottom_sheet_general_place_address"/>
 
         <TextView
             android:id="@+id/bottom_sheet_place_hours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center_vertical"
             android:text="@string/bottom_place_open_hours_text"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/mid_text_size" />
+            style="@style/bottom_sheet_general_opening_hours"/>
 
         <View
             android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="4dp"
-            android:background="@color/colorAccent" />
+            style="@style/bottom_sheet_horizontal_divider"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/bottom_sheet_tab_height"
             app:tabTextAppearance="@color/colorAccent"/>
 
         <android.support.v4.view.ViewPager
