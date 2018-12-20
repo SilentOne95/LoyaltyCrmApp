@@ -65,7 +65,7 @@
         <item name="android:minHeight">@dimen/zero</item>
     </style>
 
-    <style name="basic_day_of_the_week_text" parent="layout_wrap_content">
+    <style name="basic_bottom_sheet_text" parent="layout_wrap_content">
         <item name="android:textSize">@dimen/mid_text_size</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
@@ -314,7 +314,7 @@
         <item name="android:layout_gravity">bottom</item>
     </style>
 
-    <!-- Bottom Sheet first Tab -->
+    <!-- Bottom Sheet first Tab: Opening Hours -->
     <style name="vertical_divider_line">
         <item name="android:layout_width">@dimen/vertical_divider_width</item>
         <item name="android:layout_height">@dimen/zero</item>
@@ -323,12 +323,34 @@
         <item name="android:background">@color/colorBlack</item>
     </style>
 
-    <style name="bottom_sheet_first_day_text_style" parent="basic_day_of_the_week_text">
+    <style name="bottom_sheet_first_day_text_style" parent="basic_bottom_sheet_text">
         <item name="android:layout_marginTop">@dimen/mid_value</item>
     </style>
 
-    <style name="bottom_sheet_last_day_text_style" parent="basic_day_of_the_week_text">
+    <style name="bottom_sheet_last_day_text_style" parent="basic_bottom_sheet_text">
         <item name="android:layout_marginBottom">@dimen/mid_value</item>
+    </style>
+
+    <!-- Bottom Sheet first Tab: Contact Info -->
+    <style name="bottom_sheet_contact_us_text"  parent="basic_bottom_sheet_text">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/very_big_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="contact_info_phone_text" parent="basic_bottom_sheet_text">
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/big_value</item>
+    </style>
+
+    <style name="contact_info_phone_view" parent="basic_bottom_sheet_text">
+        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+    </style>
+
+    <style name="contact_info_email" parent="basic_bottom_sheet_text">
+        <item name="android:layout_marginTop">@dimen/small_value</item>
     </style>
 
     <!-- General grid list item -->

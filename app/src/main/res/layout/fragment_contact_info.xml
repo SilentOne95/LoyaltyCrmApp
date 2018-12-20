@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdditionalUI.ContactInfoFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Second"
-        android:gravity="center"/>
+        android:id="@+id/contact_us_text"
+        android:text="@string/contact_us_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/bottom_sheet_contact_us_text"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/contact_info_phone_text"
+        android:text="@string/contact_info_phone_number_text"
+        app:layout_constraintEnd_toStartOf="@+id/contact_info_phone_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact_us_text"
+        style="@style/contact_info_phone_text"/>
+
+    <TextView
+        android:id="@+id/contact_info_phone_view"
+        android:text="@string/contact_info_phone_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/contact_info_phone_text"
+        app:layout_constraintTop_toBottomOf="@+id/contact_us_text"
+        style="@style/contact_info_phone_view"/>
+
+    <TextView
+        android:id="@+id/contact_info_email_text"
+        android:text="@string/contact_info_email_text"
+        app:layout_constraintStart_toStartOf="@+id/contact_info_phone_text"
+        app:layout_constraintTop_toBottomOf="@+id/contact_info_phone_text"
+        style="@style/contact_info_email"/>
+
+    <TextView
+        android:id="@+id/contact_info_email_view"
+        android:text="@string/contact_info_email"
+        app:layout_constraintStart_toStartOf="@+id/contact_info_phone_view"
+        app:layout_constraintTop_toBottomOf="@+id/contact_info_phone_view"
+        style="@style/contact_info_email"/>
+
+</android.support.constraint.ConstraintLayout>

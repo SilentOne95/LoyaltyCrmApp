@@ -51,6 +51,10 @@
     <string name="saturday_text">Saturday</string>
     <string name="sunday_text">Sunday</string>
 
+    <string name="contact_us_text">In case of any questions,\n please contact us:</string>
+    <string name="contact_info_phone_number_text">Phone:</string>
+    <string name="contact_info_email_text">E-mail:</string>
+
     <string name="opening_hours_default_text">Closed</string>
 
     <!-- Image content descriptions -->
@@ -114,5 +118,9 @@
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem
         accusantium doloremque laudantium, totam rem aperiam.
     </string>
+
+    <!-- Bottom Sheet contact info tab temporary strings -->
+    <string name="contact_info_phone_number">+48 123–456–789</string>
+    <string name="contact_info_email">email@address.com</string>
 
 </resources>

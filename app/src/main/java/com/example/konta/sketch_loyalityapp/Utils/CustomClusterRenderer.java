@@ -23,11 +23,17 @@ public class CustomClusterRenderer extends DefaultClusterRenderer<ItemLocation> 
     }
 
     @Override
+    protected int getColor(int clusterSize) {
+        return ContextCompat.getColor(mContext, R.color.colorAccent);
+    }
+
+    @Override
     protected void onBeforeClusterItemRendered(ItemLocation item, MarkerOptions markerOptions) {
         // Set custom color of markers
-        String string = "#" + Integer.toHexString(ContextCompat.getColor(mContext, R.color.colorAccent));
-        final BitmapDescriptor markerDescriptor = CustomBitmapDescriptorFactory.fromColorString(string);
+        String string = "#" + Integer.toHexString(ContextCompat.getColor(mContext, R.color.colorPrimary));
+        final BitmapDescriptor markerDescriptorCustom = CustomBitmapDescriptorFactory.fromColorString(string);
 
+        final BitmapDescriptor markerDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
         markerOptions.icon(markerDescriptor).snippet(item.getTitle());
     }
 }
