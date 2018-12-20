@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View mBottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheet.setOnClickListener(this);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(100);
+        mBottomSheetBehavior.setPeekHeight(200);
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
