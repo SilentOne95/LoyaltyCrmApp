@@ -1,8 +1,6 @@
 package com.example.konta.sketch_loyalityapp.Adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.konta.sketch_loyalityapp.AdditionalUI.FirstFragment;
-import com.example.konta.sketch_loyalityapp.AdditionalUI.SecondFragment;
+import com.example.konta.sketch_loyalityapp.AdditionalUI.OpeningHoursFragment;
+import com.example.konta.sketch_loyalityapp.AdditionalUI.ContactInfoFragment;
 import com.example.konta.sketch_loyalityapp.R;
 
 public class BottomSheetViewPagerAdapter extends FragmentPagerAdapter {
@@ -39,9 +37,9 @@ public class BottomSheetViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new FirstFragment();
+            return new OpeningHoursFragment();
         } else {
-            return new SecondFragment();
+            return new ContactInfoFragment();
         }
     }
 

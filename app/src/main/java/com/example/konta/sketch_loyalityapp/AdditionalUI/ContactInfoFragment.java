@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import com.example.konta.sketch_loyalityapp.R;
 
-public class FirstFragment extends Fragment {
+public class ContactInfoFragment extends Fragment {
 
-    public FirstFragment() {
+    public ContactInfoFragment() {
         // Required empty public constructor
     }
 
@@ -18,6 +18,6 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        return inflater.inflate(R.layout.fragment_contact_info, container, false);
     }
 }

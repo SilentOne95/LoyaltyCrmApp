@@ -35,10 +35,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private BottomSheetBehavior mBottomSheetBehavior;
     private String json;
     GoogleMapFragment mGoogleMapFragment;
-    private BottomSheetBehavior mBottomSheetBehavior;
-
 
     // Arrays to store key-value pairs to store specified type assigned to view
     private SparseArray<String> menuSectionOneArray = new SparseArray<>();
