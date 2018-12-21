@@ -12,7 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".LoginUI.SignUpActivity">
+        tools:context=".loginViews.SignUpActivity">
 
         <ImageView
             android:id="@+id/sample_image_view"

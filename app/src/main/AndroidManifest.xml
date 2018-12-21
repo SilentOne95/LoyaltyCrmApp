@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme.NoActionBar">
         <activity
-            android:name=".AdditionalUI.LaunchActivity"
+            android:name=".additionalViews.LaunchActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,46 +31,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MenuUIFragments.MainActivity"
+            android:name=".drawerDependentViews.MainActivity"
             android:theme="@style/BaseAppTheme.NoActionBar" />
-        <activity android:name=".LoginUI.LogInActivity" />
-        <activity android:name=".LoginUI.SignUpActivity" />
+        <activity android:name=".loginViews.LogInActivity" />
+        <activity android:name=".loginViews.SignUpActivity" />
         <activity
-            android:name=".MenuUIActivities.WebsiteActivity"
+            android:name=".independentViews.WebsiteActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuUIFragments.MainActivity" />
+                android:value=".drawerDependentViews.MainActivity" />
         </activity>
         <activity
-            android:name=".MenuUIActivities.TermsConditionsActivity"
+            android:name=".independentViews.TermsConditionsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuUIFragments.MainActivity" />
+                android:value=".drawerDependentViews.MainActivity" />
         </activity>
         <activity
-            android:name=".MenuUIActivities.ContactActivity"
+            android:name=".independentViews.ContactActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuUIFragments.MainActivity" />
+                android:value=".drawerDependentViews.MainActivity" />
         </activity>
         <activity
-            android:name=".AdditionalUI.CouponDetailsActivity"
+            android:name=".additionalViews.CouponDetailsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuUIFragments.MainActivity" />
+                android:value=".drawerDependentViews.MainActivity" />
         </activity>
         <activity
-            android:name=".AdditionalUI.ProductDetailsActivity"
+            android:name=".additionalViews.ProductDetailsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuUIFragments.MainActivity" />
+                android:value=".drawerDependentViews.MainActivity" />
         </activity>
-        <activity android:name=".AdditionalUI.BottomSheet" />
+        <activity android:name=".additionalViews.BottomSheet" />
 
         <meta-data
             android:name="com.google.android.gms.version"

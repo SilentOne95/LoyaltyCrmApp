@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorFragmentBackground"
-    tools:context=".MenuUIActivities.TermsConditionsActivity">
+    tools:context=".independentViews.TermsConditionsActivity">
 
     <TextView
         android:id="@+id/terms_conditions_text_view"

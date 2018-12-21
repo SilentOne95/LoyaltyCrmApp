@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:clipToPadding="false"
     android:clipChildren="false"
-    tools:context=".MenuUIFragments.HomeFragment">
+    tools:context=".drawerDependentViews.HomeFragment">
 
     <ImageView
         android:id="@+id/special_offer_image"
@@ -22,7 +22,7 @@
         android:text="@string/check_offers_text"
         style="@style/home_info_text_view"/>
 
-    <com.example.konta.sketch_loyalityapp.Utils.CustomGridView
+    <com.example.konta.sketch_loyalityapp.utils.CustomGridView
         android:id="@+id/grid_view"
         style="@style/home_grid_view"/>
 
