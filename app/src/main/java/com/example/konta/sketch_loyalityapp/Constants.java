@@ -17,5 +17,4 @@ public final class Constants {
 
     // MapFragment
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
 }

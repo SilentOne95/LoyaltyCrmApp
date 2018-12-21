@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_ITEM_ID;
+import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
@@ -238,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (requestCode == GoogleMapFragment.MY_PERMISSIONS_REQUEST_LOCATION) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
             mGoogleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
