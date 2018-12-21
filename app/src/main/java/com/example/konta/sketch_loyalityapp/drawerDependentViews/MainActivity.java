@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomSheetBehavior mBottomSheetBehavior;
     private String json;
     GoogleMapFragment mGoogleMapFragment;
+
+    // Fields which stores clicked menuItem IDs
+    private int groupId;
+    private int itemId;
+
+    // Global field responsible for storing info which fragment should be opened
     private Fragment mFragment = null;
 
     // Arrays to store key-value pairs to store specified type assigned to view
@@ -163,6 +169,65 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Entering / exiting animations for activities
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        // Assign menu IDs to global variables to display attached view after drawer is closed
+        groupId = menuItem.getGroupId();
+        itemId = menuItem.getItemId();
+
+        // Uncheck all checked menu items
+        int size = mNavigationView.getMenu().size();
+        for (int i = 0; i < size; i++) {
+            mNavigationView.getMenu().getItem(i).setChecked(false);
+        }
+
+        // Set item as selected to persist highlight
+        menuItem.setChecked(true).setCheckable(true);
+
+        // Close drawer when item is tapped
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+            mGoogleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (mBottomSheetBehavior.getState()) {
+            case BottomSheetBehavior.STATE_COLLAPSED:
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case BottomSheetBehavior.STATE_EXPANDED:
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void changeBottomSheetState(int state) {
+        if (state == 1 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_COLLAPSED) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        } else if (state == 0 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN){
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        }
+    }
+
     private void displaySelectedScreen(int groupId, int itemId) {
         String layoutType;
 
@@ -209,79 +274,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        // Entering / exiting animations for activities
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-    }
+    public void onDrawerSlide(@NonNull View view, float v) { }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        // Update the UI based on the item selected
-        displaySelectedScreen(menuItem.getGroupId(), menuItem.getItemId());
-
-        // Uncheck all checked menu items
-        int size = mNavigationView.getMenu().size();
-        for (int i = 0; i < size; i++) {
-            mNavigationView.getMenu().getItem(i).setChecked(false);
-        }
-        // Set item as selected to persist highlight
-        menuItem.setChecked(true).setCheckable(true);
-
-        // Close drawer when item is tapped
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
+    public void onDrawerOpened(@NonNull View view) { }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
-            mGoogleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
+    public void onDrawerClosed(@NonNull View view) { displaySelectedScreen(groupId, itemId); }
 
     @Override
-    public void onClick(View view) {
-        switch (mBottomSheetBehavior.getState()) {
-            case BottomSheetBehavior.STATE_COLLAPSED:
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                break;
-            case BottomSheetBehavior.STATE_EXPANDED:
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void changeBottomSheetState(int state) {
-        if (state == 1 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_COLLAPSED) {
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        } else if (state == 0 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN){
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        }
-    }
-
-    @Override
-    public void onDrawerSlide(@NonNull View view, float v) {
-
-    }
-
-    @Override
-    public void onDrawerOpened(@NonNull View view) {
-
-    }
-
-    @Override
-    public void onDrawerClosed(@NonNull View view) {
-
-    }
-
-    @Override
-    public void onDrawerStateChanged(int i) {
-
-    }
+    public void onDrawerStateChanged(int i) { }
 }
