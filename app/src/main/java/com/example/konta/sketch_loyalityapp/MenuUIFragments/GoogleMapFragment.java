@@ -43,6 +43,8 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
+
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
     View mView;
@@ -54,8 +56,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     private String layoutTitle;
     private ClusterManager<ItemLocation> mClusterManager;
     private SparseArray<ItemLocation> mListOfMarkers = new SparseArray<>();
-
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     // Temporary variables using to get json data from assets
     private static final String jsonFileData = "locations.json";
@@ -145,6 +145,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 // Set BottomSheet state collapsed when marker is clicked
+                // Pass int of 1 to make it collapsed
                 ((MainActivity) getActivity()).changeBottomSheetState(1);
                 return true;
             }
@@ -154,6 +155,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onMapClick(LatLng latLng) {
                 // Set BottomSheet state hidden when map is clicked
+                // Pass int of 0 to make it hidden
                 ((MainActivity) getActivity()).changeBottomSheetState(0);
             }
         });

@@ -31,6 +31,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
+import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_GROUP_ID;
+import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_ITEM_ID;
+import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
+import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
+import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private DrawerLayout mDrawerLayout;
@@ -73,14 +80,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         prepareMenuData();
 
         // Display chosen screen as a default one after app is launched
-        displaySelectedScreen(0,1);
-        mNavigationView.getMenu().getItem(1).setChecked(true).setCheckable(true);
+        displaySelectedScreen(DISPLAY_STARTING_VIEW_GROUP_ID,DISPLAY_STARTING_VIEW_ITEM_ID);
+        mNavigationView.getMenu().getItem(DISPLAY_STARTING_VIEW_ITEM_ID).setChecked(true).setCheckable(true);
 
         // Set up BottomSheet
         View mBottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheet.setOnClickListener(this);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(200);
+        mBottomSheetBehavior.setPeekHeight(BOTTOM_SHEET_PEEK_HEIGHT);
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
@@ -112,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Resources resources = this.getResources();
                 final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
                 Menu menuOne = mNavigationView.getMenu();
-                menuOne.add(0, i, 0, title).setIcon(resourceId);
+                menuOne.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, title).setIcon(resourceId);
 
                 // Put type of views into an array
                 String type = insideObj.getString("componentType");
@@ -129,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Resources resources = this.getResources();
                     final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
                     Menu menuTwo = mNavigationView.getMenu();
-                    menuTwo.add(1, i, 0, title).setIcon(resourceId);
+                    menuTwo.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, title).setIcon(resourceId);
 
                     // Put type of views into an array
                     String type = insideObj.getString("componentType");

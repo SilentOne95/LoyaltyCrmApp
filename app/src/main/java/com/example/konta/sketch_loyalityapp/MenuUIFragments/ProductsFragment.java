@@ -27,6 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS;
+
 public class ProductsFragment extends Fragment {
 
     private static ArrayList<ItemProduct> itemList;
@@ -85,7 +87,7 @@ public class ProductsFragment extends Fragment {
 
             Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceCategoryImage);
             RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
-            bitmapDrawable.setCornerRadius(20);
+            bitmapDrawable.setCornerRadius(BITMAP_CORNER_RADIUS);
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject insideObj = array.getJSONObject(i);

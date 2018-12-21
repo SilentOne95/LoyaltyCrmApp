@@ -28,6 +28,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS;
+import static com.example.konta.sketch_loyalityapp.Constants.INITIAL_CAPACITY_ARRAY;
+
 public class HomeFragment extends Fragment {
 
     private static ArrayList<Item> itemList;
@@ -74,7 +77,7 @@ public class HomeFragment extends Fragment {
     private void extractDataFromJson() {
         try {
             Resources resources = this.getResources();
-            itemList = new ArrayList<>();
+            itemList = new ArrayList<>(INITIAL_CAPACITY_ARRAY);
 
             JSONObject object = new JSONObject(json);
             layoutTitle = object.getString("componentTitleCurrent");
@@ -92,7 +95,7 @@ public class HomeFragment extends Fragment {
 
                 Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceCategoryImage);
                 RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
-                bitmapDrawable.setCornerRadius(20);
+                bitmapDrawable.setCornerRadius(BITMAP_CORNER_RADIUS);
 
                 itemList.add(new Item(title, bitmapDrawable));
             }
