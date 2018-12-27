@@ -1,6 +1,6 @@
 package com.example.konta.sketch_loyalityapp.root;
 
-import com.example.konta.sketch_loyalityapp.drawerDependentViews.MainActivity;
+import com.example.konta.sketch_loyalityapp.main.MainActivity;
 
 import javax.inject.Singleton;
 

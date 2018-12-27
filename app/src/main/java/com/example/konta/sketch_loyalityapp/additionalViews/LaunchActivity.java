@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.konta.sketch_loyalityapp.drawerDependentViews.MainActivity;
+import com.example.konta.sketch_loyalityapp.main.MainActivity;
 
 public class LaunchActivity extends AppCompatActivity {
 

@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".drawerDependentViews.MainActivity"
+            android:name=".main.MainActivity"
             android:theme="@style/BaseAppTheme.NoActionBar" />
         <activity android:name=".loginViews.LogInActivity" />
         <activity android:name=".loginViews.SignUpActivity" />
@@ -40,35 +40,35 @@
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".drawerDependentViews.MainActivity" />
+                android:value=".main.MainActivity" />
         </activity>
         <activity
             android:name=".independentViews.TermsConditionsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".drawerDependentViews.MainActivity" />
+                android:value=".main.MainActivity" />
         </activity>
         <activity
             android:name=".independentViews.ContactActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".drawerDependentViews.MainActivity" />
+                android:value=".main.MainActivity" />
         </activity>
         <activity
             android:name=".additionalViews.CouponDetailsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".drawerDependentViews.MainActivity" />
+                android:value=".main.MainActivity" />
         </activity>
         <activity
             android:name=".additionalViews.ProductDetailsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".drawerDependentViews.MainActivity" />
+                android:value=".main.MainActivity" />
         </activity>
         <activity android:name=".additionalViews.BottomSheet" />
 

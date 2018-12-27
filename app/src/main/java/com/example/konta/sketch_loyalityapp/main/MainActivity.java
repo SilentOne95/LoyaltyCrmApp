@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.drawerDependentViews;
+package com.example.konta.sketch_loyalityapp.main;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -20,6 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
+import com.example.konta.sketch_loyalityapp.drawerDependentViews.CouponsFragment;
+import com.example.konta.sketch_loyalityapp.drawerDependentViews.GoogleMapFragment;
+import com.example.konta.sketch_loyalityapp.drawerDependentViews.HomeFragment;
+import com.example.konta.sketch_loyalityapp.drawerDependentViews.ProductsFragment;
 import com.example.konta.sketch_loyalityapp.independentViews.ContactActivity;
 import com.example.konta.sketch_loyalityapp.independentViews.TermsConditionsActivity;
 import com.example.konta.sketch_loyalityapp.independentViews.WebsiteActivity;
