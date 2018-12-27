@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp;
+package com.example.konta.sketch_loyalityapp.root;
 
 import android.app.Application;
 
@@ -7,7 +7,20 @@ import java.io.InputStream;
 
 public class MyApplication extends Application {
 
+    private ApplicationComponent mApplicationComponent;
+
     private String mJson;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        mApplicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
+    }
+
+    public ApplicationComponent getApplicationComponent() { return mApplicationComponent; }
 
     public String readFromAssets(String filename) {
         try {

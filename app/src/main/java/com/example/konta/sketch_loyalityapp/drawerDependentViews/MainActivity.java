@@ -24,7 +24,7 @@ import com.example.konta.sketch_loyalityapp.independentViews.ContactActivity;
 import com.example.konta.sketch_loyalityapp.independentViews.TermsConditionsActivity;
 import com.example.konta.sketch_loyalityapp.independentViews.WebsiteActivity;
 import com.example.konta.sketch_loyalityapp.loginViews.LogInActivity;
-import com.example.konta.sketch_loyalityapp.MyApplication;
+import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 
 import org.json.JSONArray;
@@ -193,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Close drawer when item is tapped
         mDrawerLayout.closeDrawer(GravityCompat.START);
+
         return true;
     }
 

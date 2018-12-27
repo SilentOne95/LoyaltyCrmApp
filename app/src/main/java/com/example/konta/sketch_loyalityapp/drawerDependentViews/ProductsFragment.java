@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.konta.sketch_loyalityapp.adapters.GridViewProductAdapter;
-import com.example.konta.sketch_loyalityapp.MyApplication;
+import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemProduct;
 

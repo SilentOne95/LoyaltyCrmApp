@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemLocation;
-import com.example.konta.sketch_loyalityapp.MyApplication;
+import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;

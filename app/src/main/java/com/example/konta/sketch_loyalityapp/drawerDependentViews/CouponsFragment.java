@@ -16,7 +16,7 @@ import android.widget.GridView;
 
 import com.example.konta.sketch_loyalityapp.adapters.GridViewCouponAdapter;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemCoupon;
-import com.example.konta.sketch_loyalityapp.MyApplication;
+import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 
 import org.json.JSONArray;
