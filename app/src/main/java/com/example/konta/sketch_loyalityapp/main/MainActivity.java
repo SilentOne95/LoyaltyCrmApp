@@ -35,6 +35,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.inject.Inject;
+
 import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_ITEM_ID;
@@ -43,8 +45,11 @@ import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROU
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        View.OnClickListener, DrawerLayout.DrawerListener {
+public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener,
+        NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,
+        MainActivityContract.View {
+
+    @Inject MainActivityContract.Presenter mPresenter;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int groupId;
     private int itemId;
 
-    // Global field responsible for storing info which fragment should be opened
+    // Global field responsible for storing info which flragment should be opened
     private Fragment mFragment = null;
 
     // Arrays to store key-value pairs to store specified type assigned to view
@@ -71,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ((MyApplication) getApplication()).getApplicationComponent().inject(this);
+
+        // Init toolbar and action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -80,11 +88,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         }
 
+        // Init drawer layout
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.addDrawerListener(this);
 
+        // Init navigation view
         mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
+
 
         // Reading JSON file from assets
         json = ((MyApplication) getApplication()).readFromAssets(jsonFileData);
@@ -118,6 +129,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(pagerAdapter.getTabView(i));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.setView(this);
     }
 
     private void prepareMenuData() {
