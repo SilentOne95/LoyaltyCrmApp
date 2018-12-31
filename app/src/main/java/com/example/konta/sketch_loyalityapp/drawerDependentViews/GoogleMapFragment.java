@@ -38,7 +38,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.clustering.ClusterManager;
 
 import org.json.JSONArray;
@@ -169,11 +168,11 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, V
         mClusterManager.setRenderer(renderer);
 
         // Handle events related to BottomSheet
-        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<ItemLocation>() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
-                // Set BottomSheet state collapsed when marker is clicked
-                // Pass int of 1 to make it collapsed
+            public boolean onClusterItemClick(ItemLocation itemLocation) {
+                // Set BottomSheet state hidden when map is clicked
+                // Pass value of 1 to make it collapsed
                 changeBottomSheetState(1);
                 return true;
             }
@@ -183,7 +182,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, V
             @Override
             public void onMapClick(LatLng latLng) {
                 // Set BottomSheet state hidden when map is clicked
-                // Pass int of 0 to make it hidden
+                // Pass value of 0 to make it hidden
                 changeBottomSheetState(0);
             }
         });
