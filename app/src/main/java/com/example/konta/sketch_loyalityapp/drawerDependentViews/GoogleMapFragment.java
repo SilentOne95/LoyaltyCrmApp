@@ -8,17 +8,20 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.main.MainActivity;
+import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemLocation;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
@@ -44,9 +47,10 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 
-public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
+public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener {
 
     View mView;
     GoogleMap mGoogleMap;
@@ -57,6 +61,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     private String layoutTitle;
     private ClusterManager<ItemLocation> mClusterManager;
     private SparseArray<ItemLocation> mListOfMarkers = new SparseArray<>();
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     // Temporary variables using to get json data from assets
     private static final String jsonFileData = "locations.json";
@@ -87,6 +92,28 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         // Extracting objects that has been built up from parsing the given JSON file
         // and adding markers (items) to cluster
         extractDataFromJson();
+
+        // Set up BottomSheet
+        View mBottomSheet = mView.findViewById(R.id.bottom_sheet);
+        mBottomSheet.setOnClickListener(this);
+        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
+        mBottomSheetBehavior.setPeekHeight(BOTTOM_SHEET_PEEK_HEIGHT);
+        mBottomSheetBehavior.setHideable(true);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        // Custom TabLayout with ViewPager set up
+        ViewPager viewPager = mView.findViewById(R.id.view_pager);
+        BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(getContext(), getFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+
+        TabLayout tabLayout = mView.findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+        // Setting up custom TabLayout view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(pagerAdapter.getTabView(i));
+        }
 
         return mView;
     }
@@ -147,7 +174,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             public boolean onMarkerClick(Marker marker) {
                 // Set BottomSheet state collapsed when marker is clicked
                 // Pass int of 1 to make it collapsed
-                ((MainActivity) getActivity()).changeBottomSheetState(1);
+                changeBottomSheetState(1);
                 return true;
             }
         });
@@ -157,7 +184,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             public void onMapClick(LatLng latLng) {
                 // Set BottomSheet state hidden when map is clicked
                 // Pass int of 0 to make it hidden
-                ((MainActivity) getActivity()).changeBottomSheetState(0);
+                changeBottomSheetState(0);
             }
         });
     }
@@ -260,6 +287,28 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         for (int i = 0; i < mListOfMarkers.size(); i++) {
             ItemLocation marker = new ItemLocation(mListOfMarkers.get(i).getPosition(), mListOfMarkers.get(i).getTitle());
             mClusterManager.addItem(marker);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (mBottomSheetBehavior.getState()) {
+            case BottomSheetBehavior.STATE_COLLAPSED:
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case BottomSheetBehavior.STATE_EXPANDED:
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void changeBottomSheetState(int state) {
+        if (state == 1 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_COLLAPSED) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        } else if (state == 0 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
     }
 }

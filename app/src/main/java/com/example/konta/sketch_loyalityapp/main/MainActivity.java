@@ -3,12 +3,9 @@ package com.example.konta.sketch_loyalityapp.main;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.drawerDependentViews.CouponsFragment;
 import com.example.konta.sketch_loyalityapp.drawerDependentViews.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.drawerDependentViews.HomeFragment;
@@ -37,7 +33,6 @@ import org.json.JSONObject;
 
 import javax.inject.Inject;
 
-import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_ITEM_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
@@ -46,20 +41,18 @@ import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
 
 public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener,
-        NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,
-        MainActivityContract.View {
+        NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View {
 
     @Inject MainActivityContract.Presenter mPresenter;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private BottomSheetBehavior mBottomSheetBehavior;
     private String json;
     GoogleMapFragment mGoogleMapFragment;
 
     // Fields which stores clicked menuItem IDs
-    private int groupId;
-    private int itemId;
+    private int groupId = DISPLAY_STARTING_VIEW_GROUP_ID;
+    private int itemId = DISPLAY_STARTING_VIEW_ITEM_ID;
 
     // Global field responsible for storing info which flragment should be opened
     private Fragment mFragment = null;
@@ -105,30 +98,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         prepareMenuData();
 
         // Display chosen screen as a default one after app is launched
-        displaySelectedScreen(DISPLAY_STARTING_VIEW_GROUP_ID,DISPLAY_STARTING_VIEW_ITEM_ID);
-        mNavigationView.getMenu().getItem(DISPLAY_STARTING_VIEW_ITEM_ID).setChecked(true).setCheckable(true);
-
-        // Set up BottomSheet
-        View mBottomSheet = findViewById(R.id.bottom_sheet);
-        mBottomSheet.setOnClickListener(this);
-        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(BOTTOM_SHEET_PEEK_HEIGHT);
-        mBottomSheetBehavior.setHideable(true);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-
-        // Custom TabLayout with ViewPager set up
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(MainActivity.this, getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-
-        // Setting up custom TabLayout view
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(pagerAdapter.getTabView(i));
-        }
+        displaySelectedScreen(groupId, itemId);
+        mNavigationView.getMenu().getItem(itemId).setChecked(true).setCheckable(true);
     }
 
     @Override
@@ -225,28 +196,6 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
             mGoogleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (mBottomSheetBehavior.getState()) {
-            case BottomSheetBehavior.STATE_COLLAPSED:
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                break;
-            case BottomSheetBehavior.STATE_EXPANDED:
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void changeBottomSheetState(int state) {
-        if (state == 1 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_COLLAPSED) {
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        } else if (state == 0 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN){
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
     }
 
