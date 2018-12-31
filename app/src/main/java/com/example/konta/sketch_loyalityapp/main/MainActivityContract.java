@@ -2,7 +2,7 @@ package com.example.konta.sketch_loyalityapp.main;
 
 import android.app.Activity;
 
-import com.example.konta.sketch_loyalityapp.baseFragment.BaseFragment;
+import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 
 public interface MainActivityContract {
 

@@ -13,7 +13,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.example.konta.sketch_loyalityapp.adapters.HomeAdapter;
-import com.example.konta.sketch_loyalityapp.baseFragment.BaseFragment;
+import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.modelClasses.Item;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;

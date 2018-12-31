@@ -16,7 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.baseFragment.BaseFragment;
+import com.example.konta.sketch_loyalityapp.base.BaseActivity;
+import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.drawerDependentViews.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
@@ -25,8 +26,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.inject.Inject;
-
 import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_ITEM_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
@@ -34,7 +33,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROU
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
 
-public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener,
+public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
         NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View {
 
     MainActivityPresenter mPresenter;
@@ -57,9 +56,11 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     private static final String jsonFileData = "menu.json";
 
     @Override
+    protected int getLayout() { return R.layout.activity_main; }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         ((MyApplication) getApplication()).getApplicationComponent().inject(this);
 

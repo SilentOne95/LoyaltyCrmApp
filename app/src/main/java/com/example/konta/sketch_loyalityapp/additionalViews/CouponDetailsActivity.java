@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 
@@ -25,7 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CouponDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class CouponDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     private String json, layoutTitle;
     Button showCouponCodeButton;
@@ -42,9 +43,11 @@ public class CouponDetailsActivity extends AppCompatActivity implements View.OnC
     private double mCouponBasicPrice, mCouponNewPrice;
 
     @Override
+    protected int getLayout() { return R.layout.activity_coupon_details; }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coupon_details);
 
         // Temporary solution - setting up sample data
         Bundle extras = getIntent().getExtras();

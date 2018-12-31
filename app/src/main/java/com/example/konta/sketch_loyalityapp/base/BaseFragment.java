@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.baseFragment;
+package com.example.konta.sketch_loyalityapp.base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

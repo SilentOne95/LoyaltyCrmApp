@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
-import com.example.konta.sketch_loyalityapp.baseFragment.BaseFragment;
+import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemLocation;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;

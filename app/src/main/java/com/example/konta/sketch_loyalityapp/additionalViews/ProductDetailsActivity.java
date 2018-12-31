@@ -2,11 +2,11 @@ package com.example.konta.sketch_loyalityapp.additionalViews;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 
@@ -14,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class ProductDetailsActivity extends BaseActivity {
 
     private String json, layoutTitle;
 
@@ -28,9 +28,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private double mProductPrice;
 
     @Override
+    protected int getLayout() { return R.layout.activity_product_details; }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_details);
 
         // Temporary solution - setting up sample data
         Bundle extras = getIntent().getExtras();
