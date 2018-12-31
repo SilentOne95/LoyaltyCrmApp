@@ -3,20 +3,16 @@ package com.example.konta.sketch_loyalityapp.drawerDependentViews;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.konta.sketch_loyalityapp.adapters.GridViewProductAdapter;
+import com.example.konta.sketch_loyalityapp.baseFragment.BaseFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemProduct;
@@ -29,7 +25,7 @@ import java.util.ArrayList;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS;
 
-public class ProductsFragment extends Fragment {
+public class ProductsFragment extends BaseFragment {
 
     private static ArrayList<ItemProduct> itemList;
     private String json;
@@ -39,13 +35,12 @@ public class ProductsFragment extends Fragment {
     // Temporary variables using to get json data from assets
     private static final String jsonFileData = "products.json";
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_products, container, false);
+    protected int getLayout() { return R.layout.fragment_products; }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         // Reading JSON file from assets
         json = ((MyApplication) getActivity().getApplication()).readFromAssets(jsonFileData);
 
@@ -53,20 +48,13 @@ public class ProductsFragment extends Fragment {
         // preparing and displaying data using custom adapter
         extractDataFromJson();
 
+        getActivity().setTitle(layoutTitle);
+
         GridViewProductAdapter adapter = new GridViewProductAdapter(getActivity(), itemList, true);
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setEmptyView(rootView.findViewById(R.id.empty_state_products_container));
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);
-
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        getActivity().setTitle(layoutTitle);
     }
 
     private void extractDataFromJson() {

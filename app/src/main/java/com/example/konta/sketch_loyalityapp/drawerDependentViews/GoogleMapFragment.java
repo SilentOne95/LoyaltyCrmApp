@@ -10,18 +10,16 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
+import com.example.konta.sketch_loyalityapp.baseFragment.BaseFragment;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemLocation;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
@@ -49,7 +47,7 @@ import java.util.List;
 import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 
-public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener {
+public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback, View.OnClickListener {
 
     View mView;
     GoogleMap mGoogleMap;
@@ -65,12 +63,12 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, V
     // Temporary variables using to get json data from assets
     private static final String jsonFileData = "locations.json";
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_google_map, container, false);
+    protected int getLayout() { return R.layout.fragment_google_map; }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
@@ -92,8 +90,10 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, V
         // and adding markers (items) to cluster
         extractDataFromJson();
 
+        getActivity().setTitle(layoutTitle);
+
         // Set up BottomSheet
-        View mBottomSheet = mView.findViewById(R.id.bottom_sheet);
+        View mBottomSheet = rootView.findViewById(R.id.bottom_sheet);
         mBottomSheet.setOnClickListener(this);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
         mBottomSheetBehavior.setPeekHeight(BOTTOM_SHEET_PEEK_HEIGHT);
@@ -101,11 +101,11 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, V
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
         // Custom TabLayout with ViewPager set up
-        ViewPager viewPager = mView.findViewById(R.id.view_pager);
+        ViewPager viewPager = rootView.findViewById(R.id.view_pager);
         BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(getContext(), getFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
-        TabLayout tabLayout = mView.findViewById(R.id.tabs);
+        TabLayout tabLayout = rootView.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         // Setting up custom TabLayout view
@@ -113,15 +113,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback, V
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(pagerAdapter.getTabView(i));
         }
-
-        return mView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        getActivity().setTitle(layoutTitle);
     }
 
     @Override

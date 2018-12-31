@@ -6,15 +6,13 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.konta.sketch_loyalityapp.adapters.GridViewCouponAdapter;
+import com.example.konta.sketch_loyalityapp.baseFragment.BaseFragment;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
@@ -27,7 +25,7 @@ import java.util.ArrayList;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS;
 
-public class CouponsFragment extends Fragment {
+public class CouponsFragment extends BaseFragment {
 
     private static ArrayList<ItemCoupon> itemList;
     private String json;
@@ -38,11 +36,11 @@ public class CouponsFragment extends Fragment {
     private static final String jsonFileData = "coupons.json";
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_coupons, container, false);
+    protected int getLayout() { return R.layout.fragment_coupons; }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         // Reading JSON file from assets
         json = ((MyApplication) getActivity().getApplication()).readFromAssets(jsonFileData);
 
@@ -50,20 +48,13 @@ public class CouponsFragment extends Fragment {
         // preparing and displaying data using custom adapter
         extractDataFromJson();
 
+        getActivity().setTitle(layoutTitle);
+
         GridViewCouponAdapter adapter = new GridViewCouponAdapter(getActivity(), itemList, true);
         final GridView gridView = rootView.findViewById(R.id.grid_view);
         gridView.setEmptyView(rootView.findViewById(R.id.empty_state_coupons_container));
         gridView.setNumColumns(columns);
         gridView.setAdapter(adapter);
-
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        getActivity().setTitle(layoutTitle);
     }
 
     private void extractDataFromJson() {

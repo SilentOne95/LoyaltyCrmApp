@@ -6,8 +6,4 @@ import dagger.Provides;
 @Module
 public class MainActivityModule {
 
-    @Provides
-    MainActivityContract.Presenter provideMainActivityPresenter() {
-        return new MainActivityPresenter();
-    }
 }

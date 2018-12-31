@@ -13,7 +13,7 @@ public class ApplicationModule {
 
     private Application mApplication;
 
-    public ApplicationModule(Application application) {
+    ApplicationModule(Application application) {
         mApplication = application;
     }
 

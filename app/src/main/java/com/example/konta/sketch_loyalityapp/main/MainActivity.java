@@ -1,10 +1,10 @@
 package com.example.konta.sketch_loyalityapp.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -16,14 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.drawerDependentViews.CouponsFragment;
+import com.example.konta.sketch_loyalityapp.baseFragment.BaseFragment;
 import com.example.konta.sketch_loyalityapp.drawerDependentViews.GoogleMapFragment;
-import com.example.konta.sketch_loyalityapp.drawerDependentViews.HomeFragment;
-import com.example.konta.sketch_loyalityapp.drawerDependentViews.ProductsFragment;
-import com.example.konta.sketch_loyalityapp.independentViews.ContactActivity;
-import com.example.konta.sketch_loyalityapp.independentViews.TermsConditionsActivity;
-import com.example.konta.sketch_loyalityapp.independentViews.WebsiteActivity;
-import com.example.konta.sketch_loyalityapp.loginViews.LogInActivity;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 
@@ -43,7 +37,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GRO
 public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener,
         NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View {
 
-    @Inject MainActivityContract.Presenter mPresenter;
+    MainActivityPresenter mPresenter;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -53,13 +47,11 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     // Fields which stores clicked menuItem IDs
     private int groupId = DISPLAY_STARTING_VIEW_GROUP_ID;
     private int itemId = DISPLAY_STARTING_VIEW_ITEM_ID;
-
-    // Global field responsible for storing info which flragment should be opened
-    private Fragment mFragment = null;
+    private String layoutType;
 
     // Arrays to store key-value pairs to store specified type assigned to view
-    private SparseArray<String> menuSectionOneArray = new SparseArray<>();
-    private SparseArray<String> menuSectionTwoArray = new SparseArray<>();
+    public SparseArray<String> menuSectionOneArray = new SparseArray<>();
+    public SparseArray<String> menuSectionTwoArray = new SparseArray<>();
 
     // Temporary variables using to get json data from assets
     private static final String jsonFileData = "menu.json";
@@ -97,15 +89,17 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         // preparing and displaying data in Navigation Drawer using custom adapter
         prepareMenuData();
 
-        // Display chosen screen as a default one after app is launched
-        displaySelectedScreen(groupId, itemId);
+        // Set home screen selected in navigation drawer
         mNavigationView.getMenu().getItem(itemId).setChecked(true).setCheckable(true);
+
+        mPresenter = new MainActivityPresenter(this);
+        mPresenter.displayHomeScreen();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.setView(this);
+        mNavigationView.getMenu().getItem(DISPLAY_STARTING_VIEW_ITEM_ID).setChecked(true).setCheckable(true);
     }
 
     private void prepareMenuData() {
@@ -152,6 +146,13 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        // Entering / exiting animations for activities
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+    }
+
+    @Override
     public boolean onOptionsItemSelected (MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -162,17 +163,16 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        // Entering / exiting animations for activities
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // Assign menu IDs to global variables to display attached view after drawer is closed
         groupId = menuItem.getGroupId();
         itemId = menuItem.getItemId();
+
+        if (groupId == 0) {
+            layoutType = menuSectionOneArray.get(itemId);
+        } else {
+            layoutType = menuSectionTwoArray.get(itemId);
+        }
 
         // Uncheck all checked menu items
         int size = mNavigationView.getMenu().size();
@@ -199,51 +199,6 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         }
     }
 
-    private void displaySelectedScreen(int groupId, int itemId) {
-        String layoutType;
-
-        if (groupId == 0) {
-            layoutType = menuSectionOneArray.get(itemId);
-        } else {
-            layoutType = menuSectionTwoArray.get(itemId);
-        }
-
-        switch (layoutType) {
-            case "LogIn":
-                MainActivity.this.startActivity(new Intent(MainActivity.this, LogInActivity.class));
-                break;
-            case "Home":
-                mFragment = new HomeFragment();
-                break;
-            case "Products":
-                mFragment = new ProductsFragment();
-                break;
-            case "Coupons":
-                mFragment = new CouponsFragment();
-                break;
-            case "Map":
-                mFragment = new GoogleMapFragment();
-                break;
-            case "Internet":
-                MainActivity.this.startActivity(new Intent(MainActivity.this, WebsiteActivity.class));
-                break;
-            case "Terms":
-                MainActivity.this.startActivity(new Intent(MainActivity.this, TermsConditionsActivity.class));
-                break;
-            case "Contact":
-                MainActivity.this.startActivity(new Intent(MainActivity.this, ContactActivity.class));
-                break;
-        }
-
-        // Replacing the fragment
-        if (mFragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.switch_view_layout, mFragment)
-                    .commit();
-        }
-    }
-
     @Override
     public void onDrawerSlide(@NonNull View view, float v) { }
 
@@ -251,8 +206,27 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     public void onDrawerOpened(@NonNull View view) { }
 
     @Override
-    public void onDrawerClosed(@NonNull View view) { displaySelectedScreen(groupId, itemId); }
+    public void onDrawerClosed(@NonNull View view) { mPresenter.displaySelectedScreen(groupId, itemId, layoutType); }
 
     @Override
     public void onDrawerStateChanged(int i) { }
+
+    @Override
+    public void setFragment(BaseFragment fragment) {
+
+        fragment.attachPresenter(mPresenter);
+
+        // Replacing the fragment
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.switch_view_layout, fragment)
+                .commit();
+
+    }
+
+    @Override
+    public void setActivity(Class<? extends Activity> activity) {
+
+        MainActivity.this.startActivity(new Intent(MainActivity.this, activity));
+    }
 }
