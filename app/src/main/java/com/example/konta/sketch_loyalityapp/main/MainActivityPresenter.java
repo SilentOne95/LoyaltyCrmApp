@@ -20,9 +20,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Ba
     MainActivityPresenter(MainActivityContract.View view) { this.view = view; }
 
     @Override
-    public void setView(MainActivityContract.View view) { this.view = view; }
-
-    @Override
     public void displaySelectedScreen(int groupId, int itemId, String layoutType) {
 
         switch (layoutType) {

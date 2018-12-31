@@ -14,8 +14,6 @@ public interface MainActivityContract {
 
     interface Presenter {
 
-        void setView(MainActivityContract.View view);
-
         void displayHomeScreen();
         void displaySelectedScreen(int groupId, int itemId, String layoutType);
     }

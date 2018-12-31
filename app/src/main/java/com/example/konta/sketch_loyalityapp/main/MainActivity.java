@@ -8,7 +8,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
@@ -165,7 +164,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        // Assign menu IDs to global variables to display attached view after drawer is closed
+        // Assign clicked menuItem IDs and layout type to global variables
         groupId = menuItem.getGroupId();
         itemId = menuItem.getItemId();
 
