@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.drawerDependentViews;
+package com.example.konta.sketch_loyalityapp.map;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -47,9 +47,11 @@ import java.util.List;
 import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 
-public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback, View.OnClickListener {
+public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
+        View.OnClickListener, MapContract.View {
 
-    View mView;
+    MapContract.Presenter mPresenter;
+
     GoogleMap mGoogleMap;
     LocationRequest mLocationRequest;
     Location mLastLocation;
@@ -69,6 +71,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mPresenter = new MapPresenter(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
@@ -162,9 +165,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<ItemLocation>() {
             @Override
             public boolean onClusterItemClick(ItemLocation itemLocation) {
-                // Set BottomSheet state hidden when map is clicked
-                // Pass value of 1 to make it collapsed
-                changeBottomSheetState(1);
+                mPresenter.switchBottomSheetState(itemLocation);
                 return true;
             }
         });
@@ -172,9 +173,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                // Set BottomSheet state hidden when map is clicked
-                // Pass value of 0 to make it hidden
-                changeBottomSheetState(0);
+                mPresenter.switchBottomSheetState(latLng);
             }
         });
     }
@@ -281,24 +280,13 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void onClick(View v) {
-        switch (mBottomSheetBehavior.getState()) {
-            case BottomSheetBehavior.STATE_COLLAPSED:
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                break;
-            case BottomSheetBehavior.STATE_EXPANDED:
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                break;
-            default:
-                break;
-        }
+    public void onClick(View view) {
+        mPresenter.switchBottomSheetState(view);
     }
 
-    public void changeBottomSheetState(int state) {
-        if (state == 1 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_COLLAPSED) {
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        } else if (state == 0 && mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        }
-    }
+    @Override
+    public int getBottomSheetState() { return mBottomSheetBehavior.getState(); }
+
+    @Override
+    public void setBottomSheetState(int state) { mBottomSheetBehavior.setState(state); }
 }

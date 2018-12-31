@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
 import com.example.konta.sketch_loyalityapp.drawerDependentViews.CouponsFragment;
-import com.example.konta.sketch_loyalityapp.drawerDependentViews.GoogleMapFragment;
+import com.example.konta.sketch_loyalityapp.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.drawerDependentViews.HomeFragment;
 import com.example.konta.sketch_loyalityapp.drawerDependentViews.ProductsFragment;
 import com.example.konta.sketch_loyalityapp.independentViews.ContactActivity;

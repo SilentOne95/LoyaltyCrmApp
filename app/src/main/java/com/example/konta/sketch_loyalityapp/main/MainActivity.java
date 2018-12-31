@@ -17,7 +17,7 @@ import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.drawerDependentViews.GoogleMapFragment;
+import com.example.konta.sketch_loyalityapp.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 
