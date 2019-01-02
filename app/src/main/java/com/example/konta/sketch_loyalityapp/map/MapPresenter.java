@@ -25,11 +25,11 @@ public class MapPresenter implements MapContract.Presenter {
             if (view.getBottomSheetState() != BottomSheetBehavior.STATE_HIDDEN) {
                 view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
             }
-        } else if (object instanceof View) {
-            if (view.getBottomSheetState() != BottomSheetBehavior.STATE_EXPANDED) {
-                view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
-            } else {
+        } else if (object instanceof View){
+            if (view.getBottomSheetState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 view.setBottomSheetState(BottomSheetBehavior.STATE_EXPANDED);
+            } else {
+                view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         }
     }

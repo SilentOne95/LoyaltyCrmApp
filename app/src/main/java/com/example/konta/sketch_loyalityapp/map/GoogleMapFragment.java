@@ -280,13 +280,15 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void onClick(View view) {
-        mPresenter.switchBottomSheetState(view);
+    public void onClick(View view) { mPresenter.switchBottomSheetState(view); }
+
+    @Override
+    public int getBottomSheetState() {
+        return mBottomSheetBehavior.getState();
     }
 
     @Override
-    public int getBottomSheetState() { return mBottomSheetBehavior.getState(); }
-
-    @Override
-    public void setBottomSheetState(int state) { mBottomSheetBehavior.setState(state); }
+    public void setBottomSheetState(int state) {
+        mBottomSheetBehavior.setState(state);
+    }
 }
