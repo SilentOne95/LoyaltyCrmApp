@@ -8,15 +8,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.GridView;
 
-import com.example.konta.sketch_loyalityapp.adapters.GridViewCouponAdapter;
+import com.example.konta.sketch_loyalityapp.adapters.CouponAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivity;
+import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,11 +53,12 @@ public class CouponsFragment extends BaseFragment {
 
         getActivity().setTitle(layoutTitle);
 
-        GridViewCouponAdapter adapter = new GridViewCouponAdapter(getActivity(), itemList, true);
-        final GridView gridView = rootView.findViewById(R.id.grid_view);
-        gridView.setEmptyView(rootView.findViewById(R.id.empty_state_coupons_container));
-        gridView.setNumColumns(columns);
-        gridView.setAdapter(adapter);
+        // Set up adapter
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(new CouponAdapter(itemList));
     }
 
     private void extractDataFromJson() {
