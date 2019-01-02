@@ -22,8 +22,8 @@
         android:text="@string/check_offers_text"
         style="@style/home_info_text_view"/>
 
-    <com.example.konta.sketch_loyalityapp.utils.CustomGridView
-        android:id="@+id/grid_view"
-        style="@style/home_grid_view"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        style="@style/basic_recycler_view_style"/>
 
 </LinearLayout>

@@ -24,28 +24,36 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Ba
 
         switch (layoutType) {
             case "Home":
-                view.setFragment(new HomeFragment());
+                if (view != null)
+                    view.setFragment(new HomeFragment());
                 break;
             case "Products":
-                view.setFragment(new ProductsFragment());
+                if (view != null)
+                    view.setFragment(new ProductsFragment());
                 break;
             case "Coupons":
-                view.setFragment(new CouponsFragment());
+                if (view != null)
+                    view.setFragment(new CouponsFragment());
                 break;
             case "Map":
-                view.setFragment(new GoogleMapFragment());
+                if (view != null)
+                    view.setFragment(new GoogleMapFragment());
                 break;
             case "LogIn":
-                view.setActivity(LogInActivity.class);
+                if (view != null)
+                    view.setActivity(LogInActivity.class);
                 break;
             case "Internet":
-                view.setActivity(WebsiteActivity.class);
+                if (view != null)
+                    view.setActivity(WebsiteActivity.class);
                 break;
             case "Terms":
-                view.setActivity(TermsConditionsActivity.class);
+                if (view != null)
+                    view.setActivity(TermsConditionsActivity.class);
                 break;
             case "Contact":
-                view.setActivity(ContactActivity.class);
+                if (view != null)
+                    view.setActivity(ContactActivity.class);
                 break;
         }
     }

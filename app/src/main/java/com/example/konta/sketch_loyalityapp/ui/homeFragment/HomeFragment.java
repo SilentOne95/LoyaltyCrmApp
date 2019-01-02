@@ -8,10 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 import com.example.konta.sketch_loyalityapp.adapters.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.modelClasses.Item;
@@ -57,10 +59,12 @@ public class HomeFragment extends BaseFragment {
         ImageView specialOfferImage = rootView.findViewById(R.id.special_offer_image);
         specialOfferImage.setImageResource(resourceSpecialOffer);
 
-        HomeAdapter adapter = new HomeAdapter(getActivity(), itemList, false);
-        final GridView gridView = rootView.findViewById(R.id.grid_view);
-        gridView.setNumColumns(columns);
-        gridView.setAdapter(adapter);
+        // Set up adapter
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(new HomeAdapter(itemList));
     }
 
     private void extractDataFromJson() {

@@ -228,7 +228,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void setActivity(Class<? extends Activity> activity) {
-
         MainActivity.this.startActivity(new Intent(MainActivity.this, activity));
     }
 }

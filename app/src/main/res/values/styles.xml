@@ -31,6 +31,14 @@
         <item name="android:scrollbars">none</item>
     </style>
 
+    <style name="basic_recycler_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:padding">@dimen/small_value</item>
+    </style>
+
     <style name="basic_grid_list_item_marker">
         <item name="android:layout_width">@dimen/discount_marker_width</item>
         <item name="android:layout_height">@dimen/discount_marker_height</item>
