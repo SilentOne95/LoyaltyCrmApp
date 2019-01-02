@@ -16,6 +16,7 @@ import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,7 +71,7 @@ public class CouponsFragment extends BaseFragment {
             String description = object.getString("contentShortDescription");
 
             final int resourceCategoryImage = resources
-                    .getIdentifier(image, "drawable", getActivity().getPackageName());
+                    .getIdentifier(image, "drawable", MainActivity.PACKAGE_NAME);
 
             Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceCategoryImage);
             RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);

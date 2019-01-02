@@ -53,6 +53,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     // Temporary variables using to get json data from assets
     private static final String jsonFileData = "menu.json";
+    public static String PACKAGE_NAME;
 
     @Override
     protected int getLayout() { return R.layout.activity_main; }
@@ -62,6 +63,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         super.onCreate(savedInstanceState);
 
         ((MyApplication) getApplication()).getApplicationComponent().inject(this);
+        PACKAGE_NAME = getApplication().getPackageName();
 
         // Init toolbar and action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
