@@ -10,33 +10,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.modelClasses.Item;
+import com.example.konta.sketch_loyalityapp.modelClasses.ItemProduct;
 
 import java.util.ArrayList;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private ArrayList<Item> listOfItems;
+    private ArrayList<ItemProduct> listOfItems;
 
-    public HomeAdapter(ArrayList<Item> items) { listOfItems = items; }
+    public ProductAdapter(ArrayList<ItemProduct> items) { listOfItems = items; }
 
     @NonNull
     @Override
-    public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.grid_list_item_home, parent, false);
+                .inflate(R.layout.grid_list_item_product, parent, false);
         return new ViewHolder(view);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
-        private TextView titleView, descriptionText;
+        private TextView titleView, price, descriptionText;
         private Button button;
 
         ViewHolder(@NonNull View view) {
             super(view);
             imageView = view.findViewById(R.id.grid_item_image);
             titleView = view.findViewById(R.id.grid_item_title_text);
+            price = view.findViewById(R.id.grid_item_price_amount);
             descriptionText = view.findViewById(R.id.grid_item_content_description);
             button = view.findViewById(R.id.grid_item_view_details_button);
         }
@@ -44,11 +45,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Item currentItem = listOfItems.get(position);
+        ItemProduct currentItem = listOfItems.get(position);
 
-        holder.imageView.setImageDrawable(currentItem.getBitmapDrawable());
+        holder.imageView.setImageDrawable(currentItem.getItemBitmapDrawable());
         holder.titleView.setText(currentItem.getItemTitle());
-        holder.descriptionText.setVisibility(View.GONE);
+        holder.price.setText(String.valueOf(currentItem.getItemPrice()).concat(" ").concat("zł"));
+        holder.descriptionText.setText(currentItem.getItemDescription());
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

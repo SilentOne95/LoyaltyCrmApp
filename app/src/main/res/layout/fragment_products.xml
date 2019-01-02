@@ -10,9 +10,9 @@
     android:background="@color/colorFragmentBackground"
     tools:context=".ui.productsFragment.ProductsFragment">
 
-    <com.example.konta.sketch_loyalityapp.utils.CustomGridView
-        android:id="@+id/grid_view"
-        style="@style/basic_grid_view_style"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        style="@style/basic_recycler_view_style"/>
 
     <LinearLayout
         android:id="@+id/empty_state_products_container"
