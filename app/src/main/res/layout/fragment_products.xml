@@ -8,7 +8,7 @@
     android:focusableInTouchMode="true"
     android:padding="@dimen/mid_value"
     android:background="@color/colorFragmentBackground"
-    tools:context=".drawerDependentViews.ProductsFragment">
+    tools:context=".ui.productsFragment.ProductsFragment">
 
     <com.example.konta.sketch_loyalityapp.utils.CustomGridView
         android:id="@+id/grid_view"

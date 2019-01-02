@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"
-        tools:context="com.example.konta.sketch_loyalityapp.map.GoogleMapFragment" />
+        tools:context=".ui.mapFragment.GoogleMapFragment" />
 
     <!-- BottomSheet layout -->
     <include layout="@layout/activity_bottom_sheet"/>

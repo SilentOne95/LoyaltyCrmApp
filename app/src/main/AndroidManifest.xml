@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme.NoActionBar">
         <activity
-            android:name=".additionalViews.LaunchActivity"
+            android:name=".ui.launchActivity.LaunchActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,46 +31,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.MainActivity"
+            android:name=".ui.mainActivity.MainActivity"
             android:theme="@style/BaseAppTheme.NoActionBar" />
-        <activity android:name=".loginViews.LogInActivity" />
-        <activity android:name=".loginViews.SignUpActivity" />
+        <activity android:name=".ui.logInActivity.LogInActivity" />
+        <activity android:name=".ui.signUpActivity.SignUpActivity" />
         <activity
-            android:name=".independentViews.WebsiteActivity"
+            android:name=".ui.websiteActivity.WebsiteActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.MainActivity" />
+                android:value=".ui.mainActivity.MainActivity" />
         </activity>
         <activity
-            android:name=".independentViews.TermsConditionsActivity"
+            android:name=".ui.termsActivity.TermsConditionsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.MainActivity" />
+                android:value=".ui.mainActivity.MainActivity" />
         </activity>
         <activity
-            android:name=".independentViews.ContactActivity"
+            android:name=".ui.contactActivity.ContactActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.MainActivity" />
+                android:value=".ui.mainActivity.MainActivity" />
         </activity>
         <activity
-            android:name=".additionalViews.CouponDetailsActivity"
+            android:name=".ui.couponDetailsActivity.CouponDetailsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.MainActivity" />
+                android:value=".ui.mainActivity.MainActivity" />
         </activity>
         <activity
-            android:name=".additionalViews.ProductDetailsActivity"
+            android:name=".ui.productDetailsActivity.ProductDetailsActivity"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.MainActivity" />
+                android:value=".ui.mainActivity.MainActivity" />
         </activity>
-        <activity android:name=".additionalViews.BottomSheet" />
+        <activity android:name=".ui.mapFragment.BottomSheet" />
 
         <meta-data
             android:name="com.google.android.gms.version"

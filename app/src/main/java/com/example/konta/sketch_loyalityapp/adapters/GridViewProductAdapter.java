@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.konta.sketch_loyalityapp.additionalViews.ProductDetailsActivity;
+import com.example.konta.sketch_loyalityapp.ui.productDetailsActivity.ProductDetailsActivity;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemProduct;
 

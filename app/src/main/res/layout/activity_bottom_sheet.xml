@@ -10,7 +10,7 @@
     android:focusable="true"
     android:orientation="vertical"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:context=".additionalViews.BottomSheet">
+    tools:context=".ui.mapFragment.BottomSheet">
 
     <LinearLayout
         android:id="@+id/bottom_sheet_peek"

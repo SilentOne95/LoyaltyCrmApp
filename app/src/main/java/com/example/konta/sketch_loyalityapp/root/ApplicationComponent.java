@@ -1,7 +1,7 @@
 package com.example.konta.sketch_loyalityapp.root;
 
-import com.example.konta.sketch_loyalityapp.main.MainActivity;
-import com.example.konta.sketch_loyalityapp.main.MainActivityModule;
+import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivity;
+import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivityModule;
 
 import javax.inject.Singleton;
 
