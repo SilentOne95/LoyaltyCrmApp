@@ -11,7 +11,7 @@ public class CustomItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mItemOffset;
 
-    public CustomItemDecoration(int itemOffset) { mItemOffset = itemOffset; }
+    private CustomItemDecoration(int itemOffset) { mItemOffset = itemOffset; }
 
     public CustomItemDecoration(@NonNull Context context, @DimenRes int itemOffsetId) {
         this(context.getResources().getDimensionPixelSize(itemOffsetId));

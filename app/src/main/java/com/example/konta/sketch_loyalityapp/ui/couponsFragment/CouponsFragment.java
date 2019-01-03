@@ -56,7 +56,7 @@ public class CouponsFragment extends BaseFragment {
         // Set up adapter
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(new CouponAdapter(itemList));
     }

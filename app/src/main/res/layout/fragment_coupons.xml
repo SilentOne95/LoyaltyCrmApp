@@ -6,7 +6,6 @@
     android:clipToPadding="false"
     android:clipChildren="false"
     android:focusableInTouchMode="true"
-    android:padding="@dimen/mid_value"
     android:background="@color/colorFragmentBackground"
     tools:context=".ui.couponsFragment.CouponsFragment">
 
