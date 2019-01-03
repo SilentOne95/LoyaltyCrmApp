@@ -59,6 +59,16 @@ public class ProductsFragment extends BaseFragment {
         CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(new ProductAdapter(itemList));
+
+        // Empty state view
+        View emptyStateView = rootView.findViewById(R.id.empty_state_products_container);
+        if (!itemList.isEmpty()) {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyStateView.setVisibility(View.GONE);
+        } else {
+            recyclerView.setVisibility(View.GONE);
+            emptyStateView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void extractDataFromJson() {
