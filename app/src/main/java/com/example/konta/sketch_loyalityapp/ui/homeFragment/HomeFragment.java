@@ -12,7 +12,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 import com.example.konta.sketch_loyalityapp.adapters.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
@@ -64,8 +66,15 @@ public class HomeFragment extends BaseFragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
         recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(new HomeAdapter(itemList));
+        recyclerView.setAdapter(new HomeAdapter(itemList, recyclerItemClickListener));
     }
+
+    private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
+        @Override
+        public void onItemClick(Item item) {
+            Toast.makeText(getContext(), "Test: " + item.getItemTitle(), Toast.LENGTH_LONG).show();
+        }
+    };
 
     private void extractDataFromJson() {
         try {

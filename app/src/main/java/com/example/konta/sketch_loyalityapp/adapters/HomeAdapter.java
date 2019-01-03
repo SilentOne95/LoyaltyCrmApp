@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.adapters;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.modelClasses.Item;
@@ -18,8 +18,12 @@ import java.util.ArrayList;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private ArrayList<Item> listOfItems;
+    private RecyclerItemClickListener recyclerItemClickListener;
 
-    public HomeAdapter(ArrayList<Item> items) { listOfItems = items; }
+    public HomeAdapter(ArrayList<Item> items, RecyclerItemClickListener clickListener) {
+        listOfItems = items;
+        recyclerItemClickListener = clickListener;
+    }
 
     @NonNull
     @Override
@@ -44,7 +48,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Item currentItem = listOfItems.get(position);
 
         holder.imageView.setImageDrawable(currentItem.getBitmapDrawable());
@@ -52,8 +56,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.descriptionText.setVisibility(View.GONE);
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View view) {
+                recyclerItemClickListener.onItemClick(listOfItems.get(position));
             }
         });
     }

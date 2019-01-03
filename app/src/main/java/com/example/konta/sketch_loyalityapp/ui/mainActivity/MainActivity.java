@@ -14,7 +14,9 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.ui.mapFragment.GoogleMapFragment;
@@ -36,7 +38,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View {
 
     MainActivityPresenter mPresenter;
-    SwitchLayoutPresenter mSwitchLayoutPresenter;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -97,7 +98,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         mPresenter = new MainActivityPresenter(this);
         mPresenter.displayHomeScreen();
-        mSwitchLayoutPresenter = new SwitchLayoutPresenter(this);
     }
 
     @Override
@@ -210,7 +210,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onDrawerOpened(@NonNull View view) { }
 
     @Override
-    public void onDrawerClosed(@NonNull View view) { mSwitchLayoutPresenter.displaySelectedScreen(groupId, itemId, layoutType); }
+    public void onDrawerClosed(@NonNull View view) { mPresenter.displaySelectedScreen(groupId, itemId, layoutType); }
 
     @Override
     public void onDrawerStateChanged(int i) { }
@@ -218,7 +218,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public void setFragment(BaseFragment fragment) {
 
-        fragment.attachPresenter(mSwitchLayoutPresenter);
+        fragment.attachPresenter(mPresenter);
 
         // Replacing the fragment
         getSupportFragmentManager()
