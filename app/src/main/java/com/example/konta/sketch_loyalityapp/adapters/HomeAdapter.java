@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.modelClasses.Item;
@@ -43,8 +44,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Item currentItem = listOfItems.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final Item currentItem = listOfItems.get(position);
 
         holder.imageView.setImageDrawable(currentItem.getBitmapDrawable());
         holder.titleView.setText(currentItem.getItemTitle());

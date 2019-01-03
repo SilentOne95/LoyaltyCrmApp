@@ -15,10 +15,14 @@ public interface MainActivityContract {
     interface Presenter {
 
         void displayHomeScreen();
-        void displaySelectedScreen(int groupId, int itemId, String layoutType);
     }
 
     interface Model {
 
+    }
+
+    interface SwitchLayoutPresenter {
+
+        void displaySelectedScreen(int groupId, int itemId, String layoutType);
     }
 }
