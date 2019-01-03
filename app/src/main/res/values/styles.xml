@@ -365,87 +365,90 @@
         <item name="android:padding">@dimen/very_small_value</item>
     </style>
 
-    <!-- General grid list item -->
-    <style name="general_grid_item_image">
+    <!-- General grid list item // one row -->
+    <style name="general_grid_item_image_one_row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:scaleType">fitCenter</item>
         <item name="android:adjustViewBounds">true</item>
     </style>
 
-    <style name="general_grid_item_title" parent="layout_wrap_content">
+    <style name="general_grid_item_title_one_row" parent="layout_wrap_content">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/very_big_text_size</item>
     </style>
 
-    <style name="general_grid_item_price_text" parent="layout_wrap_content">
+    <style name="general_grid_item_price_text_one_row" parent="layout_wrap_content">
         <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/big_text_size</item>
     </style>
 
-    <style name="general_grid_item_price_amount" parent="layout_wrap_content">
+    <style name="general_grid_item_price_amount_one_row" parent="layout_wrap_content">
         <item name="android:layout_marginStart">@dimen/small_value</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/big_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <!-- Grid list item Product -->
-    <style name="grid_item_product_title" parent="general_grid_item_title">
+    <!-- Grid list item Product // two rows -->
+    <style name="grid_item_product_title_one_row" parent="general_grid_item_title_one_row">
         <item name="android:layout_margin">@dimen/mid_value</item>
     </style>
 
-    <style name="grid_item_product_content_desc">
+    <style name="grid_item_product_content_desc_one_row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/small_text_size</item>
         <item name="android:padding">@dimen/mid_value</item>
     </style>
 
-    <style name="grid_item_product_button" parent="basic_min_size_button">
+    <style name="grid_item_product_button_one_row" parent="basic_min_size_button">
         <item name="android:layout_width">@dimen/grid_item_button_code_width</item>
-        <item name="android:layout_height">@dimen/grid_item_height</item>
+        <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/big_value</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
-    <!-- Grid list item Coupon -->
-    <style name="grid_item_coupon_old_price_amount" parent="layout_wrap_content">
+    <!-- Grid list item Coupon // one row -->
+    <style name="grid_item_coupon_old_price_amount_one_row" parent="layout_wrap_content">
         <item name="android:layout_marginStart">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/small_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="grid_item_product_description_text">
+    <style name="grid_item_product_description_text_one_row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
-    <style name="grid_item_coupon_button" parent="basic_min_size_button">
-        <item name="android:layout_height">@dimen/grid_item_height</item>
+    <style name="grid_item_coupon_button_one_row" parent="basic_min_size_button">
+        <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/big_value</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
-    <style name="grid_item_coupon_show_code_button" parent="grid_item_coupon_button">
+    <style name="grid_item_coupon_show_code_button_one_row" parent="grid_item_coupon_button_one_row">
         <item name="android:layout_width">@dimen/grid_item_button_code_width</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
-    <style name="grid_item_coupon_show_details_button" parent="grid_item_coupon_button">
+    <style name="grid_item_coupon_show_details_button_one_row" parent="grid_item_coupon_button_one_row">
         <item name="android:layout_width">@dimen/grid_item_button_details_width</item>
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
-    <!-- Grid list item Home -->
-    <style name="grid_item_home_title" parent="layout_wrap_content">
+    <!-- Grid list item Home // two rows -->
+    <style name="grid_item_home_title_two_rows" parent="layout_wrap_content">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
         <item name="android:layout_margin">@dimen/mid_value</item>

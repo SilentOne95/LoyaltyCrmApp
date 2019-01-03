@@ -14,36 +14,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/grid_list_item_content_desc"
-        style="@style/general_grid_item_image"/>
+        style="@style/general_grid_item_image_one_row"/>
 
     <TextView
         android:id="@+id/grid_item_title_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid_item_image"
-        style="@style/grid_item_product_title"/>
+        style="@style/grid_item_product_title_one_row"/>
 
     <TextView
         android:id="@+id/grid_item_price_text"
         android:text="@string/price_text"
         app:layout_constraintStart_toStartOf="@+id/grid_item_title_text"
         app:layout_constraintTop_toBottomOf="@+id/grid_item_title_text"
-        style="@style/general_grid_item_price_text"/>
+        style="@style/general_grid_item_price_text_one_row"/>
 
     <TextView
         android:id="@+id/grid_item_price_amount"
         app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
         app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
         app:layout_constraintTop_toTopOf="@+id/grid_item_price_text"
-        style="@style/general_grid_item_price_amount"/>
+        style="@style/general_grid_item_price_amount_one_row"/>
 
     <TextView
         android:id="@+id/grid_item_content_description"
-        style="@style/grid_item_product_content_desc"
         android:layout_marginTop="8dp"
         android:text="@string/short_lorem_ipsum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text" />
+        app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text"
+        style="@style/grid_item_product_content_desc_one_row" />
 
     <Button
         android:id="@+id/grid_item_view_details_button"
@@ -52,6 +52,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description"
-        style="@style/grid_item_product_button"/>
+        style="@style/grid_item_product_button_one_row"/>
 
 </android.support.constraint.ConstraintLayout>
