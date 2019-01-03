@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/grid_list_item_content_desc"
-        style="@style/general_grid_item_image_one_row"/>
+        style="@style/general_grid_item_image"/>
 
     <TextView
         android:id="@+id/grid_item_title_text"
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid_item_title_text"
-        style="@style/grid_item_product_content_desc_one_row"/>
+        style="@style/grid_item_home_content_desc_two_rows"/>
 
     <Button
         android:id="@+id/grid_item_view_details_button"
@@ -37,6 +37,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description"
-        style="@style/grid_item_product_button_one_row"/>
+        style="@style/grid_item_home_button_two_rows"/>
 
 </android.support.constraint.ConstraintLayout>
