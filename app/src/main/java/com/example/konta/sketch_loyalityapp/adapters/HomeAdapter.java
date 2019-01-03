@@ -11,16 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.modelClasses.Item;
+import com.example.konta.sketch_loyalityapp.modelClasses.ItemHome;
 
 import java.util.ArrayList;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
-    private ArrayList<Item> listOfItems;
+    private ArrayList<ItemHome> listOfItems;
     private RecyclerItemClickListener recyclerItemClickListener;
 
-    public HomeAdapter(ArrayList<Item> items, RecyclerItemClickListener clickListener) {
+    public HomeAdapter(ArrayList<ItemHome> items, RecyclerItemClickListener clickListener) {
         listOfItems = items;
         recyclerItemClickListener = clickListener;
     }
@@ -49,7 +49,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        final Item currentItem = listOfItems.get(position);
+        final ItemHome currentItem = listOfItems.get(position);
 
         holder.imageView.setImageDrawable(currentItem.getBitmapDrawable());
         holder.titleView.setText(currentItem.getItemTitle());
@@ -57,7 +57,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recyclerItemClickListener.onItemClick(listOfItems.get(position));
+                recyclerItemClickListener.onItemHomeClick(listOfItems.get(position));
             }
         });
     }

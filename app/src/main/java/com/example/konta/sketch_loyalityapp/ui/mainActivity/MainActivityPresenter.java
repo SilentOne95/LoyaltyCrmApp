@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.mainActivity;
 import android.support.annotation.Nullable;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
+import com.example.konta.sketch_loyalityapp.modelClasses.ItemHome;
 import com.example.konta.sketch_loyalityapp.ui.couponsFragment.CouponsFragment;
 import com.example.konta.sketch_loyalityapp.ui.mapFragment.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.homeFragment.HomeFragment;
@@ -27,7 +28,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Ba
     }
 
     @Override
-    public void displaySelectedScreen(int groupId, int itemId, String layoutType) {
+    public void displaySelectedScreen(String layoutType) {
 
         switch (layoutType) {
             case "Home":
@@ -63,5 +64,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter, Ba
                     view.setActivity(ContactActivity.class);
                 break;
         }
+
+        if (view != null)
+            view.setDisplayScreenChecked(layoutType);
+    }
+
+    @Override
+    public void getSelectedLayoutType(ItemHome item) {
+        displaySelectedScreen(item.getLayoutType());
     }
 }

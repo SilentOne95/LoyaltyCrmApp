@@ -1,6 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.mainActivity;
 
 import android.app.Activity;
+import android.view.MenuItem;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 
@@ -10,12 +11,14 @@ public interface MainActivityContract {
 
         void setFragment(BaseFragment fragment);
         void setActivity(Class<? extends Activity> activity);
+
+        void setDisplayScreenChecked(String layoutType);
     }
 
     interface Presenter {
 
         void displayHomeScreen();
-        void displaySelectedScreen(int groupId, int itemId, String layoutType);
+        void displaySelectedScreen(String layoutType);
     }
 
     interface Model {

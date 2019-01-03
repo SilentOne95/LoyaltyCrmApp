@@ -169,13 +169,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // Assign clicked menuItem IDs and layout type to global variables
-        groupId = menuItem.getGroupId();
-        itemId = menuItem.getItemId();
-
-        if (groupId == 0) {
-            layoutType = menuSectionOneArray.get(itemId);
+        if (menuItem.getGroupId() == 0) {
+            layoutType = menuSectionOneArray.get(menuItem.getItemId());
         } else {
-            layoutType = menuSectionTwoArray.get(itemId);
+            layoutType = menuSectionTwoArray.get(menuItem.getItemId());
         }
 
         // Uncheck all checked menu items
@@ -210,7 +207,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onDrawerOpened(@NonNull View view) { }
 
     @Override
-    public void onDrawerClosed(@NonNull View view) { mPresenter.displaySelectedScreen(groupId, itemId, layoutType); }
+    public void onDrawerClosed(@NonNull View view) { mPresenter.displaySelectedScreen(layoutType); }
 
     @Override
     public void onDrawerStateChanged(int i) { }
@@ -225,11 +222,15 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 .beginTransaction()
                 .replace(R.id.switch_view_layout, fragment)
                 .commit();
-
     }
 
     @Override
     public void setActivity(Class<? extends Activity> activity) {
         MainActivity.this.startActivity(new Intent(MainActivity.this, activity));
+    }
+
+    @Override
+    public void setDisplayScreenChecked(String layoutType) {
+
     }
 }

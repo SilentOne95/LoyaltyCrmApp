@@ -12,13 +12,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 import com.example.konta.sketch_loyalityapp.adapters.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.modelClasses.Item;
+import com.example.konta.sketch_loyalityapp.modelClasses.ItemHome;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivity;
@@ -32,9 +31,9 @@ import java.util.ArrayList;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS;
 import static com.example.konta.sketch_loyalityapp.Constants.INITIAL_CAPACITY_ARRAY;
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements HomeContract.View {
 
-    private static ArrayList<Item> itemList;
+    private static ArrayList<ItemHome> itemList;
     private String json;
     private String layoutTitle;
     private int resourceSpecialOffer;
@@ -71,8 +70,8 @@ public class HomeFragment extends BaseFragment {
 
     private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
         @Override
-        public void onItemClick(Item item) {
-            Toast.makeText(getContext(), "Test: " + item.getItemTitle(), Toast.LENGTH_LONG).show();
+        public void onItemHomeClick(ItemHome item) {
+            navigationPresenter.getSelectedLayoutType(item);
         }
     };
 
@@ -84,6 +83,9 @@ public class HomeFragment extends BaseFragment {
             JSONObject object = new JSONObject(json);
             layoutTitle = object.getString("componentTitleCurrent");
 
+            String specialOfferImage = object.getString("specialOfferImage");
+            resourceSpecialOffer = resources.getIdentifier(specialOfferImage, "drawable", MainActivity.PACKAGE_NAME);
+
             JSONArray array = object.getJSONArray("components");
 
             for (int i = 0; i < array.length(); i++) {
@@ -91,6 +93,7 @@ public class HomeFragment extends BaseFragment {
 
                 String title = insideObj.getString("componentTitle");
                 String image = insideObj.getString("componentImage");
+                String type = insideObj.getString("componentType");
 
                 final int resourceCategoryImage = resources
                         .getIdentifier(image, "drawable", MainActivity.PACKAGE_NAME);
@@ -99,16 +102,19 @@ public class HomeFragment extends BaseFragment {
                 RoundedBitmapDrawable bitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap);
                 bitmapDrawable.setCornerRadius(BITMAP_CORNER_RADIUS);
 
-                itemList.add(new Item(title, bitmapDrawable));
+                itemList.add(new ItemHome(title, bitmapDrawable, type));
             }
 
-            String specialOfferImage = object.getString("specialOfferImage");
-
-            resourceSpecialOffer = resources.getIdentifier(specialOfferImage, "drawable", getActivity().getPackageName());
             columns = object.getInt("numberOfColumns");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public String getSelectedLayoutType(ItemHome item) {
+        return item.getLayoutType();
     }
 }

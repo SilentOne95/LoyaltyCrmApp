@@ -1,5 +1,7 @@
 package com.example.konta.sketch_loyalityapp.base;
 
+import com.example.konta.sketch_loyalityapp.modelClasses.ItemHome;
+
 public interface BaseFragmentContract {
 
     interface View {
@@ -8,6 +10,6 @@ public interface BaseFragmentContract {
     }
 
     interface Presenter {
-
+        void getSelectedLayoutType(ItemHome item);
     }
 }
