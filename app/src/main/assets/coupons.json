@@ -8,37 +8,37 @@
     "contentBasicPrice": 109.99,
     "contentFinalPrice": 76.99,
     "contentDiscount": 30,
-    "contentValidDate": "2019-02-13"
+    "contentValidDate": "2019-02-01"
   }, {
     "contentTitle": "Coupon 2",
     "contentBasicPrice": 1209.99,
     "contentFinalPrice": 1028.99,
     "contentDiscount": 15,
-    "contentValidDate": "2019-02-13"
+    "contentValidDate": "2019-02-02"
   }, {
     "contentTitle": "Coupon 3",
     "contentBasicPrice": 19.99,
     "contentFinalPrice": 17.99,
     "contentDiscount": 10,
-    "contentValidDate": "2019-02-13"
+    "contentValidDate": "2019-02-03"
   }, {
     "contentTitle": "Coupon 4",
     "contentBasicPrice": 49.99,
     "contentFinalPrice": 24.99,
     "contentDiscount": 50,
-    "contentValidDate": "2019-02-13"
+    "contentValidDate": "2019-02-04"
   }, {
     "contentTitle": "Coupon 5",
     "contentBasicPrice": 499.99,
     "contentFinalPrice": 225.99,
     "contentDiscount": 55,
-    "contentValidDate": "2019-02-13"
+    "contentValidDate": "2019-02-05"
   }, {
     "contentTitle": "Coupon 6",
     "contentBasicPrice": 222.99,
     "contentFinalPrice": 156.99,
     "contentDiscount": 30,
-    "contentValidDate": "2019-02-13"
+    "contentValidDate": "2019-02-06"
   }],
   "numberOfColumns": 1
 }

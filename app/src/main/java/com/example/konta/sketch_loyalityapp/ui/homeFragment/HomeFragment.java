@@ -68,7 +68,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         recyclerView.setAdapter(new HomeAdapter(itemList, recyclerItemClickListener));
     }
 
-    private RecyclerItemClickListener recyclerItemClickListener = new RecyclerItemClickListener() {
+    private RecyclerItemClickListener.HomeClickListener recyclerItemClickListener = new RecyclerItemClickListener.HomeClickListener() {
         @Override
         public void onItemHomeClick(ItemHome item) {
             navigationPresenter.getSelectedLayoutType(item);

@@ -18,11 +18,12 @@ import java.util.ArrayList;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private ArrayList<ItemHome> listOfItems;
-    private RecyclerItemClickListener recyclerItemClickListener;
+    private RecyclerItemClickListener.HomeClickListener homeClickListener;
 
-    public HomeAdapter(ArrayList<ItemHome> items, RecyclerItemClickListener clickListener) {
+    public HomeAdapter(ArrayList<ItemHome> items,
+                       RecyclerItemClickListener.HomeClickListener clickListener) {
         listOfItems = items;
-        recyclerItemClickListener = clickListener;
+        homeClickListener = clickListener;
     }
 
     @NonNull
@@ -57,7 +58,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recyclerItemClickListener.onItemHomeClick(listOfItems.get(position));
+                homeClickListener.onItemHomeClick(listOfItems.get(position));
             }
         });
     }

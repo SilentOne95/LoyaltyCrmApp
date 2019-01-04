@@ -11,8 +11,10 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.ProductAdapter;
+import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
@@ -58,7 +60,7 @@ public class ProductsFragment extends BaseFragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
         recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(new ProductAdapter(itemList));
+        recyclerView.setAdapter(new ProductAdapter(itemList, recyclerItemClickListener));
 
         // Empty state view
         View emptyStateView = rootView.findViewById(R.id.empty_state_products_container);
@@ -70,6 +72,13 @@ public class ProductsFragment extends BaseFragment {
             emptyStateView.setVisibility(View.VISIBLE);
         }
     }
+
+    private RecyclerItemClickListener.ProductClickListener recyclerItemClickListener = new RecyclerItemClickListener.ProductClickListener() {
+        @Override
+        public void onItemProductClick(ItemProduct item) {
+            Toast.makeText(getContext(), item.getItemTitle(), Toast.LENGTH_LONG).show();
+        }
+    };
 
     private void extractDataFromJson() {
         try {

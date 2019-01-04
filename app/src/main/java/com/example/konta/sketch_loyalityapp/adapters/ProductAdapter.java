@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.adapters;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +18,13 @@ import java.util.ArrayList;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private ArrayList<ItemProduct> listOfItems;
+    private RecyclerItemClickListener.ProductClickListener productClickListener;
 
-    public ProductAdapter(ArrayList<ItemProduct> items) { listOfItems = items; }
+    public ProductAdapter(ArrayList<ItemProduct> items,
+                          RecyclerItemClickListener.ProductClickListener clickListener ) {
+        listOfItems = items;
+        productClickListener = clickListener;
+    }
 
     @NonNull
     @Override
@@ -44,7 +50,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         ItemProduct currentItem = listOfItems.get(position);
 
         holder.imageView.setImageDrawable(currentItem.getItemBitmapDrawable());
@@ -54,7 +60,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                productClickListener.onItemProductClick(listOfItems.get(position));
             }
         });
     }

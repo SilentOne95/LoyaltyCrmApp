@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.adapters;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +18,13 @@ import java.util.ArrayList;
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> {
 
     private ArrayList<ItemCoupon> listOfItems;
+    private RecyclerItemClickListener.CouponClickListener couponClickListener;
 
-    public CouponAdapter(ArrayList<ItemCoupon> items) { listOfItems = items; }
+    public CouponAdapter(ArrayList<ItemCoupon> items,
+                         RecyclerItemClickListener.CouponClickListener clickListener) {
+        listOfItems = items;
+        couponClickListener = clickListener;
+    }
 
     @NonNull
     @Override
@@ -28,12 +34,12 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView imageView;
         private TextView titleView, descriptionText, discountMarker, basicPrice, newPrice;
-        private Button showDetailsButton;
+        private Button checkCodeButton, showDetailsButton;
 
-        ViewHolder(@NonNull View view) {
+        ViewHolder(@NonNull final View view) {
             super(view);
             imageView = view.findViewById(R.id.grid_item_image);
             discountMarker = view.findViewById(R.id.grid_item_discount_marker);
@@ -42,12 +48,27 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             newPrice = view.findViewById(R.id.grid_item_price_amount);
             descriptionText = view.findViewById(R.id.grid_item_coupon_description_text);
             showDetailsButton = view.findViewById(R.id.grid_item_show_details_button);
+            showDetailsButton.setOnClickListener(this);
+            checkCodeButton = view.findViewById(R.id.grid_item_show_code_button);
+            checkCodeButton.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.grid_item_show_details_button:
+                    couponClickListener.onItemCouponDetailsClick(listOfItems.get(getAdapterPosition()));
+                    break;
+                case R.id.grid_item_show_code_button:
+                    couponClickListener.onItemCouponCodeCheckClick(listOfItems.get(getAdapterPosition()));
+                    break;
+            }
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ItemCoupon currentItem = listOfItems.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+        final ItemCoupon currentItem = listOfItems.get(position);
 
         holder.imageView.setImageDrawable(currentItem.getItemBitmapDrawable());
         holder.discountMarker.setText("-".concat(Integer.toString(currentItem.getItemDiscount())).concat("%"));
@@ -55,12 +76,6 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         holder.basicPrice.setText(String.valueOf(currentItem.getItemBasicPrice()).concat(" ").concat("zł"));
         holder.newPrice.setText(String.valueOf(currentItem.getItemFinalPrice()).concat(" ").concat("zł"));
         holder.descriptionText.setText(currentItem.getItemDescription());
-        holder.showDetailsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override

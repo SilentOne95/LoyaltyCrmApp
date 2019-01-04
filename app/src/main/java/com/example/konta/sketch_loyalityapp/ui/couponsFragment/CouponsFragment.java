@@ -11,8 +11,10 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.CouponAdapter;
+import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
@@ -58,7 +60,7 @@ public class CouponsFragment extends BaseFragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
         recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(new CouponAdapter(itemList));
+        recyclerView.setAdapter(new CouponAdapter(itemList, recyclerItemClickListener));
 
         // Empty state view
         View emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
@@ -70,6 +72,18 @@ public class CouponsFragment extends BaseFragment {
             emptyStateView.setVisibility(View.VISIBLE);
         }
     }
+
+    private RecyclerItemClickListener.CouponClickListener recyclerItemClickListener = new RecyclerItemClickListener.CouponClickListener() {
+        @Override
+        public void onItemCouponDetailsClick(ItemCoupon item) {
+            Toast.makeText(getContext(), item.getItemTitle(), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onItemCouponCodeCheckClick(ItemCoupon item) {
+            Toast.makeText(getContext(), item.getItemValidDate() , Toast.LENGTH_LONG).show();
+        }
+    };
 
     private void extractDataFromJson() {
         try {
