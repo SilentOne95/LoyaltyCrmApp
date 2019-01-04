@@ -14,9 +14,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.ui.mapFragment.GoogleMapFragment;
@@ -27,8 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_GROUP_ID;
-import static com.example.konta.sketch_loyalityapp.Constants.DISPLAY_STARTING_VIEW_ITEM_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
@@ -45,8 +41,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     GoogleMapFragment mGoogleMapFragment;
 
     // Fields which stores clicked menuItem IDs
-    private int groupId = DISPLAY_STARTING_VIEW_GROUP_ID;
-    private int itemId = DISPLAY_STARTING_VIEW_ITEM_ID;
+    private int homeScreenMenuId;
     private String layoutType;
 
     // Arrays to store key-value pairs to store specified type assigned to view
@@ -94,7 +89,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         prepareMenuData();
 
         // Set home screen selected in navigation drawer
-        mNavigationView.getMenu().getItem(itemId).setChecked(true).setCheckable(true);
+        mNavigationView.getMenu().getItem(homeScreenMenuId).setChecked(true).setCheckable(true);
 
         mPresenter = new MainActivityPresenter(this);
         mPresenter.displayHomeScreen();
@@ -103,7 +98,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     protected void onResume() {
         super.onResume();
-        mNavigationView.getMenu().getItem(DISPLAY_STARTING_VIEW_ITEM_ID).setChecked(true).setCheckable(true);
+        mNavigationView.getMenu().getItem(homeScreenMenuId).setChecked(true).setCheckable(true);
     }
 
     private void prepareMenuData() {
@@ -124,6 +119,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 // Put type of views into an array
                 String type = insideObj.getString("componentType");
                 menuSectionOneArray.append(i, type);
+
+                if (type.equals("Home")) {
+                    homeScreenMenuId = i;
+                }
             }
 
             if (object.getJSONArray("sectionTwo") != null){
@@ -141,6 +140,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     // Put type of views into an array
                     String type = insideObj.getString("componentType");
                     menuSectionTwoArray.append(i, type);
+
+                    if (type.equals("Home")) {
+                        homeScreenMenuId = i;
+                    }
                 }
             }
 
