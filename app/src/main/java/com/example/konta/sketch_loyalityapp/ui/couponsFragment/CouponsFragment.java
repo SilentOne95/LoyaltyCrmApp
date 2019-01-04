@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.couponsFragment;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.ui.couponDetailsActivity.CouponDetailsActivity;
 import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivity;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 
@@ -75,13 +77,15 @@ public class CouponsFragment extends BaseFragment {
 
     private RecyclerItemClickListener.CouponClickListener recyclerItemClickListener = new RecyclerItemClickListener.CouponClickListener() {
         @Override
-        public void onItemCouponDetailsClick(ItemCoupon item) {
-            Toast.makeText(getContext(), item.getItemTitle(), Toast.LENGTH_LONG).show();
+        public void onItemCouponDetailsClick(int couponId) {
+            Intent couponDetailsIntent = new Intent(getActivity(), CouponDetailsActivity.class);
+            couponDetailsIntent.putExtra("EXTRA_ELEMENT_ID", couponId);
+            startActivity(couponDetailsIntent);
         }
 
         @Override
         public void onItemCouponCodeCheckClick(ItemCoupon item) {
-            Toast.makeText(getContext(), item.getItemValidDate() , Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Show coupon code" , Toast.LENGTH_LONG).show();
         }
     };
 

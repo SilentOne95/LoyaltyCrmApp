@@ -57,7 +57,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.grid_item_show_details_button:
-                    couponClickListener.onItemCouponDetailsClick(listOfItems.get(getAdapterPosition()));
+                    couponClickListener.onItemCouponDetailsClick(getAdapterPosition());
                     break;
                 case R.id.grid_item_show_code_button:
                     couponClickListener.onItemCouponCodeCheckClick(listOfItems.get(getAdapterPosition()));

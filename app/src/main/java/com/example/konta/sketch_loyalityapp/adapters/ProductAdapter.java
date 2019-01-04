@@ -34,7 +34,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return new ViewHolder(view);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView imageView;
         private TextView titleView, price, descriptionText;
         private Button button;
@@ -46,6 +46,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             price = view.findViewById(R.id.grid_item_price_amount);
             descriptionText = view.findViewById(R.id.grid_item_content_description);
             button = view.findViewById(R.id.grid_item_view_details_button);
+            button.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            productClickListener.onItemProductClick(getAdapterPosition());
         }
     }
 
@@ -57,12 +63,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.titleView.setText(currentItem.getItemTitle());
         holder.price.setText(String.valueOf(currentItem.getItemPrice()).concat(" ").concat("zł"));
         holder.descriptionText.setText(currentItem.getItemDescription());
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                productClickListener.onItemProductClick(listOfItems.get(position));
-            }
-        });
     }
 
     @Override

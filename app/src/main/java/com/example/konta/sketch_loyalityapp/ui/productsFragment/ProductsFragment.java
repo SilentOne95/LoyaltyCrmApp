@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.productsFragment;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,7 +12,6 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.ProductAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
@@ -20,6 +20,7 @@ import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.modelClasses.ItemProduct;
 import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivity;
+import com.example.konta.sketch_loyalityapp.ui.productDetailsActivity.ProductDetailsActivity;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 
 import org.json.JSONArray;
@@ -75,8 +76,10 @@ public class ProductsFragment extends BaseFragment {
 
     private RecyclerItemClickListener.ProductClickListener recyclerItemClickListener = new RecyclerItemClickListener.ProductClickListener() {
         @Override
-        public void onItemProductClick(ItemProduct item) {
-            Toast.makeText(getContext(), item.getItemTitle(), Toast.LENGTH_LONG).show();
+        public void onItemProductClick(int productId) {
+            Intent productDetailsIntent = new Intent(getContext(), ProductDetailsActivity.class);
+            productDetailsIntent.putExtra("EXTRA_ELEMENT_ID", productId);
+            startActivity(productDetailsIntent);
         }
     };
 
