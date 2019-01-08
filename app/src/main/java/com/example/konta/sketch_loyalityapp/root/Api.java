@@ -1,10 +1,10 @@
 package com.example.konta.sketch_loyalityapp.root;
 
-import com.example.konta.sketch_loyalityapp.modelClasses.data.coupon.Coupon;
-import com.example.konta.sketch_loyalityapp.modelClasses.data.map.Marker;
-import com.example.konta.sketch_loyalityapp.modelClasses.data.menu.MenuComponent;
-import com.example.konta.sketch_loyalityapp.modelClasses.data.product.Product;
-import com.example.konta.sketch_loyalityapp.modelClasses.data.staticPage.Page;
+import com.example.konta.sketch_loyalityapp.model.data.coupon.Coupon;
+import com.example.konta.sketch_loyalityapp.model.data.map.Marker;
+import com.example.konta.sketch_loyalityapp.model.data.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.model.data.product.Product;
+import com.example.konta.sketch_loyalityapp.model.data.staticPage.Page;
 
 import java.util.List;
 

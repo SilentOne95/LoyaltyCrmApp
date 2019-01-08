@@ -1,9 +1,9 @@
-package com.example.konta.sketch_loyalityapp.modelClasses.data.map;
+package com.example.konta.sketch_loyalityapp.model.data.map;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Sunday {
+public class Monday {
 
     @SerializedName("open_hour")
     @Expose

@@ -1,7 +1,7 @@
 package com.example.konta.sketch_loyalityapp.adapters;
 
-import com.example.konta.sketch_loyalityapp.modelClasses.adapterItem.ItemCoupon;
-import com.example.konta.sketch_loyalityapp.modelClasses.adapterItem.ItemHome;
+import com.example.konta.sketch_loyalityapp.model.adapterItem.ItemCoupon;
+import com.example.konta.sketch_loyalityapp.model.adapterItem.ItemHome;
 
 public interface RecyclerItemClickListener {
 

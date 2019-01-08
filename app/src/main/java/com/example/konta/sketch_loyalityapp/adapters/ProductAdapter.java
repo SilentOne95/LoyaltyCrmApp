@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.modelClasses.adapterItem.ItemProduct;
+import com.example.konta.sketch_loyalityapp.model.adapterItem.ItemProduct;
 
 import java.util.ArrayList;
 

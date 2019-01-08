@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.modelClasses.data.product;
+package com.example.konta.sketch_loyalityapp.model.data.product;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

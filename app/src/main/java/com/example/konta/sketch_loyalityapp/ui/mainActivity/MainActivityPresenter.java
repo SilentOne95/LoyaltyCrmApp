@@ -3,7 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.mainActivity;
 import android.support.annotation.Nullable;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
-import com.example.konta.sketch_loyalityapp.modelClasses.adapterItem.ItemHome;
+import com.example.konta.sketch_loyalityapp.model.adapterItem.ItemHome;
 import com.example.konta.sketch_loyalityapp.ui.couponsFragment.CouponsFragment;
 import com.example.konta.sketch_loyalityapp.ui.mapFragment.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.homeFragment.HomeFragment;
