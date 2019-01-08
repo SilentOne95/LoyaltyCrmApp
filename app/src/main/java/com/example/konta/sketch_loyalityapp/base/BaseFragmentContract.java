@@ -1,6 +1,6 @@
 package com.example.konta.sketch_loyalityapp.base;
 
-import com.example.konta.sketch_loyalityapp.modelClasses.ItemHome;
+import com.example.konta.sketch_loyalityapp.modelClasses.adapterItem.ItemHome;
 
 public interface BaseFragmentContract {
 

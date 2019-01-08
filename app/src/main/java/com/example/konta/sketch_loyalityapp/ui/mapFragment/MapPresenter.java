@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.modelClasses.ItemLocation;
+import com.example.konta.sketch_loyalityapp.modelClasses.adapterItem.ItemLocation;
 import com.google.android.gms.maps.model.LatLng;
 
 public class MapPresenter implements MapContract.Presenter {

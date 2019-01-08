@@ -1,23 +1,28 @@
 package com.example.konta.sketch_loyalityapp.root;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.widget.Toast;
+
+import com.example.konta.sketch_loyalityapp.modelClasses.data.MenuList;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
-import okhttp3.ResponseBody;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL;
 
 public class MyApplication extends Application {
 
     private ApplicationComponent mApplicationComponent;
+
+    static Api api;
 
     private String mJson;
 
@@ -25,35 +30,43 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5000/")
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
                 .build();
 
-        Api api = retrofit.create(Api.class);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
 
-        api.getTest().enqueue(new Callback<ResponseBody>() {
+        api = retrofit.create(Api.class);
+
+        api.getTest().enqueue(new Callback<List<MenuList>>() {
             @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                try {
-                    Log.d("Test test ", response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            public void onResponse(Call<List<MenuList>> call, Response<List<MenuList>> response) {
+
             }
 
             @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<List<MenuList>> call, Throwable t) {
+
             }
         });
-
 
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
-        }
+    }
 
-    public ApplicationComponent getApplicationComponent() { return mApplicationComponent; }
+    public static Api getApi() { return api; }
+
+    public ApplicationComponent getApplicationComponent() {
+        return mApplicationComponent;
+    }
 
     public String readFromAssets(String filename) {
         try {
@@ -69,10 +82,5 @@ public class MyApplication extends Application {
         }
 
         return mJson;
-    }
-
-    interface Api {
-        @GET("/app_loyalty_page/get/6")
-        Call<ResponseBody> getTest();
     }
 }

@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.konta.sketch_loyalityapp.adapters.CouponAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.modelClasses.ItemCoupon;
+import com.example.konta.sketch_loyalityapp.modelClasses.adapterItem.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ui.couponDetailsActivity.CouponDetailsActivity;
