@@ -26,7 +26,7 @@ public class MyApplication extends Application {
         super.onCreate();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("http://10.0.2.2:5000/")
                 .build();
 
         Api api = retrofit.create(Api.class);
@@ -72,7 +72,7 @@ public class MyApplication extends Application {
     }
 
     interface Api {
-        @GET("/posts")
+        @GET("/app_loyalty_page/get/6")
         Call<ResponseBody> getTest();
     }
 }
