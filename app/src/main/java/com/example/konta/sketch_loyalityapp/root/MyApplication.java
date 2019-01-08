@@ -2,17 +2,11 @@ package com.example.konta.sketch_loyalityapp.root;
 
 import android.app.Application;
 
-import com.example.konta.sketch_loyalityapp.modelClasses.data.MenuList;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -45,17 +39,6 @@ public class MyApplication extends Application {
 
         api = retrofit.create(Api.class);
 
-        api.getTest().enqueue(new Callback<List<MenuList>>() {
-            @Override
-            public void onResponse(Call<List<MenuList>> call, Response<List<MenuList>> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<List<MenuList>> call, Throwable t) {
-
-            }
-        });
 
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))

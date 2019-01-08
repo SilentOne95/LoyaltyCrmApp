@@ -1,9 +1,9 @@
-package com.example.konta.sketch_loyalityapp.modelClasses.data;
+package com.example.konta.sketch_loyalityapp.modelClasses.data.menu;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MenuList {
+public class MenuComponent {
 
     @SerializedName("id")
     @Expose
@@ -126,5 +126,4 @@ public class MenuList {
     public void setPosition(Integer position) {
         this.position = position;
     }
-
 }
