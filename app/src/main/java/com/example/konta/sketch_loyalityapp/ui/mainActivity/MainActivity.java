@@ -10,18 +10,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.data.menu.HelperComponent;
-import com.example.konta.sketch_loyalityapp.root.Api;
 import com.example.konta.sketch_loyalityapp.ui.mapFragment.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
@@ -29,12 +25,6 @@ import com.example.konta.sketch_loyalityapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
@@ -92,26 +82,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mNavigationView.setNavigationItemSelectedListener(this);
 
 
-        // Retrofit
-        Api api = MyApplication.getApi();
-        api.getMenuComponents().enqueue(new Callback<List<MenuComponent>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<MenuComponent>> call, @NonNull Response<List<MenuComponent>> response) {
-
-                List<MenuComponent> testList = response.body();
-                if (testList != null)
-                    setUpMenu(testList);
-
-                // Set home screen selected in navigation drawer
-                mNavigationView.getMenu().getItem(homeScreenMenuId).setChecked(true).setCheckable(true);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<MenuComponent>> call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), "BAD", Toast.LENGTH_LONG).show();
-            }
-        });
-
         // Reading JSON file from assets
         json = ((MyApplication) getApplication()).readFromAssets(jsonFileData);
 
@@ -122,51 +92,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Set home screen selected in navigation drawer
         // Call it here: mNavigationView.getMenu().getItem(homeScreenMenuId).setChecked(true).setCheckable(true);
 
-        mPresenter = new MainActivityPresenter(this);
+        // Using Retrofit to set up NavDrawer
+        mPresenter = new MainActivityPresenter(this, new MainActivityModel());
+        mPresenter.requestDataFromServer();
         mPresenter.displayHomeScreen();
-    }
-
-    private void setUpMenu(List<MenuComponent> componentList) {
-        int menuId = 0, submenuId = 0;
-        Menu menu = mNavigationView.getMenu(), submenu = mNavigationView.getMenu();
-        String menuType, type, title;
-        SparseArray<HelperComponent> menuArray = new SparseArray<>();
-        SparseArray<HelperComponent> submenuArray = new SparseArray<>();
-
-        for (int i = 0; i < componentList.size(); i++) {
-            menuType = componentList.get(i).getList();
-
-            if (menuType.equals("menu")) {
-                type = componentList.get(i).getType();
-                title = componentList.get(i).getComponentTitle();
-
-                menuArray.append(menuId, new HelperComponent(type, title));
-                menuId++;
-
-                Log.d("HelperComponent 1 ", type.concat(" ".concat(title)));
-
-            } else if (menuType.equals("submenu")) {
-                type = componentList.get(i).getType();
-                title = componentList.get(i).getComponentTitle();
-
-                submenuArray.append(submenuId, new HelperComponent(type, title));
-                submenuId++;
-
-                Log.d("HelperComponent 2 ", type.concat(" ".concat(title)));
-            }
-
-            if (componentList.get(i).getIsHomePage() == 1) {
-                homeScreenMenuId = i;
-            }
-        }
-
-        for (int i = 0; i < menuArray.size(); i++) {
-            menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, menuArray.get(i).getValTwo());
-        }
-
-        for (int i = 0; i < submenuArray.size(); i++) {
-            submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, submenuArray.get(i).getValTwo());
-        }
     }
 
     @Override
@@ -184,12 +113,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 .beginTransaction()
                 .replace(R.id.switch_view_layout, fragment)
                 .commit();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        mNavigationView.getMenu().getItem(homeScreenMenuId).setChecked(true).setCheckable(true);
     }
 
     @Override
@@ -214,6 +137,25 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public void setDisplayScreenChecked(String layoutType) {
 
+    }
+
+    @Override
+    public void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
+                                   SparseArray<HelperComponent> submenuSectionArray,
+                                   int homeScreenId) {
+
+        Menu menu = mNavigationView.getMenu(), submenu = mNavigationView.getMenu();
+
+        for (int i = 0; i < menuSectionArray.size(); i++) {
+            menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, menuSectionArray.get(i).getValTwo());
+        }
+
+        for (int i = 0; i < submenuSectionArray.size(); i++) {
+            submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, submenuSectionArray.get(i).getValTwo());
+        }
+
+        // Set checked home screen in Navigation Drawer
+        mNavigationView.getMenu().getItem(homeScreenId).setChecked(true).setCheckable(true);
     }
 
     @Override
