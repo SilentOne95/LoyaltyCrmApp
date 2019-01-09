@@ -25,6 +25,7 @@ public interface MainActivityContract {
     interface Presenter {
 
         void requestDataFromServer();
+        String getLayoutType(int groupId, int itemId);
 
         void displayHomeScreen();
         void displaySelectedScreen(String layoutType);

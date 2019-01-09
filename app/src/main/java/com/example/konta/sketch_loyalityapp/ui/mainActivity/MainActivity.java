@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void setDisplayScreenChecked(String layoutType) {
-
+        // TODO: Fix logic
     }
 
     @Override
@@ -171,11 +171,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // Assign clicked menuItem IDs and layout type to global variables
-        if (menuItem.getGroupId() == 0) {
-            layoutType = menuSectionOneArray.get(menuItem.getItemId());
-        } else {
-            layoutType = menuSectionTwoArray.get(menuItem.getItemId());
-        }
+        layoutType = mPresenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
+
+        // Logic to retrieve layout type base on menuItem IDs
+        //
 
         // Uncheck all checked menu items
         int size = mNavigationView.getMenu().size();

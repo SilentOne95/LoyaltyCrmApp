@@ -26,6 +26,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     private MainActivityContract.View view;
     private MainActivityContract.Model model;
 
+    private SparseArray<HelperComponent> menuArray = new SparseArray<>();
+    private SparseArray<HelperComponent> submenuArray = new SparseArray<>();
+
     MainActivityPresenter(@Nullable MainActivityContract.View view,
                           MainActivityContract.Model model) {
         this.view = view;
@@ -49,8 +52,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
         int menuId = 0, submenuId = 0, homeScreenId = 0;
         String menuType, type, title;
-        SparseArray<HelperComponent> menuArray = new SparseArray<>();
-        SparseArray<HelperComponent> submenuArray = new SparseArray<>();
 
         for (int i = 0; i < listMenuComponent.size(); i++) {
             menuType = listMenuComponent.get(i).getList();
@@ -85,6 +86,19 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
+    public String getLayoutType(int groupId, int itemId) {
+        String layoutType;
+
+        if (groupId == 0) {
+            layoutType = menuArray.get(itemId).getValOne();
+        } else {
+            layoutType = submenuArray.get(itemId).getValOne();
+        }
+
+        return layoutType;
+    }
+
+    @Override
     public void onFailure(Throwable t) {
 
     }
@@ -94,35 +108,35 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
         if (layoutType != null) {
             switch (layoutType) {
-                case "Home":
+                case "home":
                     if (view != null)
                         view.setFragment(new HomeFragment());
                     break;
-                case "Products":
+                case "products":
                     if (view != null)
                         view.setFragment(new ProductsFragment());
                     break;
-                case "Coupons":
+                case "coupons":
                     if (view != null)
                         view.setFragment(new CouponsFragment());
                     break;
-                case "Map":
+                case "map":
                     if (view != null)
                         view.setFragment(new GoogleMapFragment());
                     break;
-                case "LogIn":
+                case "login":
                     if (view != null)
                         view.setActivity(LogInActivity.class);
                     break;
-                case "Internet":
+                case "internet":
                     if (view != null)
                         view.setActivity(WebsiteActivity.class);
                     break;
-                case "Terms":
+                case "terms":
                     if (view != null)
                         view.setActivity(TermsConditionsActivity.class);
                     break;
-                case "Contact":
+                case "contact":
                     if (view != null)
                         view.setActivity(ContactActivity.class);
                     break;
