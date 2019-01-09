@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
-import com.example.konta.sketch_loyalityapp.model.adapterItem.ItemLocation;
+import com.example.konta.sketch_loyalityapp.adapterModel.ItemLocation;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;

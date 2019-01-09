@@ -1,6 +1,5 @@
 package com.example.konta.sketch_loyalityapp.adapters;
 
-import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,16 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.adapterModel.ItemProduct;
+import com.example.konta.sketch_loyalityapp.data.product.Product;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofitAdapter.ViewHolder> {
 
-    private ArrayList<ItemProduct> listOfItems;
+    private List<Product> listOfItems;
     private RecyclerItemClickListener.ProductClickListener productClickListener;
 
-    public ProductAdapter(ArrayList<ItemProduct> items,
+    public ProductRetrofitAdapter(List<Product> items,
                           RecyclerItemClickListener.ProductClickListener clickListener ) {
         listOfItems = items;
         productClickListener = clickListener;
@@ -28,23 +27,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @NonNull
     @Override
-    public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductRetrofitAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.grid_list_item_product, parent, false);
-        return new ViewHolder(view);
+        return new ProductRetrofitAdapter.ViewHolder(view);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ImageView imageView;
-        private TextView titleView, price, descriptionText;
+//        private ImageView imageView;
+        private TextView titleView, price, shortDescription;
         private Button button;
 
         ViewHolder(@NonNull View view) {
             super(view);
-            imageView = view.findViewById(R.id.grid_item_image);
+//            imageView = view.findViewById(R.id.grid_item_image);
             titleView = view.findViewById(R.id.grid_item_title_text);
             price = view.findViewById(R.id.grid_item_price_amount);
-            descriptionText = view.findViewById(R.id.grid_item_content_description);
+            shortDescription = view.findViewById(R.id.grid_item_content_description);
             button = view.findViewById(R.id.grid_item_view_details_button);
             button.setOnClickListener(this);
         }
@@ -56,13 +55,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        ItemProduct currentItem = listOfItems.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Product currentItem = listOfItems.get(position);
 
-        holder.imageView.setImageDrawable(currentItem.getItemBitmapDrawable());
-        holder.titleView.setText(currentItem.getItemTitle());
-        holder.price.setText(String.valueOf(currentItem.getItemPrice()).concat(" ").concat("zł"));
-        holder.descriptionText.setText(currentItem.getItemDescription());
+        holder.titleView.setText(currentItem.getTitle());
+        holder.price.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
+        holder.shortDescription.setText(currentItem.getShortDescription());
     }
 
     @Override

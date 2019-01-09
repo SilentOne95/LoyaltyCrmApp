@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.model.adapterItem;
+package com.example.konta.sketch_loyalityapp.adapterModel;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;

@@ -17,7 +17,7 @@ import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 import com.example.konta.sketch_loyalityapp.adapters.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.model.adapterItem.ItemHome;
+import com.example.konta.sketch_loyalityapp.adapterModel.ItemHome;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivity;

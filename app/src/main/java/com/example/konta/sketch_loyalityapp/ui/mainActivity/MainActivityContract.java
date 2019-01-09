@@ -1,7 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.mainActivity;
 
 import android.app.Activity;
-import android.view.MenuItem;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 

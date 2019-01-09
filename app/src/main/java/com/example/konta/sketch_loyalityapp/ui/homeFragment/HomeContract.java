@@ -1,6 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.homeFragment;
 
-import com.example.konta.sketch_loyalityapp.model.adapterItem.ItemHome;
+import com.example.konta.sketch_loyalityapp.adapterModel.ItemHome;
 
 public interface HomeContract {
 

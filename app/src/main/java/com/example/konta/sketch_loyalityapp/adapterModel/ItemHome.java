@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.model.adapterItem;
+package com.example.konta.sketch_loyalityapp.adapterModel;
 
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 

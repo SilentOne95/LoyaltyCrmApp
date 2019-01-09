@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
-import com.example.konta.sketch_loyalityapp.model.adapterItem.ItemLocation;
+import com.example.konta.sketch_loyalityapp.adapterModel.ItemLocation;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
