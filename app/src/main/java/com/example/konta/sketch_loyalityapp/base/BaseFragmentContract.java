@@ -1,6 +1,6 @@
 package com.example.konta.sketch_loyalityapp.base;
 
-import com.example.konta.sketch_loyalityapp.adapterModel.ItemHome;
+import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
 
 public interface BaseFragmentContract {
 
@@ -10,6 +10,6 @@ public interface BaseFragmentContract {
     }
 
     interface Presenter {
-        void getSelectedLayoutType(ItemHome item);
+        void getSelectedLayoutType(MenuComponent item);
     }
 }

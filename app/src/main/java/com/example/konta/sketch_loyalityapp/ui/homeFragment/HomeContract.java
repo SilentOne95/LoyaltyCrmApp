@@ -1,15 +1,17 @@
 package com.example.konta.sketch_loyalityapp.ui.homeFragment;
 
-import com.example.konta.sketch_loyalityapp.adapterModel.ItemHome;
+import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
+
+import java.util.List;
 
 public interface HomeContract {
 
     interface View {
-        String getSelectedLayoutType(ItemHome item);
+        void setUpAdapter(List<MenuComponent> list);
     }
 
     interface Presenter {
-
+        void fetchDataFromServer();
     }
 
     interface Model {

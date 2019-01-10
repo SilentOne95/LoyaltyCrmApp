@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
-import com.example.konta.sketch_loyalityapp.adapterModel.ItemHome;
 import com.example.konta.sketch_loyalityapp.data.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.couponsFragment.CouponsFragment;
@@ -150,7 +149,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void getSelectedLayoutType(ItemHome item) {
-        displaySelectedScreen(item.getLayoutType());
+    public void getSelectedLayoutType(MenuComponent item) {
+        displaySelectedScreen(item.getType());
     }
 }

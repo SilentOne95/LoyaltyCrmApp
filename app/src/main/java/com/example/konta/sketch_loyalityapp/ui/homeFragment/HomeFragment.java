@@ -13,9 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.konta.sketch_loyalityapp.adapters.HomeRetrofitAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
+import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivityModel;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
-import com.example.konta.sketch_loyalityapp.adapters.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.adapterModel.ItemHome;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
@@ -27,17 +29,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS;
 import static com.example.konta.sketch_loyalityapp.Constants.INITIAL_CAPACITY_ARRAY;
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
 
+    HomePresenter mPresenter;
+
     private static ArrayList<ItemHome> itemList;
     private String json;
     private String layoutTitle;
     private int resourceSpecialOffer;
     int columns = 0;
+    private RecyclerView recyclerView;
 
     // Temporary variables using to get json data from assets
     private static final String jsonFileData = "home.json";
@@ -60,17 +66,21 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         ImageView specialOfferImage = rootView.findViewById(R.id.special_offer_image);
         specialOfferImage.setImageResource(resourceSpecialOffer);
 
+
+        // Retrofit
+        mPresenter = new HomePresenter(this, new MainActivityModel());
+        mPresenter.fetchDataFromServer();
+
         // Set up adapter
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
         recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(new HomeAdapter(itemList, recyclerItemClickListener));
     }
 
-    private RecyclerItemClickListener.HomeClickListener recyclerItemClickListener = new RecyclerItemClickListener.HomeClickListener() {
+    private RecyclerItemClickListener.HomeRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.HomeRetrofitClickListener() {
         @Override
-        public void onItemHomeClick(ItemHome item) {
+        public void onItemHomeClick(MenuComponent item) {
             navigationPresenter.getSelectedLayoutType(item);
         }
     };
@@ -112,9 +122,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         }
     }
 
-
     @Override
-    public String getSelectedLayoutType(ItemHome item) {
-        return item.getLayoutType();
+    public void setUpAdapter(List<MenuComponent> list) {
+        recyclerView.setAdapter(new HomeRetrofitAdapter(list, recyclerItemClickListener));
     }
+
 }

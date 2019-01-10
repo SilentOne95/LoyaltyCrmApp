@@ -42,15 +42,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private String json;
     GoogleMapFragment mGoogleMapFragment;
 
-    // Fields which stores clicked menuItem IDs
-    private int homeScreenMenuId = 0;
+    // Field that stores layout type of clicked menu item
     private String layoutType;
 
-    // Arrays to store key-value pairs to store specified type assigned to view
-    public SparseArray<String> menuSectionOneArray = new SparseArray<>();
-    public SparseArray<String> menuSectionTwoArray = new SparseArray<>();
-
     // Temporary variables using to get json data from assets
+    // Arrays to store key-value pairs to store specified type assigned to view
+    private SparseArray<String> menuSectionOneArray = new SparseArray<>();
+    private SparseArray<String> menuSectionTwoArray = new SparseArray<>();
+    private int homeScreenMenuId = 0;
     private static final String jsonFileData = "menu.json";
     public static String PACKAGE_NAME;
 
@@ -82,6 +81,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
 
+        // Using Retrofit to set up NavDrawer
+        mPresenter = new MainActivityPresenter(this, new MainActivityModel());
+        mPresenter.requestDataFromServer();
+        mPresenter.displayHomeScreen();
+
 
         // Reading JSON file from assets
         json = ((MyApplication) getApplication()).readFromAssets(jsonFileData);
@@ -92,11 +96,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Set home screen selected in navigation drawer
         // Call it here: mNavigationView.getMenu().getItem(homeScreenMenuId).setChecked(true).setCheckable(true);
-
-        // Using Retrofit to set up NavDrawer
-        mPresenter = new MainActivityPresenter(this, new MainActivityModel());
-        mPresenter.requestDataFromServer();
-        mPresenter.displayHomeScreen();
     }
 
     @Override

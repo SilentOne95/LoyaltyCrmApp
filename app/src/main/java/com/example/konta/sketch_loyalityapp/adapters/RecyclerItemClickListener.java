@@ -2,8 +2,13 @@ package com.example.konta.sketch_loyalityapp.adapters;
 
 import com.example.konta.sketch_loyalityapp.adapterModel.ItemCoupon;
 import com.example.konta.sketch_loyalityapp.adapterModel.ItemHome;
+import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
 
 public interface RecyclerItemClickListener {
+
+    interface HomeRetrofitClickListener {
+        void onItemHomeClick(MenuComponent item);
+    }
 
     interface HomeClickListener {
         void onItemHomeClick(ItemHome item);
