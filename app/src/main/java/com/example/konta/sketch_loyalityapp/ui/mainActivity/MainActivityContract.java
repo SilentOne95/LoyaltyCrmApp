@@ -35,7 +35,7 @@ public interface MainActivityContract {
     interface Model {
 
         interface OnFinishedListener {
-            void onFinished(List<MenuComponent> noticeList);
+            void onFinished(List<MenuComponent> menuComponentList);
             void onFailure(Throwable t);
         }
 

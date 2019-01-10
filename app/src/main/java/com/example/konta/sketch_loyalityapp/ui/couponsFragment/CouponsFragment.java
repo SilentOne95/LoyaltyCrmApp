@@ -1,6 +1,5 @@
 package com.example.konta.sketch_loyalityapp.ui.couponsFragment;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,13 +13,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.adapters.CouponAdapter;
+import com.example.konta.sketch_loyalityapp.adapters.CouponRetrofitAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.adapterModel.ItemCoupon;
+import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.ui.couponDetailsActivity.CouponDetailsActivity;
 import com.example.konta.sketch_loyalityapp.ui.mainActivity.MainActivity;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 
@@ -29,15 +28,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS;
 
-public class CouponsFragment extends BaseFragment {
+public class CouponsFragment extends BaseFragment implements CouponsContract.View {
+
+    CouponsPresenter mPresenter;
 
     private static ArrayList<ItemCoupon> itemList;
     private String json;
     private String layoutTitle;
     int columns = 0;
+    private RecyclerView recyclerView;
+    private View emptyStateView;
 
     // Temporary variables using to get json data from assets
     private static final String jsonFileData = "coupons.json";
@@ -57,16 +61,37 @@ public class CouponsFragment extends BaseFragment {
 
         getActivity().setTitle(layoutTitle);
 
+        // Retrofit
+        mPresenter = new CouponsPresenter(this, new CouponsModel());
+        mPresenter.requestDataFromServer();
+
         // Set up adapter
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
         recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(new CouponAdapter(itemList, recyclerItemClickListener));
+        emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
+    }
 
-        // Empty state view
-        View emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
-        if (!itemList.isEmpty()) {
+    private RecyclerItemClickListener.CouponRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.CouponRetrofitClickListener() {
+        @Override
+        public void onItemCouponDetailsClick(int couponId) {
+            Toast.makeText(getContext(), "Show details" , Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onItemCouponCodeCheckClick(Coupon coupon) {
+            Toast.makeText(getContext(), "Show coupon code" , Toast.LENGTH_LONG).show();
+        }
+    };
+
+    @Override
+    public void setUpAdapter(List<Coupon> couponList) {
+
+        recyclerView.setAdapter(new CouponRetrofitAdapter(couponList, recyclerItemClickListener));
+
+        // Check if empty state view is needed
+        if (!couponList.isEmpty()) {
             recyclerView.setVisibility(View.VISIBLE);
             emptyStateView.setVisibility(View.GONE);
         } else {
@@ -74,20 +99,6 @@ public class CouponsFragment extends BaseFragment {
             emptyStateView.setVisibility(View.VISIBLE);
         }
     }
-
-    private RecyclerItemClickListener.CouponClickListener recyclerItemClickListener = new RecyclerItemClickListener.CouponClickListener() {
-        @Override
-        public void onItemCouponDetailsClick(int couponId) {
-            Intent couponDetailsIntent = new Intent(getActivity(), CouponDetailsActivity.class);
-            couponDetailsIntent.putExtra("EXTRA_ELEMENT_ID", couponId);
-            startActivity(couponDetailsIntent);
-        }
-
-        @Override
-        public void onItemCouponCodeCheckClick(ItemCoupon item) {
-            Toast.makeText(getContext(), "Show coupon code" , Toast.LENGTH_LONG).show();
-        }
-    };
 
     private void extractDataFromJson() {
         try {

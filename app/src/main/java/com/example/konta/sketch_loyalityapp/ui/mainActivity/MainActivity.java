@@ -96,6 +96,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Set home screen selected in navigation drawer
         // Call it here: mNavigationView.getMenu().getItem(homeScreenMenuId).setChecked(true).setCheckable(true);
+
     }
 
     @Override

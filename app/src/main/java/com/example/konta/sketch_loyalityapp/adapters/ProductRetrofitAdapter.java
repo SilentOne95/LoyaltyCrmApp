@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
@@ -34,13 +33,13 @@ public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofit
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-//        private ImageView imageView;
+        // imageView
         private TextView titleView, price, shortDescription;
         private Button button;
 
         ViewHolder(@NonNull View view) {
             super(view);
-//            imageView = view.findViewById(R.id.grid_item_image);
+            // imageView
             titleView = view.findViewById(R.id.grid_item_title_text);
             price = view.findViewById(R.id.grid_item_price_amount);
             shortDescription = view.findViewById(R.id.grid_item_content_description);
@@ -58,6 +57,7 @@ public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofit
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product currentItem = listOfItems.get(position);
 
+        // holder - imageView
         holder.titleView.setText(currentItem.getTitle());
         holder.price.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
         holder.shortDescription.setText(currentItem.getShortDescription());
