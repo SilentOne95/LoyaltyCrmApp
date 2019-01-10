@@ -1,6 +1,5 @@
 package com.example.konta.sketch_loyalityapp.ui.couponsFragment;
 
-
 import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 
 import java.util.List;

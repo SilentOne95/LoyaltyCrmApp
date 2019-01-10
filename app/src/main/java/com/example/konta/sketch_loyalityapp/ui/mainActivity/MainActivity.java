@@ -2,7 +2,6 @@ package com.example.konta.sketch_loyalityapp.ui.mainActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,10 +22,6 @@ import com.example.konta.sketch_loyalityapp.ui.mapFragment.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
@@ -35,22 +30,15 @@ import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GRO
 public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
         NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View {
 
-    MainActivityPresenter mPresenter;
+    MainActivityPresenter presenter;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-    private String json;
     GoogleMapFragment mGoogleMapFragment;
 
     // Field that stores layout type of clicked menu item
     private String layoutType;
 
-    // Temporary variables using to get json data from assets
-    // Arrays to store key-value pairs to store specified type assigned to view
-    private SparseArray<String> menuSectionOneArray = new SparseArray<>();
-    private SparseArray<String> menuSectionTwoArray = new SparseArray<>();
-    private int homeScreenMenuId = 0;
-    private static final String jsonFileData = "menu.json";
     public static String PACKAGE_NAME;
 
     @Override
@@ -82,21 +70,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mNavigationView.setNavigationItemSelectedListener(this);
 
         // Using Retrofit to set up NavDrawer
-        mPresenter = new MainActivityPresenter(this, new MainActivityModel());
-        mPresenter.requestDataFromServer();
-        mPresenter.displayHomeScreen();
-
-
-        // Reading JSON file from assets
-        json = ((MyApplication) getApplication()).readFromAssets(jsonFileData);
-
-        // Extracting objects that has been built up from parsing the given JSON file,
-        // preparing and displaying data in Navigation Drawer using custom adapter
-        // Call method here: prepareMenuData()
-
-        // Set home screen selected in navigation drawer
-        // Call it here: mNavigationView.getMenu().getItem(homeScreenMenuId).setChecked(true).setCheckable(true);
-
+        presenter = new MainActivityPresenter(this, new MainActivityModel());
+        presenter.requestDataFromServer();
+        presenter.displayHomeScreen();
     }
 
     @Override
@@ -107,7 +83,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public void setFragment(BaseFragment fragment) {
 
-        fragment.attachPresenter(mPresenter);
+        fragment.attachPresenter(presenter);
 
         // Replacing the fragment
         getSupportFragmentManager()
@@ -130,7 +106,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onDrawerOpened(@NonNull View view) { }
 
     @Override
-    public void onDrawerClosed(@NonNull View view) { mPresenter.displaySelectedScreen(layoutType); }
+    public void onDrawerClosed(@NonNull View view) { presenter.displaySelectedScreen(layoutType); }
 
     @Override
     public void onDrawerStateChanged(int i) { }
@@ -161,7 +137,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void onResponseFailure(Throwable throwable) {
-        Toast.makeText(MainActivity.this, "Ooops.. something went wrong: ", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Oops.. something went wrong: ", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -177,10 +153,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // Assign clicked menuItem IDs and layout type to global variables
-        layoutType = mPresenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
-
-        // Logic to retrieve layout type base on menuItem IDs
-        //
+        layoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
 
         // Uncheck all checked menu items
         int size = mNavigationView.getMenu().size();
@@ -204,57 +177,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             mGoogleMapFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    private void prepareMenuData() {
-        try {
-            JSONObject object = new JSONObject(json);
-            JSONArray arrayOne = object.getJSONArray("sectionOne");
-
-            for (int i = 0; i < arrayOne.length(); i++) {
-                JSONObject insideObj = arrayOne.getJSONObject(i);
-                String title = insideObj.getString("componentTitle");
-                String icon = insideObj.getString("menuIcon");
-
-                Resources resources = this.getResources();
-                final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
-                Menu menuOne = mNavigationView.getMenu();
-                menuOne.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, title).setIcon(resourceId);
-
-                // Put type of views into an array
-                String type = insideObj.getString("componentType");
-                menuSectionOneArray.append(i, type);
-
-                if (type.equals("Home")) {
-                    homeScreenMenuId = i;
-                }
-            }
-
-            if (object.getJSONArray("sectionTwo") != null){
-                JSONArray arrayTwo = object.getJSONArray("sectionTwo");
-                for (int i = 0; i < arrayTwo.length(); i++) {
-                    JSONObject insideObj = arrayTwo.getJSONObject(i);
-                    String title = insideObj.getString("componentTitle");
-                    String icon = insideObj.getString("menuIcon");
-
-                    Resources resources = this.getResources();
-                    final int resourceId = resources.getIdentifier(icon, "drawable", this.getPackageName());
-                    Menu menuTwo = mNavigationView.getMenu();
-                    menuTwo.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, title).setIcon(resourceId);
-
-                    // Put type of views into an array
-                    String type = insideObj.getString("componentType");
-                    menuSectionTwoArray.append(i, type);
-
-                    if (type.equals("Home")) {
-                        homeScreenMenuId = i;
-                    }
-                }
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 }
