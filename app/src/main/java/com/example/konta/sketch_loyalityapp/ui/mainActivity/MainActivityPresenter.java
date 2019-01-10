@@ -18,7 +18,6 @@ import com.example.konta.sketch_loyalityapp.ui.logInActivity.LogInActivity;
 
 import java.util.List;
 
-
 public class MainActivityPresenter implements MainActivityContract.Presenter,
         BaseFragmentContract.Presenter, MainActivityContract.Model.OnFinishedListener {
 
@@ -90,9 +89,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         String layoutType;
 
         if (groupId == 0) {
-            layoutType = menuArray.get(itemId).getValOne();
+            layoutType = menuArray.get(itemId).getType();
         } else {
-            layoutType = submenuArray.get(itemId).getValOne();
+            layoutType = submenuArray.get(itemId).getType();
         }
 
         return layoutType;
