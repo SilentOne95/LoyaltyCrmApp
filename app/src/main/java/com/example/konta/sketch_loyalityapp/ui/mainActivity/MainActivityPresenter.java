@@ -85,6 +85,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
+    public void onFailure(Throwable t) {
+        if (view != null) {
+            view.onResponseFailure(t);
+        }
+    }
+
+    @Override
     public String getLayoutType(int groupId, int itemId) {
         String layoutType;
 
@@ -95,11 +102,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         }
 
         return layoutType;
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-
     }
 
     @Override

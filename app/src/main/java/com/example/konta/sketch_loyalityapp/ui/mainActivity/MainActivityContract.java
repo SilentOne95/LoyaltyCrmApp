@@ -19,6 +19,7 @@ public interface MainActivityContract {
         void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
                                 SparseArray<HelperComponent> submenuSectionArray,
                                 int homeScreenId);
+        void onResponseFailure(Throwable throwable);
         void setDisplayScreenChecked(String layoutType);
     }
 
