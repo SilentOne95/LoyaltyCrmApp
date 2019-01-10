@@ -62,7 +62,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
         recyclerView.setAdapter(new CouponRetrofitAdapter(couponList, recyclerItemClickListener));
 
-        // Check if empty state view is needed
+        // Set empty state view if needed
         if (!couponList.isEmpty()) {
             recyclerView.setVisibility(View.VISIBLE);
             emptyStateView.setVisibility(View.GONE);

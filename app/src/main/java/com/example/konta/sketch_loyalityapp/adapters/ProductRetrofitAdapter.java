@@ -16,10 +16,10 @@ import java.util.List;
 public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofitAdapter.ViewHolder> {
 
     private List<Product> listOfItems;
-    private RecyclerItemClickListener.ProductClickListener productClickListener;
+    private RecyclerItemClickListener.ProductRetrofitClickListener productClickListener;
 
     public ProductRetrofitAdapter(List<Product> items,
-                          RecyclerItemClickListener.ProductClickListener clickListener ) {
+                          RecyclerItemClickListener.ProductRetrofitClickListener clickListener ) {
         listOfItems = items;
         productClickListener = clickListener;
     }
