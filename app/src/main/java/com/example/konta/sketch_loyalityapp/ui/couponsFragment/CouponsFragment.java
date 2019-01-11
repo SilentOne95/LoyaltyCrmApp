@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.couponsFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,13 +14,14 @@ import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.ui.couponDetailsActivity.CouponDetailsActivity;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 
 import java.util.List;
 
 public class CouponsFragment extends BaseFragment implements CouponsContract.View {
 
-    CouponsPresenter mPresenter;
+    CouponsPresenter presenter;
 
     private RecyclerView recyclerView;
     private View emptyStateView;
@@ -34,8 +36,8 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         getActivity().setTitle("Coupons");
 
         // Retrofit
-        mPresenter = new CouponsPresenter(this, new CouponsModel());
-        mPresenter.requestDataFromServer();
+        presenter = new CouponsPresenter(this, new CouponsModel());
+        presenter.requestDataFromServer();
 
         // Set up adapter
         recyclerView = rootView.findViewById(R.id.recycler_view);
@@ -48,18 +50,19 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     private RecyclerItemClickListener.CouponRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.CouponRetrofitClickListener() {
         @Override
         public void onItemCouponDetailsClick(int couponId) {
-            Toast.makeText(getContext(), "Show details" , Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getContext(), CouponDetailsActivity.class);
+            intent.putExtra("EXTRA_ELEMENT_ID", couponId);
+            startActivity(intent);
         }
 
         @Override
-        public void onItemCouponCodeCheckClick(Coupon coupon) {
-            Toast.makeText(getContext(), "Show coupon code" , Toast.LENGTH_LONG).show();
+        public void onItemCouponCodeCheckClick(String couponCode) {
+            Toast.makeText(getContext(), "Code: " + couponCode , Toast.LENGTH_LONG).show();
         }
     };
 
     @Override
     public void setUpAdapter(List<Coupon> couponList) {
-
         recyclerView.setAdapter(new CouponRetrofitAdapter(couponList, recyclerItemClickListener));
 
         // Set empty state view if needed

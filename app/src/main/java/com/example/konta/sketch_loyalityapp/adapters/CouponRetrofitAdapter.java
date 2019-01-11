@@ -56,10 +56,14 @@ public class CouponRetrofitAdapter extends RecyclerView.Adapter<CouponRetrofitAd
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.grid_item_show_details_button:
-                    couponClickListener.onItemCouponDetailsClick(getAdapterPosition());
+                    couponClickListener.onItemCouponDetailsClick(listOfItems
+                            .get(getAdapterPosition())
+                            .getId());
                     break;
                 case R.id.grid_item_show_code_button:
-                    couponClickListener.onItemCouponCodeCheckClick(listOfItems.get(getAdapterPosition()));
+                    couponClickListener.onItemCouponCodeCheckClick(listOfItems
+                            .get(getAdapterPosition())
+                            .getCouponCode());
                     break;
             }
         }

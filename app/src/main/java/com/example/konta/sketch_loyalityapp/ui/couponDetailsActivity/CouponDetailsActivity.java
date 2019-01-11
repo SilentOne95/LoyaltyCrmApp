@@ -1,6 +1,5 @@
 package com.example.konta.sketch_loyalityapp.ui.couponDetailsActivity;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -18,28 +17,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
-import com.example.konta.sketch_loyalityapp.root.MyApplication;
+import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+public class CouponDetailsActivity extends BaseActivity implements CouponDetailsContract.View, View.OnClickListener {
 
-public class CouponDetailsActivity extends BaseActivity implements View.OnClickListener {
+    CouponDetailsPresenter presenter;
 
-    private String json, layoutTitle;
     Button showCouponCodeButton;
     GradientDrawable backgroundButton;
     Spannable staticCodeText, promoCodeText;
 
     // Temporary variables using to get json data from assets
-    private int couponPosition = 0;
-    private static final String jsonFileData = "coupons.json";
-
-    // Fields necessary to store values that will be displayed to user
-    private int mCouponImageResourceId, mCouponDiscount;
-    private String mCouponValidDate, mCouponTitle, mCouponDescription;
-    private double mCouponBasicPrice, mCouponNewPrice;
+    private int couponPosition;
 
     @Override
     protected int getLayout() { return R.layout.activity_coupon_details; }
@@ -48,21 +38,17 @@ public class CouponDetailsActivity extends BaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Temporary solution - setting up sample data
+        setTitle("Coupon");
+
+        // Receiving id of the clicked coupon
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             couponPosition = extras.getInt("EXTRA_ELEMENT_ID");
         }
 
-        // Reading JSON file from assets
-        json = ((MyApplication) getApplication()).readFromAssets(jsonFileData);
+        presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
+        presenter.requestDataFromServer(couponPosition);
 
-        // Extracting objects that has been built up from parsing the given JSON file,
-        // preparing and displaying data
-        extractDataFromJson();
-
-        setTitle(layoutTitle);
-        setDataToRelatedViews();
 
         showCouponCodeButton = findViewById(R.id.show_coupon_button);
         showCouponCodeButton.setOnClickListener(this);
@@ -71,6 +57,29 @@ public class CouponDetailsActivity extends BaseActivity implements View.OnClickL
 
         // Temporary solution to hide code when activity is stopped or paused
         getBasicButtonStyle();
+    }
+
+    @Override
+    public void setUpViewsWithData(Coupon coupon) {
+        ImageView couponImage = findViewById(R.id.imageView);
+
+        TextView couponMarker = findViewById(R.id.discount_marker_text_view);
+        couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
+
+        TextView couponDate = findViewById(R.id.valid_date_text_view);
+        couponDate.setText(coupon.getFreshTime());
+
+        TextView couponTitle = findViewById(R.id.product_title_text_view);
+        couponTitle.setText(coupon.getTitle());
+
+        TextView couponNewPrice = findViewById(R.id.price_amount_text_view);
+        couponNewPrice.setText(String.valueOf(coupon.getPriceAfter()).concat(" zł"));
+
+        TextView couponBasicPrice = findViewById(R.id.old_price_amount_text_view);
+        couponBasicPrice.setText(String.valueOf(coupon.getPrice()).concat(" zł"));
+
+        TextView couponDescription = findViewById(R.id.coupon_description_text_view);
+        couponDescription.setText(coupon.getDescription());
     }
 
     @Override
@@ -107,55 +116,5 @@ public class CouponDetailsActivity extends BaseActivity implements View.OnClickL
         showCouponCodeButton.setText(getResources().getText(R.string.show_my_coupon_text));
         backgroundButton.setColor(getResources().getColor(R.color.colorAccent));
         backgroundButton.setStroke(3, getResources().getColor(R.color.colorAccent));
-    }
-
-    private void extractDataFromJson() {
-        try {
-            Resources resources = this.getResources();
-
-            JSONObject object = new JSONObject(json);
-            layoutTitle = object.getString("componentTitleCurrent");
-
-            String image = object.getString("contentImage");
-            mCouponImageResourceId = resources
-                    .getIdentifier(image, "drawable", this.getPackageName());
-
-            mCouponDescription = object.getString("contentFullDescription");
-
-            JSONArray array = object.getJSONArray("coupons");
-            JSONObject insideObj = array.getJSONObject(couponPosition);
-
-            mCouponTitle = insideObj.getString("contentTitle");
-            mCouponBasicPrice = insideObj.getDouble("contentBasicPrice");
-            mCouponNewPrice = insideObj.getDouble("contentFinalPrice");
-            mCouponDiscount = insideObj.getInt("contentDiscount");
-            mCouponValidDate = insideObj.getString("contentValidDate");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setDataToRelatedViews() {
-        ImageView couponImage = findViewById(R.id.imageView);
-        couponImage.setImageResource(mCouponImageResourceId);
-
-        TextView couponMarker = findViewById(R.id.discount_marker_text_view);
-        couponMarker.setText("-".concat(Integer.toString(mCouponDiscount)).concat("%"));
-
-        TextView couponDate = findViewById(R.id.valid_date_text_view);
-        couponDate.setText(mCouponValidDate);
-
-        TextView couponTitle = findViewById(R.id.product_title_text_view);
-        couponTitle.setText(mCouponTitle);
-
-        TextView couponNewPrice = findViewById(R.id.price_amount_text_view);
-        couponNewPrice.setText(String.valueOf(mCouponNewPrice).concat(" zł"));
-
-        TextView couponBasicPrice = findViewById(R.id.old_price_amount_text_view);
-        couponBasicPrice.setText(String.valueOf(mCouponBasicPrice).concat(" zł"));
-
-        TextView couponDescription = findViewById(R.id.coupon_description_text_view);
-        couponDescription.setText(mCouponDescription);
     }
 }
