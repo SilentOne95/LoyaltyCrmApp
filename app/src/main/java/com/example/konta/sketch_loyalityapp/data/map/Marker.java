@@ -1,9 +1,11 @@
 package com.example.konta.sketch_loyalityapp.data.map;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.maps.android.clustering.ClusterItem;
 
-public class Marker {
+public class Marker implements ClusterItem {
 
     @SerializedName("id")
     @Expose
@@ -21,16 +23,18 @@ public class Marker {
     @Expose
     private OpenHours openHours;
 
+    public Marker(double lat, double lng, int id) {
+        this.lat = lat;
+        this.lng = lng;
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public void setTitle(String title) {
@@ -61,4 +65,17 @@ public class Marker {
         this.openHours = openHours;
     }
 
+    @Override
+    public LatLng getPosition() {
+        return new LatLng(lat, lng);
+    }
+
+    public String getTitle() {
+        return null;
+    }
+
+    @Override
+    public String getSnippet() {
+        return null;
+    }
 }

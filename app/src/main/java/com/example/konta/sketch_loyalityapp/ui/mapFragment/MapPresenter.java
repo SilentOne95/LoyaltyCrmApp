@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.adapterModel.ItemLocation;
 import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -30,7 +29,7 @@ public class MapPresenter implements MapContract.Presenter, MapContract.Model.On
     public void switchBottomSheetState(Object object) {
 
         if (view != null){
-            if (object instanceof ItemLocation) {
+            if (object instanceof Marker) {
                 if (view.getBottomSheetState() != BottomSheetBehavior.STATE_COLLAPSED) {
                     view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
                 }

@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
-import com.example.konta.sketch_loyalityapp.adapterModel.ItemLocation;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -52,7 +51,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     Location mLastLocation;
     FusedLocationProviderClient mFusedLocationClient;
 
-    private ClusterManager<ItemLocation> mClusterManager;
+    private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
 
     @Override
@@ -106,7 +105,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mGoogleMap=googleMap;
+        mGoogleMap = googleMap;
 
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -220,8 +219,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         // Add markers to cluster
         for (Marker marker : markerList) {
-            ItemLocation itemLocation = new ItemLocation(marker.getLat(), marker.getLng(), Integer.toString(marker.getId()));
-            mClusterManager.addItem(itemLocation);
+            mClusterManager.addItem(marker);
         }
 
         // Set custom cluster style
@@ -229,10 +227,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mClusterManager.setRenderer(renderer);
 
         // Set BottomSheet state when marker is clicked
-        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<ItemLocation>() {
+        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<Marker>() {
             @Override
-            public boolean onClusterItemClick(ItemLocation itemLocation) {
-                presenter.switchBottomSheetState(itemLocation);
+            public boolean onClusterItemClick(Marker marker) {
+                presenter.switchBottomSheetState(marker);
                 return true;
             }
         });
