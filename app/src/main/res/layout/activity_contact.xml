@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorFragmentBackground"
-    tools:context=".ui.contactActivity.ContactActivity">
+    tools:context=".ui.contact.ContactActivity">
 
     <TextView
         android:id="@+id/terms_contact_text_view"

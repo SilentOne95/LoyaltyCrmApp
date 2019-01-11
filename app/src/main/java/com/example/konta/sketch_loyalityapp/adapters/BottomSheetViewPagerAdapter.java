@@ -8,14 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.konta.sketch_loyalityapp.ui.mapFragment.bottomSheet.OpeningHoursFragment;
-import com.example.konta.sketch_loyalityapp.ui.mapFragment.bottomSheet.ContactInfoFragment;
+import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.OpeningHoursFragment;
+import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.ContactInfoFragment;
 import com.example.konta.sketch_loyalityapp.R;
 
 public class BottomSheetViewPagerAdapter extends FragmentPagerAdapter {
 
     private Context mContext;
-    private final int PAGE_COUNT = 2;
     private int[] tabTitles = {R.string.first_fragment, R.string.second_fragment};
     private int[] imageResId = {R.drawable.ic_clock, R.drawable.ic_info};
 
@@ -44,7 +43,5 @@ public class BottomSheetViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public int getCount() {
-        return PAGE_COUNT;
-    }
+    public int getCount() { return 2; }
 }

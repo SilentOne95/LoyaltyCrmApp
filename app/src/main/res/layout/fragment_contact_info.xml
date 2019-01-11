@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mapFragment.bottomSheet.ContactInfoFragment">
+    tools:context=".ui.map.bottomSheet.ContactInfoFragment">
 
     <TextView
         android:id="@+id/contact_us_text"
