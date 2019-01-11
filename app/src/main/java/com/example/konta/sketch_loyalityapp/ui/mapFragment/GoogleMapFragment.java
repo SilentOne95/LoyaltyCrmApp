@@ -144,7 +144,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         // Point the map's listeners at the listeners implemented by the cluster manager
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
-        mGoogleMap.setOnMarkerClickListener(mClusterManager);
 
         // Set BottomSheet state when map is clicked
         mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -227,6 +226,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mClusterManager.setRenderer(renderer);
 
         // Set BottomSheet state when marker is clicked
+        mGoogleMap.setOnMarkerClickListener(mClusterManager);
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<Marker>() {
             @Override
             public boolean onClusterItemClick(Marker marker) {
