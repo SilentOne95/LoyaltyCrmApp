@@ -49,7 +49,7 @@ public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofit
 
         @Override
         public void onClick(View v) {
-            productClickListener.onItemProductClick(getAdapterPosition());
+            productClickListener.onItemProductClick(listOfItems.get(getAdapterPosition()).getId());
         }
     }
 

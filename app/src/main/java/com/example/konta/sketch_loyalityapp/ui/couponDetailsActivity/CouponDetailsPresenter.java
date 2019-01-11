@@ -24,7 +24,7 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter, 
     @Override
     public void onFinished(Coupon coupon) {
         if (view != null) {
-            view.setUpViewsWithData(coupon);
+            view.setUpViewWithData(coupon);
         }
     }
 

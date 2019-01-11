@@ -50,9 +50,9 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     private RecyclerItemClickListener.CouponRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.CouponRetrofitClickListener() {
         @Override
         public void onItemCouponDetailsClick(int couponId) {
-            Intent intent = new Intent(getContext(), CouponDetailsActivity.class);
-            intent.putExtra("EXTRA_ELEMENT_ID", couponId);
-            startActivity(intent);
+            Intent startCouponDetailsActivity = new Intent(getContext(), CouponDetailsActivity.class);
+            startCouponDetailsActivity.putExtra("EXTRA_ELEMENT_ID", couponId);
+            startActivity(startCouponDetailsActivity);
         }
 
         @Override

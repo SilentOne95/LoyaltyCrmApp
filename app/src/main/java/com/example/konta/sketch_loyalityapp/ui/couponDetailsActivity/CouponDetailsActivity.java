@@ -29,7 +29,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     Spannable staticCodeText, promoCodeText;
 
     // Temporary variables using to get json data from assets
-    private int couponPosition;
+    private int couponId;
 
     @Override
     protected int getLayout() { return R.layout.activity_coupon_details; }
@@ -43,11 +43,11 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         // Receiving id of the clicked coupon
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            couponPosition = extras.getInt("EXTRA_ELEMENT_ID");
+            couponId = extras.getInt("EXTRA_ELEMENT_ID");
         }
 
         presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
-        presenter.requestDataFromServer(couponPosition);
+        presenter.requestDataFromServer(couponId);
 
 
         showCouponCodeButton = findViewById(R.id.show_coupon_button);
@@ -60,7 +60,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     }
 
     @Override
-    public void setUpViewsWithData(Coupon coupon) {
+    public void setUpViewWithData(Coupon coupon) {
         ImageView couponImage = findViewById(R.id.imageView);
 
         TextView couponMarker = findViewById(R.id.discount_marker_text_view);

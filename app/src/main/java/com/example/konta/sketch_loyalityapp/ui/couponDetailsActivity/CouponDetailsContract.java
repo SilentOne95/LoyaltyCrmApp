@@ -5,7 +5,7 @@ import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 public interface CouponDetailsContract {
 
     interface View {
-        void setUpViewsWithData(Coupon coupon);
+        void setUpViewWithData(Coupon coupon);
     }
 
     interface Presenter {
