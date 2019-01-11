@@ -7,13 +7,13 @@ import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
 import com.example.konta.sketch_loyalityapp.data.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.coupons.CouponsFragment;
+import com.example.konta.sketch_loyalityapp.ui.login.LogInActivity;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomeFragment;
 import com.example.konta.sketch_loyalityapp.ui.products.ProductsFragment;
 import com.example.konta.sketch_loyalityapp.ui.contact.ContactActivity;
 import com.example.konta.sketch_loyalityapp.ui.terms.TermsConditionsActivity;
 import com.example.konta.sketch_loyalityapp.ui.website.WebsiteActivity;
-import com.example.konta.sketch_loyalityapp.ui.login.LogInActivity;
 
 import java.util.List;
 
@@ -106,44 +106,35 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     @Override
     public void displaySelectedScreen(String layoutType) {
 
-        if (layoutType != null) {
+        if (layoutType != null && view != null) {
             switch (layoutType) {
                 case "home":
-                    if (view != null)
-                        view.setFragment(new HomeFragment());
+                    view.setFragment(new HomeFragment());
                     break;
                 case "products":
-                    if (view != null)
-                        view.setFragment(new ProductsFragment());
+                    view.setFragment(new ProductsFragment());
                     break;
                 case "coupons":
-                    if (view != null)
-                        view.setFragment(new CouponsFragment());
+                    view.setFragment(new CouponsFragment());
                     break;
                 case "map":
-                    if (view != null)
-                        view.setFragment(new GoogleMapFragment());
+                    view.setFragment(new GoogleMapFragment());
                     break;
                 case "login":
-                    if (view != null)
-                        view.setActivity(LogInActivity.class);
+                    view.setActivity(LogInActivity.class);
                     break;
                 case "internet":
-                    if (view != null)
-                        view.setActivity(WebsiteActivity.class);
+                    view.setActivity(WebsiteActivity.class);
                     break;
                 case "terms":
-                    if (view != null)
-                        view.setActivity(TermsConditionsActivity.class);
+                    view.setActivity(TermsConditionsActivity.class);
                     break;
                 case "contact":
-                    if (view != null)
-                        view.setActivity(ContactActivity.class);
+                    view.setActivity(ContactActivity.class);
                     break;
             }
 
-            if (view != null)
-                view.setDisplayScreenChecked(layoutType);
+            view.setDisplayScreenChecked(layoutType);
         }
 
     }

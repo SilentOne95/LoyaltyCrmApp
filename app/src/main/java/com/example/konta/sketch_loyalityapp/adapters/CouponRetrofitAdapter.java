@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.adapters;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,11 +75,15 @@ public class CouponRetrofitAdapter extends RecyclerView.Adapter<CouponRetrofitAd
         final Coupon currentItem = listOfItems.get(position);
 
         // holder - imageView
-        holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("%"));
+        if (currentItem.getReductionType().equals("percent")){
+            holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("%"));
+        } else {
+            holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("zł"));
+        }
         holder.titleView.setText(currentItem.getTitle());
         holder.basicPrice.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
         holder.newPrice.setText(String.valueOf(currentItem.getPriceAfter()).concat(" ").concat("zł"));
-        holder.descriptionText.setText(currentItem.getShortDescription());
+        holder.descriptionText.setText(Html.fromHtml(currentItem.getShortDescription()));
     }
 
     @Override

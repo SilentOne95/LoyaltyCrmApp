@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,7 @@ public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofit
         // holder - imageView
         holder.titleView.setText(currentItem.getTitle());
         holder.price.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
-        holder.shortDescription.setText(currentItem.getShortDescription());
+        holder.shortDescription.setText(Html.fromHtml(currentItem.getShortDescription()));
     }
 
     @Override
