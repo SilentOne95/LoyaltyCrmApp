@@ -51,8 +51,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     };
 
     @Override
-    public void setUpAdapter(List<MenuComponent> list) {
-        recyclerView.setAdapter(new HomeRetrofitAdapter(list, recyclerItemClickListener));
+    public void setUpAdapter(List<MenuComponent> menuComponentList) {
+        recyclerView.setAdapter(new HomeRetrofitAdapter(menuComponentList, recyclerItemClickListener));
     }
 
 }

@@ -17,7 +17,7 @@ public interface ProductsContract {
     interface Model {
 
         interface OnFinishedListener {
-            void onFinished(List<Product> couponList);
+            void onFinished(List<Product> productList);
             void onFailure(Throwable t);
         }
 

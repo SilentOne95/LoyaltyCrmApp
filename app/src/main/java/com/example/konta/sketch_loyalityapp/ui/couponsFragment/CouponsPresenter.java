@@ -1,5 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.couponsFragment;
 
+import android.support.annotation.Nullable;
+
 import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 
 import java.util.List;
@@ -7,10 +9,11 @@ import java.util.List;
 public class CouponsPresenter implements CouponsContract.Presenter,
         CouponsContract.Model.OnFinishedListener {
 
+    @Nullable
     private CouponsContract.View view;
     private CouponsContract.Model model;
 
-    CouponsPresenter(CouponsContract.View view, CouponsContract.Model model) {
+    CouponsPresenter(@Nullable CouponsContract.View view, CouponsContract.Model model) {
         this.view = view;
         this.model = model;
     }
@@ -22,7 +25,9 @@ public class CouponsPresenter implements CouponsContract.Presenter,
 
     @Override
     public void onFinished(List<Coupon> couponList) {
-        view.setUpAdapter(couponList);
+        if (view != null) {
+            view.setUpAdapter(couponList);
+        }
     }
 
     @Override

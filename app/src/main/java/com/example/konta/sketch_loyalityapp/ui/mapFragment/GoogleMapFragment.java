@@ -14,7 +14,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.util.SparseArray;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +21,6 @@ import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.adapterModel.ItemLocation;
-import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -36,11 +34,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.google.maps.android.clustering.ClusterManager;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -50,20 +45,15 @@ import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQU
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
         View.OnClickListener, MapContract.View {
 
-    MapContract.Presenter mPresenter;
+    MapPresenter presenter;
 
     GoogleMap mGoogleMap;
     LocationRequest mLocationRequest;
     Location mLastLocation;
     FusedLocationProviderClient mFusedLocationClient;
-    private String json = null;
-    private String layoutTitle;
-    private ClusterManager<ItemLocation> mClusterManager;
-    private SparseArray<ItemLocation> mListOfMarkers = new SparseArray<>();
-    private BottomSheetBehavior mBottomSheetBehavior;
 
-    // Temporary variables using to get json data from assets
-    private static final String jsonFileData = "locations.json";
+    private ClusterManager<ItemLocation> mClusterManager;
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     @Override
     protected int getLayout() { return R.layout.fragment_google_map; }
@@ -71,7 +61,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter = new MapPresenter(this);
+
+        getActivity().setTitle("Map");
+
+        presenter = new MapPresenter(this, new MapModel());
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
@@ -85,15 +78,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             fragmentTransaction.replace(R.id.map, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
-
-        // Reading JSON file from assets
-        json = ((MyApplication) getActivity().getApplication()).readFromAssets(jsonFileData);
-
-        // Extracting objects that has been built up from parsing the given JSON file
-        // and adding markers (items) to cluster
-        extractDataFromJson();
-
-        getActivity().setTitle(layoutTitle);
 
         // Set up BottomSheet
         View mBottomSheet = rootView.findViewById(R.id.bottom_sheet);
@@ -114,7 +98,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         // Setting up custom TabLayout view
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(pagerAdapter.getTabView(i));
+            if (tab != null) {
+                tab.setCustomView(pagerAdapter.getTabView(i));
+            }
         }
     }
 
@@ -155,25 +141,17 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.animateCamera(cameraUpdate);
 
         // Add markers to map and set up ClusterManager
-        setUpCluster();
+        presenter.requestDataFromServer();
 
-        // Set custom cluster style
-        final CustomClusterRenderer renderer = new CustomClusterRenderer(getContext(), mGoogleMap, mClusterManager);
-        mClusterManager.setRenderer(renderer);
+        // Point the map's listeners at the listeners implemented by the cluster manager
+        mGoogleMap.setOnCameraIdleListener(mClusterManager);
+        mGoogleMap.setOnMarkerClickListener(mClusterManager);
 
-        // Handle events related to BottomSheet
-        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<ItemLocation>() {
-            @Override
-            public boolean onClusterItemClick(ItemLocation itemLocation) {
-                mPresenter.switchBottomSheetState(itemLocation);
-                return true;
-            }
-        });
-
+        // Set BottomSheet state when map is clicked
         mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                mPresenter.switchBottomSheetState(latLng);
+                presenter.switchBottomSheetState(latLng);
             }
         });
     }
@@ -235,52 +213,33 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
-    private void extractDataFromJson() {
-        try {
-            JSONObject object = new JSONObject(json);
-            layoutTitle = object.getString("componentTitleCurrent");
-
-            JSONArray array = object.getJSONArray("shops");
-
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject insideObj = array.getJSONObject(i);
-                int shopId = insideObj.getInt("shopId");
-                String shopTitle = insideObj.getString("shopTitle");
-
-                JSONArray shopCoordinates = insideObj.getJSONArray("shopCoordinates");
-                double shopLatitude = shopCoordinates.getDouble(0);
-                double shopLongitude = shopCoordinates.getDouble(1);
-
-                mListOfMarkers.append(i,
-                        new ItemLocation(shopLatitude, shopLongitude, Integer.toString(shopId)));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setUpCluster() {
+    @Override
+    public void setUpCluster(List<Marker> markerList) {
         // Initialize the manager with the context and the map
         mClusterManager = new ClusterManager<>(getContext(), mGoogleMap);
 
-        // Point the map's listeners at the listeners implemented by the cluster manager
-        mGoogleMap.setOnCameraIdleListener(mClusterManager);
-        mGoogleMap.setOnMarkerClickListener(mClusterManager);
-
-        // Setting up markers using json data
-        addMarkersToCluster();
-    }
-
-    private void addMarkersToCluster() {
-        // Add ten cluster items in close proximity, for purposes of this example.
-        for (int i = 0; i < mListOfMarkers.size(); i++) {
-            ItemLocation marker = new ItemLocation(mListOfMarkers.get(i).getPosition(), mListOfMarkers.get(i).getTitle());
-            mClusterManager.addItem(marker);
+        // Add markers to cluster
+        for (Marker marker : markerList) {
+            ItemLocation itemLocation = new ItemLocation(marker.getLat(), marker.getLng(), Integer.toString(marker.getId()));
+            mClusterManager.addItem(itemLocation);
         }
+
+        // Set custom cluster style
+        final CustomClusterRenderer renderer = new CustomClusterRenderer(getContext(), mGoogleMap, mClusterManager);
+        mClusterManager.setRenderer(renderer);
+
+        // Set BottomSheet state when marker is clicked
+        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<ItemLocation>() {
+            @Override
+            public boolean onClusterItemClick(ItemLocation itemLocation) {
+                presenter.switchBottomSheetState(itemLocation);
+                return true;
+            }
+        });
     }
 
     @Override
-    public void onClick(View view) { mPresenter.switchBottomSheetState(view); }
+    public void onClick(View view) { presenter.switchBottomSheetState(view); }
 
     @Override
     public int getBottomSheetState() {

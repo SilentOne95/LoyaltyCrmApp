@@ -4,8 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
-import com.example.konta.sketch_loyalityapp.adapterModel.ItemLocation;
 import com.example.konta.sketch_loyalityapp.R;
+import com.example.konta.sketch_loyalityapp.adapterModel.ItemLocation;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -28,13 +28,13 @@ public class CustomClusterRenderer extends DefaultClusterRenderer<ItemLocation> 
     }
 
     @Override
-    protected void onBeforeClusterItemRendered(ItemLocation item, MarkerOptions markerOptions) {
+    protected void onBeforeClusterItemRendered(ItemLocation itemLocation, MarkerOptions markerOptions) {
         // Set custom color of markers
         String string = "#" + Integer.toHexString(ContextCompat.getColor(mContext, R.color.colorPrimary));
         final BitmapDescriptor markerDescriptorCustom = CustomBitmapDescriptorFactory.fromColorString(string);
 
         final BitmapDescriptor markerDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
-        markerOptions.icon(markerDescriptor).snippet(item.getTitle());
+        markerOptions.icon(markerDescriptor).snippet(itemLocation.getTitle());
     }
 }
 

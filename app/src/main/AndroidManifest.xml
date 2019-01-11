@@ -71,7 +71,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.mainActivity.MainActivity" />
         </activity>
-        <activity android:name=".ui.mapFragment.BottomSheet" />
+        <activity android:name=".ui.mapFragment.bottomSheet.BottomSheet" />
 
         <meta-data
             android:name="com.google.android.gms.version"

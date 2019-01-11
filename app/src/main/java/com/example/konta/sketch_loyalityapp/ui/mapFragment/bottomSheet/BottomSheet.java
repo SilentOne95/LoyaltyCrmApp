@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.ui.mapFragment;
+package com.example.konta.sketch_loyalityapp.ui.mapFragment.bottomSheet;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

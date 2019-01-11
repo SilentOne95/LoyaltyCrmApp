@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.ui.mapFragment;
+package com.example.konta.sketch_loyalityapp.ui.mapFragment.bottomSheet;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;

@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.konta.sketch_loyalityapp.ui.mapFragment.OpeningHoursFragment;
-import com.example.konta.sketch_loyalityapp.ui.mapFragment.ContactInfoFragment;
+import com.example.konta.sketch_loyalityapp.ui.mapFragment.bottomSheet.OpeningHoursFragment;
+import com.example.konta.sketch_loyalityapp.ui.mapFragment.bottomSheet.ContactInfoFragment;
 import com.example.konta.sketch_loyalityapp.R;
 
 public class BottomSheetViewPagerAdapter extends FragmentPagerAdapter {
