@@ -137,7 +137,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void onResponseFailure(Throwable throwable) {
-        Toast.makeText(MainActivity.this, "Oops.. something went wrong: ", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Oops.. something went wrong!", Toast.LENGTH_LONG).show();
     }
 
     @Override

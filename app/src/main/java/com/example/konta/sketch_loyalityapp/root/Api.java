@@ -40,5 +40,5 @@ public interface Api {
 
     // Get static page
     @GET("/app_loyalty_page/get/{id}")
-    Call<List<Page>> getStaticPage(@Path("id") int id);
+    Call<Page> getStaticPage(@Path("id") int id);
 }
