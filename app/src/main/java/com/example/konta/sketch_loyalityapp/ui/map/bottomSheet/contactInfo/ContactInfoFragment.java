@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
+import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetModel;
+
+import java.util.List;
 
 public class ContactInfoFragment extends BaseFragment implements BottomSheetContract.ContactInfoView,
         View.OnClickListener {
@@ -34,7 +37,10 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
 
         presenter = new ContactInfoPresenter(this, new BottomSheetModel());
         presenter.requestMarkersList();
+    }
 
+    @Override
+    public void setUpViewsWithData(List<Marker> markerList) {
         phoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
         phoneTextView.setOnClickListener(this);
 

@@ -26,7 +26,9 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
     @Override
     public void onFinished(List<Marker> markerList) {
-
+        if (view != null) {
+            view.setUpViewsWithData(markerList);
+        }
     }
 
     @Override
