@@ -33,7 +33,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new ContactInfoPresenter(this, new BottomSheetModel());
-        presenter.requestMarker();
+        presenter.requestMarkersList();
 
         phoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
         phoneTextView.setOnClickListener(this);

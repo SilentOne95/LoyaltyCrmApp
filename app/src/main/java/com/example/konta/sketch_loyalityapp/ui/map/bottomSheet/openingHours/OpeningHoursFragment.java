@@ -26,6 +26,6 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new OpeningHoursPresenter(this, new BottomSheetModel());
-        presenter.requestMarker();
+        presenter.requestMarkersList();
     }
 }
