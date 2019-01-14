@@ -4,6 +4,11 @@ import android.support.annotation.Nullable;
 
 import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class CouponDetailsPresenter implements CouponDetailsContract.Presenter, CouponDetailsContract.Model.OnFinishedListener {
 
     @Nullable
@@ -19,6 +24,20 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter, 
     @Override
     public void requestDataFromServer(int couponId) {
         model.fetchDataFromServer(this, couponId);
+    }
+
+    @Override
+    public String formatDateString(String dateString) {
+        String formattedDate = null;
+
+        try {
+            Date date = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH).parse(dateString);
+            formattedDate = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL")).format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return formattedDate;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.home;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
@@ -32,7 +31,6 @@ public class HomePresenter implements HomeContract.Presenter, MainActivityContra
                 if (component.getList().equals("menu")) {
                     list.append(i, component);
                     i++;
-                    Log.d("test 1 ", component.getComponentTitle());
                 }
             }
 
@@ -40,7 +38,6 @@ public class HomePresenter implements HomeContract.Presenter, MainActivityContra
                 if (component.getList().equals("submenu")) {
                     list.append(i, component);
                     i++;
-                    Log.d("test 2 ", component.getComponentTitle());
                 }
             }
         }

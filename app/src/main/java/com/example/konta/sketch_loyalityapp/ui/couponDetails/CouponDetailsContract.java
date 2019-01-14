@@ -10,6 +10,8 @@ public interface CouponDetailsContract {
 
     interface Presenter {
         void requestDataFromServer(int couponId);
+
+        String formatDateString(String dateString);
     }
 
     interface Model {

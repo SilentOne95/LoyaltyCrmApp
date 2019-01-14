@@ -67,7 +67,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
 
         TextView couponDate = findViewById(R.id.valid_date_text_view);
-        couponDate.setText(coupon.getFreshTime());
+        couponDate.setText(presenter.formatDateString(coupon.getFreshTime()));
 
         TextView couponTitle = findViewById(R.id.product_title_text_view);
         couponTitle.setText(coupon.getTitle());
