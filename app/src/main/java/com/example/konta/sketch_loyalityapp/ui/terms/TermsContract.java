@@ -16,9 +16,9 @@ public interface TermsContract {
     }
 
     interface Model {
+
         interface OnFinishedListener {
             void onFinished(Page page);
-
             void onFailure(Throwable t);
         }
 

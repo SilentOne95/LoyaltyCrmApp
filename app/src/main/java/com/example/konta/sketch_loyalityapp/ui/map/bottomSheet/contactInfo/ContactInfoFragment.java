@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.ui.map.bottomSheet;
+package com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.contactInfo;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -11,8 +11,13 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
+import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
+import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetModel;
 
-public class ContactInfoFragment extends BaseFragment implements View.OnClickListener {
+public class ContactInfoFragment extends BaseFragment implements BottomSheetContract.ContactInfoView,
+        View.OnClickListener {
+
+    ContactInfoPresenter presenter;
 
     private TextView phoneTextView, emailTextView;
 
@@ -26,6 +31,9 @@ public class ContactInfoFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        presenter = new ContactInfoPresenter(this, new BottomSheetModel());
+        presenter.requestMarker();
 
         phoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
         phoneTextView.setOnClickListener(this);

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
+import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetModel;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -63,7 +64,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         getActivity().setTitle("Map");
 
-        presenter = new MapPresenter(this, new MapModel());
+        presenter = new MapPresenter(this, new MapModel(), new BottomSheetModel());
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
