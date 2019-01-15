@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.map;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.map.Marker;
 
 import java.util.List;
@@ -23,11 +24,6 @@ public interface MapContract {
 
     interface Model {
 
-        interface OnFinishedListener {
-            void onFinished(List<Marker> markerList);
-            void onFailure(Throwable t);
-        }
-
-        void fetchDataFromServer(OnFinishedListener onFinishedListener);
+        void fetchDataFromServer(BaseCallbackListener.ListItemsOnFinishListener<Marker> onFinishedListener);
     }
 }

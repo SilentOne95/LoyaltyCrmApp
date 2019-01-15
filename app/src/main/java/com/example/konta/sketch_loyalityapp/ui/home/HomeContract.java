@@ -13,8 +13,4 @@ public interface HomeContract {
     interface Presenter {
         void fetchDataFromServer();
     }
-
-    interface Model {
-
-    }
 }

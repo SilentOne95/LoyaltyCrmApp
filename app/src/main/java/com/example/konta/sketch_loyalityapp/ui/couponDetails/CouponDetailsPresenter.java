@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.ui.couponDetails;
 
 import android.support.annotation.Nullable;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 
 import java.text.ParseException;
@@ -9,7 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class CouponDetailsPresenter implements CouponDetailsContract.Presenter, CouponDetailsContract.Model.OnFinishedListener {
+public class CouponDetailsPresenter implements CouponDetailsContract.Presenter,
+        BaseCallbackListener.SingleItemOnFinishListener<Coupon> {
 
     @Nullable
     private CouponDetailsContract.View view;

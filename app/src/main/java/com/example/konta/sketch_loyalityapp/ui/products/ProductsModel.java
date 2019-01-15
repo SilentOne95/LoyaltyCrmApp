@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.ui.products;
 
 import android.support.annotation.NonNull;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.product.Product;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 
@@ -14,7 +15,7 @@ import retrofit2.Response;
 public class ProductsModel implements ProductsContract.Model {
 
     @Override
-    public void fetchDataFromServer(final OnFinishedListener onFinishedListener) {
+    public void fetchDataFromServer(final BaseCallbackListener.ListItemsOnFinishListener<Product> onFinishedListener) {
         MyApplication.getApi().getAllProducts().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {

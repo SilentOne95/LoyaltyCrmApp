@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.main;
 import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
 import com.example.konta.sketch_loyalityapp.data.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
@@ -18,7 +19,7 @@ import com.example.konta.sketch_loyalityapp.ui.website.WebsiteActivity;
 import java.util.List;
 
 public class MainActivityPresenter implements MainActivityContract.Presenter,
-        BaseFragmentContract.Presenter, MainActivityContract.Model.OnFinishedListener {
+        BaseFragmentContract.Presenter, BaseCallbackListener.ListItemsOnFinishListener<MenuComponent> {
 
     @Nullable
     private MainActivityContract.View view;
@@ -46,33 +47,32 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void onFinished(List<MenuComponent> listMenuComponent) {
-
+    public void onFinished(List<MenuComponent> listOfItems) {
         int menuId = 0, submenuId = 0, homeScreenId = 0;
         String menuType, type, title;
 
-        for (int i = 0; i < listMenuComponent.size(); i++) {
-            menuType = listMenuComponent.get(i).getList();
+        for (int i = 0; i < listOfItems.size(); i++) {
+            menuType = listOfItems.get(i).getList();
 
             if (menuType.equals("menu")) {
-                type = listMenuComponent.get(i).getType();
-                title = listMenuComponent.get(i).getComponentTitle();
+                type = listOfItems.get(i).getType();
+                title = listOfItems.get(i).getComponentTitle();
 
                 menuArray.append(menuId, new HelperComponent(type, title));
                 menuId++;
 
-                if (listMenuComponent.get(i).getIsHomePage().equals(1)) {
+                if (listOfItems.get(i).getIsHomePage().equals(1)) {
                     homeScreenId = menuId - 1;
                 }
 
             } else if (menuType.equals("submenu")) {
-                type = listMenuComponent.get(i).getType();
-                title = listMenuComponent.get(i).getComponentTitle();
+                type = listOfItems.get(i).getType();
+                title = listOfItems.get(i).getComponentTitle();
 
                 submenuArray.append(submenuId, new HelperComponent(type, title));
                 submenuId++;
 
-                if (listMenuComponent.get(i).getIsHomePage().equals(1)) {
+                if (listOfItems.get(i).getIsHomePage().equals(1)) {
                     homeScreenId = menuId - 1;
                 }
             }

@@ -3,11 +3,10 @@ package com.example.konta.sketch_loyalityapp.ui.main;
 import android.app.Activity;
 import android.util.SparseArray;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.data.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
-
-import java.util.List;
 
 public interface MainActivityContract {
 
@@ -34,11 +33,6 @@ public interface MainActivityContract {
 
     interface Model {
 
-        interface OnFinishedListener {
-            void onFinished(List<MenuComponent> menuComponentList);
-            void onFailure(Throwable t);
-        }
-
-        void fetchDataFromServer(OnFinishedListener onFinishedListener);
+        void fetchDataFromServer(BaseCallbackListener.ListItemsOnFinishListener<MenuComponent> onFinishedListener);
     }
 }

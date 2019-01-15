@@ -4,12 +4,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.view.View;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-public class MapPresenter implements MapContract.Presenter, MapContract.Model.OnFinishedListener {
+public class MapPresenter implements MapContract.Presenter,
+        BaseCallbackListener.ListItemsOnFinishListener<Marker> {
 
     @Nullable
     private MapContract.View view;

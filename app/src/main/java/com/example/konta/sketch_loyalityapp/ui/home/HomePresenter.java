@@ -3,12 +3,14 @@ package com.example.konta.sketch_loyalityapp.ui.home;
 import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityContract;
 
 import java.util.List;
 
-public class HomePresenter implements HomeContract.Presenter, MainActivityContract.Model.OnFinishedListener {
+public class HomePresenter implements HomeContract.Presenter,
+        BaseCallbackListener.ListItemsOnFinishListener<MenuComponent> {
 
     @Nullable
     private HomeContract.View view;

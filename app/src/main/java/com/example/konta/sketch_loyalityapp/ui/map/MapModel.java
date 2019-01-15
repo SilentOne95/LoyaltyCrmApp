@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.ui.map;
 
 import android.support.annotation.NonNull;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 
@@ -14,7 +15,7 @@ import retrofit2.Response;
 public class MapModel implements MapContract.Model {
 
     @Override
-    public void fetchDataFromServer(final OnFinishedListener onFinishedListener) {
+    public void fetchDataFromServer(final BaseCallbackListener.ListItemsOnFinishListener<Marker> onFinishedListener) {
         MyApplication.getApi().getAllMarkers().enqueue(new Callback<List<Marker>>() {
             @Override
             public void onResponse(@NonNull Call<List<Marker>> call, @NonNull Response<List<Marker>> response) {

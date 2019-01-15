@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.terms;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.staticPage.Page;
 
 public interface TermsContract {
@@ -17,11 +18,7 @@ public interface TermsContract {
 
     interface Model {
 
-        interface OnFinishedListener {
-            void onFinished(Page page);
-            void onFailure(Throwable t);
-        }
-
-        void fetchDataFromServer(OnFinishedListener onFinishedListener, int pageId);
+        void fetchDataFromServer(BaseCallbackListener.SingleItemOnFinishListener<Page> onFinishedListener,
+                                 int pageId);
     }
 }

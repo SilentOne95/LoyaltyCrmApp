@@ -2,12 +2,13 @@ package com.example.konta.sketch_loyalityapp.ui.coupons;
 
 import android.support.annotation.Nullable;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 
 import java.util.List;
 
 public class CouponsPresenter implements CouponsContract.Presenter,
-        CouponsContract.Model.OnFinishedListener {
+        BaseCallbackListener.ListItemsOnFinishListener<Coupon> {
 
     @Nullable
     private CouponsContract.View view;

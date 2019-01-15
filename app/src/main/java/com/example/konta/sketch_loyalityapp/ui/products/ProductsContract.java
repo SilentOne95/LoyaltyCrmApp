@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.products;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.product.Product;
 
 import java.util.List;
@@ -16,11 +17,6 @@ public interface ProductsContract {
 
     interface Model {
 
-        interface OnFinishedListener {
-            void onFinished(List<Product> productList);
-            void onFailure(Throwable t);
-        }
-
-        void fetchDataFromServer(OnFinishedListener onFinishedListener);
+        void fetchDataFromServer(BaseCallbackListener.ListItemsOnFinishListener<Product> onFinishedListener);
     }
 }
