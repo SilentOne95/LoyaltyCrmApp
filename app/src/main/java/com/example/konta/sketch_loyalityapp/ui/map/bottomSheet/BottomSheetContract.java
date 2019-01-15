@@ -20,25 +20,10 @@ public interface BottomSheetContract {
 
     interface ContactInfoPresenter {
 
-        void requestMarkersList();
     }
 
     interface OpeningHoursPresenter {
 
-        void requestMarkersList();
-
         void formatOpenHoursData(List<Marker> markerList);
-    }
-
-    interface Model {
-
-        interface OnFinishedListener {
-            void onFinished(List<Marker> markerList);
-            void onFailure(Throwable t);
-        }
-
-        void fetchDataFromServer(OnFinishedListener onFinishedListener);
-
-        void fetchMarkerList(OnFinishedListener onFinishedListener);
     }
 }

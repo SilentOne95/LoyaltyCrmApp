@@ -13,7 +13,6 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
-import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetModel;
 
 import java.util.List;
 
@@ -35,8 +34,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = new ContactInfoPresenter(this, new BottomSheetModel());
-        presenter.requestMarkersList();
+        presenter = new ContactInfoPresenter(this);
     }
 
     @Override
