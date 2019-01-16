@@ -17,6 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+
 public class CouponRetrofitAdapter extends RecyclerView.Adapter<CouponRetrofitAdapter.ViewHolder> {
 
     private List<Coupon> listOfItems;
@@ -76,8 +78,10 @@ public class CouponRetrofitAdapter extends RecyclerView.Adapter<CouponRetrofitAd
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Coupon currentItem = listOfItems.get(position);
 
-        // Testing picasso library
-        Picasso.get().load("http://10.0.2.2:5000/file/appImg/1546418584783_V979RGOIEB3K.jpg").into(holder.imageView);
+        // Temporary solution - testing library
+        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
+            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
+        }
 
         if (currentItem.getReductionType().equals("percent")){
             holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("%"));

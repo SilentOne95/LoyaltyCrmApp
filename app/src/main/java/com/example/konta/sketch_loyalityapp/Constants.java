@@ -5,6 +5,7 @@ public final class Constants {
 
     // General
     public static final String BASE_URL = "http://10.0.2.2:5000/";
+    public static final String BASE_URL_IMAGES = "http://10.0.2.2:5000";
     public static final int INITIAL_CAPACITY_ARRAY = 0;
     public static final int BITMAP_CORNER_RADIUS = 15;
 

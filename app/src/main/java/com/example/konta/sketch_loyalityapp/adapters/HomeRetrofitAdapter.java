@@ -12,8 +12,11 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class HomeRetrofitAdapter extends RecyclerView.Adapter<HomeRetrofitAdapter.ViewHolder> {
 
@@ -41,8 +44,7 @@ public class HomeRetrofitAdapter extends RecyclerView.Adapter<HomeRetrofitAdapte
 
         ViewHolder(@NonNull View view) {
             super(view);
-
-            // imageView
+            imageView = view.findViewById(R.id.grid_item_image);
             titleView = view.findViewById(R.id.grid_item_title_text);
             descriptionText = view.findViewById(R.id.grid_item_content_description);
             button = view.findViewById(R.id.grid_item_view_details_button);
@@ -53,7 +55,11 @@ public class HomeRetrofitAdapter extends RecyclerView.Adapter<HomeRetrofitAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final MenuComponent currentItem = listOfItems.get(position);
 
-        // holder - imageView
+        // Temporary solution - testing library
+        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
+            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
+        }
+
         holder.titleView.setText(currentItem.getComponentTitle());
         holder.descriptionText.setVisibility(View.GONE);
         holder.button.setOnClickListener(new View.OnClickListener() {

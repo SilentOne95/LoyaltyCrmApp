@@ -7,12 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.data.product.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofitAdapter.ViewHolder> {
 
@@ -34,13 +38,13 @@ public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofit
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        // imageView
+        private ImageView imageView;
         private TextView titleView, price, shortDescription;
         private Button button;
 
         ViewHolder(@NonNull View view) {
             super(view);
-            // imageView
+            imageView = view.findViewById(R.id.grid_item_image);
             titleView = view.findViewById(R.id.grid_item_title_text);
             price = view.findViewById(R.id.grid_item_price_amount);
             shortDescription = view.findViewById(R.id.grid_item_content_description);
@@ -58,7 +62,11 @@ public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofit
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product currentItem = listOfItems.get(position);
 
-        // holder - imageView
+        // Temporary solution - testing library
+        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
+            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
+        }
+
         holder.titleView.setText(currentItem.getTitle());
         holder.price.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
         holder.shortDescription.setText(Html.fromHtml(currentItem.getShortDescription()));

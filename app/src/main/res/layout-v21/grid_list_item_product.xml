@@ -24,7 +24,8 @@
         <TextView
             android:id="@+id/grid_item_title_text"
             style="@style/general_grid_item_title_one_row"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/grid_item_price_text"
