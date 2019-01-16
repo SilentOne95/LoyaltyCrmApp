@@ -29,6 +29,9 @@ public class MenuComponent {
     @SerializedName("is_home_page")
     @Expose
     private Integer isHomePage;
+    @SerializedName("url")
+    @Expose
+    private String url;
     @SerializedName("id_component")
     @Expose
     private Integer idComponent;
@@ -102,6 +105,10 @@ public class MenuComponent {
     public void setIsHomePage(Integer isHomePage) {
         this.isHomePage = isHomePage;
     }
+
+    public String getUrl() { return url; }
+
+    public void setUrl(String url) { this.url = url; }
 
     public Integer getIdComponent() {
         return idComponent;

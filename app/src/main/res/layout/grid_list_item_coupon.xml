@@ -10,7 +10,8 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/image_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/grid_item_image"

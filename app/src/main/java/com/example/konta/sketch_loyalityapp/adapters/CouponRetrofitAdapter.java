@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -35,13 +37,13 @@ public class CouponRetrofitAdapter extends RecyclerView.Adapter<CouponRetrofitAd
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        // imageView
+        private ImageView imageView;
         private TextView titleView, descriptionText, discountMarker, basicPrice, newPrice;
         private Button checkCodeButton, showDetailsButton;
 
         ViewHolder(@NonNull final View view) {
             super(view);
-            // imageView
+            imageView = view.findViewById(R.id.grid_item_image);
             discountMarker = view.findViewById(R.id.grid_item_discount_marker);
             titleView = view.findViewById(R.id.grid_item_coupon_title);
             basicPrice = view.findViewById(R.id.grid_item_old_price_amount);
@@ -74,7 +76,9 @@ public class CouponRetrofitAdapter extends RecyclerView.Adapter<CouponRetrofitAd
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Coupon currentItem = listOfItems.get(position);
 
-        // holder - imageView
+        // Testing picasso library
+        Picasso.get().load("http://10.0.2.2:5000/file/appImg/1546418584783_V979RGOIEB3K.jpg").into(holder.imageView);
+
         if (currentItem.getReductionType().equals("percent")){
             holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("%"));
         } else {
