@@ -124,11 +124,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         Menu menu = mNavigationView.getMenu(), submenu = mNavigationView.getMenu();
 
         for (int i = 0; i < menuSectionArray.size(); i++) {
-            menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, menuSectionArray.get(i).getTitle());
+                menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, menuSectionArray.get(i).getTitle());
         }
 
         for (int i = 0; i < submenuSectionArray.size(); i++) {
-            submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, submenuSectionArray.get(i).getTitle());
+                submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, submenuSectionArray.get(i).getTitle());
         }
 
         // Set checked home screen in Navigation Drawer
