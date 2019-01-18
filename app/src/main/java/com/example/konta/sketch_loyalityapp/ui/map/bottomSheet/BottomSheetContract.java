@@ -24,6 +24,8 @@ public interface BottomSheetContract {
 
     interface OpeningHoursPresenter {
 
+        void fetchData();
         void formatOpenHoursData(List<Marker> markerList);
-    }
+        String checkIfOpenHoursAreValid(String openHour, String openMinute, String closeHour, String closeMinute);
+        }
 }

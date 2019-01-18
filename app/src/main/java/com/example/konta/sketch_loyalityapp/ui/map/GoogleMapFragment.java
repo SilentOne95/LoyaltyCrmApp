@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
+import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -33,7 +34,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;

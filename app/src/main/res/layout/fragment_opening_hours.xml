@@ -79,7 +79,6 @@
 
     <TextView
         android:id="@+id/monday_hours_text"
-        android:text="@string/opening_hours_default_text"
         app:layout_constraintBottom_toTopOf="@+id/tuesday_hours_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/divider"
@@ -88,7 +87,6 @@
 
     <TextView
         android:id="@+id/tuesday_hours_text"
-        android:text="@string/opening_hours_default_text"
         app:layout_constraintBottom_toTopOf="@+id/wednesday_hours_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/divider"
@@ -97,7 +95,6 @@
 
     <TextView
         android:id="@+id/wednesday_hours_text"
-        android:text="@string/opening_hours_default_text"
         app:layout_constraintBottom_toTopOf="@+id/thursday_hours_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/divider"
@@ -106,7 +103,6 @@
 
     <TextView
         android:id="@+id/thursday_hours_text"
-        android:text="@string/opening_hours_default_text"
         app:layout_constraintBottom_toTopOf="@+id/friday_hours_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/divider"
@@ -115,7 +111,6 @@
 
     <TextView
         android:id="@+id/friday_hours_text"
-        android:text="@string/opening_hours_default_text"
         app:layout_constraintBottom_toTopOf="@+id/saturday_hours_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/divider"
@@ -124,7 +119,6 @@
 
     <TextView
         android:id="@+id/saturday_hours_text"
-        android:text="@string/opening_hours_default_text"
         app:layout_constraintBottom_toTopOf="@+id/sunday_hours_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/divider"
@@ -133,7 +127,6 @@
 
     <TextView
         android:id="@+id/sunday_hours_text"
-        android:text="@string/opening_hours_default_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/divider"

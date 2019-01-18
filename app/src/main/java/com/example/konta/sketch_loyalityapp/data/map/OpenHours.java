@@ -82,5 +82,4 @@ public class OpenHours {
     public void setSunday(Sunday sunday) {
         this.sunday = sunday;
     }
-
 }

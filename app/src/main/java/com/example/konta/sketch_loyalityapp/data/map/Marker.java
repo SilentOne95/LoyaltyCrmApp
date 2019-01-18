@@ -37,6 +37,10 @@ public class Marker implements ClusterItem {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -66,16 +70,9 @@ public class Marker implements ClusterItem {
     }
 
     @Override
-    public LatLng getPosition() {
-        return new LatLng(lat, lng);
-    }
-
-    public String getTitle() {
-        return null;
-    }
+    public LatLng getPosition() { return  new LatLng(lat, lng); }
 
     @Override
-    public String getSnippet() {
-        return null;
-    }
+    public String getSnippet() { return null; }
+
 }

@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.openingHours;
 import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
+import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.data.map.Friday;
 import com.example.konta.sketch_loyalityapp.data.map.Marker;
 import com.example.konta.sketch_loyalityapp.data.map.Monday;
@@ -12,107 +13,189 @@ import com.example.konta.sketch_loyalityapp.data.map.Sunday;
 import com.example.konta.sketch_loyalityapp.data.map.Thursday;
 import com.example.konta.sketch_loyalityapp.data.map.Tuesday;
 import com.example.konta.sketch_loyalityapp.data.map.Wednesday;
+import com.example.konta.sketch_loyalityapp.ui.map.MapContract;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
 
 import java.util.List;
 
-public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter {
+public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter,
+        BaseCallbackListener.ListItemsOnFinishListener<Marker> {
 
     @Nullable
     private BottomSheetContract.OpeningHoursView view;
+    private MapContract.Model model;
 
-    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view) {
+    private SparseArray<String> list = new SparseArray<>();
+
+    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view, MapContract.Model model) {
         this.view = view;
+        this.model = model;
     }
 
     @Override
     public void formatOpenHoursData(List<Marker> markerList) {
-        SparseArray<String> list = new SparseArray<>();
         OpenHours open;
         String openHour, openMinute, closeHour, closeMinute, day;
-        openHour = openMinute = closeHour = closeMinute = day = null;
+        int index = 0;
 
-        Marker marker = markerList.get(0);
+        // For the test purpose get static value
+        Marker marker = markerList.get(1);
+        open = marker.getOpenHours();
 
-        int i = 0;
-        do {
-            open = marker.getOpenHours();
+        // TODO: Simplify
+        if (open.getMonday() != null) {
+            Monday monday = open.getMonday();
 
-            switch (i) {
-                case 0:
-                    Monday monday = open.getMonday();
+            openHour = monday.getOpenHour();
+            openMinute = monday.getOpenMinute();
+            closeHour = monday.getCloseHour();
+            closeMinute = monday.getCloseMinute();
 
-                    openHour = monday.getOpenHour().toString();
-                    openMinute = monday.getOpenMinute().toString();
-                    closeHour = monday.getCloseHour().toString();
-                    closeMinute = monday.getCloseMinute().toString();
-                    break;
-                case 1:
-                    Tuesday tuesday = open.getTuesday();
+            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
+            list.append(index, day);
+            index++;
+        } else {
+            day = "Closed";
+            list.append(index, day);
+            index++;
+        }
 
-                    openHour = tuesday.getOpenHour().toString();
-                    openMinute = tuesday.getOpenMinute().toString();
-                    closeHour = tuesday.getCloseHour().toString();
-                    closeMinute = tuesday.getCloseMinute().toString();
-                    break;
-                case 2:
-                    if (open.getWednesday() != null){
-                        Wednesday wednesday = open.getWednesday();
+        if (open.getTuesday() != null) {
+            Tuesday tuesday = open.getTuesday();
 
-                        openHour = wednesday.getOpenHour().toString();
-                        openMinute = wednesday.getOpenMinute().toString();
-                        closeHour = wednesday.getCloseHour().toString();
-                        closeMinute = wednesday.getCloseMinute().toString();
-                    }
-                    break;
-                case 3:
-                    Thursday thursday = open.getThursday();
+            openHour = tuesday.getOpenHour();
+            openMinute = tuesday.getOpenMinute();
+            closeHour = tuesday.getCloseHour();
+            closeMinute = tuesday.getCloseMinute();
 
-                    openHour = thursday.getOpenHour().toString();
-                    openMinute = thursday.getOpenMinute().toString();
-                    closeHour = thursday.getCloseHour().toString();
-                    closeMinute = thursday.getCloseMinute().toString();
-                    break;
-                case 4:
-                    Friday friday = open.getFriday();
+            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
+            list.append(index, day);
+            index++;
 
-                    openHour = friday.getOpenHour().toString();
-                    openMinute = friday.getOpenMinute().toString();
-                    closeHour = friday.getCloseHour().toString();
-                    closeMinute = friday.getCloseMinute().toString();
-                    break;
-                case 5:
-                    Saturday saturday = open.getSaturday();
+        } else {
+            day = checkIfOpenHoursAreValid("", "", "", "");
+            list.append(index, day);
+            index++;
+        }
 
-                    openHour = saturday.getOpenHour().toString();
-                    openMinute = saturday.getOpenMinute().toString();
-                    closeHour = saturday.getCloseHour().toString();
-                    closeMinute = saturday.getCloseMinute().toString();
-                    break;
-                case 6:
-                    Sunday sunday = open.getSunday();
+        if (open.getWednesday() != null) {
+            Wednesday wednesday = open.getWednesday();
 
-                    openHour = sunday.getOpenHour().toString();
-                    openMinute = sunday.getOpenMinute().toString();
-                    closeHour = sunday.getCloseHour().toString();
-                    closeMinute = sunday.getCloseMinute().toString();
-                    break;
-                default:
-                    break;
-            }
+            openHour = wednesday.getOpenHour();
+            openMinute = wednesday.getOpenMinute();
+            closeHour = wednesday.getCloseHour();
+            closeMinute = wednesday.getCloseMinute();
 
-            if (openHour.isEmpty() || openHour.equals(closeHour)) {
-                day = "Closed";
-            } else {
-                day = openHour + ":" + openMinute + " - " + closeHour + ":" + closeMinute;
-            }
+            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
+            list.append(index, day);
+            index++;
 
-            list.append(i, day);
-            i++;
-        } while (i < 7);
+        } else {
+            day = checkIfOpenHoursAreValid("", "", "", "");
+            list.append(index, day);
+            index++;
+        }
+
+        if (open.getThursday() != null) {
+            Thursday thursday = open.getThursday();
+
+            openHour = thursday.getOpenHour();
+            openMinute = thursday.getOpenMinute();
+            closeHour = thursday.getCloseHour();
+            closeMinute = thursday.getCloseMinute();
+
+            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
+            list.append(index, day);
+            index++;
+
+        } else {
+            day = checkIfOpenHoursAreValid("", "", "", "");
+            list.append(index, day);
+            index++;
+        }
+
+        if (open.getFriday() != null) {
+            Friday friday = open.getFriday();
+
+            openHour = friday.getOpenHour();
+            openMinute = friday.getOpenMinute();
+            closeHour = friday.getCloseHour();
+            closeMinute = friday.getCloseMinute();
+
+            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
+            list.append(index, day);
+            index++;
+        } else {
+            day = checkIfOpenHoursAreValid("", "", "", "");
+            list.append(index, day);
+            index++;
+        }
+
+        if (open.getSaturday() != null) {
+            Saturday saturday = open.getSaturday();
+
+            openHour = saturday.getOpenHour();
+            openMinute = saturday.getOpenMinute();
+            closeHour = saturday.getCloseHour();
+            closeMinute = saturday.getCloseMinute();
+
+            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
+            list.append(index, day);
+            index++;
+
+        } else {
+            day = checkIfOpenHoursAreValid("", "", "", "");
+            list.append(index, day);
+            index++;
+        }
+
+        if (open.getSunday() != null) {
+            Sunday sunday = open.getSunday();
+
+            openHour = sunday.getOpenHour();
+            openMinute = sunday.getOpenMinute();
+            closeHour = sunday.getCloseHour();
+            closeMinute = sunday.getCloseMinute();
+
+            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
+            list.append(index, day);
+
+        } else {
+            day = checkIfOpenHoursAreValid("", "", "", "");
+            list.append(index, day);
+        }
 
         if (view != null) {
             view.setUpViewsWithData(list);
         }
+    }
+
+    @Override
+    public String checkIfOpenHoursAreValid(String openHour, String openMinute, String closeHour, String closeMinute) {
+        String day;
+
+        if (openHour.isEmpty() || openHour.equals("None")) {
+            day = "Closed";
+        } else if (openHour.equals(closeHour)) {
+            day = "Open 24/7";
+        } else {
+            day = openHour + ":" + openMinute + " - " + closeHour + ":" + closeMinute;
+        }
+        return day;
+    }
+
+    @Override
+    public void fetchData() {
+        model.fetchDataFromServer(this);
+    }
+
+    @Override
+    public void onFinished(List<Marker> listOfItems) {
+        formatOpenHoursData(listOfItems);
+    }
+
+    @Override
+    public void onFailure(Throwable throwable) {
+
     }
 }

@@ -59,8 +59,6 @@
     <string name="contact_info_phone_number_text">Phone:</string>
     <string name="contact_info_email_text">E-mail:</string>
 
-    <string name="opening_hours_default_text">Closed</string>
-
     <!-- Image content descriptions -->
     <string name="sign_up_image_desc">Sign Up logo image</string>
     <string name="grid_list_item_content_desc">Resource passed with JSON, will be populated

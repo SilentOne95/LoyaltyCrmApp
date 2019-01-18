@@ -7,46 +7,46 @@ public class Saturday {
 
     @SerializedName("open_hour")
     @Expose
-    private Integer openHour;
+    private String openHour;
     @SerializedName("open_minute")
     @Expose
-    private Integer openMinute;
+    private String openMinute;
     @SerializedName("close_hour")
     @Expose
-    private Integer closeHour;
+    private String closeHour;
     @SerializedName("close_minute")
     @Expose
-    private Integer closeMinute;
+    private String closeMinute;
 
-    public Integer getOpenHour() {
+    public String getOpenHour() {
         return openHour;
     }
 
-    public void setOpenHour(Integer openHour) {
+    public void setOpenHour(String openHour) {
         this.openHour = openHour;
     }
 
-    public Integer getOpenMinute() {
+    public String getOpenMinute() {
         return openMinute;
     }
 
-    public void setOpenMinute(Integer openMinute) {
+    public void setOpenMinute(String openMinute) {
         this.openMinute = openMinute;
     }
 
-    public Integer getCloseHour() {
+    public String getCloseHour() {
         return closeHour;
     }
 
-    public void setCloseHour(Integer closeHour) {
+    public void setCloseHour(String closeHour) {
         this.closeHour = closeHour;
     }
 
-    public Integer getCloseMinute() {
+    public String getCloseMinute() {
         return closeMinute;
     }
 
-    public void setCloseMinute(Integer closeMinute) {
+    public void setCloseMinute(String closeMinute) {
         this.closeMinute = closeMinute;
     }
 
