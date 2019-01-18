@@ -78,7 +78,6 @@ public class CouponRetrofitAdapter extends RecyclerView.Adapter<CouponRetrofitAd
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Coupon currentItem = listOfItems.get(position);
 
-        // Temporary solution - testing library
         if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
             Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
         }

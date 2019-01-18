@@ -1,6 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.productDetails;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,12 +9,14 @@ import android.widget.TextView;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.data.product.Product;
+import com.squareup.picasso.Picasso;
+
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View{
 
     ProductDetailsPresenter presenter;
 
-    // Temporary variables using to get json data from assets
     private int productId;
 
     @Override
@@ -39,6 +42,9 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     @Override
     public void setUpViewWithData(Product product) {
         ImageView productImage = findViewById(R.id.imageView);
+        if (!(product.getImage() == null || product.getImage().isEmpty())) {
+            Picasso.get().load(BASE_URL_IMAGES + product.getImage()).into(productImage);
+        }
 
         TextView productTitle = findViewById(R.id.product_title_text_view);
         productTitle.setText(product.getTitle());
@@ -47,7 +53,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         productPrice.setText(String.valueOf(product.getPrice()).concat(" ").concat("zł"));
 
         TextView productDescription = findViewById(R.id.product_description_text_view);
-        productDescription.setText(product.getDescription());
+        productDescription.setText(Html.fromHtml(product.getDescription()));
     }
 
     @Override

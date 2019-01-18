@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.R;
+import com.squareup.picasso.Picasso;
+
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class CouponDetailsActivity extends BaseActivity implements CouponDetailsContract.View, View.OnClickListener {
 
@@ -28,8 +32,8 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     GradientDrawable backgroundButton;
     Spannable staticCodeText, promoCodeText;
 
-    // Temporary variables using to get json data from assets
     private int couponId;
+    private String couponCode;
 
     @Override
     protected int getLayout() { return R.layout.activity_coupon_details; }
@@ -62,6 +66,9 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     @Override
     public void setUpViewWithData(Coupon coupon) {
         ImageView couponImage = findViewById(R.id.imageView);
+        if (!(coupon.getImage() == null || coupon.getImage().isEmpty())) {
+            Picasso.get().load(BASE_URL_IMAGES + coupon.getImage()).into(couponImage);
+        }
 
         TextView couponMarker = findViewById(R.id.discount_marker_text_view);
         couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
@@ -79,7 +86,9 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         couponBasicPrice.setText(String.valueOf(coupon.getPrice()).concat(" zł"));
 
         TextView couponDescription = findViewById(R.id.coupon_description_text_view);
-        couponDescription.setText(coupon.getDescription());
+        couponDescription.setText(Html.fromHtml(coupon.getDescription()));
+
+        couponCode = coupon.getCouponCode();
     }
 
     @Override
@@ -101,7 +110,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         staticCodeText = new SpannableString(getResources().getString(R.string.coupon_details_code_text));
         staticCodeText.setSpan(new ForegroundColorSpan(Color.BLACK), 0, staticCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        promoCodeText = new SpannableString("CWVZ85F");
+        promoCodeText = new SpannableString(couponCode);
         promoCodeText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         promoCodeText.setSpan(new StyleSpan(Typeface.BOLD), 0, promoCodeText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
