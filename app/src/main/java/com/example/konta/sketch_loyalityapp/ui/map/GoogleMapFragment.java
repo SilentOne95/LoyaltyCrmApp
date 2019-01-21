@@ -38,9 +38,6 @@ import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
-
 import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 
@@ -56,8 +53,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
-
-    static PublishSubject<Integer> data = PublishSubject.create();
 
     @Override
     protected int getLayout() { return R.layout.fragment_google_map; }
@@ -235,15 +230,11 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<Marker>() {
             @Override
             public boolean onClusterItemClick(Marker marker) {
-                data.onNext(marker.getId());
+                presenter.passDataToBottomSheet(marker.getId());
                 presenter.switchBottomSheetState(marker);
                 return true;
             }
         });
-    }
-
-    public static Observable<Integer> getObservable() {
-        return data;
     }
 
     @Override

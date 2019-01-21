@@ -20,12 +20,15 @@ public interface BottomSheetContract {
 
     interface ContactInfoPresenter {
 
+        void setUpObservable();
     }
 
     interface OpeningHoursPresenter {
 
         void fetchData();
+
+        void setUpObservable();
+
         void formatOpenHoursData(List<Marker> markerList);
-        String checkIfOpenHoursAreValid(String openHour, String openMinute, String closeHour, String closeMinute);
-        }
+        String checkIfOpenHoursAreValid(String openHour, String openMinute, String closeHour, String closeMinute);}
 }

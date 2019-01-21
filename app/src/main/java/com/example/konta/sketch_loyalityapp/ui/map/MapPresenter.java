@@ -10,12 +10,17 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+
 public class MapPresenter implements MapContract.Presenter,
         BaseCallbackListener.ListItemsOnFinishListener<Marker> {
 
     @Nullable
     private MapContract.View view;
     private MapContract.Model model;
+
+    private static PublishSubject<Integer> data = PublishSubject.create();
 
     MapPresenter(@Nullable MapContract.View view, MapContract.Model model) {
         this.view = view;
@@ -47,6 +52,16 @@ public class MapPresenter implements MapContract.Presenter,
                 }
             }
         }
+    }
+
+    @Override
+    public void passDataToBottomSheet(int markerId) {
+        data.onNext(markerId);
+        data.onComplete();
+    }
+
+    public static Observable<Integer> getObservable() {
+        return data;
     }
 
     @Override

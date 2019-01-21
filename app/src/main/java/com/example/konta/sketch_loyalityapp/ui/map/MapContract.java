@@ -20,6 +20,8 @@ public interface MapContract {
         void requestDataFromServer();
 
         void switchBottomSheetState(Object object);
+
+        void passDataToBottomSheet(int markerId);
     }
 
     interface Model {

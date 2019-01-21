@@ -1,6 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.openingHours;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
@@ -14,9 +15,14 @@ import com.example.konta.sketch_loyalityapp.data.map.Thursday;
 import com.example.konta.sketch_loyalityapp.data.map.Tuesday;
 import com.example.konta.sketch_loyalityapp.data.map.Wednesday;
 import com.example.konta.sketch_loyalityapp.ui.map.MapContract;
+import com.example.konta.sketch_loyalityapp.ui.map.MapPresenter;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
 
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter,
         BaseCallbackListener.ListItemsOnFinishListener<Marker> {
@@ -25,11 +31,41 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
     private BottomSheetContract.OpeningHoursView view;
     private MapContract.Model model;
 
+    private static final String TAG = "OpeningHoursFragment";
     private SparseArray<String> list = new SparseArray<>();
 
     OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view, MapContract.Model model) {
         this.view = view;
         this.model = model;
+    }
+
+    @Override
+    public void setUpObservable() {
+
+        Observable<Integer> observable = MapPresenter.getObservable();
+        Observer<Integer> observer = new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.d(TAG, "onSubscribe");
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.d(TAG, "onNext");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete");
+            }
+        };
+
+        observable.subscribe(observer);
     }
 
     @Override
