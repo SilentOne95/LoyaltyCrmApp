@@ -6,21 +6,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.data.map.Marker;
+import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
 
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class ContactInfoFragment extends BaseFragment implements BottomSheetContract.ContactInfoView,
         View.OnClickListener {
 
     ContactInfoPresenter presenter;
 
+    private static final String TAG = "ContactInfoFragment";
     private TextView phoneTextView, emailTextView;
 
     public ContactInfoFragment() {
@@ -35,6 +42,32 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new ContactInfoPresenter(this);
+
+        Observable<Integer> observable = GoogleMapFragment.getObservable();
+        Observer<Integer> observer = new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.d(TAG, "onSubscribe");
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.d(TAG, "onNext");
+                onComplete();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete");
+            }
+        };
+
+        observable.subscribe(observer);
     }
 
     @Override
