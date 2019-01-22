@@ -11,6 +11,9 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.subjects.PublishSubject;
 
 public class MapPresenter implements MapContract.Presenter,
@@ -21,6 +24,8 @@ public class MapPresenter implements MapContract.Presenter,
     private MapContract.Model model;
 
     private static PublishSubject<Integer> data = PublishSubject.create();
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
 
     MapPresenter(@Nullable MapContract.View view, MapContract.Model model) {
         this.view = view;
@@ -29,7 +34,22 @@ public class MapPresenter implements MapContract.Presenter,
 
     @Override
     public void requestDataFromServer() {
-        model.fetchDataFromServer(this);
+        Disposable disposable = model.fetchDataFromServer();
+        compositeDisposable.add(disposable);
+    }
+
+    static DisposableSingleObserver<List<Marker>> getObserver() {
+        return new DisposableSingleObserver<List<Marker>>() {
+            @Override
+            public void onSuccess(List<Marker> markers) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        };
     }
 
     @Override

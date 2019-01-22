@@ -15,7 +15,6 @@ public class MainActivityModel implements MainActivityContract.Model {
 
     @Override
     public Disposable fetchDataFromServer() {
-
         return getObservable().subscribeWith(MainActivityPresenter.getObserver());
     }
 

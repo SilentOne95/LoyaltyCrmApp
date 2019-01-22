@@ -1,9 +1,10 @@
 package com.example.konta.sketch_loyalityapp.ui.products;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 public interface ProductsContract {
 
@@ -17,6 +18,6 @@ public interface ProductsContract {
 
     interface Model {
 
-        void fetchDataFromServer(BaseCallbackListener.ListItemsOnFinishListener<Product> onFinishedListener);
+        Disposable fetchDataFromServer();
     }
 }

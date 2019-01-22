@@ -1,31 +1,27 @@
 package com.example.konta.sketch_loyalityapp.ui.coupons;
 
-import android.support.annotation.NonNull;
-
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
+import com.example.konta.sketch_loyalityapp.network.Api;
+import com.example.konta.sketch_loyalityapp.network.RetrofitClient;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
-import com.example.konta.sketch_loyalityapp.root.MyApplication;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class CouponsModel implements CouponsContract.Model {
 
     @Override
-    public void fetchDataFromServer(final BaseCallbackListener.ListItemsOnFinishListener<Coupon> onFinishedListener) {
-        MyApplication.getApi().getAllCoupons().enqueue(new Callback<List<Coupon>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Coupon>> call, @NonNull Response<List<Coupon>> response) {
-                onFinishedListener.onFinished(response.body());
-            }
+    public Disposable fetchDataFromServer() {
+        return getObservable().subscribeWith(CouponsPresenter.getObserver());
+    }
 
-            @Override
-            public void onFailure(@NonNull Call<List<Coupon>> call, @NonNull Throwable t) {
-                onFinishedListener.onFailure(t);
-            }
-        });
+    private Single<List<Coupon>> getObservable() {
+        return RetrofitClient.getInstance().create(Api.class)
+                .getAllCoupons()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

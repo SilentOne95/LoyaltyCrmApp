@@ -1,9 +1,10 @@
 package com.example.konta.sketch_loyalityapp.ui.map;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
 
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 public interface MapContract {
 
@@ -26,6 +27,6 @@ public interface MapContract {
 
     interface Model {
 
-        void fetchDataFromServer(BaseCallbackListener.ListItemsOnFinishListener<Marker> onFinishedListener);
+        Disposable fetchDataFromServer();
     }
 }

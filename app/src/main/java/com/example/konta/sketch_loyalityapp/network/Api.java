@@ -9,7 +9,6 @@ import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 import java.util.List;
 
 import io.reactivex.Single;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -21,25 +20,25 @@ public interface Api {
 
     // Get all products
     @GET("/app_loyalty_product/get_all/0")
-    Call<List<Product>> getAllProducts();
+    Single<List<Product>> getAllProducts();
 
     // Get single product
     @GET("/app_loyalty_product/get/{id}")
-    Call<Product> getSingleProduct(@Path("id") int id);
+    Single<Product> getSingleProduct(@Path("id") int id);
 
     // Get all coupons
     @GET("/app_loyalty_product_coupon/get_all/0")
-    Call<List<Coupon>> getAllCoupons();
+    Single<List<Coupon>> getAllCoupons();
 
     // Get single coupon
     @GET("/app_loyalty_product_coupon/get/{id}")
-    Call<Coupon> getSingleCoupon(@Path("id") int id);
+    Single<Coupon> getSingleCoupon(@Path("id") int id);
 
     // Get all markers
     @GET("/app_loyalty_map/get_all/0")
-    Call<List<Marker>> getAllMarkers();
+    Single<List<Marker>> getAllMarkers();
 
     // Get static page
     @GET("/app_loyalty_page/get/{id}")
-    Call<Page> getStaticPage(@Path("id") int id);
+    Single<Page> getStaticPage(@Path("id") int id);
 }

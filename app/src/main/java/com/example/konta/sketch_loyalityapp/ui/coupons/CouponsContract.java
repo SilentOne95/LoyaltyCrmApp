@@ -1,9 +1,10 @@
 package com.example.konta.sketch_loyalityapp.ui.coupons;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 public interface CouponsContract {
 
@@ -17,6 +18,6 @@ public interface CouponsContract {
 
     interface Model {
 
-        void fetchDataFromServer(BaseCallbackListener.ListItemsOnFinishListener<Coupon> onFinishedListener);
+        Disposable fetchDataFromServer();
     }
 }

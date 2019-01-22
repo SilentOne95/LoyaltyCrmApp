@@ -1,31 +1,27 @@
 package com.example.konta.sketch_loyalityapp.ui.products;
 
-import android.support.annotation.NonNull;
-
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
+import com.example.konta.sketch_loyalityapp.network.Api;
+import com.example.konta.sketch_loyalityapp.network.RetrofitClient;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
-import com.example.konta.sketch_loyalityapp.root.MyApplication;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class ProductsModel implements ProductsContract.Model {
 
     @Override
-    public void fetchDataFromServer(final BaseCallbackListener.ListItemsOnFinishListener<Product> onFinishedListener) {
-        MyApplication.getApi().getAllProducts().enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
-                onFinishedListener.onFinished(response.body());
-            }
+    public Disposable fetchDataFromServer() {
+        return getObservable().subscribeWith(ProductsPresenter.getObserver());
+    }
 
-            @Override
-            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
-                onFinishedListener.onFailure(t);
-            }
-        });
+    private Single<List<Product>> getObservable() {
+        return RetrofitClient.getInstance().create(Api.class)
+                .getAllProducts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

@@ -10,12 +10,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableSingleObserver;
+
 public class CouponDetailsPresenter implements CouponDetailsContract.Presenter,
         BaseCallbackListener.SingleItemOnFinishListener<Coupon> {
 
     @Nullable
     private CouponDetailsContract.View view;
     private CouponDetailsContract.Model model;
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     CouponDetailsPresenter(@Nullable CouponDetailsContract.View view,
                            CouponDetailsContract.Model model) {
@@ -25,7 +31,22 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter,
 
     @Override
     public void requestDataFromServer(int couponId) {
-        model.fetchDataFromServer(this, couponId);
+        Disposable disposable = model.fetchDataFromServer(couponId);
+        compositeDisposable.add(disposable);
+    }
+
+    static DisposableSingleObserver<Coupon> getObserver() {
+        return new DisposableSingleObserver<Coupon>() {
+            @Override
+            public void onSuccess(Coupon coupon) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        };
     }
 
     @Override
