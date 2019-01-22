@@ -5,8 +5,8 @@ import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
-import com.example.konta.sketch_loyalityapp.data.menu.HelperComponent;
-import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.coupons.CouponsFragment;
 import com.example.konta.sketch_loyalityapp.ui.login.LogInActivity;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
@@ -18,12 +18,18 @@ import com.example.konta.sketch_loyalityapp.ui.website.WebsiteActivity;
 
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableSingleObserver;
+
 public class MainActivityPresenter implements MainActivityContract.Presenter,
         BaseFragmentContract.Presenter, BaseCallbackListener.ListItemsOnFinishListener<MenuComponent> {
 
     @Nullable
     private MainActivityContract.View view;
     private MainActivityContract.Model model;
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private SparseArray<HelperComponent> menuArray = new SparseArray<>();
     private SparseArray<HelperComponent> submenuArray = new SparseArray<>();
@@ -36,7 +42,22 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
     @Override
     public void requestDataFromServer() {
-        model.fetchDataFromServer(this);
+        Disposable disposable = model.fetchDataFromServer();
+        compositeDisposable.add(disposable);
+    }
+
+    static DisposableSingleObserver<List<MenuComponent>> getObserver() {
+        return new DisposableSingleObserver<List<MenuComponent>>() {
+            @Override
+            public void onSuccess(List<MenuComponent> menuComponents) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        };
     }
 
     @Override

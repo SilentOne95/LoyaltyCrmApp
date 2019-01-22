@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
-import com.example.konta.sketch_loyalityapp.data.staticPage.Page;
+import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 
 public class TermsConditionsActivity extends BaseActivity implements TermsContract.View {
 

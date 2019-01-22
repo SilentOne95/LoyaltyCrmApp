@@ -3,7 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.productDetails;
 import android.support.annotation.Nullable;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.product.Product;
+import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 
 public class ProductDetailsPresenter implements ProductDetailsContract.Presenter,
         BaseCallbackListener.SingleItemOnFinishListener<Product> {

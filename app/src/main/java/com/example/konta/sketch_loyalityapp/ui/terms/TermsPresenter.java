@@ -3,7 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.terms;
 import android.support.annotation.Nullable;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.staticPage.Page;
+import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 
 public class TermsPresenter implements TermsContract.Presenter,
         BaseCallbackListener.SingleItemOnFinishListener<Page> {

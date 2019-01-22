@@ -1,6 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.home;
 
-import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 
 import java.util.List;
 

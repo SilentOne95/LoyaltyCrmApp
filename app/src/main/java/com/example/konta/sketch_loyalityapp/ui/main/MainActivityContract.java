@@ -3,10 +3,10 @@ package com.example.konta.sketch_loyalityapp.ui.main;
 import android.app.Activity;
 import android.util.SparseArray;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.data.menu.HelperComponent;
-import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
+
+import io.reactivex.disposables.Disposable;
 
 public interface MainActivityContract {
 
@@ -33,6 +33,6 @@ public interface MainActivityContract {
 
     interface Model {
 
-        void fetchDataFromServer(BaseCallbackListener.ListItemsOnFinishListener<MenuComponent> onFinishedListener);
+        Disposable fetchDataFromServer();
     }
 }

@@ -1,7 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.couponDetails;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
+import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 
 public interface CouponDetailsContract {
 

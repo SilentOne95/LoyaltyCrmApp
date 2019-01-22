@@ -2,6 +2,8 @@ package com.example.konta.sketch_loyalityapp.root;
 
 import android.app.Application;
 
+import com.example.konta.sketch_loyalityapp.network.Api;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

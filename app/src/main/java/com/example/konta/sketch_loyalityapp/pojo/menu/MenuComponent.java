@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.data.menu;
+package com.example.konta.sketch_loyalityapp.pojo.menu;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

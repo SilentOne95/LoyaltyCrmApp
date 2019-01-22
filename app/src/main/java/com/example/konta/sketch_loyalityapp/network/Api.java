@@ -1,13 +1,14 @@
-package com.example.konta.sketch_loyalityapp.root;
+package com.example.konta.sketch_loyalityapp.network;
 
-import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
-import com.example.konta.sketch_loyalityapp.data.map.Marker;
-import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
-import com.example.konta.sketch_loyalityapp.data.product.Product;
-import com.example.konta.sketch_loyalityapp.data.staticPage.Page;
+import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
+import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.pojo.product.Product;
+import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 
 import java.util.List;
 
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -16,7 +17,7 @@ public interface Api {
 
     // Get menu components
     @GET("/app_loyalty_app/get_all/0")
-    Call<List<MenuComponent>> getMenuComponents();
+    Single<List<MenuComponent>> getMenuComponents();
 
     // Get all products
     @GET("/app_loyalty_product/get_all/0")

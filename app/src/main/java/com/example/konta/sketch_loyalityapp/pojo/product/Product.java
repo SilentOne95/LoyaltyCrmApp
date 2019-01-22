@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.data.product;
+package com.example.konta.sketch_loyalityapp.pojo.product;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

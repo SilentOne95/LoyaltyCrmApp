@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.adapters.HomeRetrofitAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
-import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityModel;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;

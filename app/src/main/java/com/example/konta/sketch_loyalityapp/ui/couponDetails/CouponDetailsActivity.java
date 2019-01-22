@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
-import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
+import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.R;
 import com.squareup.picasso.Picasso;
 

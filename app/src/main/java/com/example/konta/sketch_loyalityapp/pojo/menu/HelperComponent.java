@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.data.menu;
+package com.example.konta.sketch_loyalityapp.pojo.menu;
 
 public class HelperComponent {
     private String type, title;

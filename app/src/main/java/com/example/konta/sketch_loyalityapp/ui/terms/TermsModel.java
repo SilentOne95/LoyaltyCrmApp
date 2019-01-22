@@ -3,7 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.terms;
 import android.support.annotation.NonNull;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.staticPage.Page;
+import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 
 import retrofit2.Call;

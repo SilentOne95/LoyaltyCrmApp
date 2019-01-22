@@ -11,12 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
-import com.squareup.picasso.Picasso;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 
 import java.util.List;
-
-import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class HomeRetrofitAdapter extends RecyclerView.Adapter<HomeRetrofitAdapter.ViewHolder> {
 
@@ -56,9 +53,9 @@ public class HomeRetrofitAdapter extends RecyclerView.Adapter<HomeRetrofitAdapte
         final MenuComponent currentItem = listOfItems.get(position);
 
         // Temporary solution - testing library
-        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
-            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
-        }
+//        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
+//            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
+//        }
 
         holder.titleView.setText(currentItem.getComponentTitle());
         holder.descriptionText.setVisibility(View.GONE);

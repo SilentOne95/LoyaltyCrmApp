@@ -11,7 +11,7 @@ import android.view.View;
 import com.example.konta.sketch_loyalityapp.adapters.ProductRetrofitAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.data.product.Product;
+import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ui.productDetails.ProductDetailsActivity;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;

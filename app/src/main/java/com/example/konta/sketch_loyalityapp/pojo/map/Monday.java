@@ -1,9 +1,9 @@
-package com.example.konta.sketch_loyalityapp.data.map;
+package com.example.konta.sketch_loyalityapp.pojo.map;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Thursday {
+public class Monday {
 
     @SerializedName("open_hour")
     @Expose

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.data.product.Product;
+import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

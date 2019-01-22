@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.R;
-import com.example.konta.sketch_loyalityapp.data.product.Product;
+import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 import com.squareup.picasso.Picasso;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
@@ -28,7 +28,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
         setTitle("Product");
 
-        // Temporary solution - setting up sample data
+        // Temporary solution - setting up sample pojo
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             productId = extras.getInt("EXTRA_ELEMENT_ID");

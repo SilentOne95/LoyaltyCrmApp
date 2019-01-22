@@ -3,7 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.coupons;
 import android.support.annotation.Nullable;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.coupon.Coupon;
+import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 
 import java.util.List;
 

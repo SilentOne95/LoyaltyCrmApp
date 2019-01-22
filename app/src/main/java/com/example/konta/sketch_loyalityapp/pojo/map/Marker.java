@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.data.map;
+package com.example.konta.sketch_loyalityapp.pojo.map;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.Expose;

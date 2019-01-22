@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.data.menu.HelperComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;

@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityContract;
 
 import java.util.List;
@@ -56,6 +56,6 @@ public class HomePresenter implements HomeContract.Presenter,
 
     @Override
     public void fetchDataFromServer() {
-        model.fetchDataFromServer(this);
+//        model.fetchDataFromServer();
     }
 }

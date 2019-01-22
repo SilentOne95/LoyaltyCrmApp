@@ -1,7 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.products;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.product.Product;
+import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 
 import java.util.List;
 

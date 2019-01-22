@@ -5,7 +5,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.map.Marker;
+import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;

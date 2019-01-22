@@ -3,7 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.map;
 import android.support.annotation.NonNull;
 
 import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
-import com.example.konta.sketch_loyalityapp.data.map.Marker;
+import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 
 import java.util.List;
