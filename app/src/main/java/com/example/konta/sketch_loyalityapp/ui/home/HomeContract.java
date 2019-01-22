@@ -7,10 +7,12 @@ import java.util.List;
 public interface HomeContract {
 
     interface View {
+
         void setUpAdapter(List<MenuComponent> menuComponentList);
     }
 
     interface Presenter {
-        void fetchDataFromServer();
+
+        void refactorFetchedData(List<MenuComponent> listMenuComponent);
     }
 }

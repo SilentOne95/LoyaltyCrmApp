@@ -2,7 +2,6 @@ package com.example.konta.sketch_loyalityapp.ui.products;
 
 import android.support.annotation.Nullable;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 
 import java.util.List;
@@ -11,8 +10,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 
-public class ProductsPresenter implements ProductsContract.Presenter,
-        BaseCallbackListener.ListItemsOnFinishListener<Product> {
+public class ProductsPresenter implements ProductsContract.Presenter {
 
     @Nullable
     private ProductsContract.View view;
@@ -43,17 +41,5 @@ public class ProductsPresenter implements ProductsContract.Presenter,
 
             }
         };
-    }
-
-    @Override
-    public void onFinished(List<Product> productList) {
-        if (view != null) {
-            view.setUpAdapter(productList);
-        }
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-
     }
 }

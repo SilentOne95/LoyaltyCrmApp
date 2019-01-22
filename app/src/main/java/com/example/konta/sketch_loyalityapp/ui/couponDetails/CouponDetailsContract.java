@@ -7,10 +7,12 @@ import io.reactivex.disposables.Disposable;
 public interface CouponDetailsContract {
 
     interface View {
+
         void setUpViewWithData(Coupon coupon);
     }
 
     interface Presenter {
+
         void requestDataFromServer(int couponId);
 
         String formatDateString(String dateString);

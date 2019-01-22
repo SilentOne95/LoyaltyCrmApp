@@ -2,15 +2,13 @@ package com.example.konta.sketch_loyalityapp.ui.terms;
 
 import android.support.annotation.Nullable;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 
-public class TermsPresenter implements TermsContract.Presenter,
-        BaseCallbackListener.SingleItemOnFinishListener<Page> {
+public class TermsPresenter implements TermsContract.Presenter {
 
     @Nullable
     private TermsContract.View view;
@@ -41,19 +39,5 @@ public class TermsPresenter implements TermsContract.Presenter,
 
             }
         };
-    }
-
-    @Override
-    public void onFinished(Page page) {
-        if (view != null) {
-            view.setUpViewWithData(page);
-        }
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-        if (view != null) {
-            view.onResponseFailure();
-        }
     }
 }

@@ -2,15 +2,13 @@ package com.example.konta.sketch_loyalityapp.ui.productDetails;
 
 import android.support.annotation.Nullable;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 
-public class ProductDetailsPresenter implements ProductDetailsContract.Presenter,
-        BaseCallbackListener.SingleItemOnFinishListener<Product> {
+public class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
 
     @Nullable
     private ProductDetailsContract.View view;
@@ -42,17 +40,5 @@ public class ProductDetailsPresenter implements ProductDetailsContract.Presenter
 
             }
         };
-    }
-
-    @Override
-    public void onFinished(Product product) {
-        if (view != null) {
-            view.setUpViewWithData(product);
-        }
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-
     }
 }

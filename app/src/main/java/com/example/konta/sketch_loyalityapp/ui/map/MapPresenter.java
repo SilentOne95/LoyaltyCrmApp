@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -16,8 +15,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.subjects.PublishSubject;
 
-public class MapPresenter implements MapContract.Presenter,
-        BaseCallbackListener.ListItemsOnFinishListener<Marker> {
+public class MapPresenter implements MapContract.Presenter {
 
     @Nullable
     private MapContract.View view;
@@ -82,17 +80,5 @@ public class MapPresenter implements MapContract.Presenter,
 
     public static Observable<Integer> getObservable() {
         return data;
-    }
-
-    @Override
-    public void onFinished(List<Marker> markerList) {
-        if (view != null) {
-            view.setUpCluster(markerList);
-        }
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-
     }
 }

@@ -34,7 +34,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
         // Retrofit
         presenter = new HomePresenter(this, new MainActivityModel());
-        presenter.fetchDataFromServer();
 
         // Set up adapter
         recyclerView = rootView.findViewById(R.id.recycler_view);

@@ -3,7 +3,6 @@ package com.example.konta.sketch_loyalityapp.ui.main;
 import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
@@ -23,7 +22,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 
 public class MainActivityPresenter implements MainActivityContract.Presenter,
-        BaseFragmentContract.Presenter, BaseCallbackListener.ListItemsOnFinishListener<MenuComponent> {
+        BaseFragmentContract.Presenter {
 
     @Nullable
     private MainActivityContract.View view;
@@ -68,7 +67,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void onFinished(List<MenuComponent> listOfItems) {
+    public void refactorFetchedData(List<MenuComponent> listOfItems) {
         int homeScreenId = 0;
         String menuType, type, title;
         SparseArray<MenuComponent> menuTemporary = new SparseArray<>();
@@ -142,13 +141,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
         if (view != null) {
             view.setDataToNavDrawer(menuArray, submenuArray, homeScreenId);
-        }
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-        if (view != null) {
-            view.onResponseFailure(t);
         }
     }
 

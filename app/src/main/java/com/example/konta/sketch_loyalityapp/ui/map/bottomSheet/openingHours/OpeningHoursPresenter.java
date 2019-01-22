@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.map.Friday;
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
 import com.example.konta.sketch_loyalityapp.pojo.map.Monday;
@@ -14,7 +13,6 @@ import com.example.konta.sketch_loyalityapp.pojo.map.Sunday;
 import com.example.konta.sketch_loyalityapp.pojo.map.Thursday;
 import com.example.konta.sketch_loyalityapp.pojo.map.Tuesday;
 import com.example.konta.sketch_loyalityapp.pojo.map.Wednesday;
-import com.example.konta.sketch_loyalityapp.ui.map.MapContract;
 import com.example.konta.sketch_loyalityapp.ui.map.MapPresenter;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
 
@@ -24,19 +22,16 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter,
-        BaseCallbackListener.ListItemsOnFinishListener<Marker> {
+public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter{
 
     @Nullable
     private BottomSheetContract.OpeningHoursView view;
-    private MapContract.Model model;
 
     private static final String TAG = "OpeningHoursFragment";
     private SparseArray<String> list = new SparseArray<>();
 
-    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view, MapContract.Model model) {
+    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view) {
         this.view = view;
-        this.model = model;
     }
 
     @Override
@@ -218,20 +213,5 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
             day = openHour + ":" + openMinute + " - " + closeHour + ":" + closeMinute;
         }
         return day;
-    }
-
-    @Override
-    public void fetchData() {
-        model.fetchDataFromServer(this);
-    }
-
-    @Override
-    public void onFinished(List<Marker> listOfItems) {
-        formatOpenHoursData(listOfItems);
-    }
-
-    @Override
-    public void onFailure(Throwable throwable) {
-
     }
 }

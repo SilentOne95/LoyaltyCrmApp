@@ -25,8 +25,6 @@ public interface BottomSheetContract {
 
     interface OpeningHoursPresenter {
 
-        void fetchData();
-
         void setUpObservable();
 
         void formatOpenHoursData(List<Marker> markerList);

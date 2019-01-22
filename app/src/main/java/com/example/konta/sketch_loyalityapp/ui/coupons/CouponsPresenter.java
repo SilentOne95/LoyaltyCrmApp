@@ -2,7 +2,6 @@ package com.example.konta.sketch_loyalityapp.ui.coupons;
 
 import android.support.annotation.Nullable;
 
-import com.example.konta.sketch_loyalityapp.base.BaseCallbackListener;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 
 import java.util.List;
@@ -11,8 +10,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 
-public class CouponsPresenter implements CouponsContract.Presenter,
-        BaseCallbackListener.ListItemsOnFinishListener<Coupon> {
+public class CouponsPresenter implements CouponsContract.Presenter {
 
     @Nullable
     private CouponsContract.View view;
@@ -43,17 +41,5 @@ public class CouponsPresenter implements CouponsContract.Presenter,
 
             }
         };
-    }
-
-    @Override
-    public void onFinished(List<Coupon> couponList) {
-        if (view != null) {
-            view.setUpAdapter(couponList);
-        }
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-
     }
 }

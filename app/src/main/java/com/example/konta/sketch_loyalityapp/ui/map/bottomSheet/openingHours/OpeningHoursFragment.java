@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.ui.map.MapModel;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
 
 public class OpeningHoursFragment extends BaseFragment implements BottomSheetContract.OpeningHoursView {
@@ -27,7 +26,7 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = new OpeningHoursPresenter(this, new MapModel());
+        presenter = new OpeningHoursPresenter(this);
         presenter.setUpObservable();
     }
 
