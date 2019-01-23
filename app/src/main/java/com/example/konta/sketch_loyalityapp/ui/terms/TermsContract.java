@@ -9,16 +9,16 @@ public interface TermsContract {
     interface View {
 
         void setUpViewWithData(Page page);
-        void onResponseFailure();
     }
 
     interface Presenter {
 
         void requestDataFromServer(int pageId);
+        void passDataToView(Page page);
     }
 
     interface Model {
 
-        Disposable fetchDataFromServer(int pageId);
+        Disposable fetchDataFromServer(TermsPresenter presenter, int pageId);
     }
 }

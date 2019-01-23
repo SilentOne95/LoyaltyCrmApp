@@ -6,7 +6,6 @@ import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 
 public class TermsPresenter implements TermsContract.Presenter {
 
@@ -23,21 +22,14 @@ public class TermsPresenter implements TermsContract.Presenter {
 
     @Override
     public void requestDataFromServer(int pageId) {
-        Disposable disposable = model.fetchDataFromServer(pageId);
+        Disposable disposable = model.fetchDataFromServer(this, pageId);
         compositeDisposable.add(disposable);
     }
 
-    static DisposableSingleObserver<Page> getObserver() {
-        return new DisposableSingleObserver<Page>() {
-            @Override
-            public void onSuccess(Page page) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-        };
+    @Override
+    public void passDataToView(Page page) {
+        if (view != null) {
+            view.setUpViewWithData(page);
+        }
     }
 }

@@ -3,7 +3,6 @@ package com.example.konta.sketch_loyalityapp.ui.terms;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
@@ -30,10 +29,5 @@ public class TermsConditionsActivity extends BaseActivity implements TermsContra
     public void setUpViewWithData(Page page) {
         TextView description = findViewById(R.id.terms_conditions_text_view);
         description.setText(Html.fromHtml(page.getBody()));
-    }
-
-    @Override
-    public void onResponseFailure() {
-        Toast.makeText(TermsConditionsActivity.this, "Oops.. something went wrong!", Toast.LENGTH_LONG).show();
     }
 }
