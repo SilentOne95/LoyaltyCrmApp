@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.adapters.CouponRetrofitAdapter;
+import com.example.konta.sketch_loyalityapp.adapters.CouponAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
@@ -63,7 +63,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
     @Override
     public void setUpAdapter(List<Coupon> couponList) {
-        recyclerView.setAdapter(new CouponRetrofitAdapter(couponList, recyclerItemClickListener));
+        recyclerView.setAdapter(new CouponAdapter(couponList, recyclerItemClickListener));
 
         // Set empty state view if needed
         if (!couponList.isEmpty()) {

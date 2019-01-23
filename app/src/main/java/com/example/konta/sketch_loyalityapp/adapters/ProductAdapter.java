@@ -18,12 +18,12 @@ import java.util.List;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
-public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofitAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private List<Product> listOfItems;
     private RecyclerItemClickListener.ProductRetrofitClickListener productClickListener;
 
-    public ProductRetrofitAdapter(List<Product> items,
+    public ProductAdapter(List<Product> items,
                           RecyclerItemClickListener.ProductRetrofitClickListener clickListener ) {
         listOfItems = items;
         productClickListener = clickListener;
@@ -31,10 +31,10 @@ public class ProductRetrofitAdapter extends RecyclerView.Adapter<ProductRetrofit
 
     @NonNull
     @Override
-    public ProductRetrofitAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.grid_list_item_product, parent, false);
-        return new ProductRetrofitAdapter.ViewHolder(view);
+        return new ProductAdapter.ViewHolder(view);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

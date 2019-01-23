@@ -19,20 +19,20 @@ import java.util.List;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
-public class CouponRetrofitAdapter extends RecyclerView.Adapter<CouponRetrofitAdapter.ViewHolder> {
+public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> {
 
     private List<Coupon> listOfItems;
     private RecyclerItemClickListener.CouponRetrofitClickListener couponClickListener;
 
-    public CouponRetrofitAdapter(List<Coupon> items,
-                                 RecyclerItemClickListener.CouponRetrofitClickListener clickListener) {
+    public CouponAdapter(List<Coupon> items,
+                         RecyclerItemClickListener.CouponRetrofitClickListener clickListener) {
         listOfItems = items;
         couponClickListener = clickListener;
     }
 
     @NonNull
     @Override
-    public CouponRetrofitAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CouponAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.grid_list_item_coupon, parent, false);
         return new ViewHolder(view);

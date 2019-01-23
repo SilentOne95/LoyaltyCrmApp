@@ -8,7 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.adapters.ProductRetrofitAdapter;
+import com.example.konta.sketch_loyalityapp.adapters.ProductAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
@@ -56,7 +56,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     @Override
     public void setUpAdapter(List<Product> productList) {
-        recyclerView.setAdapter(new ProductRetrofitAdapter(productList, recyclerItemClickListener));
+        recyclerView.setAdapter(new ProductAdapter(productList, recyclerItemClickListener));
 
         // Set empty state view if needed
         if (!productList.isEmpty()) {

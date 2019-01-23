@@ -17,20 +17,20 @@ import com.squareup.picasso.Picasso;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
-public class HomeRetrofitAdapter extends RecyclerView.Adapter<HomeRetrofitAdapter.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private SparseArray<MenuComponent> listOfItems;
     private RecyclerItemClickListener.HomeRetrofitClickListener homeClickListener;
 
-    public HomeRetrofitAdapter(SparseArray<MenuComponent> items,
-                               RecyclerItemClickListener.HomeRetrofitClickListener clickListener) {
+    public HomeAdapter(SparseArray<MenuComponent> items,
+                       RecyclerItemClickListener.HomeRetrofitClickListener clickListener) {
         listOfItems = items;
         homeClickListener = clickListener;
     }
 
     @NonNull
     @Override
-    public HomeRetrofitAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.grid_list_item_home, parent, false);
         return new ViewHolder(view);

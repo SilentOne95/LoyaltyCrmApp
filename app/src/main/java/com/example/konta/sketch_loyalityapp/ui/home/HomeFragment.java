@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.adapters.HomeRetrofitAdapter;
+import com.example.konta.sketch_loyalityapp.adapters.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityModel;
@@ -51,6 +51,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void setUpAdapter(SparseArray<MenuComponent> menuComponentList) {
-        recyclerView.setAdapter(new HomeRetrofitAdapter(menuComponentList, recyclerItemClickListener));
+        recyclerView.setAdapter(new HomeAdapter(menuComponentList, recyclerItemClickListener));
     }
 }
