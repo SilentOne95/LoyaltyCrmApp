@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.adapters;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,16 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
+import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class HomeRetrofitAdapter extends RecyclerView.Adapter<HomeRetrofitAdapter.ViewHolder> {
 
-    private List<MenuComponent> listOfItems;
+    private SparseArray<MenuComponent> listOfItems;
     private RecyclerItemClickListener.HomeRetrofitClickListener homeClickListener;
 
-    public HomeRetrofitAdapter(List<MenuComponent> items,
+    public HomeRetrofitAdapter(SparseArray<MenuComponent> items,
                                RecyclerItemClickListener.HomeRetrofitClickListener clickListener) {
         listOfItems = items;
         homeClickListener = clickListener;
@@ -52,10 +54,9 @@ public class HomeRetrofitAdapter extends RecyclerView.Adapter<HomeRetrofitAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final MenuComponent currentItem = listOfItems.get(position);
 
-        // Temporary solution - testing library
-//        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
-//            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
-//        }
+        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
+            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
+        }
 
         holder.titleView.setText(currentItem.getComponentTitle());
         holder.descriptionText.setVisibility(View.GONE);

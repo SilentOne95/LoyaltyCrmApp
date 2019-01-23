@@ -6,6 +6,7 @@ import android.util.SparseArray;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
 
 import java.util.List;
 
@@ -38,7 +39,11 @@ public interface MainActivityContract {
     interface Model {
 
         Disposable fetchDataFromServer(MainActivityPresenter presenter);
-        void refactorFetchedData(List<MenuComponent> listOfItems);
+        Disposable fetchDataFromServer(HomePresenter presenter);
+
+        void refactorFetchedDataForNavDrawer(List<MenuComponent> listOfItems);
+        void refactorFetchedDataForHomeView(List<MenuComponent> listOfItems);
+
         String getMenuLayoutType(int itemId);
         String getSubmenuLayoutType(int itemId);
     }

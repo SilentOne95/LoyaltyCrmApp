@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.adapters.HomeRetrofitAdapter;
@@ -14,8 +15,6 @@ import com.example.konta.sketch_loyalityapp.ui.main.MainActivityModel;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.R;
-
-import java.util.List;
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
 
@@ -34,6 +33,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
         // Retrofit
         presenter = new HomePresenter(this, new MainActivityModel());
+        presenter.requestDataFromServer();
 
         // Set up adapter
         recyclerView = rootView.findViewById(R.id.recycler_view);
@@ -50,8 +50,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     };
 
     @Override
-    public void setUpAdapter(List<MenuComponent> menuComponentList) {
+    public void setUpAdapter(SparseArray<MenuComponent> menuComponentList) {
         recyclerView.setAdapter(new HomeRetrofitAdapter(menuComponentList, recyclerItemClickListener));
     }
-
 }

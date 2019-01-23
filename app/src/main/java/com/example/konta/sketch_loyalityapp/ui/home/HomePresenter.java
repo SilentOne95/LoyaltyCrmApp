@@ -6,7 +6,8 @@ import android.util.SparseArray;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityContract;
 
-import java.util.List;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public class HomePresenter implements HomeContract.Presenter {
 
@@ -14,36 +15,23 @@ public class HomePresenter implements HomeContract.Presenter {
     private HomeContract.View view;
     private MainActivityContract.Model model;
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     HomePresenter(@Nullable HomeContract.View view, MainActivityContract.Model model) {
         this.view = view;
         this.model = model;
     }
 
     @Override
-    public void refactorFetchedData(List<MenuComponent> listMenuComponent) {
+    public void requestDataFromServer() {
+        Disposable disposable = model.fetchDataFromServer(this);
+        compositeDisposable.add(disposable);
+    }
 
-        // TODO:
-        SparseArray<MenuComponent> list = new SparseArray<>();
-        int i = 0;
-
-        if (listMenuComponent != null) {
-            for (MenuComponent component : listMenuComponent) {
-                if (component.getList().equals("menu")) {
-                    list.append(i, component);
-                    i++;
-                }
-            }
-
-            for (MenuComponent component : listMenuComponent) {
-                if (component.getList().equals("submenu")) {
-                    list.append(i, component);
-                    i++;
-                }
-            }
-        }
-
-        if (view != null) {
-            view.setUpAdapter(listMenuComponent);
+    @Override
+    public void passDataToAdapter(SparseArray<MenuComponent> menuComponentList) {
+        if (view != null && menuComponentList != null) {
+            view.setUpAdapter(menuComponentList);
         }
     }
 }

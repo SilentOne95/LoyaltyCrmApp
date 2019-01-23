@@ -6,6 +6,7 @@ import com.example.konta.sketch_loyalityapp.network.RetrofitClient;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.network.Api;
+import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
 
 import java.util.List;
 
@@ -18,13 +19,22 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivityModel implements MainActivityContract.Model {
 
     private MainActivityPresenter presenter;
+    private HomePresenter homePresenter;
+
     private SparseArray<HelperComponent> menuArray = new SparseArray<>();
     private SparseArray<HelperComponent> submenuArray = new SparseArray<>();
+    private SparseArray<MenuComponent> navDrawerArray = new SparseArray<>();
 
     @Override
     public Disposable fetchDataFromServer(MainActivityPresenter presenter) {
         this.presenter = presenter;
-        return getObservable().subscribeWith(getObserver());
+        return getObservable().subscribeWith(getObserverMainActivity());
+    }
+
+    @Override
+    public Disposable fetchDataFromServer(HomePresenter presenter) {
+        homePresenter = presenter;
+        return getObservable().subscribeWith(getObserverHomeView());
     }
 
     private Single<List<MenuComponent>> getObservable() {
@@ -34,11 +44,23 @@ public class MainActivityModel implements MainActivityContract.Model {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private DisposableSingleObserver<List<MenuComponent>> getObserver() {
+    private DisposableSingleObserver<List<MenuComponent>> getObserverMainActivity() {
         return new DisposableSingleObserver<List<MenuComponent>>() {
             @Override
             public void onSuccess(List<MenuComponent> menuComponents) {
-                refactorFetchedData(menuComponents);
+                refactorFetchedDataForNavDrawer(menuComponents);
+            }
+
+            @Override
+            public void onError(Throwable e) { }
+        };
+    }
+
+    private DisposableSingleObserver<List<MenuComponent>> getObserverHomeView() {
+        return new DisposableSingleObserver<List<MenuComponent>>() {
+            @Override
+            public void onSuccess(List<MenuComponent> menuComponents) {
+                refactorFetchedDataForHomeView(menuComponents);
             }
 
             @Override
@@ -47,7 +69,7 @@ public class MainActivityModel implements MainActivityContract.Model {
     }
 
     @Override
-    public void refactorFetchedData(List<MenuComponent> listOfItems) {
+    public void refactorFetchedDataForNavDrawer(List<MenuComponent> listOfItems) {
         int homeScreenId = 0;
         String menuType, type, title;
         SparseArray<MenuComponent> menuTemporary = new SparseArray<>();
@@ -120,6 +142,29 @@ public class MainActivityModel implements MainActivityContract.Model {
         } while (submenuArray.size() < submenuTemporary.size());
 
         presenter.passDataToNavDrawer(menuArray, submenuArray, homeScreenId);
+    }
+
+    @Override
+    public void refactorFetchedDataForHomeView(List<MenuComponent> listOfItems) {
+        int i = 0;
+
+        if (listOfItems != null) {
+            for (MenuComponent component : listOfItems) {
+                if (component.getList().equals("menu")) {
+                    navDrawerArray.append(i, component);
+                    i++;
+                }
+            }
+
+            for (MenuComponent component : listOfItems) {
+                if (component.getList().equals("submenu")) {
+                    navDrawerArray.append(i, component);
+                    i++;
+                }
+            }
+        }
+
+        homePresenter.passDataToAdapter(navDrawerArray);
     }
 
     @Override

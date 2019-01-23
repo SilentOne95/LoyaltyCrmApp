@@ -1,18 +1,19 @@
 package com.example.konta.sketch_loyalityapp.ui.home;
 
-import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
+import android.util.SparseArray;
 
-import java.util.List;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 
 public interface HomeContract {
 
     interface View {
 
-        void setUpAdapter(List<MenuComponent> menuComponentList);
+        void setUpAdapter(SparseArray<MenuComponent> menuComponentList);
     }
 
     interface Presenter {
 
-        void refactorFetchedData(List<MenuComponent> listMenuComponent);
+        void requestDataFromServer();
+        void passDataToAdapter(SparseArray<MenuComponent> menuComponentList);
     }
 }
