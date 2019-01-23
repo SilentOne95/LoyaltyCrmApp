@@ -19,6 +19,7 @@ public interface MapContract {
     interface Presenter {
 
         void requestDataFromServer();
+        void passDataToCluster(List<Marker> markerList);
 
         void switchBottomSheetState(Object object);
 
@@ -27,6 +28,6 @@ public interface MapContract {
 
     interface Model {
 
-        Disposable fetchDataFromServer();
+        Disposable fetchDataFromServer(MapPresenter presenter);
     }
 }

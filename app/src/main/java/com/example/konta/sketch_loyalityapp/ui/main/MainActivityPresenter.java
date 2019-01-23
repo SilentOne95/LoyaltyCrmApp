@@ -47,7 +47,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void setUpNavDrawer(SparseArray<HelperComponent> menu,
+    public void passDataToNavDrawer(SparseArray<HelperComponent> menu,
                                SparseArray<HelperComponent> submenu, int homeScreenId) {
         if (view != null) {
             view.setDataToNavDrawer(menu, submenu, homeScreenId);

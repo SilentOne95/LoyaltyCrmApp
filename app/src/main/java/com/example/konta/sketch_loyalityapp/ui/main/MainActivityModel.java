@@ -119,7 +119,7 @@ public class MainActivityModel implements MainActivityContract.Model {
             }
         } while (submenuArray.size() < submenuTemporary.size());
 
-        presenter.setUpNavDrawer(menuArray, submenuArray, homeScreenId);
+        presenter.passDataToNavDrawer(menuArray, submenuArray, homeScreenId);
     }
 
     @Override

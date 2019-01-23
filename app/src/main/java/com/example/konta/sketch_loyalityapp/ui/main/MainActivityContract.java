@@ -32,7 +32,7 @@ public interface MainActivityContract {
         void displayHomeScreen();
         void displaySelectedScreen(String layoutType);
 
-        void setUpNavDrawer(SparseArray<HelperComponent> one, SparseArray<HelperComponent> two, int id);
+        void passDataToNavDrawer(SparseArray<HelperComponent> one, SparseArray<HelperComponent> two, int id);
     }
 
     interface Model {

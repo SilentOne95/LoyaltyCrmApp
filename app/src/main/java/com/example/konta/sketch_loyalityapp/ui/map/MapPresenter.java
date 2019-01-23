@@ -12,7 +12,6 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.subjects.PublishSubject;
 
 public class MapPresenter implements MapContract.Presenter {
@@ -24,7 +23,6 @@ public class MapPresenter implements MapContract.Presenter {
     private static PublishSubject<Integer> data = PublishSubject.create();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-
     MapPresenter(@Nullable MapContract.View view, MapContract.Model model) {
         this.view = view;
         this.model = model;
@@ -32,22 +30,15 @@ public class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void requestDataFromServer() {
-        Disposable disposable = model.fetchDataFromServer();
+        Disposable disposable = model.fetchDataFromServer(this);
         compositeDisposable.add(disposable);
     }
 
-    static DisposableSingleObserver<List<Marker>> getObserver() {
-        return new DisposableSingleObserver<List<Marker>>() {
-            @Override
-            public void onSuccess(List<Marker> markers) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-        };
+    @Override
+    public void passDataToCluster(List<Marker> markerList) {
+        if (view != null) {
+            view.setUpCluster(markerList);
+        }
     }
 
     @Override
