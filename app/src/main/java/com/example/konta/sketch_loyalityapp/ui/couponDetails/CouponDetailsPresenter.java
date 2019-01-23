@@ -11,7 +11,6 @@ import java.util.Locale;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 
 public class CouponDetailsPresenter implements CouponDetailsContract.Presenter {
 
@@ -29,22 +28,15 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter {
 
     @Override
     public void requestDataFromServer(int couponId) {
-        Disposable disposable = model.fetchDataFromServer(couponId);
+        Disposable disposable = model.fetchDataFromServer(this, couponId);
         compositeDisposable.add(disposable);
     }
 
-    static DisposableSingleObserver<Coupon> getObserver() {
-        return new DisposableSingleObserver<Coupon>() {
-            @Override
-            public void onSuccess(Coupon coupon) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-        };
+    @Override
+    public void passDataToView(Coupon coupon) {
+        if (view != null) {
+            view.setUpViewWithData(coupon);
+        }
     }
 
     @Override

@@ -14,12 +14,13 @@ public interface CouponDetailsContract {
     interface Presenter {
 
         void requestDataFromServer(int couponId);
+        void passDataToView(Coupon coupon);
 
         String formatDateString(String dateString);
     }
 
     interface Model {
 
-        Disposable fetchDataFromServer(int couponId);
+        Disposable fetchDataFromServer(CouponDetailsPresenter presenter, int couponId);
     }
 }

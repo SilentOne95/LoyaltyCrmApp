@@ -9,15 +9,18 @@ import io.reactivex.disposables.Disposable;
 public interface CouponsContract {
 
     interface View {
+
         void setUpAdapter(List<Coupon> couponList);
     }
 
     interface Presenter {
+
         void requestDataFromServer();
+        void passDataToAdapter(List<Coupon> couponList);
     }
 
     interface Model {
 
-        Disposable fetchDataFromServer();
+        Disposable fetchDataFromServer(CouponsPresenter presenter);
     }
 }
