@@ -6,7 +6,6 @@ import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 
 public class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
 
@@ -24,21 +23,14 @@ public class ProductDetailsPresenter implements ProductDetailsContract.Presenter
 
     @Override
     public void requestDataFromServer(int productId) {
-        Disposable disposable = model.fetchDataFromServer(productId);
+        Disposable disposable = model.fetchDataFromServer(this, productId);
         compositeDisposable.add(disposable);
     }
 
-    static DisposableSingleObserver<Product> getObserver() {
-        return new DisposableSingleObserver<Product>() {
-            @Override
-            public void onSuccess(Product product) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-        };
+    @Override
+    public void passDataToView(Product product) {
+        if (view != null) {
+            view.setUpViewWithData(product);
+        }
     }
 }

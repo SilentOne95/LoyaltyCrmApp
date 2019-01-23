@@ -55,11 +55,11 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     };
 
     @Override
-    public void setUpAdapter(List<Product> couponList) {
-        recyclerView.setAdapter(new ProductRetrofitAdapter(couponList, recyclerItemClickListener));
+    public void setUpAdapter(List<Product> productList) {
+        recyclerView.setAdapter(new ProductRetrofitAdapter(productList, recyclerItemClickListener));
 
         // Set empty state view if needed
-        if (!couponList.isEmpty()) {
+        if (!productList.isEmpty()) {
             recyclerView.setVisibility(View.VISIBLE);
             emptyStateView.setVisibility(View.GONE);
         } else {

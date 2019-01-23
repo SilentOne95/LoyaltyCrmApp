@@ -8,7 +8,6 @@ import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 
 public class ProductsPresenter implements ProductsContract.Presenter {
 
@@ -25,21 +24,14 @@ public class ProductsPresenter implements ProductsContract.Presenter {
 
     @Override
     public void requestDataFromServer() {
-        Disposable disposable = model.fetchDataFromServer();
+        Disposable disposable = model.fetchDataFromServer(this);
         compositeDisposable.add(disposable);
     }
 
-    static DisposableSingleObserver<List<Product>> getObserver() {
-        return new DisposableSingleObserver<List<Product>>() {
-            @Override
-            public void onSuccess(List<Product> products) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-        };
+    @Override
+    public void passDataToAdapter(List<Product> productList) {
+        if (view != null) {
+            view.setUpAdapter(productList);
+        }
     }
 }
