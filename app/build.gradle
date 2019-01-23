@@ -26,24 +26,38 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:multidex:1.0.3'
+
+    // Google Maps
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.maps.android:android-maps-utils:0.5'
+
+    // Dagger2
     implementation 'com.google.dagger:dagger:2.20'
     implementation 'com.google.dagger:dagger-android:2.15'
     implementation 'com.google.dagger:dagger-android-support:2.13'
+
+    // Retrofit2
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
+    // Picasso library for images
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support:exifinterface:28.0.0'
+
+    // Firebase Cloud Messaging
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+
+    // RxJava2
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.20'
     testImplementation 'junit:junit:4.12'
 }
 
+// Firebase Cloud Messaging plugin
 apply plugin: 'com.google.gms.google-services'

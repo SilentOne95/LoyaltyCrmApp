@@ -21,22 +21,25 @@ public interface MainActivityContract {
         void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
                                 SparseArray<HelperComponent> submenuSectionArray,
                                 int homeScreenId);
-        void onResponseFailure(Throwable throwable);
         void setDisplayScreenChecked(String layoutType);
     }
 
     interface Presenter {
 
         void requestDataFromServer();
-        void refactorFetchedData(List<MenuComponent> listOfItems);
         String getLayoutType(int groupId, int itemId);
 
         void displayHomeScreen();
         void displaySelectedScreen(String layoutType);
+
+        void setUpNavDrawer(SparseArray<HelperComponent> one, SparseArray<HelperComponent> two, int id);
     }
 
     interface Model {
 
-        Disposable fetchDataFromServer();
+        Disposable fetchDataFromServer(MainActivityPresenter presenter);
+        void refactorFetchedData(List<MenuComponent> listOfItems);
+        String getMenuLayoutType(int itemId);
+        String getSubmenuLayoutType(int itemId);
     }
 }

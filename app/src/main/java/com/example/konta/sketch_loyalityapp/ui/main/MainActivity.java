@@ -13,7 +13,6 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
@@ -133,11 +132,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Set checked home screen in Navigation Drawer
         mNavigationView.getMenu().getItem(homeScreenId).setChecked(true).setCheckable(true);
-    }
-
-    @Override
-    public void onResponseFailure(Throwable throwable) {
-        Toast.makeText(MainActivity.this, "Oops.. something went wrong!", Toast.LENGTH_LONG).show();
     }
 
     @Override
