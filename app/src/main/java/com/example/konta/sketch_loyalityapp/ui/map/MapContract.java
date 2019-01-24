@@ -1,6 +1,8 @@
 package com.example.konta.sketch_loyalityapp.ui.map;
 
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
+import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.contactInfo.ContactInfoPresenter;
+import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.openingHours.OpeningHoursPresenter;
 
 import java.util.List;
 
@@ -29,5 +31,8 @@ public interface MapContract {
     interface Model {
 
         Disposable fetchDataFromServer(MapPresenter presenter);
+
+        Disposable fetchDataFromServer(OpeningHoursPresenter openingHoursPresenter);
+        Disposable fetchDataFromServer(ContactInfoPresenter contactInfoPresenter);
     }
 }

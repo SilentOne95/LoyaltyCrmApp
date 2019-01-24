@@ -13,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter{
@@ -22,6 +23,9 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
     private MapModel model;
 
     private static final String TAG = "OpeningHoursFragment";
+
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private int selectedMarkerId;
 
     OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view, MapModel model) {
         this.view = view;
@@ -39,8 +43,10 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
             }
 
             @Override
-            public void onNext(Integer integer) {
-                Log.d(TAG, "onNext");
+            public void onNext(Integer markerId) {
+                Log.d(TAG, "onNext" + String.valueOf(markerId));
+                selectedMarkerId = markerId;
+                getMarkerList();
             }
 
             @Override
@@ -56,37 +62,53 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
     }
 
     @Override
+    public void getMarkerList() {
+       Disposable disposable = model.fetchDataFromServer(this);
+       compositeDisposable.add(disposable);
+    }
+
+    @Override
     public void formatOpenHoursData(List<Marker> markerList) {
         String monday, tuesday, wednesday, thursday, friday, saturday, sunday;
         monday = tuesday = wednesday = thursday = friday = saturday = sunday = "Closed";
         String[] days;
+        int markerPosition = 0;
 
-        Marker marker = markerList.get(1);
+        for (int i = 0; i < markerList.size(); i++) {
+            if (markerList.get(i).getId().equals(selectedMarkerId)) {
+                markerPosition = i;
+                break;
+            }
+        }
+
+        Marker marker = markerList.get(markerPosition);
         List<OpenHour> openHourList = marker.getOpenHours();
 
         for (OpenHour time : openHourList) {
-            switch (time.getDayName()) {
-                case "monday":
-                    monday = checkIfOpenHoursAreValid(time);
-                    break;
-                case "tuesday":
-                    tuesday = checkIfOpenHoursAreValid(time);
-                    break;
-                case "wednesday":
-                    wednesday = checkIfOpenHoursAreValid(time);
-                    break;
-                case "thursday":
-                    thursday = checkIfOpenHoursAreValid(time);
-                    break;
-                case "friday":
-                    friday = checkIfOpenHoursAreValid(time);
-                    break;
-                case "saturday":
-                    saturday = checkIfOpenHoursAreValid(time);
-                    break;
-                case "sunday":
-                    sunday = checkIfOpenHoursAreValid(time);
-                    break;
+            if (time.getDayName() != null) {
+                switch (time.getDayName()) {
+                    case "monday":
+                        monday = checkIfOpenHoursAreValid(time);
+                        break;
+                    case "tuesday":
+                        tuesday = checkIfOpenHoursAreValid(time);
+                        break;
+                    case "wednesday":
+                        wednesday = checkIfOpenHoursAreValid(time);
+                        break;
+                    case "thursday":
+                        thursday = checkIfOpenHoursAreValid(time);
+                        break;
+                    case "friday":
+                        friday = checkIfOpenHoursAreValid(time);
+                        break;
+                    case "saturday":
+                        saturday = checkIfOpenHoursAreValid(time);
+                        break;
+                    case "sunday":
+                        sunday = checkIfOpenHoursAreValid(time);
+                        break;
+                }
             }
         }
 

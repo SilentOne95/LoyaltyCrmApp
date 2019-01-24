@@ -20,7 +20,7 @@ public class MapPresenter implements MapContract.Presenter {
     private MapContract.View view;
     private MapContract.Model model;
 
-    private static PublishSubject<Integer> data = PublishSubject.create();
+    private static PublishSubject<Integer> markerIdSubject = PublishSubject.create();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     MapPresenter(@Nullable MapContract.View view, MapContract.Model model) {
@@ -65,11 +65,10 @@ public class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void passDataToBottomSheet(int markerId) {
-        data.onNext(markerId);
-        data.onComplete();
+        markerIdSubject.onNext(markerId);
     }
 
     public static Observable<Integer> getObservable() {
-        return data;
+        return markerIdSubject;
     }
 }
