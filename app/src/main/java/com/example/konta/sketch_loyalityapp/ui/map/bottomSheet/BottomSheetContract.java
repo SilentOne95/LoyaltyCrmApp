@@ -1,8 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.map.bottomSheet;
 
-import android.util.SparseArray;
-
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
+import com.example.konta.sketch_loyalityapp.pojo.map.OpenHour;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface BottomSheetContract {
 
     interface OpeningHoursView {
 
-        void setUpViewsWithData(SparseArray<String> singleDayOpenHours);
+        void setUpViewsWithData(String[] singleDayOpenHours);
     }
 
     interface ContactInfoPresenter {
@@ -28,5 +27,6 @@ public interface BottomSheetContract {
         void setUpObservable();
 
         void formatOpenHoursData(List<Marker> markerList);
-        String checkIfOpenHoursAreValid(String openHour, String openMinute, String closeHour, String closeMinute);}
+        String checkIfOpenHoursAreValid(OpenHour time);
+    }
 }

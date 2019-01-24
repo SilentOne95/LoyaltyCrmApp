@@ -2,17 +2,10 @@ package com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.openingHours;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.util.SparseArray;
 
-import com.example.konta.sketch_loyalityapp.pojo.map.Friday;
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
-import com.example.konta.sketch_loyalityapp.pojo.map.Monday;
-import com.example.konta.sketch_loyalityapp.pojo.map.OpenHours;
-import com.example.konta.sketch_loyalityapp.pojo.map.Saturday;
-import com.example.konta.sketch_loyalityapp.pojo.map.Sunday;
-import com.example.konta.sketch_loyalityapp.pojo.map.Thursday;
-import com.example.konta.sketch_loyalityapp.pojo.map.Tuesday;
-import com.example.konta.sketch_loyalityapp.pojo.map.Wednesday;
+import com.example.konta.sketch_loyalityapp.pojo.map.OpenHour;
+import com.example.konta.sketch_loyalityapp.ui.map.MapModel;
 import com.example.konta.sketch_loyalityapp.ui.map.MapPresenter;
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContract;
 
@@ -26,12 +19,13 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
 
     @Nullable
     private BottomSheetContract.OpeningHoursView view;
+    private MapModel model;
 
     private static final String TAG = "OpeningHoursFragment";
-    private SparseArray<String> list = new SparseArray<>();
 
-    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view) {
+    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view, MapModel model) {
         this.view = view;
+        this.model = model;
     }
 
     @Override
@@ -55,9 +49,7 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
             }
 
             @Override
-            public void onComplete() {
-                Log.d(TAG, "onComplete");
-            }
+            public void onComplete() { Log.d(TAG, "onComplete"); }
         };
 
         observable.subscribe(observer);
@@ -65,153 +57,59 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
 
     @Override
     public void formatOpenHoursData(List<Marker> markerList) {
-        OpenHours open;
-        String openHour, openMinute, closeHour, closeMinute, day;
-        int index = 0;
+        String monday, tuesday, wednesday, thursday, friday, saturday, sunday;
+        monday = tuesday = wednesday = thursday = friday = saturday = sunday = "Closed";
+        String[] days;
 
-        // For the test purpose get static value
         Marker marker = markerList.get(1);
-        open = marker.getOpenHours();
+        List<OpenHour> openHourList = marker.getOpenHours();
 
-        // TODO: Simplify
-        if (open.getMonday() != null) {
-            Monday monday = open.getMonday();
-
-            openHour = monday.getOpenHour();
-            openMinute = monday.getOpenMinute();
-            closeHour = monday.getCloseHour();
-            closeMinute = monday.getCloseMinute();
-
-            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
-            list.append(index, day);
-            index++;
-        } else {
-            day = "Closed";
-            list.append(index, day);
-            index++;
+        for (OpenHour time : openHourList) {
+            switch (time.getDayName()) {
+                case "monday":
+                    monday = checkIfOpenHoursAreValid(time);
+                    break;
+                case "tuesday":
+                    tuesday = checkIfOpenHoursAreValid(time);
+                    break;
+                case "wednesday":
+                    wednesday = checkIfOpenHoursAreValid(time);
+                    break;
+                case "thursday":
+                    thursday = checkIfOpenHoursAreValid(time);
+                    break;
+                case "friday":
+                    friday = checkIfOpenHoursAreValid(time);
+                    break;
+                case "saturday":
+                    saturday = checkIfOpenHoursAreValid(time);
+                    break;
+                case "sunday":
+                    sunday = checkIfOpenHoursAreValid(time);
+                    break;
+            }
         }
 
-        if (open.getTuesday() != null) {
-            Tuesday tuesday = open.getTuesday();
-
-            openHour = tuesday.getOpenHour();
-            openMinute = tuesday.getOpenMinute();
-            closeHour = tuesday.getCloseHour();
-            closeMinute = tuesday.getCloseMinute();
-
-            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
-            list.append(index, day);
-            index++;
-
-        } else {
-            day = checkIfOpenHoursAreValid("", "", "", "");
-            list.append(index, day);
-            index++;
-        }
-
-        if (open.getWednesday() != null) {
-            Wednesday wednesday = open.getWednesday();
-
-            openHour = wednesday.getOpenHour();
-            openMinute = wednesday.getOpenMinute();
-            closeHour = wednesday.getCloseHour();
-            closeMinute = wednesday.getCloseMinute();
-
-            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
-            list.append(index, day);
-            index++;
-
-        } else {
-            day = checkIfOpenHoursAreValid("", "", "", "");
-            list.append(index, day);
-            index++;
-        }
-
-        if (open.getThursday() != null) {
-            Thursday thursday = open.getThursday();
-
-            openHour = thursday.getOpenHour();
-            openMinute = thursday.getOpenMinute();
-            closeHour = thursday.getCloseHour();
-            closeMinute = thursday.getCloseMinute();
-
-            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
-            list.append(index, day);
-            index++;
-
-        } else {
-            day = checkIfOpenHoursAreValid("", "", "", "");
-            list.append(index, day);
-            index++;
-        }
-
-        if (open.getFriday() != null) {
-            Friday friday = open.getFriday();
-
-            openHour = friday.getOpenHour();
-            openMinute = friday.getOpenMinute();
-            closeHour = friday.getCloseHour();
-            closeMinute = friday.getCloseMinute();
-
-            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
-            list.append(index, day);
-            index++;
-        } else {
-            day = checkIfOpenHoursAreValid("", "", "", "");
-            list.append(index, day);
-            index++;
-        }
-
-        if (open.getSaturday() != null) {
-            Saturday saturday = open.getSaturday();
-
-            openHour = saturday.getOpenHour();
-            openMinute = saturday.getOpenMinute();
-            closeHour = saturday.getCloseHour();
-            closeMinute = saturday.getCloseMinute();
-
-            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
-            list.append(index, day);
-            index++;
-
-        } else {
-            day = checkIfOpenHoursAreValid("", "", "", "");
-            list.append(index, day);
-            index++;
-        }
-
-        if (open.getSunday() != null) {
-            Sunday sunday = open.getSunday();
-
-            openHour = sunday.getOpenHour();
-            openMinute = sunday.getOpenMinute();
-            closeHour = sunday.getCloseHour();
-            closeMinute = sunday.getCloseMinute();
-
-            day = checkIfOpenHoursAreValid(openHour, openMinute, closeHour, closeMinute);
-            list.append(index, day);
-
-        } else {
-            day = checkIfOpenHoursAreValid("", "", "", "");
-            list.append(index, day);
-        }
+        days = new String[] {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
 
         if (view != null) {
-            view.setUpViewsWithData(list);
+            view.setUpViewsWithData(days);
         }
     }
 
     @Override
-    public String checkIfOpenHoursAreValid(String openHour, String openMinute, String closeHour, String closeMinute) {
+    public String checkIfOpenHoursAreValid(OpenHour time) {
         String day;
 
-        if (openHour.isEmpty() || openHour.equals("None")) {
+        if (time.getOpenHour().isEmpty() || time.getOpenHour().equals("None")) {
             day = "Closed";
-        } else if (openHour.equals(closeHour)) {
+        } else if (time.getOpenHour().equals(time.getCloseHour())) {
             day = "Open 24/7";
         } else {
-            day = openHour + ":" + openMinute + " - " + closeHour + ":" + closeMinute;
+            day = time.getOpenHour() + ":" + time.getOpenMinute() + " - " +
+                    time.getCloseHour() + ":" + time.getCloseMinute();
         }
+
         return day;
     }
 }

@@ -3,8 +3,11 @@ package com.example.konta.sketch_loyalityapp.pojo.map;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Wednesday {
+public class OpenHour {
 
+    @SerializedName("day_name")
+    @Expose
+    private String dayName;
     @SerializedName("open_hour")
     @Expose
     private String openHour;
@@ -17,6 +20,14 @@ public class Wednesday {
     @SerializedName("close_minute")
     @Expose
     private String closeMinute;
+
+    public String getDayName() {
+        return dayName;
+    }
+
+    public void setDayName(String dayName) {
+        this.dayName = dayName;
+    }
 
     public String getOpenHour() {
         return openHour;

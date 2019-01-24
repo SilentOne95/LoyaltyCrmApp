@@ -5,6 +5,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.maps.android.clustering.ClusterItem;
 
+import java.util.List;
+
 public class Marker implements ClusterItem {
 
     @SerializedName("id")
@@ -21,7 +23,7 @@ public class Marker implements ClusterItem {
     private Double lng;
     @SerializedName("open_hours")
     @Expose
-    private OpenHours openHours;
+    private List<OpenHour> openHours = null;
 
     public Marker(double lat, double lng, int id) {
         this.lat = lat;
@@ -61,16 +63,16 @@ public class Marker implements ClusterItem {
         this.lng = lng;
     }
 
-    public OpenHours getOpenHours() {
+    public List<OpenHour> getOpenHours() {
         return openHours;
     }
 
-    public void setOpenHours(OpenHours openHours) {
+    public void setOpenHours(List<OpenHour> openHours) {
         this.openHours = openHours;
     }
 
     @Override
-    public LatLng getPosition() { return  new LatLng(lat, lng); }
+    public LatLng getPosition() { return new LatLng(lat, lng); }
 
     @Override
     public String getSnippet() { return null; }
