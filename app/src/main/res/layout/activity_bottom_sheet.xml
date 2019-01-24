@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_sheet_general_info_layout_height"
@@ -9,9 +8,9 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:context=".ui.map.bottomSheet.BottomSheet">
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
+    <!--PeekHeight panel layout-->
     <LinearLayout
         android:id="@+id/bottom_sheet_peek"
         android:layout_width="match_parent"
@@ -20,26 +19,27 @@
 
         <TextView
             android:id="@+id/bottom_sheet_icon_title"
+            style="@style/bottom_sheet_general_icon_text"
             android:drawableStart="@drawable/ic_marker"
-            android:text="@string/bottom_place_title_text"
-            style="@style/bottom_sheet_general_icon_text"/>
+            android:text="@string/bottom_place_title_text" />
 
         <TextView
             android:id="@+id/bottom_sheet_place_address"
-            android:text="@string/bottom_place_address_text"
-            style="@style/bottom_sheet_general_place_address"/>
+            style="@style/bottom_sheet_general_place_address"
+            android:text="@string/bottom_place_address_text" />
 
         <TextView
             android:id="@+id/bottom_sheet_place_hours"
-            android:text="@string/bottom_place_open_hours_text"
-            style="@style/bottom_sheet_general_opening_hours"/>
+            style="@style/bottom_sheet_general_opening_hours"
+            android:text="@string/bottom_place_open_hours_text" />
 
         <View
             android:id="@+id/view"
-            style="@style/bottom_sheet_horizontal_divider"/>
+            style="@style/bottom_sheet_horizontal_divider" />
 
     </LinearLayout>
 
+    <!--Content layout-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

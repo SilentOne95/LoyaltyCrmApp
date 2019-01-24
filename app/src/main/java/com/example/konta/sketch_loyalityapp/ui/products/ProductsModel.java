@@ -1,7 +1,5 @@
 package com.example.konta.sketch_loyalityapp.ui.products;
 
-import android.util.Log;
-
 import com.example.konta.sketch_loyalityapp.network.Api;
 import com.example.konta.sketch_loyalityapp.network.RetrofitClient;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
@@ -39,9 +37,7 @@ public class ProductsModel implements ProductsContract.Model {
             }
 
             @Override
-            public void onError(Throwable e) {
-                Log.d("test", "products fail");
-            }
+            public void onError(Throwable e) { }
         };
     }
 }
