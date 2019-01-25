@@ -125,4 +125,8 @@
     <string name="contact_info_phone_number">+48 123 456 789</string>
     <string name="contact_info_email">email@address.com</string>
 
+    <!-- Bottom Sheet peek Panel default info -->
+    <string name="bottom_sheet_default_place_title">Place no.</string>
+    <string name="bottom_sheet_default_no_info_text">No info to display</string>
+
 </resources>

@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.ui.map;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,7 @@ import java.util.List;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
+import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
         View.OnClickListener, MapContract.View {
@@ -261,15 +264,21 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void setUpBottomSheetPanelWithData(Marker marker) {
-        String address = marker.getAddress().concat(", ")
-                .concat(marker.getPostCode().toString()).concat(" ")
-                .concat(marker.getCity());
-        // TODO: Add logic to get today's open hour
-        String todayHours = "Test hours";
+    public String getDefaultPlaceTitle() {
+        return getString(getResources()
+                .getIdentifier("bottom_sheet_default_place_title", "string", PACKAGE_NAME));
+    }
 
-        mPanelPlaceTitle.setText(marker.getShopName());
+    @Override
+    public String getDefaultPlaceData() {
+        return getString(getResources()
+                .getIdentifier("bottom_sheet_default_no_info_text", "string", PACKAGE_NAME));
+    }
+
+    @Override
+    public void setUpBottomSheetPanelWithData(String title, String address, String openHours) {
+        mPanelPlaceTitle.setText(title);
         mPanelAddress.setText(address);
-        mPanelTodayOpenHours.setText(todayHours);
+        mPanelTodayOpenHours.setText(openHours);
     }
 }

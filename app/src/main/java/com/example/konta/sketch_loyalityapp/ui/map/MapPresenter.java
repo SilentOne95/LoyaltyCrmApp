@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
+import com.example.konta.sketch_loyalityapp.pojo.map.OpenHour;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -24,6 +26,7 @@ public class MapPresenter implements MapContract.Presenter {
 
     private static final String TAG = "MapFragment";
     private List<Marker> markerList = null;
+    private int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
     private static PublishSubject<Integer> markerIdSubject = PublishSubject.create();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -50,7 +53,7 @@ public class MapPresenter implements MapContract.Presenter {
     @Override
     public void switchBottomSheetState(Object object) {
 
-        if (view != null){
+        if (view != null) {
             if (object instanceof Marker) {
                 if (view.getBottomSheetState() != BottomSheetBehavior.STATE_COLLAPSED) {
                     view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -59,7 +62,7 @@ public class MapPresenter implements MapContract.Presenter {
                 if (view.getBottomSheetState() != BottomSheetBehavior.STATE_HIDDEN) {
                     view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
                 }
-            } else if (object instanceof View){
+            } else if (object instanceof View) {
                 if (view.getBottomSheetState() == BottomSheetBehavior.STATE_COLLAPSED) {
                     view.setBottomSheetState(BottomSheetBehavior.STATE_EXPANDED);
                 } else {
@@ -91,7 +94,7 @@ public class MapPresenter implements MapContract.Presenter {
             @Override
             public void onNext(Integer markerId) {
                 Log.d(TAG, "onNext" + String.valueOf(markerId));
-                passDataToView(markerId);
+                findSelectedMarkerId(markerId);
             }
 
             @Override
@@ -109,7 +112,7 @@ public class MapPresenter implements MapContract.Presenter {
     }
 
     @Override
-    public void passDataToView(int markerId) {
+    public void findSelectedMarkerId(int markerId) {
         int markerPosition = 0;
 
         for (int i = 0; i < markerList.size(); i++) {
@@ -119,8 +122,87 @@ public class MapPresenter implements MapContract.Presenter {
             }
         }
 
+        passDataToView(markerList.get(markerPosition));
+    }
+
+    @Override
+    public void passDataToView(Marker marker) {
+        String title, address, openHours;
+
+        // TODO: Move this logic to model class
+        String defaultString;
+        String defaultTitle;
         if (view != null) {
-            view.setUpBottomSheetPanelWithData(markerList.get(markerPosition));
+            defaultTitle = view.getDefaultPlaceTitle();
+            defaultString = view.getDefaultPlaceData();
+        } else {
+            defaultTitle = defaultString = "Unable to display";
         }
+        title = defaultTitle;
+        address = openHours = defaultString;
+
+        if (marker.getTitle() != null) {
+            title = marker.getTitle();
+        }
+
+        if (marker.getAddress() != null && marker.getPostCode() != null && marker.getCity() != null) {
+            address = marker.getAddress() + ", " +
+                    marker.getPostCode().toString() + " " +
+                    marker.getCity();
+        }
+
+        if (marker.getOpenHours() != null) {
+            for (int i = 0; i < marker.getOpenHours().size(); i++) {
+                if (marker.getOpenHours().get(i).getDayName().equals(getCurrentDay())) {
+                    OpenHour obj = marker.getOpenHours().get(i);
+                    openHours = "Open:" + " " +
+                            obj.getOpenHour() + ":" +
+                            obj.getOpenMinute() + " - " +
+                            obj.getCloseHour() + ":" +
+                            obj.getCloseMinute();
+
+                    break;
+                }
+            }
+        }
+
+        if (view != null) {
+            view.setUpBottomSheetPanelWithData(title, address, openHours);
+        }
+    }
+
+    @Override
+    public String getCurrentDay() {
+        String day;
+
+        switch (currentDay){
+            case 1:
+                day = "sunday";
+                break;
+            case 2:
+                day = "monday";
+                break;
+            case 3:
+                day = "tuesday";
+                break;
+            case 4:
+                day = "wednesday";
+                break;
+            case 5:
+                day = "thursday";
+                break;
+            case 6:
+                day = "friday";
+                break;
+            case 7:
+                day = "saturday";
+                break;
+
+            default:
+                day = "";
+                break;
+        }
+
+        return day;
     }
 }
