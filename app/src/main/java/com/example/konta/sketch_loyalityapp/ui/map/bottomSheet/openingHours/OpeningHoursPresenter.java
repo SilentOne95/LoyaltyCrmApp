@@ -55,7 +55,9 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
             }
 
             @Override
-            public void onComplete() { Log.d(TAG, "onComplete"); }
+            public void onComplete() {
+                Log.d(TAG, "onComplete");
+            }
         };
 
         observable.subscribe(observer);

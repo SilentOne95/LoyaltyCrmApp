@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.ui.map;
 
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
+import android.util.Log;
 import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
@@ -10,6 +11,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
@@ -19,6 +21,9 @@ public class MapPresenter implements MapContract.Presenter {
     @Nullable
     private MapContract.View view;
     private MapContract.Model model;
+
+    private static final String TAG = "MapFragment";
+    private List<Marker> markerList = null;
 
     private static PublishSubject<Integer> markerIdSubject = PublishSubject.create();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -36,6 +41,7 @@ public class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void passDataToCluster(List<Marker> markerList) {
+        this.markerList = markerList;
         if (view != null) {
             view.setUpCluster(markerList);
         }
@@ -70,5 +76,51 @@ public class MapPresenter implements MapContract.Presenter {
 
     public static Observable<Integer> getObservable() {
         return markerIdSubject;
+    }
+
+    @Override
+    public void setUpObservable() {
+
+        Observable<Integer> observable = getObservable();
+        Observer<Integer> observer = new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.d(TAG, "onSubscribe");
+            }
+
+            @Override
+            public void onNext(Integer markerId) {
+                Log.d(TAG, "onNext" + String.valueOf(markerId));
+                passDataToView(markerId);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "onError");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete");
+            }
+        };
+
+        observable.subscribe(observer);
+    }
+
+    @Override
+    public void passDataToView(int markerId) {
+        int markerPosition = 0;
+
+        for (int i = 0; i < markerList.size(); i++) {
+            if (markerList.get(i).getId().equals(markerId)) {
+                markerPosition = i;
+                break;
+            }
+        }
+
+        if (view != null) {
+            view.setUpBottomSheetPanelWithData(markerList.get(markerPosition));
+        }
     }
 }

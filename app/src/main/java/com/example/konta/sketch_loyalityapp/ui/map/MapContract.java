@@ -16,6 +16,8 @@ public interface MapContract {
 
         int getBottomSheetState();
         void setBottomSheetState(int state);
+
+        void setUpBottomSheetPanelWithData(Marker marker);
     }
 
     interface Presenter {
@@ -24,6 +26,9 @@ public interface MapContract {
         void passDataToCluster(List<Marker> markerList);
 
         void switchBottomSheetState(Object object);
+
+        void setUpObservable();
+        void passDataToView(int markerId);
 
         void passDataToBottomSheet(int markerId);
     }

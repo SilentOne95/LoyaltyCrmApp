@@ -21,6 +21,24 @@ public class Marker implements ClusterItem {
     @SerializedName("lng")
     @Expose
     private Double lng;
+    @SerializedName("shop_name")
+    @Expose
+    private String shopName;
+    @SerializedName("address")
+    @Expose
+    private String address;
+    @SerializedName("post_code")
+    @Expose
+    private Integer postCode;
+    @SerializedName("city")
+    @Expose
+    private String city;
+    @SerializedName("mail")
+    @Expose
+    private Object mail;
+    @SerializedName("phone_number")
+    @Expose
+    private Object phoneNumber;
     @SerializedName("open_hours")
     @Expose
     private List<OpenHour> openHours = null;
@@ -61,6 +79,54 @@ public class Marker implements ClusterItem {
 
     public void setLng(Double lng) {
         this.lng = lng;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(Integer postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Object getMail() {
+        return mail;
+    }
+
+    public void setMail(Object mail) {
+        this.mail = mail;
+    }
+
+    public Object getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Object phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public List<OpenHour> getOpenHours() {

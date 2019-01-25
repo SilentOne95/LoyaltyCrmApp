@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
@@ -54,6 +55,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
 
+    // BottomSheet PeekHeight Panel views
+    private TextView mPanelPlaceTitle, mPanelAddress, mPanelTodayOpenHours;
+
     @Override
     protected int getLayout() { return R.layout.fragment_google_map; }
 
@@ -64,6 +68,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         getActivity().setTitle("Map");
 
         presenter = new MapPresenter(this, new MapModel());
+        presenter.setUpObservable();
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
@@ -101,6 +106,11 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                 tab.setCustomView(pagerAdapter.getTabView(i));
             }
         }
+
+        // BottomSheet PeekHeight Panel
+        mPanelPlaceTitle = rootView.findViewById(R.id.bottom_sheet_icon_title);
+        mPanelAddress = rootView.findViewById(R.id.bottom_sheet_place_address);
+        mPanelTodayOpenHours = rootView.findViewById(R.id.bottom_sheet_place_hours);
     }
 
     @Override
@@ -248,5 +258,18 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public void setBottomSheetState(int state) {
         mBottomSheetBehavior.setState(state);
+    }
+
+    @Override
+    public void setUpBottomSheetPanelWithData(Marker marker) {
+        String address = marker.getAddress().concat(", ")
+                .concat(marker.getPostCode().toString()).concat(" ")
+                .concat(marker.getCity());
+        // TODO: Add logic to get today's open hour
+        String todayHours = "Test hours";
+
+        mPanelPlaceTitle.setText(marker.getShopName());
+        mPanelAddress.setText(address);
+        mPanelTodayOpenHours.setText(todayHours);
     }
 }
