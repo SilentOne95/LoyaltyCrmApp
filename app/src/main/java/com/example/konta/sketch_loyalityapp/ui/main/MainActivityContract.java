@@ -22,7 +22,8 @@ public interface MainActivityContract {
         void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
                                 SparseArray<HelperComponent> submenuSectionArray,
                                 int homeScreenId);
-        void setDisplayScreenChecked(String layoutType);
+        void setDisplayItemChecked(int viewPosition);
+        void uncheckItemsNavDrawer();
     }
 
     interface Presenter {
@@ -34,6 +35,9 @@ public interface MainActivityContract {
         void displaySelectedScreen(String layoutType);
 
         void passDataToNavDrawer(SparseArray<HelperComponent> one, SparseArray<HelperComponent> two, int id);
+
+        void setUpObservableHomeAdapter();
+        void passIdOfSelectedView(int viewPosition);
     }
 
     interface Model {

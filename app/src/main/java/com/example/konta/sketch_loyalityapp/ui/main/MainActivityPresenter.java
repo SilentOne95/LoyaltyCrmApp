@@ -1,12 +1,14 @@
 package com.example.konta.sketch_loyalityapp.ui.main;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.coupons.CouponsFragment;
+import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
 import com.example.konta.sketch_loyalityapp.ui.login.LogInActivity;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomeFragment;
@@ -15,6 +17,8 @@ import com.example.konta.sketch_loyalityapp.ui.contact.ContactActivity;
 import com.example.konta.sketch_loyalityapp.ui.terms.TermsConditionsActivity;
 import com.example.konta.sketch_loyalityapp.ui.website.WebsiteActivity;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -97,13 +101,48 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                     view.setActivity(ContactActivity.class);
                     break;
             }
-
-            view.setDisplayScreenChecked(layoutType);
         }
     }
 
     @Override
     public void getSelectedLayoutType(MenuComponent item) {
         displaySelectedScreen(item.getType());
+    }
+
+    @Override
+    public void setUpObservableHomeAdapter() {
+
+        Observable<Integer> observable = HomePresenter.getObservableSelectedView();
+        Observer<Integer> observer = new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.d("home", "onSubscribe");
+            }
+
+            @Override
+            public void onNext(Integer viewPosition) {
+                Log.d("home", "onNext" + String.valueOf(viewPosition));
+                passIdOfSelectedView(viewPosition);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("home", "onError");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d("home", "onComplete");
+            }
+        };
+
+        observable.subscribe(observer);
+    }
+
+    @Override
+    public void passIdOfSelectedView(int viewPosition) {
+        if (view != null) {
+            view.setDisplayItemChecked(viewPosition);
+        }
     }
 }

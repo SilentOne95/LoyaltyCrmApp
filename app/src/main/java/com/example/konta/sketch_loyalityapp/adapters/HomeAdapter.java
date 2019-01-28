@@ -63,7 +63,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homeClickListener.onItemHomeClick(listOfItems.get(position));
+                homeClickListener.onItemHomeClick(listOfItems.get(position), position);
             }
         });
     }

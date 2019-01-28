@@ -6,8 +6,10 @@ import android.util.SparseArray;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityContract;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 
 public class HomePresenter implements HomeContract.Presenter {
 
@@ -15,6 +17,7 @@ public class HomePresenter implements HomeContract.Presenter {
     private HomeContract.View view;
     private MainActivityContract.Model model;
 
+    private static PublishSubject<Integer> markerIdSubject = PublishSubject.create();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     HomePresenter(@Nullable HomeContract.View view, MainActivityContract.Model model) {
@@ -33,5 +36,14 @@ public class HomePresenter implements HomeContract.Presenter {
         if (view != null && menuComponentList != null) {
             view.setUpAdapter(menuComponentList);
         }
+    }
+
+    @Override
+    public void passIdOfSelectedView(int viewId) {
+        markerIdSubject.onNext(viewId);
+    }
+
+    public static Observable<Integer> getObservableSelectedView() {
+        return markerIdSubject;
     }
 }

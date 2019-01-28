@@ -15,5 +15,7 @@ public interface HomeContract {
 
         void requestDataFromServer();
         void passDataToAdapter(SparseArray<MenuComponent> menuComponentList);
+
+        void passIdOfSelectedView(int viewId);
     }
 }

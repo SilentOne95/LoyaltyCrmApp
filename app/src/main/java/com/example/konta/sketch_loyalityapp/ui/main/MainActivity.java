@@ -72,6 +72,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         presenter = new MainActivityPresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
         presenter.displayHomeScreen();
+        presenter.setUpObservableHomeAdapter();
     }
 
     @Override
@@ -111,11 +112,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onDrawerStateChanged(int i) { }
 
     @Override
-    public void setDisplayScreenChecked(String layoutType) {
-        // TODO: Fix logic
-    }
-
-    @Override
     public void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
                                    SparseArray<HelperComponent> submenuSectionArray,
                                    int homeScreenId) {
@@ -123,11 +119,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         Menu menu = mNavigationView.getMenu(), submenu = mNavigationView.getMenu();
 
         for (int i = 0; i < menuSectionArray.size(); i++) {
-                menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, menuSectionArray.get(i).getTitle());
+            menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, menuSectionArray.get(i).getTitle());
         }
 
         for (int i = 0; i < submenuSectionArray.size(); i++) {
-                submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, submenuSectionArray.get(i).getTitle());
+            submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, submenuSectionArray.get(i).getTitle());
         }
 
         // Set checked home screen in Navigation Drawer
@@ -150,10 +146,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         layoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
 
         // Uncheck all checked menu items
-        int size = mNavigationView.getMenu().size();
-        for (int i = 0; i < size; i++) {
-            mNavigationView.getMenu().getItem(i).setChecked(false);
-        }
+        uncheckItemsNavDrawer();
 
         // Set item as selected to persist highlight
         menuItem.setChecked(true).setCheckable(true);
@@ -162,6 +155,23 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mDrawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    @Override
+    public void setDisplayItemChecked(int viewPosition) {
+        // Uncheck all checked menu items
+        uncheckItemsNavDrawer();
+
+        // Set checked item related to selected screen in Navigation Drawer
+        mNavigationView.getMenu().getItem(viewPosition).setChecked(true).setCheckable(true);
+    }
+
+    @Override
+    public void uncheckItemsNavDrawer() {
+        int size = mNavigationView.getMenu().size();
+        for (int i = 0; i < size; i++) {
+            mNavigationView.getMenu().getItem(i).setChecked(false);
+        }
     }
 
     @Override

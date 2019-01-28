@@ -10,6 +10,7 @@ public interface BaseFragmentContract {
     }
 
     interface Presenter {
+
         void getSelectedLayoutType(MenuComponent item);
     }
 }

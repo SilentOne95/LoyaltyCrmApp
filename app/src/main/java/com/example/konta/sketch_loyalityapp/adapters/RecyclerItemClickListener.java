@@ -5,7 +5,7 @@ import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 public interface RecyclerItemClickListener {
 
     interface HomeRetrofitClickListener {
-        void onItemHomeClick(MenuComponent item);
+        void onItemHomeClick(MenuComponent item, int selectedViewId);
     }
 
     interface ProductRetrofitClickListener {
