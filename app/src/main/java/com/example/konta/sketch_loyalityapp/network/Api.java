@@ -15,30 +15,30 @@ import retrofit2.http.Path;
 public interface Api {
 
     // Get menu components
-    @GET("/app_loyalty_app/get_all/0")
+    @GET("/menu")
     Single<List<MenuComponent>> getMenuComponents();
 
     // Get all products
-    @GET("/app_loyalty_product/get_all/0")
+    @GET("/products")
     Single<List<Product>> getAllProducts();
 
     // Get single product
-    @GET("/app_loyalty_product/get/{id}")
+    @GET("/products/{id}")
     Single<Product> getSingleProduct(@Path("id") int id);
 
     // Get all coupons
-    @GET("/app_loyalty_product_coupon/get_all/0")
+    @GET("/coupons")
     Single<List<Coupon>> getAllCoupons();
 
     // Get single coupon
-    @GET("/app_loyalty_product_coupon/get/{id}")
+    @GET("/coupons/{id}")
     Single<Coupon> getSingleCoupon(@Path("id") int id);
 
     // Get all markers
-    @GET("/app_loyalty_map/get_all/0")
+    @GET("/localizations")
     Single<List<Marker>> getAllMarkers();
 
     // Get static page
-    @GET("/app_loyalty_page/get/{id}")
+    @GET("/localizations/{id}")
     Single<Page> getStaticPage(@Path("id") int id);
 }
