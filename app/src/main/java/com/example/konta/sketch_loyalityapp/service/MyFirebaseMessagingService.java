@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.firebaseServices;
+package com.example.konta.sketch_loyalityapp.service;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

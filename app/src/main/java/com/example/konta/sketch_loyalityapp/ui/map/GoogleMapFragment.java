@@ -1,8 +1,8 @@
 package com.example.konta.sketch_loyalityapp.ui.map;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,14 +15,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.adapters.BottomSheetViewPagerAdapter;
+import com.example.konta.sketch_loyalityapp.adapter.BottomSheetViewPagerAdapter;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
+import com.example.konta.sketch_loyalityapp.service.TrackerService;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -127,7 +127,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         // Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getActivity(),
+            if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 // Location Permission already granted
@@ -190,11 +190,19 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     private void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
+        } else {
+            startTrackService();
+        }
+
+    }
+
+    private void startTrackService() {
+        if (getActivity() != null) {
+            getActivity().startService(new Intent(getContext(), TrackerService.class));
         }
     }
 
@@ -208,13 +216,15 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     // Permission granted. Do the needed location-related task
-                    if (ContextCompat.checkSelfPermission(getActivity(),
+                    if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(),
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
                         mFusedLocationClient.requestLocationUpdates(mLocationRequest,
                                 mLocationCallback, Looper.myLooper());
                         mGoogleMap.setMyLocationEnabled(true);
+
+                        startTrackService();
                     }
                 } else {
                     // Permission denied, display Toast message

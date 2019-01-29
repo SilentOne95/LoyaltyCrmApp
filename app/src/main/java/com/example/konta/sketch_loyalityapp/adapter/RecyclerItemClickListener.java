@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.adapters;
+package com.example.konta.sketch_loyalityapp.adapter;
 
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 

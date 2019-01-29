@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.adapters;
+package com.example.konta.sketch_loyalityapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.adapters;
+package com.example.konta.sketch_loyalityapp.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

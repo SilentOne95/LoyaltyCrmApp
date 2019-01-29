@@ -9,8 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.konta.sketch_loyalityapp.adapters.CouponAdapter;
-import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
+import com.example.konta.sketch_loyalityapp.adapter.CouponAdapter;
+import com.example.konta.sketch_loyalityapp.adapter.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.R;

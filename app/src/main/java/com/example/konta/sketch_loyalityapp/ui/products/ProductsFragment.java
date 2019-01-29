@@ -8,8 +8,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.adapters.ProductAdapter;
-import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
+import com.example.konta.sketch_loyalityapp.adapter.ProductAdapter;
+import com.example.konta.sketch_loyalityapp.adapter.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 import com.example.konta.sketch_loyalityapp.R;

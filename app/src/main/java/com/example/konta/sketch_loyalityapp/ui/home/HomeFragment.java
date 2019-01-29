@@ -8,8 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 
-import com.example.konta.sketch_loyalityapp.adapters.HomeAdapter;
-import com.example.konta.sketch_loyalityapp.adapters.RecyclerItemClickListener;
+import com.example.konta.sketch_loyalityapp.adapter.HomeAdapter;
+import com.example.konta.sketch_loyalityapp.adapter.RecyclerItemClickListener;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityModel;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;

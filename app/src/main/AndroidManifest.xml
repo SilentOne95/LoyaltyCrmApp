@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <permission
         android:name="com.example.konta.sketch_loyalityapp.permission.MAPS_RECEIVE"
@@ -25,13 +26,18 @@
         android:theme="@style/BaseAppTheme.NoActionBar">
 
         <service
-            android:name=".firebaseServices.MyFirebaseMessagingService"
+            android:name=".service.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service
+            android:name=".service.TrackerService"
+            android:enabled="true"
+            android:exported="true"/>
 
         <activity
             android:name=".ui.launch.LaunchActivity"
@@ -94,6 +100,7 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
     </application>
 
 </manifest>
