@@ -20,6 +20,8 @@ import java.util.List;
 
 public class ProductsFragment extends BaseFragment implements ProductsContract.View {
 
+    private static final String TAG = ProductsFragment.class.getSimpleName();
+
     ProductsPresenter presenter;
 
     private RecyclerView recyclerView;

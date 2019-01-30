@@ -21,6 +21,8 @@ import java.util.List;
 
 public class CouponsFragment extends BaseFragment implements CouponsContract.View {
 
+    private static final String TAG = CouponsFragment.class.getSimpleName();
+
     CouponsPresenter presenter;
 
     private RecyclerView recyclerView;

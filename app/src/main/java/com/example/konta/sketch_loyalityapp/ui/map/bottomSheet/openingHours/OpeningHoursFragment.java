@@ -13,6 +13,8 @@ import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContra
 
 public class OpeningHoursFragment extends BaseFragment implements BottomSheetContract.OpeningHoursView {
 
+    private static final String TAG = OpeningHoursFragment.class.getSimpleName();
+
     OpeningHoursPresenter presenter;
 
     public OpeningHoursFragment() {

@@ -26,6 +26,8 @@ import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class CouponDetailsActivity extends BaseActivity implements CouponDetailsContract.View, View.OnClickListener {
 
+    private static final String TAG = CouponDetailsActivity.class.getSimpleName();
+
     CouponDetailsPresenter presenter;
 
     Button showCouponCodeButton;

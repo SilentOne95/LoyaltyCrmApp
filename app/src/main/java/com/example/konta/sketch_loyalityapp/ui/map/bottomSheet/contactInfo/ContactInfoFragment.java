@@ -20,6 +20,8 @@ import java.util.List;
 public class ContactInfoFragment extends BaseFragment implements BottomSheetContract.ContactInfoView,
         View.OnClickListener {
 
+    private static final String TAG = ContactInfoFragment.class.getSimpleName();
+
     ContactInfoPresenter presenter;
 
     private TextView phoneTextView, emailTextView;

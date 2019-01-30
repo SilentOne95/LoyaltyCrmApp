@@ -29,6 +29,8 @@ import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GRO
 public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
         NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     MainActivityPresenter presenter;
 
     private DrawerLayout mDrawerLayout;

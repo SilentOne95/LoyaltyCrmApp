@@ -10,6 +10,8 @@ import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 
 public class TermsConditionsActivity extends BaseActivity implements TermsContract.View {
 
+    private static final String TAG = TermsConditionsActivity.class.getSimpleName();
+
     TermsPresenter presenter;
 
     @Override

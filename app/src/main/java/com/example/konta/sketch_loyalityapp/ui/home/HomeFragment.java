@@ -18,6 +18,8 @@ import com.example.konta.sketch_loyalityapp.R;
 
 public class HomeFragment extends BaseFragment implements HomeContract.View {
 
+    private static final String TAG = HomeFragment.class.getSimpleName();
+
     HomePresenter presenter;
 
     private RecyclerView recyclerView;

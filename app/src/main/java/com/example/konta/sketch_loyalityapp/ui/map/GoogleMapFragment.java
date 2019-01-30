@@ -48,6 +48,8 @@ import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
         View.OnClickListener, MapContract.View {
 
+    private static final String TAG = GoogleMapFragment.class.getSimpleName();
+
     MapPresenter presenter;
 
     GoogleMap mGoogleMap;

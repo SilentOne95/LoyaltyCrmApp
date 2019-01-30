@@ -15,6 +15,8 @@ import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View{
 
+    private static final String TAG = ProductDetailsActivity.class.getSimpleName();
+
     ProductDetailsPresenter presenter;
 
     private int productId;
