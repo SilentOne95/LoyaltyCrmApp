@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.coupons;
 
+import com.example.konta.sketch_loyalityapp.pojo.adapter.CouponData;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 
 import java.util.List;
@@ -10,17 +11,19 @@ public interface CouponsContract {
 
     interface View {
 
-        void setUpAdapter(List<Coupon> couponList);
+        void setUpAdapter(List<Coupon> couponList, int numOfColumns);
     }
 
     interface Presenter {
 
         void requestDataFromServer();
-        void passDataToAdapter(List<Coupon> couponList);
+        void passDataToAdapter(List<Coupon> couponList, int numOfColumns);
     }
 
     interface Model {
 
         Disposable fetchDataFromServer(CouponsPresenter presenter);
+
+        void formatCouponsData(CouponData couponData);
     }
 }

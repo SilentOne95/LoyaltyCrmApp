@@ -17,17 +17,27 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_THREE_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_SINGLE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_THREE_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
 
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> {
 
     private List<Coupon> listOfItems;
     private RecyclerItemClickListener.CouponRetrofitClickListener couponClickListener;
+    private int numOfColumns;
 
     public CouponAdapter(List<Coupon> items,
-                         RecyclerItemClickListener.CouponRetrofitClickListener clickListener) {
+                         RecyclerItemClickListener.CouponRetrofitClickListener clickListener,
+                         int columns) {
         listOfItems = items;
         couponClickListener = clickListener;
+        numOfColumns = columns;
     }
 
     @NonNull
@@ -77,9 +87,33 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Coupon currentItem = listOfItems.get(position);
+        int cornerRadius, imageHeight;
+
+        switch (numOfColumns) {
+            case 1:
+                cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+                imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
+                break;
+            case 2:
+                cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+                imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
+                break;
+            case 3:
+                cornerRadius = BITMAP_CORNER_RADIUS_THREE_COLUMNS;
+                imageHeight = BITMAP_HEIGHT_THREE_COLUMNS;
+                break;
+            default:
+                cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+                imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
+                break;
+        }
 
         if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
-            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
+            Picasso.get()
+                    .load("")
+                    .transform(new RoundedCornersTransformation(cornerRadius, 0))
+                    .resize(holder.imageView.getWidth(),imageHeight)
+                    .into(holder.imageView);
         }
 
         if (currentItem.getReductionType().equals("percent")){

@@ -29,9 +29,9 @@ public class CouponsPresenter implements CouponsContract.Presenter {
     }
 
     @Override
-    public void passDataToAdapter(List<Coupon> couponList) {
+    public void passDataToAdapter(List<Coupon> couponList, int numOfColumns) {
         if (view != null) {
-            view.setUpAdapter(couponList);
+            view.setUpAdapter(couponList, numOfColumns);
         }
     }
 }

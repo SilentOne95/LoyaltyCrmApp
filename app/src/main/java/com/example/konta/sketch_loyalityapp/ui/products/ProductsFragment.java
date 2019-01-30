@@ -55,10 +55,6 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     @Override
     public void setUpAdapter(List<Product> productList, int numOfColumns) {
-        if (numOfColumns < 1 || numOfColumns > 3) {
-            numOfColumns = 2;
-        }
-
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
         CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
         recyclerView.addItemDecoration(itemDecoration);

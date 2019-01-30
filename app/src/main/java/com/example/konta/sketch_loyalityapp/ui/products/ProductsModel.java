@@ -15,6 +15,8 @@ import io.reactivex.functions.BiFunction;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_NUM_OF_COLUMNS;
+
 public class ProductsModel implements ProductsContract.Model {
 
     private ProductsPresenter presenter;
@@ -27,12 +29,12 @@ public class ProductsModel implements ProductsContract.Model {
 
     private Single<ProductData> getObservable() {
         return Single.zip(getObservableMenu(), getObservableProducts(),
-            new BiFunction<List<MenuComponent>, List<Product>, ProductData>() {
-                @Override
-                public ProductData apply(List<MenuComponent> list, List<Product> productList) throws Exception {
-                    return new ProductData(list, productList);
-                }
-            });
+                new BiFunction<List<MenuComponent>, List<Product>, ProductData>() {
+                    @Override
+                    public ProductData apply(List<MenuComponent> componentList, List<Product> productList) {
+                        return new ProductData(componentList, productList);
+                    }
+                });
     }
 
     private Single<List<MenuComponent>> getObservableMenu() {
@@ -70,6 +72,10 @@ public class ProductsModel implements ProductsContract.Model {
                 numOfColumns = component.getNumberOfColumns();
                 break;
             }
+        }
+
+        if ( numOfColumns < 1 || numOfColumns > 3) {
+            numOfColumns = DEFAULT_NUM_OF_COLUMNS;
         }
 
         presenter.passDataToAdapter(productData.getProducts(), numOfColumns);

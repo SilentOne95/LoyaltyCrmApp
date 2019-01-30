@@ -3,7 +3,6 @@ package com.example.konta.sketch_loyalityapp.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +73,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Product currentItem = listOfItems.get(position);
         int cornerRadius, imageHeight;
 
-        Log.d("test", String.valueOf(numOfColumns));
         switch (numOfColumns) {
             case 1:
                 cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
@@ -93,9 +91,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
                 break;
         }
-
-        Log.d("test", String.valueOf(cornerRadius) + String.valueOf(imageHeight));
-
 
         if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
             Picasso.get()

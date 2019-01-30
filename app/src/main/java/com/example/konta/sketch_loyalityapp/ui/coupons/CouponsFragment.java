@@ -43,9 +43,6 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
         // Set up adapter
         recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
-        recyclerView.addItemDecoration(itemDecoration);
         emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
     }
 
@@ -64,8 +61,11 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     };
 
     @Override
-    public void setUpAdapter(List<Coupon> couponList) {
-        recyclerView.setAdapter(new CouponAdapter(couponList, recyclerItemClickListener));
+    public void setUpAdapter(List<Coupon> couponList, int numOfColumns) {
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
+        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns));
 
         // Set empty state view if needed
         if (!couponList.isEmpty()) {
