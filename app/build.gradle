@@ -45,6 +45,8 @@ dependencies {
     // Picasso library for images
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support:exifinterface:28.0.0'
+    // Picasso image transformation
+    implementation 'jp.wasabeef:picasso-transformations:2.2.1'
 
     // Firebase database
     implementation 'com.google.firebase:firebase-auth:16.1.0'

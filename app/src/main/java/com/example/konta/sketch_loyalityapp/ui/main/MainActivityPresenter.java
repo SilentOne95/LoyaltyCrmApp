@@ -89,7 +89,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                     view.setFragment(new GoogleMapFragment());
                     break;
                 case "login":
-                    view.setFragment(new GoogleMapFragment());
+                    view.setFragment(new ProductsFragment());
 //                    view.setActivity(LogInActivity.class);
                     break;
                 case "internet":

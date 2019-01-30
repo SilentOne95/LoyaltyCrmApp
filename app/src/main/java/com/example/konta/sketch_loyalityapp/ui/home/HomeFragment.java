@@ -35,11 +35,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         presenter = new HomePresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
 
-        // Set up adapter
+        // Adapter
         recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
-        recyclerView.addItemDecoration(itemDecoration);
     }
 
     private RecyclerItemClickListener.HomeRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.HomeRetrofitClickListener() {
@@ -51,7 +48,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     };
 
     @Override
-    public void setUpAdapter(SparseArray<MenuComponent> menuComponentList) {
-        recyclerView.setAdapter(new HomeAdapter(menuComponentList, recyclerItemClickListener));
+    public void setUpAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns) {
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
+        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(new HomeAdapter(menuComponentList, recyclerItemClickListener, numOfColumns));
     }
 }

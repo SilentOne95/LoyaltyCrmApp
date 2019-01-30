@@ -32,9 +32,9 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
-    public void passDataToAdapter(SparseArray<MenuComponent> menuComponentList) {
+    public void passDataToAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns) {
         if (view != null && menuComponentList != null) {
-            view.setUpAdapter(menuComponentList);
+            view.setUpAdapter(menuComponentList, numOfColumns);
         }
     }
 

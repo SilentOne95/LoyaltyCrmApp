@@ -8,13 +8,13 @@ public interface HomeContract {
 
     interface View {
 
-        void setUpAdapter(SparseArray<MenuComponent> menuComponentList);
+        void setUpAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns);
     }
 
     interface Presenter {
 
         void requestDataFromServer();
-        void passDataToAdapter(SparseArray<MenuComponent> menuComponentList);
+        void passDataToAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns);
 
         void passIdOfSelectedView(int viewId);
     }

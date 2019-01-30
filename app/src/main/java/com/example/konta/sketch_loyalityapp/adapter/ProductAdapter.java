@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +17,27 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_THREE_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_SINGLE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_THREE_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private List<Product> listOfItems;
     private RecyclerItemClickListener.ProductRetrofitClickListener productClickListener;
+    private int numOfColumns;
 
     public ProductAdapter(List<Product> items,
-                          RecyclerItemClickListener.ProductRetrofitClickListener clickListener ) {
+                          RecyclerItemClickListener.ProductRetrofitClickListener clickListener,
+                          int columns) {
         listOfItems = items;
         productClickListener = clickListener;
+        numOfColumns = columns;
     }
 
     @NonNull
@@ -61,10 +72,37 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product currentItem = listOfItems.get(position);
+        int cornerRadius, imageHeight;
 
-        // Temporary solution - testing library
+        Log.d("test", String.valueOf(numOfColumns));
+        switch (numOfColumns) {
+            case 1:
+                cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+                imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
+                break;
+            case 2:
+                cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+                imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
+                break;
+            case 3:
+                cornerRadius = BITMAP_CORNER_RADIUS_THREE_COLUMNS;
+                imageHeight = BITMAP_HEIGHT_THREE_COLUMNS;
+                break;
+            default:
+                cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+                imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
+                break;
+        }
+
+        Log.d("test", String.valueOf(cornerRadius) + String.valueOf(imageHeight));
+
+
         if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
-            Picasso.get().load(BASE_URL_IMAGES + currentItem.getImage()).into(holder.imageView);
+            Picasso.get()
+                    .load("")
+                    .transform(new RoundedCornersTransformation(cornerRadius, 0))
+                    .resize(holder.imageView.getWidth(),imageHeight)
+                    .into(holder.imageView);
         }
 
         holder.titleView.setText(currentItem.getTitle());

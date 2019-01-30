@@ -29,9 +29,9 @@ public class ProductsPresenter implements ProductsContract.Presenter {
     }
 
     @Override
-    public void passDataToAdapter(List<Product> productList) {
+    public void passDataToAdapter(List<Product> productList, int numOfColumns) {
         if (view != null) {
-            view.setUpAdapter(productList);
+            view.setUpAdapter(productList, numOfColumns);
         }
     }
 }

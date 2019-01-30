@@ -34,11 +34,8 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
         getActivity().setTitle("Products");
 
-        // Set up adapter
+        // Adapter
         recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
-        recyclerView.addItemDecoration(itemDecoration);
         emptyStateView = rootView.findViewById(R.id.empty_state_products_container);
 
         presenter = new ProductsPresenter(this, new ProductsModel());
@@ -55,8 +52,15 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     };
 
     @Override
-    public void setUpAdapter(List<Product> productList) {
-        recyclerView.setAdapter(new ProductAdapter(productList, recyclerItemClickListener));
+    public void setUpAdapter(List<Product> productList, int numOfColumns) {
+        if (numOfColumns < 1 || numOfColumns > 3) {
+            numOfColumns = 2;
+        }
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
+        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(new ProductAdapter(productList, recyclerItemClickListener, numOfColumns));
 
         // Set empty state view if needed
         if (!productList.isEmpty()) {

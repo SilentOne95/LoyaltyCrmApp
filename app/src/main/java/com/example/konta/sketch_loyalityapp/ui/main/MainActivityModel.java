@@ -147,6 +147,7 @@ public class MainActivityModel implements MainActivityContract.Model {
     @Override
     public void refactorFetchedDataForHomeView(List<MenuComponent> listOfItems) {
         int i = 0;
+        int numOfColumns = 1;
 
         if (listOfItems != null) {
             for (MenuComponent component : listOfItems) {
@@ -164,7 +165,16 @@ public class MainActivityModel implements MainActivityContract.Model {
             }
         }
 
-        homePresenter.passDataToAdapter(navDrawerArray);
+        if (listOfItems != null) {
+            for (MenuComponent component : listOfItems) {
+                if (component.getIsHomePage().equals(1)) {
+                    numOfColumns = component.getNumberOfColumns();
+                    break;
+                }
+            }
+        }
+
+        homePresenter.passDataToAdapter(navDrawerArray, numOfColumns);
     }
 
     @Override

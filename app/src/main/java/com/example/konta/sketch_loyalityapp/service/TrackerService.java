@@ -35,8 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class TrackerService extends Service {
 
-    public TrackerService() {
-    }
+    public TrackerService() { }
 
     private static final String TAG = TrackerService.class.getSimpleName();
 
