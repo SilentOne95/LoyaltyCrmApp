@@ -24,6 +24,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIU
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_SINGLE_COLUMN;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_THREE_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
@@ -92,7 +93,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 break;
         }
 
-        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
+        if (currentItem.getImage() != null && !currentItem.getImage().isEmpty()) {
             Picasso.get()
                     .load("")
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
@@ -100,9 +101,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     .into(holder.imageView);
         }
 
-        holder.titleView.setText(currentItem.getTitle());
-        holder.price.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
-        holder.shortDescription.setText(Html.fromHtml(currentItem.getShortDescription()));
+        if (currentItem.getTitle() != null && !currentItem.getTitle().trim().isEmpty()) {
+            holder.titleView.setText(currentItem.getTitle());
+        } else {
+            holder.titleView.setText(DEFAULT_STRING);
+        }
+
+        if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
+            holder.price.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
+        } else {
+            holder.price.setText(DEFAULT_STRING);
+        }
+        if (currentItem.getShortDescription() != null && !currentItem.getShortDescription().trim().isEmpty()) {
+            holder.shortDescription.setText(Html.fromHtml(currentItem.getShortDescription()));
+        } else {
+            holder.shortDescription.setText(DEFAULT_STRING);
+        }
     }
 
     @Override

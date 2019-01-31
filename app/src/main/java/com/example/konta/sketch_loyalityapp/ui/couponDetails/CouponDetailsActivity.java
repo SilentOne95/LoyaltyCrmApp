@@ -23,6 +23,7 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.squareup.picasso.Picasso;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class CouponDetailsActivity extends BaseActivity implements CouponDetailsContract.View, View.OnClickListener {
 
@@ -55,7 +56,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
         presenter.requestDataFromServer(couponId);
 
-
         showCouponCodeButton = findViewById(R.id.show_coupon_button);
         showCouponCodeButton.setOnClickListener(this);
 
@@ -68,29 +68,57 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     @Override
     public void setUpViewWithData(Coupon coupon) {
         ImageView couponImage = findViewById(R.id.imageView);
-        if (!(coupon.getImage() == null || coupon.getImage().isEmpty())) {
+        if (coupon.getImage() != null && !coupon.getImage().trim().isEmpty()) {
             Picasso.get().load(BASE_URL_IMAGES + coupon.getImage()).into(couponImage);
         }
 
         TextView couponMarker = findViewById(R.id.discount_marker_text_view);
-        couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
+        if (coupon.getReductionAmount() != null && !coupon.getReductionAmount().trim().isEmpty()) {
+            couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
+        } else {
+            couponMarker.setText(DEFAULT_STRING);
+        }
 
         TextView couponDate = findViewById(R.id.valid_date_text_view);
-        couponDate.setText(presenter.formatDateString(coupon.getFreshTime()));
+        if (coupon.getFreshTime() != null && !coupon.getFreshTime().trim().isEmpty()) {
+            couponDate.setText(presenter.formatDateString(coupon.getFreshTime()));
+        } else {
+            couponDate.setText(DEFAULT_STRING);
+        }
 
         TextView couponTitle = findViewById(R.id.product_title_text_view);
-        couponTitle.setText(coupon.getTitle());
+        if (coupon.getTitle() != null && !coupon.getTitle().trim().isEmpty()) {
+            couponTitle.setText(coupon.getTitle());
+        } else {
+            couponTitle.setText(DEFAULT_STRING);
+        }
 
         TextView couponNewPrice = findViewById(R.id.price_amount_text_view);
-        couponNewPrice.setText(String.valueOf(coupon.getPriceAfter()).concat(" zł"));
+        if (coupon.getPriceAfter() != null && !coupon.getPriceAfter().toString().trim().isEmpty()) {
+            couponNewPrice.setText(String.valueOf(coupon.getPriceAfter()).concat(" zł"));
+        } else {
+            couponNewPrice.setText(DEFAULT_STRING);
+        }
 
         TextView couponBasicPrice = findViewById(R.id.old_price_amount_text_view);
-        couponBasicPrice.setText(String.valueOf(coupon.getPrice()).concat(" zł"));
+        if (coupon.getPrice() != null && !coupon.getPrice().toString().trim().isEmpty()) {
+            couponBasicPrice.setText(String.valueOf(coupon.getPrice()).concat(" zł"));
+        } else {
+            couponBasicPrice.setText(DEFAULT_STRING);
+        }
 
         TextView couponDescription = findViewById(R.id.coupon_description_text_view);
-        couponDescription.setText(Html.fromHtml(coupon.getDescription()));
+        if (coupon.getDescription() != null && !coupon.getDescription().trim().isEmpty()) {
+            couponDescription.setText(Html.fromHtml(coupon.getDescription()));
+        } else {
+            couponDescription.setText(DEFAULT_STRING);
+        }
 
-        couponCode = coupon.getCouponCode();
+        if (coupon.getCouponCode() != null && !coupon.getCouponCode().trim().isEmpty()) {
+            couponCode = coupon.getCouponCode();
+        } else {
+            couponCode = DEFAULT_STRING;
+        }
     }
 
     @Override
@@ -115,7 +143,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         promoCodeText = new SpannableString(couponCode);
         promoCodeText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         promoCodeText.setSpan(new StyleSpan(Typeface.BOLD), 0, promoCodeText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
 
         // Set new text and color
         showCouponCodeButton.setText(TextUtils.concat(staticCodeText, "  ", promoCodeText));

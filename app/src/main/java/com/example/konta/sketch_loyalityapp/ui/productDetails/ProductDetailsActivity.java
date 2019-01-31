@@ -12,6 +12,7 @@ import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 import com.squareup.picasso.Picasso;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View{
 
@@ -44,18 +45,30 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     @Override
     public void setUpViewWithData(Product product) {
         ImageView productImage = findViewById(R.id.imageView);
-        if (!(product.getImage() == null || product.getImage().isEmpty())) {
+        if (product.getImage() != null && product.getImage().trim().isEmpty()) {
             Picasso.get().load(BASE_URL_IMAGES + product.getImage()).into(productImage);
         }
 
         TextView productTitle = findViewById(R.id.product_title_text_view);
-        productTitle.setText(product.getTitle());
+        if (product.getTitle() != null && !product.getTitle().trim().isEmpty()) {
+            productTitle.setText(product.getTitle());
+        } else {
+            productTitle.setText(DEFAULT_STRING);
+        }
 
         TextView productPrice = findViewById(R.id.price_amount_text_view);
-        productPrice.setText(String.valueOf(product.getPrice()).concat(" ").concat("zł"));
+        if (product.getPrice() != null && !product.getPrice().toString().trim().isEmpty()) {
+            productPrice.setText(String.valueOf(product.getPrice()).concat(" ").concat("zł"));
+        } else {
+            productPrice.setText(DEFAULT_STRING);
+        }
 
         TextView productDescription = findViewById(R.id.product_description_text_view);
-        productDescription.setText(Html.fromHtml(product.getDescription()));
+        if (product.getDescription() != null && !product.getDescription().trim().isEmpty()) {
+            productDescription.setText(Html.fromHtml(product.getDescription()));
+        } else {
+            productDescription.setText(DEFAULT_STRING);
+        }
     }
 
     @Override

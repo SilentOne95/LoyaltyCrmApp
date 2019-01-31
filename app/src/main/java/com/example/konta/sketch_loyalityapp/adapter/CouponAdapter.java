@@ -25,6 +25,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIU
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_SINGLE_COLUMN;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_THREE_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> {
 
@@ -108,7 +109,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
                 break;
         }
 
-        if (!(currentItem.getImage() == null || currentItem.getImage().isEmpty())) {
+        if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty()) {
             Picasso.get()
                     .load("")
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
@@ -116,15 +117,39 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
                     .into(holder.imageView);
         }
 
-        if (currentItem.getReductionType().equals("percent")){
-            holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("%"));
+        if (currentItem.getReductionAmount() != null && !currentItem.getReductionAmount().trim().isEmpty()) {
+            if (currentItem.getReductionType().equals("percent")){
+                holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("%"));
+            } else {
+                holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("zł"));
+            }
         } else {
-            holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("zł"));
+            holder.discountMarker.setText(DEFAULT_STRING);
         }
-        holder.titleView.setText(currentItem.getTitle());
-        holder.basicPrice.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
-        holder.newPrice.setText(String.valueOf(currentItem.getPriceAfter()).concat(" ").concat("zł"));
-        holder.descriptionText.setText(Html.fromHtml(currentItem.getShortDescription()));
+
+        if (currentItem.getTitle() != null && !currentItem.getTitle().trim().isEmpty()) {
+            holder.titleView.setText(currentItem.getTitle());
+        } else {
+            holder.titleView.setText(DEFAULT_STRING);
+        }
+
+        if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
+            holder.basicPrice.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
+        } else {
+            holder.basicPrice.setText(DEFAULT_STRING);
+        }
+
+        if (currentItem.getPriceAfter() != null && !currentItem.getPriceAfter().toString().trim().isEmpty()) {
+            holder.newPrice.setText(String.valueOf(currentItem.getPriceAfter()).concat(" ").concat("zł"));
+        } else {
+            holder.newPrice.setText(DEFAULT_STRING);
+        }
+
+        if (currentItem.getShortDescription() != null && !currentItem.getShortDescription().trim().isEmpty()) {
+            holder.descriptionText.setText(Html.fromHtml(currentItem.getShortDescription()));
+        } else {
+            holder.descriptionText.setText(DEFAULT_STRING);
+        }
     }
 
     @Override

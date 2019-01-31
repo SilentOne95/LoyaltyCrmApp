@@ -27,4 +27,6 @@ public final class Constants {
     public static final int BITMAP_HEIGHT_SINGLE_COLUMN = 250;
     public static final int BITMAP_HEIGHT_TWO_COLUMNS = 140;
     public static final int BITMAP_HEIGHT_THREE_COLUMNS = 140;
+
+    public static final String DEFAULT_STRING = "Not available";
 }
