@@ -17,6 +17,8 @@ import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.BottomSheetContra
 
 import java.util.List;
 
+import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
+
 public class ContactInfoFragment extends BaseFragment implements BottomSheetContract.ContactInfoView,
         View.OnClickListener {
 
@@ -45,11 +47,15 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
     public void setUpViewsWithData(String phoneNumber, String emailAddress) {
         phoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
         phoneTextView.setText(phoneNumber);
-        phoneTextView.setOnClickListener(this);
+        if (!phoneNumber.equals(DEFAULT_STRING)) {
+            phoneTextView.setOnClickListener(this);
+        }
 
         emailTextView = rootView.findViewById(R.id.contact_info_email_view);
         emailTextView.setText(emailAddress);
-        emailTextView.setOnClickListener(this);
+        if (!emailAddress.equals(DEFAULT_STRING)) {
+            emailTextView.setOnClickListener(this);
+        }
     }
 
     @Override

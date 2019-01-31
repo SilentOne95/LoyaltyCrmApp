@@ -9,7 +9,7 @@ public final class Constants {
     public static final int INITIAL_CAPACITY_ARRAY = 0;
 
     // MainActivity
-    public static final int BOTTOM_SHEET_PEEK_HEIGHT = 250;
+    public static final int BOTTOM_SHEET_PEEK_HEIGHT = 120;
     public static final int NAV_VIEW_FIRST_GROUP_ID = 0;
     public static final int NAV_VIEW_SECOND_GROUP_ID = 1;
     public static final int NAV_VIEW_ORDER = 0;

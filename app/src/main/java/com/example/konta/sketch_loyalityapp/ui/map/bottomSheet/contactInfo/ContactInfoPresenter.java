@@ -15,6 +15,8 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
+import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
+
 public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPresenter {
 
     @Nullable
@@ -87,7 +89,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
     @Override
     public String formatPhoneNumber(Marker marker) {
-        String phoneNumber = "Not available";
+        String phoneNumber = DEFAULT_STRING;
         String[] phonePrefix = {"0048", "48", "0"};
 
         if (marker.getPhoneNumber() != null && !marker.getPhoneNumber().trim().isEmpty()) {
@@ -121,7 +123,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
     @Override
     public String formatEmailAddress(Marker marker) {
-        String emailAddress = "Not available";
+        String emailAddress = DEFAULT_STRING;
 
         if (marker.getMail() != null && !marker.getMail().trim().isEmpty()) {
             emailAddress = marker.getMail();
