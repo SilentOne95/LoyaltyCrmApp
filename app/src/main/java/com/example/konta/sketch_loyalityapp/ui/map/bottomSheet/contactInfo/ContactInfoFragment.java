@@ -42,11 +42,13 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
     }
 
     @Override
-    public void setUpViewsWithData(List<Marker> markerList) {
+    public void setUpViewsWithData(String phoneNumber, String emailAddress) {
         phoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
+        phoneTextView.setText(phoneNumber);
         phoneTextView.setOnClickListener(this);
 
         emailTextView = rootView.findViewById(R.id.contact_info_email_view);
+        emailTextView.setText(emailAddress);
         emailTextView.setOnClickListener(this);
     }
 

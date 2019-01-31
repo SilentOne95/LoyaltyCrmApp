@@ -23,7 +23,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
     private static final String TAG = "ContactInfoFragment";
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private int markerInt;
+    private int selectedMarkerId;
 
     ContactInfoPresenter(@Nullable BottomSheetContract.ContactInfoView view, MapContract.Model model) {
         this.view = view;
@@ -43,7 +43,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
             @Override
             public void onNext(Integer markerId) {
                 Log.d(TAG, "onNext");
-                markerInt = markerId;
+                selectedMarkerId = markerId;
                 getMarkerList();
             }
 
@@ -68,9 +68,72 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public void passDataToView(List<Marker> markerList) {
+    public void formatContactInfoData(List<Marker> markerList) {
+        String phoneNumber, emailAddress;
+        int markerPosition = 0;
+
+        for (int i = 0; i < markerList.size(); i++) {
+            if (markerList.get(i).getId().equals(selectedMarkerId)) {
+                markerPosition = i;
+                break;
+            }
+        }
+
+        phoneNumber = formatPhoneNumber(markerList.get(markerPosition));
+        emailAddress = formatEmailAddress(markerList.get(markerPosition));
+
+        passDataToView(phoneNumber, emailAddress);
+    }
+
+    @Override
+    public String formatPhoneNumber(Marker marker) {
+        String phoneNumber = "Not available";
+        String[] phonePrefix = {"0048", "48", "0"};
+
+        if (marker.getPhoneNumber() != null && !marker.getPhoneNumber().trim().isEmpty()) {
+            phoneNumber = phoneNumber
+                    .replaceAll("\\s+", "")
+                    .replaceAll("[\\D]", "");
+
+            int caseCounter;
+            for (caseCounter = 0; caseCounter < phonePrefix.length; caseCounter++) {
+                if (phoneNumber.startsWith(phonePrefix[caseCounter]))
+                    break;
+            }
+
+            switch (caseCounter) {
+                case 0:
+                    phoneNumber = phoneNumber.substring(4);
+                    break;
+                case 1:
+                    phoneNumber = phoneNumber.substring(2);
+                    break;
+                case 2:
+                    phoneNumber = phoneNumber.substring(1);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return phoneNumber;
+    }
+
+    @Override
+    public String formatEmailAddress(Marker marker) {
+        String emailAddress = "Not available";
+
+        if (marker.getMail() != null && !marker.getMail().trim().isEmpty()) {
+            emailAddress = marker.getMail();
+        }
+
+        return emailAddress;
+    }
+
+    @Override
+    public void passDataToView(String phoneNumber, String emailAddress) {
         if (view != null) {
-            view.setUpViewsWithData(markerList);
+            view.setUpViewsWithData(phoneNumber, emailAddress);
         }
     }
 }

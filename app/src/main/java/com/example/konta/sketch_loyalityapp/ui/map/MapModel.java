@@ -62,7 +62,7 @@ public class MapModel implements MapContract.Model {
         return new DisposableSingleObserver<List<Marker>>() {
             @Override
             public void onSuccess(List<Marker> markerList) {
-                contactInfoPresenter.passDataToView(markerList);
+                contactInfoPresenter.formatContactInfoData(markerList);
             }
 
             @Override

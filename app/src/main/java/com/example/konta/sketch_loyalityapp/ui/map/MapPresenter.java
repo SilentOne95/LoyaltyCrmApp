@@ -141,17 +141,19 @@ public class MapPresenter implements MapContract.Presenter {
         title = defaultTitle;
         address = openHours = defaultString;
 
-        if (marker.getTitle() != null) {
+        if (marker.getTitle() != null && !marker.getTitle().trim().isEmpty()) {
             title = marker.getTitle();
         }
 
-        if (marker.getAddress() != null && marker.getPostCode() != null && marker.getCity() != null) {
+        if (marker.getAddress() != null && !marker.getAddress().trim().isEmpty()
+                && marker.getPostCode() != null
+                && marker.getCity() != null && !marker.getCity().trim().isEmpty()) {
             address = marker.getAddress() + ", " +
                     marker.getPostCode().toString() + " " +
                     marker.getCity();
         }
 
-        if (marker.getOpenHours() != null) {
+        if (marker.getOpenHours() != null && marker.getOpenHours().get(0).getDayName() != null) {
             for (int i = 0; i < marker.getOpenHours().size(); i++) {
                 if (marker.getOpenHours().get(i).getDayName().equals(getCurrentDay())) {
                     OpenHour obj = marker.getOpenHours().get(i);

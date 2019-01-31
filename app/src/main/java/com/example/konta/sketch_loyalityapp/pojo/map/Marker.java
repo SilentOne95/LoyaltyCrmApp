@@ -35,10 +35,10 @@ public class Marker implements ClusterItem {
     private String city;
     @SerializedName("mail")
     @Expose
-    private Object mail;
+    private String mail;
     @SerializedName("phone_number")
     @Expose
-    private Object phoneNumber;
+    private String phoneNumber;
     @SerializedName("open_hours")
     @Expose
     private List<OpenHour> openHours = null;
@@ -113,19 +113,19 @@ public class Marker implements ClusterItem {
         this.city = city;
     }
 
-    public Object getMail() {
+    public String getMail() {
         return mail;
     }
 
-    public void setMail(Object mail) {
+    public void setMail(String mail) {
         this.mail = mail;
     }
 
-    public Object getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Object phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
