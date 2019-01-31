@@ -79,7 +79,9 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     @Override
     public void setUpViewWithData(Coupon coupon) {
         if (coupon.getImage() != null && !coupon.getImage().trim().isEmpty()) {
-            Picasso.get().load(BASE_URL_IMAGES + coupon.getImage()).into(couponImage);
+            // TODO: Upload images to server
+        } else {
+            Picasso.get().load(R.drawable.image_not_available).into(couponImage);
         }
 
         if (coupon.getReductionAmount() != null && !coupon.getReductionAmount().trim().isEmpty()) {

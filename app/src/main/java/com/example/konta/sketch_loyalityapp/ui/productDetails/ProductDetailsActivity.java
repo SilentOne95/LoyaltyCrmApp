@@ -52,7 +52,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     @Override
     public void setUpViewWithData(Product product) {
         if (product.getImage() != null && product.getImage().trim().isEmpty()) {
-            Picasso.get().load(BASE_URL_IMAGES + product.getImage()).into(productImage);
+            // TODO: Upload images to server
+            Picasso.get().load(R.drawable.image_not_available).into(productImage);
         }
 
         if (product.getTitle() != null && !product.getTitle().trim().isEmpty()) {

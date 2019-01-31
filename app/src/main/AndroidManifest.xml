@@ -37,7 +37,8 @@
         <service
             android:name=".service.TrackerService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true"
+            android:stopWithTask="true"/>
 
         <activity
             android:name=".ui.launch.LaunchActivity"

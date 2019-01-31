@@ -94,8 +94,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
 
         if (currentItem.getImage() != null && !currentItem.getImage().isEmpty()) {
+            // TODO: Upload images to server
             Picasso.get()
                     .load("")
+                    .transform(new RoundedCornersTransformation(cornerRadius, 0))
+                    .resize(holder.imageView.getWidth(),imageHeight)
+                    .into(holder.imageView);
+        } else {
+            Picasso.get()
+                    .load(R.drawable.image_not_available)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .resize(holder.imageView.getWidth(),imageHeight)
                     .into(holder.imageView);

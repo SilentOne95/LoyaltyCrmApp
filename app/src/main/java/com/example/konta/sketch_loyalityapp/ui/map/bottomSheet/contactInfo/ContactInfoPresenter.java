@@ -23,7 +23,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     private BottomSheetContract.ContactInfoView view;
     private MapContract.Model model;
 
-    private static final String TAG = "ContactInfoFragment";
+    private static final String TAG = ContactInfoPresenter.class.getSimpleName();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private int selectedMarkerId;
 
@@ -93,7 +93,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
         String[] phonePrefix = {"0048", "48", "0"};
 
         if (marker.getPhoneNumber() != null && !marker.getPhoneNumber().trim().isEmpty()) {
-            phoneNumber = phoneNumber
+            phoneNumber = marker.getPhoneNumber()
                     .replaceAll("\\s+", "")
                     .replaceAll("[\\D]", "");
 
