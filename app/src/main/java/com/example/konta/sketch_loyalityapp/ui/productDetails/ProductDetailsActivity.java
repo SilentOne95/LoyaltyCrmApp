@@ -20,6 +20,9 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
     ProductDetailsPresenter presenter;
 
+    ImageView productImage;
+    TextView productTitle, productPrice, productDescription;
+
     private int productId;
 
     @Override
@@ -37,33 +40,33 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             productId = extras.getInt("EXTRA_ELEMENT_ID");
         }
 
+        productImage = findViewById(R.id.imageView);
+        productTitle = findViewById(R.id.product_title_text_view);
+        productPrice = findViewById(R.id.price_amount_text_view);
+        productDescription = findViewById(R.id.product_description_text_view);
+
         presenter = new ProductDetailsPresenter(this, new ProductDetailsModel());
         presenter.requestDataFromServer(productId);
-
     }
 
     @Override
     public void setUpViewWithData(Product product) {
-        ImageView productImage = findViewById(R.id.imageView);
         if (product.getImage() != null && product.getImage().trim().isEmpty()) {
             Picasso.get().load(BASE_URL_IMAGES + product.getImage()).into(productImage);
         }
 
-        TextView productTitle = findViewById(R.id.product_title_text_view);
         if (product.getTitle() != null && !product.getTitle().trim().isEmpty()) {
             productTitle.setText(product.getTitle());
         } else {
             productTitle.setText(DEFAULT_STRING);
         }
 
-        TextView productPrice = findViewById(R.id.price_amount_text_view);
         if (product.getPrice() != null && !product.getPrice().toString().trim().isEmpty()) {
             productPrice.setText(String.valueOf(product.getPrice()).concat(" ").concat("zł"));
         } else {
             productPrice.setText(DEFAULT_STRING);
         }
 
-        TextView productDescription = findViewById(R.id.product_description_text_view);
         if (product.getDescription() != null && !product.getDescription().trim().isEmpty()) {
             productDescription.setText(Html.fromHtml(product.getDescription()));
         } else {

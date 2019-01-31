@@ -35,6 +35,9 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     GradientDrawable backgroundButton;
     Spannable staticCodeText, promoCodeText;
 
+    ImageView couponImage;
+    TextView couponMarker, couponDate, couponTitle, couponNewPrice, couponBasicPrice, couponDescription;
+
     private int couponId;
     private String couponCode;
 
@@ -53,8 +56,13 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             couponId = extras.getInt("EXTRA_ELEMENT_ID");
         }
 
-        presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
-        presenter.requestDataFromServer(couponId);
+        couponImage = findViewById(R.id.imageView);
+        couponMarker = findViewById(R.id.discount_marker_text_view);
+        couponDate = findViewById(R.id.valid_date_text_view);
+        couponTitle = findViewById(R.id.product_title_text_view);
+        couponNewPrice = findViewById(R.id.price_amount_text_view);
+        couponBasicPrice = findViewById(R.id.old_price_amount_text_view);
+        couponDescription = findViewById(R.id.coupon_description_text_view);
 
         showCouponCodeButton = findViewById(R.id.show_coupon_button);
         showCouponCodeButton.setOnClickListener(this);
@@ -63,51 +71,47 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
         // Temporary solution to hide code when activity is stopped or paused
         getBasicButtonStyle();
+
+        presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
+        presenter.requestDataFromServer(couponId);
     }
 
     @Override
     public void setUpViewWithData(Coupon coupon) {
-        ImageView couponImage = findViewById(R.id.imageView);
         if (coupon.getImage() != null && !coupon.getImage().trim().isEmpty()) {
             Picasso.get().load(BASE_URL_IMAGES + coupon.getImage()).into(couponImage);
         }
 
-        TextView couponMarker = findViewById(R.id.discount_marker_text_view);
         if (coupon.getReductionAmount() != null && !coupon.getReductionAmount().trim().isEmpty()) {
             couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
         } else {
             couponMarker.setText(DEFAULT_STRING);
         }
 
-        TextView couponDate = findViewById(R.id.valid_date_text_view);
         if (coupon.getFreshTime() != null && !coupon.getFreshTime().trim().isEmpty()) {
             couponDate.setText(presenter.formatDateString(coupon.getFreshTime()));
         } else {
             couponDate.setText(DEFAULT_STRING);
         }
 
-        TextView couponTitle = findViewById(R.id.product_title_text_view);
         if (coupon.getTitle() != null && !coupon.getTitle().trim().isEmpty()) {
             couponTitle.setText(coupon.getTitle());
         } else {
             couponTitle.setText(DEFAULT_STRING);
         }
 
-        TextView couponNewPrice = findViewById(R.id.price_amount_text_view);
         if (coupon.getPriceAfter() != null && !coupon.getPriceAfter().toString().trim().isEmpty()) {
             couponNewPrice.setText(String.valueOf(coupon.getPriceAfter()).concat(" zł"));
         } else {
             couponNewPrice.setText(DEFAULT_STRING);
         }
 
-        TextView couponBasicPrice = findViewById(R.id.old_price_amount_text_view);
         if (coupon.getPrice() != null && !coupon.getPrice().toString().trim().isEmpty()) {
             couponBasicPrice.setText(String.valueOf(coupon.getPrice()).concat(" zł"));
         } else {
             couponBasicPrice.setText(DEFAULT_STRING);
         }
 
-        TextView couponDescription = findViewById(R.id.coupon_description_text_view);
         if (coupon.getDescription() != null && !coupon.getDescription().trim().isEmpty()) {
             couponDescription.setText(Html.fromHtml(coupon.getDescription()));
         } else {
