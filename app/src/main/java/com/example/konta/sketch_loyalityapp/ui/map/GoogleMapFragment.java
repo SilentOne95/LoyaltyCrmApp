@@ -301,9 +301,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             final AlertDialog.Builder builder = new AlertDialog.Builder(
                     this.getActivity());
 
-            builder.setMessage("GPS is disabled")
+            builder.setMessage("Please enable GPS localization, to show your position on map")
                     .setCancelable(false)
-                    .setTitle("Please enable GPS localization, to show your position on map.")
+                    .setTitle("GPS is disabled")
                     .setPositiveButton("Enable",
                             (dialog, id) -> startActivity(new Intent(
                                     android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)))

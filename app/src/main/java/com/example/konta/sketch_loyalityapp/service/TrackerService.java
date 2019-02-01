@@ -26,9 +26,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -69,8 +66,7 @@ public class TrackerService extends Service {
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setContentTitle("App name")
-                        .setContentText("Notification text")
+                        .setContentText("GPS localization is enabled")
                         .setSmallIcon(R.drawable.sellger_logo)
                         .setOngoing(true);
 
@@ -108,15 +104,12 @@ public class TrackerService extends Service {
     };
 
     private void loginToFirebase() {
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "firebase auth success");
-                    requestLocationUpdates();
-                } else {
-                    Log.d(TAG, "firebase auth failed");
-                }
+        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d(TAG, "firebase auth success");
+                requestLocationUpdates();
+            } else {
+                Log.d(TAG, "firebase auth failed");
             }
         });
     }
