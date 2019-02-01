@@ -91,7 +91,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                 case "login":
                     view.setActivity(LogInActivity.class);
                     break;
-                case "internet":
+                case "url":
                     view.setActivity(WebsiteActivity.class);
                     break;
                 case "terms":

@@ -39,6 +39,6 @@ public interface Api {
     Single<List<Marker>> getAllMarkers();
 
     // Get static page
-    @GET("/pages")
+    @GET("/page/{id}")
     Single<Page> getStaticPage(@Path("id") int id);
 }

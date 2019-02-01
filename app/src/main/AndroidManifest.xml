@@ -42,7 +42,8 @@
 
         <activity
             android:name=".ui.launch.LaunchActivity"
-            android:theme="@style/AppTheme.Launcher">
+            android:theme="@style/AppTheme.Launcher"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,11 +52,17 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/BaseAppTheme.NoActionBar" />
-        <activity android:name=".ui.login.LogInActivity" />
-        <activity android:name=".ui.signUp.SignUpActivity" />
+            android:theme="@style/BaseAppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.login.LogInActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.signUp.SignUpActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.website.WebsiteActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -63,6 +70,7 @@
         </activity>
         <activity
             android:name=".ui.terms.TermsConditionsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -70,6 +78,7 @@
         </activity>
         <activity
             android:name=".ui.contact.ContactActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -77,6 +86,7 @@
         </activity>
         <activity
             android:name=".ui.couponDetails.CouponDetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,6 +94,7 @@
         </activity>
         <activity
             android:name=".ui.productDetails.ProductDetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
