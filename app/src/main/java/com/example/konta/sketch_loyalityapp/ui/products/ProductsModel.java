@@ -11,7 +11,6 @@ import java.util.List;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -29,12 +28,7 @@ public class ProductsModel implements ProductsContract.Model {
 
     private Single<ProductData> getObservable() {
         return Single.zip(getObservableMenu(), getObservableProducts(),
-                new BiFunction<List<MenuComponent>, List<Product>, ProductData>() {
-                    @Override
-                    public ProductData apply(List<MenuComponent> componentList, List<Product> productList) {
-                        return new ProductData(componentList, productList);
-                    }
-                });
+                ProductData::new);
     }
 
     private Single<List<MenuComponent>> getObservableMenu() {

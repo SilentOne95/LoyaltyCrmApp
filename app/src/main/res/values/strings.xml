@@ -68,58 +68,11 @@
     <string name="coupon_details_image_desc">Coupon details image</string>
     <string name="company_logo_desc">Company logo</string>
     <string name="bottom_sheet_marker_icon">Marker icon next to place title in BottomSheet</string>
+    <string name="loading_indicator_desc">Custom loading indicator</string>
 
     <!-- MenuComponent strings -->
     <string name="first_fragment">Open hours</string>
     <string name="second_fragment">Contact info</string>
-    <string name="long_lorem_ipsum">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-        amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore
-        et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
-        nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-        sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-        consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et
-        dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
-        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
-        pariatur? Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis
-        et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-        voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
-        sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut
-        labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
-        nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-    </string>
-    <string name="mid_lorem_ipsum">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-        ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-        amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore
-        et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
-        nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-    </string>
-    <string name="short_lorem_ipsum">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam.
-    </string>
 
     <!-- Bottom Sheet contact info tab temporary strings -->
     <string name="contact_info_phone_number">+48 123 456 789</string>
@@ -128,5 +81,4 @@
     <!-- Bottom Sheet peek Panel default info -->
     <string name="bottom_sheet_default_place_title">Place no.</string>
     <string name="bottom_sheet_default_no_info_text">No info to display</string>
-
 </resources>
