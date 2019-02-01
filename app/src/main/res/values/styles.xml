@@ -78,6 +78,14 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
+    <!-- Navigation view header -->
+    <style name="nav_header_logo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">15dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
     <!-- Home fragment -->
     <style name="home_special_offer_image">
         <item name="android:layout_width">match_parent</item>
@@ -109,7 +117,7 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
-        <item name="android:textColor">@color/colorEmptyStateText</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -123,7 +131,7 @@
     <!-- Coupon and Product details activity -->
     <style name="details_image_view">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">300dp</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:adjustViewBounds">true</item>
     </style>

@@ -7,7 +7,6 @@
     <string name="default_notification_channel_name" translatable="false">"Default channel</string>
 
     <!-- Navigation Drawer strings -->
-    <string name="nav_header_title">My header title</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
 
@@ -28,8 +27,8 @@
     <string name="check_offers_text">Check offers!</string>
 
     <!-- Fragment coupons and products strings -->
-    <string name="no_coupons_text">Unfortunately, you do not have active coupons\n :(</string>
-    <string name="no_products_text">Unfortunately, you do not have active products\n :(</string>
+    <string name="no_coupons_text">Unfortunately, \nyou do not have active coupons\n :(</string>
+    <string name="no_products_text">Unfortunately, \nyou do not have active products\n :(</string>
     <string name="try_again_later_text">Try again later</string>
 
     <!-- Activity Coupon details strings -->
@@ -60,6 +59,7 @@
     <string name="contact_info_email_text">E-mail:</string>
 
     <!-- Image content descriptions -->
+    <string name="navigation_header_logo_desc">Navigation header company logo</string>
     <string name="sign_up_image_desc">Sign Up logo image</string>
     <string name="grid_list_item_content_desc">Resource passed with JSON, will be populated
         in 2 different category activities.</string>
