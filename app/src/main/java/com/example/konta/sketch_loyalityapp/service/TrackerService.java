@@ -71,7 +71,7 @@ public class TrackerService extends Service {
                 new NotificationCompat.Builder(this, channelId)
                         .setContentTitle("App name")
                         .setContentText("Notification text")
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.drawable.sellger_logo)
                         .setOngoing(true);
 
         startForeground(1, notificationBuilder.build());

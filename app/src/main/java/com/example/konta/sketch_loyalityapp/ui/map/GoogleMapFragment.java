@@ -1,9 +1,14 @@
 package com.example.konta.sketch_loyalityapp.ui.map;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -46,7 +51,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQU
 import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
-        View.OnClickListener, MapContract.View {
+        View.OnClickListener, MapContract.View, GoogleMap.OnMyLocationButtonClickListener {
 
     private static final String TAG = GoogleMapFragment.class.getSimpleName();
 
@@ -161,12 +166,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
 
         // Set BottomSheet state when map is clicked
-        mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                presenter.switchBottomSheetState(latLng);
-            }
-        });
+        mGoogleMap.setOnMapClickListener(latLng -> presenter.switchBottomSheetState(latLng));
+
+        mGoogleMap.setOnMyLocationButtonClickListener(this);
     }
 
     LocationCallback mLocationCallback = new LocationCallback() {
@@ -252,13 +254,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         // Set BottomSheet state when marker is clicked
         mGoogleMap.setOnMarkerClickListener(mClusterManager);
-        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<Marker>() {
-            @Override
-            public boolean onClusterItemClick(Marker marker) {
-                presenter.passDataToBottomSheet(marker.getId());
-                presenter.switchBottomSheetState(marker);
-                return true;
-            }
+        mClusterManager.setOnClusterItemClickListener(marker -> {
+            presenter.passDataToBottomSheet(marker.getId());
+            presenter.switchBottomSheetState(marker);
+            return true;
         });
     }
 
@@ -292,5 +291,29 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mPanelPlaceTitle.setText(title);
         mPanelAddress.setText(address);
         mPanelTodayOpenHours.setText(openHours);
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(
+                    this.getActivity());
+
+            builder.setMessage("GPS is disabled")
+                    .setCancelable(false)
+                    .setTitle("Please enable GPS localization, to show your position on map.")
+                    .setPositiveButton("Enable",
+                            (dialog, id) -> startActivity(new Intent(
+                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)))
+                    .setNegativeButton("Cancel",
+                            (dialog, id) -> dialog.cancel());
+
+            final AlertDialog alert = builder.create();
+            alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+            alert.show();
+        }
+        return false;
     }
 }

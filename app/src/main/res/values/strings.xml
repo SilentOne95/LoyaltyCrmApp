@@ -1,6 +1,6 @@
 <resources>
     <!-- App name -->
-    <string name="app_name">Loyalty app</string>
+    <string name="app_name">Sellger</string>
 
     <!-- Firebase // Push Notifications -->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
