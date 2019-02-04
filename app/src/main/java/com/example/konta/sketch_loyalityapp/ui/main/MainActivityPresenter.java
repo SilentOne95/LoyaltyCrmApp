@@ -52,10 +52,61 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
     @Override
     public void passDataToNavDrawer(SparseArray<HelperComponent> menu,
-                               SparseArray<HelperComponent> submenu, int homeScreenId) {
-        if (view != null) {
-            view.setDataToNavDrawer(menu, submenu, homeScreenId);
+                                    SparseArray<HelperComponent> submenu, int homeScreenId) {
+        int arraySize = menu.size() + submenu.size();
+        int arrayIndex = 0;
+        String[] iconNameArray = new String[arraySize];
+
+        for (int i = 0; i < menu.size(); i++) {
+            iconNameArray[arrayIndex] = matchRelevantIconName(menu.get(i).getType());
+            arrayIndex++;
         }
+
+        for (int i = 0; i < submenu.size(); i++) {
+            iconNameArray[arrayIndex] = matchRelevantIconName(submenu.get(i).getType());
+            arrayIndex++;
+        }
+
+        if (view != null) {
+            view.setDataToNavDrawer(menu, submenu, homeScreenId, iconNameArray);
+        }
+    }
+
+    @Override
+    public String matchRelevantIconName(String layoutType) {
+        String iconName;
+
+        switch (layoutType) {
+            case "home":
+                iconName = "ic_menu_home";
+                break;
+            case "products":
+                iconName = "ic_menu_cube";
+                break;
+            case "coupons":
+                iconName = "ic_menu_coupon";
+                break;
+            case "map":
+                iconName = "ic_menu_marker";
+                break;
+            case "login":
+                iconName = "ic_menu_account";
+                break;
+            case "url":
+                iconName = "ic_menu_search";
+                break;
+            case "terms":
+                iconName = "ic_menu_terms";
+                break;
+            case "contact":
+                iconName = "ic_menu_phone";
+                break;
+            default:
+                iconName = "ic_menu_script";
+                break;
+        }
+
+        return iconName;
     }
 
     @Override

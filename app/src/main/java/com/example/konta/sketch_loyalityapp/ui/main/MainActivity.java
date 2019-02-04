@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -126,16 +127,24 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
                                    SparseArray<HelperComponent> submenuSectionArray,
-                                   int homeScreenId) {
+                                   int homeScreenId, String[] iconNameArray) {
 
         Menu menu = mNavigationView.getMenu(), submenu = mNavigationView.getMenu();
+        Resources resources = this.getResources();
+        int arrayIndex = 0;
 
         for (int i = 0; i < menuSectionArray.size(); i++) {
-            menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, menuSectionArray.get(i).getTitle());
+            menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER,
+                    menuSectionArray.get(i).getTitle())
+                    .setIcon(resources.getIdentifier(iconNameArray[arrayIndex], "drawable", PACKAGE_NAME));
+            arrayIndex++;
         }
 
         for (int i = 0; i < submenuSectionArray.size(); i++) {
-            submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, submenuSectionArray.get(i).getTitle());
+            submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER,
+                    submenuSectionArray.get(i).getTitle())
+                    .setIcon(resources.getIdentifier(iconNameArray[arrayIndex], "drawable", PACKAGE_NAME));
+            arrayIndex++;
         }
 
         // Set checked home screen in Navigation Drawer
