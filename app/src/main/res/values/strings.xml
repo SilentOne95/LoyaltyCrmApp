@@ -69,6 +69,7 @@
     <string name="company_logo_desc">Company logo</string>
     <string name="bottom_sheet_marker_icon">Marker icon next to place title in BottomSheet</string>
     <string name="loading_indicator_desc">Custom loading indicator</string>
+    <string name="notification_logo_desc">White logo push notification</string>
 
     <!-- MenuComponent strings -->
     <string name="first_fragment">Open hours</string>
