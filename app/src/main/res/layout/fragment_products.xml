@@ -13,14 +13,16 @@
         android:id="@+id/recycler_view"
         style="@style/basic_recycler_view_style"/>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/Widget.AppCompat.ProgressBar"/>
+
     <LinearLayout
         android:id="@+id/empty_state_products_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:background="@color/colorFragmentBackground"
-        android:layout_margin="@dimen/big_value">
+        style="@style/coupons_empty_state_container">
 
         <TextView
             android:id="@+id/empty_state_products_text"

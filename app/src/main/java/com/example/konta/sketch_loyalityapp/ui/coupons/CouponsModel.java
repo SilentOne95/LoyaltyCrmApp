@@ -7,11 +7,11 @@ import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_NUM_OF_COLUMNS;
@@ -23,12 +23,20 @@ public class CouponsModel implements CouponsContract.Model {
     @Override
     public Disposable fetchDataFromServer(CouponsPresenter presenter) {
         this.presenter = presenter;
-        return getObservable().subscribeWith(getObserver());
+
+        return getObservable()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(couponData -> {
+                    formatCouponsData(couponData);
+                    presenter.isProgressBarNeeded(false);
+                }, throwable -> presenter.isProgressBarNeeded(false));
     }
 
     private Single<CouponData> getObservable() {
         return Single.zip(getObservableMenu(), getObservableCoupons(),
-                CouponData::new);
+                Single.timer(1000, TimeUnit.MILLISECONDS),
+                (componentList, couponList, timer) -> new CouponData(componentList, couponList));
     }
 
     private Single<List<MenuComponent>> getObservableMenu() {
@@ -43,18 +51,6 @@ public class CouponsModel implements CouponsContract.Model {
                 .getAllCoupons()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private DisposableSingleObserver<CouponData> getObserver() {
-        return new DisposableSingleObserver<CouponData>() {
-            @Override
-            public void onSuccess(CouponData couponData) {
-                formatCouponsData(couponData);
-            }
-
-            @Override
-            public void onError(Throwable e) { }
-        };
     }
 
     @Override

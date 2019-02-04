@@ -34,4 +34,11 @@ public class ProductsPresenter implements ProductsContract.Presenter {
             view.setUpAdapter(productList, numOfColumns);
         }
     }
+
+    @Override
+    public void isProgressBarNeeded(boolean isNeeded) {
+        if (view != null) {
+            view.setProgressBarVisibility(isNeeded);
+        }
+    }
 }

@@ -34,4 +34,11 @@ public class CouponsPresenter implements CouponsContract.Presenter {
             view.setUpAdapter(couponList, numOfColumns);
         }
     }
+
+    @Override
+    public void isProgressBarNeeded(boolean isNeeded) {
+        if (view != null) {
+            view.setProgressBarVisibility(isNeeded);
+        }
+    }
 }

@@ -7,6 +7,7 @@ import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -23,12 +24,20 @@ public class ProductsModel implements ProductsContract.Model {
     @Override
     public Disposable fetchDataFromServer(ProductsPresenter presenter) {
         this.presenter = presenter;
-        return getObservable().subscribeWith(getObserverProductAdapter());
+
+        return getObservable()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(productData -> {
+                    formatProductsData(productData);
+                    presenter.isProgressBarNeeded(false);
+                }, throwable -> presenter.isProgressBarNeeded(false));
     }
 
     private Single<ProductData> getObservable() {
         return Single.zip(getObservableMenu(), getObservableProducts(),
-                ProductData::new);
+                Single.timer(1000, TimeUnit.MILLISECONDS),
+                ((componentList, productList, timer) -> new ProductData(componentList, productList)));
     }
 
     private Single<List<MenuComponent>> getObservableMenu() {
@@ -43,18 +52,6 @@ public class ProductsModel implements ProductsContract.Model {
                 .getAllProducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private DisposableSingleObserver<ProductData> getObserverProductAdapter() {
-        return new DisposableSingleObserver<ProductData>() {
-            @Override
-            public void onSuccess(ProductData productData) {
-                formatProductsData(productData);
-            }
-
-            @Override
-            public void onError(Throwable e) { }
-        };
     }
 
     @Override

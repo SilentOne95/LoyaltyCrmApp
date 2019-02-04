@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.konta.sketch_loyalityapp.adapter.ProductAdapter;
 import com.example.konta.sketch_loyalityapp.adapter.RecyclerItemClickListener;
@@ -26,6 +27,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     private RecyclerView recyclerView;
     private View emptyStateView;
+    private ProgressBar progressBar;
 
     @Override
     protected int getLayout() { return R.layout.fragment_products; }
@@ -36,9 +38,10 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
         getActivity().setTitle("Products");
 
-        // Adapter
+        progressBar = rootView.findViewById(R.id.progress_bar);
         recyclerView = rootView.findViewById(R.id.recycler_view);
         emptyStateView = rootView.findViewById(R.id.empty_state_products_container);
+        emptyStateView.setVisibility(View.GONE);
 
         presenter = new ProductsPresenter(this, new ProductsModel());
         presenter.requestDataFromServer();
@@ -55,18 +58,31 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     @Override
     public void setUpAdapter(List<Product> productList, int numOfColumns) {
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
-        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(new ProductAdapter(productList, recyclerItemClickListener, numOfColumns));
-
         // Set empty state view if needed
-        if (!productList.isEmpty()) {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyStateView.setVisibility(View.GONE);
+        if (productList.isEmpty()) {
+            setUpEmptyStateView(true);
         } else {
+            setUpEmptyStateView(false);
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
+            CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+            recyclerView.addItemDecoration(itemDecoration);
+            recyclerView.setAdapter(new ProductAdapter(productList, recyclerItemClickListener, numOfColumns));
+        }
+    }
+
+    @Override
+    public void setUpEmptyStateView(boolean isNeeded) {
+        if (isNeeded) {
             recyclerView.setVisibility(View.GONE);
             emptyStateView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyStateView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void setProgressBarVisibility(boolean isNeeded) {
+        progressBar.setVisibility(View.GONE);
     }
 }

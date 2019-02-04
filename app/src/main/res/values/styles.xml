@@ -111,6 +111,15 @@
     </style>
 
     <!-- Coupons fragment  -->
+    <style name="coupons_empty_state_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/colorFragmentBackground</item>
+        <item name="android:layout_margin">@dimen/big_value</item>
+    </style>
+
     <style name="coupons_empty_state_text_one">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

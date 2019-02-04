@@ -12,12 +12,15 @@ public interface ProductsContract {
     interface View {
 
         void setUpAdapter(List<Product> productList, int numOfColumns);
+        void setUpEmptyStateView(boolean isNeeded);
+        void setProgressBarVisibility(boolean isNeeded);
     }
 
     interface Presenter {
 
         void requestDataFromServer();
         void passDataToAdapter(List<Product> productList, int numOfColumns);
+        void isProgressBarNeeded(boolean isNeeded);
     }
 
     interface Model {
