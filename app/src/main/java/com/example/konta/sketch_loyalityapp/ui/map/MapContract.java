@@ -13,6 +13,7 @@ public interface MapContract {
     interface View {
 
         void setUpCluster(List<Marker> markerList);
+        void setProgressBarVisibility(boolean isNeeded);
 
         int getBottomSheetState();
         void setBottomSheetState(int state);
@@ -27,6 +28,7 @@ public interface MapContract {
 
         void requestDataFromServer();
         void passDataToCluster(List<Marker> markerList);
+        void isProgressBarNeeded(boolean isNeeded);
 
         void switchBottomSheetState(Object object);
 

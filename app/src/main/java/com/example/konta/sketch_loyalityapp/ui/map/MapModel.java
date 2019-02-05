@@ -7,6 +7,7 @@ import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.contactInfo.Conta
 import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.openingHours.OpeningHoursPresenter;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -24,26 +25,27 @@ public class MapModel implements MapContract.Model {
     @Override
     public Disposable fetchDataFromServer(MapPresenter presenter) {
         this.presenter = presenter;
-        return getObservable().subscribeWith(getObserver());
+        return getObservable()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(markerList -> {
+                    presenter.passDataToCluster(markerList);
+                    presenter.isProgressBarNeeded(false);
+                }, throwable -> presenter.isProgressBarNeeded(false));
     }
 
     private Single<List<Marker>> getObservable() {
+        return Single.zip(getObservableMarkers(),
+                Single.timer(1000, TimeUnit.MILLISECONDS),
+                (markerList, timer) -> markerList);
+    }
+
+
+    private Single<List<Marker>> getObservableMarkers() {
         return RetrofitClient.getInstance().create(Api.class)
                 .getAllMarkers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private DisposableSingleObserver<List<Marker>> getObserver() {
-        return new DisposableSingleObserver<List<Marker>>() {
-            @Override
-            public void onSuccess(List<Marker> markerList) {
-                presenter.passDataToCluster(markerList);
-            }
-
-            @Override
-            public void onError(Throwable e) { }
-        };
     }
 
     private DisposableSingleObserver<List<Marker>> getObserverOpening() {
