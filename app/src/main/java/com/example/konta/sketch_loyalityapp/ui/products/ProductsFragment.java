@@ -47,13 +47,10 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         presenter.requestDataFromServer();
     }
 
-    private RecyclerItemClickListener.ProductRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.ProductRetrofitClickListener() {
-        @Override
-        public void onItemProductClick(int productId) {
-            Intent startProductDetailsActivity = new Intent(getContext(), ProductDetailsActivity.class);
-            startProductDetailsActivity.putExtra("EXTRA_ELEMENT_ID", productId);
-            startActivity(startProductDetailsActivity);
-        }
+    private RecyclerItemClickListener.ProductRetrofitClickListener recyclerItemClickListener = productId -> {
+        Intent startProductDetailsActivity = new Intent(getContext(), ProductDetailsActivity.class);
+        startProductDetailsActivity.putExtra("EXTRA_ELEMENT_ID", productId);
+        startActivity(startProductDetailsActivity);
     };
 
     @Override

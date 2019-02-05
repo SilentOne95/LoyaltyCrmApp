@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/grid_item_product"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_corners_grid_item">
+    android:background="@drawable/rounded_corners_grid_item"
+    android:clipChildren="false">
 
     <ImageView
         android:id="@+id/grid_item_image"
-        style="@style/general_grid_item_image"
-        android:contentDescription="@string/grid_list_item_content_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        style="@style/grid_item_image_one_row"
+        android:contentDescription="@string/grid_list_item_content_desc" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mid_value"
-        app:layout_constraintTop_toBottomOf="@+id/grid_item_image">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/mid_value">
 
         <TextView
             android:id="@+id/grid_item_title_text"
@@ -50,13 +49,14 @@
 
         <Button
             android:id="@+id/grid_item_view_details_button"
-            style="@style/grid_item_product_button_one_row"
+            style="@style/grid_item_product_button"
             android:background="@drawable/rounded_corners_button"
             android:text="@string/button_check_coupon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description" />
+            app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description"
+            app:layout_constraintVertical_bias="1" />
 
     </android.support.constraint.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

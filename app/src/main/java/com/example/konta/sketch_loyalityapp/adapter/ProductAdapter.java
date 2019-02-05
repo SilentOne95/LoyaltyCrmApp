@@ -43,8 +43,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @NonNull
     @Override
     public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.grid_list_item_product, parent, false);
+        View view;
+        switch (numOfColumns) {
+            case 1:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_product_one_col, parent, false);
+                break;
+            case 2:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_product_two_col, parent, false);
+                break;
+            default:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_product_two_col, parent, false);
+                break;
+        }
+
         return new ProductAdapter.ViewHolder(view);
     }
 

@@ -44,8 +44,23 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     @NonNull
     @Override
     public CouponAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.grid_list_item_coupon, parent, false);
+        View view;
+
+        switch (numOfColumns) {
+            case 1:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_coupon_one_col, parent, false);
+                break;
+            case 2:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_coupon_two_col, parent, false);
+                break;
+            default:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_coupon_one_col, parent, false);
+                break;
+        }
+
         return new ViewHolder(view);
     }
 
