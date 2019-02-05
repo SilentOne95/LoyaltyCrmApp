@@ -1,12 +1,10 @@
 package com.example.konta.sketch_loyalityapp.ui.map;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
@@ -31,11 +29,19 @@ import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
 import com.example.konta.sketch_loyalityapp.service.TrackerService;
 import com.example.konta.sketch_loyalityapp.utils.CustomClusterRenderer;
 import com.example.konta.sketch_loyalityapp.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Result;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,21 +53,24 @@ import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
+import static com.example.konta.sketch_loyalityapp.Constants.REQUEST_CHECK_SETTINGS;
 import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
-        View.OnClickListener, MapContract.View, GoogleMap.OnMyLocationButtonClickListener {
+        View.OnClickListener, MapContract.View, GoogleMap.OnMyLocationButtonClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ResultCallback {
 
     private static final String TAG = GoogleMapFragment.class.getSimpleName();
 
     MapPresenter presenter;
 
     GoogleMap mGoogleMap;
-    LocationRequest mLocationRequest;
     Location mLastLocation;
     FusedLocationProviderClient mFusedLocationClient;
+    protected LocationRequest mLocationRequest;
+    protected GoogleApiClient mGoogleApiClient;
 
     private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -129,12 +138,23 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
+    public void setUpGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this).build();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
 
+        setUpGoogleApiClient();
+
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(20 * 1000);
+        mLocationRequest.setInterval(30 * 1000);
         mLocationRequest.setFastestInterval(10 * 1000);
 
         // Initialize Google Play Services
@@ -176,6 +196,73 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.setOnMyLocationButtonClickListener(this);
     }
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(mLocationRequest);
+        builder.setAlwaysShow(true);
+
+        PendingResult result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
+        result.setResultCallback(this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Toast.makeText(getContext(), "onConnectionSuspended", Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Toast.makeText(getContext(), "onConnectionFailed", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onResult(@NonNull Result result) {
+        final Status status = result.getStatus();
+
+        switch (status.getStatusCode()) {
+            case LocationSettingsStatusCodes.SUCCESS:
+                // No need to show the dialog;
+                break;
+            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                //  GPS turned off, show the user a dialog
+                try {
+                    // Show the dialog and check the result
+                    status.startResolutionForResult(getActivity(), REQUEST_CHECK_SETTINGS);
+                } catch (IntentSender.SendIntentException e) {
+                    // Failed to show dialog
+                }
+                break;
+            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                // Location settings are unavailable, so not possible to show any dialog now
+                break;
+        }
+    }
+
+    // TODO: Check toasts
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CHECK_SETTINGS) {
+            if (resultCode == RESULT_OK) {
+
+                Toast.makeText(getContext(), "GPS enabled", Toast.LENGTH_LONG).show();
+            } else {
+
+                Toast.makeText(getContext(), "GPS is not enabled", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
@@ -191,7 +278,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public void onPause() {
         super.onPause();
-
         // Stop location updates when Activity is no longer active
         if (mFusedLocationClient != null) {
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
@@ -237,7 +323,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                     }
                 } else {
                     // Permission denied, display Toast message
-                    Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -264,6 +350,19 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             presenter.switchBottomSheetState(marker);
             return true;
         });
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        // If GPS is off and user click on button to localize position on map,
+        // dialog window will pop up to turn on GPS
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            setUpGoogleApiClient();
+        }
+
+        return false;
     }
 
     @Override
@@ -299,29 +398,5 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mPanelPlaceTitle.setText(title);
         mPanelAddress.setText(address);
         mPanelTodayOpenHours.setText(openHours);
-    }
-
-    @Override
-    public boolean onMyLocationButtonClick() {
-        LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(
-                    this.getActivity());
-
-            builder.setMessage("Please enable GPS localization, to show your position on map")
-                    .setCancelable(false)
-                    .setTitle("GPS is disabled")
-                    .setPositiveButton("Enable",
-                            (dialog, id) -> startActivity(new Intent(
-                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)))
-                    .setNegativeButton("Cancel",
-                            (dialog, id) -> dialog.cancel());
-
-            final AlertDialog alert = builder.create();
-            alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-            alert.show();
-        }
-        return false;
     }
 }

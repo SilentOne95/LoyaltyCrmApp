@@ -12,6 +12,8 @@ public interface MapContract {
 
     interface View {
 
+        void setUpGoogleApiClient();
+
         void setUpCluster(List<Marker> markerList);
         void setProgressBarVisibility(boolean isNeeded);
 

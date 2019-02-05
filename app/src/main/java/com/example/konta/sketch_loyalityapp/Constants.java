@@ -16,6 +16,7 @@ public final class Constants {
 
     // MapFragment
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    public static final int REQUEST_CHECK_SETTINGS = 100;
 
     // Adapter
     public static final int DEFAULT_NUM_OF_COLUMNS = 1;
