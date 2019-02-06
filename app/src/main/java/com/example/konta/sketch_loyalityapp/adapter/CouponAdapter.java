@@ -35,7 +35,6 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     private int numOfColumns;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
-
     public CouponAdapter(List<Coupon> items,
                          RecyclerItemClickListener.CouponRetrofitClickListener clickListener,
                          int columns) {

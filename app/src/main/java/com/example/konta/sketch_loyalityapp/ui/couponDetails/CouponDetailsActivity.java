@@ -22,7 +22,8 @@ import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.R;
 import com.squareup.picasso.Picasso;
 
-import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+import java.text.DecimalFormat;
+
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class CouponDetailsActivity extends BaseActivity implements CouponDetailsContract.View, View.OnClickListener {
@@ -40,6 +41,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     private int couponId;
     private String couponCode;
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     @Override
     protected int getLayout() { return R.layout.activity_coupon_details; }
@@ -103,13 +105,13 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         }
 
         if (coupon.getPriceAfter() != null && !coupon.getPriceAfter().toString().trim().isEmpty()) {
-            couponNewPrice.setText(String.valueOf(coupon.getPriceAfter()).concat(" zł"));
+            couponNewPrice.setText(String.valueOf(decimalFormat.format(coupon.getPriceAfter())).concat(" zł"));
         } else {
             couponNewPrice.setText(DEFAULT_STRING);
         }
 
         if (coupon.getPrice() != null && !coupon.getPrice().toString().trim().isEmpty()) {
-            couponBasicPrice.setText(String.valueOf(coupon.getPrice()).concat(" zł"));
+            couponBasicPrice.setText(String.valueOf(decimalFormat.format(coupon.getPrice())).concat(" zł"));
         } else {
             couponBasicPrice.setText(DEFAULT_STRING);
         }

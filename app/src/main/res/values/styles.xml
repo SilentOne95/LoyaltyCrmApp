@@ -162,9 +162,9 @@
     </style>
 
     <style name="details_price_text" parent="layout_wrap_content">
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
     <style name="details_price_amount" parent="layout_wrap_content">
@@ -193,6 +193,7 @@
     <style name="details_product_description_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
         <item name="android:layout_marginTop">@dimen/big_value</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
@@ -475,6 +476,7 @@
     <style name="grid_item_product_desc_text_one_row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">4</item>
         <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
@@ -652,6 +654,5 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-
 
 </resources>

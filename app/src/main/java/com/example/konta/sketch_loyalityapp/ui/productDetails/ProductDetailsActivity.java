@@ -11,7 +11,8 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 import com.squareup.picasso.Picasso;
 
-import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+import java.text.DecimalFormat;
+
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View{
@@ -24,6 +25,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     TextView productTitle, productPrice, productDescription;
 
     private int productId;
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     @Override
     protected int getLayout() { return R.layout.activity_product_details; }
@@ -63,7 +65,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         }
 
         if (product.getPrice() != null && !product.getPrice().toString().trim().isEmpty()) {
-            productPrice.setText(String.valueOf(product.getPrice()).concat(" ").concat("zł"));
+            productPrice.setText(String.valueOf(decimalFormat.format(product.getPrice())).concat(" zł"));
         } else {
             productPrice.setText(DEFAULT_STRING);
         }
