@@ -42,8 +42,23 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @NonNull
     @Override
     public HomeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.grid_list_item_home, parent, false);
+        View view;
+
+        switch (numOfColumns) {
+            case 1:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_home_one_col, parent, false);
+                break;
+            case 2:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_home_two_col, parent, false);
+                break;
+            default:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.grid_list_item_home_two_col, parent, false);
+                break;
+        }
+
         return new ViewHolder(view);
     }
 

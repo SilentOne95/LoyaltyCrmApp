@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/grid_item_coupon"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/grid_item_shadow"
     android:clipChildren="false"
-    android:elevation="@dimen/grid_item_elevation">
+    android:elevation="@dimen/grid_item_elevation"
+    android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/image_container"
@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/grid_item_discount_marker"
-            style="@style/basic_grid_list_item_marker"
+            style="@style/grid_item_coupon_marker_tag_two_rows"
             android:background="@drawable/rounded_corners_label_discount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,25 +34,25 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="@dimen/mid_value">
+        android:layout_margin="@dimen/mid_value"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/grid_item_coupon_title"
-            style="@style/general_grid_item_title_two_rows"
+            style="@style/grid_item_coupon_title_two_rows"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/grid_item_price_text"
-            style="@style/general_grid_item_price_text_two_rows"
+            style="@style/grid_item_coupon_price_text_two_rows"
             android:text="@string/price_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_coupon_title" />
 
         <TextView
             android:id="@+id/grid_item_price_amount"
-            style="@style/general_grid_item_price_amount_two_rows"
+            style="@style/grid_item_coupon_price_amount_two_rows"
             app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
             app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
             app:layout_constraintTop_toTopOf="@+id/grid_item_price_text" />
@@ -66,7 +66,7 @@
 
         <TextView
             android:id="@+id/grid_item_coupon_description_text"
-            style="@style/general_grid_item_desc_text_two_rows"
+            style="@style/grid_item_coupon_desc_text_two_rows"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text" />
