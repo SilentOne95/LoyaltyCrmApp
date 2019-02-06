@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -80,6 +81,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Init navigation view
         mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
+        hideNavDrawerScrollbar();
 
         // Using Retrofit to set up NavDrawer
         presenter = new MainActivityPresenter(this, new MainActivityModel());
@@ -113,16 +115,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void onDrawerSlide(@NonNull View view, float v) { }
-
-    @Override
-    public void onDrawerOpened(@NonNull View view) { }
-
-    @Override
-    public void onDrawerClosed(@NonNull View view) { presenter.displaySelectedScreen(layoutType); }
-
-    @Override
-    public void onDrawerStateChanged(int i) { }
+    public void hideNavDrawerScrollbar() {
+        if (mNavigationView != null) {
+            NavigationMenuView navigationMenuView = (NavigationMenuView) mNavigationView.getChildAt(0);
+            if (navigationMenuView != null) {
+                navigationMenuView.setVerticalScrollBarEnabled(false);
+            }
+        }
+    }
 
     @Override
     public void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
@@ -177,6 +177,18 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         return true;
     }
+
+    @Override
+    public void onDrawerSlide(@NonNull View view, float v) { }
+
+    @Override
+    public void onDrawerOpened(@NonNull View view) { }
+
+    @Override
+    public void onDrawerClosed(@NonNull View view) { presenter.displaySelectedScreen(layoutType); }
+
+    @Override
+    public void onDrawerStateChanged(int i) { }
 
     @Override
     public void setDisplayItemChecked(int viewPosition) {

@@ -19,6 +19,8 @@ public interface MainActivityContract {
         void setFragment(BaseFragment fragment);
         void setActivity(Class<? extends Activity> activity);
 
+        void hideNavDrawerScrollbar();
+
         void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
                                 SparseArray<HelperComponent> submenuSectionArray,
                                 int homeScreenId, String[] iconNameArray);

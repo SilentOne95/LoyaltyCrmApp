@@ -174,6 +174,10 @@ public class MainActivityModel implements MainActivityContract.Model {
             }
         }
 
+        if (numOfColumns < 1 || numOfColumns > 2) {
+            numOfColumns = 2;
+        }
+
         homePresenter.passDataToAdapter(navDrawerArray, numOfColumns);
     }
 
