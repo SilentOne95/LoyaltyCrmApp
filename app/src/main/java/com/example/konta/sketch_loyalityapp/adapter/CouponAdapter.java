@@ -15,6 +15,7 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -32,6 +33,8 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     private List<Coupon> listOfItems;
     private RecyclerItemClickListener.CouponRetrofitClickListener couponClickListener;
     private int numOfColumns;
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
 
     public CouponAdapter(List<Coupon> items,
                          RecyclerItemClickListener.CouponRetrofitClickListener clickListener,
@@ -80,7 +83,11 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             showDetailsButton = view.findViewById(R.id.grid_item_show_details_button);
             showDetailsButton.setOnClickListener(this);
             checkCodeButton = view.findViewById(R.id.grid_item_show_code_button);
-            checkCodeButton.setOnClickListener(this);
+            if (numOfColumns == 1) {
+                checkCodeButton.setOnClickListener(this);
+            } else {
+                checkCodeButton.setVisibility(View.GONE);
+            }
         }
 
         @Override
@@ -156,13 +163,17 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         }
 
         if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
-            holder.basicPrice.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
+            holder.basicPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())).concat("zł"));
         } else {
             holder.basicPrice.setText(DEFAULT_STRING);
         }
 
         if (currentItem.getPriceAfter() != null && !currentItem.getPriceAfter().toString().trim().isEmpty()) {
-            holder.newPrice.setText(String.valueOf(currentItem.getPriceAfter()).concat(" ").concat("zł"));
+            if (numOfColumns == 1) {
+                holder.newPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPriceAfter())).concat("zł"));
+            } else {
+                holder.newPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPriceAfter())));
+            }
         } else {
             holder.newPrice.setText(DEFAULT_STRING);
         }

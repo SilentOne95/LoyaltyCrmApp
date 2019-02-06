@@ -70,7 +70,13 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         } else {
             setUpEmptyStateView(false);
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
-            CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
+
+            CustomItemDecoration itemDecoration;
+            if (numOfColumns == 1) {
+                itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
+            } else {
+                itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+            }
             recyclerView.addItemDecoration(itemDecoration);
             recyclerView.setAdapter(new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns));
         }

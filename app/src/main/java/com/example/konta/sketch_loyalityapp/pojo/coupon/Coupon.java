@@ -22,10 +22,10 @@ public class Coupon {
     private String image;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Float price;
     @SerializedName("price_after")
     @Expose
-    private Double priceAfter;
+    private Float priceAfter;
     @SerializedName("reduction_amount")
     @Expose
     private String reductionAmount;
@@ -79,19 +79,19 @@ public class Coupon {
         this.image = image;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    public Double getPriceAfter() {
+    public Float getPriceAfter() {
         return priceAfter;
     }
 
-    public void setPriceAfter(Double priceAfter) {
+    public void setPriceAfter(Float priceAfter) {
         this.priceAfter = priceAfter;
     }
 

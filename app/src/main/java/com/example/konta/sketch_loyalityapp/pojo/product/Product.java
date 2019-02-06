@@ -16,7 +16,7 @@ public class Product {
     private String image;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Float price;
     @SerializedName("description")
     @Expose
     private String description;
@@ -48,11 +48,11 @@ public class Product {
         this.image = image;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
