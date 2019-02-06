@@ -383,7 +383,6 @@
     </style>
 
 
-
     <!-- General grid list item // one row -->
     <style name="grid_item_image_one_row">
         <item name="android:layout_height">@dimen/image_height_one_row</item>
@@ -410,7 +409,7 @@
     <style name="grid_item_coupon_price_text_one_row" parent="layout_wrap_content">
         <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
     <style name="grid_item_coupon_price_amount_one_row" parent="layout_wrap_content">
@@ -429,6 +428,7 @@
     <style name="grid_item_coupon_desc_text_one_row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">4</item>
         <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
@@ -438,8 +438,7 @@
         <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
-        <item name="android:layout_marginBottom">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
@@ -449,8 +448,7 @@
         <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
-        <item name="android:layout_marginBottom">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
@@ -516,6 +514,7 @@
         <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
+
     <!-- General grid list item // two rows -->
     <style name="grid_item_image_two_rows">
         <item name="android:layout_height">@dimen/image_height_two_rows</item>
@@ -571,7 +570,7 @@
         <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
@@ -581,7 +580,7 @@
         <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>

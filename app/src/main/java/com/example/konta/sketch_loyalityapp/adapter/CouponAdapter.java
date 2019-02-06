@@ -92,7 +92,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.grid_item_show_details_button:
                     couponClickListener.onItemCouponDetailsClick(listOfItems
                             .get(getAdapterPosition())
@@ -136,18 +136,18 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             Picasso.get()
                     .load("")
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(holder.imageView.getWidth(),imageHeight)
+                    .resize(holder.imageView.getWidth(), imageHeight)
                     .into(holder.imageView);
         } else {
             Picasso.get()
                     .load(R.drawable.image_not_available)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(holder.imageView.getWidth(),imageHeight)
+                    .resize(holder.imageView.getWidth(), imageHeight)
                     .into(holder.imageView);
         }
 
         if (currentItem.getReductionAmount() != null && !currentItem.getReductionAmount().trim().isEmpty()) {
-            if (currentItem.getReductionType().equals("percent")){
+            if (currentItem.getReductionType().equals("percent")) {
                 holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("%"));
             } else {
                 holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("zł"));
@@ -163,17 +163,17 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         }
 
         if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
-            holder.basicPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())).concat("zł"));
+            if (numOfColumns == 1) {
+                holder.basicPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())).concat("zł"));
+            } else {
+                holder.basicPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())));
+            }
         } else {
             holder.basicPrice.setText(DEFAULT_STRING);
         }
 
         if (currentItem.getPriceAfter() != null && !currentItem.getPriceAfter().toString().trim().isEmpty()) {
-            if (numOfColumns == 1) {
-                holder.newPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPriceAfter())).concat("zł"));
-            } else {
-                holder.newPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPriceAfter())));
-            }
+            holder.newPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPriceAfter())).concat("zł"));
         } else {
             holder.newPrice.setText(DEFAULT_STRING);
         }
@@ -186,5 +186,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     }
 
     @Override
-    public int getItemCount() { return listOfItems.size(); }
+    public int getItemCount() {
+        return listOfItems.size();
+    }
 }
