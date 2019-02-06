@@ -588,17 +588,17 @@
     <!-- Grid list item Product // two rows -->
     <style name="grid_item_product_title_two_rows" parent="layout_wrap_content">
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/very_big_text_size</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
     </style>
 
     <style name="grid_item_product_price_text_two_rows" parent="layout_wrap_content">
         <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
     <style name="grid_item_product_price_amount_two_rows" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginStart">@dimen/very_small_value</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/big_text_size</item>
         <item name="android:textStyle">bold</item>
@@ -607,16 +607,17 @@
     <style name="grid_item_product_desc_text_two_rows">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">3</item>
         <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <style name="grid_item_product_button_two_rows" parent="basic_min_size_button">
         <item name="android:layout_width">@dimen/grid_item_button_details_width_two_rows</item>
-        <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
+        <item name="android:layout_height">@dimen/grid_item_height_two_rows</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>

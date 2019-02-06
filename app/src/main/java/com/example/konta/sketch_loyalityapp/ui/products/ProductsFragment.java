@@ -61,7 +61,13 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         } else {
             setUpEmptyStateView(false);
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
-            CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+
+            CustomItemDecoration itemDecoration;
+            if (numOfColumns == 1) {
+                itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
+            } else {
+                itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+            }
             recyclerView.addItemDecoration(itemDecoration);
             recyclerView.setAdapter(new ProductAdapter(productList, recyclerItemClickListener, numOfColumns));
         }

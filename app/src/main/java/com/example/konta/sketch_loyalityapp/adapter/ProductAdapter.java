@@ -14,6 +14,7 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -31,6 +32,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private List<Product> listOfItems;
     private RecyclerItemClickListener.ProductRetrofitClickListener productClickListener;
     private int numOfColumns;
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     public ProductAdapter(List<Product> items,
                           RecyclerItemClickListener.ProductRetrofitClickListener clickListener,
@@ -129,7 +131,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
 
         if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
-            holder.price.setText(String.valueOf(currentItem.getPrice()).concat(" ").concat("zł"));
+            holder.price.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())).concat("zł"));
         } else {
             holder.price.setText(DEFAULT_STRING);
         }
