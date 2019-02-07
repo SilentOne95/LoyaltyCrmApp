@@ -51,13 +51,6 @@ public class MapPresenter implements MapContract.Presenter {
     }
 
     @Override
-    public void isProgressBarNeeded(boolean isNeeded) {
-        if (view != null) {
-            view.setProgressBarVisibility(isNeeded);
-        }
-    }
-
-    @Override
     public void switchBottomSheetState(Object object) {
 
         if (view != null) {

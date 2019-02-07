@@ -20,7 +20,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,7 +80,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
-    private ProgressBar mProgressBar;
 
     // BottomSheet PeekHeight Panel views
     private TextView mPanelPlaceTitle, mPanelAddress, mPanelTodayOpenHours;
@@ -94,9 +92,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Map");
-
-        mProgressBar = rootView.findViewById(R.id.progress_bar);
-        mProgressBar.setVisibility(View.VISIBLE);
 
         presenter = new MapPresenter(this, new MapModel());
         presenter.setUpObservable();
@@ -404,9 +399,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         return false;
     }
-
-    @Override
-    public void setProgressBarVisibility(boolean isNeeded) { mProgressBar.setVisibility(View.GONE); }
 
     @Override
     public void onClick(View view) { presenter.switchBottomSheetState(view); }

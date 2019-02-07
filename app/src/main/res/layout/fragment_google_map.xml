@@ -17,13 +17,6 @@
             android:layout_height="match_parent"
             tools:context=".ui.map.GoogleMapFragment" />
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            style="@style/Widget.AppCompat.ProgressBar"/>
-
     </RelativeLayout>
 
     <!-- BottomSheet layout -->
