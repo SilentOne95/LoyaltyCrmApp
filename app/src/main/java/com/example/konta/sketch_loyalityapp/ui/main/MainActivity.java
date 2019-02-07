@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
@@ -172,8 +173,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Set item as selected to persist highlight
         menuItem.setChecked(true).setCheckable(true);
 
-        // Close drawer when item is tapped
-        mDrawerLayout.closeDrawer(GravityCompat.START);
+        // Close drawer after delay when item is tapped
+        new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), 200);
 
         return true;
     }
