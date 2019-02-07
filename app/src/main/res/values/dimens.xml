@@ -65,4 +65,7 @@
     <dimen name="bottom_sheet_tab_height">40dp</dimen>
     <dimen name="vertical_divider_width">1dp</dimen>
 
+    <!-- Notification layout -->
+    <dimen name="notification_layout_height">64dp</dimen>
+
 </resources>

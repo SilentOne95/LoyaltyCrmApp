@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/navigation_header_logo"
-        android:src="@drawable/sellger_logo_portrait"
+        android:src="@drawable/sellger_logo_portrait_white"
         android:contentDescription="@string/navigation_header_logo_desc"
         style="@style/nav_header_logo"/>
 
