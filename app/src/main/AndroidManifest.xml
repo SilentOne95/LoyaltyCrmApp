@@ -33,17 +33,16 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".service.TrackerService"
             android:enabled="true"
             android:exported="true"
-            android:stopWithTask="true"/>
+            android:stopWithTask="true" />
 
         <activity
             android:name=".ui.launch.LaunchActivity"
-            android:theme="@style/AppTheme.Launcher"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,14 +51,14 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:theme="@style/BaseAppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme.NoActionBar" />
         <activity
             android:name=".ui.login.LogInActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.signUp.SignUpActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.website.WebsiteActivity"
             android:screenOrientation="portrait"
@@ -104,7 +103,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -112,7 +110,6 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
     </application>
 
 </manifest>

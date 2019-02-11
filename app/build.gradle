@@ -10,6 +10,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.testtest.runner.AndroidJUnitRunner"
         resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -64,6 +65,9 @@ dependencies {
     // RxJava2
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+
+    // Barcode scanner
+    implementation 'com.google.android.gms:play-services-vision:17.0.2'
 
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.20'

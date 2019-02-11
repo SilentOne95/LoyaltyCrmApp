@@ -16,6 +16,7 @@
 
     <!-- Corner radius -->
     <dimen name="rounded_corner_radius">3dp</dimen>
+    <dimen name="rounded_corner_radius_barcode_scanner">2dp</dimen>
 
     <!-- Grid list item -->
     <dimen name="image_height_one_row">180dp</dimen>
