@@ -69,6 +69,10 @@ dependencies {
     // Barcode scanner
     implementation 'com.google.android.gms:play-services-vision:17.0.2'
 
+    // Barcode generator
+    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.20'
     testImplementation 'junit:junit:4.12'

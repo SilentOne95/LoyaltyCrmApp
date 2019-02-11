@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/grid_item_shadow"
-        tools:context=".barcodeScanner.BarcodeScanner">
+        tools:context=".ui.barcodeScanner.BarcodeScanner">
 
         <TextView
             android:id="@+id/title_text_view"
@@ -148,7 +148,6 @@
             android:textSize="@dimen/big_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>

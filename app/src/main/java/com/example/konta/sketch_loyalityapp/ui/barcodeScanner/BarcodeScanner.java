@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.barcodeScanner;
+package com.example.konta.sketch_loyalityapp.ui.barcodeScanner;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,7 +22,7 @@ public class BarcodeScanner extends BaseFragment implements View.OnClickListener
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_barcode_scanner;
+        return R.layout.fragment_barcode_scanner;
     }
 
     @Override

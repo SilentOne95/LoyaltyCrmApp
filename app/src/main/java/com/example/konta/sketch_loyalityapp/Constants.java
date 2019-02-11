@@ -30,4 +30,9 @@ public final class Constants {
     public static final int BITMAP_HEIGHT_THREE_COLUMNS = 140;
 
     public static final String DEFAULT_STRING = "Not available";
+
+    // Barcode generator
+    public static final int BARCODE_WIDTH = 600;
+    public static final int BARCODE_HEIGHT = 300;
+
 }
