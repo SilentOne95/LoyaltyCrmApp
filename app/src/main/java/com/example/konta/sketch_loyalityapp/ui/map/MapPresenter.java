@@ -28,7 +28,7 @@ public class MapPresenter implements MapContract.Presenter {
     private List<Marker> markerList = null;
     private int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
-    private static PublishSubject<Integer> markerIdSubject = PublishSubject.create();
+    private static PublishSubject<Integer> markerIdSubject;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     MapPresenter(@Nullable MapContract.View view, MapContract.Model model) {
@@ -83,6 +83,7 @@ public class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void setUpObservable() {
+         markerIdSubject = PublishSubject.create();
 
         Observable<Integer> observable = getObservable();
         Observer<Integer> observer = new Observer<Integer>() {
