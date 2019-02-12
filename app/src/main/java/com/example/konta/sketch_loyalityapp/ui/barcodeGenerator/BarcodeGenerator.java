@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,13 +23,12 @@ import java.util.Map;
 import static com.example.konta.sketch_loyalityapp.Constants.BARCODE_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.BARCODE_WIDTH;
 
-public class BarcodeGenerator extends BaseFragment implements View.OnClickListener {
+public class BarcodeGenerator extends BaseFragment {
 
     static final String BARCODE_DATA = "12345678901";
 
     private Bitmap bitmap = null;
     private ImageView outputImage;
-    private Button button;
     private TextView textView;
 
     @Override
@@ -47,14 +45,9 @@ public class BarcodeGenerator extends BaseFragment implements View.OnClickListen
         textView.setText(BARCODE_DATA);
 
         outputImage = rootView.findViewById(R.id.imageView);
-        button = rootView.findViewById(R.id.button);
-        button.setOnClickListener(this);
-    }
 
-    @Override
-    public void onClick(View v) {
         try {
-            bitmap = encodeAsBitmap(BARCODE_DATA, BarcodeFormat.UPC_A, BARCODE_WIDTH, BARCODE_HEIGHT);
+            bitmap = encodeAsBitmap(BARCODE_DATA);
             outputImage.setImageBitmap(bitmap);
             textView.setVisibility(View.VISIBLE);
         } catch (WriterException e) {
@@ -62,7 +55,7 @@ public class BarcodeGenerator extends BaseFragment implements View.OnClickListen
         }
     }
 
-    private Bitmap encodeAsBitmap(String contents, BarcodeFormat format, int imgWidth, int imgHeight) throws WriterException {
+    private Bitmap encodeAsBitmap(String contents) throws WriterException {
         if (contents == null) {
             return null;
         }
@@ -73,7 +66,7 @@ public class BarcodeGenerator extends BaseFragment implements View.OnClickListen
         BitMatrix result;
 
         try {
-            result = writer.encode(contents, format, imgWidth, imgHeight, hints);
+            result = writer.encode(contents, BarcodeFormat.UPC_A, BARCODE_WIDTH, BARCODE_HEIGHT, hints);
         } catch (IllegalArgumentException iae) {
             // Unsupported format
             return null;

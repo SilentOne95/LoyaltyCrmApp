@@ -13,6 +13,7 @@
     <dimen name="mid_text_size">16sp</dimen>
     <dimen name="big_text_size">20sp</dimen>
     <dimen name="very_big_text_size">24sp</dimen>
+    <dimen name="layout_title_text_size">30sp</dimen>
 
     <!-- Corner radius -->
     <dimen name="rounded_corner_radius">3dp</dimen>
@@ -68,5 +69,12 @@
 
     <!-- Notification layout -->
     <dimen name="notification_layout_height">64dp</dimen>
+
+    <!-- Barcode scanner layout -->
+    <dimen name="barcode_scanner_layout_container_padding">12dp</dimen>
+    <dimen name="barcode_scanner_instruction_text_size">18sp</dimen>
+    <dimen name="barcode_scanner_instruction_spacing">4dp</dimen>
+    <dimen name="barcode_scanner_button_width">100dp</dimen>
+    <dimen name="barcode_scanner_button_height">40dp</dimen>
 
 </resources>

@@ -358,7 +358,7 @@
     </style>
 
     <!-- Bottom Sheet first Tab: Contact Info -->
-    <style name="bottom_sheet_contact_us_text"  parent="basic_bottom_sheet_text">
+    <style name="bottom_sheet_contact_us_text" parent="basic_bottom_sheet_text">
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginStart">@dimen/small_value</item>
         <item name="android:layout_marginTop">@dimen/very_big_value</item>
@@ -649,12 +649,6 @@
         <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
-    <!-- wrap_content layout size -->
-    <style name="layout_wrap_content">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
     <!-- notification layout -->
     <style name="notification_image_view">
         <item name="android:layout_width">wrap_content</item>
@@ -678,8 +672,83 @@
         <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
-    <style name="switch_barcode_scanner" parent="Theme.AppCompat.Light">
+    <!-- barcode scanner layout -->
+    <style name="barcode_scanner_title" parent="layout_wrap_content">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/layout_title_text_size</item>
+    </style>
+
+    <style name="barcode_scanner_instruction_text" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/barcode_scanner_instruction_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="barcode_scanner_instruction">
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:layout_marginBottom">@dimen/small_value</item>
+        <item name="android:lineSpacingExtra">@dimen/barcode_scanner_instruction_spacing</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
+
+    <style name="barcode_scanner_scan_result">
+        <item name="android:layout_margin">@dimen/mid_value</item>
+        <item name="android:paddingStart">@dimen/very_big_value</item>
+        <item name="android:paddingEnd">@dimen/very_big_value</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rounded_corners_barcode_scanner</item>
+    </style>
+
+    <style name="barcode_scanner_switch_one_text" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginBottom">@dimen/small_value</item>
+        <item name="android:paddingEnd">@dimen/small_value</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="barcode_scanner_switch_two_text" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginBottom">@dimen/big_value</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="switch_button_barcode_scanner" parent="Theme.AppCompat.Light">
+        <item name="android:scaleX">1.1</item>
+        <item name="android:scaleY">1.1</item>
         <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="barcode_scanner_scan_button">
+        <item name="android:layout_width">@dimen/barcode_scanner_button_width</item>
+        <item name="android:layout_height">@dimen/barcode_scanner_button_height</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:layout_marginBottom">@dimen/mid_value</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/rounded_corners_button</item>
+    </style>
+
+    <!-- wrap_content layout size -->
+    <style name="layout_wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>

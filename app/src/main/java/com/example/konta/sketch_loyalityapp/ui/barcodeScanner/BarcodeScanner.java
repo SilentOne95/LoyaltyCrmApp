@@ -28,10 +28,10 @@ public class BarcodeScanner extends BaseFragment implements View.OnClickListener
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        autoFocusSwitch = rootView.findViewById(R.id.switch_one);
-        flashSwitch = rootView.findViewById(R.id.switch_two);
+        autoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
+        flashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);
 
-        scanButton = rootView.findViewById(R.id.scan_button);
+        scanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
         scanButton.setOnClickListener(this);
     }
 
