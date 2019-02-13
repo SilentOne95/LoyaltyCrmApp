@@ -29,7 +29,7 @@ public class Marker implements ClusterItem {
     private String address;
     @SerializedName("post_code")
     @Expose
-    private Integer postCode;
+    private String postCode;
     @SerializedName("city")
     @Expose
     private String city;
@@ -97,11 +97,11 @@ public class Marker implements ClusterItem {
         this.address = address;
     }
 
-    public Integer getPostCode() {
+    public String getPostCode() {
         return postCode;
     }
 
-    public void setPostCode(Integer postCode) {
+    public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
 

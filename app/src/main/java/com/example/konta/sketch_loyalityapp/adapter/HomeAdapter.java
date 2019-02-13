@@ -20,9 +20,8 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_THREE_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_SINGLE_COLUMN;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_THREE_COLUMNS;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
@@ -79,38 +78,35 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final MenuComponent currentItem = listOfItems.get(position);
-        int cornerRadius, imageHeight;
+        int cornerRadius;
 
         switch (numOfColumns) {
             case 1:
                 cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
-                imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
                 break;
             case 2:
                 cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
-                imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
                 break;
             case 3:
                 cornerRadius = BITMAP_CORNER_RADIUS_THREE_COLUMNS;
-                imageHeight = BITMAP_HEIGHT_THREE_COLUMNS;
                 break;
             default:
                 cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
-                imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
                 break;
         }
 
-        if (currentItem.getImage() != null && !currentItem.getImage().isEmpty()) {
+        if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
             // TODO: Upload images to server
             Picasso.get()
                     .load("")
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(holder.imageView.getWidth(),imageHeight)
+                    .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);
         } else {
             Picasso.get()
-                    .load(R.drawable.image_not_available)
+                    .load(R.drawable.sample_home)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
+                    .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);
         }
 
@@ -121,12 +117,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         }
 
         holder.descriptionText.setVisibility(View.GONE);
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                homeClickListener.onItemHomeClick(listOfItems.get(position), position);
-            }
-        });
+        holder.button.setOnClickListener(view ->
+                homeClickListener.onItemHomeClick(listOfItems.get(position), position));
     }
 
     @Override

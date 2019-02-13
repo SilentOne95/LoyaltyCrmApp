@@ -384,9 +384,9 @@
     </style>
 
 
-    <!-- General grid list item // one row -->
-    <style name="grid_item_image_one_row">
-        <item name="android:layout_height">@dimen/image_height_one_row</item>
+    <!-- General grid list item -->
+    <style name="grid_item_image">
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:adjustViewBounds">true</item>
     </style>
@@ -516,13 +516,6 @@
         <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
-
-    <!-- General grid list item // two rows -->
-    <style name="grid_item_image_two_rows">
-        <item name="android:layout_height">@dimen/image_height_two_rows</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:adjustViewBounds">true</item>
-    </style>
 
     <!-- Grid list item Coupon // two rows -->
     <style name="grid_item_coupon_marker_tag_two_rows">

@@ -23,9 +23,8 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_THREE_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_SINGLE_COLUMN;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_THREE_COLUMNS;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> {
@@ -109,39 +108,35 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Coupon currentItem = listOfItems.get(position);
-        int cornerRadius, imageHeight;
+        int cornerRadius;
 
         switch (numOfColumns) {
             case 1:
                 cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
-                imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
                 break;
             case 2:
                 cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
-                imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
                 break;
             case 3:
                 cornerRadius = BITMAP_CORNER_RADIUS_THREE_COLUMNS;
-                imageHeight = BITMAP_HEIGHT_THREE_COLUMNS;
                 break;
             default:
                 cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
-                imageHeight = BITMAP_HEIGHT_SINGLE_COLUMN;
                 break;
         }
 
-        if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty()) {
+        if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
             // TODO: Upload images to server
             Picasso.get()
                     .load("")
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(holder.imageView.getWidth(), imageHeight)
+                    .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);
         } else {
             Picasso.get()
-                    .load(R.drawable.image_not_available)
+                    .load(R.drawable.sample_coupon)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(holder.imageView.getWidth(), imageHeight)
+                    .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);
         }
 

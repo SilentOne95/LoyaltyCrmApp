@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/grid_item_image"
-        style="@style/grid_item_image_two_rows"
+        style="@style/grid_item_image"
         android:contentDescription="@string/grid_list_item_content_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
