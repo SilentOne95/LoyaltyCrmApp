@@ -83,7 +83,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         if (coupon.getImage() != null && !coupon.getImage().trim().isEmpty()) {
             // TODO: Upload images to server
         } else {
-            Picasso.get().load(R.drawable.image_not_available).into(couponImage);
+            Picasso.get().load(R.drawable.sample_coupon).into(couponImage);
         }
 
         if (coupon.getReductionAmount() != null && !coupon.getReductionAmount().trim().isEmpty()) {

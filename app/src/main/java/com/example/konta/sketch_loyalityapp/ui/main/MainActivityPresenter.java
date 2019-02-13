@@ -7,11 +7,14 @@ import android.util.SparseArray;
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
+import com.example.konta.sketch_loyalityapp.ui.barcodeGenerator.BarcodeGenerator;
+import com.example.konta.sketch_loyalityapp.ui.barcodeScanner.BarcodeScanner;
 import com.example.konta.sketch_loyalityapp.ui.coupons.CouponsFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
 import com.example.konta.sketch_loyalityapp.ui.login.LogInActivity;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomeFragment;
+import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.contactInfo.ContactInfoFragment;
 import com.example.konta.sketch_loyalityapp.ui.products.ProductsFragment;
 import com.example.konta.sketch_loyalityapp.ui.contact.ContactActivity;
 import com.example.konta.sketch_loyalityapp.ui.terms.TermsConditionsActivity;
@@ -101,6 +104,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
             case "contact":
                 iconName = "ic_menu_phone";
                 break;
+            case "scanner":
+                iconName = "ic_menu_barcode_scan";
+                break;
+            case "barcode":
+                iconName = "ic_menu_account";
+                break;
             default:
                 iconName = "ic_menu_script";
                 break;
@@ -150,6 +159,14 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                     break;
                 case "contact":
                     view.setActivity(ContactActivity.class);
+                    break;
+                case "scanner":
+                    view.setFragment(new BarcodeScanner());
+                    break;
+                case "barcode":
+                    view.setFragment(new BarcodeGenerator());
+                    break;
+                default:
                     break;
             }
         }

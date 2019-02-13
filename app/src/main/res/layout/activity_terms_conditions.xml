@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/terms_conditions_text_view"
+        android:lineSpacingExtra="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"

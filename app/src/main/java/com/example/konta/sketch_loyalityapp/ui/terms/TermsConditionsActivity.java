@@ -24,7 +24,7 @@ public class TermsConditionsActivity extends BaseActivity implements TermsContra
         setTitle("Terms & Conditions");
 
         presenter = new TermsPresenter(this, new TermsModel());
-        presenter.requestDataFromServer(10);
+        presenter.requestDataFromServer(1);
     }
 
     @Override

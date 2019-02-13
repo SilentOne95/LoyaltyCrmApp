@@ -151,14 +151,14 @@ public class MainActivityModel implements MainActivityContract.Model {
 
         if (listOfItems != null) {
             for (MenuComponent component : listOfItems) {
-                if (component.getList().equals("menu")) {
+                if (component.getList().equals("menu") && !component.getIsHomePage().equals(1)) {
                     navDrawerArray.append(i, component);
                     i++;
                 }
             }
 
             for (MenuComponent component : listOfItems) {
-                if (component.getList().equals("submenu")) {
+                if (component.getList().equals("submenu") && !component.getIsHomePage().equals(1)) {
                     navDrawerArray.append(i, component);
                     i++;
                 }

@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.website;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,13 +15,16 @@ public class WebsiteActivity extends BaseActivity {
     @Override
     protected int getLayout() { return R.layout.activity_website; }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Website");
+        setTitle("Our website");
 
         WebView mWebView = findViewById(R.id.webview);
         mWebView.setWebViewClient(new WebViewClient());
-        mWebView.loadUrl("https://www.google.com");
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.loadUrl("http://kadeor.com/");
     }
 }
