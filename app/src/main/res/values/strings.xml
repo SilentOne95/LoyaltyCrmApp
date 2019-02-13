@@ -25,6 +25,7 @@
 
     <!-- Fragment home strings -->
     <string name="check_offers_text">Check offers!</string>
+    <string name="something_went_wrong_text">Ooops! Something went wrong. \nPlease check your internet connection</string>
 
     <!-- Fragment coupons and products strings -->
     <string name="no_coupons_text">Unfortunately, \nyou do not have active coupons\n :(</string>

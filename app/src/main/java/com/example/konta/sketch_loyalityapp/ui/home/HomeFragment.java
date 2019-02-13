@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.konta.sketch_loyalityapp.adapter.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.adapter.RecyclerItemClickListener;
@@ -23,6 +24,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     HomePresenter presenter;
 
     private RecyclerView recyclerView;
+    private View emptyStateView;
+    private ProgressBar progressBar;
 
     @Override
     protected int getLayout() { return R.layout.fragment_home; }
@@ -33,12 +36,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
         getActivity().setTitle("Home");
 
-        // Retrofit
+        progressBar = rootView.findViewById(R.id.progress_bar_home);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
+        emptyStateView = rootView.findViewById(R.id.empty_state_home_container);
+        emptyStateView.setVisibility(View.GONE);
+
         presenter = new HomePresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
-
-        // Adapter
-        recyclerView = rootView.findViewById(R.id.recycler_view);
     }
 
     private RecyclerItemClickListener.HomeRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.HomeRetrofitClickListener() {
@@ -51,9 +55,36 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void setUpAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns) {
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
-        CustomItemDecoration itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setAdapter(new HomeAdapter(menuComponentList, recyclerItemClickListener, numOfColumns));
+        if (menuComponentList.size() == 0) {
+            setUpEmptyStateView(true);
+        } else {
+            setUpEmptyStateView(false);
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
+
+            CustomItemDecoration itemDecoration;
+            if (numOfColumns == 1) {
+                itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
+            } else {
+                itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
+            }
+            recyclerView.addItemDecoration(itemDecoration);
+            recyclerView.setAdapter(new HomeAdapter(menuComponentList, recyclerItemClickListener, numOfColumns));
+        }
+    }
+
+    @Override
+    public void setUpEmptyStateView(boolean isNeeded) {
+        if (isNeeded) {
+            recyclerView.setVisibility(View.GONE);
+            emptyStateView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyStateView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setProgressBarVisibility(boolean isNeeded) {
+        progressBar.setVisibility(View.GONE);
     }
 }

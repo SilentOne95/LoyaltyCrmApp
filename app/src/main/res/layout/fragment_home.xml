@@ -23,8 +23,32 @@
         android:text="@string/check_offers_text"
         style="@style/home_info_text_view"/>
 
+    <ProgressBar
+        android:id="@+id/progress_bar_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mid_value"
+        android:layout_gravity="center_horizontal"
+        style="@style/Widget.AppCompat.ProgressBar"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         style="@style/basic_recycler_view_style"/>
+
+    <LinearLayout
+        android:id="@+id/empty_state_home_container"
+        style="@style/coupons_empty_state_container">
+
+        <TextView
+            android:id="@+id/empty_state_coupons_text"
+            android:text="@string/something_went_wrong_text"
+            style="@style/coupons_empty_state_text_one"/>
+
+        <TextView
+            android:id="@+id/empty_state_coupons_text_two"
+            android:text="@string/try_again_later_text"
+            style="@style/coupons_empty_state_text_two"/>
+
+    </LinearLayout>
 
 </LinearLayout>

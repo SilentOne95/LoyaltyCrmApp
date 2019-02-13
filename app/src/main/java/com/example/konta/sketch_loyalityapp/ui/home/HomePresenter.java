@@ -39,6 +39,13 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
+    public void isProgressBarNeeded(boolean isNeeded) {
+        if (view != null) {
+            view.setProgressBarVisibility(isNeeded);
+        }
+    }
+
+    @Override
     public void passIdOfSelectedView(int viewId) {
         markerIdSubject.onNext(viewId);
     }

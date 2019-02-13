@@ -9,11 +9,11 @@ import com.example.konta.sketch_loyalityapp.network.Api;
 import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivityModel implements MainActivityContract.Model {
@@ -28,13 +28,28 @@ public class MainActivityModel implements MainActivityContract.Model {
     @Override
     public Disposable fetchDataFromServer(MainActivityPresenter presenter) {
         this.presenter = presenter;
-        return getObservable().subscribeWith(getObserverMainActivity());
+        return getObservableTimer()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::refactorFetchedDataForNavDrawer, throwable -> {});
     }
 
     @Override
     public Disposable fetchDataFromServer(HomePresenter presenter) {
         homePresenter = presenter;
-        return getObservable().subscribeWith(getObserverHomeView());
+
+        return getObservableTimer()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(componentList -> {
+                    refactorFetchedDataForHomeView(componentList);
+                    presenter.isProgressBarNeeded(false);
+                }, throwable -> presenter.isProgressBarNeeded(false));
+    }
+
+    private Single<List<MenuComponent>> getObservableTimer() {
+        return Single.zip(getObservable(), Single.timer(1000, TimeUnit.MILLISECONDS),
+                (componentList, timer) -> componentList);
     }
 
     private Single<List<MenuComponent>> getObservable() {
@@ -42,30 +57,6 @@ public class MainActivityModel implements MainActivityContract.Model {
                 .getMenuComponents()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private DisposableSingleObserver<List<MenuComponent>> getObserverMainActivity() {
-        return new DisposableSingleObserver<List<MenuComponent>>() {
-            @Override
-            public void onSuccess(List<MenuComponent> menuComponents) {
-                refactorFetchedDataForNavDrawer(menuComponents);
-            }
-
-            @Override
-            public void onError(Throwable e) { }
-        };
-    }
-
-    private DisposableSingleObserver<List<MenuComponent>> getObserverHomeView() {
-        return new DisposableSingleObserver<List<MenuComponent>>() {
-            @Override
-            public void onSuccess(List<MenuComponent> menuComponents) {
-                refactorFetchedDataForHomeView(menuComponents);
-            }
-
-            @Override
-            public void onError(Throwable e) { }
-        };
     }
 
     @Override
