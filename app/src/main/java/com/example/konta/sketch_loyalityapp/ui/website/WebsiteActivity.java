@@ -19,7 +19,7 @@ public class WebsiteActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Our website");
+        setTitle("Our Website");
 
         WebView mWebView = findViewById(R.id.webview);
         mWebView.setWebViewClient(new WebViewClient());

@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:clipToPadding="false"
-    android:clipChildren="false"
     tools:context=".ui.home.HomeFragment">
 
-    <ImageView
-        android:id="@+id/special_offer_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/fragment_home_special_image_desc"
-        android:src="@drawable/image_offer"
-        style="@style/home_special_offer_image"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:clipChildren="false">
 
-    <TextView
-        android:id="@+id/info_text_view"
-        android:text="@string/check_offers_text"
-        style="@style/home_info_text_view"/>
+        <ImageView
+            android:id="@+id/special_offer_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/fragment_home_special_image_desc"
+            android:src="@drawable/image_offer"
+            style="@style/home_special_offer_image"/>
+
+        <TextView
+            android:id="@+id/info_text_view"
+            android:text="@string/check_offers_text"
+            style="@style/home_info_text_view"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            style="@style/basic_recycler_view_style"/>
+
+        <LinearLayout
+            android:id="@+id/empty_state_home_container"
+            style="@style/coupons_empty_state_container">
+
+            <TextView
+                android:id="@+id/empty_state_coupons_text"
+                android:text="@string/something_went_wrong_text"
+                style="@style/coupons_empty_state_text_one"/>
+
+            <TextView
+                android:id="@+id/empty_state_coupons_text_two"
+                android:text="@string/try_again_later_text"
+                style="@style/coupons_empty_state_text_two"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mid_value"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"
         style="@style/Widget.AppCompat.ProgressBar"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        style="@style/basic_recycler_view_style"/>
-
-    <LinearLayout
-        android:id="@+id/empty_state_home_container"
-        style="@style/coupons_empty_state_container">
-
-        <TextView
-            android:id="@+id/empty_state_coupons_text"
-            android:text="@string/something_went_wrong_text"
-            style="@style/coupons_empty_state_text_one"/>
-
-        <TextView
-            android:id="@+id/empty_state_coupons_text_two"
-            android:text="@string/try_again_later_text"
-            style="@style/coupons_empty_state_text_two"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

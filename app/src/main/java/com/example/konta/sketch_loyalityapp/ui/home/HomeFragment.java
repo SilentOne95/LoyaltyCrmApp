@@ -7,7 +7,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.adapter.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.adapter.RecyclerItemClickListener;
@@ -23,6 +25,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     HomePresenter presenter;
 
+    private ImageView specialOfferImage;
+    private TextView specialOfferText;
     private RecyclerView recyclerView;
     private View emptyStateView;
     private ProgressBar progressBar;
@@ -35,6 +39,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Home");
+
+        specialOfferImage = rootView.findViewById(R.id.special_offer_image);
+        specialOfferImage.setVisibility(View.GONE);
+        specialOfferText = rootView.findViewById(R.id.info_text_view);
+        specialOfferText.setVisibility(View.GONE);
 
         progressBar = rootView.findViewById(R.id.progress_bar_home);
         recyclerView = rootView.findViewById(R.id.recycler_view);
@@ -59,6 +68,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             setUpEmptyStateView(true);
         } else {
             setUpEmptyStateView(false);
+
+            specialOfferText.setVisibility(View.VISIBLE);
+            specialOfferImage.setVisibility(View.VISIBLE);
+
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
 
             CustomItemDecoration itemDecoration;
