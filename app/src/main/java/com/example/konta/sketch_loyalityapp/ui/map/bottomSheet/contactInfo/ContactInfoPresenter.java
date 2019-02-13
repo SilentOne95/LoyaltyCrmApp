@@ -71,7 +71,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
     @Override
     public void formatContactInfoData(List<Marker> markerList) {
-        String phoneNumber, emailAddress;
+        String phoneNumber, emailAddress, websiteAddress;
         int markerPosition = 0;
 
         for (int i = 0; i < markerList.size(); i++) {
@@ -83,8 +83,9 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
         phoneNumber = formatPhoneNumber(markerList.get(markerPosition));
         emailAddress = formatEmailAddress(markerList.get(markerPosition));
+        websiteAddress = formatWebsiteAddress(markerList.get(markerPosition));
 
-        passDataToView(phoneNumber, emailAddress);
+        passDataToView(phoneNumber, emailAddress, websiteAddress);
     }
 
     @Override
@@ -133,9 +134,20 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public void passDataToView(String phoneNumber, String emailAddress) {
+    public String formatWebsiteAddress(Marker marker) {
+        String websiteAddress = DEFAULT_STRING;
+
+        if (marker.getWebsite() != null && !marker.getWebsite().trim().isEmpty()) {
+            websiteAddress = marker.getWebsite();
+        }
+
+        return websiteAddress;
+    }
+
+    @Override
+    public void passDataToView(String phoneNumber, String emailAddress, String websiteAddress) {
         if (view != null) {
-            view.setUpViewsWithData(phoneNumber, emailAddress);
+            view.setUpViewsWithData(phoneNumber, emailAddress, websiteAddress);
         }
     }
 }

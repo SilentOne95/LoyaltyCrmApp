@@ -158,11 +158,16 @@ public class MapPresenter implements MapContract.Presenter {
             for (int i = 0; i < marker.getOpenHours().size(); i++) {
                 if (marker.getOpenHours().get(i).getDayName().equals(getCurrentDay())) {
                     OpenHour obj = marker.getOpenHours().get(i);
-                    openHours = "Open:" + " " +
-                            obj.getOpenHour() + ":" +
-                            obj.getOpenMinute() + " - " +
-                            obj.getCloseHour() + ":" +
-                            obj.getCloseMinute();
+                    if (!obj.getOpenHour().equals("None") && !obj.getOpenMinute().equals("None") &&
+                            !obj.getCloseHour().equals("None") && !obj.getCloseMinute().equals("None")){
+                        openHours = "Today open:" + " " +
+                                obj.getOpenHour() + ":" +
+                                obj.getOpenMinute() + " - " +
+                                obj.getCloseHour() + ":" +
+                                obj.getCloseMinute();
+                    } else {
+                        openHours = "Today is closed";
+                    }
 
                     break;
                 }

@@ -58,6 +58,7 @@
     <string name="contact_us_text">In case of any questions,\n please contact us:</string>
     <string name="contact_info_phone_number_text">Phone:</string>
     <string name="contact_info_email_text">E-mail:</string>
+    <string name="contact_info_website_text">Website:</string>
 
     <!-- Image content descriptions -->
     <string name="navigation_header_logo_desc">Navigation header company logo</string>
@@ -76,10 +77,6 @@
     <!-- MenuComponent strings -->
     <string name="first_fragment">Open hours</string>
     <string name="second_fragment">Contact info</string>
-
-    <!-- Bottom Sheet contact info tab temporary strings -->
-    <string name="contact_info_phone_number">+48 123 456 789</string>
-    <string name="contact_info_email">email@address.com</string>
 
     <!-- Bottom Sheet peek Panel default info -->
     <string name="bottom_sheet_default_place_title">Place no.</string>

@@ -9,7 +9,7 @@ public interface BottomSheetContract {
 
     interface ContactInfoView {
 
-        void setUpViewsWithData(String phoneNumber, String emailAddress);
+        void setUpViewsWithData(String phoneNumber, String emailAddress, String websiteAddress);
     }
 
     interface OpeningHoursView {
@@ -26,7 +26,8 @@ public interface BottomSheetContract {
         void formatContactInfoData(List<Marker> markerList);
         String formatPhoneNumber(Marker marker);
         String formatEmailAddress(Marker marker);
-        void passDataToView(String phoneNumber, String emailAddress);
+        String formatWebsiteAddress(Marker marker);
+        void passDataToView(String phoneNumber, String emailAddress, String websiteAddress);
     }
 
     interface OpeningHoursPresenter {

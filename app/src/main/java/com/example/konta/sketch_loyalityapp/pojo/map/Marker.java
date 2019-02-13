@@ -39,6 +39,9 @@ public class Marker implements ClusterItem {
     @SerializedName("phone_number")
     @Expose
     private String phoneNumber;
+    @SerializedName("website")
+    @Expose
+    private String website;
     @SerializedName("open_hours")
     @Expose
     private List<OpenHour> openHours = null;
@@ -127,6 +130,14 @@ public class Marker implements ClusterItem {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public List<OpenHour> getOpenHours() {
