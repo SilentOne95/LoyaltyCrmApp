@@ -2,9 +2,12 @@ package com.example.konta.sketch_loyalityapp.ui.main;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenuView;
@@ -19,6 +22,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
@@ -45,7 +49,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     GoogleMapFragment mGoogleMapFragment;
 
     // Field that stores layout type of clicked menu item
-    private String layoutType;
+    private String layoutType = null;
 
     public static String PACKAGE_NAME;
 
@@ -84,11 +88,32 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mNavigationView.setNavigationItemSelectedListener(this);
         hideNavDrawerScrollbar();
 
-        // Using Retrofit to set up NavDrawer
         presenter = new MainActivityPresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
         presenter.displayHomeScreen();
         presenter.setUpObservableHomeAdapter();
+
+        // Using Retrofit to set up NavDrawer
+        if (checkInternetConnection()) {
+            Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    protected boolean checkInternetConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
+    private void showInternetConnectionResult() {
+        if (checkInternetConnection()) {
+            Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -195,6 +220,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Set layoutType to null to avoid creating new instance of fragment, when closing nav drawer
         // by clicking next to the view
         layoutType = null;
+        showInternetConnectionResult();
     }
 
     @Override
