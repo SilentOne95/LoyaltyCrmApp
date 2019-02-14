@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorFragmentBackground"
+    android:background="@color/colorWhite"
     tools:context=".ui.terms.TermsConditionsActivity">
 
-    <TextView
-        android:id="@+id/terms_conditions_text_view"
-        android:lineSpacingExtra="4dp"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:padding="@dimen/mid_value"/>
+        android:layout_centerInParent="true" />
 
-</ScrollView>
+    <ScrollView
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/terms_conditions_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="4dp"
+            android:padding="@dimen/mid_value"
+            android:textColor="@color/colorBlack" />
+
+    </ScrollView>
+
+</RelativeLayout>

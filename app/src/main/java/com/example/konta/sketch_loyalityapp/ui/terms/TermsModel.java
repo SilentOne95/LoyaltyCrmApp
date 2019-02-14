@@ -4,10 +4,11 @@ import com.example.konta.sketch_loyalityapp.network.Api;
 import com.example.konta.sketch_loyalityapp.network.RetrofitClient;
 import com.example.konta.sketch_loyalityapp.pojo.staticPage.Page;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class TermsModel implements TermsContract.Model {
@@ -17,7 +18,18 @@ public class TermsModel implements TermsContract.Model {
     @Override
     public Disposable fetchDataFromServer(TermsPresenter presenter, int pageId) {
         this.presenter = presenter;
-        return getObservable(pageId).subscribeWith(getObserver());
+        return getObservableTimer(pageId)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(page -> {
+                    presenter.passDataToView(page);
+                    presenter.hideProgressBar();
+                }, throwable -> presenter.hideProgressBar());
+    }
+
+    private Single<Page> getObservableTimer(int pageId) {
+        return Single.zip(getObservable(pageId), Single.timer(1000, TimeUnit.MILLISECONDS),
+                (page, timer) -> page);
     }
 
     private Single<Page> getObservable(int pageId) {
@@ -25,17 +37,5 @@ public class TermsModel implements TermsContract.Model {
                 .getStaticPage(pageId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private DisposableSingleObserver<Page> getObserver() {
-        return new DisposableSingleObserver<Page>() {
-            @Override
-            public void onSuccess(Page page) {
-                presenter.passDataToView(page);
-            }
-
-            @Override
-            public void onError(Throwable e) { }
-        };
     }
 }

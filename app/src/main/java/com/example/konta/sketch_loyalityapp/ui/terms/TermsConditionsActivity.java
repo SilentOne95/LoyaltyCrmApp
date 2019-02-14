@@ -2,6 +2,8 @@ package com.example.konta.sketch_loyalityapp.ui.terms;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
@@ -14,6 +16,9 @@ public class TermsConditionsActivity extends BaseActivity implements TermsContra
 
     TermsPresenter presenter;
 
+    private ProgressBar progressBar;
+    private View layoutContainer;
+
     @Override
     protected int getLayout() { return R.layout.activity_terms_conditions; }
 
@@ -23,8 +28,18 @@ public class TermsConditionsActivity extends BaseActivity implements TermsContra
 
         setTitle("Terms & Conditions");
 
+        layoutContainer = findViewById(R.id.layout_container);
+        layoutContainer.setVisibility(View.GONE);
+        progressBar = findViewById(R.id.progress_bar);
+
         presenter = new TermsPresenter(this, new TermsModel());
         presenter.requestDataFromServer(1);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+        layoutContainer.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -27,6 +27,13 @@ public class TermsPresenter implements TermsContract.Presenter {
     }
 
     @Override
+    public void hideProgressBar() {
+        if (view != null) {
+            view.hideProgressBar();
+        }
+    }
+
+    @Override
     public void passDataToView(Page page) {
         if (view != null) {
             view.setUpViewWithData(page);

@@ -8,12 +8,14 @@ public interface TermsContract {
 
     interface View {
 
+        void hideProgressBar();
         void setUpViewWithData(Page page);
     }
 
     interface Presenter {
 
         void requestDataFromServer(int pageId);
+        void hideProgressBar();
         void passDataToView(Page page);
     }
 
