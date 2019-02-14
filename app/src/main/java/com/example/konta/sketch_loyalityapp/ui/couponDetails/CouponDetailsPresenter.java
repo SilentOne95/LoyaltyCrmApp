@@ -40,6 +40,13 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter {
     }
 
     @Override
+    public void isProgressBarNeeded(boolean isNeeded) {
+        if (view != null) {
+            view.changeProgressBarVisibility(isNeeded);
+        }
+    }
+
+    @Override
     public String formatDateString(String dateString) {
         String formattedDate = null;
 

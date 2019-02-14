@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
@@ -32,12 +33,14 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     CouponDetailsPresenter presenter;
 
-    Button showCouponCodeButton;
-    GradientDrawable backgroundButton;
-    Spannable staticCodeText, promoCodeText;
+    private Button showCouponCodeButton;
+    private GradientDrawable backgroundButton;
+    private Spannable staticCodeText, promoCodeText;
+    private View layoutContainer;
 
-    ImageView couponImage;
-    TextView couponMarker, couponDate, couponTitle, couponNewPrice, couponBasicPrice, couponDescription;
+    private ImageView couponImage;
+    private TextView couponMarker, couponDate, couponTitle, couponNewPrice, couponBasicPrice, couponDescription;
+    private ProgressBar progressBar;
 
     private int couponId;
     private String couponCode;
@@ -58,6 +61,10 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             couponId = extras.getInt("EXTRA_ELEMENT_ID");
         }
 
+        layoutContainer = findViewById(R.id.layout_container);
+        layoutContainer.setVisibility(View.GONE);
+        progressBar = findViewById(R.id.progress_bar);
+
         couponImage = findViewById(R.id.imageView);
         couponMarker = findViewById(R.id.discount_marker_text_view);
         couponDate = findViewById(R.id.valid_date_text_view);
@@ -76,6 +83,12 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
         presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
         presenter.requestDataFromServer(couponId);
+    }
+
+    @Override
+    public void changeProgressBarVisibility(boolean isNeeded) {
+        layoutContainer.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
