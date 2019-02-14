@@ -4,10 +4,11 @@ import com.example.konta.sketch_loyalityapp.network.Api;
 import com.example.konta.sketch_loyalityapp.network.RetrofitClient;
 import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class ProductDetailsModel implements ProductDetailsContract.Model {
@@ -17,7 +18,19 @@ public class ProductDetailsModel implements ProductDetailsContract.Model {
     @Override
     public Disposable fetchDataFromServer(ProductDetailsPresenter presenter, int productId) {
         this.presenter = presenter;
-        return getObservable(productId).subscribeWith(getObserver());
+
+        return getObservableTimer(productId)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(product -> {
+                    presenter.hideProgressBar();
+                    presenter.passDataToView(product);
+                }, throwable -> presenter.hideProgressBar());
+    }
+
+    private Single<Product> getObservableTimer(int productId) {
+        return Single.zip(getObservable(productId), Single.timer(1000, TimeUnit.MILLISECONDS),
+                ((product, timer) -> product));
     }
 
     private Single<Product> getObservable(int productId) {
@@ -25,17 +38,5 @@ public class ProductDetailsModel implements ProductDetailsContract.Model {
                 .getSingleProduct(productId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private DisposableSingleObserver<Product> getObserver() {
-        return new DisposableSingleObserver<Product>() {
-            @Override
-            public void onSuccess(Product product) {
-                presenter.passDataToView(product);
-            }
-
-            @Override
-            public void onError(Throwable e) { }
-        };
     }
 }

@@ -3,7 +3,9 @@ package com.example.konta.sketch_loyalityapp.ui.productDetails;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
@@ -21,8 +23,10 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
     ProductDetailsPresenter presenter;
 
-    ImageView productImage;
-    TextView productTitle, productPrice, productDescription;
+    private ImageView productImage;
+    private TextView productTitle, productPrice, productDescription;
+    private ProgressBar progressBar;
+    private View layoutContainer;
 
     private int productId;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -42,6 +46,10 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             productId = extras.getInt("EXTRA_ELEMENT_ID");
         }
 
+        layoutContainer = findViewById(R.id.layout_container);
+        layoutContainer.setVisibility(View.GONE);
+        progressBar = findViewById(R.id.progress_bar);
+
         productImage = findViewById(R.id.imageView);
         productTitle = findViewById(R.id.product_title_text_view);
         productPrice = findViewById(R.id.price_amount_text_view);
@@ -49,6 +57,12 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
         presenter = new ProductDetailsPresenter(this, new ProductDetailsModel());
         presenter.requestDataFromServer(productId);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        layoutContainer.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

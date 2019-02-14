@@ -8,6 +8,7 @@ public interface ProductDetailsContract {
 
     interface View {
 
+        void hideProgressBar();
         void setUpViewWithData(Product product);
     }
 
@@ -15,6 +16,7 @@ public interface ProductDetailsContract {
 
         void requestDataFromServer(int productId);
         void passDataToView(Product product);
+        void hideProgressBar();
     }
 
     interface Model {

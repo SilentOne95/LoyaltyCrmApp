@@ -33,4 +33,11 @@ public class ProductDetailsPresenter implements ProductDetailsContract.Presenter
             view.setUpViewWithData(product);
         }
     }
+
+    @Override
+    public void hideProgressBar() {
+        if (view != null) {
+            view.hideProgressBar();
+        }
+    }
 }
