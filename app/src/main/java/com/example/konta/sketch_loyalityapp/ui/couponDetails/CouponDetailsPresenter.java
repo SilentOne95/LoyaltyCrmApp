@@ -40,9 +40,9 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter {
     }
 
     @Override
-    public void isProgressBarNeeded(boolean isNeeded) {
+    public void hideProgressBar() {
         if (view != null) {
-            view.changeProgressBarVisibility(isNeeded);
+            view.hideProgressBar();
         }
     }
 

@@ -94,7 +94,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     }
 
     @Override
-    public void setProgressBarVisibility(boolean isNeeded) {
+    public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
     }
 }

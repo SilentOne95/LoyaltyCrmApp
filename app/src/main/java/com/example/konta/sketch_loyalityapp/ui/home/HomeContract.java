@@ -10,14 +10,14 @@ public interface HomeContract {
 
         void setUpAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns);
         void setUpEmptyStateView(boolean isNeeded);
-        void setProgressBarVisibility(boolean isNeeded);
+        void hideProgressBar();
     }
 
     interface Presenter {
 
         void requestDataFromServer();
         void passDataToAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns);
-        void isProgressBarNeeded(boolean isNeeded);
+        void hideProgressBar();
 
         void passIdOfSelectedView(int viewId);
     }

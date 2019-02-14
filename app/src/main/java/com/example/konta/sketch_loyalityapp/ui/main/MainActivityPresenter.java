@@ -14,7 +14,6 @@ import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
 import com.example.konta.sketch_loyalityapp.ui.login.LogInActivity;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomeFragment;
-import com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.contactInfo.ContactInfoFragment;
 import com.example.konta.sketch_loyalityapp.ui.products.ProductsFragment;
 import com.example.konta.sketch_loyalityapp.ui.contact.ContactActivity;
 import com.example.konta.sketch_loyalityapp.ui.terms.TermsConditionsActivity;

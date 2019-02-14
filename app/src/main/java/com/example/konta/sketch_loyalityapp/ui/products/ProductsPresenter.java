@@ -36,9 +36,9 @@ public class ProductsPresenter implements ProductsContract.Presenter {
     }
 
     @Override
-    public void isProgressBarNeeded(boolean isNeeded) {
+    public void hideProgressBar() {
         if (view != null) {
-            view.setProgressBarVisibility(isNeeded);
+            view.hideProgressBar();
         }
     }
 }

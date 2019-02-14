@@ -29,8 +29,8 @@ public class CouponsModel implements CouponsContract.Model {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(couponData -> {
                     formatCouponsData(couponData);
-                    presenter.isProgressBarNeeded(false);
-                }, throwable -> presenter.isProgressBarNeeded(false));
+                    presenter.hideProgressBar();
+                }, throwable -> presenter.hideProgressBar());
     }
 
     private Single<CouponData> getObservable() {

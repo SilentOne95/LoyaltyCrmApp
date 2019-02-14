@@ -43,8 +43,8 @@ public class MainActivityModel implements MainActivityContract.Model {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(componentList -> {
                     refactorFetchedDataForHomeView(componentList);
-                    presenter.isProgressBarNeeded(false);
-                }, throwable -> presenter.isProgressBarNeeded(false));
+                    presenter.hideProgressBar();
+                }, throwable -> presenter.hideProgressBar());
     }
 
     private Single<List<MenuComponent>> getObservableTimer() {

@@ -13,14 +13,14 @@ public interface ProductsContract {
 
         void setUpAdapter(List<Product> productList, int numOfColumns);
         void setUpEmptyStateView(boolean isNeeded);
-        void setProgressBarVisibility(boolean isNeeded);
+        void hideProgressBar();
     }
 
     interface Presenter {
 
         void requestDataFromServer();
         void passDataToAdapter(List<Product> productList, int numOfColumns);
-        void isProgressBarNeeded(boolean isNeeded);
+        void hideProgressBar();
     }
 
     interface Model {

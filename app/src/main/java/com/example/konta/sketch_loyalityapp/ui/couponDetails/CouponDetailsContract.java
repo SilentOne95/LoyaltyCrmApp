@@ -8,7 +8,7 @@ public interface CouponDetailsContract {
 
     interface View {
 
-        void changeProgressBarVisibility(boolean isNeeded);
+        void hideProgressBar();
         void setUpViewWithData(Coupon coupon);
     }
 
@@ -16,7 +16,7 @@ public interface CouponDetailsContract {
 
         void requestDataFromServer(int couponId);
         void passDataToView(Coupon coupon);
-        void isProgressBarNeeded(boolean isNeeded);
+        void hideProgressBar();
 
         String formatDateString(String dateString);
     }

@@ -32,16 +32,16 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
-    public void passDataToAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns) {
-        if (view != null && menuComponentList != null) {
-            view.setUpAdapter(menuComponentList, numOfColumns);
+    public void hideProgressBar() {
+        if (view != null) {
+            view.hideProgressBar();
         }
     }
 
     @Override
-    public void isProgressBarNeeded(boolean isNeeded) {
-        if (view != null) {
-            view.setProgressBarVisibility(isNeeded);
+    public void passDataToAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns) {
+        if (view != null && menuComponentList != null) {
+            view.setUpAdapter(menuComponentList, numOfColumns);
         }
     }
 

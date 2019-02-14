@@ -85,7 +85,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     }
 
     @Override
-    public void setProgressBarVisibility(boolean isNeeded) {
+    public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
     }
 }

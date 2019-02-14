@@ -30,8 +30,8 @@ public class ProductsModel implements ProductsContract.Model {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(productData -> {
                     formatProductsData(productData);
-                    presenter.isProgressBarNeeded(false);
-                }, throwable -> presenter.isProgressBarNeeded(false));
+                    presenter.hideProgressBar();
+                }, throwable -> presenter.hideProgressBar());
     }
 
     private Single<ProductData> getObservable() {

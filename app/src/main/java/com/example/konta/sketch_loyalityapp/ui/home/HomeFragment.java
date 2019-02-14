@@ -97,7 +97,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     @Override
-    public void setProgressBarVisibility(boolean isNeeded) {
+    public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
     }
 }

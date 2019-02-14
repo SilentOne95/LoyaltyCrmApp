@@ -36,11 +36,11 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     private Button showCouponCodeButton;
     private GradientDrawable backgroundButton;
     private Spannable staticCodeText, promoCodeText;
-    private View layoutContainer;
 
     private ImageView couponImage;
     private TextView couponMarker, couponDate, couponTitle, couponNewPrice, couponBasicPrice, couponDescription;
     private ProgressBar progressBar;
+    private View layoutContainer;
 
     private int couponId;
     private String couponCode;
@@ -86,7 +86,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     }
 
     @Override
-    public void changeProgressBarVisibility(boolean isNeeded) {
+    public void hideProgressBar() {
         layoutContainer.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
     }

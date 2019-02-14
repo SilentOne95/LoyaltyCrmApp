@@ -13,14 +13,14 @@ public interface CouponsContract {
 
         void setUpAdapter(List<Coupon> couponList, int numOfColumns);
         void setUpEmptyStateView(boolean isNeeded);
-        void setProgressBarVisibility(boolean isNeeded);
+        void hideProgressBar();
     }
 
     interface Presenter {
 
         void requestDataFromServer();
         void passDataToAdapter(List<Coupon> couponList, int numOfColumns);
-        void isProgressBarNeeded(boolean isNeeded);
+        void hideProgressBar();
     }
 
     interface Model {
