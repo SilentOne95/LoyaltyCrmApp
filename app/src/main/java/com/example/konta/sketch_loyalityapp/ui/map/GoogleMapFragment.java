@@ -186,6 +186,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mGoogleMap.animateCamera(cameraUpdate);
 
+        // Initialize the manager with the context and the map
+        mClusterManager = new ClusterManager<>(getContext(), mGoogleMap);
+
         // Add markers to map and set up ClusterManager
         presenter.requestDataFromServer();
 
@@ -366,9 +369,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public void setUpCluster(final List<Marker> markerList) {
-        // Initialize the manager with the context and the map
-        mClusterManager = new ClusterManager<>(getContext(), mGoogleMap);
-
         // Add markers to cluster
         for (Marker marker : markerList) {
             mClusterManager.addItem(marker);
