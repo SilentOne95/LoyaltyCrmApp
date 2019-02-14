@@ -165,7 +165,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // Assign clicked menuItem IDs and layout type to global variables
-        layoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
+        if (!menuItem.isChecked()) {
+            layoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
+        } else {
+            layoutType = null;
+        }
 
         // Uncheck all checked menu items
         uncheckItemsNavDrawer();
@@ -186,7 +190,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onDrawerOpened(@NonNull View view) { }
 
     @Override
-    public void onDrawerClosed(@NonNull View view) { presenter.displaySelectedScreen(layoutType); }
+    public void onDrawerClosed(@NonNull View view) {
+        presenter.displaySelectedScreen(layoutType);
+        // Set layoutType to null to avoid creating new instance of fragment, when closing nav drawer
+        // by clicking next to the view
+        layoutType = null;
+    }
 
     @Override
     public void onDrawerStateChanged(int i) { }
