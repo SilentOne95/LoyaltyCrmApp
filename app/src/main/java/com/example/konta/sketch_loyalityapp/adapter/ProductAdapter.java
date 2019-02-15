@@ -108,12 +108,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             // TODO: Upload images to server
             Picasso.get()
                     .load("")
+                    .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);
         } else {
             Picasso.get()
-                    .load(R.drawable.sample_product)
+                    .load(R.drawable.image_product)
+                    .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);

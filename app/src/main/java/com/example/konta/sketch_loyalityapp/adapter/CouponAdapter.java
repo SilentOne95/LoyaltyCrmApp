@@ -126,15 +126,17 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         }
 
         if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
-            // TODO: Upload images to server
+            // TODO: Upload images to server and change "else" image to no_image_available
             Picasso.get()
                     .load("")
+                    .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);
         } else {
             Picasso.get()
-                    .load(R.drawable.sample_coupon)
+                    .load(R.drawable.image_coupon)
+                    .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);

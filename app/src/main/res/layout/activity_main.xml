@@ -15,6 +15,7 @@
         app:headerLayout="@layout/nav_header"
         app:itemBackground="@drawable/nav_view_state_background"
         app:itemIconTint="@drawable/nav_view_state_icon"
+        app:itemTextAppearance="?android:attr/textAppearanceMedium"
         app:itemTextColor="@drawable/nav_view_state_text" />
 
 </android.support.v4.widget.DrawerLayout>

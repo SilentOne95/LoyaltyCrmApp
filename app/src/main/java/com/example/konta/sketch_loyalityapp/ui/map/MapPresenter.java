@@ -167,7 +167,7 @@ public class MapPresenter implements MapContract.Presenter {
                                 obj.getCloseMinute();
                     } else if (obj.getOpenHour().equals(obj.getCloseHour()) &&
                             obj.getOpenMinute().equals(obj.getCloseMinute())) {
-                        openHours = "All day";
+                        openHours = "Today open: All day";
                     } else {
                         openHours = "Today is closed";
                     }
