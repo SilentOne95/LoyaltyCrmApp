@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_THREE_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH;
@@ -86,9 +85,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 break;
             case 2:
                 cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
-                break;
-            case 3:
-                cornerRadius = BITMAP_CORNER_RADIUS_THREE_COLUMNS;
                 break;
             default:
                 cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;

@@ -20,7 +20,6 @@ import java.util.List;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_THREE_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH;
@@ -96,16 +95,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             case 2:
                 cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
                 break;
-            case 3:
-                cornerRadius = BITMAP_CORNER_RADIUS_THREE_COLUMNS;
-                break;
             default:
                 cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
                 break;
         }
 
         if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
-            // TODO: Upload images to server
+            // TODO: Upload images to server and change "else" image to no_image_available
             Picasso.get()
                     .load("")
                     .placeholder(R.drawable.placeholder)

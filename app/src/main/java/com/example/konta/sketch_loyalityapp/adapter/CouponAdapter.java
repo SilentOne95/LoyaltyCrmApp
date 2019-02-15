@@ -21,7 +21,6 @@ import java.util.List;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_THREE_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH;
@@ -117,9 +116,6 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             case 2:
                 cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
                 break;
-            case 3:
-                cornerRadius = BITMAP_CORNER_RADIUS_THREE_COLUMNS;
-                break;
             default:
                 cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
                 break;
@@ -138,7 +134,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
                     .load(R.drawable.image_coupon)
                     .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
+                    .resize(BITMAP_WIDTH,BITMAP_HEIGHT)
                     .into(holder.imageView);
         }
 
