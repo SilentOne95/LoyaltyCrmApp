@@ -17,12 +17,12 @@ public interface CouponDetailsContract {
         void requestDataFromServer(int couponId);
         void passDataToView(Coupon coupon);
         void hideProgressBar();
-
-        String formatDateString(String dateString);
     }
 
     interface Model {
 
         Disposable fetchDataFromServer(CouponDetailsPresenter presenter, int couponId);
+
+        void isCouponDataValid(Coupon coupon);
     }
 }

@@ -6,7 +6,14 @@ import com.example.konta.sketch_loyalityapp.pojo.adapter.CouponData;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
@@ -56,6 +63,7 @@ public class CouponsModel implements CouponsContract.Model {
     @Override
     public void formatCouponsData(CouponData couponData) {
         int numOfColumns = 1;
+        ArrayList<Coupon> validCouponsList;
 
         for (MenuComponent component : couponData.getComponents()) {
             if (component.getType().equals("coupons")) {
@@ -68,6 +76,36 @@ public class CouponsModel implements CouponsContract.Model {
             numOfColumns = DEFAULT_NUM_OF_COLUMNS;
         }
 
-        presenter.passDataToAdapter(couponData.getCoupons(), numOfColumns);
+        validCouponsList = isCouponDataValid(couponData.getCoupons());
+
+        presenter.passDataToAdapter(validCouponsList, numOfColumns);
+    }
+
+    @Override
+    public ArrayList<Coupon> isCouponDataValid(List<Coupon> couponList) {
+        ArrayList<Coupon> validCouponsList = new ArrayList<>();
+        SimpleDateFormat currentCouponDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
+        SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL"));
+        Date couponDate = new Date();
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("CET"));
+        calendar.add(Calendar.DATE, 1);
+        Date date = calendar.getTime();
+
+        for (Coupon coupon : couponList) {
+
+            try {
+                couponDate = currentCouponDateFormat.parse(coupon.getFreshTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (!date.after(couponDate)) {
+                coupon.setFreshTime(newDateFormat.format(couponDate));
+                validCouponsList.add(coupon);
+            }
+        }
+
+        return validCouponsList;
     }
 }

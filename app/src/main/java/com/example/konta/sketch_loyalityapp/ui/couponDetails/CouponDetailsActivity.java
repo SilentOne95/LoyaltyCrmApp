@@ -106,7 +106,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         }
 
         if (coupon.getFreshTime() != null && !coupon.getFreshTime().trim().isEmpty()) {
-            couponDate.setText(presenter.formatDateString(coupon.getFreshTime()));
+            couponDate.setText(coupon.getFreshTime());
         } else {
             couponDate.setText(DEFAULT_STRING);
         }

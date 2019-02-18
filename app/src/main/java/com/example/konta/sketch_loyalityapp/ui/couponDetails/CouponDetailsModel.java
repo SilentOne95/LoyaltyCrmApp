@@ -4,6 +4,10 @@ import com.example.konta.sketch_loyalityapp.network.Api;
 import com.example.konta.sketch_loyalityapp.network.RetrofitClient;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
@@ -24,7 +28,7 @@ public class CouponDetailsModel implements CouponDetailsContract.Model {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(coupon -> {
                     presenter.hideProgressBar();
-                    presenter.passDataToView(coupon);
+                    isCouponDataValid(coupon);
                 }, throwable -> presenter.hideProgressBar());
     }
 
@@ -38,5 +42,22 @@ public class CouponDetailsModel implements CouponDetailsContract.Model {
                 .getSingleCoupon(couponId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public void isCouponDataValid(Coupon coupon) {
+        SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL"));
+        String formattedDate = "Not specified";
+
+        try {
+            Date date = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH).parse(coupon.getFreshTime());
+            formattedDate = newDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        coupon.setFreshTime(formattedDate);
+
+        presenter.passDataToView(coupon);
     }
 }
