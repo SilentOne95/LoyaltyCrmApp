@@ -1,5 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.map;
 
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.util.Log;
@@ -55,8 +56,11 @@ public class MapPresenter implements MapContract.Presenter {
 
         if (view != null) {
             if (object instanceof Marker) {
-                if (view.getBottomSheetState() != BottomSheetBehavior.STATE_COLLAPSED) {
+                if (view.getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
                     view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else {
+                    view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
+                    new Handler().postDelayed(() -> view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED), 300);
                 }
             } else if (object instanceof LatLng) {
                 if (view.getBottomSheetState() != BottomSheetBehavior.STATE_HIDDEN) {
@@ -166,7 +170,8 @@ public class MapPresenter implements MapContract.Presenter {
                                 obj.getCloseHour() + ":" +
                                 obj.getCloseMinute();
                     } else if (obj.getOpenHour().equals(obj.getCloseHour()) &&
-                            obj.getOpenMinute().equals(obj.getCloseMinute())) {
+                            obj.getOpenMinute().equals(obj.getCloseMinute()) &&
+                            !obj.getOpenHour().equals("None")) {
                         openHours = "Today open: All day";
                     } else {
                         openHours = "Today is closed";

@@ -58,7 +58,6 @@ import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
-import static com.example.konta.sketch_loyalityapp.Constants.BOTTOM_SHEET_PEEK_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.example.konta.sketch_loyalityapp.Constants.REQUEST_CHECK_SETTINGS;
 import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_NAME;
@@ -80,8 +79,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
+    private int mPreviousSelectedMarkerId;
 
     // BottomSheet PeekHeight Panel views
+    private View mPanelPeekHeight;
     private TextView mPanelPlaceTitle, mPanelAddress, mPanelTodayOpenHours;
 
     @Override
@@ -110,10 +111,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         // Set up BottomSheet
+        mPanelPeekHeight = rootView.findViewById(R.id.bottom_sheet_peek);
         View mBottomSheet = rootView.findViewById(R.id.bottom_sheet);
         mBottomSheet.setOnClickListener(this);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(BOTTOM_SHEET_PEEK_HEIGHT);
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
@@ -151,6 +152,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+
+        // Setting up BottomSheet height as layout height. It has to be implemented here to measure
+        // view after it's created to get different value than 0
+        mBottomSheetBehavior.setPeekHeight(mPanelPeekHeight.getHeight());
 
         setUpGoogleApiClient();
 
@@ -196,7 +201,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
 
         // Set BottomSheet state when map is clicked
-        mGoogleMap.setOnMapClickListener(latLng -> presenter.switchBottomSheetState(latLng));
+        mGoogleMap.setOnMapClickListener(latLng -> {
+                    presenter.switchBottomSheetState(latLng);
+                    // Set markerId to 0 to enable BottomSheet appear
+                    mPreviousSelectedMarkerId = 0;
+                }
+        );
 
         mGoogleMap.setOnMyLocationButtonClickListener(this);
     }
@@ -381,8 +391,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         // Set BottomSheet state when marker is clicked
         mGoogleMap.setOnMarkerClickListener(mClusterManager);
         mClusterManager.setOnClusterItemClickListener(marker -> {
-            presenter.passDataToBottomSheet(marker.getId());
-            presenter.switchBottomSheetState(marker);
+            // Preventing from selecting the same marker
+            if (mPreviousSelectedMarkerId != marker.getId()) {
+                presenter.passDataToBottomSheet(marker.getId());
+                presenter.switchBottomSheetState(marker);
+                mPreviousSelectedMarkerId = marker.getId();
+            }
             return true;
         });
     }
