@@ -54,36 +54,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.NoActionBar" />
         <activity
-            android:name=".ui.login.LogInActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.signUp.SignUpActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.website.WebsiteActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/BaseAppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ui.terms.TermsConditionsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/BaseAppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ui.contact.ContactActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/BaseAppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
-        </activity>
-        <activity
             android:name=".ui.couponDetails.CouponDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">

@@ -11,13 +11,13 @@ import com.example.konta.sketch_loyalityapp.ui.barcodeGenerator.BarcodeGenerator
 import com.example.konta.sketch_loyalityapp.ui.barcodeScanner.BarcodeScanner;
 import com.example.konta.sketch_loyalityapp.ui.coupons.CouponsFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
-import com.example.konta.sketch_loyalityapp.ui.login.LogInActivity;
+import com.example.konta.sketch_loyalityapp.ui.login.LogInFragment;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomeFragment;
 import com.example.konta.sketch_loyalityapp.ui.products.ProductsFragment;
-import com.example.konta.sketch_loyalityapp.ui.contact.ContactActivity;
-import com.example.konta.sketch_loyalityapp.ui.terms.TermsConditionsActivity;
-import com.example.konta.sketch_loyalityapp.ui.website.WebsiteActivity;
+import com.example.konta.sketch_loyalityapp.ui.contact.ContactFragment;
+import com.example.konta.sketch_loyalityapp.ui.terms.TermsFragment;
+import com.example.konta.sketch_loyalityapp.ui.website.WebsiteFragment;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -148,16 +148,16 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                     view.setFragment(new GoogleMapFragment());
                     break;
                 case "login":
-                    view.setActivity(LogInActivity.class);
+                    view.setFragment(new LogInFragment());
                     break;
                 case "url":
-                    view.setActivity(WebsiteActivity.class);
+                    view.setFragment(new WebsiteFragment());
                     break;
                 case "terms":
-                    view.setActivity(TermsConditionsActivity.class);
+                    view.setFragment(new TermsFragment());
                     break;
                 case "contact":
-                    view.setActivity(ContactActivity.class);
+                    view.setFragment(new ContactFragment());
                     break;
                 case "scanner":
                     view.setFragment(new BarcodeScanner());
