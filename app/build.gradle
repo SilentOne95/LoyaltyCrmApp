@@ -56,13 +56,10 @@ dependencies {
     // Picasso image transformation
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
 
-    // Firebase database
+    // Firebase database and cloud messaging
+    implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
-    implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-database:16.0.6'
-
-    // Firebase Cloud Messaging
-    implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
 
     // RxJava2

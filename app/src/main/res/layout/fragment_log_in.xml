@@ -17,9 +17,10 @@
         <ImageView
             android:id="@+id/login_image_logo"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="75dp"
             android:layout_marginTop="32dp"
             android:adjustViewBounds="true"
+            android:padding="8dp"
             android:scaleType="fitCenter"
             android:src="@drawable/sellger_logo"
             app:layout_constraintEnd_toEndOf="parent"
