@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:multidex:1.0.3'
 
-    // Google Authorization
+    // Sing-in
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     // Google Maps
@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.13'
 
     // Retrofit2
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 

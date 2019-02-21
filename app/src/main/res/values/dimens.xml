@@ -15,6 +15,8 @@
     <dimen name="very_big_text_size">24sp</dimen>
     <dimen name="layout_title_text_size">30sp</dimen>
 
+    <dimen name="layout_container_padding">12dp</dimen>
+
     <!-- Corner radius -->
     <dimen name="rounded_corner_radius">3dp</dimen>
     <dimen name="rounded_corner_radius_barcode_scanner">2dp</dimen>
@@ -46,13 +48,13 @@
     <!-- Coupon details activity -->
     <dimen name="coupon_details_button_height">40dp</dimen>
 
-    <!-- Log In activity -->
-    <dimen name="log_in_fields_width">300dp</dimen>
-    <dimen name="log_in_fields_height">40dp</dimen>
-    <dimen name="log_in_fields_padding">10dp</dimen>
-    <dimen name="log_in_button_margin_bottom">48dp</dimen>
+    <!-- Log In -->
 
-    <!-- Sign Up activity -->
+
+    <!-- Sign Up layout -->
+    <dimen name="sign_up_fields_width">300dp</dimen>
+    <dimen name="sign_up_fields_height">40dp</dimen>
+    <dimen name="sign_up_fields_padding">10dp</dimen>
     <dimen name="sign_up_checkbox_width">320dp</dimen>
 
     <!-- Bottom Sheet layout -->
@@ -68,7 +70,6 @@
     <dimen name="notification_layout_height">64dp</dimen>
 
     <!-- Barcode scanner layout -->
-    <dimen name="barcode_scanner_layout_container_padding">12dp</dimen>
     <dimen name="barcode_scanner_instruction_text_size">18sp</dimen>
     <dimen name="barcode_scanner_instruction_spacing">4dp</dimen>
     <dimen name="barcode_scanner_button_width">100dp</dimen>

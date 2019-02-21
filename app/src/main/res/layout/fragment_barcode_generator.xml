@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorFragmentBackground"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/layout_container_padding">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

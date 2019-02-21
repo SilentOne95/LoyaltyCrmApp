@@ -45,20 +45,6 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
-    <style name="basic_log_in_field">
-        <item name="android:layout_width">@dimen/log_in_fields_width</item>
-        <item name="android:layout_height">@dimen/log_in_fields_height</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-    </style>
-
-    <style name="basic_log_in_edit_text" parent="basic_log_in_field">
-        <item name="android:ems">10</item>
-        <item name="android:paddingStart">@dimen/log_in_fields_padding</item>
-        <item name="android:paddingEnd">@dimen/log_in_fields_padding</item>
-    </style>
-
     <style name="basic_min_size_button">
         <item name="android:minWidth">@dimen/zero</item>
         <item name="android:minHeight">@dimen/zero</item>
@@ -207,7 +193,10 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
-    <!-- Log In and Sign Up activity -->
+    <!-- Log In and -->
+
+
+    <!-- Sign Up screen -->
     <style name="log_in_company_image" parent="layout_wrap_content">
         <item name="android:layout_marginStart">@dimen/small_value</item>
         <item name="android:layout_marginTop">@dimen/big_value</item>
@@ -226,50 +215,52 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="log_in_facebook_button" parent="basic_log_in_field">
-        <item name="android:textSize">@dimen/mid_text_size</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
-    </style>
-
-    <style name="login_field_edit_text" parent="basic_log_in_edit_text">
+    <style name="login_field_edit_text">
         <item name="android:inputType">textPersonName</item>
+        <item name="android:ems">10</item>
+        <item name="android:paddingStart">@dimen/sign_up_fields_padding</item>
+        <item name="android:paddingEnd">@dimen/sign_up_fields_padding</item>
+        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
+        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
     </style>
 
-    <style name="password_field_edit_text" parent="basic_log_in_edit_text">
+    <style name="password_field_edit_text">
         <item name="android:inputType">textPassword</item>
+        <item name="android:ems">10</item>
+        <item name="android:paddingStart">@dimen/sign_up_fields_padding</item>
+        <item name="android:paddingEnd">@dimen/sign_up_fields_padding</item>
+        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
+        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
     </style>
 
-    <style name="email_field_edit_text" parent="basic_log_in_edit_text">
+    <style name="email_field_edit_text">
         <item name="android:inputType">textEmailAddress</item>
+        <item name="android:ems">10</item>
+        <item name="android:paddingStart">@dimen/sign_up_fields_padding</item>
+        <item name="android:paddingEnd">@dimen/sign_up_fields_padding</item>
+        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
+        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
     </style>
 
-    <style name="phone_field_edit_text" parent="basic_log_in_edit_text">
+    <style name="phone_field_edit_text">
         <item name="android:inputType">phone</item>
-    </style>
-
-    <style name="log_in_button" parent="basic_log_in_field">
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:layout_marginTop">@dimen/log_in_button_margin_bottom</item>
-    </style>
-
-    <style name="log_in_remind_password_text_view" parent="layout_wrap_content">
+        <item name="android:ems">10</item>
+        <item name="android:paddingStart">@dimen/sign_up_fields_padding</item>
+        <item name="android:paddingEnd">@dimen/sign_up_fields_padding</item>
+        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
+        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
         <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-    </style>
-
-    <style name="sign_up_text_view" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:layout_marginBottom">@dimen/big_value</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
     <style name="sign_up_checkbox_newsletter">
@@ -281,11 +272,15 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
-    <style name="sign_up_button" parent="basic_log_in_field">
+    <style name="sign_up_button">
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
+        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
     </style>
 
     <style name="log_in_text_view_action" parent="layout_wrap_content">

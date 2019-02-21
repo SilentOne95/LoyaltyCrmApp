@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorFragmentBackground"
     android:orientation="vertical"
-    android:padding="@dimen/barcode_scanner_layout_container_padding"
+    android:padding="@dimen/layout_container_padding"
     tools:context=".ui.barcodeScanner.BarcodeScanner">
 
     <LinearLayout

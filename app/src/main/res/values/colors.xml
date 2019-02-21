@@ -14,5 +14,8 @@
     <color name="colorFacebookBlue">#3b5998</color>
     <color name="colorFacebookBlueRipple">#2a3f6c</color>
 
+    <color name="colorPhoneGreen">#34a853</color>
+    <color name="colorPhoneGreenRipple">#217739</color>
+
     <color name="colorNavViewStateFalse">#5e5e5e</color>
 </resources>
