@@ -4,6 +4,7 @@
 
     <!-- Required for Google Auth, Firebase Web ID -->
     <string name="server_client_id">Server client ID</string>
+    <string name="facebook_app_id">Facebook app ID</string>
 
     <!-- Firebase // Push Notifications -->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
