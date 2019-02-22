@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/login_image_logo"
             android:layout_width="wrap_content"
-            android:layout_height="75dp"
+            android:layout_height="100dp"
             android:layout_marginTop="32dp"
             android:adjustViewBounds="true"
             android:padding="8dp"
@@ -115,7 +115,7 @@
                 android:fontFamily="@font/lato"
                 android:text="No account? Sign up now"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/small_text_size" />
+                android:textSize="@dimen/mid_text_size" />
 
             <Button
                 android:id="@+id/register_button"
@@ -132,6 +132,17 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/mid_text_size" />
+
+            <TextView
+                android:id="@+id/register_guest_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/lato"
+                android:text="Sign up as a guest"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/small_text_size"
+                android:layout_marginTop="@dimen/mid_value"/>
 
         </LinearLayout>
 
