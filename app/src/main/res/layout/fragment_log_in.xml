@@ -41,9 +41,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_image_logo">
 
+            <TextView
+                android:id="@+id/choose_register_method_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/lato"
+                android:text="Choose registration method:"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/mid_text_size"
+                android:layout_marginBottom="16dp"/>
+
             <Button
                 android:id="@+id/login_google_button"
-                android:layout_width="220dp"
+                android:layout_width="230dp"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_corners_button_white"
                 android:drawableStart="@drawable/ic_google_btn"
@@ -51,7 +62,7 @@
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
-                android:text="Log In with Google"
+                android:text="Sign up with Google"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/colorBlack"
@@ -59,16 +70,17 @@
 
             <Button
                 android:id="@+id/login_facebook_button"
-                android:layout_width="220dp"
+                android:layout_width="230dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/rounded_corners_facebook"
                 android:drawableStart="@drawable/ic_facebook_btn"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/lato"
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
-                android:text="Log In with Facebook"
+                android:text="Sign up with Facebook"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
@@ -76,7 +88,7 @@
 
             <Button
                 android:id="@+id/login_phone_button"
-                android:layout_width="220dp"
+                android:layout_width="230dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/rounded_corners_button_green"
@@ -85,7 +97,7 @@
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
-                android:text="Log In with phone"
+                android:text="Sign up with Phone"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
@@ -97,7 +109,6 @@
             android:id="@+id/login_sign_up_now_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical"
@@ -113,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/lato"
-                android:text="No account? Sign up now"
+                android:text="Already have an account?"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/mid_text_size" />
 
@@ -122,14 +133,16 @@
                 android:layout_width="220dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_corners_button"
                 android:fontFamily="@font/lato"
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:text="Sign Up"
+                android:text="Log In"
                 android:textAlignment="center"
                 android:textAllCaps="false"
+                android:textStyle="bold"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/mid_text_size" />
 
@@ -139,10 +152,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/lato"
-                android:text="Sign up as a guest"
+                android:text="or continue as a guest"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/small_text_size"
-                android:layout_marginTop="@dimen/mid_value"/>
+                android:padding="8dp" />
 
         </LinearLayout>
 
