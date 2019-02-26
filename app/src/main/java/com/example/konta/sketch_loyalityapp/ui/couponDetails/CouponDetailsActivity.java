@@ -100,7 +100,11 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         }
 
         if (coupon.getReductionAmount() != null && !coupon.getReductionAmount().trim().isEmpty()) {
-            couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
+            if (coupon.getReductionType().equals("percent")) {
+                couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
+            } else {
+                couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("zł"));
+            }
         } else {
             couponMarker.setText(DEFAULT_STRING);
         }

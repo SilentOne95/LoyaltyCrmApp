@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.example.konta.sketch_loyalityapp.Constants.RC_SIGN_IN;
 
-public class LogInFragment extends BaseFragment implements View.OnClickListener {
+public class LogInFragment extends BaseFragment implements LogInContract.View, View.OnClickListener {
 
     private static final String TAG = LogInFragment.class.getSimpleName();
 
@@ -48,6 +48,8 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager mCallbackFacebookManager;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber;
+    private PhoneAuthProvider.ForceResendingToken mResendToken;
+    private String mSmsCode;
     private Button mLogInWithGoogleButton, mLogInWithFacebookButton, mLogInWithPhoneButton;
 
     private String mVerificationId;
@@ -114,6 +116,7 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                 Log.d(TAG,"onVerificationCompleted:" + phoneAuthCredential);
                 signInWithPhoneAuthCredential(phoneAuthCredential);
+                mSmsCode = phoneAuthCredential.getSmsCode();
             }
 
             @Override
@@ -126,6 +129,7 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
                 super.onCodeSent(verificationId, forceResendingToken);
                 Log.d(TAG,"onCodeSent:" + forceResendingToken);
                 mVerificationId = verificationId;
+                mResendToken = forceResendingToken;
             }
         };
     }
@@ -157,7 +161,7 @@ public class LogInFragment extends BaseFragment implements View.OnClickListener 
 
         PhoneAuthProvider phoneAuthProvider = PhoneAuthProvider.getInstance();
         phoneAuthProvider.verifyPhoneNumber(
-                mTestPhoneNumber,
+                "+48" + mTestPhoneNumber,
                 60L,
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,

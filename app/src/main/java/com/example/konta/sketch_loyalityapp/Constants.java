@@ -20,8 +20,8 @@ public final class Constants {
     // Adapter
     public static final int DEFAULT_NUM_OF_COLUMNS = 1;
 
-    public static final int BITMAP_CORNER_RADIUS_SINGLE_COLUMN = 4;
-    public static final int BITMAP_CORNER_RADIUS_TWO_COLUMNS = 9;
+    public static final int BITMAP_CORNER_RADIUS_SINGLE_COLUMN = 8;
+    public static final int BITMAP_CORNER_RADIUS_TWO_COLUMNS = 15;
 
     public static final int BITMAP_WIDTH = 600;
     public static final int BITMAP_HEIGHT = 360;
