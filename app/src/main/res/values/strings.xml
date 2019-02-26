@@ -3,8 +3,8 @@
     <string name="app_name">Sellger</string>
 
     <!-- Required for Google Auth, Firebase Web ID -->
-    <string name="server_client_id">Server client ID</string>
-    <string name="facebook_app_id">Facebook app ID</string>
+    <string name="server_client_id">580087034404-ttb5oee6jee76tt56m62jpp88o5qdjal.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">2252363271523504</string>
 
     <!-- Firebase // Push Notifications -->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
@@ -104,4 +104,7 @@
     <string name="barcode_generator_title">Your card</string>
     <string name="barcode_generator_advice">This barcode represents your club card \n
         Let cashier scan this to get special promotions and offers</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

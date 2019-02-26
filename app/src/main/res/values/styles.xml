@@ -194,7 +194,9 @@
     </style>
 
     <!-- Log In and -->
-
+    <style name="login_text_input_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/colorAccent</item>
+    </style>
 
     <!-- Sign Up screen -->
     <style name="log_in_company_image" parent="layout_wrap_content">
