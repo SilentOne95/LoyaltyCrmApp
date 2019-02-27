@@ -9,15 +9,16 @@
     tools:context=".ui.login.phoneNumber.LogInRegisterFragment">
 
     <LinearLayout
-        android:id="@+id/register_number_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/grid_item_shadow"
         android:orientation="vertical">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/register_number_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp">
 
             <LinearLayout
                 android:id="@+id/verify_number_text_container"
@@ -74,7 +75,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
+                    android:minWidth="80dp"
                     android:textColorHint="@color/colorAccent">
 
                     <android.support.design.widget.TextInputEditText
@@ -94,7 +96,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
-                    android:layout_weight="3.5"
+                    android:layout_weight="3"
                     android:textColorHint="@color/colorAccent">
 
                     <android.support.design.widget.TextInputEditText
@@ -117,7 +119,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="130dp"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_phone_circle"
+                android:src="@drawable/ic_circle_phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -159,12 +161,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:padding="8dp"
                 android:text="More info"
                 android:textColor="@color/colorLink"
                 android:textSize="@dimen/small_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/terms_privacy_policy_link_text" />
