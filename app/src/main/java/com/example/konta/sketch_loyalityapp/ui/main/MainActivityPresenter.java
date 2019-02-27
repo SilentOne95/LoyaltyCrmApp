@@ -6,12 +6,13 @@ import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
-import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.barcodeGenerator.BarcodeGenerator;
 import com.example.konta.sketch_loyalityapp.ui.barcodeScanner.BarcodeScanner;
 import com.example.konta.sketch_loyalityapp.ui.coupons.CouponsFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
 import com.example.konta.sketch_loyalityapp.ui.login.LogInFragment;
+import com.example.konta.sketch_loyalityapp.ui.login.phoneNumber.LogInPhoneFragment;
+import com.example.konta.sketch_loyalityapp.ui.login.phoneNumber.LogInVerifyFragment;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomeFragment;
 import com.example.konta.sketch_loyalityapp.ui.products.ProductsFragment;
@@ -147,9 +148,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                 case "map":
                     view.setFragment(new GoogleMapFragment());
                     break;
-                case "login":
-                    view.setFragment(new LogInFragment());
-                    break;
                 case "url":
                     view.setFragment(new WebsiteFragment());
                     break;
@@ -165,6 +163,17 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                 case "barcode":
                     view.setFragment(new BarcodeGenerator());
                     break;
+
+                // Registration views
+                case "login":
+                    view.setFragment(new LogInFragment());
+                    break;
+                case "phone":
+                    view.setFragment(new LogInPhoneFragment());
+                    break;
+                case "code":
+                    view.setFragment(new LogInVerifyFragment());
+                    break;
                 default:
                     break;
             }
@@ -172,9 +181,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void getSelectedLayoutType(MenuComponent item) {
-        displaySelectedScreen(item.getType());
-    }
+    public void getSelectedLayoutType(String item) { displaySelectedScreen(item); }
 
     @Override
     public void setUpObservableHomeAdapter() {

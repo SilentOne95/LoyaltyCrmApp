@@ -57,7 +57,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private RecyclerItemClickListener.HomeRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.HomeRetrofitClickListener() {
         @Override
         public void onItemHomeClick(MenuComponent item, int selectedViewId) {
-            navigationPresenter.getSelectedLayoutType(item);
+            navigationPresenter.getSelectedLayoutType(item.getType());
             presenter.passIdOfSelectedView(selectedViewId);
         }
     };

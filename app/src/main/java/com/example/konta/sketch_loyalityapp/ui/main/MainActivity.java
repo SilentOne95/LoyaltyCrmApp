@@ -28,6 +28,8 @@ import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.service.TrackerService;
+import com.example.konta.sketch_loyalityapp.ui.login.phoneNumber.LogInPhoneFragment;
+import com.example.konta.sketch_loyalityapp.ui.login.phoneNumber.LogInVerifyFragment;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
@@ -127,17 +129,18 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         fragment.attachPresenter(presenter);
 
         // Replacing the fragment
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.switch_view_layout, fragment)
-                .commit();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Entering / exiting animations for activities
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+        if (fragment instanceof LogInPhoneFragment || fragment instanceof LogInVerifyFragment) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left)
+                    .replace(R.id.switch_view_layout, fragment)
+                    .commit();
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.switch_view_layout, fragment)
+                    .commit();
+        }
     }
 
     @Override

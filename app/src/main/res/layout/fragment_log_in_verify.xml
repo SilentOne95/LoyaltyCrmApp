@@ -6,7 +6,7 @@
     android:background="@color/colorFragmentBackground"
     android:orientation="vertical"
     android:padding="@dimen/layout_container_padding"
-    tools:context=".ui.login.phoneNumber.LogInRegisterFragment">
+    tools:context=".ui.login.phoneNumber.LogInVerifyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
             </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/verify_code_input"
+                android:id="@+id/verify_code_input_box"
                 style="@style/login_text_input_layout_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,6 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/verify_code_text_container">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/verify_code_input_text"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -100,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
                 android:text="Waiting for code to be delivered"
                 android:textColor="@color/colorAccent"
@@ -108,10 +109,10 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verify_code_input" />
+                app:layout_constraintTop_toBottomOf="@+id/verify_code_input_box" />
 
             <ProgressBar
-                android:id="@+id/progress_bar"
+                android:id="@+id/verify_progress_bar"
                 style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

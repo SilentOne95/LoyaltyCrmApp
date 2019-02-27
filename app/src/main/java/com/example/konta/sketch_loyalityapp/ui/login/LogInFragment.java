@@ -23,20 +23,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthSettings;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 import static com.example.konta.sketch_loyalityapp.Constants.RC_SIGN_IN;
 
@@ -47,16 +40,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager mCallbackFacebookManager;
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber;
-    private PhoneAuthProvider.ForceResendingToken mResendToken;
-    private String mSmsCode;
     private Button mLogInWithGoogleButton, mLogInWithFacebookButton, mLogInWithPhoneButton;
-
-    private String mVerificationId;
-
-    // Add white-listed data: phone number and verification code:
-    private String mTestPhoneNumber = "";
-    private String mTestVerificationCode = "";
 
     @Override
     protected int getLayout() { return R.layout.fragment_log_in; }
@@ -109,29 +93,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 Log.w(TAG, "onError");
             }
         });
-
-        // Log In with Phone Number
-        mCallbacksPhoneNumber = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            @Override
-            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                Log.d(TAG,"onVerificationCompleted:" + phoneAuthCredential);
-                signInWithPhoneAuthCredential(phoneAuthCredential);
-                mSmsCode = phoneAuthCredential.getSmsCode();
-            }
-
-            @Override
-            public void onVerificationFailed(FirebaseException e) {
-                Log.w(TAG, "onVerificationFailed", e);
-            }
-
-            @Override
-            public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                super.onCodeSent(verificationId, forceResendingToken);
-                Log.d(TAG,"onCodeSent:" + forceResendingToken);
-                mVerificationId = verificationId;
-                mResendToken = forceResendingToken;
-            }
-        };
     }
 
     @Override
@@ -145,39 +106,12 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 facebookSignIn();
                 break;
             case R.id.login_phone_button:
-                // TODO: Temporary testing phone number verification
-                // To enable real world method, call phoneNumberSignIn
-                testPhoneSignIn();
+                navigationPresenter.getSelectedLayoutType("phone");
                 break;
             default:
                 break;
 
         }
-    }
-
-    private void testPhoneSignIn() {
-        FirebaseAuthSettings firebaseAuthSettings = mAuth.getFirebaseAuthSettings();
-        firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(mTestPhoneNumber, mTestVerificationCode);
-
-        PhoneAuthProvider phoneAuthProvider = PhoneAuthProvider.getInstance();
-        phoneAuthProvider.verifyPhoneNumber(
-                "+48" + mTestPhoneNumber,
-                60L,
-                TimeUnit.SECONDS,
-                TaskExecutors.MAIN_THREAD,
-                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                        Log.d(TAG, "testOnVerificationCompleted: " + phoneAuthCredential);
-                        signInWithPhoneAuthCredential(phoneAuthCredential);
-                    }
-
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        Log.w(TAG, "testOnVerificationFailed", e);
-                    }
-                }
-        );
     }
 
     private void googleSignIn() {
@@ -187,35 +121,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     private void facebookSignIn() {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
-    }
-
-    private void phoneNumberSignIn(String phoneNumber) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,
-                60,
-                TimeUnit.SECONDS,
-                TaskExecutors.MAIN_THREAD,
-                mCallbacksPhoneNumber);
-    }
-
-    private void verifyPhoneNumberWithCode(String verificationId, String code) {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
-        signInWithPhoneAuthCredential(credential);
-    }
-
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), task -> {
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = task.getResult().getUser();
-                    } else {
-                        Log.d(TAG, "signInWithCredential:failure", task.getException());
-                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                            // The verification code entered was invalid
-                        }
-                    }
-                });
     }
 
     @Override
