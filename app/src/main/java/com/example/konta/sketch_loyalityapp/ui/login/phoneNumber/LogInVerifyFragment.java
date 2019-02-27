@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
@@ -27,7 +28,8 @@ public class LogInVerifyFragment extends BaseFragment {
 
     private static final String TAG = LogInVerifyFragment.class.getSimpleName();
 
-    private EditText mTextInputCode;
+    private TextInputEditText mTextInputCode;
+    private TextView mTextWaitingForCode;
     private ProgressBar mProgressBar;
 
     private FirebaseAuth mAuth;
@@ -57,6 +59,7 @@ public class LogInVerifyFragment extends BaseFragment {
 
         // Views
         mTextInputCode = rootView.findViewById(R.id.verify_code_input_text);
+        mTextWaitingForCode = rootView.findViewById(R.id.verify_waiting_for_code_text);
         mProgressBar = rootView.findViewById(R.id.verify_progress_bar);
 
         // TODO:
@@ -136,6 +139,7 @@ public class LogInVerifyFragment extends BaseFragment {
         new Handler().postDelayed(() -> {
             mTextInputCode.setFocusableInTouchMode(true);
             mTextInputCode.setText(code);
+            mTextWaitingForCode.setVisibility(View.GONE);
             mProgressBar.setVisibility(View.GONE);
         }, 3000);
 

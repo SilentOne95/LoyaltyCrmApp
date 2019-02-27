@@ -19,6 +19,8 @@
 
     <color name="colorNavViewStateFalse">#5e5e5e</color>
 
+    <!-- Log In views -->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#ff9800</color>
     <color name="colorLink">#0645ad</color>
+    <color name="colorErrorInput">#a70000</color>
 </resources>

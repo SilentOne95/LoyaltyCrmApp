@@ -1,12 +1,14 @@
 package com.example.konta.sketch_loyalityapp.ui.login.phoneNumber;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
@@ -16,8 +18,10 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
 
     private static final String TAG = LogInPhoneFragment.class.getSimpleName();
 
-    private EditText mTextInputPrefix;
-    private EditText mTextInputPhoneNumber;
+    private TextInputLayout mTextInputLayoutPrefix;
+    private TextInputEditText mTextInputPrefix;
+    private TextInputLayout mTextInputLayoutPhoneNumber;
+    private TextInputEditText mTextInputPhoneNumber;
     private Button mRegisterButton;
 
     public LogInPhoneFragment() {
@@ -25,7 +29,9 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
     }
 
     @Override
-    protected int getLayout() { return R.layout.fragment_log_in_phone; }
+    protected int getLayout() {
+        return R.layout.fragment_log_in_phone;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -35,7 +41,9 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
         ((BaseActivity) getActivity()).getSupportActionBar().hide();
 
         // Views
+        mTextInputLayoutPrefix = rootView.findViewById(R.id.register_prefix_input_box);
         mTextInputPrefix = rootView.findViewById(R.id.register_prefix_input);
+        mTextInputLayoutPhoneNumber = rootView.findViewById(R.id.register_number_input_box);
         mTextInputPhoneNumber = rootView.findViewById(R.id.register_number_input);
         mRegisterButton = rootView.findViewById(R.id.register_number_button);
 
@@ -47,6 +55,8 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
     public void onClick(View v) {
         if (getTextInputEditText()) {
             navigationPresenter.getSelectedLayoutType("code");
+            mTextInputPrefix.clearFocus();
+            mTextInputPhoneNumber.clearFocus();
         }
     }
 
@@ -60,15 +70,31 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
 
             return true;
         } else {
-            if (mTextInputPrefix.getText() == null) {
-                mTextInputPrefix.setError("Wrong prefix type");
-            } else if (mTextInputPhoneNumber.getText() == null) {
-                mTextInputPhoneNumber.setError("Please enter phone number");
+            if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+                mTextInputLayoutPrefix.setError("Wrong prefix");
+                dismissError(mTextInputLayoutPrefix);
+            } else if (!TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+                mTextInputLayoutPhoneNumber.setError("Please enter phone number");
+                dismissError(mTextInputLayoutPhoneNumber);
             } else {
-                mTextInputPhoneNumber.setError("Wrong format of data");
+                mTextInputLayoutPhoneNumber.setError("Wrong format of data");
+                dismissError(mTextInputLayoutPhoneNumber);
             }
 
             return false;
         }
+    }
+
+    private void dismissError(View v) {
+        new Handler().postDelayed(() -> {
+            switch (v.getId()) {
+                case R.id.register_prefix_input_box:
+                    mTextInputLayoutPrefix.setError(null);
+                case R.id.register_number_input_box:
+                    mTextInputLayoutPhoneNumber.setError(null);
+                default:
+                    break;
+            }
+        }, 3000);
     }
 }

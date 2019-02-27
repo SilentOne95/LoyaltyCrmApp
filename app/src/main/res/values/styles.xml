@@ -198,6 +198,11 @@
         <item name="boxStrokeColor">@color/colorAccent</item>
     </style>
 
+    <style name="login_edittext_error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorErrorInput</item>
+        <item name="android:textSize">@dimen/very_small_text_size</item>
+    </style>
+
     <!-- Sign Up screen -->
     <style name="log_in_company_image" parent="layout_wrap_content">
         <item name="android:layout_marginStart">@dimen/small_value</item>
