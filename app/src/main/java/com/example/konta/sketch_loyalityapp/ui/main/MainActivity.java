@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,6 +29,7 @@ import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.service.TrackerService;
+import com.example.konta.sketch_loyalityapp.ui.login.LogInFragment;
 import com.example.konta.sketch_loyalityapp.ui.login.phoneNumber.LogInPhoneFragment;
 import com.example.konta.sketch_loyalityapp.ui.login.phoneNumber.LogInVerifyFragment;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
@@ -125,7 +127,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void setFragment(BaseFragment fragment) {
-
         fragment.attachPresenter(presenter);
 
         // Replacing the fragment
@@ -140,6 +141,28 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     .beginTransaction()
                     .replace(R.id.switch_view_layout, fragment)
                     .commit();
+        }
+    }
+
+    @Override
+    public void setLogInFragment(BaseFragment fragment) {
+        fragment.attachPresenter(presenter);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right)
+                .replace(R.id.switch_view_layout, fragment)
+                .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // If back button is pressed on certain view, set up desired view
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
+        if (fragment instanceof LogInPhoneFragment || fragment instanceof  LogInVerifyFragment) {
+            setLogInFragment(new LogInFragment());
+        } else {
+            super.onBackPressed();
         }
     }
 

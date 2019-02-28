@@ -18,6 +18,7 @@ public interface MainActivityContract {
 
         void setFragment(BaseFragment fragment);
         void setActivity(Class<? extends Activity> activity);
+        void setLogInFragment(BaseFragment fragment);
 
         void hideNavDrawerScrollbar();
 
