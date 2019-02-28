@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.ui.login.phoneNumber;
+package com.example.konta.sketch_loyalityapp.ui.login.phoneAuthNumber;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +15,7 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 
-public class LogInPhoneFragment extends BaseFragment implements View.OnClickListener {
+public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContract.View, View.OnClickListener {
 
     private static final String TAG = LogInPhoneFragment.class.getSimpleName();
 
@@ -62,7 +62,8 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
         }
     }
 
-    private boolean getTextInputEditText() {
+    @Override
+    public boolean getTextInputEditText() {
         String prefix, phoneNumber, number;
 
         if (!TextUtils.isEmpty(mTextInputPrefix.getText().toString()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText().toString())) {
@@ -72,28 +73,34 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
 
             return true;
         } else {
-
-            if (TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                mTextInputLayoutPrefix.setError(" ");
-                mTextInputLayoutPhoneNumber.setError("Please enter data");
-                dismissError(mTextInputLayoutPrefix);
-                dismissError(mTextInputLayoutPhoneNumber);
-            } else if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                mTextInputLayoutPrefix.setError(" ");
-                dismissError(mTextInputLayoutPrefix);
-            } else if (!TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                mTextInputLayoutPhoneNumber.setError("Please enter phone number");
-                dismissError(mTextInputLayoutPhoneNumber);
-            } else {
-                mTextInputLayoutPhoneNumber.setError("Wrong format of data");
-                dismissError(mTextInputLayoutPhoneNumber);
-            }
+            displayErrorInputMessage();
 
             return false;
         }
     }
 
-    private void dismissError(View v) {
+    @Override
+    public void displayErrorInputMessage() {
+
+        if (TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+            mTextInputLayoutPrefix.setError(" ");
+            mTextInputLayoutPhoneNumber.setError("Please enter data");
+            dismissError(mTextInputLayoutPrefix);
+            dismissError(mTextInputLayoutPhoneNumber);
+        } else if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+            mTextInputLayoutPrefix.setError(" ");
+            dismissError(mTextInputLayoutPrefix);
+        } else if (!TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+            mTextInputLayoutPhoneNumber.setError("Please enter phone number");
+            dismissError(mTextInputLayoutPhoneNumber);
+        } else {
+            mTextInputLayoutPhoneNumber.setError("Wrong format of data");
+            dismissError(mTextInputLayoutPhoneNumber);
+        }
+    }
+
+    @Override
+    public void dismissError(View v) {
         new Handler().postDelayed(() -> {
             switch (v.getId()) {
                 case R.id.register_prefix_input_box:

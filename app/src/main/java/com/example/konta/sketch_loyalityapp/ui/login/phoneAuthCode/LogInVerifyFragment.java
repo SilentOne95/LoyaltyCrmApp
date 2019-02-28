@@ -1,4 +1,4 @@
-package com.example.konta.sketch_loyalityapp.ui.login.phoneNumber;
+package com.example.konta.sketch_loyalityapp.ui.login.phoneAuthCode;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,7 +24,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class LogInVerifyFragment extends BaseFragment {
+public class LogInVerifyFragment extends BaseFragment implements LogInVerifyContract.View {
 
     private static final String TAG = LogInVerifyFragment.class.getSimpleName();
 
@@ -99,7 +99,8 @@ public class LogInVerifyFragment extends BaseFragment {
         phoneNumberSignIn(mPhoneNumber);
     }
 
-    private void testPhoneSignIn() {
+    @Override
+    public void testPhoneSignIn() {
         FirebaseAuthSettings firebaseAuthSettings = mAuth.getFirebaseAuthSettings();
         firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(mTestPhoneNumber, mTestVerificationCode);
 
@@ -126,7 +127,8 @@ public class LogInVerifyFragment extends BaseFragment {
         );
     }
 
-    private void phoneNumberSignIn(String phoneNumber) {
+    @Override
+    public void phoneNumberSignIn(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,
                 60,
@@ -135,7 +137,8 @@ public class LogInVerifyFragment extends BaseFragment {
                 mCallbacksPhoneNumber);
     }
 
-    private void setCodeInEditText(String code) {
+    @Override
+    public void setCodeInEditText(String code) {
         new Handler().postDelayed(() -> {
             mTextInputCode.setFocusableInTouchMode(true);
             mTextInputCode.setText(code);
@@ -143,17 +146,21 @@ public class LogInVerifyFragment extends BaseFragment {
             mProgressBar.setVisibility(View.GONE);
         }, 3000);
 
-        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home"),5000);
         // Verify sms code after 10 sec
         new Handler().postDelayed(() -> verifyPhoneNumberWithCode(mVerificationId, mSmsCode), 1000);
+
+        // Switch layout with delay
+        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home"),5000);
     }
 
-    private void verifyPhoneNumberWithCode(String verificationId, String code) {
+    @Override
+    public void verifyPhoneNumberWithCode(String verificationId, String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
         signInWithPhoneAuthCredential(credential);
     }
 
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+    @Override
+    public void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {

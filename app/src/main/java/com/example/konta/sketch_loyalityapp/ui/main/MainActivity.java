@@ -30,8 +30,8 @@ import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.service.TrackerService;
 import com.example.konta.sketch_loyalityapp.ui.login.LogInFragment;
-import com.example.konta.sketch_loyalityapp.ui.login.phoneNumber.LogInPhoneFragment;
-import com.example.konta.sketch_loyalityapp.ui.login.phoneNumber.LogInVerifyFragment;
+import com.example.konta.sketch_loyalityapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
+import com.example.konta.sketch_loyalityapp.ui.login.phoneAuthCode.LogInVerifyFragment;
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
@@ -58,7 +58,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public static String PACKAGE_NAME;
 
     @Override
-    protected int getLayout() { return R.layout.activity_main; }
+    protected int getLayout() {
+        return R.layout.activity_main;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,10 +237,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void onDrawerSlide(@NonNull View view, float v) { }
+    public void onDrawerSlide(@NonNull View view, float v) {
+    }
 
     @Override
-    public void onDrawerOpened(@NonNull View view) { }
+    public void onDrawerOpened(@NonNull View view) {
+    }
 
     @Override
     public void onDrawerClosed(@NonNull View view) {
@@ -250,7 +254,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void onDrawerStateChanged(int i) { }
+    public void onDrawerStateChanged(int i) {
+    }
 
     @Override
     public void setDisplayItemChecked(int viewPosition) {
