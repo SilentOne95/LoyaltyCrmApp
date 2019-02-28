@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 
 import com.example.konta.sketch_loyalityapp.R;
@@ -54,9 +55,10 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (getTextInputEditText()) {
+            // Hide keyboard and display next view
+            mTextInputPrefix.onEditorAction(EditorInfo.IME_ACTION_DONE);
+            mTextInputPhoneNumber.onEditorAction(EditorInfo.IME_ACTION_DONE);
             navigationPresenter.getSelectedLayoutType("code");
-            mTextInputPrefix.clearFocus();
-            mTextInputPhoneNumber.clearFocus();
         }
     }
 
