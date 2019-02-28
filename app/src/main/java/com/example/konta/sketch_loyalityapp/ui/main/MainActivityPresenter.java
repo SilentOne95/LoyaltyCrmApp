@@ -49,7 +49,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     @Override
     public void displayHomeScreen() {
         if (view != null) {
-            view.setFragment(new HomeFragment());
+            view.setFragment(new LogInFragment());
         }
     }
 

@@ -143,6 +143,7 @@ public class LogInVerifyFragment extends BaseFragment {
             mProgressBar.setVisibility(View.GONE);
         }, 3000);
 
+        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home"),5000);
         // Verify sms code after 10 sec
         new Handler().postDelayed(() -> verifyPhoneNumberWithCode(mVerificationId, mSmsCode), 1000);
     }

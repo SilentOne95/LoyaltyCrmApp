@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.adapter.HomeAdapter;
 import com.example.konta.sketch_loyalityapp.adapter.RecyclerItemClickListener;
+import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityModel;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
@@ -39,6 +40,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Home");
+
+        // Show action bar if view is shown after log in procedure
+        ((BaseActivity) getActivity()).getSupportActionBar().show();
 
         specialOfferImage = rootView.findViewById(R.id.special_offer_image);
         specialOfferImage.setVisibility(View.GONE);
