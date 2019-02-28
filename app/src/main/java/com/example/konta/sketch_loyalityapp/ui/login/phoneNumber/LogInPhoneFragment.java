@@ -72,8 +72,14 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
 
             return true;
         } else {
-            if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                mTextInputLayoutPrefix.setError("Wrong prefix");
+
+            if (TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+                mTextInputLayoutPrefix.setError(" ");
+                mTextInputLayoutPhoneNumber.setError("Please enter data");
+                dismissError(mTextInputLayoutPrefix);
+                dismissError(mTextInputLayoutPhoneNumber);
+            } else if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+                mTextInputLayoutPrefix.setError(" ");
                 dismissError(mTextInputLayoutPrefix);
             } else if (!TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
                 mTextInputLayoutPhoneNumber.setError("Please enter phone number");
@@ -97,6 +103,6 @@ public class LogInPhoneFragment extends BaseFragment implements View.OnClickList
                 default:
                     break;
             }
-        }, 3000);
+        }, 2500);
     }
 }
