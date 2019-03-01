@@ -42,6 +42,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     private String mPhoneNumber = "";
     private String mTestPhoneNumber = "";
     private String mTestVerificationCode = "";
+    private String mProvidedPhoneNumber;
 
     public LogInVerifyFragment() {
         // Required empty public constructor
@@ -92,8 +93,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         // Extract additional data
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            mTest = bundle.getString("DATA_STRING");
-            mTextProvidedPhoneNumber.setText(mTest);
+            mProvidedPhoneNumber = bundle.getString("DATA_STRING");
+            mTextProvidedPhoneNumber.setText(mProvidedPhoneNumber);
         }
     }
 
@@ -152,7 +153,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
             mProgressBar.setVisibility(View.GONE);
         }, 3000);
 
-        // Verify sms code after 10 sec
+        // Verify sms code with delay
         new Handler().postDelayed(() -> verifyPhoneNumberWithCode(mVerificationId, mSmsCode), 1000);
 
         // Switch layout with delay

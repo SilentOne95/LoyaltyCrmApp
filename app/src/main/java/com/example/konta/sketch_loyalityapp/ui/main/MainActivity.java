@@ -103,11 +103,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         presenter.setUpObservableHomeAdapter();
 
         // Using Retrofit to set up NavDrawer
-        if (checkInternetConnection()) {
-            Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
-        }
+        showInternetConnectionResult();
     }
 
     protected boolean checkInternetConnection() {

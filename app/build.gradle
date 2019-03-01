@@ -76,6 +76,9 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
 
+    // Phone prefix and number verification library
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.10.6'
+
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.20'
     testImplementation 'junit:junit:4.12'

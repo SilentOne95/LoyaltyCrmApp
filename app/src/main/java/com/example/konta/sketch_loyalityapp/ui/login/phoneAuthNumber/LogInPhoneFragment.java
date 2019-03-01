@@ -14,6 +14,9 @@ import android.widget.Button;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 
 public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContract.View, View.OnClickListener {
 
@@ -56,7 +59,7 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
 
     @Override
     public void onClick(View v) {
-        if (getTextInputEditText()) {
+        if (isInputEditTextValid()) {
             // Hide keyboard and display next view
             mTextInputPrefix.onEditorAction(EditorInfo.IME_ACTION_DONE);
             mTextInputPhoneNumber.onEditorAction(EditorInfo.IME_ACTION_DONE);
@@ -65,39 +68,76 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
     }
 
     @Override
-    public boolean getTextInputEditText() {
-        String prefix, phoneNumber;
+    public boolean isInputEditTextValid() {
+        String prefix, phoneNumber, typeError;
+        PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
+        boolean isValid = false;
 
         if (!TextUtils.isEmpty(mTextInputPrefix.getText().toString()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText().toString())) {
-            prefix = "+" + mTextInputPrefix.getText().toString().trim();
+            prefix = mTextInputPrefix.getText().toString().trim();
+            prefix = prefix.replaceAll("\\+", "");
             phoneNumber = mTextInputPhoneNumber.getText().toString().trim();
-            mProvidedPhoneNumber = prefix + phoneNumber;
+            String phone = "+" + prefix + phoneNumber;
 
-            return true;
+            try {
+                Phonenumber.PhoneNumber phonetest = phoneNumberUtil.parse(phone, null);
+                isValid = phoneNumberUtil.isValidNumber(phonetest);
+
+            } catch (NumberParseException e) {
+                e.printStackTrace();
+            }
+
+            if (isValid) {
+                mProvidedPhoneNumber = phone;
+                return true;
+            } else {
+                displayErrorInputMessage("wrong data");
+                return false;
+            }
+
         } else {
-            displayErrorInputMessage();
+            if (TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+                typeError = "empty data";
+            } else if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+                typeError = "empty prefix";
+            } else if (!TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
+                typeError = "empty number";
+            } else {
+                typeError = "wrong type";
+            }
+
+            displayErrorInputMessage(typeError);
 
             return false;
         }
     }
 
     @Override
-    public void displayErrorInputMessage() {
+    public void displayErrorInputMessage(String type) {
 
-        if (TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-            mTextInputLayoutPrefix.setError(" ");
-            mTextInputLayoutPhoneNumber.setError("Please enter data");
-            dismissError(mTextInputLayoutPrefix);
-            dismissError(mTextInputLayoutPhoneNumber);
-        } else if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-            mTextInputLayoutPrefix.setError(" ");
-            dismissError(mTextInputLayoutPrefix);
-        } else if (!TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-            mTextInputLayoutPhoneNumber.setError("Please enter phone number");
-            dismissError(mTextInputLayoutPhoneNumber);
-        } else {
-            mTextInputLayoutPhoneNumber.setError("Wrong format of data");
-            dismissError(mTextInputLayoutPhoneNumber);
+        switch (type) {
+            case "empty data":
+                mTextInputLayoutPrefix.setError(" ");
+                mTextInputLayoutPhoneNumber.setError("Please enter data");
+                dismissError(mTextInputLayoutPrefix);
+                dismissError(mTextInputLayoutPhoneNumber);
+                break;
+            case "empty prefix":
+                mTextInputLayoutPrefix.setError(" ");
+                dismissError(mTextInputLayoutPrefix);
+                break;
+            case "empty number":
+                mTextInputLayoutPhoneNumber.setError("Please enter phone number");
+                dismissError(mTextInputLayoutPhoneNumber);
+                break;
+            case "wrong type":
+                mTextInputLayoutPhoneNumber.setError("Wrong format of data");
+                dismissError(mTextInputLayoutPhoneNumber);
+                break;
+            case "wrong data":
+                mTextInputLayoutPhoneNumber.setError("Wrong prefix or phone number");
+                dismissError(mTextInputLayoutPhoneNumber);
+                break;
         }
     }
 
@@ -112,6 +152,6 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
                 default:
                     break;
             }
-        }, 2500);
+        }, 2000);
     }
 }

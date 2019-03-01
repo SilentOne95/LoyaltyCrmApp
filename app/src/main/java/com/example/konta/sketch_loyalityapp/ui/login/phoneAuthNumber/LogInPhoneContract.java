@@ -4,8 +4,8 @@ public interface LogInPhoneContract {
 
     interface View {
 
-        boolean getTextInputEditText();
-        void displayErrorInputMessage();
+        boolean isInputEditTextValid();
+        void displayErrorInputMessage(String type);
         void dismissError(android.view.View v);
     }
 }
