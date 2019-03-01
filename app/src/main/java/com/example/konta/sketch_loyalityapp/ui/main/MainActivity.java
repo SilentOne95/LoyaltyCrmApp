@@ -35,6 +35,7 @@ import com.example.konta.sketch_loyalityapp.ui.login.phoneAuthCode.LogInVerifyFr
 import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
@@ -48,6 +49,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     MainActivityPresenter presenter;
 
+    private FirebaseAuth mFirebaseAuth;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     GoogleMapFragment mGoogleMapFragment;
@@ -58,13 +60,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public static String PACKAGE_NAME;
 
     @Override
-    protected int getLayout() {
-        return R.layout.activity_main;
-    }
+    protected int getLayout() { return R.layout.activity_main; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseAuth.useAppLanguage();
 
         // Check if GPS permission is granted - if so, start TrackingService
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -128,8 +131,15 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void setFragment(BaseFragment fragment) {
+    public void setFragment(BaseFragment fragment, String data) {
         fragment.attachPresenter(presenter);
+
+        // Adding data
+        if (!data.equals("")) {
+            Bundle bundle = new Bundle();
+            bundle.putString("DATA_STRING", data);
+            fragment.setArguments(bundle);
+        }
 
         // Replacing the fragment
         if (fragment instanceof LogInPhoneFragment || fragment instanceof LogInVerifyFragment) {
@@ -237,25 +247,22 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void onDrawerSlide(@NonNull View view, float v) {
-    }
+    public void onDrawerSlide(@NonNull View view, float v) { }
 
     @Override
-    public void onDrawerOpened(@NonNull View view) {
-    }
+    public void onDrawerOpened(@NonNull View view) { }
 
     @Override
     public void onDrawerClosed(@NonNull View view) {
-        presenter.displaySelectedScreen(layoutType);
+        presenter.displaySelectedScreen(layoutType, "");
         // Set layoutType to null to avoid creating new instance of fragment, when closing nav drawer
         // by clicking next to the view
         layoutType = null;
-        showInternetConnectionResult();
+//        showInternetConnectionResult();
     }
 
     @Override
-    public void onDrawerStateChanged(int i) {
-    }
+    public void onDrawerStateChanged(int i) { }
 
     @Override
     public void setDisplayItemChecked(int viewPosition) {

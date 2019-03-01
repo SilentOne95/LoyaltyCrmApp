@@ -37,7 +37,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     private static final String TAG = LogInFragment.class.getSimpleName();
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mFirebaseAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager mCallbackFacebookManager;
     private Button mLogInWithGoogleButton, mLogInWithFacebookButton, mLogInWithPhoneButton;
@@ -48,6 +48,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseAuth.useAppLanguage();
 
         // Hide action bar
         ((BaseActivity) getActivity()).getSupportActionBar().hide();
@@ -61,11 +64,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mLogInWithGoogleButton.setOnClickListener(this);
         mLogInWithFacebookButton.setOnClickListener(this);
         mLogInWithPhoneButton.setOnClickListener(this);
-
-        // TODO: Create attach method
-        // Temporary init FirebaseAuth in this fragment - testing purpose
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.useAppLanguage();
 
         // Log In with Google
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -106,7 +104,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 facebookSignIn();
                 break;
             case R.id.login_phone_button:
-                navigationPresenter.getSelectedLayoutType("phone");
+                navigationPresenter.getSelectedLayoutType("phone", "");
                 break;
             default:
                 break;
@@ -149,12 +147,12 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
+        mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -166,12 +164,12 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
+        mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.getException());

@@ -49,7 +49,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     @Override
     public void displayHomeScreen() {
         if (view != null) {
-            view.setFragment(new LogInFragment());
+            view.setFragment(new LogInFragment(), "");
         }
     }
 
@@ -132,47 +132,47 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void displaySelectedScreen(String layoutType) {
+    public void displaySelectedScreen(String layoutType, String data) {
 
         if (layoutType != null && view != null) {
             switch (layoutType) {
                 case "home":
-                    view.setFragment(new HomeFragment());
+                    view.setFragment(new HomeFragment(), data);
                     break;
                 case "products":
-                    view.setFragment(new ProductsFragment());
+                    view.setFragment(new ProductsFragment(), data);
                     break;
                 case "coupons":
-                    view.setFragment(new CouponsFragment());
+                    view.setFragment(new CouponsFragment(), data);
                     break;
                 case "map":
-                    view.setFragment(new GoogleMapFragment());
+                    view.setFragment(new GoogleMapFragment(), data);
                     break;
                 case "url":
-                    view.setFragment(new WebsiteFragment());
+                    view.setFragment(new WebsiteFragment(), data);
                     break;
                 case "terms":
-                    view.setFragment(new TermsFragment());
+                    view.setFragment(new TermsFragment(), data);
                     break;
                 case "contact":
-                    view.setFragment(new ContactFragment());
+                    view.setFragment(new ContactFragment(), data);
                     break;
                 case "scanner":
-                    view.setFragment(new BarcodeScanner());
+                    view.setFragment(new BarcodeScanner(), data);
                     break;
                 case "barcode":
-                    view.setFragment(new BarcodeGenerator());
+                    view.setFragment(new BarcodeGenerator(), data);
                     break;
 
                 // Registration views
                 case "login":
-                    view.setFragment(new LogInFragment());
+                    view.setFragment(new LogInFragment(), data);
                     break;
                 case "phone":
-                    view.setFragment(new LogInPhoneFragment());
+                    view.setFragment(new LogInPhoneFragment(), data);
                     break;
                 case "code":
-                    view.setFragment(new LogInVerifyFragment());
+                    view.setFragment(new LogInVerifyFragment(), data);
                     break;
                 default:
                     break;
@@ -181,7 +181,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void getSelectedLayoutType(String item) { displaySelectedScreen(item); }
+    public void getSelectedLayoutType(String item, String data) { displaySelectedScreen(item, data); }
 
     @Override
     public void setUpObservableHomeAdapter() {

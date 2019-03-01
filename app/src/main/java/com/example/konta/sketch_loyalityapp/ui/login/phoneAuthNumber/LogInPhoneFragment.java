@@ -25,6 +25,8 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
     private TextInputEditText mTextInputPhoneNumber;
     private Button mRegisterButton;
 
+    private String mProvidedPhoneNumber;
+
     public LogInPhoneFragment() {
         // Required empty public constructor
     }
@@ -58,18 +60,18 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
             // Hide keyboard and display next view
             mTextInputPrefix.onEditorAction(EditorInfo.IME_ACTION_DONE);
             mTextInputPhoneNumber.onEditorAction(EditorInfo.IME_ACTION_DONE);
-            navigationPresenter.getSelectedLayoutType("code");
+            navigationPresenter.getSelectedLayoutType("code", mProvidedPhoneNumber);
         }
     }
 
     @Override
     public boolean getTextInputEditText() {
-        String prefix, phoneNumber, number;
+        String prefix, phoneNumber;
 
         if (!TextUtils.isEmpty(mTextInputPrefix.getText().toString()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText().toString())) {
             prefix = "+" + mTextInputPrefix.getText().toString().trim();
             phoneNumber = mTextInputPhoneNumber.getText().toString().trim();
-            number = prefix + phoneNumber;
+            mProvidedPhoneNumber = prefix + phoneNumber;
 
             return true;
         } else {

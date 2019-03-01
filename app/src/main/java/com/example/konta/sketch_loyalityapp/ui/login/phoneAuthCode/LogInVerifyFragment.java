@@ -29,10 +29,10 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     private static final String TAG = LogInVerifyFragment.class.getSimpleName();
 
     private TextInputEditText mTextInputCode;
-    private TextView mTextWaitingForCode;
+    private TextView mTextWaitingForCode , mTextProvidedPhoneNumber;
     private ProgressBar mProgressBar;
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mFirebaseAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String mSmsCode, mVerificationId;
@@ -54,18 +54,17 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseAuth.useAppLanguage();
+
         // Hide action bar
         ((BaseActivity) getActivity()).getSupportActionBar().hide();
 
         // Views
+        mTextProvidedPhoneNumber = rootView.findViewById(R.id.verify_your_number_text);
         mTextInputCode = rootView.findViewById(R.id.verify_code_input_text);
         mTextWaitingForCode = rootView.findViewById(R.id.verify_waiting_for_code_text);
         mProgressBar = rootView.findViewById(R.id.verify_progress_bar);
-
-        // TODO:
-        // Temporary init FirebaseAuth in this fragment - testing purpose
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.useAppLanguage();
 
         // Log In with Phone Number
         mCallbacksPhoneNumber = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -89,6 +88,13 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 mResendToken = forceResendingToken;
             }
         };
+
+        // Extract additional data
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            mTest = bundle.getString("DATA_STRING");
+            mTextProvidedPhoneNumber.setText(mTest);
+        }
     }
 
     @Override
@@ -101,7 +107,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     @Override
     public void testPhoneSignIn() {
-        FirebaseAuthSettings firebaseAuthSettings = mAuth.getFirebaseAuthSettings();
+        FirebaseAuthSettings firebaseAuthSettings = mFirebaseAuth.getFirebaseAuthSettings();
         firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(mTestPhoneNumber, mTestVerificationCode);
 
         PhoneAuthProvider phoneAuthProvider = PhoneAuthProvider.getInstance();
@@ -150,7 +156,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         new Handler().postDelayed(() -> verifyPhoneNumberWithCode(mVerificationId, mSmsCode), 1000);
 
         // Switch layout with delay
-        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home"),5000);
+        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", ""),5000);
     }
 
     @Override
@@ -161,7 +167,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     @Override
     public void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
+        mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");

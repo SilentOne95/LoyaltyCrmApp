@@ -16,7 +16,7 @@ public interface MainActivityContract {
 
     interface View {
 
-        void setFragment(BaseFragment fragment);
+        void setFragment(BaseFragment fragment, String data);
         void setActivity(Class<? extends Activity> activity);
         void setLogInFragment(BaseFragment fragment);
 
@@ -35,7 +35,7 @@ public interface MainActivityContract {
         String getLayoutType(int groupId, int itemId);
 
         void displayHomeScreen();
-        void displaySelectedScreen(String layoutType);
+        void displaySelectedScreen(String layoutType, String data);
 
         void passDataToNavDrawer(SparseArray<HelperComponent> one, SparseArray<HelperComponent> two, int id);
         String matchRelevantIconName(String layoutType);
