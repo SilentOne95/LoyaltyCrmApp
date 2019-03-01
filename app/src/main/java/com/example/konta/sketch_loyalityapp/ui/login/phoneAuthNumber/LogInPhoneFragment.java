@@ -69,7 +69,7 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
 
     @Override
     public boolean isInputEditTextValid() {
-        String prefix, phoneNumber, typeError;
+        String prefix, phoneNumber, errorType;
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
         boolean isValid = false;
 
@@ -77,11 +77,11 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
             prefix = mTextInputPrefix.getText().toString().trim();
             prefix = prefix.replaceAll("\\+", "");
             phoneNumber = mTextInputPhoneNumber.getText().toString().trim();
-            String phone = "+" + prefix + phoneNumber;
+            String phone = "+" + prefix + " " + phoneNumber;
 
             try {
-                Phonenumber.PhoneNumber phonetest = phoneNumberUtil.parse(phone, null);
-                isValid = phoneNumberUtil.isValidNumber(phonetest);
+                Phonenumber.PhoneNumber phoneNumberObject = phoneNumberUtil.parse(phone, null);
+                isValid = phoneNumberUtil.isValidNumber(phoneNumberObject);
 
             } catch (NumberParseException e) {
                 e.printStackTrace();
@@ -97,16 +97,16 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
 
         } else {
             if (TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                typeError = "empty data";
+                errorType = "empty data";
             } else if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                typeError = "empty prefix";
+                errorType = "empty prefix";
             } else if (!TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                typeError = "empty number";
+                errorType = "empty number";
             } else {
-                typeError = "wrong type";
+                errorType = "wrong type";
             }
 
-            displayErrorInputMessage(typeError);
+            displayErrorInputMessage(errorType);
 
             return false;
         }
@@ -135,7 +135,9 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;
             case "wrong data":
+                mTextInputLayoutPrefix.setError(" ");
                 mTextInputLayoutPhoneNumber.setError("Wrong prefix or phone number");
+                dismissError(mTextInputLayoutPrefix);
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;
         }
