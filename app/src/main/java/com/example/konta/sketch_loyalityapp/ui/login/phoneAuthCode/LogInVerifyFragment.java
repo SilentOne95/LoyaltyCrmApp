@@ -161,9 +161,6 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
         // Verify sms code with delay
         new Handler().postDelayed(() -> verifyPhoneNumberWithCode(mVerificationId, mSmsCode), 1000);
-
-        // Switch layout with delay
-        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", ""),5000);
     }
 
     @Override
@@ -184,6 +181,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = task.getResult().getUser();
+
+                        // Switch layout to "home" with delay
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", ""),5000);
                     } else {
                         Log.d(TAG, "signInWithCredential:failure", task.getException());
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -201,8 +201,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         Log.d(TAG, "linkWithCredential:success");
                         FirebaseUser user = task.getResult().getUser();
 
-                        // Open Home view
-                        navigationPresenter.getSelectedLayoutType("home", "");
+                        // Switch layout to "home" with delay
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", ""),5000);
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
                         Toast.makeText(getContext(), "Authentication failed",
