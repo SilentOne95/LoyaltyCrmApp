@@ -139,8 +139,70 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     }
 
     @Override
+    public void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        if (mFirebaseAuth.getCurrentUser() != null) {
+            convertAnonymousAccount(credential);
+        } else {
+            signInWithGoogleCredential(credential);
+        }
+    }
+
+    @Override
+    public void signInWithGoogleCredential(AuthCredential credential) {
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                        // Open Home view
+                        navigationPresenter.getSelectedLayoutType("home", "");
+                    } else {
+                        // If sign in fails, display a message to the user
+                        Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                    }
+                });
+    }
+
+    @Override
     public void facebookSignIn() {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
+    }
+
+    @Override
+    public void handleFacebookAccessToken(AccessToken token) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        if (mFirebaseAuth.getCurrentUser() != null) {
+            convertAnonymousAccount(credential);
+        } else {
+            signInWithFacebookCredential(credential);
+        }
+    }
+
+    @Override
+    public void signInWithFacebookCredential(AuthCredential credential) {
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                        // Open Home view
+                        navigationPresenter.getSelectedLayoutType("home", "");
+                    } else {
+                        // If sign in fails, display a message to the user
+                        Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                    }
+                });
     }
 
     @Override
@@ -166,50 +228,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     }
 
     @Override
-    public void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
-
-                        // Open Home view
-                        navigationPresenter.getSelectedLayoutType("home", "");
-                    } else {
-                        // If sign in fails, display a message to the user
-                        Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
-                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-                    }
-                });
-    }
-
-    @Override
-    public void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
-
-                        // Open Home view
-                        navigationPresenter.getSelectedLayoutType("home", "");
-                    } else {
-                        // If sign in fails, display a message to the user
-                        Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
-                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-                    }
-                });
-    }
-
-    @Override
     public void anonymousSignIn() {
         mFirebaseAuth.signInAnonymously()
                 .addOnCompleteListener(getActivity(), task -> {
@@ -223,7 +241,25 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInAnonymously:failure", task.getException());
-                        Toast.makeText(getContext(), "Authentication failed.",
+                        Toast.makeText(getContext(), "Authentication failed",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void convertAnonymousAccount(AuthCredential credential) {
+        mFirebaseAuth.getCurrentUser().linkWithCredential(credential)
+                .addOnCompleteListener(getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "linkWithCredential:success");
+                        FirebaseUser user = task.getResult().getUser();
+
+                        // Open Home view
+                        navigationPresenter.getSelectedLayoutType("home", "");
+                    } else {
+                        Log.w(TAG, "linkWithCredential:failure", task.getException());
+                        Toast.makeText(getContext(), "Authentication failed",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
