@@ -1,12 +1,16 @@
 package com.example.konta.sketch_loyalityapp.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
@@ -40,6 +44,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     private FirebaseAuth mFirebaseAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager mCallbackFacebookManager;
+
     private Button mLogInWithGoogleButton, mLogInWithFacebookButton, mLogInWithPhoneButton;
 
     @Override
@@ -96,28 +101,38 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()) {
-            case R.id.login_google_button:
-                googleSignIn();
-                break;
-            case R.id.login_facebook_button:
-                facebookSignIn();
-                break;
-            case R.id.login_phone_button:
-                navigationPresenter.getSelectedLayoutType("phone", "");
-                break;
-            default:
-                break;
-
+        if (checkInternetConnection()) {
+            switch (view.getId()) {
+                case R.id.login_google_button:
+                    googleSignIn();
+                    break;
+                case R.id.login_facebook_button:
+                    facebookSignIn();
+                    break;
+                case R.id.login_phone_button:
+                    navigationPresenter.getSelectedLayoutType("phone", "");
+                    break;
+            }
+        } else {
+            Toast.makeText(getContext(), "Internet connection is required", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void googleSignIn() {
+    protected boolean checkInternetConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
+    @Override
+    public void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void facebookSignIn() {
+    @Override
+    public void facebookSignIn() {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
     }
 
@@ -143,7 +158,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mCallbackFacebookManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+    @Override
+    public void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
@@ -154,13 +170,15 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
                     } else {
-                        // If sign in fails, display a message to the user.
+                        // If sign in fails, display a message to the user
+                        Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                     }
                 });
     }
 
-    private void handleFacebookAccessToken(AccessToken token) {
+    @Override
+    public void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
@@ -171,7 +189,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
                     } else {
-                        // If sign in fails, display a message to the user.
+                        // If sign in fails, display a message to the user
+                        Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                     }
                 });

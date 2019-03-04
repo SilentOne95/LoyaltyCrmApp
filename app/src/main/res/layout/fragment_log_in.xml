@@ -48,7 +48,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/lato"
-                android:text="Choose registration method:"
+                android:text="Sign Up / Sign In:"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/mid_text_size" />
 
@@ -62,7 +62,7 @@
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
-                android:text="Sign up with Google"
+                android:text="Continue with Google"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/colorBlack"
@@ -80,7 +80,7 @@
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
-                android:text="Sign up with Facebook"
+                android:text="Continue with Facebook"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
@@ -97,7 +97,7 @@
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingEnd="8dp"
-                android:text="Sign up with Phone"
+                android:text="Continue with Phone"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
@@ -117,34 +117,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/register_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/lato"
-                android:text="Already have an account?"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/mid_text_size" />
-
-            <Button
-                android:id="@+id/register_button"
-                android:layout_width="220dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/rounded_corners_button"
-                android:fontFamily="@font/lato"
-                android:gravity="center"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:text="Log In"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/mid_text_size"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/register_guest_text"
