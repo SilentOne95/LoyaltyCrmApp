@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         presenter.setUpObservableHomeAdapter();
 
         // Using Retrofit to set up NavDrawer
-        showInternetConnectionResult();
+//        showInternetConnectionResult();
     }
 
     @Override
@@ -110,6 +110,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         super.onStart();
 
         // Display relevant view based on whether user is already logged or not
+        // TODO:
+        // Replace hardcoded variables
         if (mFirebaseAuth.getCurrentUser() != null) {
             presenter.displayHomeScreen("home");
         } else {
@@ -180,6 +182,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
         if (fragment instanceof LogInPhoneFragment || fragment instanceof  LogInVerifyFragment) {
             setLogInFragment(new LogInFragment());
+        } else if (fragment instanceof LogInFragment && mFirebaseAuth.getCurrentUser() != null) {
+            // TODO:
+            // Replace hardcoded variables
+            presenter.displaySelectedScreen("home", "");
+            presenter.passIdOfSelectedView(1);
         } else {
             super.onBackPressed();
         }

@@ -19,6 +19,8 @@ public interface LogInContract {
         void anonymousSignIn();
 
         void convertAnonymousAccount(AuthCredential credential);
+
+        void displayAccountAlreadyExists();
     }
 
     interface Presenter {

@@ -117,7 +117,11 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     navigationPresenter.getSelectedLayoutType("phone", "");
                     break;
                 case R.id.register_guest_text:
-                    anonymousSignIn();
+                    if (mFirebaseAuth.getCurrentUser() != null) {
+                        displayAccountAlreadyExists();
+                    } else {
+                        anonymousSignIn();
+                    }
                     break;
             }
         } else {
@@ -159,7 +163,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
-                        // Open Home view
+                        // Open "home" view
                         navigationPresenter.getSelectedLayoutType("home", "");
                     } else {
                         // If sign in fails, display a message to the user
@@ -195,7 +199,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
-                        // Open Home view
+                        // Open "home" view
                         navigationPresenter.getSelectedLayoutType("home", "");
                     } else {
                         // If sign in fails, display a message to the user
@@ -236,7 +240,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         Log.d(TAG, "signInAnonymously:success");
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
-                        // Open Home view
+                        // Open "home" view
                         navigationPresenter.getSelectedLayoutType("home", "");
                     } else {
                         // If sign in fails, display a message to the user.
@@ -263,5 +267,10 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    public void displayAccountAlreadyExists() {
+        Toast.makeText(getContext(), "Already sign in as a guest!\nPlease choose other option", Toast.LENGTH_LONG).show();
     }
 }
