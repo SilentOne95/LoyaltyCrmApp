@@ -9,12 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthSettings;
@@ -123,7 +125,11 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         Log.d(TAG, "testOnVerificationCompleted: " + phoneAuthCredential);
 
                         setCodeInEditText(phoneAuthCredential.getSmsCode());
-                        new Handler().postDelayed(() -> signInWithPhoneAuthCredential(phoneAuthCredential), 1000);
+                        if (mFirebaseAuth.getCurrentUser() != null) {
+                            new Handler().postDelayed(() -> convertAnonymousAccount(phoneAuthCredential), 1000);
+                        } else {
+                            new Handler().postDelayed(() -> signInWithPhoneAuthCredential(phoneAuthCredential), 1000);
+                        }
                     }
 
                     @Override
@@ -163,7 +169,12 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     @Override
     public void verifyPhoneNumberWithCode(String verificationId, String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
-        signInWithPhoneAuthCredential(credential);
+
+        if (mFirebaseAuth.getCurrentUser() != null) {
+            convertAnonymousAccount(credential);
+        } else {
+            signInWithPhoneAuthCredential(credential);
+        }
     }
 
     @Override
@@ -178,6 +189,24 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             // The verification code entered was invalid
                         }
+                    }
+                });
+    }
+
+    @Override
+    public void convertAnonymousAccount(AuthCredential credential) {
+        mFirebaseAuth.getCurrentUser().linkWithCredential(credential)
+                .addOnCompleteListener(getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "linkWithCredential:success");
+                        FirebaseUser user = task.getResult().getUser();
+
+                        // Open Home view
+                        navigationPresenter.getSelectedLayoutType("home", "");
+                    } else {
+                        Log.w(TAG, "linkWithCredential:failure", task.getException());
+                        Toast.makeText(getContext(), "Authentication failed",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
