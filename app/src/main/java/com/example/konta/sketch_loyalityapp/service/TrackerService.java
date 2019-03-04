@@ -27,6 +27,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -104,20 +105,17 @@ public class TrackerService extends Service {
     };
 
     private void loginToFirebase() {
-        FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Log.d(TAG, "firebase auth success");
-                requestLocationUpdates();
-            } else {
-                Log.d(TAG, "firebase auth failed");
-            }
-        });
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            requestLocationUpdates();
+            Log.d(TAG, "logged to Firebase");
+        }
     }
 
     private void requestLocationUpdates() {
         LocationRequest request = new LocationRequest();
-        request.setInterval(10000);
-        request.setFastestInterval(5000);
+        request.setInterval(100000);
+        request.setFastestInterval(50000);
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);

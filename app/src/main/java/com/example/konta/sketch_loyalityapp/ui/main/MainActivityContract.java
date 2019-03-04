@@ -34,7 +34,7 @@ public interface MainActivityContract {
         void requestDataFromServer();
         String getLayoutType(int groupId, int itemId);
 
-        void displayHomeScreen();
+        void displayHomeScreen(String layoutType);
         void displaySelectedScreen(String layoutType, String data);
 
         void passDataToNavDrawer(SparseArray<HelperComponent> one, SparseArray<HelperComponent> two, int id);

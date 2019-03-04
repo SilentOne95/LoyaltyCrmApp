@@ -99,11 +99,22 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         presenter = new MainActivityPresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
-        presenter.displayHomeScreen();
         presenter.setUpObservableHomeAdapter();
 
         // Using Retrofit to set up NavDrawer
         showInternetConnectionResult();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Display relevant view based on whether user is already logged or not
+        if (mFirebaseAuth.getCurrentUser() != null) {
+            presenter.displayHomeScreen("home");
+        } else {
+            presenter.displayHomeScreen("login");
+        }
     }
 
     protected boolean checkInternetConnection() {

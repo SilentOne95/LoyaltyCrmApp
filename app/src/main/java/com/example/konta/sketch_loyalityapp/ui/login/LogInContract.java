@@ -11,6 +11,7 @@ public interface LogInContract {
         void facebookSignIn();
         void firebaseAuthWithGoogle(GoogleSignInAccount account);
         void handleFacebookAccessToken(AccessToken token);
+        void anonymousSignIn();
     }
 
     interface Presenter {

@@ -47,10 +47,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void displayHomeScreen() {
-        if (view != null) {
-            view.setFragment(new LogInFragment(), "");
-        }
+    public void displayHomeScreen(String layoutType) {
+        displaySelectedScreen(layoutType, "");
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.R;
@@ -45,7 +46,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager mCallbackFacebookManager;
 
-    private Button mLogInWithGoogleButton, mLogInWithFacebookButton, mLogInWithPhoneButton;
+    private Button mSignInWithGoogleButton, mSignInWithFacebookButton, mSignInWithPhoneButton;
+    private TextView mSignInAnonymously;
 
     @Override
     protected int getLayout() { return R.layout.fragment_log_in; }
@@ -61,14 +63,16 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         ((BaseActivity) getActivity()).getSupportActionBar().hide();
 
         // Assign views
-        mLogInWithGoogleButton = rootView.findViewById(R.id.login_google_button);
-        mLogInWithFacebookButton = rootView.findViewById(R.id.login_facebook_button);
-        mLogInWithPhoneButton = rootView.findViewById(R.id.login_phone_button);
+        mSignInWithGoogleButton = rootView.findViewById(R.id.login_google_button);
+        mSignInWithFacebookButton = rootView.findViewById(R.id.login_facebook_button);
+        mSignInWithPhoneButton = rootView.findViewById(R.id.login_phone_button);
+        mSignInAnonymously = rootView.findViewById(R.id.register_guest_text);
 
         // Button listeners
-        mLogInWithGoogleButton.setOnClickListener(this);
-        mLogInWithFacebookButton.setOnClickListener(this);
-        mLogInWithPhoneButton.setOnClickListener(this);
+        mSignInWithGoogleButton.setOnClickListener(this);
+        mSignInWithFacebookButton.setOnClickListener(this);
+        mSignInWithPhoneButton.setOnClickListener(this);
+        mSignInAnonymously.setOnClickListener(this);
 
         // Log In with Google
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -111,6 +115,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     break;
                 case R.id.login_phone_button:
                     navigationPresenter.getSelectedLayoutType("phone", "");
+                    break;
+                case R.id.register_guest_text:
+                    anonymousSignIn();
                     break;
             }
         } else {
@@ -169,6 +176,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                        // Open Home view
+                        navigationPresenter.getSelectedLayoutType("home", "");
                     } else {
                         // If sign in fails, display a message to the user
                         Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
@@ -188,10 +198,33 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                        // Open Home view
+                        navigationPresenter.getSelectedLayoutType("home", "");
                     } else {
                         // If sign in fails, display a message to the user
                         Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
+                    }
+                });
+    }
+
+    @Override
+    public void anonymousSignIn() {
+        mFirebaseAuth.signInAnonymously()
+                .addOnCompleteListener(getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInAnonymously:success");
+                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                        // Open Home view
+                        navigationPresenter.getSelectedLayoutType("home", "");
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInAnonymously:failure", task.getException());
+                        Toast.makeText(getContext(), "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
