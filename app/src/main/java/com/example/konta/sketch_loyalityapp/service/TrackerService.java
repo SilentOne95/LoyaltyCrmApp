@@ -119,7 +119,15 @@ public class TrackerService extends Service {
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
-        final String path = "path/position";
+
+        String userId = FirebaseAuth.getInstance().getUid();
+        String key = FirebaseDatabase.getInstance().getReference(userId + "location").push().getKey();
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference()
+                .child(userId)
+                .child("location")
+                .child(key);
+
         int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         if (permission == PackageManager.PERMISSION_GRANTED) {
@@ -128,11 +136,15 @@ public class TrackerService extends Service {
             client.requestLocationUpdates(request, new LocationCallback() {
                 @Override
                 public void onLocationResult(LocationResult locationResult) {
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(path);
+                    DatabaseReference latReference = reference.child("lat");
+                    DatabaseReference lngReference = reference.child("lng");
+
                     Location location = locationResult.getLastLocation();
+
                     if (location != null) {
-                        Log.d(TAG, "location update " + location);
-                        reference.setValue(location.getLatitude() + ", " + location.getLongitude());
+                        Log.d(TAG, "location update " + location.getLatitude() + " " + location.getLongitude());
+                        latReference.setValue(location.getLatitude());
+                        lngReference.setValue(location.getLongitude());
                     }
                 }
             }, null);
