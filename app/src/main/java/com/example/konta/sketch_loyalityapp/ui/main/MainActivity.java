@@ -101,14 +101,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         presenter.requestDataFromServer();
         presenter.setUpObservableHomeAdapter();
 
-        // Using Retrofit to set up NavDrawer
-//        showInternetConnectionResult();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         // Display relevant view based on whether user is already logged or not
         // TODO:
         // Replace hardcoded variables
@@ -117,6 +109,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         } else {
             presenter.displayHomeScreen("login");
         }
+
+        // Using Retrofit to set up NavDrawer
+//        showInternetConnectionResult();
     }
 
     protected boolean checkInternetConnection() {
