@@ -205,7 +205,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             // TODO:
             // Replace hardcoded variables
             presenter.displaySelectedScreen("home", "");
-            presenter.passIdOfSelectedView(1);
+            presenter.passIdOfSelectedView(0);
         } else {
             super.onBackPressed();
         }
@@ -333,7 +333,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
-        if (!(fragment instanceof BarcodeGenerator)) {
+        if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
+            presenter.displaySelectedScreen("login", "");
+        } else if (!(fragment instanceof BarcodeGenerator)) {
             presenter.displaySelectedScreen("barcode", "");
             uncheckItemsNavDrawer();
         }

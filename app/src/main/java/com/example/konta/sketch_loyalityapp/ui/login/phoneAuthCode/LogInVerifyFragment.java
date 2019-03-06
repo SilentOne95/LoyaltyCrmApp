@@ -76,6 +76,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                 Log.d(TAG,"onVerificationCompleted:" + phoneAuthCredential);
+
                 mSmsCode = phoneAuthCredential.getSmsCode();
                 setCodeInEditText(mSmsCode);
             }
