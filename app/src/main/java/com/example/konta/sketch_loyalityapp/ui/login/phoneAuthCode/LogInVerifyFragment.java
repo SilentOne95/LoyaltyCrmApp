@@ -26,6 +26,8 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.example.konta.sketch_loyalityapp.Constants.NOT_ANONYMOUS_REGISTRATION;
+
 public class LogInVerifyFragment extends BaseFragment implements LogInVerifyContract.View {
 
     private static final String TAG = LogInVerifyFragment.class.getSimpleName();
@@ -183,7 +185,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         FirebaseUser user = task.getResult().getUser();
 
                         // Switch layout to "home" with delay
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", ""),5000);
+                        // TODO: Workaround
+                        // Pass string to display / hide information about account in nav view header
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),5000);
                     } else {
                         Log.d(TAG, "signInWithCredential:failure", task.getException());
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -202,7 +206,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         FirebaseUser user = task.getResult().getUser();
 
                         // Switch layout to "home" with delay
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", ""),5000);
+                        // TODO: Workaround
+                        // Pass string to display / hide information about account in nav view header
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),5000);
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
                         Toast.makeText(getContext(), "Authentication failed",

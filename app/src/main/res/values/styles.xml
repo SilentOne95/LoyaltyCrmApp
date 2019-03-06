@@ -59,8 +59,7 @@
     <style name="nav_header_logo">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">15dp</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">24dp</item>
     </style>
 
     <style name="navigation_view">

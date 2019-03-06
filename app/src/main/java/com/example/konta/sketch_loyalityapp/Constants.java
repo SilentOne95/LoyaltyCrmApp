@@ -32,4 +32,8 @@ public final class Constants {
     public static final int BARCODE_WIDTH = 600;
     public static final int BARCODE_HEIGHT = 300;
 
+    // Additional data while changing fragments
+    public static final String ANONYMOUS_REGISTRATION = "anonymous";
+    public static final String NOT_ANONYMOUS_REGISTRATION = "not anonymous";
+
 }

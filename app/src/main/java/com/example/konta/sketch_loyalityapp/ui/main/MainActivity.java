@@ -23,6 +23,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
@@ -38,13 +39,15 @@ import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static com.example.konta.sketch_loyalityapp.Constants.ANONYMOUS_REGISTRATION;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
+import static com.example.konta.sketch_loyalityapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 
 public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
-        NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View, Toolbar.OnMenuItemClickListener {
+        NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View, Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -54,6 +57,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     GoogleMapFragment mGoogleMapFragment;
+
+    private View mNavViewHeaderShadeContainer;
+    private Button mNavViewHeaderButton;
 
     // Field that stores layout type of clicked menu item
     private String layoutType = null;
@@ -99,6 +105,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mNavigationView.setNavigationItemSelectedListener(this);
         hideNavDrawerScrollbar();
 
+        // Init navigation view header
+        View navigationViewHeader = mNavigationView.getHeaderView(0);
+        mNavViewHeaderShadeContainer = navigationViewHeader.findViewById(R.id.navigation_view_header_shade_container);
+        mNavViewHeaderButton = navigationViewHeader.findViewById(R.id.navigation_header_button);
+        mNavViewHeaderButton.setOnClickListener(this);
+
         presenter = new MainActivityPresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
         presenter.setUpObservableHomeAdapter();
@@ -141,10 +153,13 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         fragment.attachPresenter(presenter);
 
         // Adding data
-        if (!data.equals("")) {
+        if (!data.equals("") && !data.equals(ANONYMOUS_REGISTRATION)
+                && !data.equals(NOT_ANONYMOUS_REGISTRATION) ) {
             Bundle bundle = new Bundle();
             bundle.putString("DATA_STRING", data);
             fragment.setArguments(bundle);
+        } else if (data.equals(ANONYMOUS_REGISTRATION) || data.equals(NOT_ANONYMOUS_REGISTRATION)) {
+            setNavViewHeaderVisibility(data);
         }
 
         // Replacing the fragment
@@ -153,6 +168,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             getSupportFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left)
+                    .replace(R.id.switch_view_layout, fragment)
+                    .commit();
+        } else if (fragment instanceof LogInFragment) {
+            getSupportFragmentManager()
+                    .beginTransaction()
                     .replace(R.id.switch_view_layout, fragment)
                     .commit();
         } else {
@@ -318,5 +338,25 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             uncheckItemsNavDrawer();
         }
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        layoutType = "login";
+
+        // Close drawer after delay when item is tapped
+        new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), 200);
+    }
+
+    @Override
+    public void setNavViewHeaderVisibility(String isAccountAnonymous) {
+        switch (isAccountAnonymous) {
+            case NOT_ANONYMOUS_REGISTRATION:
+                mNavViewHeaderShadeContainer.setVisibility(View.GONE);
+                break;
+            case ANONYMOUS_REGISTRATION:
+                mNavViewHeaderShadeContainer.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 }

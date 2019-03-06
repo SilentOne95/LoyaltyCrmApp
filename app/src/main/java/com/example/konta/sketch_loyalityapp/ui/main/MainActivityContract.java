@@ -27,6 +27,8 @@ public interface MainActivityContract {
                                 int homeScreenId, String[] iconNameArray);
         void setDisplayItemChecked(int viewPosition);
         void uncheckItemsNavDrawer();
+
+        void setNavViewHeaderVisibility(String isAccountAnonymous);
     }
 
     interface Presenter {

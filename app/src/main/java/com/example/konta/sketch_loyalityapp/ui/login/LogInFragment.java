@@ -36,6 +36,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Arrays;
 
+import static com.example.konta.sketch_loyalityapp.Constants.ANONYMOUS_REGISTRATION;
+import static com.example.konta.sketch_loyalityapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.example.konta.sketch_loyalityapp.Constants.RC_SIGN_IN;
 
 public class LogInFragment extends BaseFragment implements LogInContract.View, View.OnClickListener {
@@ -164,7 +166,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
                         // Open "home" view
-                        navigationPresenter.getSelectedLayoutType("home", "");
+                        // TODO: Workaround
+                        // Pass string to display / hide information about account in nav view header
+                        navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user
                         Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
@@ -200,7 +204,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
                         // Open "home" view
-                        navigationPresenter.getSelectedLayoutType("home", "");
+                        // TODO: Workaround
+                        // Pass string to display / hide information about account in nav view header
+                        navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user
                         Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
@@ -241,7 +247,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
                         // Open "home" view
-                        navigationPresenter.getSelectedLayoutType("home", "");
+                        // TODO: Workaround
+                        // Pass string to display / hide information about account in nav view header
+                        navigationPresenter.getSelectedLayoutType("home", ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInAnonymously:failure", task.getException());
@@ -260,7 +268,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         FirebaseUser user = task.getResult().getUser();
 
                         // Open "home" view
-                        navigationPresenter.getSelectedLayoutType("home", "");
+                        // TODO: Workaround
+                        // Pass string to display / hide information about account in nav view header
+                        navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
                         Toast.makeText(getContext(), "Authentication failed",
