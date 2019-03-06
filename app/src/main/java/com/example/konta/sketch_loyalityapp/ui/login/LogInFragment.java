@@ -259,7 +259,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         Log.d(TAG, "linkWithCredential:success");
                         FirebaseUser user = task.getResult().getUser();
 
-                        // Open Home view
+                        // Open "home" view
                         navigationPresenter.getSelectedLayoutType("home", "");
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
@@ -271,6 +271,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     @Override
     public void displayAccountAlreadyExists() {
-        Toast.makeText(getContext(), "Already sign in as a guest!\nPlease choose other option", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Already signed in as a guest!\nPlease choose other option", Toast.LENGTH_LONG).show();
     }
 }

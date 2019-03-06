@@ -29,6 +29,7 @@ import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
 import com.example.konta.sketch_loyalityapp.service.TrackerService;
+import com.example.konta.sketch_loyalityapp.ui.barcodeGenerator.BarcodeGenerator;
 import com.example.konta.sketch_loyalityapp.ui.login.LogInFragment;
 import com.example.konta.sketch_loyalityapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
 import com.example.konta.sketch_loyalityapp.ui.login.phoneAuthCode.LogInVerifyFragment;
@@ -43,7 +44,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
 
 public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
-        NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View {
+        NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View, Toolbar.OnMenuItemClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Init toolbar and action bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setOnMenuItemClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -146,7 +148,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
 
         // Replacing the fragment
-        if (fragment instanceof LogInPhoneFragment || fragment instanceof LogInVerifyFragment) {
+        if (fragment instanceof LogInPhoneFragment || fragment instanceof LogInVerifyFragment
+                || fragment instanceof BarcodeGenerator) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left)
@@ -155,6 +158,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right)
                     .replace(R.id.switch_view_layout, fragment)
                     .commit();
         }
@@ -298,5 +302,21 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
+        if (!(fragment instanceof BarcodeGenerator)) {
+            presenter.displaySelectedScreen("barcode", "");
+            uncheckItemsNavDrawer();
+        }
+        return false;
     }
 }
