@@ -62,7 +62,7 @@ dependencies {
     // Firebase database and cloud messaging
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
-    implementation 'com.google.firebase:firebase-database:16.0.6'
+    implementation 'com.google.firebase:firebase-database:16.1.0'
     implementation 'com.google.firebase:firebase-messaging:17.4.0'
 
     // RxJava2
@@ -78,6 +78,14 @@ dependencies {
 
     // Phone prefix and number verification library
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.10.6'
+
+    // Room components
+    implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
+
+    // Lifecycle components
+    implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
 
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.20'
