@@ -367,36 +367,28 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="contact_info_phone_text" parent="basic_bottom_sheet_text">
-        <item name="android:layout_marginStart">50dp</item>
-        <item name="android:layout_marginTop">@dimen/very_big_value</item>
-        <item name="android:padding">@dimen/small_value</item>
-    </style>
-
     <style name="contact_info_phone_view" parent="basic_bottom_sheet_text">
-        <item name="android:layout_marginEnd">@dimen/mid_value</item>
-        <item name="android:padding">@dimen/small_value</item>
-        <item name="android:drawablePadding">@dimen/small_value</item>
-    </style>
-
-    <style name="contact_info_email_text" parent="basic_bottom_sheet_text">
+        <item name="android:layout_marginStart">@dimen/very_big_value</item>
         <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
         <item name="android:padding">@dimen/small_value</item>
+        <item name="android:drawablePadding">@dimen/mid_value</item>
     </style>
 
     <style name="contact_info_email_view" parent="basic_bottom_sheet_text">
-        <item name="android:padding">@dimen/small_value</item>
-        <item name="android:drawablePadding">@dimen/small_value</item>
-    </style>
-
-    <style name="contact_info_website_text" parent="basic_bottom_sheet_text">
+        <item name="android:layout_marginStart">@dimen/very_big_value</item>
         <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
         <item name="android:padding">@dimen/small_value</item>
+        <item name="android:drawablePadding">@dimen/mid_value</item>
     </style>
 
     <style name="contact_info_website_view" parent="basic_bottom_sheet_text">
+        <item name="android:layout_marginStart">@dimen/very_big_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
         <item name="android:padding">@dimen/small_value</item>
-        <item name="android:drawablePadding">@dimen/small_value</item>
+        <item name="android:drawablePadding">@dimen/mid_value</item>
     </style>
 
 

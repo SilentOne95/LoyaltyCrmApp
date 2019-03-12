@@ -63,9 +63,6 @@
     <string name="sunday_text">Sunday</string>
 
     <string name="contact_us_text">In case of any questions,\n please contact us:</string>
-    <string name="contact_info_phone_number_text">Phone:</string>
-    <string name="contact_info_email_text">E-mail:</string>
-    <string name="contact_info_website_text">Website:</string>
 
     <!-- Image content descriptions -->
     <string name="navigation_header_logo_desc">Navigation header company logo</string>

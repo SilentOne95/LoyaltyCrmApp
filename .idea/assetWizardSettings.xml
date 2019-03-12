@@ -45,8 +45,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\png\ic_info.png" />
-                                      <entry key="outputName" value="ic_info" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\png\ic_home_indicator.png" />
+                                      <entry key="outputName" value="ic_home_indicator" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
                                     </map>
