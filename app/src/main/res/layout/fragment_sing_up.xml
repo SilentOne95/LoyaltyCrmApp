@@ -15,8 +15,9 @@
         tools:context=".ui.signUp.SignUpFragment">
 
         <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:id="@+id/sample_image_view"
-            android:src="@drawable/ic_sample_lock"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -82,34 +82,28 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                 iconName = "ic_menu_home";
                 break;
             case "products":
-                iconName = "ic_menu_cube";
+                iconName = "ic_menu_product";
                 break;
             case "coupons":
                 iconName = "ic_menu_coupon";
                 break;
             case "map":
-                iconName = "ic_menu_marker";
-                break;
-            case "login":
-                iconName = "ic_menu_account";
+                iconName = "ic_menu_map";
                 break;
             case "url":
-                iconName = "ic_menu_search";
+                iconName = "ic_menu_website";
                 break;
             case "terms":
                 iconName = "ic_menu_terms";
                 break;
             case "contact":
-                iconName = "ic_menu_phone";
+                iconName = "ic_menu_contact";
                 break;
             case "scanner":
-                iconName = "ic_menu_barcode_scan";
-                break;
-            case "barcode":
-                iconName = "ic_menu_account";
+                iconName = "ic_menu_scanner";
                 break;
             default:
-                iconName = "ic_menu_script";
+                iconName = "ic_menu_page";
                 break;
         }
 
