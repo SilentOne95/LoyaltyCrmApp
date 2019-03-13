@@ -1,14 +1,14 @@
 package com.example.konta.sketch_loyalityapp.ui.home;
 
-import android.util.SparseArray;
-
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
+
+import java.util.ArrayList;
 
 public interface HomeContract {
 
     interface View {
 
-        void setUpAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns);
+        void setUpAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns);
         void setUpEmptyStateView(boolean isNeeded);
         void hideProgressBar();
     }
@@ -16,7 +16,7 @@ public interface HomeContract {
     interface Presenter {
 
         void requestDataFromServer();
-        void passDataToAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns);
+        void passDataToAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns);
         void hideProgressBar();
 
         void passIdOfSelectedView(int viewId);

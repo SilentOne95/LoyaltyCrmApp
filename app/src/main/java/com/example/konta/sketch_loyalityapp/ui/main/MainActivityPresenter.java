@@ -2,7 +2,6 @@ package com.example.konta.sketch_loyalityapp.ui.main;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
@@ -19,6 +18,9 @@ import com.example.konta.sketch_loyalityapp.ui.products.ProductsFragment;
 import com.example.konta.sketch_loyalityapp.ui.contact.ContactFragment;
 import com.example.konta.sketch_loyalityapp.ui.terms.TermsFragment;
 import com.example.konta.sketch_loyalityapp.ui.website.WebsiteFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -52,8 +54,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     @Override
-    public void passDataToNavDrawer(SparseArray<HelperComponent> menu,
-                                    SparseArray<HelperComponent> submenu, int homeScreenId) {
+    public void passDataToNavDrawer(ArrayList<MenuComponent> menu,
+                                    ArrayList<MenuComponent> submenu, int homeScreenId) {
         int arraySize = menu.size() + submenu.size();
         int arrayIndex = 0;
         String[] iconNameArray = new String[arraySize];

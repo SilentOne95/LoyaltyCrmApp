@@ -19,7 +19,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +27,7 @@ import android.widget.Toast;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.service.TrackerService;
 import com.example.konta.sketch_loyalityapp.ui.barcodeGenerator.BarcodeGenerator;
 import com.example.konta.sketch_loyalityapp.ui.login.LogInFragment;
@@ -38,6 +37,8 @@ import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.root.MyApplication;
 import com.example.konta.sketch_loyalityapp.R;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 import static com.example.konta.sketch_loyalityapp.Constants.ANONYMOUS_REGISTRATION;
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
@@ -222,8 +223,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
-                                   SparseArray<HelperComponent> submenuSectionArray,
+    public void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
+                                   ArrayList<MenuComponent> submenuSectionArray,
                                    int homeScreenId, String[] iconNameArray) {
 
         Menu menu = mNavigationView.getMenu(), submenu = mNavigationView.getMenu();
@@ -232,14 +233,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         for (int i = 0; i < menuSectionArray.size(); i++) {
             menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER,
-                    menuSectionArray.get(i).getTitle())
+                    menuSectionArray.get(i).getComponentTitle())
                     .setIcon(resources.getIdentifier(iconNameArray[arrayIndex], "drawable", PACKAGE_NAME));
             arrayIndex++;
         }
 
         for (int i = 0; i < submenuSectionArray.size(); i++) {
             submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER,
-                    submenuSectionArray.get(i).getTitle())
+                    submenuSectionArray.get(i).getComponentTitle())
                     .setIcon(resources.getIdentifier(iconNameArray[arrayIndex], "drawable", PACKAGE_NAME));
             arrayIndex++;
         }

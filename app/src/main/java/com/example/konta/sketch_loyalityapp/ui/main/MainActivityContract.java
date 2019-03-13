@@ -1,13 +1,13 @@
 package com.example.konta.sketch_loyalityapp.ui.main;
 
 import android.app.Activity;
-import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
-import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.HelperArray;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.home.HomePresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -22,8 +22,8 @@ public interface MainActivityContract {
 
         void hideNavDrawerScrollbar();
 
-        void setDataToNavDrawer(SparseArray<HelperComponent> menuSectionArray,
-                                SparseArray<HelperComponent> submenuSectionArray,
+        void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
+                                ArrayList<MenuComponent> submenuSectionArray,
                                 int homeScreenId, String[] iconNameArray);
         void setDisplayItemChecked(int viewPosition);
         void uncheckItemsNavDrawer();
@@ -39,7 +39,7 @@ public interface MainActivityContract {
         void displayHomeScreen(String layoutType);
         void displaySelectedScreen(String layoutType, String data);
 
-        void passDataToNavDrawer(SparseArray<HelperComponent> one, SparseArray<HelperComponent> two, int id);
+        void passDataToNavDrawer(ArrayList<MenuComponent> one, ArrayList<MenuComponent> two, int id);
         String matchRelevantIconName(String layoutType);
 
         void setUpObservableHomeAdapter();
@@ -51,8 +51,9 @@ public interface MainActivityContract {
         Disposable fetchDataFromServer(MainActivityPresenter presenter);
         Disposable fetchDataFromServer(HomePresenter presenter);
 
-        void refactorFetchedDataForNavDrawer(List<MenuComponent> listOfItems);
-        void refactorFetchedDataForHomeView(List<MenuComponent> listOfItems);
+        void fetchedDataForNavDrawer(List<MenuComponent> listOfItems);
+        void fetchedDataForHomeView(List<MenuComponent> listOfItems);
+        HelperArray refactorFetchedData(List<MenuComponent> listOfItems);
 
         String getMenuLayoutType(int itemId);
         String getSubmenuLayoutType(int itemId);

@@ -20,6 +20,8 @@ import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.R;
 
+import java.util.ArrayList;
+
 public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
@@ -62,12 +64,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         @Override
         public void onItemHomeClick(MenuComponent item, int selectedViewId) {
             navigationPresenter.getSelectedLayoutType(item.getType(), "");
-            presenter.passIdOfSelectedView(selectedViewId);
+            // Need to add 1 position as views count from 0, but menu items from 1
+            presenter.passIdOfSelectedView(selectedViewId + 1);
         }
     };
 
     @Override
-    public void setUpAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns) {
+    public void setUpAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
         if (menuComponentList.size() == 0) {
             setUpEmptyStateView(true);
         } else {

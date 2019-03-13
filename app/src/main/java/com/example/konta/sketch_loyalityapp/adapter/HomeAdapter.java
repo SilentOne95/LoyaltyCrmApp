@@ -14,6 +14,8 @@ import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
@@ -25,11 +27,11 @@ import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
-    private SparseArray<MenuComponent> listOfItems;
+    private ArrayList<MenuComponent> listOfItems;
     private RecyclerItemClickListener.HomeRetrofitClickListener homeClickListener;
     private int numOfColumns;
 
-    public HomeAdapter(SparseArray<MenuComponent> items,
+    public HomeAdapter(ArrayList<MenuComponent> items,
                        RecyclerItemClickListener.HomeRetrofitClickListener clickListener,
                        int columns) {
         listOfItems = items;

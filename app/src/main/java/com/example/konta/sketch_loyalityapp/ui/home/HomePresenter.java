@@ -1,10 +1,11 @@
 package com.example.konta.sketch_loyalityapp.ui.home;
 
 import android.support.annotation.Nullable;
-import android.util.SparseArray;
 
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.main.MainActivityContract;
+
+import java.util.ArrayList;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
@@ -39,7 +40,7 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
-    public void passDataToAdapter(SparseArray<MenuComponent> menuComponentList, int numOfColumns) {
+    public void passDataToAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
         if (view != null && menuComponentList != null) {
             view.setUpAdapter(menuComponentList, numOfColumns);
         }
