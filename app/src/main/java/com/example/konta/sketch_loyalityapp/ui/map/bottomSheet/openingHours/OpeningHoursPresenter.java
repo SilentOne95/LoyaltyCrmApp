@@ -1,6 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.openingHours;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
@@ -87,7 +88,7 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
         List<OpenHour> openHourList = marker.getOpenHours();
 
         for (OpenHour time : openHourList) {
-            if (time.getDayName() != null) {
+            if (!TextUtils.isEmpty(time.getDayName())) {
                 switch (time.getDayName()) {
                     case "monday":
                         monday = checkIfOpenHoursAreValid(time);

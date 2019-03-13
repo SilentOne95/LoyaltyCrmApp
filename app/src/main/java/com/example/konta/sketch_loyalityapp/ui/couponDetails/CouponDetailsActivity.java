@@ -93,13 +93,13 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     @Override
     public void setUpViewWithData(Coupon coupon) {
-        if (coupon.getImage() != null && !coupon.getImage().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(coupon.getImage())) {
             // TODO: Upload images to server
         } else {
             Picasso.get().load(R.drawable.image_coupon).into(couponImage);
         }
 
-        if (coupon.getReductionAmount() != null && !coupon.getReductionAmount().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(coupon.getReductionAmount())) {
             if (coupon.getReductionType().equals("percent")) {
                 couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
             } else {
@@ -109,13 +109,13 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             couponMarker.setText(DEFAULT_STRING);
         }
 
-        if (coupon.getFreshTime() != null && !coupon.getFreshTime().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(coupon.getFreshTime())) {
             couponDate.setText(coupon.getFreshTime());
         } else {
             couponDate.setText(DEFAULT_STRING);
         }
 
-        if (coupon.getTitle() != null && !coupon.getTitle().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(coupon.getTitle())) {
             couponTitle.setText(coupon.getTitle());
         } else {
             couponTitle.setText(DEFAULT_STRING);
@@ -133,13 +133,13 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             couponBasicPrice.setText(DEFAULT_STRING);
         }
 
-        if (coupon.getDescription() != null && !coupon.getDescription().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(coupon.getDescription())) {
             couponDescription.setText(Html.fromHtml(coupon.getDescription()));
         } else {
             couponDescription.setText(DEFAULT_STRING);
         }
 
-        if (coupon.getCouponCode() != null && !coupon.getCouponCode().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(coupon.getCouponCode())) {
             couponCode = coupon.getCouponCode();
         } else {
             couponCode = DEFAULT_STRING;

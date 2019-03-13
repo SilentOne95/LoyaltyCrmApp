@@ -1,6 +1,7 @@
 package com.example.konta.sketch_loyalityapp.ui.map.bottomSheet.contactInfo;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.konta.sketch_loyalityapp.pojo.map.Marker;
@@ -93,7 +94,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
         String phoneNumber = DEFAULT_STRING;
         String[] phonePrefix = {"0048", "48", "0"};
 
-        if (marker.getPhoneNumber() != null && !marker.getPhoneNumber().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(marker.getPhoneNumber())) {
             phoneNumber = marker.getPhoneNumber()
                     .replaceAll("\\s+", "")
                     .replaceAll("[\\D]", "");
@@ -126,7 +127,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     public String formatEmailAddress(Marker marker) {
         String emailAddress = DEFAULT_STRING;
 
-        if (marker.getMail() != null && !marker.getMail().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(marker.getMail())) {
             emailAddress = marker.getMail();
         }
 
@@ -137,7 +138,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     public String formatWebsiteAddress(Marker marker) {
         String websiteAddress = DEFAULT_STRING;
 
-        if (marker.getWebsite() != null && !marker.getWebsite().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(marker.getWebsite())) {
             websiteAddress = marker.getWebsite();
         }
 

@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.ui.productDetails;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -72,7 +73,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             Picasso.get().load(R.drawable.image_product).into(productImage);
         }
 
-        if (product.getTitle() != null && !product.getTitle().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(product.getTitle())) {
             productTitle.setText(product.getTitle());
         } else {
             productTitle.setText(DEFAULT_STRING);
@@ -84,7 +85,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             productPrice.setText(DEFAULT_STRING);
         }
 
-        if (product.getDescription() != null && !product.getDescription().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(product.getDescription())) {
             productDescription.setText(Html.fromHtml(product.getDescription()));
         } else {
             productDescription.setText(DEFAULT_STRING);

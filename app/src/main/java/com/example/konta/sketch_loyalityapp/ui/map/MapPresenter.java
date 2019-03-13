@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.ui.map;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -146,13 +147,12 @@ public class MapPresenter implements MapContract.Presenter {
         title = defaultTitle;
         address = openHours = defaultString;
 
-        if (marker.getTitle() != null && !marker.getTitle().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(marker.getTitle())) {
             title = marker.getTitle();
         }
 
-        if (marker.getAddress() != null && !marker.getAddress().trim().isEmpty()
-                && marker.getPostCode() != null
-                && marker.getCity() != null && !marker.getCity().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(marker.getAddress()) && !TextUtils.isEmpty(marker.getPostCode())
+                && !TextUtils.isEmpty(marker.getCity())) {
             address = marker.getAddress() + ", " +
                     marker.getPostCode() + " " +
                     marker.getCity();
