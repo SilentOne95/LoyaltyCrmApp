@@ -95,8 +95,14 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     public void setUpViewWithData(Coupon coupon) {
         if (!TextUtils.isEmpty(coupon.getImage())) {
             // TODO: Upload images to server
+            Picasso.get()
+                    .load("invalid path")
+                    .error(R.drawable.no_image_available)
+                    .into(couponImage);
         } else {
-            Picasso.get().load(R.drawable.image_coupon).into(couponImage);
+            Picasso.get()
+                    .load(R.drawable.image_coupon)
+                    .into(couponImage);
         }
 
         if (!TextUtils.isEmpty(coupon.getReductionAmount())) {

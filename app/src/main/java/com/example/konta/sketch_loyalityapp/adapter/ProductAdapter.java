@@ -103,9 +103,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
             // TODO: Upload images to server and change "else" image to no_image_available
             Picasso.get()
-                    .load("")
+                    .load("invalid path")
                     .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
+                    .error(R.drawable.no_image_available)
                     .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);
         } else {
@@ -113,6 +114,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     .load(R.drawable.image_product)
                     .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
+                    .error(R.drawable.no_image_available)
                     .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
                     .into(holder.imageView);
         }
