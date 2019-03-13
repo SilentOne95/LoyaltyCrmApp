@@ -7,7 +7,6 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +21,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIU
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
+import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
@@ -61,16 +61,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        private View itemView;
         private ImageView imageView;
-        private TextView titleView, descriptionText;
-        private Button button;
+        private TextView titleView;
 
         ViewHolder(@NonNull View view) {
             super(view);
+            itemView = view.findViewById(R.id.grid_item_home);
             imageView = view.findViewById(R.id.grid_item_image);
             titleView = view.findViewById(R.id.grid_item_title_text);
-            descriptionText = view.findViewById(R.id.grid_item_content_description);
-            button = view.findViewById(R.id.grid_item_view_details_button);
         }
     }
 
@@ -93,12 +92,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
             // TODO: Upload images to server and change "else" image to no_image_available
+            int imageId = holder.imageView.getContext()
+                    .getResources()
+                    .getIdentifier(currentItem.getImage(), "drawable", PACKAGE_NAME);
+
             Picasso.get()
-                    .load("")
-                    .placeholder(R.drawable.placeholder)
-                    .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
+                    .load(imageId)
                     .into(holder.imageView);
+
         } else {
             Picasso.get()
                     .load(R.drawable.image_offer)
@@ -114,8 +115,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             holder.titleView.setText(DEFAULT_STRING);
         }
 
-        holder.descriptionText.setVisibility(View.GONE);
-        holder.button.setOnClickListener(view ->
+        holder.itemView.setOnClickListener(view ->
                 homeClickListener.onItemHomeClick(listOfItems.get(position), position));
     }
 
