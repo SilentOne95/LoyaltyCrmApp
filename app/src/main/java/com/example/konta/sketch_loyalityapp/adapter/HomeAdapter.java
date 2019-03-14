@@ -101,10 +101,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             Picasso.get()
                     .load(imageId)
                     .into(holder.imageView);
-
         } else {
             Picasso.get()
-                    .load(R.drawable.image_offer)
+                    .load(R.drawable.no_image_available)
                     .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .resize(BITMAP_WIDTH, BITMAP_HEIGHT)

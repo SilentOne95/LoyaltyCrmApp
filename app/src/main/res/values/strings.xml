@@ -3,56 +3,73 @@
     <string name="app_name">Sellger</string>
 
     <!-- Required for Google Auth, Firebase Web ID -->
-    <string name="server_client_id">580087034404-ttb5oee6jee76tt56m62jpp88o5qdjal.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">2252363271523504</string>
+    <string name="server_client_id" translatable="false">580087034404-ttb5oee6jee76tt56m62jpp88o5qdjal.apps.googleusercontent.com</string>
+    <string name="facebook_app_id" translatable="false">2252363271523504</string>
 
     <!-- Firebase // Push Notifications -->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="default_notification_channel_name" translatable="false">"Default channel</string>
+    <string name="default_notification_channel_name" translatable="false">Default channel</string>
 
-    <!-- Toolbar menu -->
+    <!-- Main activity -->
     <string name="menu_toolbar_my_account_string">My Account</string>
+    <string name="nav_view_upgrade_acc_text">Sign up with other method to upgrade your account</string>
 
-    <!-- Navigation Drawer strings -->
-    <string name="navigation_drawer_open">Open</string>
-    <string name="navigation_drawer_close">Close</string>
-
-    <!-- Log In and Sign Up strings-->
-    <string name="login_text">Login</string>
-    <string name="log_in_facebook_button">Log In with Facebook</string>
-    <string name="password_text">Password</string>
-    <string name="log_in_text">Log In</string>
-    <string name="forgot_password_text">Forgot password?</string>
+    <!-- Log in view -->
     <string name="sign_up_text">Sign Up</string>
-    <string name="email_address_text">E-mail address</string>
-    <string name="email_text">E-mail</string>
-    <string name="phone_number_text">Phone number</string>
-    <string name="newsletter_checkbox_text">Sign up for a newsletter to stay updated on all newly
-        released products or daily specials.</string>
+    <string name="sign_up_sign_in_text">Sign Up / Sign In:</string>
+    <string name="continue_with_google_text">Continue with Google</string>
+    <string name="continue_with_facebook_text">Continue with Facebook</string>
+    <string name="continue_with_phone_text">Continue with Phone</string>
+    <string name="continue_as_guest_text">or continue as a guest</string>
 
-    <!-- Fragment home strings -->
+    <!-- Log in 1. step - enter phone number -->
+    <string name="verify_your_number_text">Verify your number</string>
+    <string name="instruction_provide_number_text">Please enter your number to send a verification code. Operator rates may apply.</string>
+    <string name="prefix_hint" translatable="false">Prefix</string>
+    <string name="phone_number_hint">Phone number</string>
+    <string name="register_button_text">Register</string>
+    <string name="terms_link_text">Terms of service &amp; privacy policy</string>
+    <string name="more_info_text">More info</string>
+
+    <!-- Log in 2. step - enter code -->
+    <string name="verify_text">Verify</string>
+    <string name="enter_code_text">Enter the verification code sent to the number provided.</string>
+    <string name="code_hint">Code</string>
+    <string name="waiting_info_text">Waiting for code to be delivered</string>
+
+    <string name="verify_error_empty_data">Please enter data</string>
+    <string name="verify_error_empty_number">Please enter phone number</string>
+    <string name="verify_error_wrong_type">Wrong format of data</string>
+    <string name="verify_error_wrong_data">Wrong prefix or phone number</string>
+
+    <!-- Fragment home -->
     <string name="check_offers_text">Check offers!</string>
     <string name="something_went_wrong_text">Ooops! Something went wrong. \nPlease check your internet connection</string>
 
-    <!-- Fragment coupons and products strings -->
+    <!-- Fragment coupons and products -->
     <string name="no_coupons_text">Unfortunately, \nyou do not have active coupons\n :(</string>
     <string name="no_products_text">Unfortunately, \nyou do not have active products\n :(</string>
     <string name="try_again_later_text">Try again later</string>
 
-    <!-- Activity Coupon details strings -->
+    <!-- Activity Coupon details -->
     <string name="valid_until_text">valid until:</string>
     <string name="price_text">Price:</string>
     <string name="show_my_coupon_text">Show my coupon</string>
     <string name="coupon_details_code_text">Promo code:</string>
 
-    <!-- Grid list item strings -->
+    <!-- Grid list item -->
+    <string name="button_check_product">Check</string>
     <string name="button_check_coupon">Check</string>
     <string name="button_check_details">View details</string>
 
-    <!-- Bottom Sheet strings -->
-    <string name="bottom_place_title_text">Current place title</string>
-    <string name="bottom_place_address_text">Current place address, postal code, city</string>
-    <string name="bottom_place_open_hours_text">Current place open hours</string>
+    <!-- Bottom Sheet -->
+    <string name="bottom_place_title_text" translatable="false">Current place title</string>
+    <string name="bottom_place_address_text" translatable="false">Current place address, postal code, city</string>
+    <string name="bottom_place_open_hours_text" translatable="false">Current place open hours</string>
+
+    <string name="bottom_sheet_today_open_text">Today open:</string>
+    <string name="bottom_sheet_today_open_all_day_text">All day</string>
+    <string name="bottom_sheet_today_closed_text">Today is closed</string>
 
     <string name="monday_text">Monday</string>
     <string name="tuesday_text">Tuesday</string>
@@ -64,27 +81,9 @@
 
     <string name="contact_us_text">In case of any questions,\n please contact us:</string>
 
-    <!-- Image content descriptions -->
-    <string name="navigation_header_logo_desc">Navigation header company logo</string>
-    <string name="sign_up_image_desc">Sign Up logo image</string>
-    <string name="grid_list_item_content_desc">Resource passed with JSON, will be populated
-        in 2 different category activities.</string>
-    <string name="fragment_home_special_image_desc">Highlighted special offer image</string>
-    <string name="tab_view_image_desc">TabView icon in BottomSheet</string>
-    <string name="coupon_details_image_desc">Coupon details image</string>
-    <string name="company_logo_desc">Company logo</string>
-    <string name="bottom_sheet_marker_icon">Marker icon next to place title in BottomSheet</string>
-    <string name="loading_indicator_desc">Custom loading indicator</string>
-    <string name="notification_logo_desc">White logo push notification</string>
-    <string name="barcode_desc">Barcode</string>
-
-    <!-- MenuComponent strings -->
+    <!-- MenuComponent titles -->
     <string name="first_fragment">Open hours</string>
     <string name="second_fragment">Contact info</string>
-
-    <!-- Bottom Sheet peek Panel default info -->
-    <string name="bottom_sheet_default_place_title">Place no.</string>
-    <string name="bottom_sheet_default_no_info_text">No info to display</string>
 
     <!-- Barcode scanner -->
     <string name="barcode_scanner_title">Barcode Scanner</string>
@@ -104,5 +103,25 @@
     <string name="barcode_generator_title">Your card</string>
     <string name="barcode_generator_advice">This barcode represents your club card \n
         Let cashier scan this to get special promotions and offers</string>
+
+    <!-- Toast messages -->
+    <string name="internet_connection_required">Internet connection is required</string>
+    <string name="localization_permission_denied">Localization permission denied</string>
+
+    <!-- Image content descriptions -->
+    <string name="log_in_view_logo_desc" translatable="false">log_in_view_logo_desc</string>
+    <string name="navigation_header_logo_desc" translatable="false">Navigation header company logo</string>
+    <string name="sign_up_image_desc" translatable="false">Sign Up logo image</string>
+    <string name="grid_list_item_content_desc" translatable="false">Resource passed with JSON, will be populated
+        in 2 different category activities.</string>
+    <string name="fragment_home_special_image_desc" translatable="false">Highlighted special offer image</string>
+    <string name="tab_view_image_desc" translatable="false">TabView icon in BottomSheet</string>
+    <string name="coupon_details_image_desc" translatable="false">Coupon details image</string>
+    <string name="company_logo_desc" translatable="false">Company logo</string>
+    <string name="loading_indicator_desc" translatable="false">Custom loading indicator</string>
+    <string name="notification_logo_desc" translatable="false">White logo push notification</string>
+    <string name="barcode_desc" translatable="false">Barcode</string>
+    <string name="phone_icon_verify_code_desc" translatable="false">Text icon in 1nd step of verification phone num</string>
+    <string name="text_icon_verify_code_desc" translatable="false">Text icon in 2nd step of verification phone num</string>
 
 </resources>

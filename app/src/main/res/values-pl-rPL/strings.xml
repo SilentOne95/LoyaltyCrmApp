@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name -->
+    <string name="app_name">Sellger</string>
+
+    <!-- Main activity -->
+    <string name="menu_toolbar_my_account_string">Moje konto</string>
+    <string name="nav_view_upgrade_acc_text">Zarejestruj się, aby uzyskać dostęp do wszystkich promocji</string>
+
+    <!-- Log in view -->
+    <string name="sign_up_sign_in_text">Wybierz metodę logowania\n korzystając z:</string>
+    <string name="continue_with_google_text">Konta Google</string>
+    <string name="continue_with_facebook_text">Konta Facebook</string>
+    <string name="continue_with_phone_text">Numeru telefonu</string>
+    <string name="continue_as_guest_text">albo kontynuuj jako gość</string>
+    <string name="sign_up_text">Zarejestruj się</string>
+
+    <!-- Log in 1. step - enter phone number -->
+    <string name="verify_your_number_text">Zweryfikuj numer telefonu</string>
+    <string name="instruction_provide_number_text">Proszę wprowadzić numer telefonu, na który zostanie wysłany specjalny kod do potwierdzenia rejestracji</string>
+    <string name="phone_number_hint">Numer telefonu</string>
+    <string name="register_button_text">Wyślij kod</string>
+    <string name="terms_link_text">Regulamin &amp; polityka prywatności</string>
+    <string name="more_info_text">Więcej informacji</string>
+
+    <string name="verify_error_empty_data">Proszę wypełnić wskazane pola</string>
+    <string name="verify_error_empty_number">Proszę wprowadzić numer telefonu</string>
+    <string name="verify_error_wrong_type">Sprawdź wprowadzony numer</string>
+    <string name="verify_error_wrong_data">Błędny prefiks lub numer telefonu</string>
+
+    <!-- Log in 2. step - enter code -->
+    <string name="verify_text">Weryfikacja numeru:\n</string>
+    <string name="enter_code_text">Wprowadź numer weryfikacyjny, wysłany na podany numer.</string>
+    <string name="code_hint">Kod</string>
+    <string name="waiting_info_text">Oczekiwanie na dostarczenie kodu</string>
+
+    <!-- Fragment home -->
+    <string name="check_offers_text">Sprawdź oferty!</string>
+    <string name="something_went_wrong_text">Ups! Coś poszło nie tak.\n Sprawdź połączenie z internetem.</string>
+
+    <!-- Fragment coupons and products -->
+    <string name="no_coupons_text">Niestety nie masz aktywnych kuponów :(</string>
+    <string name="no_products_text">Niestety nie masz aktywnych produktów :(</string>
+    <string name="try_again_later_text">Spróbuj później</string>
+
+    <!-- Activity Coupon details -->
+    <string name="valid_until_text">Aktywne do:</string>
+    <string name="price_text">Cena:</string>
+    <string name="show_my_coupon_text">Pokaż mój kupon</string>
+    <string name="coupon_details_code_text">Kod promocyjny:</string>
+
+    <!-- Grid list item -->
+    <string name="button_check_product">Szczegóły</string>
+    <string name="button_check_coupon">Pokaż kod</string>
+    <string name="button_check_details">Szczegóły</string>
+
+    <!-- Bottom Sheet -->
+    <string name="first_fragment">Godziny otwarcia</string>
+    <string name="second_fragment">Kontakt</string>
+
+    <string name="monday_text">Poniedziałek</string>
+    <string name="tuesday_text">Wtorek</string>
+    <string name="wednesday_text">Środa</string>
+    <string name="thursday_text">Czwartek</string>
+    <string name="friday_text">Piątek</string>
+    <string name="saturday_text">Sobota</string>
+    <string name="sunday_text">Niedziela</string>
+
+    <string name="bottom_sheet_today_open_text">Dziś otwarte:</string>
+    <string name="bottom_sheet_today_open_all_day_text">cały dzień</string>
+    <string name="bottom_sheet_today_closed_text">Dziś jest zamknięte</string>
+    <string name="contact_us_text">W razie jakichkolwiek pytań,\n prosimy o kontakt:</string>
+
+    <!-- Barcode scanner -->
+    <string name="barcode_scanner_title">Skaner kodów kreskowych</string>
+    <string name="barcode_scanner_instruction_text">Instrukcja</string>
+    <string name="barcode_scanner_button_text">Skanuj</string>
+    <string name="barcode_scanner_switch_flash_text">Latarka</string>
+    <string name="barcode_scanner_switch_focus_text">Auto focus</string>
+    <string name="barcode_scanner_code_text">TWÓJ KOD ZOSTANIE\n WYŚWIETLONY TUTAJ</string>
+    <string name="barcode_scanner_instruction_body">1.Wybierz dodatkowe opcje dostępne podczas skanowania.\n
+        2.Kliknij przycisk \"skanuj\".\n
+        3.Zatwierdź zgodę dostępu do kamery.\n
+        4.Najedź kamerą na kod kreskowy.\n
+        5.Kiedy pojawi się ramka wokół kodu,\n kliknij wewnątrz niej.\n
+        6.Kod zczytany z kodu kreskowego zostanie wyświetlony\n we wskazanym miejscu.</string>
+
+    <!-- Barcode generator -->
+    <string name="barcode_generator_title">Twoja karta klienta</string>
+    <string name="barcode_generator_advice">Poniższy kod kreskowy zawiera Twój unikatowy numer klienta.\n Pokaż go kasjerowi, aby otrzymać punkty, bądź specjalne promocje.</string>
+
+    <!-- Toast messages -->
+    <string name="internet_connection_required">Połączenie z internetem jest wymagane</string>
+    <string name="localization_permission_denied">Wyłączono usługi lokalizacyjne</string>
+
+</resources>

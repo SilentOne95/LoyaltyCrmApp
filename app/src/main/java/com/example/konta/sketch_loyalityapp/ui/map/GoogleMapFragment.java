@@ -371,7 +371,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                     }
                 } else {
                     // Permission denied, display Toast message
-                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),
+                            getResources().getText(R.string.localization_permission_denied), Toast.LENGTH_LONG)
+                            .show();
                 }
             }
         }
@@ -441,6 +443,14 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public void setUpBottomSheetPanelWithData(String title, String address, String openHours) {
+        if (openHours.contains("Today open:")) {
+            openHours = openHours.replace("Today open:", getResources().getString(R.string.bottom_sheet_today_open_text));
+        } else if (openHours.contains("All day")) {
+            openHours = getResources().getString(R.string.bottom_sheet_today_open_all_day_text);
+        } else {
+            openHours = getResources().getString(R.string.bottom_sheet_today_closed_text);
+        }
+
         mPanelPlaceTitle.setText(title);
         mPanelAddress.setText(address);
         mPanelTodayOpenHours.setText(openHours);

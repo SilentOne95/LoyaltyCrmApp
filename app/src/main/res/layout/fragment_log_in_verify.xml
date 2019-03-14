@@ -23,7 +23,7 @@
             <LinearLayout
                 android:id="@+id/verify_code_text_container"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="170dp"
                 android:background="@drawable/rounded_corners_orange"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:gravity="center"
-                    android:text="Verify +48123456789"
+                    android:text="@string/verify_text"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/big_text_size"
                     android:textStyle="bold" />
@@ -52,7 +52,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:gravity="center"
-                    android:text="Enter the verification code sent to the number provided."
+                    android:text="@string/enter_code_text"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/mid_text_size" />
 
@@ -77,7 +77,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="Code"
+                    android:hint="@string/code_hint"
                     android:inputType="phone"
                     android:textColor="@color/colorAccent"
                     android:textColorHint="@color/colorAccent" />
@@ -94,7 +94,8 @@
                 android:src="@drawable/ic_circle_message"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/text_icon_verify_code_desc" />
 
             <TextView
                 android:id="@+id/verify_waiting_for_code_text"
@@ -103,7 +104,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
-                android:text="Waiting for code to be delivered"
+                android:text="@string/waiting_info_text"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/mid_text_size"
                 android:textStyle="bold"

@@ -118,7 +118,7 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
         switch (type) {
             case "empty data":
                 mTextInputLayoutPrefix.setError(" ");
-                mTextInputLayoutPhoneNumber.setError("Please enter data");
+                mTextInputLayoutPhoneNumber.setError(getResources().getText(R.string.verify_error_empty_data));
                 dismissError(mTextInputLayoutPrefix);
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;
@@ -127,16 +127,16 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
                 dismissError(mTextInputLayoutPrefix);
                 break;
             case "empty number":
-                mTextInputLayoutPhoneNumber.setError("Please enter phone number");
+                mTextInputLayoutPhoneNumber.setError(getResources().getText(R.string.verify_error_empty_number));
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;
             case "wrong type":
-                mTextInputLayoutPhoneNumber.setError("Wrong format of data");
+                mTextInputLayoutPhoneNumber.setError(getResources().getText(R.string.verify_error_wrong_type));
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;
             case "wrong data":
                 mTextInputLayoutPrefix.setError(" ");
-                mTextInputLayoutPhoneNumber.setError("Wrong prefix or phone number");
+                mTextInputLayoutPhoneNumber.setError(getResources().getText(R.string.verify_error_wrong_data));
                 dismissError(mTextInputLayoutPrefix);
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;

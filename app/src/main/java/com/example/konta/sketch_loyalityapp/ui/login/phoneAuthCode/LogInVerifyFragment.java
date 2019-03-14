@@ -99,6 +99,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             mProvidedPhoneNumber = bundle.getString("DATA_STRING");
+            mProvidedPhoneNumber = getResources().getText(R.string.verify_text) + " " + mProvidedPhoneNumber;
             mTextProvidedPhoneNumber.setText(mProvidedPhoneNumber);
         }
     }

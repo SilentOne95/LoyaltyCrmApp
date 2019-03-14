@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
@@ -127,7 +128,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     break;
             }
         } else {
-            Toast.makeText(getContext(), "Internet connection is required", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),
+                    Resources.getSystem().getText(R.string.internet_connection_required), Toast.LENGTH_LONG)
+                    .show();
         }
     }
 

@@ -132,10 +132,9 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
                     .into(holder.imageView);
         } else {
             Picasso.get()
-                    .load(R.drawable.image_coupon)
+                    .load(R.drawable.no_image_available)
                     .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .error(R.drawable.no_image_available)
                     .resize(BITMAP_WIDTH,BITMAP_HEIGHT)
                     .into(holder.imageView);
         }

@@ -23,7 +23,7 @@
             <LinearLayout
                 android:id="@+id/verify_number_text_container"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="170dp"
                 android:background="@drawable/rounded_corners_orange"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:gravity="center"
-                    android:text="Verify your number"
+                    android:text="@string/verify_your_number_text"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/big_text_size"
                     android:textStyle="bold" />
@@ -52,7 +52,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:gravity="center"
-                    android:text="Please enter your number to send a verification code. Operator rates may apply."
+                    android:text="@string/instruction_provide_number_text"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/mid_text_size" />
 
@@ -66,7 +66,8 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verify_number_text_container">
+                app:layout_constraintTop_toBottomOf="@+id/verify_number_text_container"
+                android:baselineAligned="false">
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/register_prefix_input_box"
@@ -87,7 +88,7 @@
                         android:layout_height="60dp"
                         android:drawableStart="@drawable/ic_plus_phone"
                         android:drawablePadding="4dp"
-                        android:hint="Prefix"
+                        android:hint="@string/prefix_hint"
                         android:background="@null"
                         android:inputType="phone"
                         android:textColor="@color/colorAccent"
@@ -111,7 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="@null"
-                        android:hint="Phone number"
+                        android:hint="@string/phone_number_hint"
                         android:inputType="phone"
                         android:textColor="@color/colorAccent"
                         android:textColorHint="@color/colorAccent" />
@@ -125,8 +126,9 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="130dp"
+                android:layout_marginTop="140dp"
                 android:layout_marginEnd="8dp"
+                android:contentDescription="@string/phone_icon_verify_code_desc"
                 android:src="@drawable/ic_circle_phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +142,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/rounded_corners_button"
-                android:text="Register"
+                android:text="@string/register_button_text"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/mid_text_size"
@@ -156,7 +158,7 @@
                 android:layout_marginTop="64dp"
                 android:layout_marginEnd="8dp"
                 android:padding="8dp"
-                android:text="Terms of service &amp; privacy policy"
+                android:text="@string/terms_link_text"
                 android:textColor="@color/colorLink"
                 android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -170,7 +172,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:padding="8dp"
-                android:text="More info"
+                android:text="@string/more_info_text"
                 android:textColor="@color/colorLink"
                 android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"

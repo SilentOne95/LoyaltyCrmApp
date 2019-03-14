@@ -101,7 +101,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
                     .into(couponImage);
         } else {
             Picasso.get()
-                    .load(R.drawable.image_coupon)
+                    .load(R.drawable.no_image_available)
                     .into(couponImage);
         }
 

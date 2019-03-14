@@ -76,7 +76,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
                     .into(productImage);
         } else {
             Picasso.get()
-                    .load(R.drawable.image_coupon)
+                    .load(R.drawable.no_image_available)
                     .into(productImage);
         }
 
