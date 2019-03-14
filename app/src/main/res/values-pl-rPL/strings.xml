@@ -35,7 +35,7 @@
     <string name="waiting_info_text">Oczekiwanie na dostarczenie kodu</string>
 
     <!-- Fragment home -->
-    <string name="check_offers_text">Sprawdź oferty!</string>
+    <string name="check_offers_text">Sprawdź najnowsze\n oferty!</string>
     <string name="something_went_wrong_text">Ups! Coś poszło nie tak.\n Sprawdź połączenie z internetem.</string>
 
     <!-- Fragment coupons and products -->
@@ -87,7 +87,7 @@
 
     <!-- Barcode generator -->
     <string name="barcode_generator_title">Twoja karta klienta</string>
-    <string name="barcode_generator_advice">Poniższy kod kreskowy zawiera Twój unikatowy numer klienta.\n Pokaż go kasjerowi, aby otrzymać punkty, bądź specjalne promocje.</string>
+    <string name="barcode_generator_advice">Powyższy kod kreskowy zawiera Twój unikatowy numer klienta.\n\n Pokaż go kasjerowi, aby otrzymać specjalne zniżki lub punkty, które możesz wymienić na nagrody.</string>
 
     <!-- Toast messages -->
     <string name="internet_connection_required">Połączenie z internetem jest wymagane</string>

@@ -31,6 +31,6 @@ public class WebsiteFragment extends BaseFragment {
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("http://kadeor.com/");
+        mWebView.loadUrl("https://www.google.com/");
     }
 }

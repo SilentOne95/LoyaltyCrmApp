@@ -89,13 +89,13 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="130dp"
+                android:layout_marginTop="140dp"
                 android:layout_marginEnd="8dp"
+                android:contentDescription="@string/text_icon_verify_code_desc"
                 android:src="@drawable/ic_circle_message"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/text_icon_verify_code_desc" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/verify_waiting_for_code_text"
