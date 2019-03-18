@@ -239,7 +239,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
 
         for (int i = 0; i < submenuSectionArray.size(); i++) {
-            submenu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER,
+            menu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER,
                     submenuSectionArray.get(i).getComponentTitle())
                     .setIcon(resources.getIdentifier(iconNameArray[arrayIndex], "drawable", PACKAGE_NAME));
             arrayIndex++;

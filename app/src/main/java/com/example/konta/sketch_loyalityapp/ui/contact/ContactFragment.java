@@ -19,6 +19,6 @@ public class ContactFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Contact");
+        getActivity().setTitle("Kontakt");
     }
 }

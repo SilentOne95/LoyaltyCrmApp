@@ -37,7 +37,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Coupons");
+        getActivity().setTitle("Kupony");
 
         progressBar = rootView.findViewById(R.id.progress_bar);
         recyclerView = rootView.findViewById(R.id.recycler_view);

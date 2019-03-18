@@ -2,7 +2,6 @@ package com.example.konta.sketch_loyalityapp.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
@@ -129,7 +128,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
             }
         } else {
             Toast.makeText(getContext(),
-                    Resources.getSystem().getText(R.string.internet_connection_required), Toast.LENGTH_LONG)
+                    getResources().getText(R.string.internet_connection_required), Toast.LENGTH_LONG)
                     .show();
         }
     }

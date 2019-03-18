@@ -29,7 +29,7 @@ public class BarcodeScanner extends BaseFragment implements View.OnClickListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Scanner");
+        getActivity().setTitle("Skaner");
 
         autoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
         flashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);

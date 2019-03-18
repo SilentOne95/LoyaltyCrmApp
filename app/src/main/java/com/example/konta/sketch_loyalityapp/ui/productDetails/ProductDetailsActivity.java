@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View{
@@ -39,7 +40,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle("Product");
+        setTitle("Produkt");
 
         // Temporary solution - setting up sample pojo
         Bundle extras = getIntent().getExtras();
@@ -71,7 +72,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         if (!TextUtils.isEmpty(product.getImage())) {
             // TODO: Upload images to server
             Picasso.get()
-                    .load("invalid path")
+                    .load(BASE_URL_IMAGES + product.getImage())
                     .error(R.drawable.no_image_available)
                     .into(productImage);
         } else {

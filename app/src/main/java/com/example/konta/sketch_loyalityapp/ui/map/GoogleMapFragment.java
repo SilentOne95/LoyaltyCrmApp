@@ -60,7 +60,6 @@ import java.util.List;
 
 import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.example.konta.sketch_loyalityapp.Constants.REQUEST_CHECK_SETTINGS;
-import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
         View.OnClickListener, MapContract.View, GoogleMap.OnMyLocationButtonClickListener,
@@ -92,7 +91,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Map");
+        getActivity().setTitle("Mapa");
 
         presenter = new MapPresenter(this, new MapModel());
         presenter.setUpObservable();
@@ -431,14 +430,16 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public String getDefaultPlaceTitle() {
-        return getString(getResources()
-                .getIdentifier("bottom_sheet_default_place_title", "string", PACKAGE_NAME));
+        return " ";
+//        return getString(getResources()
+//                .getIdentifier("bottom_sheet_default_place_title", "string", PACKAGE_NAME));
     }
 
     @Override
     public String getDefaultPlaceData() {
-        return getString(getResources()
-                .getIdentifier("bottom_sheet_default_no_info_text", "string", PACKAGE_NAME));
+        return " ";
+//        return getString(getResources()
+//                .getIdentifier("bottom_sheet_default_no_info_text", "string", PACKAGE_NAME));
     }
 
     @Override

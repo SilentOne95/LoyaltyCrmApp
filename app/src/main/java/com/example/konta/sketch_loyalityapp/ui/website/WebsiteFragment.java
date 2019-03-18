@@ -25,7 +25,7 @@ public class WebsiteFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Our Website");
+        getActivity().setTitle("Nasza strona");
 
         mWebView = rootView.findViewById(R.id.webview);
         mWebView.setWebViewClient(new WebViewClient());

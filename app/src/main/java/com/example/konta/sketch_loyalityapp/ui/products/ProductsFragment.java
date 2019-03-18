@@ -36,7 +36,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Products");
+        getActivity().setTitle("Produkty");
 
         progressBar = rootView.findViewById(R.id.progress_bar);
         recyclerView = rootView.findViewById(R.id.recycler_view);

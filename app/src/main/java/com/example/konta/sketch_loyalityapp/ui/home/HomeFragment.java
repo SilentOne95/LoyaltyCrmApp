@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -41,7 +40,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Home");
+        getActivity().setTitle("Start");
 
         // Show action bar if view is shown after log in procedure
         ((BaseActivity) getActivity()).getSupportActionBar().show();

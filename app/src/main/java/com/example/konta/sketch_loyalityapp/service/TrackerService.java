@@ -68,7 +68,7 @@ public class TrackerService extends Service {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setContentText("GPS localization is enabled")
-                        .setSmallIcon(R.drawable.sellger_logo)
+                        .setSmallIcon(R.drawable.ic_sellger_logo)
                         .setOngoing(true);
 
         startForeground(1, notificationBuilder.build());

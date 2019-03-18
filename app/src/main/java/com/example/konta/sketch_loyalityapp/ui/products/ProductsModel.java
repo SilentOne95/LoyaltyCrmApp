@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_NUM_OF_COLUMNS;

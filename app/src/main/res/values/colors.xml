@@ -5,6 +5,14 @@
     <color name="colorAccent">#ff9800</color>
     <color name="colorAccentDark">#c66900</color>
 
+    <!-- Sample theme colors - replace accordingly colorAccent and colorAccentDark -->
+    <color name="colorAccentOrangeVersion">#ff9800</color>
+    <color name="colorAccentDarkOrangeVersion">#c66900</color>
+    <color name="colorAccentBlueVersion">#2C37D8</color>
+    <color name="colorAccentDarkBlueVersion">#141BA2</color>
+    <color name="colorAccentBlackVersion">#000</color>
+    <color name="colorAccentDarkBlackVersion">#FF1D1D1D</color>
+
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#fff</color>
 

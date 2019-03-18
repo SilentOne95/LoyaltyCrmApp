@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class CouponDetailsActivity extends BaseActivity implements CouponDetailsContract.View, View.OnClickListener {
@@ -53,7 +54,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle("Coupon");
+        setTitle("Kupon");
 
         // Receiving id of the clicked coupon
         Bundle extras = getIntent().getExtras();
@@ -96,7 +97,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         if (!TextUtils.isEmpty(coupon.getImage())) {
             // TODO: Upload images to server
             Picasso.get()
-                    .load("invalid path")
+                    .load(BASE_URL_IMAGES + coupon.getImage())
                     .error(R.drawable.no_image_available)
                     .into(couponImage);
         } else {

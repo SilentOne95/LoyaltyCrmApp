@@ -29,7 +29,7 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Terms & Conditions");
+        getActivity().setTitle("Regulamin");
 
         mLayoutContainer = rootView.findViewById(R.id.layout_container);
         mLayoutContainer.setVisibility(View.GONE);
