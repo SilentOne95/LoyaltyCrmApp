@@ -1,6 +1,5 @@
 package com.example.konta.sketch_loyalityapp.adapter;
 
-import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -20,10 +19,13 @@ import java.util.List;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_ONE_COLUMN;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT;
-import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_ONE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> {
@@ -105,37 +107,43 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final Coupon currentItem = listOfItems.get(position);
-        int cornerRadius;
+        int cornerRadius, imageWidth, imageHeight;
 
         switch (numOfColumns) {
             case 1:
-                cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+                cornerRadius = BITMAP_CORNER_RADIUS_ONE_COLUMN;
+                imageWidth = BITMAP_WIDTH_ONE_COLUMN;
+                imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
                 break;
             case 2:
                 cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+                imageWidth = BITMAP_WIDTH_TWO_COLUMNS;
+                imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
                 break;
             default:
-                cornerRadius = BITMAP_CORNER_RADIUS_SINGLE_COLUMN;
+                cornerRadius = BITMAP_CORNER_RADIUS_ONE_COLUMN;
+                imageWidth = BITMAP_WIDTH_ONE_COLUMN;
+                imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
                 break;
         }
 
         if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
             // TODO: Upload images to server and change "else" image to no_image_available
             Picasso.get()
-                    .load("invalid path")
+                    .load(BASE_URL_IMAGES + currentItem.getImage())
                     .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .error(R.drawable.no_image_available)
-                    .resize(BITMAP_WIDTH, BITMAP_HEIGHT)
+                    .resize(imageWidth, imageHeight)
                     .into(holder.imageView);
         } else {
             Picasso.get()
                     .load(R.drawable.no_image_available)
                     .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(BITMAP_WIDTH,BITMAP_HEIGHT)
+                    .resize(imageWidth, imageHeight)
                     .into(holder.imageView);
         }
 
