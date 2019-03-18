@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragmentContract;
-import com.example.konta.sketch_loyalityapp.pojo.menu.HelperComponent;
+import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
 import com.example.konta.sketch_loyalityapp.ui.barcodeGenerator.BarcodeGenerator;
 import com.example.konta.sketch_loyalityapp.ui.barcodeScanner.BarcodeScanner;
 import com.example.konta.sketch_loyalityapp.ui.coupons.CouponsFragment;
@@ -20,7 +20,6 @@ import com.example.konta.sketch_loyalityapp.ui.terms.TermsFragment;
 import com.example.konta.sketch_loyalityapp.ui.website.WebsiteFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
