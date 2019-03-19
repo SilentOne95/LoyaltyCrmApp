@@ -40,7 +40,7 @@ public class BarcodeGenerator extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("My Account");
+        getActivity().setTitle("Moje konto");
 
         textView = rootView.findViewById(R.id.textView);
         textView.setVisibility(View.GONE);
