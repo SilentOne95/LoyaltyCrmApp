@@ -28,6 +28,12 @@ import jp.wasabeef.picasso.transformations.GrayscaleTransformation;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_ONE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_ONE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
+import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 
 public class CouponsFragment extends BaseFragment implements CouponsContract.View {
 
@@ -38,6 +44,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     private RecyclerView recyclerView;
     private View emptyStateView;
     private ProgressBar progressBar;
+    private int numOfColumns;
 
     @Override
     protected int getLayout() { return R.layout.fragment_coupons; }
@@ -67,33 +74,59 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
         @Override
         public void onItemCouponCodeCheckClick(int position, String imageUrl) {
-            ImageView imageView = recyclerView.getChildAt(position).findViewById(R.id.grid_item_image);
-            TextView textView = recyclerView.getChildAt(position).findViewById(R.id.grid_item_code_text);
+            ImageView couponImage = recyclerView.getChildAt(position).findViewById(R.id.grid_item_image);
+            TextView couponCodeText = recyclerView.getChildAt(position).findViewById(R.id.grid_item_code_text);
 
-            Picasso.get()
-                    .load(BASE_URL_IMAGES + imageUrl)
-                    .noPlaceholder()
-                    .transform(new BlurTransformation(imageView.getContext()))
-                    .transform(new GrayscaleTransformation())
-                    .transform(new RoundedCornersTransformation(8, 0))
-                    .error(R.drawable.no_image_available)
-                    .resize(1200, 720)
-                    .into(imageView, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            textView.setVisibility(View.VISIBLE);
-                        }
+            switch (numOfColumns) {
+                case 1:
+                    Picasso.get()
+                            .load(BASE_URL_IMAGES + imageUrl)
+                            .noPlaceholder()
+                            .transform(new BlurTransformation(couponImage.getContext()))
+                            .transform(new GrayscaleTransformation())
+                            .transform(new RoundedCornersTransformation(BITMAP_CORNER_RADIUS_ONE_COLUMN, 0))
+                            .error(R.drawable.no_image_available)
+                            .resize(BITMAP_WIDTH_ONE_COLUMN, BITMAP_HEIGHT_ONE_COLUMN)
+                            .into(couponImage, new Callback() {
+                                @Override
+                                public void onSuccess() {
+                                    couponCodeText.setVisibility(View.VISIBLE);
+                                }
 
-                        @Override
-                        public void onError(Exception e) {
+                                @Override
+                                public void onError(Exception e) {
 
-                        }
-                    });
+                                }
+                            });
+                    break;
+                case 2:
+                    Picasso.get()
+                            .load(BASE_URL_IMAGES + imageUrl)
+                            .noPlaceholder()
+                            .transform(new BlurTransformation(couponImage.getContext()))
+                            .transform(new GrayscaleTransformation())
+                            .transform(new RoundedCornersTransformation(BITMAP_CORNER_RADIUS_TWO_COLUMNS, 0))
+                            .error(R.drawable.no_image_available)
+                            .resize(BITMAP_WIDTH_TWO_COLUMNS, BITMAP_HEIGHT_TWO_COLUMNS)
+                            .into(couponImage, new Callback() {
+                                @Override
+                                public void onSuccess() {
+                                    couponCodeText.setVisibility(View.VISIBLE);
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+
+                                }
+                            });
+                    break;
+            }
         }
     };
 
     @Override
     public void setUpAdapter(List<Coupon> couponList, int numOfColumns) {
+        this.numOfColumns = numOfColumns;
         // Set empty state view if needed
         if (couponList.isEmpty()) {
             setUpEmptyStateView(true);
