@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,7 +128,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     .into(holder.imageView);
         }
 
-        if (currentItem.getTitle() != null && !currentItem.getTitle().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(currentItem.getTitle())) {
             holder.titleView.setText(currentItem.getTitle());
         } else {
             holder.titleView.setText(DEFAULT_STRING);
@@ -138,7 +139,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         } else {
             holder.price.setText(DEFAULT_STRING);
         }
-        if (currentItem.getShortDescription() != null && !currentItem.getShortDescription().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(currentItem.getShortDescription())) {
             holder.shortDescription.setText(Html.fromHtml(currentItem.getShortDescription()));
         } else {
             holder.shortDescription.setText(DEFAULT_STRING);

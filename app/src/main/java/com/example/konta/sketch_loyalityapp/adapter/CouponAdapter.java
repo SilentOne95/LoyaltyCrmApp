@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView imageView;
-        private TextView titleView, descriptionText, discountMarker, basicPrice, newPrice;
+        private TextView titleView, codeText, descriptionText, discountMarker, basicPrice, newPrice;
         private Button checkCodeButton, showDetailsButton;
 
         ViewHolder(@NonNull final View view) {
@@ -76,6 +77,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             imageView = view.findViewById(R.id.grid_item_image);
             discountMarker = view.findViewById(R.id.grid_item_discount_marker);
             titleView = view.findViewById(R.id.grid_item_coupon_title);
+            codeText = view.findViewById(R.id.grid_item_code_text);
             basicPrice = view.findViewById(R.id.grid_item_old_price_amount);
             newPrice = view.findViewById(R.id.grid_item_price_amount);
             descriptionText = view.findViewById(R.id.grid_item_coupon_description_text);
@@ -94,13 +96,11 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             switch (v.getId()) {
                 case R.id.grid_item_show_details_button:
                     couponClickListener.onItemCouponDetailsClick(listOfItems
-                            .get(getAdapterPosition())
-                            .getId());
+                            .get(getAdapterPosition()).getId());
                     break;
                 case R.id.grid_item_show_code_button:
-                    couponClickListener.onItemCouponCodeCheckClick(listOfItems
-                            .get(getAdapterPosition())
-                            .getCouponCode());
+                    couponClickListener.onItemCouponCodeCheckClick(getAdapterPosition(),
+                            listOfItems.get(getAdapterPosition()).getImage());
                     break;
             }
         }
@@ -129,7 +129,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
                 break;
         }
 
-        if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
+        if (!TextUtils.isEmpty(currentItem.getImage())) {
             // TODO: Upload images to server and change "else" image to no_image_available
             Picasso.get()
                     .load(BASE_URL_IMAGES + currentItem.getImage())
@@ -157,8 +157,15 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             holder.discountMarker.setText(DEFAULT_STRING);
         }
 
-        if (currentItem.getTitle() != null && !currentItem.getTitle().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(currentItem.getTitle())) {
             holder.titleView.setText(currentItem.getTitle());
+        } else {
+            holder.titleView.setText(DEFAULT_STRING);
+        }
+
+        holder.codeText.setVisibility(View.GONE);
+        if (!TextUtils.isEmpty(currentItem.getCouponCode())) {
+            holder.codeText.setText(currentItem.getCouponCode());
         } else {
             holder.titleView.setText(DEFAULT_STRING);
         }
@@ -179,7 +186,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             holder.newPrice.setText(DEFAULT_STRING);
         }
 
-        if (currentItem.getShortDescription() != null && !currentItem.getShortDescription().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(currentItem.getShortDescription())) {
             holder.descriptionText.setText(Html.fromHtml(currentItem.getShortDescription()));
         } else {
             holder.descriptionText.setText(DEFAULT_STRING);

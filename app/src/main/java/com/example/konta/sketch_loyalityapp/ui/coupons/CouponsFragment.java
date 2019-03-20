@@ -7,8 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.adapter.CouponAdapter;
 import com.example.konta.sketch_loyalityapp.adapter.RecyclerItemClickListener;
@@ -17,8 +18,16 @@ import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.ui.couponDetails.CouponDetailsActivity;
 import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import jp.wasabeef.picasso.transformations.BlurTransformation;
+import jp.wasabeef.picasso.transformations.GrayscaleTransformation;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
+import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 
 public class CouponsFragment extends BaseFragment implements CouponsContract.View {
 
@@ -57,8 +66,29 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         }
 
         @Override
-        public void onItemCouponCodeCheckClick(String couponCode) {
-            Toast.makeText(getContext(), "Code: " + couponCode , Toast.LENGTH_LONG).show();
+        public void onItemCouponCodeCheckClick(int position, String imageUrl) {
+            ImageView imageView = recyclerView.getChildAt(position).findViewById(R.id.grid_item_image);
+            TextView textView = recyclerView.getChildAt(position).findViewById(R.id.grid_item_code_text);
+
+            Picasso.get()
+                    .load(BASE_URL_IMAGES + imageUrl)
+                    .noPlaceholder()
+                    .transform(new BlurTransformation(imageView.getContext()))
+                    .transform(new GrayscaleTransformation())
+                    .transform(new RoundedCornersTransformation(8, 0))
+                    .error(R.drawable.no_image_available)
+                    .resize(1200, 720)
+                    .into(imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            textView.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
         }
     };
 

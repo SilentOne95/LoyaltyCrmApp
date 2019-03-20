@@ -14,6 +14,6 @@ public interface RecyclerItemClickListener {
 
     interface CouponRetrofitClickListener {
         void onItemCouponDetailsClick(int couponId);
-        void onItemCouponCodeCheckClick(String couponCode);
+        void onItemCouponCodeCheckClick(int position, String imageUrl);
     }
 }

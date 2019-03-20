@@ -3,6 +3,7 @@ package com.example.konta.sketch_loyalityapp.adapter;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,6 +108,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
             Picasso.get()
                     .load(imageId)
+                    .placeholder(R.drawable.placeholder)
                     .into(holder.imageView);
         } else {
             Picasso.get()
@@ -117,7 +119,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                     .into(holder.imageView);
         }
 
-        if (currentItem.getComponentTitle() != null && !currentItem.getComponentTitle().trim().isEmpty()) {
+        if (!TextUtils.isEmpty(currentItem.getComponentTitle())) {
             holder.titleView.setText(currentItem.getComponentTitle());
         } else {
             holder.titleView.setText(DEFAULT_STRING);

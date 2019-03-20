@@ -409,6 +409,16 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="grid_item_coupon_code" parent="layout_wrap_content">
+        <item name="android:layout_margin">@dimen/small_value</item>
+        <item name="android:padding">@dimen/small_value</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/layout_title_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="grid_item_coupon_title_one_row" parent="layout_wrap_content">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">@dimen/very_big_text_size</item>
