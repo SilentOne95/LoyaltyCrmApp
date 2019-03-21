@@ -21,6 +21,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.example.konta.sketch_loyalityapp.R;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -114,9 +116,10 @@ public class TrackerService extends Service {
 
     private void requestLocationUpdates() {
         LocationRequest request = new LocationRequest();
-        request.setInterval(100000);
-        request.setFastestInterval(50000);
-        request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        request.setInterval(10 * 60 * 1000);
+        request.setMaxWaitTime(60 * 60 * 1000);
+        request.setFastestInterval(2 * 60 * 1000);
+        request.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);
 
@@ -130,24 +133,21 @@ public class TrackerService extends Service {
             client.requestLocationUpdates(request, new LocationCallback() {
                 @Override
                 public void onLocationResult(LocationResult locationResult) {
-                    String key = FirebaseDatabase.getInstance().getReference(userId + "location").push().getKey();
-
-                    DatabaseReference reference = FirebaseDatabase.getInstance()
-                            .getReference()
+                    String userKey = FirebaseDatabase.getInstance().getReference(userId + "location").push().getKey();
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                             .child(userId)
-                            .child("location")
-                            .child(key);
+                            .child("location");
 
-                    DatabaseReference latReference = reference.child("lat");
-                    DatabaseReference lngReference = reference.child("lng");
-
+                    GeoFire geoFire = new GeoFire(reference);
                     Location location = locationResult.getLastLocation();
-
-                    if (location != null) {
-                        Log.d(TAG, "location update " + location.getLatitude() + " " + location.getLongitude());
-                        latReference.setValue(location.getLatitude());
-                        lngReference.setValue(location.getLongitude());
-                    }
+                    geoFire.setLocation(userKey, new GeoLocation(location.getLatitude(), location.getLongitude()),
+                            (key, error) -> {
+                        if (error != null) {
+                            Log.d(TAG, "error occured while saving location data");
+                        } else {
+                            Log.d(TAG, "location saved successfully ");
+                        }
+                    });
                 }
             }, null);
         }
