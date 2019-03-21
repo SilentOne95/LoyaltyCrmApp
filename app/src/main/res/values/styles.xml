@@ -409,7 +409,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="grid_item_coupon_code" parent="layout_wrap_content">
+    <style name="grid_item_coupon_code_one_row" parent="layout_wrap_content">
         <item name="android:layout_margin">@dimen/small_value</item>
         <item name="android:padding">@dimen/small_value</item>
         <item name="android:fontFamily">@font/lato</item>
@@ -561,6 +561,16 @@
         <item name="android:textSize">@dimen/big_text_size</item>
     </style>
 
+    <style name="grid_item_coupon_code_two_rows" parent="layout_wrap_content">
+        <item name="android:layout_margin">@dimen/small_value</item>
+        <item name="android:padding">@dimen/small_value</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="grid_item_coupon_price_text_two_rows" parent="layout_wrap_content">
         <item name="android:layout_marginTop">@dimen/small_value</item>
         <item name="android:textColor">@color/colorBlack</item>
@@ -589,22 +599,22 @@
     </style>
 
     <style name="grid_item_coupon_show_code_button_two_rows" parent="basic_min_size_button">
-        <item name="android:layout_width">@dimen/grid_item_button_code_width_two_rows</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:gravity">center</item>
         <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:layout_marginBottom">@dimen/small_value</item>
+        <item name="android:gravity">center</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
     <style name="grid_item_coupon_show_details_button_two_rows" parent="basic_min_size_button">
-        <item name="android:layout_width">@dimen/grid_item_button_details_width_two_rows</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/grid_item_height_one_row</item>
-        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 

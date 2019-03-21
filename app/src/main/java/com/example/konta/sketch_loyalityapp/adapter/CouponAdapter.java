@@ -84,11 +84,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             showDetailsButton = view.findViewById(R.id.grid_item_show_details_button);
             showDetailsButton.setOnClickListener(this);
             checkCodeButton = view.findViewById(R.id.grid_item_show_code_button);
-            if (numOfColumns == 1) {
-                checkCodeButton.setOnClickListener(this);
-            } else {
-                checkCodeButton.setVisibility(View.GONE);
-            }
+            checkCodeButton.setOnClickListener(this);
         }
 
         @Override
@@ -167,15 +163,11 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         if (!TextUtils.isEmpty(currentItem.getCouponCode())) {
             holder.codeText.setText(currentItem.getCouponCode());
         } else {
-            holder.titleView.setText(DEFAULT_STRING);
+            holder.codeText.setText(DEFAULT_STRING);
         }
 
         if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
-            if (numOfColumns == 1) {
-                holder.basicPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())).concat("zł"));
-            } else {
-                holder.basicPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())));
-            }
+            holder.basicPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())).concat("zł"));
         } else {
             holder.basicPrice.setText(DEFAULT_STRING);
         }

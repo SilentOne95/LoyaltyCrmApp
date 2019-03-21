@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/grid_item_code_text"
-            style="@style/grid_item_coupon_code"
+            style="@style/grid_item_coupon_code_one_row"
             app:layout_constraintBottom_toBottomOf="@+id/grid_item_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

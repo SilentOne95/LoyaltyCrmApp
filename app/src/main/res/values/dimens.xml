@@ -29,7 +29,6 @@
     <dimen name="discount_marker_height_two_rows">40dp</dimen>
 
     <dimen name="grid_item_button_code_width_one_row">90dp</dimen>
-    <dimen name="grid_item_button_code_width_two_rows">80dp</dimen>
 
     <dimen name="grid_item_button_details_width_one_row">130dp</dimen>
     <dimen name="grid_item_button_details_width_two_rows">100dp</dimen>
