@@ -5,6 +5,8 @@
 
     <!-- Main activity -->
     <string name="menu_toolbar_my_account_string">Moje konto</string>
+    <string name="menu_toolbar_search_string">Szukaj</string>
+    <string name="main_menu_search_hint">Podpowiedź</string>
     <string name="nav_view_upgrade_acc_text">Zarejestruj się, aby uzyskać dostęp do wszystkich promocji</string>
 
     <!-- Log in view -->
