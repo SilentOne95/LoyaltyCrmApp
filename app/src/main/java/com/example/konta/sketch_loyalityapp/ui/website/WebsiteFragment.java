@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -27,10 +30,20 @@ public class WebsiteFragment extends BaseFragment {
 
         getActivity().setTitle("Nasza strona");
 
+        setHasOptionsMenu(true);
+
         mWebView = rootView.findViewById(R.id.webview);
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.loadUrl("https://www.google.com/");
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        searchItem.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

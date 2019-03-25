@@ -19,6 +19,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +68,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.REQUEST_CHECK_SETTI
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
         View.OnClickListener, MapContract.View, GoogleMap.OnMyLocationButtonClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        ResultCallback, OnCompleteListener<LocationSettingsResponse> {
+        ResultCallback, OnCompleteListener<LocationSettingsResponse>, SearchView.OnQueryTextListener {
 
     private static final String TAG = GoogleMapFragment.class.getSimpleName();
 
@@ -92,6 +96,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Mapa");
+
+        setHasOptionsMenu(true);
 
         presenter = new MapPresenter(this, new MapModel());
         presenter.setUpObservable();
@@ -137,6 +143,16 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mPanelPlaceTitle = rootView.findViewById(R.id.bottom_sheet_icon_title);
         mPanelAddress = rootView.findViewById(R.id.bottom_sheet_place_address);
         mPanelTodayOpenHours = rootView.findViewById(R.id.bottom_sheet_place_hours);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint("Search");
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -455,5 +471,15 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mPanelPlaceTitle.setText(title);
         mPanelAddress.setText(address);
         mPanelTodayOpenHours.setText(openHours);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
     }
 }

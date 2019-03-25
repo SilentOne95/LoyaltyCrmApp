@@ -5,6 +5,9 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +45,8 @@ public class BarcodeGenerator extends BaseFragment {
 
         getActivity().setTitle("Moje konto");
 
+        setHasOptionsMenu(true);
+
         textView = rootView.findViewById(R.id.textView);
         textView.setVisibility(View.GONE);
         textView.setText(BARCODE_DATA);
@@ -55,6 +60,14 @@ public class BarcodeGenerator extends BaseFragment {
         } catch (WriterException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        searchItem.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private Bitmap encodeAsBitmap(String contents) throws WriterException {

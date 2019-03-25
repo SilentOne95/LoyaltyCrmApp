@@ -3,6 +3,9 @@ package com.example.konta.sketch_loyalityapp.ui.contact;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.konta.sketch_loyalityapp.R;
@@ -20,5 +23,15 @@ public class ContactFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Kontakt");
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        searchItem.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

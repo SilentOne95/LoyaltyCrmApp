@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -55,8 +58,18 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         emptyStateView = rootView.findViewById(R.id.empty_state_home_container);
         emptyStateView.setVisibility(View.GONE);
 
+        setHasOptionsMenu(true);
+
         presenter = new HomePresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        searchItem.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private RecyclerItemClickListener.HomeRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.HomeRetrofitClickListener() {

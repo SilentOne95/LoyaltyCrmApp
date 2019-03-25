@@ -6,6 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -19,7 +23,7 @@ import com.example.konta.sketch_loyalityapp.utils.CustomItemDecoration;
 
 import java.util.List;
 
-public class ProductsFragment extends BaseFragment implements ProductsContract.View {
+public class ProductsFragment extends BaseFragment implements ProductsContract.View, SearchView.OnQueryTextListener {
 
     private static final String TAG = ProductsFragment.class.getSimpleName();
 
@@ -38,6 +42,8 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
         getActivity().setTitle("Produkty");
 
+        setHasOptionsMenu(true);
+
         progressBar = rootView.findViewById(R.id.progress_bar);
         recyclerView = rootView.findViewById(R.id.recycler_view);
         emptyStateView = rootView.findViewById(R.id.empty_state_products_container);
@@ -52,6 +58,16 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         startProductDetailsActivity.putExtra("EXTRA_ELEMENT_ID", productId);
         startActivity(startProductDetailsActivity);
     };
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint("Search");
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     @Override
     public void setUpAdapter(List<Product> productList, int numOfColumns) {
@@ -87,5 +103,15 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
     }
 }

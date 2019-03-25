@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,6 +34,8 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
 
         getActivity().setTitle("Regulamin");
 
+        setHasOptionsMenu(true);
+
         mLayoutContainer = rootView.findViewById(R.id.layout_container);
         mLayoutContainer.setVisibility(View.GONE);
         mProgressBar = rootView.findViewById(R.id.progress_bar);
@@ -39,6 +44,14 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
 
         presenter = new TermsPresenter(this, new TermsModel());
         presenter.requestDataFromServer(1);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        searchItem.setVisible(false);
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
