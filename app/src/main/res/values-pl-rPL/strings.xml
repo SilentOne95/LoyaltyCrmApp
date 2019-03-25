@@ -43,7 +43,7 @@
     <!-- Fragment coupons and products -->
     <string name="no_coupons_text">Niestety nie masz aktywnych kuponów :(</string>
     <string name="no_products_text">Niestety nie masz aktywnych produktów :(</string>
-    <string name="try_again_later_text">Spróbuj później</string>
+    <string name="try_again_later_text">Spróbuj ponownie później</string>
 
     <!-- Activity Coupon details -->
     <string name="valid_until_text">Aktywne do:</string>

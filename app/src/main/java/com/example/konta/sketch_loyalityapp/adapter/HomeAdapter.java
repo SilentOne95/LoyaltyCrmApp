@@ -100,7 +100,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 break;
         }
 
-        if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
+        if (!TextUtils.isEmpty(currentItem.getImage())) {
             // TODO: Upload images to server and change "else" image to no_image_available
             int imageId = holder.imageView.getContext()
                     .getResources()

@@ -45,8 +45,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\ic png\ic_search.png" />
-                                      <entry key="outputName" value="ic_search" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\ic_sellger_logo.png" />
+                                      <entry key="outputName" value="ic_sellger_logo" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
                                     </map>
