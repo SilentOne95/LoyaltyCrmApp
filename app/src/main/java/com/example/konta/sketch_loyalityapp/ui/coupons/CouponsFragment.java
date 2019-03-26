@@ -6,6 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -35,7 +39,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_HEIGHT_TWO_C
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 
-public class CouponsFragment extends BaseFragment implements CouponsContract.View {
+public class CouponsFragment extends BaseFragment implements CouponsContract.View, SearchView.OnQueryTextListener {
 
     private static final String TAG = CouponsFragment.class.getSimpleName();
 
@@ -45,6 +49,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     private View emptyStateView;
     private ProgressBar progressBar;
     private int numOfColumns;
+    private CouponAdapter adapter;
 
     @Override
     protected int getLayout() { return R.layout.fragment_coupons; }
@@ -55,6 +60,8 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
         getActivity().setTitle("Kupony");
 
+        setHasOptionsMenu(true);
+
         progressBar = rootView.findViewById(R.id.progress_bar);
         recyclerView = rootView.findViewById(R.id.recycler_view);
         emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
@@ -62,6 +69,16 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
         presenter = new CouponsPresenter(this, new CouponsModel());
         presenter.requestDataFromServer();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint("Search");
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private RecyclerItemClickListener.CouponRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.CouponRetrofitClickListener() {
@@ -141,7 +158,8 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
             }
             recyclerView.addItemDecoration(itemDecoration);
-            recyclerView.setAdapter(new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns));
+            adapter = new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns);
+            recyclerView.setAdapter(adapter);
         }
     }
 
@@ -159,5 +177,16 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.getFilter().filter(newText);
+        return false;
     }
 }

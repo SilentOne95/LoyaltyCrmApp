@@ -32,6 +32,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     private RecyclerView recyclerView;
     private View emptyStateView;
     private ProgressBar progressBar;
+    private ProductAdapter adapter;
 
     @Override
     protected int getLayout() { return R.layout.fragment_products; }
@@ -85,7 +86,8 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
             }
             recyclerView.addItemDecoration(itemDecoration);
-            recyclerView.setAdapter(new ProductAdapter(productList, recyclerItemClickListener, numOfColumns));
+            adapter = new ProductAdapter(productList, recyclerItemClickListener, numOfColumns);
+            recyclerView.setAdapter(adapter);
         }
     }
 
@@ -106,12 +108,13 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     }
 
     @Override
-    public boolean onQueryTextSubmit(String s) {
+    public boolean onQueryTextSubmit(String query) {
         return false;
     }
 
     @Override
-    public boolean onQueryTextChange(String s) {
+    public boolean onQueryTextChange(String newText) {
+        adapter.getFilter().filter(newText);
         return false;
     }
 }

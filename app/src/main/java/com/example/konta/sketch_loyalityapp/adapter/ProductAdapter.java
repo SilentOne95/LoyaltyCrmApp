@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.example.konta.sketch_loyalityapp.pojo.product.Product;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -29,9 +32,9 @@ import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_ONE_CO
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements Filterable {
 
-    private List<Product> listOfItems;
+    private List<Product> listOfItems, listOfItemsHelper;
     private RecyclerItemClickListener.ProductRetrofitClickListener productClickListener;
     private int numOfColumns;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -40,6 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                           RecyclerItemClickListener.ProductRetrofitClickListener clickListener,
                           int columns) {
         listOfItems = items;
+        listOfItemsHelper = new ArrayList<>(listOfItems);
         productClickListener = clickListener;
         numOfColumns = columns;
     }
@@ -148,4 +152,40 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public int getItemCount() { return listOfItems.size(); }
+
+    @Override
+    public Filter getFilter() {
+        return productFilter;
+    }
+
+    private Filter productFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Product> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(listOfItemsHelper);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Product product : listOfItemsHelper) {
+                    if (product.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(product);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            listOfItems.clear();
+            listOfItems.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
