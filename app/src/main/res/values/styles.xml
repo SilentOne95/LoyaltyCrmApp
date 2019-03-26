@@ -410,11 +410,12 @@
     </style>
 
     <style name="grid_item_coupon_code_one_row" parent="layout_wrap_content">
+        <item name="android:background">@drawable/rounded_corners_orange</item>
         <item name="android:layout_margin">@dimen/small_value</item>
         <item name="android:padding">@dimen/small_value</item>
         <item name="android:fontFamily">@font/lato</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/layout_title_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
