@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "580087034404",
+    "firebase_url": "https://sellger.firebaseio.com",
+    "project_id": "sellger",
+    "storage_bucket": "sellger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580087034404:android:d0e70a7b500d5a8d",
+        "android_client_info": {
+          "package_name": "com.example.konta.sketch_loyalityapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "580087034404-d1rformh98urpq52kdk5i3t168ie0tn8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.konta.sketch_loyalityapp",
+            "certificate_hash": "00be513ce6453ea6bce8e951de44ffb811354a66"
+          }
+        },
+        {
+          "client_id": "580087034404-ttb5oee6jee76tt56m62jpp88o5qdjal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAOmYCJScvnVOLXgdPluxZ9sEXr8kA-6c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "580087034404-p4tbei3vst9r4o9422ilkbmcvu3v86e1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
