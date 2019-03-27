@@ -47,9 +47,6 @@
     <!-- Coupon details activity -->
     <dimen name="coupon_details_button_height">40dp</dimen>
 
-    <!-- Log In -->
-
-
     <!-- Sign Up layout -->
     <dimen name="sign_up_fields_width">300dp</dimen>
     <dimen name="sign_up_fields_height">40dp</dimen>
@@ -66,7 +63,7 @@
     <dimen name="vertical_divider_width">1dp</dimen>
 
     <!-- Notification layout -->
-    <dimen name="notification_layout_height">64dp</dimen>
+    <dimen name="notification_layout_height">96dp</dimen>
 
     <!-- Barcode scanner layout -->
     <dimen name="barcode_scanner_instruction_text_size">18sp</dimen>

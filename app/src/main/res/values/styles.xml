@@ -659,11 +659,11 @@
     <!-- notification layout -->
     <style name="notification_image_view">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/small_value</item>
         <item name="android:padding">@dimen/small_value</item>
         <item name="android:adjustViewBounds">true</item>
-        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_gravity">center_vertical</item>
     </style>
 
     <style name="notification_title_text">
@@ -674,7 +674,6 @@
     </style>
 
     <style name="notification_message_text">
-        <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/small_text_size</item>
     </style>

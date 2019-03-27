@@ -89,13 +89,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setContentIntent(pendingIntent);
         } else {
             RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.notification_layout);
-            contentView.setImageViewResource(R.id.notification_logo, R.drawable.sellger_logo_white);
+            contentView.setImageViewResource(R.id.notification_logo, R.drawable.notification_logo);
             contentView.setTextViewText(R.id.notification_main_text, "Custom notification title");
             contentView.setTextViewText(R.id.notification_secondary_text, messageBody);
 
             notificationBuilder = new NotificationCompat.Builder(this, channelId)
                     .setContent(contentView)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_sellger_logo)
                     .setAutoCancel(true)
                     .setSound(defaultSoundUri)
                     .setContentIntent(pendingIntent);
