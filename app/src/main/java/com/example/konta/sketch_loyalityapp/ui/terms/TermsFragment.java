@@ -3,13 +3,12 @@ package com.example.konta.sketch_loyalityapp.ui.terms;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
@@ -23,7 +22,7 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
 
     private ProgressBar mProgressBar;
     private View mLayoutContainer;
-    private TextView mDescription;
+    private WebView mTermsTextView;
 
     @Override
     protected int getLayout() { return R.layout.fragment_terms_conditions; }
@@ -39,7 +38,7 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
         mLayoutContainer = rootView.findViewById(R.id.layout_container);
         mLayoutContainer.setVisibility(View.GONE);
         mProgressBar = rootView.findViewById(R.id.progress_bar);
-        mDescription = rootView.findViewById(R.id.terms_conditions_text_view);
+        mTermsTextView = rootView.findViewById(R.id.terms_webview);
 
 
         presenter = new TermsPresenter(this, new TermsModel());
@@ -62,6 +61,6 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
 
     @Override
     public void setUpViewWithData(Page page) {
-        mDescription.setText(Html.fromHtml(page.getBody()));
+        mTermsTextView.loadData(page.getBody(), "text/html", null);
     }
 }

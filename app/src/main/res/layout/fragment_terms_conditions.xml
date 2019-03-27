@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/colorFragmentBackground"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_container_padding"
     tools:context=".ui.terms.TermsFragment">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-
-    <ScrollView
-        android:id="@+id/layout_container"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:background="@drawable/grid_item_shadow"
+        android:padding="@dimen/small_value">
 
-        <TextView
-            android:id="@+id/terms_conditions_text_view"
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="4dp"
-            android:padding="@dimen/mid_value"
-            android:textColor="@color/colorBlack" />
+            android:layout_margin="@dimen/small_value"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </ScrollView>
+        <ScrollView
+            android:id="@+id/layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
 
-</RelativeLayout>
+            <WebView
+                android:id="@+id/terms_webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </ScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
