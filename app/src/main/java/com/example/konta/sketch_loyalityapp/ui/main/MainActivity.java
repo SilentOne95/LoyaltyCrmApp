@@ -334,19 +334,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
 
-        switch (menuItem.getItemId()) {
-            case R.id.main_menu_my_account:
-                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
-                if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
-                    presenter.displaySelectedScreen("login", "");
-                } else if (!(fragment instanceof BarcodeGenerator)) {
-                    presenter.displaySelectedScreen("barcode", "");
-                    uncheckItemsNavDrawer();
-                }
-                break;
-            case R.id.main_menu_search:
-                Toast.makeText(getApplicationContext(), "Szukaj", Toast.LENGTH_LONG).show();
-                break;
+        if (menuItem.getItemId() == R.id.main_menu_my_account) {
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
+            if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
+                presenter.displaySelectedScreen("login", "");
+            } else if (!(fragment instanceof BarcodeGenerator)) {
+                presenter.displaySelectedScreen("barcode", "");
+                uncheckItemsNavDrawer();
+            }
         }
 
         return false;

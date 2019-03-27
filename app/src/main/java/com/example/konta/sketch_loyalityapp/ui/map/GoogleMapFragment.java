@@ -56,8 +56,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
@@ -405,15 +407,29 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         final CustomClusterRenderer renderer = new CustomClusterRenderer(getContext(), mGoogleMap, mClusterManager);
         mClusterManager.setRenderer(renderer);
 
-        // Set BottomSheet state when marker is clicked
+        // Set up cluster an marker listeners
         mGoogleMap.setOnMarkerClickListener(mClusterManager);
+        mClusterManager.setOnClusterClickListener(cluster -> {
+
+            LatLngBounds.Builder builder = LatLngBounds.builder();
+            for (ClusterItem item : cluster.getItems()) {
+                builder.include(item.getPosition());
+            }
+            final LatLngBounds bounds = builder.build();
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 300));
+
+            return true;
+        });
         mClusterManager.setOnClusterItemClickListener(marker -> {
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 16));
+
             // Preventing from selecting the same marker
             if (mPreviousSelectedMarkerId != marker.getId()) {
                 presenter.passDataToBottomSheet(marker.getId());
                 presenter.switchBottomSheetState(marker);
                 mPreviousSelectedMarkerId = marker.getId();
             }
+
             return true;
         });
     }
