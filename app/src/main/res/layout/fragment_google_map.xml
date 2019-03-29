@@ -13,14 +13,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.map.GoogleMapFragment" />
 
-    <!-- BottomSheet layout with shadow -->
+    <!-- Map bottom sheet layout with shadow -->
     <View
         android:id="@+id/shadow"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="@dimen/mid_value"
         android:background="@drawable/shape_gradient"
-        app:layout_anchor="@id/bottom_sheet" />
+        app:layout_anchor="@id/map_bottom_sheet" />
 
-    <include layout="@layout/activity_bottom_sheet" />
+    <include layout="@layout/activity_map_bottom_sheet" />
 
 </android.support.design.widget.CoordinatorLayout>

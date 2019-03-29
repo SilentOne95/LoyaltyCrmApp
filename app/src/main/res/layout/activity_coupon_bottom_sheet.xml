@@ -1,68 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_coupon_details_activity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:clickable="true"
     android:focusable="true"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/test"
     app:behavior_hideable="true"
     app:behavior_peekHeight="@dimen/zero"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/bottom_coupon_advice_text_view"
+        style="@style/bottom_coupon_advice_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Pozwól zeskanować lub pokaż kod obsłudze, \naby odebrać ofertę"
-        android:textSize="@dimen/mid_text_size"
-        android:textColor="@color/colorAccent"
-        android:gravity="center"
+        android:text="@string/bottom_coupon_advice_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/bottom_flipper_container"
+        android:id="@+id/bottom_coupon_flipper_container"
+        style="@style/bottom_coupon_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/bottom_coupon_advice_text_view">
 
         <ImageView
-            android:id="@+id/bottom_arrow_left"
+            android:id="@+id/bottom_coupon_arrow_left"
+            style="@style/bottom_coupon_switch_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:padding="16dp"
-            android:src="@drawable/ic_arrow_left" />
+            android:src="@drawable/ic_arrow_left"
+            android:contentDescription="@string/view_flipper_arrow_desc" />
 
         <ViewFlipper
             android:id="@+id/bottom_coupon_view_flipper"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp">
+            style="@style/bottom_coupon_view_flipper">
 
             <ImageView
-                android:id="@+id/bottom_bitmap"
+                android:id="@+id/bottom_coupon_barcode_bitmap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@drawable/sellger_logo" />
 
             <TextView
-                android:id="@+id/bottom_coupon_text"
+                android:id="@+id/bottom_coupon_code_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -73,12 +64,13 @@
         </ViewFlipper>
 
         <ImageView
-            android:id="@+id/bottom_arrow_right"
+            android:id="@+id/bottom_coupon_arrow_right"
+            style="@style/bottom_coupon_switch_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:padding="16dp"
-            android:src="@drawable/ic_arrow_right" />
+            android:src="@drawable/ic_arrow_right"
+            android:contentDescription="@string/view_flipper_arrow_desc" />
 
     </LinearLayout>
 

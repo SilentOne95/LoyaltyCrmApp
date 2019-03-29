@@ -53,12 +53,12 @@
     <dimen name="sign_up_fields_padding">10dp</dimen>
     <dimen name="sign_up_checkbox_width">320dp</dimen>
 
-    <!-- Bottom Sheet layout -->
+    <!-- Map bottom sheet layout -->
     <dimen name="bottom_sheet_general_info_layout_height">400dp</dimen>
     <dimen name="bottom_sheet_general_text_icon_height">40dp</dimen>
     <dimen name="bottom_sheet_horizontal_divider_height">2dp</dimen>
 
-    <!-- Bottom Sheet tabs -->
+    <!-- Map bottom sheet tabs -->
     <dimen name="bottom_sheet_tab_height">40dp</dimen>
     <dimen name="vertical_divider_width">1dp</dimen>
 
@@ -70,5 +70,8 @@
     <dimen name="barcode_scanner_instruction_spacing">4dp</dimen>
     <dimen name="barcode_scanner_button_width">100dp</dimen>
     <dimen name="barcode_scanner_button_height">40dp</dimen>
+
+    <!-- Coupon bottom sheet -->
+    <dimen name="coupon_view_flipper_height">80dp</dimen>
 
 </resources>

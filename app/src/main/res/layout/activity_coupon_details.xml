@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -126,13 +125,13 @@
 
     </RelativeLayout>
 
-    <!-- BottomSheet layout with shadow -->
+    <!-- Coupon bottom sheet layout with shadow -->
     <View
         android:id="@+id/shadow"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="@dimen/mid_value"
         android:background="@drawable/shape_gradient"
-        app:layout_anchor="@id/test" />
+        app:layout_anchor="@id/bottom_coupon_details_activity" />
 
     <include layout="@layout/activity_coupon_bottom_sheet" />
 

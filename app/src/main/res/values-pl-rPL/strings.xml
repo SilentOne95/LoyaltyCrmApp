@@ -51,12 +51,15 @@
     <string name="show_my_coupon_text">Pokaż mój kupon</string>
     <string name="coupon_details_code_text">Kod promocyjny:</string>
 
+    <!-- Coupon bottom sheet -->
+    <string name="bottom_coupon_advice_text">Pozwól zeskanować lub pokaż kod obsłudze, \naby odebrać ofertę</string>
+
     <!-- Grid list item -->
     <string name="button_check_product">Szczegóły</string>
     <string name="button_check_coupon">Pokaż kod</string>
     <string name="button_check_details">Szczegóły</string>
 
-    <!-- Bottom Sheet -->
+    <!-- Map bottom sheet -->
     <string name="first_fragment">Godziny otwarcia</string>
     <string name="second_fragment">Kontakt</string>
 

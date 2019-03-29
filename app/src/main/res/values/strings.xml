@@ -59,12 +59,15 @@
     <string name="show_my_coupon_text">Show my coupon</string>
     <string name="coupon_details_code_text">Promo code:</string>
 
+    <!-- Coupon bottom sheet -->
+    <string name="bottom_coupon_advice_text">Show barcode or text code to any staff member</string>
+
     <!-- Grid list item -->
     <string name="button_check_product">Check</string>
     <string name="button_check_coupon">Check</string>
     <string name="button_check_details">View details</string>
 
-    <!-- Bottom Sheet -->
+    <!-- Map bottom sheet -->
     <string name="bottom_place_title_text" translatable="false">Current place title</string>
     <string name="bottom_place_address_text" translatable="false">Current place address, postal code, city</string>
     <string name="bottom_place_open_hours_text" translatable="false">Current place open hours</string>
@@ -125,5 +128,6 @@
     <string name="barcode_desc" translatable="false">Barcode</string>
     <string name="phone_icon_verify_code_desc" translatable="false">Text icon in 1nd step of verification phone num</string>
     <string name="text_icon_verify_code_desc" translatable="false">Text icon in 2nd step of verification phone num</string>
+    <string name="view_flipper_arrow_desc" translatable="false">Arrow image to switch view in view flipper</string>
 
 </resources>

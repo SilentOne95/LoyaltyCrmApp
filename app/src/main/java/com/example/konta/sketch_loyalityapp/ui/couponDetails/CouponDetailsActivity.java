@@ -86,16 +86,16 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         showCouponCodeButton.setOnClickListener(this);
 
         // Bottom Sheet
-        View bottomSheet = findViewById(R.id.test);
+        View bottomSheet = findViewById(R.id.bottom_coupon_details_activity);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        switchFlipperLeftArrow = findViewById(R.id.bottom_arrow_left);
+        switchFlipperLeftArrow = findViewById(R.id.bottom_coupon_arrow_left);
         switchFlipperLeftArrow.setOnClickListener(this);
-        switchFlipperRightArrow = findViewById(R.id.bottom_arrow_right);
+        switchFlipperRightArrow = findViewById(R.id.bottom_coupon_arrow_right);
         switchFlipperRightArrow.setOnClickListener(this);
         viewFlipper = findViewById(R.id.bottom_coupon_view_flipper);
-        bottomCouponCodeTextView = findViewById(R.id.bottom_coupon_text);
-        bottomBarcodeView = findViewById(R.id.bottom_bitmap);
+        bottomCouponCodeTextView = findViewById(R.id.bottom_coupon_code_text);
+        bottomBarcodeView = findViewById(R.id.bottom_coupon_barcode_bitmap);
 
         presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
         presenter.requestDataFromServer(couponId);
@@ -188,12 +188,12 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             case R.id.show_coupon_button:
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
-            case R.id.bottom_arrow_right:
+            case R.id.bottom_coupon_arrow_right:
                 viewFlipper.setInAnimation(this, R.anim.slide_in_right);
                 viewFlipper.setOutAnimation(this, R.anim.slide_out_right);
                 viewFlipper.showNext();
                 break;
-            case R.id.bottom_arrow_left:
+            case R.id.bottom_coupon_arrow_left:
                 viewFlipper.setInAnimation(this, R.anim.slide_in_left);
                 viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
                 viewFlipper.showPrevious();

@@ -190,6 +190,32 @@
         <item name="android:layout_marginTop">@dimen/big_value</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
+    
+    <!-- Coupon bottom sheet -->
+    <style name="bottom_coupon_advice_text">
+        <item name="android:layout_margin">@dimen/small_value</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+    </style>
+    
+    <style name="bottom_coupon_container">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+    </style>
+
+    <style name="bottom_coupon_switch_arrow">
+        <item name="android:padding">@dimen/mid_value</item>
+    </style>
+
+    <style name="bottom_coupon_view_flipper">
+        <item name="android:layout_width">@dimen/zero</item>
+        <item name="android:layout_height">@dimen/coupon_view_flipper_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginBottom">@dimen/mid_value</item>
+        <item name="android:padding">@dimen/small_value</item>
+    </style>
 
     <!-- Log In and -->
     <style name="login_text_input_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -297,7 +323,7 @@
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
-    <!-- Bottom Sheet activity -->
+    <!-- Map bottom sheet activity -->
     <style name="bottom_sheet_general_icon_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -339,8 +365,8 @@
         <item name="android:background">@color/colorAccent</item>
         <item name="android:layout_gravity">bottom</item>
     </style>
-
-    <!-- Bottom Sheet first Tab: Opening Hours -->
+    
+    <!-- Map bottom sheet first Tab: Opening Hours -->
     <style name="vertical_divider_line">
         <item name="android:layout_width">@dimen/vertical_divider_width</item>
         <item name="android:layout_height">@dimen/zero</item>
@@ -357,7 +383,7 @@
         <item name="android:layout_marginBottom">@dimen/mid_value</item>
     </style>
 
-    <!-- Bottom Sheet first Tab: Contact Info -->
+    <!-- Map bottom sheet first Tab: Contact Info -->
     <style name="bottom_sheet_contact_us_text" parent="basic_bottom_sheet_text">
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginStart">@dimen/small_value</item>
