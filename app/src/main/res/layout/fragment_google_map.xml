@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.example.konta.sketch_loyalityapp.utils.CustomMapFrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +13,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.map.GoogleMapFragment" />
 
-    <!-- BottomSheet layout -->
+    <!-- BottomSheet layout with shadow -->
+    <View
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@drawable/shape_gradient"
+        app:layout_anchor="@id/bottom_sheet" />
+
     <include layout="@layout/activity_bottom_sheet" />
 
 </android.support.design.widget.CoordinatorLayout>
