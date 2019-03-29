@@ -2,6 +2,7 @@ package com.example.konta.sketch_loyalityapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.konta.sketch_loyalityapp.R;
 import com.example.konta.sketch_loyalityapp.pojo.menu.MenuComponent;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_ONE_CO
 import static com.example.konta.sketch_loyalityapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 import static com.example.konta.sketch_loyalityapp.ui.main.MainActivity.PACKAGE_NAME;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
@@ -109,7 +112,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             Picasso.get()
                     .load(imageId)
                     .placeholder(R.drawable.placeholder)
-                    .into(holder.imageView);
+                    .into(holder.imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            DrawableCompat.setTint(holder.imageView.getDrawable(),
+                                    getApplicationContext().getResources().getColor(R.color.colorAccent));
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
         } else {
             Picasso.get()
                     .load(R.drawable.no_image_available)

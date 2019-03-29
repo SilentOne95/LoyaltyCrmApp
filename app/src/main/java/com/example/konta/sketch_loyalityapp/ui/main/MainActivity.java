@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
@@ -53,6 +56,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private static final String TAG = MainActivity.class.getSimpleName();
 
     MainActivityPresenter presenter;
+    private Resources resources;
 
     private FirebaseAuth mFirebaseAuth;
     private DrawerLayout mDrawerLayout;
@@ -73,6 +77,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        resources = this.getResources();
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseAuth.useAppLanguage();
@@ -227,26 +233,31 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                                    ArrayList<MenuComponent> submenuSectionArray,
                                    int homeScreenId, String[] iconNameArray) {
 
-        Menu menu = mNavigationView.getMenu(), submenu = mNavigationView.getMenu();
-        Resources resources = this.getResources();
+        Menu menu = mNavigationView.getMenu();
         int arrayIndex = 0;
 
         for (int i = 0; i < menuSectionArray.size(); i++) {
-            menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER,
-                    menuSectionArray.get(i).getComponentTitle())
-                    .setIcon(resources.getIdentifier(iconNameArray[arrayIndex], "drawable", PACKAGE_NAME));
+            menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER, menuSectionArray.get(i).getComponentTitle())
+                    .setIcon(setIconColor(iconNameArray[arrayIndex]));
             arrayIndex++;
         }
 
         for (int i = 0; i < submenuSectionArray.size(); i++) {
-            menu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER,
-                    submenuSectionArray.get(i).getComponentTitle())
-                    .setIcon(resources.getIdentifier(iconNameArray[arrayIndex], "drawable", PACKAGE_NAME));
+            menu.add(NAV_VIEW_SECOND_GROUP_ID, i, NAV_VIEW_ORDER, submenuSectionArray.get(i).getComponentTitle())
+                    .setIcon(setIconColor(iconNameArray[arrayIndex]));
             arrayIndex++;
         }
 
         // Set checked home screen in Navigation Drawer
         mNavigationView.getMenu().getItem(homeScreenId).setChecked(true).setCheckable(true);
+    }
+
+    @Override
+    public Drawable setIconColor(String iconName) {
+        int id = resources.getIdentifier(iconName, "drawable", PACKAGE_NAME);
+        Drawable drawable = resources.getDrawable(id);
+        drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+        return drawable;
     }
 
     @Override
