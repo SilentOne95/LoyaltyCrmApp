@@ -24,8 +24,6 @@
     <LinearLayout
         android:id="@+id/bottom_coupon_flipper_container"
         style="@style/bottom_coupon_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,12 +52,7 @@
 
             <TextView
                 android:id="@+id/bottom_coupon_code_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/big_text_size" />
+                style="@style/bottom_coupon_text_code" />
 
         </ViewFlipper>
 

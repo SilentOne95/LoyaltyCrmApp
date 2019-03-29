@@ -119,7 +119,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         // Set up BottomSheet
         mPanelPeekHeight = rootView.findViewById(R.id.bottom_sheet_peek);
-        View mBottomSheet = rootView.findViewById(R.id.bottom_sheet);
+        View mBottomSheet = rootView.findViewById(R.id.map_bottom_sheet);
         mBottomSheet.setOnClickListener(this);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
         mBottomSheetBehavior.setHideable(true);

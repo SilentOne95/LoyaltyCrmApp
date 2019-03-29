@@ -200,8 +200,12 @@
     </style>
     
     <style name="bottom_coupon_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">@dimen/small_value</item>
         <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginBottom">@dimen/mid_value</item>
     </style>
 
     <style name="bottom_coupon_switch_arrow">
@@ -212,9 +216,16 @@
         <item name="android:layout_width">@dimen/zero</item>
         <item name="android:layout_height">@dimen/coupon_view_flipper_height</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginBottom">@dimen/mid_value</item>
         <item name="android:padding">@dimen/small_value</item>
+    </style>
+
+    <style name="bottom_coupon_text_code">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
     </style>
 
     <!-- Log In and -->
