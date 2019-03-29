@@ -65,7 +65,9 @@ public class BarcodeGenerator extends BaseFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        MenuItem accountItem = menu.findItem(R.id.main_menu_my_account);
         searchItem.setVisible(false);
+        accountItem.setVisible(false);
 
         super.onCreateOptionsMenu(menu, inflater);
     }

@@ -34,19 +34,21 @@ public class BarcodeScanner extends BaseFragment implements View.OnClickListener
 
         getActivity().setTitle("Skaner");
 
+        setHasOptionsMenu(true);
+
         autoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
         flashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);
 
         scanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
         scanButton.setOnClickListener(this);
-
-        setHasOptionsMenu(true);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        MenuItem optionsItem = menu.findItem(R.id.main_menu_options);
         searchItem.setVisible(false);
+        optionsItem.setVisible(false);
 
         super.onCreateOptionsMenu(menu, inflater);
     }

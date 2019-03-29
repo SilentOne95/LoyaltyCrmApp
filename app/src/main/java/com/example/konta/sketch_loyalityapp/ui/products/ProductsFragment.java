@@ -64,6 +64,8 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        MenuItem optionsItem = menu.findItem(R.id.main_menu_options);
+        optionsItem.setVisible(false);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(this);

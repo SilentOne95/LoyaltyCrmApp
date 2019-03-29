@@ -150,6 +150,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        MenuItem optionsItem = menu.findItem(R.id.main_menu_options);
+        optionsItem.setVisible(false);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
         searchView.setQueryHint("Search");

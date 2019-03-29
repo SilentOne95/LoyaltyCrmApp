@@ -48,7 +48,9 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
+        MenuItem optionsItem = menu.findItem(R.id.main_menu_options);
         searchItem.setVisible(false);
+        optionsItem.setVisible(false);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
