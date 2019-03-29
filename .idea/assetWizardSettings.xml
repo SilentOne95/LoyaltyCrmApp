@@ -45,10 +45,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\ic_sellger_logo_white.png" />
-                                      <entry key="outputName" value="ic_sellger_logo_white" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\left_big.png" />
+                                      <entry key="outputName" value="ic_left_big" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="ffffff" />
+                                      <entry key="themeColor" value="ff9800" />
                                     </map>
                                   </option>
                                 </PersistentState>

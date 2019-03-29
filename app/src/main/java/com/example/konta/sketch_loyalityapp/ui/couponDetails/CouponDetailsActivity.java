@@ -1,30 +1,35 @@
 package com.example.konta.sketch_loyalityapp.ui.couponDetails;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.example.konta.sketch_loyalityapp.base.BaseActivity;
 import com.example.konta.sketch_loyalityapp.pojo.coupon.Coupon;
 import com.example.konta.sketch_loyalityapp.R;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.util.EnumMap;
+import java.util.Map;
 
+import static com.example.konta.sketch_loyalityapp.Constants.BARCODE_COUPON_HEIGHT;
+import static com.example.konta.sketch_loyalityapp.Constants.BARCODE_WIDTH;
 import static com.example.konta.sketch_loyalityapp.Constants.BASE_URL_IMAGES;
 import static com.example.konta.sketch_loyalityapp.Constants.DEFAULT_STRING;
 
@@ -34,18 +39,21 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     CouponDetailsPresenter presenter;
 
-    private Button showCouponCodeButton;
-    private GradientDrawable backgroundButton;
-    private Spannable staticCodeText, promoCodeText;
-
-    private ImageView couponImage;
-    private TextView couponMarker, couponDate, couponTitle, couponNewPrice, couponBasicPrice, couponDescription;
     private ProgressBar progressBar;
     private View layoutContainer;
+    private ImageView couponImage;
+    private TextView couponMarker, couponDate, couponTitle, couponNewPrice, couponBasicPrice, couponDescription;
+    private Button showCouponCodeButton;
 
     private int couponId;
     private String couponCode;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+    private BottomSheetBehavior bottomSheetBehavior;
+    private ViewFlipper viewFlipper;
+    private TextView bottomCouponCodeTextView;
+    private ImageView bottomBarcodeView, switchFlipperLeftArrow, switchFlipperRightArrow;
+    private Bitmap bitmap = null;
 
     @Override
     protected int getLayout() { return R.layout.activity_coupon_details; }
@@ -77,10 +85,17 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         showCouponCodeButton = findViewById(R.id.show_coupon_button);
         showCouponCodeButton.setOnClickListener(this);
 
-        backgroundButton = (GradientDrawable) showCouponCodeButton.getBackground();
-
-        // Temporary solution to hide code when activity is stopped or paused
-        getBasicButtonStyle();
+        // Bottom Sheet
+        View bottomSheet = findViewById(R.id.test);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        switchFlipperLeftArrow = findViewById(R.id.bottom_arrow_left);
+        switchFlipperLeftArrow.setOnClickListener(this);
+        switchFlipperRightArrow = findViewById(R.id.bottom_arrow_right);
+        switchFlipperRightArrow.setOnClickListener(this);
+        viewFlipper = findViewById(R.id.bottom_coupon_view_flipper);
+        bottomCouponCodeTextView = findViewById(R.id.bottom_coupon_text);
+        bottomBarcodeView = findViewById(R.id.bottom_bitmap);
 
         presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
         presenter.requestDataFromServer(couponId);
@@ -142,12 +157,17 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
         if (!TextUtils.isEmpty(coupon.getDescription())) {
             couponDescription.setText(Html.fromHtml(coupon.getDescription()));
-        } else {
-            couponDescription.setText(DEFAULT_STRING);
         }
 
         if (!TextUtils.isEmpty(coupon.getCouponCode())) {
             couponCode = coupon.getCouponCode();
+            bottomCouponCodeTextView.setText(couponCode);
+            try {
+                bitmap = encodeAsBitmap(couponCode);
+                bottomBarcodeView.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
         } else {
             couponCode = DEFAULT_STRING;
         }
@@ -164,27 +184,54 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     @Override
     public void onClick(View v) {
-        replaceButtonStyle();
+        switch (v.getId()) {
+            case R.id.show_coupon_button:
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.bottom_arrow_right:
+                viewFlipper.setInAnimation(this, R.anim.slide_in_right);
+                viewFlipper.setOutAnimation(this, R.anim.slide_out_right);
+                viewFlipper.showNext();
+                break;
+            case R.id.bottom_arrow_left:
+                viewFlipper.setInAnimation(this, R.anim.slide_in_left);
+                viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
+                viewFlipper.showPrevious();
+                break;
+        }
     }
 
-    private void replaceButtonStyle() {
-        // Setting up text which will be displayed on button when it's clicked
-        staticCodeText = new SpannableString(getResources().getString(R.string.coupon_details_code_text));
-        staticCodeText.setSpan(new ForegroundColorSpan(Color.BLACK), 0, staticCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    private Bitmap encodeAsBitmap(String contents) throws WriterException {
+        if (contents == null) {
+            return null;
+        }
 
-        promoCodeText = new SpannableString(couponCode);
-        promoCodeText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, promoCodeText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        promoCodeText.setSpan(new StyleSpan(Typeface.BOLD), 0, promoCodeText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
+        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        MultiFormatWriter writer = new MultiFormatWriter();
+        BitMatrix result;
 
-        // Set new text and color
-        showCouponCodeButton.setText(TextUtils.concat(staticCodeText, "  ", promoCodeText));
-        backgroundButton.setStroke(5, getResources().getColor(R.color.colorBlack));
-        backgroundButton.setColor(getResources().getColor(R.color.colorPrimary));
-    }
+        try {
+            result = writer.encode(contents, BarcodeFormat.CODE_128, BARCODE_WIDTH, BARCODE_COUPON_HEIGHT, hints);
+        } catch (IllegalArgumentException iae) {
+            // Unsupported format
+            return null;
+        }
 
-    private void getBasicButtonStyle() {
-        showCouponCodeButton.setText(getResources().getText(R.string.show_my_coupon_text));
-        backgroundButton.setColor(getResources().getColor(R.color.colorAccent));
-        backgroundButton.setStroke(3, getResources().getColor(R.color.colorAccent));
+        int width = result.getWidth();
+        int height = result.getHeight();
+        int[] pixels = new int[width * height];
+
+        for (int y = 0; y < height; y++) {
+            int offset = y * width;
+            for (int x = 0; x < width; x++) {
+                pixels[offset + x] = result.get(x, y) ? Color.BLACK : Color.WHITE;
+            }
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height,
+                Bitmap.Config.ARGB_8888);
+        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+        return bitmap;
     }
 }

@@ -1,122 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    tools:context=".ui.couponDetails.CouponDetailsActivity">
+    android:layout_width="match_parent">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
-
-    <ScrollView
-        android:id="@+id/layout_container"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        tools:context=".ui.couponDetails.CouponDetailsActivity">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:orientation="vertical">
+            android:layout_centerInParent="true" />
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="300dp">
+        <ScrollView
+            android:id="@+id/layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    style="@style/details_image_view"
-                    android:contentDescription="@string/coupon_details_image_desc"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/discount_marker_text_view"
-                    style="@style/basic_grid_list_item_marker"
-                    android:background="@drawable/rounded_corners_label_discount"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/big_value"
-                android:layout_marginEnd="@dimen/big_value"
-                android:layout_marginBottom="@dimen/big_value">
+                android:clipChildren="false"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/valid_until_text_view"
-                    style="@style/details_valid_text"
-                    android:text="@string/valid_until_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
 
-                <TextView
-                    android:id="@+id/valid_date_text_view"
-                    style="@style/details_valid_date_text_view"
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/imageView"
+                        style="@style/details_image_view"
+                        android:contentDescription="@string/coupon_details_image_desc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/discount_marker_text_view"
+                        style="@style/basic_grid_list_item_marker"
+                        android:background="@drawable/rounded_corners_label_discount"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/valid_until_text_view"
-                    app:layout_constraintStart_toEndOf="@+id/valid_until_text_view"
-                    app:layout_constraintTop_toTopOf="@+id/valid_until_text_view" />
+                    android:layout_marginStart="@dimen/big_value"
+                    android:layout_marginEnd="@dimen/big_value"
+                    android:layout_marginBottom="@dimen/big_value">
 
-                <TextView
-                    android:id="@+id/product_title_text_view"
-                    style="@style/details_product_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/valid_until_text_view" />
+                    <TextView
+                        android:id="@+id/valid_until_text_view"
+                        style="@style/details_valid_text"
+                        android:text="@string/valid_until_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/price_text_view"
-                    style="@style/details_price_text"
-                    android:text="@string/price_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/product_title_text_view" />
+                    <TextView
+                        android:id="@+id/valid_date_text_view"
+                        style="@style/details_valid_date_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/valid_until_text_view"
+                        app:layout_constraintStart_toEndOf="@+id/valid_until_text_view"
+                        app:layout_constraintTop_toTopOf="@+id/valid_until_text_view" />
 
-                <TextView
-                    android:id="@+id/price_amount_text_view"
-                    style="@style/details_price_amount"
-                    app:layout_constraintBottom_toBottomOf="@+id/price_text_view"
-                    app:layout_constraintStart_toEndOf="@+id/price_text_view"
-                    app:layout_constraintTop_toTopOf="@+id/price_text_view" />
+                    <TextView
+                        android:id="@+id/product_title_text_view"
+                        style="@style/details_product_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/valid_until_text_view" />
 
-                <TextView
-                    android:id="@+id/old_price_amount_text_view"
-                    style="@style/details_old_price_amount"
-                    android:background="@drawable/strike_through"
-                    app:layout_constraintStart_toEndOf="@+id/price_amount_text_view"
-                    app:layout_constraintTop_toTopOf="@+id/price_amount_text_view" />
+                    <TextView
+                        android:id="@+id/price_text_view"
+                        style="@style/details_price_text"
+                        android:text="@string/price_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/product_title_text_view" />
 
-                <Button
-                    android:id="@+id/show_coupon_button"
-                    style="@style/details_show_coupon_button"
-                    android:background="@drawable/rounded_corners_code_button"
-                    android:text="@string/show_my_coupon_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/price_text_view" />
+                    <TextView
+                        android:id="@+id/price_amount_text_view"
+                        style="@style/details_price_amount"
+                        app:layout_constraintBottom_toBottomOf="@+id/price_text_view"
+                        app:layout_constraintStart_toEndOf="@+id/price_text_view"
+                        app:layout_constraintTop_toTopOf="@+id/price_text_view" />
 
-                <TextView
-                    android:id="@+id/coupon_description_text_view"
-                    style="@style/details_product_description_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/show_coupon_button" />
+                    <TextView
+                        android:id="@+id/old_price_amount_text_view"
+                        style="@style/details_old_price_amount"
+                        android:background="@drawable/strike_through"
+                        app:layout_constraintStart_toEndOf="@+id/price_amount_text_view"
+                        app:layout_constraintTop_toTopOf="@+id/price_amount_text_view" />
 
-            </android.support.constraint.ConstraintLayout>
+                    <Button
+                        android:id="@+id/show_coupon_button"
+                        style="@style/details_show_coupon_button"
+                        android:background="@drawable/rounded_corners_code_button"
+                        android:text="@string/show_my_coupon_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/price_text_view" />
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/coupon_description_text_view"
+                        style="@style/details_product_description_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/show_coupon_button" />
 
-    </ScrollView>
+                </android.support.constraint.ConstraintLayout>
 
-</RelativeLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <!-- BottomSheet layout with shadow -->
+    <View
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@drawable/shape_gradient"
+        app:layout_anchor="@id/test" />
+
+    <include layout="@layout/activity_coupon_bottom_sheet" />
+
+</android.support.design.widget.CoordinatorLayout>

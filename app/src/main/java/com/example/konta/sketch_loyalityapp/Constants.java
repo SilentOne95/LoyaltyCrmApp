@@ -33,6 +33,7 @@ public final class Constants {
     // Barcode generator
     public static final int BARCODE_WIDTH = 600;
     public static final int BARCODE_HEIGHT = 300;
+    public static final int BARCODE_COUPON_HEIGHT = 150;
 
     // Additional data while changing fragments
     public static final String ANONYMOUS_REGISTRATION = "anonymous";
