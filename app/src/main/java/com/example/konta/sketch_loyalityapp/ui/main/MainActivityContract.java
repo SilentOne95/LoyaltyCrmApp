@@ -1,7 +1,6 @@
 package com.example.konta.sketch_loyalityapp.ui.main;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 
 import com.example.konta.sketch_loyalityapp.base.BaseFragment;
 import com.example.konta.sketch_loyalityapp.pojo.menu.HelperArray;
@@ -26,7 +25,6 @@ public interface MainActivityContract {
         void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
                                 ArrayList<MenuComponent> submenuSectionArray,
                                 int homeScreenId, String[] iconNameArray);
-        Drawable setIconColor(String iconName);
         void setDisplayItemChecked(int viewPosition);
         void uncheckItemsNavDrawer();
 

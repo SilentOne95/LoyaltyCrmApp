@@ -2,8 +2,11 @@ package com.example.konta.sketch_loyalityapp.ui.couponDetails;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -90,12 +93,17 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         switchFlipperLeftArrow = findViewById(R.id.bottom_coupon_arrow_left);
-        switchFlipperLeftArrow.setOnClickListener(this);
         switchFlipperRightArrow = findViewById(R.id.bottom_coupon_arrow_right);
-        switchFlipperRightArrow.setOnClickListener(this);
         viewFlipper = findViewById(R.id.bottom_coupon_view_flipper);
         bottomCouponCodeTextView = findViewById(R.id.bottom_coupon_code_text);
         bottomBarcodeView = findViewById(R.id.bottom_coupon_barcode_bitmap);
+
+        switchFlipperLeftArrow.setOnClickListener(this);
+        switchFlipperLeftArrow.setColorFilter(new PorterDuffColorFilter(
+                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+        switchFlipperRightArrow.setOnClickListener(this);
+        switchFlipperRightArrow.setColorFilter(new PorterDuffColorFilter(
+                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
 
         presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
         presenter.requestDataFromServer(couponId);
