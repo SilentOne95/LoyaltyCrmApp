@@ -15,6 +15,7 @@
     <string name="menu_toolbar_search_string">Search</string>
     <string name="main_menu_search_hint">Hint</string>
     <string name="nav_view_upgrade_acc_text">Sign up with other method to upgrade your account</string>
+    <string name="menu_nav_view_settings_text">Settings</string>
 
     <!-- Log in view -->
     <string name="sign_up_text">Sign Up</string>
@@ -129,5 +130,6 @@
     <string name="phone_icon_verify_code_desc" translatable="false">Text icon in 1nd step of verification phone num</string>
     <string name="text_icon_verify_code_desc" translatable="false">Text icon in 2nd step of verification phone num</string>
     <string name="view_flipper_arrow_desc" translatable="false">Arrow image to switch view in view flipper</string>
+    <string name="coupon_details_barcode" translatable="false">Generated barcode that contains coupon code</string>
 
 </resources>

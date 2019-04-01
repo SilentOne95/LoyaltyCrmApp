@@ -16,6 +16,7 @@ import com.example.konta.sketch_loyalityapp.ui.map.GoogleMapFragment;
 import com.example.konta.sketch_loyalityapp.ui.home.HomeFragment;
 import com.example.konta.sketch_loyalityapp.ui.products.ProductsFragment;
 import com.example.konta.sketch_loyalityapp.ui.contact.ContactFragment;
+import com.example.konta.sketch_loyalityapp.ui.settings.SettingsActivity;
 import com.example.konta.sketch_loyalityapp.ui.terms.TermsFragment;
 import com.example.konta.sketch_loyalityapp.ui.website.WebsiteFragment;
 
@@ -155,6 +156,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                     break;
                 case "barcode":
                     view.setFragment(new BarcodeGenerator(), data);
+                    break;
+                case "settings":
+                    view.setActivity(SettingsActivity.class);
                     break;
 
                 // Registration views

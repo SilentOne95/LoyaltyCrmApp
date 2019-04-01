@@ -15,7 +15,7 @@
     <uses-permission android:name="com.example.konta.sketch_loyalityapp.permission.MAPS_RECEIVE" />
 
     <application
-        android:name="com.example.konta.sketch_loyalityapp.root.MyApplication"
+        android:name=".root.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,7 +26,7 @@
         android:theme="@style/BaseAppTheme.NoActionBar">
 
         <service
-            android:name="com.example.konta.sketch_loyalityapp.service.MyFirebaseMessagingService"
+            android:name=".service.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -34,13 +34,13 @@
             </intent-filter>
         </service>
         <service
-            android:name="com.example.konta.sketch_loyalityapp.service.TrackerService"
+            android:name=".service.TrackerService"
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="true" />
 
         <activity
-            android:name="com.example.konta.sketch_loyalityapp.ui.launch.LaunchActivity"
+            android:name=".ui.launch.LaunchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
@@ -50,11 +50,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.konta.sketch_loyalityapp.ui.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.NoActionBar" />
         <activity
-            android:name="com.example.konta.sketch_loyalityapp.ui.couponDetails.CouponDetailsActivity"
+            android:name=".ui.couponDetails.CouponDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
@@ -62,7 +62,15 @@
                 android:value="com.example.konta.sketch_loyalityapp.ui.main.MainActivity" />
         </activity>
         <activity
-            android:name="com.example.konta.sketch_loyalityapp.ui.productDetails.ProductDetailsActivity"
+            android:name=".ui.productDetails.ProductDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.konta.sketch_loyalityapp.ui.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.settings.SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
@@ -70,14 +78,16 @@
                 android:value="com.example.konta.sketch_loyalityapp.ui.main.MainActivity" />
         </activity>
 
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -86,7 +96,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_sellger_logo" />
-
     </application>
 
 </manifest>

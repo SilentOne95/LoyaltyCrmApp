@@ -8,6 +8,7 @@
     <string name="menu_toolbar_search_string">Szukaj</string>
     <string name="main_menu_search_hint">Podpowiedź</string>
     <string name="nav_view_upgrade_acc_text">Zarejestruj się, aby uzyskać dostęp do wszystkich promocji</string>
+    <string name="menu_nav_view_settings_text">Ustawienia</string>
 
     <!-- Log in view -->
     <string name="sign_up_sign_in_text">Wybierz metodę logowania\n korzystając z:</string>

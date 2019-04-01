@@ -36,8 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_arrow_left"
-            android:contentDescription="@string/view_flipper_arrow_desc" />
+            android:contentDescription="@string/view_flipper_arrow_desc"
+            android:src="@drawable/ic_arrow_left" />
 
         <ViewFlipper
             android:id="@+id/bottom_coupon_view_flipper"
@@ -48,7 +48,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/sellger_logo" />
+                android:src="@drawable/sellger_logo"
+                android:contentDescription="@string/coupon_details_barcode" />
 
             <TextView
                 android:id="@+id/bottom_coupon_code_text"
@@ -62,8 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_arrow_right"
-            android:contentDescription="@string/view_flipper_arrow_desc" />
+            android:contentDescription="@string/view_flipper_arrow_desc"
+            android:src="@drawable/ic_arrow_right" />
 
     </LinearLayout>
 

@@ -45,6 +45,7 @@ import static com.example.konta.sketch_loyalityapp.Constants.MY_PERMISSIONS_REQU
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_ORDER;
 import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
+import static com.example.konta.sketch_loyalityapp.Constants.NAV_VIEW_THIRD_GROUP_ID;
 import static com.example.konta.sketch_loyalityapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 
 public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
@@ -244,6 +245,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             arrayIndex++;
         }
 
+        menu.add(NAV_VIEW_THIRD_GROUP_ID, 0, NAV_VIEW_ORDER, R.string.menu_nav_view_settings_text).setIcon(R.drawable.ic_menu_options);
+
         // Set checked home screen in Navigation Drawer
         mNavigationView.getMenu().getItem(homeScreenId).setChecked(true).setCheckable(true);
     }
@@ -262,7 +265,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // Assign clicked menuItem IDs and layout type to global variables
         if (!menuItem.isChecked()) {
-            layoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
+            if (menuItem.getGroupId() == 2) {
+                layoutType = "settings";
+            } else {
+                layoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
+            }
         } else {
             layoutType = null;
         }
