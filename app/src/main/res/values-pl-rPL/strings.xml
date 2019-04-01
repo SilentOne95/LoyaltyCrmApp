@@ -95,6 +95,21 @@
     <string name="barcode_generator_title">Twoja karta klienta</string>
     <string name="barcode_generator_advice">Powyższy kod kreskowy zawiera Twój unikatowy numer klienta.\n\n Pokaż go kasjerowi, aby otrzymać specjalne zniżki lub punkty, które możesz wymienić na nagrody.</string>
 
+    <!-- Settings -->
+    <string name="settings_push_notifications_label">Powiadomienia push:</string>
+    <string name="settings_notification_topic_news">Nowości</string>
+    <string name="settings_notification_topic_offers">Oferty specjalne</string>
+    <string name="settings_notification_topic_discount">Zniżki</string>
+    <string name="settings_permissions_label">Udzielone zgody:</string>
+    <string name="settings_permission_location">Lokalizacja urządzenia</string>
+    <string name="settings_terms_label">Regulaminy:</string>
+    <string name="settings_terms_conditions_link">Warunki i zasady świadczenia usług</string>
+    <string name="settings_terms_privacy_link">Polityka prywatności</string>
+    <string name="settings_terms_licenses_link">Licencje</string>
+    <string name="settings_account_label">Usuń konto:</string>
+    <string name="settings_acc_delete_instruction">Aby usunąć konto, kliknij przycisk</string>
+    <string name="settings_delete_button">Usuń</string>
+
     <!-- Toast messages -->
     <string name="internet_connection_required">Połączenie z internetem jest wymagane</string>
     <string name="localization_permission_denied">Wyłączono usługi lokalizacyjne</string>

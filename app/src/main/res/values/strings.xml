@@ -110,6 +110,21 @@
     <string name="barcode_generator_advice">This barcode represents your club card \n
         Let cashier scan this to get special promotions and offers</string>
 
+    <!-- Settings -->
+    <string name="settings_push_notifications_label">Push notifications:</string>
+    <string name="settings_notification_topic_news">News</string>
+    <string name="settings_notification_topic_offers">Special offers</string>
+    <string name="settings_notification_topic_discount">Discounts</string>
+    <string name="settings_permissions_label">Permissions:</string>
+    <string name="settings_permission_location">Access to device location</string>
+    <string name="settings_terms_label">Terms and privacy policy:</string>
+    <string name="settings_terms_conditions_link"><![CDATA[Terms & conditions]]></string>
+    <string name="settings_terms_privacy_link">Privacy policy</string>
+    <string name="settings_terms_licenses_link">Licenses</string>
+    <string name="settings_account_label">Delete account:</string>
+    <string name="settings_acc_delete_instruction">To delete account, click button</string>
+    <string name="settings_delete_button">Delete</string>
+
     <!-- Toast messages -->
     <string name="internet_connection_required">Internet connection is required</string>
     <string name="localization_permission_denied">Localization permission denied</string>
