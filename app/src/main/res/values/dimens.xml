@@ -71,6 +71,9 @@
     <dimen name="barcode_scanner_button_width">100dp</dimen>
     <dimen name="barcode_scanner_button_height">40dp</dimen>
 
+    <!-- Settings layout -->
+    <dimen name="settings_delete_button_height">35dp</dimen>
+
     <!-- Coupon bottom sheet -->
     <dimen name="coupon_view_flipper_height">80dp</dimen>
 

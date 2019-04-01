@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.settings.SettingsActivity"
     android:background="@color/colorFragmentBackground"
-    android:padding="@dimen/layout_container_padding">
+    android:padding="@dimen/layout_container_padding"
+    tools:context=".ui.settings.SettingsActivity">
 
     <ScrollView
         android:id="@+id/settings_scrollview"
@@ -20,36 +20,22 @@
 
             <TextView
                 android:id="@+id/settings_label_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/settings_label_style"
                 android:drawableStart="@drawable/ic_notification"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
                 android:text="@string/settings_push_notifications_label"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/settings_notification_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="8dp"
+                style="@style/settings_list_item_style"
                 android:text="@string/settings_notification_topic_news"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_label_notification" />
 
             <Switch
                 android:id="@+id/settings_notification_switch_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                style="@style/settings_switch_toggle_style"
                 android:theme="@style/switch_button_barcode_scanner"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_notification_one"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,23 +43,14 @@
 
             <TextView
                 android:id="@+id/settings_notification_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="16dp"
+                style="@style/settings_list_item_style"
                 android:text="@string/settings_notification_topic_offers"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_notification_one" />
 
             <Switch
                 android:id="@+id/settings_notification_switch_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                style="@style/settings_switch_toggle_style"
                 android:theme="@style/switch_button_barcode_scanner"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_notification_two"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,23 +58,14 @@
 
             <TextView
                 android:id="@+id/settings_notification_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/settings_list_item_style"
                 android:text="@string/settings_notification_topic_discount"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_notification_two" />
 
             <Switch
                 android:id="@+id/settings_notification_switch_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                style="@style/settings_switch_toggle_style"
                 android:theme="@style/switch_button_barcode_scanner"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_notification_three"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,37 +73,22 @@
 
             <TextView
                 android:id="@+id/settings_label_permission"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                style="@style/settings_label_style"
                 android:drawableStart="@drawable/ic_permission_key"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
                 android:text="@string/settings_permissions_label"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_notification_three" />
 
             <TextView
                 android:id="@+id/settings_permission_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="8dp"
+                style="@style/settings_list_item_style"
                 android:text="@string/settings_permission_location"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_label_permission" />
 
             <Switch
                 android:id="@+id/settings_permission_switch_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                style="@style/settings_switch_toggle_style"
                 android:theme="@style/switch_button_barcode_scanner"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_permission_one"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -143,94 +96,52 @@
 
             <TextView
                 android:id="@+id/settings_label_terms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                style="@style/settings_label_style"
                 android:drawableStart="@drawable/ic_lock"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
                 android:text="@string/settings_terms_label"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_permission_one" />
 
             <TextView
                 android:id="@+id/settings_terms_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="16dp"
+                style="@style/settings_list_item_link_style"
                 android:text="@string/settings_terms_conditions_link"
-                android:textColor="@color/colorLink"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_label_terms" />
 
             <TextView
                 android:id="@+id/settings_terms_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="16dp"
+                style="@style/settings_list_item_link_style"
                 android:text="@string/settings_terms_privacy_link"
-                android:textColor="@color/colorLink"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_terms_one" />
 
             <TextView
                 android:id="@+id/settings_terms_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="16dp"
+                style="@style/settings_list_item_link_style"
                 android:text="@string/settings_terms_licenses_link"
-                android:textColor="@color/colorLink"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_terms_two" />
 
             <TextView
                 android:id="@+id/settings_label_delete_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                style="@style/settings_delete_label_style"
                 android:drawableStart="@drawable/ic_delete_account"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
                 android:text="@string/settings_account_label"
-                android:textColor="@color/colorErrorInput"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_terms_three" />
 
             <TextView
                 android:id="@+id/settings_delete_account_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="8dp"
-                android:layout_marginTop="8dp"
+                style="@style/settings_list_item_style"
                 android:text="@string/settings_acc_delete_instruction"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_label_delete_account" />
 
             <Button
-                android:id="@+id/settings_delete_account_button"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/rounded_corners_orange"
+                android:id="@+id/settings_delete_button_style"
+                style="@style/settings_delete_button_style"
                 android:text="@string/settings_delete_button"
-                android:textSize="@dimen/small_text_size"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_delete_account_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_delete_account_text" />
