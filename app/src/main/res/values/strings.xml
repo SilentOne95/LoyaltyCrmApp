@@ -3,7 +3,7 @@
     <string name="app_name">Sellger</string>
 
     <!-- Required for Google Auth, Firebase Web ID -->
-    <string name="server_client_id" translatable="false">580087034404-ttb5oee6jee76tt56m62jpp88o5qdjal.apps.googleusercontent.com</string>
+    <string name="server_client_id" translatable="false">580087034404-mnh7qoedfvb40ih9qfda1nrpml3s6jap.apps.googleusercontent.com</string>
     <string name="facebook_app_id" translatable="false">2252363271523504</string>
 
     <!-- Firebase // Push Notifications -->
