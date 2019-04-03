@@ -90,6 +90,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
             public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(verificationId, forceResendingToken);
                 Log.d(TAG,"onCodeSent:" + forceResendingToken);
+                Log.d(TAG,"onCodeSent:" + verificationId);
+
                 mVerificationId = verificationId;
                 mResendToken = forceResendingToken;
             }
@@ -189,7 +191,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         // Switch layout to "home" with delay
                         // TODO: Workaround
                         // Pass string to display / hide information about account in nav view header
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),5000);
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),2000);
                     } else {
                         Log.d(TAG, "signInWithCredential:failure", task.getException());
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {

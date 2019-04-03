@@ -13,6 +13,7 @@
     <!-- Main activity -->
     <string name="menu_toolbar_my_account_string">My Account</string>
     <string name="menu_toolbar_search_string">Search</string>
+    <string name="menu_toolbar_options_string">Options</string>
     <string name="main_menu_search_hint">Hint</string>
     <string name="nav_view_upgrade_acc_text">Sign up with other method to upgrade your account</string>
     <string name="menu_nav_view_settings_text">Settings</string>
@@ -124,6 +125,10 @@
     <string name="settings_account_label">Delete account:</string>
     <string name="settings_acc_delete_instruction">To delete account, click button</string>
     <string name="settings_delete_button">Delete</string>
+
+    <string name="settings_delete_account_alert_message">Are you sure to delete your account?\n This process cannot be reversed</string>
+    <string name="settings_delete_account_alert_confirm">Yes, delete</string>
+    <string name="settings_delete_account_alert_decline">No, abort</string>
 
     <!-- Toast messages -->
     <string name="internet_connection_required">Internet connection is required</string>

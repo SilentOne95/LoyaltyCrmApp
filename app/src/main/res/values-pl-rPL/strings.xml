@@ -6,6 +6,7 @@
     <!-- Main activity -->
     <string name="menu_toolbar_my_account_string">Moje konto</string>
     <string name="menu_toolbar_search_string">Szukaj</string>
+    <string name="menu_toolbar_options_string">Ustawienia</string>
     <string name="main_menu_search_hint">Podpowiedź</string>
     <string name="nav_view_upgrade_acc_text">Zarejestruj się, aby uzyskać dostęp do wszystkich promocji</string>
     <string name="menu_nav_view_settings_text">Ustawienia</string>
@@ -113,5 +114,8 @@
     <!-- Toast messages -->
     <string name="internet_connection_required">Połączenie z internetem jest wymagane</string>
     <string name="localization_permission_denied">Wyłączono usługi lokalizacyjne</string>
+    <string name="settings_delete_account_alert_confirm">Tak, usuń</string>
+    <string name="settings_delete_account_alert_decline">Nie, przerwij</string>
+    <string name="settings_delete_account_alert_message">Czy jesteś pewny, że chcesz usunąć swoje konto? Nie będzie można przywrócić tego konta.</string>
 
 </resources>
