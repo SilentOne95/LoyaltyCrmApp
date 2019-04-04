@@ -117,6 +117,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         presenter.requestDataFromServer();
         presenter.setUpObservableHomeAdapter();
 
+        // Remove nav view header shade if an account is not anonymous
+        if (mFirebaseAuth.getCurrentUser() != null && !mFirebaseAuth.getCurrentUser().isAnonymous()){
+            setNavViewHeaderVisibility(NOT_ANONYMOUS_REGISTRATION);
+        }
+
         // Display relevant view based on whether user is already logged or not
         // TODO:
         // Replace hardcoded variables

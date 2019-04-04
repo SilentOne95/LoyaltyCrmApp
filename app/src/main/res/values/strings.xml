@@ -126,9 +126,10 @@
     <string name="settings_acc_delete_instruction">To delete account, click button</string>
     <string name="settings_delete_button">Delete</string>
 
-    <string name="settings_delete_account_alert_message">Are you sure to delete your account?\n This process cannot be reversed</string>
-    <string name="settings_delete_account_alert_confirm">Yes, delete</string>
-    <string name="settings_delete_account_alert_decline">No, abort</string>
+    <string name="settings_delete_account_alert_title">Delete account</string>
+    <string name="settings_delete_account_alert_message">Are you sure to delete your account?\n You cannot undo this action</string>
+    <string name="settings_delete_account_alert_confirm">Confirm</string>
+    <string name="settings_delete_account_alert_decline">Cancel</string>
 
     <!-- Toast messages -->
     <string name="internet_connection_required">Internet connection is required</string>

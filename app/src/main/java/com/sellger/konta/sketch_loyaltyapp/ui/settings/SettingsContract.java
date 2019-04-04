@@ -4,6 +4,8 @@ public interface SettingsContract {
 
     interface View {
 
+        void showDialogDeleteAccount();
+        void deleteUserAccount();
     }
 
     interface Presenter {

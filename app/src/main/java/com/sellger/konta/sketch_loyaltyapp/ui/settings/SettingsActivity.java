@@ -14,8 +14,6 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class SettingsActivity extends BaseActivity implements SettingsContract.View, View.OnClickListener {
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
@@ -58,16 +56,19 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         }
     }
 
-    private void showDialogDeleteAccount(){
-        AtomicBoolean result = new AtomicBoolean(false);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true)
-                .setTitle("Usunąć konto?")
+    @Override
+    public void showDialogDeleteAccount(){
+        new AlertDialog.Builder(this)
+                .setCancelable(true)
+                .setTitle(R.string.settings_delete_account_alert_title)
                 .setMessage(R.string.settings_delete_account_alert_message)
-                .setPositiveButton(R.string.settings_delete_account_alert_confirm, (dialog, which) -> result.set(true))
-                .setNegativeButton(R.string.settings_delete_account_alert_decline, null);
+                .setPositiveButton(R.string.settings_delete_account_alert_confirm, (dialog, which) -> deleteUserAccount())
+                .setNegativeButton(R.string.settings_delete_account_alert_decline, null)
+                .show();
+    }
 
+    @Override
+    public void deleteUserAccount() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.delete().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
