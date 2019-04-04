@@ -51,6 +51,7 @@
     <string name="valid_until_text">Aktywne do:</string>
     <string name="price_text">Cena:</string>
     <string name="show_my_coupon_text">Pokaż mój kupon</string>
+    <string name="hide_my_coupon_text">Ukryj kupon</string>
     <string name="coupon_details_code_text">Kod promocyjny:</string>
 
     <!-- Coupon bottom sheet -->

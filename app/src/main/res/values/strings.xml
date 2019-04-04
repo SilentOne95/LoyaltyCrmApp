@@ -59,6 +59,7 @@
     <string name="valid_until_text">valid until:</string>
     <string name="price_text">Price:</string>
     <string name="show_my_coupon_text">Show my coupon</string>
+    <string name="hide_my_coupon_text">Hide coupon</string>
     <string name="coupon_details_code_text">Promo code:</string>
 
     <!-- Coupon bottom sheet -->

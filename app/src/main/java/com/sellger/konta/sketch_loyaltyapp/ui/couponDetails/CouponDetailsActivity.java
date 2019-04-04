@@ -194,7 +194,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.show_coupon_button:
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                switchBottomSheetState();
                 break;
             case R.id.bottom_coupon_arrow_right:
                 viewFlipper.setInAnimation(this, R.anim.slide_in_right);
@@ -241,5 +241,15 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
                 Bitmap.Config.ARGB_8888);
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
         return bitmap;
+    }
+
+    private void switchBottomSheetState() {
+        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            showCouponCodeButton.setText(R.string.hide_my_coupon_text);
+        } else {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            showCouponCodeButton.setText(R.string.show_my_coupon_text);
+        }
     }
 }
