@@ -228,7 +228,7 @@
         <item name="android:textSize">@dimen/big_text_size</item>
     </style>
 
-    <!-- Log In and -->
+    <!-- Login fragments -->
     <style name="login_text_input_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/colorAccent</item>
     </style>
@@ -238,100 +238,102 @@
         <item name="android:textSize">@dimen/very_small_text_size</item>
     </style>
 
-    <!-- Sign Up screen -->
-    <style name="log_in_company_image" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/small_value</item>
+    <!-- Login fragment - provide phone number -->
+    <style name="verify_number_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
         <item name="android:layout_marginTop">@dimen/big_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
         <item name="android:layout_marginBottom">@dimen/mid_value</item>
-        <item name="android:padding">@dimen/mid_value</item>
-    </style>
-
-    <style name="log_in_text_header" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:layout_marginBottom">@dimen/small_value</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/very_big_text_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="login_field_edit_text">
-        <item name="android:inputType">textPersonName</item>
-        <item name="android:ems">10</item>
-        <item name="android:paddingStart">@dimen/sign_up_fields_padding</item>
-        <item name="android:paddingEnd">@dimen/sign_up_fields_padding</item>
-        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
-        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-    </style>
-
-    <style name="password_field_edit_text">
-        <item name="android:inputType">textPassword</item>
-        <item name="android:ems">10</item>
-        <item name="android:paddingStart">@dimen/sign_up_fields_padding</item>
-        <item name="android:paddingEnd">@dimen/sign_up_fields_padding</item>
-        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
-        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-    </style>
-
-    <style name="email_field_edit_text">
-        <item name="android:inputType">textEmailAddress</item>
-        <item name="android:ems">10</item>
-        <item name="android:paddingStart">@dimen/sign_up_fields_padding</item>
-        <item name="android:paddingEnd">@dimen/sign_up_fields_padding</item>
-        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
-        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-    </style>
-
-    <style name="phone_field_edit_text">
-        <item name="android:inputType">phone</item>
-        <item name="android:ems">10</item>
-        <item name="android:paddingStart">@dimen/sign_up_fields_padding</item>
-        <item name="android:paddingEnd">@dimen/sign_up_fields_padding</item>
-        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
-        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-    </style>
-
-    <style name="sign_up_checkbox_newsletter">
-        <item name="android:layout_width">320dp</item>
+    <style name="verify_number_instruction_text_style">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:textColor">@color/colorBlack</item>
-    </style>
-
-    <style name="sign_up_button">
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
-        <item name="android:layout_width">@dimen/sign_up_fields_width</item>
-        <item name="android:layout_height">@dimen/sign_up_fields_height</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+    </style>
+
+    <style name="register_prefix_input_box_style" parent="login_text_input_layout_style">
+        <item name="android:layout_width">@dimen/zero</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_marginStart">@dimen/big_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:minWidth">@dimen/register_prefix_input_box_min_width</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+    </style>
+
+    <style name="register_prefix_input_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/very_small_value</item>
+        <item name="android:background">@null</item>
+        <item name="android:inputType">phone</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+    </style>
+
+    <style name="register_number_input_box_style" parent="login_text_input_layout_style">
+        <item name="android:layout_width">@dimen/zero</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">5</item>
+        <item name="android:layout_marginEnd">@dimen/big_value</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+    </style>
+
+    <style name="register_number_input_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:inputType">phone</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+    </style>
+
+    <style name="register_phone_icon_image">
+        <item name="android:layout_width">@dimen/register_number_icon_image_size</item>
+        <item name="android:layout_height">@dimen/register_number_icon_image_size</item>
         <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/register_number_icon_image_margin_top</item>
         <item name="android:layout_marginEnd">@dimen/small_value</item>
     </style>
 
-    <style name="log_in_text_view_action" parent="layout_wrap_content">
+    <style name="register_number_button_style">
+        <item name="android:layout_width">@dimen/register_number_button_width</item>
+        <item name="android:layout_height">@dimen/register_number_button_height</item>
         <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_marginTop">@dimen/very_big_value</item>
         <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:layout_marginBottom">@dimen/mid_value</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/mid_text_size</item>
+    </style>
+
+    <style name="terms_privacy_policy_link_text_style" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/privacy_policy_link_margin_top</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:padding">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorLink</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
+
+    <style name="more_info_link_text_style" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:padding">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorLink</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
     <!-- Map bottom sheet activity -->

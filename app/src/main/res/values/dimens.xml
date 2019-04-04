@@ -44,14 +44,18 @@
     <!-- Navigation drawer header -->
     <dimen name="nav_header_height">200dp</dimen>
 
+    <!-- Login layouts -->
+    <dimen name="verify_number_text_container_height">170dp</dimen>
+    <dimen name="register_input_container_margin_top">64dp</dimen>
+    <dimen name="register_prefix_input_box_min_width">80dp</dimen>
+    <dimen name="register_number_icon_image_size">60dp</dimen>
+    <dimen name="register_number_icon_image_margin_top">140dp</dimen>
+    <dimen name="register_number_button_width">120dp</dimen>
+    <dimen name="register_number_button_height">40dp</dimen>
+    <dimen name="privacy_policy_link_margin_top">64dp</dimen>
+
     <!-- Coupon details activity -->
     <dimen name="coupon_details_button_height">40dp</dimen>
-
-    <!-- Sign Up layout -->
-    <dimen name="sign_up_fields_width">300dp</dimen>
-    <dimen name="sign_up_fields_height">40dp</dimen>
-    <dimen name="sign_up_fields_padding">10dp</dimen>
-    <dimen name="sign_up_checkbox_width">320dp</dimen>
 
     <!-- Map bottom sheet layout -->
     <dimen name="bottom_sheet_general_info_layout_height">400dp</dimen>
