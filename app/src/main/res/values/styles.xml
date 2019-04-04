@@ -241,7 +241,7 @@
     <!-- Login fragment - main -->
     <style name="login_image_logo_style">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_height">@dimen/login_image_logo_height</item>
         <item name="android:layout_marginTop">@dimen/very_big_value</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:padding">@dimen/small_value</item>
@@ -265,8 +265,8 @@
     </style>
 
     <style name="basic_login_button_style">
-        <item name="android:layout_width">230dp</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">@dimen/login_button_width</item>
+        <item name="android:layout_height">@dimen/login_button_height</item>
         <item name="android:fontFamily">@font/lato</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
@@ -334,7 +334,7 @@
         <item name="android:layout_weight">2</item>
         <item name="android:layout_marginStart">@dimen/big_value</item>
         <item name="android:layout_marginEnd">@dimen/mid_value</item>
-        <item name="android:minWidth">@dimen/register_prefix_input_box_min_width</item>
+        <item name="android:minWidth">@dimen/register_input_box_min_width</item>
         <item name="android:textColorHint">@color/colorAccent</item>
     </style>
 
@@ -366,8 +366,8 @@
     </style>
 
     <style name="register_phone_icon_image">
-        <item name="android:layout_width">@dimen/register_number_icon_image_size</item>
-        <item name="android:layout_height">@dimen/register_number_icon_image_size</item>
+        <item name="android:layout_width">@dimen/register_icon_image_size</item>
+        <item name="android:layout_height">@dimen/register_icon_image_size</item>
         <item name="android:layout_marginStart">@dimen/small_value</item>
         <item name="android:layout_marginTop">@dimen/register_number_icon_image_margin_top</item>
         <item name="android:layout_marginEnd">@dimen/small_value</item>
@@ -386,7 +386,7 @@
 
     <style name="terms_privacy_policy_link_text_style" parent="layout_wrap_content">
         <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/privacy_policy_link_margin_top</item>
+        <item name="android:layout_marginTop">@dimen/register_phone_margin_top</item>
         <item name="android:layout_marginEnd">@dimen/small_value</item>
         <item name="android:padding">@dimen/small_value</item>
         <item name="android:textColor">@color/colorLink</item>
@@ -399,6 +399,78 @@
         <item name="android:padding">@dimen/small_value</item>
         <item name="android:textColor">@color/colorLink</item>
         <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
+
+    <!-- Login fragment - provide verification code -->
+    <style name="verify_your_number_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/big_value</item>
+        <item name="android:layout_marginBottom">@dimen/mid_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="verify_code_instruction_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/mid_value</item>
+        <item name="android:layout_marginTop">@dimen/small_value</item>
+        <item name="android:layout_marginEnd">@dimen/mid_value</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+    </style>
+
+    <style name="verify_code_input_box_style" parent="login_text_input_layout_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/register_phone_margin_top</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:minWidth">@dimen/register_input_box_min_width</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+    </style>
+
+    <style name="verify_code_input_text_style">
+        <item name="android:layout_width">@dimen/verify_code_input_box_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:inputType">phone</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+    </style>
+
+    <style name="verify_phone_icon_image_style">
+        <item name="android:layout_width">@dimen/register_icon_image_size</item>
+        <item name="android:layout_height">@dimen/register_icon_image_size</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/verify_phone_icon_image_margin_top</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+    </style>
+
+    <style name="verify_waiting_for_code_text_style" parent="layout_wrap_content">
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/very_big_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/mid_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="verify_progress_bar_style" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginStart">@dimen/small_value</item>
+        <item name="android:layout_marginTop">@dimen/mid_value</item>
+        <item name="android:layout_marginEnd">@dimen/small_value</item>
+        <item name="android:layout_marginBottom">@dimen/small_value</item>
+
     </style>
 
     <!-- Map bottom sheet activity -->

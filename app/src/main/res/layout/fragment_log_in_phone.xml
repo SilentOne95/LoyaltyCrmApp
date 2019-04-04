@@ -62,6 +62,7 @@
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/register_prefix_input"
                         style="@style/register_prefix_input_style"
+                        android:drawableStart="@drawable/ic_plus_phone"
                         android:hint="@string/prefix_hint" />
 
                 </android.support.design.widget.TextInputLayout>
