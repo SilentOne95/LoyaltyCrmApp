@@ -22,6 +22,11 @@
     </style>
 
     <!-- Basic styles -->
+    <style name="layout_wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="basic_grid_view_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -56,10 +61,8 @@
     </style>
 
     <!-- Navigation view -->
-    <style name="nav_header_logo">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">24dp</item>
+    <style name="nav_header_logo" parent="layout_wrap_content">
+        <item name="android:padding">@dimen/big_value</item>
     </style>
 
     <style name="navigation_view">
@@ -979,10 +982,9 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
-    <!-- wrap_content layout size -->
-    <style name="layout_wrap_content">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!-- Settings alert dialog -->
+    <style name="settings_alert_dialog_style">
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
 </resources>
