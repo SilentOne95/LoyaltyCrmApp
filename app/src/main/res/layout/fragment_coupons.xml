@@ -3,36 +3,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:clipChildren="false"
-    android:focusableInTouchMode="true"
     android:background="@color/colorFragmentBackground"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:focusableInTouchMode="true"
     tools:context=".ui.coupons.CouponsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
-        style="@style/basic_recycler_view_style"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="@dimen/small_value"
+        android:scrollbars="none" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        style="@style/Widget.AppCompat.ProgressBar"/>
+        android:layout_gravity="center" />
 
     <LinearLayout
         android:id="@+id/empty_state_coupons_container"
-        style="@style/coupons_empty_state_container">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/big_value"
+        android:background="@color/colorFragmentBackground"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/empty_state_coupons_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/no_coupons_text"
-            style="@style/coupons_empty_state_text_one"/>
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/mid_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/empty_state_coupons_text_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mid_value"
             android:text="@string/try_again_later_text"
-            style="@style/coupons_empty_state_text_two"/>
+            android:textAlignment="center" />
 
     </LinearLayout>
 

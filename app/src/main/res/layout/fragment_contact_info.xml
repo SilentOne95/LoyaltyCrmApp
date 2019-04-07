@@ -8,32 +8,60 @@
 
     <TextView
         android:id="@+id/contact_us_text"
-        style="@style/bottom_sheet_contact_us_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_value"
+        android:layout_marginTop="@dimen/mid_value"
+        android:layout_marginEnd="@dimen/small_value"
+        android:gravity="center"
         android:text="@string/contact_us_text"
+        android:textSize="@dimen/mid_text_size"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/contact_info_phone_view"
-        style="@style/contact_info_phone_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/very_big_value"
+        android:layout_marginTop="@dimen/small_value"
+        android:layout_marginEnd="@dimen/small_value"
         android:drawableStart="@drawable/ic_phone"
+        android:drawablePadding="@dimen/mid_value"
+        android:padding="@dimen/small_value"
+        android:textSize="@dimen/mid_text_size"
         app:layout_constraintBottom_toTopOf="@+id/contact_info_email_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contact_us_text" />
 
     <TextView
         android:id="@+id/contact_info_email_view"
-        style="@style/contact_info_email_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/very_big_value"
+        android:layout_marginTop="@dimen/small_value"
+        android:layout_marginEnd="@dimen/small_value"
         android:drawableStart="@drawable/ic_mail"
+        android:drawablePadding="@dimen/mid_value"
+        android:padding="@dimen/small_value"
+        android:textSize="@dimen/mid_text_size"
         app:layout_constraintBottom_toTopOf="@+id/contact_info_website_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contact_info_phone_view" />
 
     <TextView
         android:id="@+id/contact_info_website_view"
-        style="@style/contact_info_website_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/very_big_value"
+        android:layout_marginTop="@dimen/small_value"
+        android:layout_marginEnd="@dimen/small_value"
         android:drawableStart="@drawable/ic_website"
+        android:drawablePadding="@dimen/mid_value"
+        android:padding="@dimen/small_value"
+        android:textSize="@dimen/mid_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contact_info_email_view" />

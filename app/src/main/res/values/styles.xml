@@ -36,14 +36,6 @@
         <item name="android:scrollbars">none</item>
     </style>
 
-    <style name="basic_recycler_view_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="android:scrollbars">none</item>
-        <item name="android:padding">@dimen/small_value</item>
-    </style>
-
     <style name="basic_min_size_button">
         <item name="android:minWidth">@dimen/zero</item>
         <item name="android:minHeight">@dimen/zero</item>
@@ -51,59 +43,6 @@
 
     <style name="basic_bottom_sheet_text" parent="layout_wrap_content">
         <item name="android:textSize">@dimen/mid_text_size</item>
-    </style>
-
-    <!-- Home fragment -->
-    <style name="home_special_offer_image">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:scaleType">centerCrop</item>
-        <item name="android:adjustViewBounds">true</item>
-        <item name="android:focusableInTouchMode">true</item>
-        <item name="android:layout_marginBottom">@dimen/mid_value</item>
-    </style>
-
-    <style name="home_info_text_view_style" parent="layout_wrap_content">
-        <item name="android:textAppearance">?android:textAppearanceLarge</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
-        <item name="android:layout_marginBottom">@dimen/big_value</item>
-    </style>
-
-    <style name="progress_bar_home_style" parent="Widget.AppCompat.ProgressBar">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:layout_margin">@dimen/mid_value</item>
-    </style>
-
-    <!-- Coupons fragment  -->
-    <style name="coupons_empty_state_container">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:background">@color/colorFragmentBackground</item>
-        <item name="android:layout_margin">@dimen/big_value</item>
-    </style>
-
-    <style name="coupons_empty_state_text_one">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="coupons_empty_state_text_two">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
     </style>
 
     <!-- Login fragments -->
@@ -361,40 +300,6 @@
     <style name="bottom_sheet_last_day_text_style" parent="basic_bottom_sheet_text">
         <item name="android:layout_marginBottom">@dimen/mid_value</item>
     </style>
-
-    <!-- Map bottom sheet first Tab: Contact Info -->
-    <style name="bottom_sheet_contact_us_text" parent="basic_bottom_sheet_text">
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="contact_info_phone_view" parent="basic_bottom_sheet_text">
-        <item name="android:layout_marginStart">@dimen/very_big_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:padding">@dimen/small_value</item>
-        <item name="android:drawablePadding">@dimen/mid_value</item>
-    </style>
-
-    <style name="contact_info_email_view" parent="basic_bottom_sheet_text">
-        <item name="android:layout_marginStart">@dimen/very_big_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:padding">@dimen/small_value</item>
-        <item name="android:drawablePadding">@dimen/mid_value</item>
-    </style>
-
-    <style name="contact_info_website_view" parent="basic_bottom_sheet_text">
-        <item name="android:layout_marginStart">@dimen/very_big_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:padding">@dimen/small_value</item>
-        <item name="android:drawablePadding">@dimen/mid_value</item>
-    </style>
-
 
     <!-- General grid list item -->
     <style name="grid_item_image">
@@ -666,72 +571,10 @@
     </style>
 
     <!-- Barcode scanner layout -->
-    <style name="barcode_scanner_title" parent="layout_wrap_content">
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
-        <item name="android:textSize">@dimen/layout_title_text_size</item>
-    </style>
-
-    <style name="barcode_scanner_instruction_text" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/barcode_scanner_instruction_text_size</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="barcode_scanner_instruction">
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/mid_value</item>
-        <item name="android:layout_marginBottom">@dimen/small_value</item>
-        <item name="android:lineSpacingExtra">@dimen/barcode_scanner_instruction_spacing</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-    </style>
-
-    <style name="barcode_scanner_scan_result">
-        <item name="android:layout_margin">@dimen/mid_value</item>
-        <item name="android:paddingStart">@dimen/very_big_value</item>
-        <item name="android:paddingEnd">@dimen/very_big_value</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/rounded_corners_barcode_scanner</item>
-    </style>
-
-    <style name="barcode_scanner_switch_one_text" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginBottom">@dimen/small_value</item>
-        <item name="android:paddingEnd">@dimen/small_value</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-    </style>
-
-    <style name="barcode_scanner_switch_two_text" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginBottom">@dimen/big_value</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-    </style>
-
     <style name="switch_button_barcode_scanner" parent="Theme.AppCompat.Light">
         <item name="android:scaleX">1.1</item>
         <item name="android:scaleY">1.1</item>
         <item name="colorControlActivated">@color/colorAccent</item>
-    </style>
-
-    <style name="barcode_scanner_scan_button">
-        <item name="android:layout_width">@dimen/barcode_scanner_button_width</item>
-        <item name="android:layout_height">@dimen/barcode_scanner_button_height</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:layout_marginBottom">@dimen/mid_value</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:background">@drawable/rounded_corners_button</item>
     </style>
 
     <!-- Settings alert dialog -->

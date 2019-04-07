@@ -16,8 +16,13 @@
 
         <ImageView
             android:id="@+id/special_offer_image"
-            style="@style/home_special_offer_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/mid_value"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/fragment_home_special_image_desc"
+            android:focusableInTouchMode="true"
+            android:scaleType="centerCrop"
             android:src="@drawable/image_main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,26 +30,51 @@
 
         <TextView
             android:id="@+id/info_text_view"
-            style="@style/home_info_text_view_style"
-            android:text="@string/check_offers_text" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/mid_value"
+            android:layout_marginBottom="@dimen/big_value"
+            android:gravity="center"
+            android:text="@string/check_offers_text"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/layout_title_text_size" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
-            style="@style/basic_recycler_view_style" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="@dimen/small_value"
+            android:scrollbars="none" />
 
         <LinearLayout
             android:id="@+id/empty_state_home_container"
-            style="@style/coupons_empty_state_container">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/big_value"
+            android:background="@color/colorFragmentBackground"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/empty_state_coupons_text"
-                style="@style/coupons_empty_state_text_one"
-                android:text="@string/something_went_wrong_text" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/something_went_wrong_text"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/mid_text_size"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/empty_state_coupons_text_two"
-                style="@style/coupons_empty_state_text_two"
-                android:text="@string/try_again_later_text" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mid_value"
+                android:text="@string/try_again_later_text"
+                android:textAlignment="center" />
 
         </LinearLayout>
 
@@ -52,6 +82,10 @@
 
     <ProgressBar
         android:id="@+id/progress_bar_home"
-        style="@style/progress_bar_home_style" />
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/mid_value" />
 
 </RelativeLayout>
