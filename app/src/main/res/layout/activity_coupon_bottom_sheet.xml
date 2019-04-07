@@ -13,17 +13,25 @@
 
     <TextView
         android:id="@+id/bottom_coupon_advice_text_view"
-        style="@style/bottom_coupon_advice_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_value"
+        android:gravity="center"
         android:text="@string/bottom_coupon_advice_text"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/mid_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/bottom_coupon_flipper_container"
-        style="@style/bottom_coupon_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_value"
+        android:layout_marginTop="@dimen/small_value"
+        android:layout_marginEnd="@dimen/small_value"
+        android:layout_marginBottom="@dimen/mid_value"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,38 +40,44 @@
 
         <ImageView
             android:id="@+id/bottom_coupon_arrow_left"
-            style="@style/bottom_coupon_switch_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:contentDescription="@string/view_flipper_arrow_desc"
+            android:padding="@dimen/mid_value"
             android:src="@drawable/ic_arrow_left" />
 
         <ViewFlipper
             android:id="@+id/bottom_coupon_view_flipper"
-            style="@style/bottom_coupon_view_flipper">
+            android:layout_width="0dp"
+            android:layout_height="@dimen/coupon_view_flipper_height"
+            android:layout_weight="1"
+            android:padding="@dimen/small_value">
 
             <ImageView
                 android:id="@+id/bottom_coupon_barcode_bitmap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/sellger_logo"
                 android:contentDescription="@string/coupon_details_barcode" />
 
             <TextView
                 android:id="@+id/bottom_coupon_code_text"
-                style="@style/bottom_coupon_text_code" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="@dimen/big_text_size" />
 
         </ViewFlipper>
 
         <ImageView
             android:id="@+id/bottom_coupon_arrow_right"
-            style="@style/bottom_coupon_switch_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:contentDescription="@string/view_flipper_arrow_desc"
+            android:padding="@dimen/mid_value"
             android:src="@drawable/ic_arrow_right" />
 
     </LinearLayout>

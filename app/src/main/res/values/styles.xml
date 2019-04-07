@@ -53,16 +53,6 @@
         <item name="android:textSize">@dimen/mid_text_size</item>
     </style>
 
-    <!-- Other styles -->
-    <!-- Navigation view -->
-    <style name="navigation_view_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_gravity">start</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:background">@color/colorWhite</item>
-    </style>
-
     <!-- Home fragment -->
     <style name="home_special_offer_image">
         <item name="android:layout_width">match_parent</item>
@@ -114,107 +104,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAlignment">center</item>
         <item name="android:layout_marginTop">@dimen/mid_value</item>
-    </style>
-
-    <!-- Coupon and Product details activity -->
-    <style name="details_image_view">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:adjustViewBounds">true</item>
-    </style>
-
-    <style name="details_valid_text" parent="layout_wrap_content">
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-    </style>
-
-    <style name="details_valid_date_text_view">
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-    </style>
-
-    <style name="details_product_title" parent="layout_wrap_content">
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:textSize">@dimen/very_big_text_size</item>
-    </style>
-
-    <style name="basic_grid_list_item_marker">
-        <item name="android:layout_width">@dimen/discount_marker_width_one_row</item>
-        <item name="android:layout_height">@dimen/discount_marker_height_one_row</item>
-        <item name="android:layout_marginEnd">@dimen/big_value</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="details_price_text" parent="layout_wrap_content">
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-    </style>
-
-    <style name="details_price_amount" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="details_old_price_amount" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="details_show_coupon_button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/coupon_details_button_height</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textAllCaps">false</item>
-    </style>
-
-    <style name="details_product_description_text">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-        <item name="android:layout_marginTop">@dimen/big_value</item>
-    </style>
-    
-    <!-- Coupon bottom sheet -->
-    <style name="bottom_coupon_advice_text">
-        <item name="android:layout_margin">@dimen/small_value</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-    </style>
-    
-    <style name="bottom_coupon_container">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginBottom">@dimen/mid_value</item>
-    </style>
-
-    <style name="bottom_coupon_switch_arrow">
-        <item name="android:padding">@dimen/mid_value</item>
-    </style>
-
-    <style name="bottom_coupon_view_flipper">
-        <item name="android:layout_width">@dimen/zero</item>
-        <item name="android:layout_height">@dimen/coupon_view_flipper_height</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:padding">@dimen/small_value</item>
-    </style>
-
-    <style name="bottom_coupon_text_code">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
     </style>
 
     <!-- Login fragments -->
@@ -456,46 +345,6 @@
 
     </style>
 
-    <!-- Map bottom sheet activity -->
-    <style name="bottom_sheet_general_icon_text">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginEnd">@dimen/mid_value</item>
-        <item name="android:drawablePadding">@dimen/mid_value</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-
-    <style name="bottom_sheet_general_place_address">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/bottom_sheet_general_text_icon_height</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginBottom">@dimen/very_small_value</item>
-        <item name="android:layout_marginEnd">@dimen/mid_value</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-
-    <style name="bottom_sheet_general_opening_hours">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginEnd">@dimen/mid_value</item>
-        <item name="android:layout_gravity">bottom</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-
-    <style name="bottom_sheet_horizontal_divider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/bottom_sheet_horizontal_divider_height</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:background">@color/colorAccent</item>
-        <item name="android:layout_gravity">bottom</item>
-    </style>
-    
     <!-- Map bottom sheet first Tab: Opening Hours -->
     <style name="vertical_divider_line">
         <item name="android:layout_width">@dimen/vertical_divider_width</item>
@@ -883,57 +732,6 @@
         <item name="android:textSize">@dimen/big_text_size</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:background">@drawable/rounded_corners_button</item>
-    </style>
-
-    <!-- Settings layout -->
-    <style name="settings_label_style" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
-        <item name="android:paddingBottom">@dimen/small_value</item>
-        <item name="android:drawablePadding">@dimen/small_value</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
-    </style>
-
-    <style name="settings_list_item_style" parent="layout_wrap_content">
-        <item name="android:paddingStart">@dimen/small_value</item>
-        <item name="android:paddingEnd">@dimen/small_value</item>
-        <item name="android:layout_marginTop">@dimen/small_value</item>
-        <item name="android:layout_marginStart">@dimen/small_value</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-    </style>
-
-    <style name="settings_list_item_link_style" parent="layout_wrap_content">
-        <item name="android:paddingStart">@dimen/mid_value</item>
-        <item name="android:paddingEnd">@dimen/mid_value</item>
-        <item name="android:paddingTop">@dimen/small_value</item>
-        <item name="android:paddingBottom">@dimen/small_value</item>
-        <item name="android:textSize">@dimen/mid_text_size</item>
-        <item name="android:textColor">@color/colorLink</item>
-    </style>
-
-    <style name="settings_switch_toggle_style" parent="layout_wrap_content">
-        <item name="android:paddingStart">@dimen/mid_value</item>
-        <item name="android:paddingEnd">@dimen/mid_value</item>
-    </style>
-
-    <style name="settings_delete_label_style" parent="layout_wrap_content">
-        <item name="android:layout_marginStart">@dimen/mid_value</item>
-        <item name="android:layout_marginTop">@dimen/mid_value</item>
-        <item name="android:paddingBottom">@dimen/small_value</item>
-        <item name="android:drawablePadding">@dimen/small_value</item>
-        <item name="android:textColor">@color/colorErrorInput</item>
-        <item name="android:textSize">@dimen/big_text_size</item>
-    </style>
-
-    <style name="settings_delete_button_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/settings_delete_button_height</item>
-        <item name="android:layout_marginEnd">@dimen/mid_value</item>
-        <item name="android:background">@drawable/rounded_corners_red</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <!-- Settings alert dialog -->

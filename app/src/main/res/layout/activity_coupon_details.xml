@@ -36,7 +36,9 @@
 
                     <ImageView
                         android:id="@+id/imageView"
-                        style="@style/details_image_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
                         android:contentDescription="@string/coupon_details_image_desc"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -44,8 +46,14 @@
 
                     <TextView
                         android:id="@+id/discount_marker_text_view"
-                        style="@style/basic_grid_list_item_marker"
+                        android:layout_width="@dimen/discount_marker_width_one_row"
+                        android:layout_height="@dimen/discount_marker_height_one_row"
+                        android:layout_marginEnd="@dimen/big_value"
                         android:background="@drawable/rounded_corners_label_discount"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/big_text_size"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,59 +68,85 @@
 
                     <TextView
                         android:id="@+id/valid_until_text_view"
-                        style="@style/details_valid_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_value"
                         android:text="@string/valid_until_text"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/valid_date_text_view"
-                        style="@style/details_valid_date_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_value"
+                        android:textSize="@dimen/mid_text_size"
                         app:layout_constraintBottom_toBottomOf="@+id/valid_until_text_view"
                         app:layout_constraintStart_toEndOf="@+id/valid_until_text_view"
                         app:layout_constraintTop_toTopOf="@+id/valid_until_text_view" />
 
                     <TextView
                         android:id="@+id/product_title_text_view"
-                        style="@style/details_product_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_value"
+                        android:textSize="@dimen/very_big_text_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/valid_until_text_view" />
 
                     <TextView
                         android:id="@+id/price_text_view"
-                        style="@style/details_price_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_value"
                         android:text="@string/price_text"
+                        android:textSize="@dimen/mid_text_size"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/product_title_text_view" />
 
                     <TextView
                         android:id="@+id/price_amount_text_view"
-                        style="@style/details_price_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_value"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/big_text_size"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/price_text_view"
                         app:layout_constraintStart_toEndOf="@+id/price_text_view"
                         app:layout_constraintTop_toTopOf="@+id/price_text_view" />
 
                     <TextView
                         android:id="@+id/old_price_amount_text_view"
-                        style="@style/details_old_price_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/small_value"
                         android:background="@drawable/strike_through"
+                        android:textSize="@dimen/small_text_size"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/price_amount_text_view"
                         app:layout_constraintTop_toTopOf="@+id/price_amount_text_view" />
 
                     <Button
                         android:id="@+id/show_coupon_button"
-                        style="@style/details_show_coupon_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/coupon_details_button_height"
+                        android:layout_marginTop="@dimen/mid_value"
                         android:background="@drawable/rounded_corners_code_button"
                         android:text="@string/show_my_coupon_text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/mid_text_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/price_text_view" />
 
                     <TextView
                         android:id="@+id/coupon_description_text_view"
-                        style="@style/details_product_description_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/big_value"
+                        android:textSize="@dimen/mid_text_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/show_coupon_button" />
