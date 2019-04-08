@@ -11,7 +11,9 @@
 
     <ImageView
         android:id="@+id/grid_item_image"
-        style="@style/grid_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/grid_list_item_content_desc" />
 
     <android.support.constraint.ConstraintLayout
@@ -22,36 +24,55 @@
 
         <TextView
             android:id="@+id/grid_item_title_text"
-            style="@style/grid_item_product_title_two_rows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/big_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/grid_item_price_text"
-            style="@style/grid_item_product_price_text_two_rows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_value"
             android:text="@string/price_text"
+            android:textSize="@dimen/small_text_size"
             app:layout_constraintStart_toStartOf="@+id/grid_item_title_text"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_title_text" />
 
         <TextView
             android:id="@+id/grid_item_price_amount"
-            style="@style/grid_item_product_price_amount_two_rows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/very_small_value"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/big_text_size"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
             app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
             app:layout_constraintTop_toTopOf="@+id/grid_item_price_text" />
 
         <TextView
             android:id="@+id/grid_item_content_description"
-            style="@style/grid_item_product_desc_text_two_rows"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_value"
+            android:maxLines="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text" />
 
         <Button
             android:id="@+id/grid_item_view_details_button"
-            style="@style/grid_item_product_button_two_rows"
+            android:layout_width="@dimen/grid_item_button_details_width_two_rows"
+            android:layout_height="@dimen/grid_item_height_two_rows"
+            android:layout_marginTop="@dimen/mid_value"
             android:background="@drawable/rounded_corners_button"
+            android:gravity="center"
             android:text="@string/button_check_product"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/mid_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description"

@@ -16,7 +16,9 @@
 
         <ImageView
             android:id="@+id/grid_item_image"
-            style="@style/grid_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/grid_list_item_content_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,14 +26,28 @@
 
         <TextView
             android:id="@+id/grid_item_discount_marker"
-            style="@style/grid_item_coupon_marker_tag_one_row"
+            android:layout_width="@dimen/discount_marker_width_one_row"
+            android:layout_height="@dimen/discount_marker_height_one_row"
+            android:layout_marginEnd="@dimen/big_value"
             android:background="@drawable/rounded_corners_label_discount"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/big_text_size"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/grid_item_code_text"
-            style="@style/grid_item_coupon_code_one_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_value"
+            android:background="@drawable/rounded_corners_orange"
+            android:padding="@dimen/small_value"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/layout_title_text_size"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/grid_item_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,52 +63,80 @@
 
         <TextView
             android:id="@+id/grid_item_coupon_title"
-            style="@style/grid_item_coupon_title_one_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/very_big_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/grid_item_price_text"
-            style="@style/grid_item_coupon_price_text_one_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_value"
             android:text="@string/price_text"
+            android:textSize="@dimen/mid_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_coupon_title" />
 
         <TextView
             android:id="@+id/grid_item_price_amount"
-            style="@style/grid_item_coupon_price_amount_one_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_value"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/big_text_size"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
             app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
             app:layout_constraintTop_toTopOf="@+id/grid_item_price_text" />
 
         <TextView
             android:id="@+id/grid_item_old_price_amount"
-            style="@style/grid_item_coupon_old_price_amount_one_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_value"
             android:background="@drawable/strike_through"
+            android:textSize="@dimen/small_text_size"
             app:layout_constraintStart_toEndOf="@+id/grid_item_price_amount"
             app:layout_constraintTop_toTopOf="@+id/grid_item_price_amount" />
 
         <TextView
             android:id="@+id/grid_item_coupon_description_text"
-            style="@style/grid_item_coupon_desc_text_one_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_value"
+            android:maxLines="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text" />
 
         <Button
             android:id="@+id/grid_item_show_code_button"
-            style="@style/grid_item_coupon_show_code_button_one_row"
+            android:layout_width="@dimen/grid_item_button_code_width_one_row"
+            android:layout_height="@dimen/grid_item_height_one_row"
+            android:layout_marginTop="@dimen/mid_value"
             android:background="@drawable/rounded_corners_button"
+            android:gravity="center"
             android:text="@string/button_check_coupon"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/mid_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_coupon_description_text" />
 
         <Button
             android:id="@+id/grid_item_show_details_button"
-            style="@style/grid_item_coupon_show_details_button_one_row"
+            android:layout_width="@dimen/grid_item_button_details_width_one_row"
+            android:layout_height="@dimen/grid_item_height_one_row"
+            android:layout_marginTop="@dimen/mid_value"
             android:background="@drawable/rounded_corners_button_white"
+            android:gravity="center"
             android:text="@string/button_check_details"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/mid_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_coupon_description_text" />

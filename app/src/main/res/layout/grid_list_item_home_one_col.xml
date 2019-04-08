@@ -8,7 +8,9 @@
 
     <ImageView
         android:id="@+id/grid_item_image"
-        style="@style/grid_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/grid_list_item_content_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,22 +18,35 @@
 
     <TextView
         android:id="@+id/grid_item_title_text"
-        style="@style/grid_item_home_title_one_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mid_value"
+        android:textSize="@dimen/mid_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid_item_image" />
 
     <TextView
         android:id="@+id/grid_item_content_description"
-        style="@style/grid_item_home_content_desc_one_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/mid_value"
+        android:textSize="@dimen/small_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid_item_title_text" />
 
     <Button
         android:id="@+id/grid_item_view_details_button"
-        style="@style/grid_item_home_button_one_row"
+        android:layout_width="@dimen/grid_item_button_details_width_one_row"
+        android:layout_height="@dimen/grid_item_height_two_rows"
+        android:layout_margin="@dimen/mid_value"
+        android:layout_marginTop="@dimen/big_value"
         android:background="@drawable/rounded_corners_button"
+        android:gravity="center"
         android:text="@string/button_check_coupon"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description" />
