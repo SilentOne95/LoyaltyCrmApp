@@ -43,6 +43,8 @@
 
     <!-- Navigation drawer header -->
     <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="nav_header_button_height">30dp</dimen>
+    <dimen name="nav_header_button_min_width">100dp</dimen>
 
     <!-- Login layouts -->
     <dimen name="register_phone_margin_top">64dp</dimen>

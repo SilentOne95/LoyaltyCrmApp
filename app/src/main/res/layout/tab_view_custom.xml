@@ -8,10 +8,10 @@
         android:id="@+id/tab_view_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:drawablePadding="@dimen/custom_tab_view_drawable_padding"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@color/colorBlack"
-        android:layout_gravity="center"/>
+        android:textColor="@color/colorBlack" />
 
 </LinearLayout>
 
