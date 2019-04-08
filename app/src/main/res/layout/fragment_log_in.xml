@@ -16,8 +16,13 @@
 
         <ImageView
             android:id="@+id/login_image_logo"
-            style="@style/login_image_logo_style"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/login_image_logo_height"
+            android:layout_marginTop="@dimen/very_big_value"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/log_in_view_logo_desc"
+            android:padding="@dimen/small_value"
+            android:scaleType="fitCenter"
             android:src="@drawable/sellger_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +30,12 @@
 
         <LinearLayout
             android:id="@+id/login_button_container"
-            style="@style/login_buttons_container_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="@dimen/small_value"
             app:layout_constraintBottom_toTopOf="@+id/register_guest_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,36 +43,76 @@
 
             <TextView
                 android:id="@+id/choose_register_method_text"
-                style="@style/choose_register_method_text_style"
-                android:text="@string/sign_up_sign_in_text" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/mid_value"
+                android:gravity="center"
+                android:text="@string/sign_up_sign_in_text"
+                android:textSize="@dimen/mid_text_size" />
 
             <Button
                 android:id="@+id/login_google_button"
-                style="@style/login_google_button_style"
+                android:layout_width="@dimen/login_button_width"
+                android:layout_height="@dimen/login_button_height"
+                android:layout_gravity="center"
                 android:background="@drawable/rounded_corners_button_white"
                 android:drawableStart="@drawable/ic_google_btn"
-                android:text="@string/continue_with_google_text" />
+                android:gravity="center"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingEnd="@dimen/small_value"
+                android:text="@string/continue_with_google_text"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="@dimen/mid_text_size" />
 
             <Button
                 android:id="@+id/login_facebook_button"
-                style="@style/login_facebook_button_style"
+                android:layout_width="@dimen/login_button_width"
+                android:layout_height="@dimen/login_button_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/big_value"
                 android:background="@drawable/rounded_corners_facebook"
                 android:drawableStart="@drawable/ic_facebook_btn"
-                android:text="@string/continue_with_facebook_text" />
+                android:drawablePadding="@dimen/small_value"
+                android:gravity="center"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingEnd="@dimen/small_value"
+                android:text="@string/continue_with_facebook_text"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/mid_text_size" />
 
             <Button
                 android:id="@+id/login_phone_button"
-                style="@style/login_phone_button_style"
+                android:layout_width="@dimen/login_button_width"
+                android:layout_height="@dimen/login_button_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/big_value"
                 android:background="@drawable/rounded_corners_button_green"
                 android:drawableStart="@drawable/ic_phone_btn"
-                android:text="@string/continue_with_phone_text" />
+                android:gravity="center"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingEnd="@dimen/small_value"
+                android:text="@string/continue_with_phone_text"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/mid_text_size" />
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/register_guest_text"
-            style="@style/register_as_guest_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_value"
+            android:layout_marginEnd="@dimen/small_value"
+            android:layout_marginBottom="@dimen/small_value"
+            android:padding="@dimen/mid_value"
             android:text="@string/continue_as_guest_text"
+            android:textSize="@dimen/small_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

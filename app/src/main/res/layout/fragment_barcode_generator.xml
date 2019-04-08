@@ -41,7 +41,7 @@
             app:layout_constraintTop_toBottomOf="@+id/my_account_title_text" />
 
         <TextView
-            android:id="@+id/my_account_image_description_text"
+            android:id="@+id/my_account_code_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"

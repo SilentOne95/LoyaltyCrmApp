@@ -32,32 +32,65 @@
 
                 <TextView
                     android:id="@+id/verify_your_number_text"
-                    style="@style/verify_your_number_text_style"
-                    android:text="@string/verify_text" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mid_value"
+                    android:layout_marginTop="@dimen/big_value"
+                    android:layout_marginEnd="@dimen/mid_value"
+                    android:layout_marginBottom="@dimen/mid_value"
+                    android:gravity="center"
+                    android:text="@string/verify_text"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/big_text_size"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/verify_code_instruction_text"
-                    style="@style/verify_code_instruction_text_style"
-                    android:text="@string/enter_code_text" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/mid_value"
+                    android:layout_marginTop="@dimen/small_value"
+                    android:layout_marginEnd="@dimen/mid_value"
+                    android:gravity="center"
+                    android:text="@string/enter_code_text"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/mid_text_size" />
 
             </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/verify_code_input_box"
-                style="@style/verify_code_input_box_style"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_value"
+                android:layout_marginTop="@dimen/register_phone_margin_top"
+                android:layout_marginEnd="@dimen/small_value"
+                android:minWidth="@dimen/register_input_box_min_width"
+                android:textColorHint="@color/colorAccent"
+                app:boxStrokeColor="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/verify_code_text_container">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/verify_code_input_text"
-                    style="@style/verify_code_input_text_style" />
+                    android:layout_width="@dimen/verify_code_input_box_width"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:inputType="phone"
+                    android:textColor="@color/colorAccent"
+                    android:textColorHint="@color/colorAccent" />
 
             </android.support.design.widget.TextInputLayout>
 
             <ImageView
                 android:id="@+id/verify_phone_icon_image"
-                style="@style/verify_phone_icon_image_style"
+                android:layout_width="@dimen/register_icon_image_size"
+                android:layout_height="@dimen/register_icon_image_size"
+                android:layout_marginStart="@dimen/small_value"
+                android:layout_marginTop="@dimen/verify_phone_icon_image_margin_top"
+                android:layout_marginEnd="@dimen/small_value"
                 android:contentDescription="@string/text_icon_verify_code_desc"
                 android:src="@drawable/ic_circle_message"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,15 +99,28 @@
 
             <TextView
                 android:id="@+id/verify_waiting_for_code_text"
-                style="@style/verify_waiting_for_code_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_value"
+                android:layout_marginTop="@dimen/very_big_value"
+                android:layout_marginEnd="@dimen/small_value"
                 android:text="@string/waiting_info_text"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/mid_text_size"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/verify_code_input_box" />
 
             <ProgressBar
                 android:id="@+id/verify_progress_bar"
-                style="@style/verify_progress_bar_style"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_value"
+                android:layout_marginTop="@dimen/mid_value"
+                android:layout_marginEnd="@dimen/small_value"
+                android:layout_marginBottom="@dimen/small_value"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/verify_waiting_for_code_text" />

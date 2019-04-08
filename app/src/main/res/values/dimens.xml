@@ -92,5 +92,4 @@
 
     <!-- My Account fragment -->
     <dimen name="my_account_desc_padding_top">2dp</dimen>
-
 </resources>

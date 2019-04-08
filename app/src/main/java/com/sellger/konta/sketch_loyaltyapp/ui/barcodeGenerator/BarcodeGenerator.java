@@ -47,7 +47,7 @@ public class BarcodeGenerator extends BaseFragment {
 
         setHasOptionsMenu(true);
 
-        textView = rootView.findViewById(R.id.textView);
+        textView = rootView.findViewById(R.id.my_account_code_text);
         textView.setVisibility(View.GONE);
         textView.setText(BARCODE_DATA);
 
