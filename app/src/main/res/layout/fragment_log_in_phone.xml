@@ -125,8 +125,8 @@
             <Button
                 android:id="@+id/register_number_button"
                 style="@style/button_color_accent"
-                android:layout_width="@dimen/register_number_button_width"
-                android:layout_height="@dimen/register_number_button_height"
+                android:layout_width="@dimen/button_basic_width"
+                android:layout_height="@dimen/button_basic_height"
                 android:layout_marginStart="@dimen/small_value"
                 android:layout_marginTop="@dimen/very_big_value"
                 android:layout_marginEnd="@dimen/small_value"

@@ -225,14 +225,14 @@
 
             <Button
                 android:id="@+id/settings_delete_button"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/settings_delete_button_height"
+                android:layout_width="@dimen/button_basic_width"
+                android:layout_height="@dimen/button_basic_height"
                 android:layout_marginEnd="@dimen/mid_value"
                 android:background="@drawable/rounded_corners_red"
                 android:text="@string/settings_delete_button"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_h5"
+                android:textSize="@dimen/text_size_h4"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_delete_account_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_delete_account_text" />

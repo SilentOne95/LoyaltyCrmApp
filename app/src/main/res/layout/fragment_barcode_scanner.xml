@@ -128,8 +128,8 @@
             <Button
                 android:id="@+id/barcode_scanner_scan_button"
                 style="@style/button_color_accent"
-                android:layout_width="@dimen/barcode_scanner_button_width"
-                android:layout_height="@dimen/barcode_scanner_button_height"
+                android:layout_width="@dimen/button_basic_width"
+                android:layout_height="@dimen/button_basic_height"
                 android:layout_marginStart="@dimen/small_value"
                 android:layout_marginEnd="@dimen/small_value"
                 android:layout_marginBottom="@dimen/mid_value"
