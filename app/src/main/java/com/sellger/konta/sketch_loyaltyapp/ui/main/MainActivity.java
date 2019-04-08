@@ -29,7 +29,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.service.TrackerService;
-import com.sellger.konta.sketch_loyaltyapp.ui.barcodeGenerator.BarcodeGenerator;
+import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccount;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode.LogInVerifyFragment;
@@ -171,7 +171,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Replacing the fragment
         if (fragment instanceof LogInPhoneFragment || fragment instanceof LogInVerifyFragment
-                || fragment instanceof BarcodeGenerator) {
+                || fragment instanceof MyAccount) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left)
@@ -349,7 +349,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
                 if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
                     presenter.displaySelectedScreen("login", "");
-                } else if (!(fragment instanceof BarcodeGenerator)) {
+                } else if (!(fragment instanceof MyAccount)) {
                     presenter.displaySelectedScreen("barcode", "");
                     uncheckItemsNavDrawer();
                 }

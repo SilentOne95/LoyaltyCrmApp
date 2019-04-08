@@ -35,14 +35,12 @@
 
         <TextView
             android:id="@+id/empty_state_products_text"
+            style="@style/text_regular_color_accent_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/no_products_text"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/mid_text_size"
-            android:textStyle="bold" />
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/empty_state_products_text_two"

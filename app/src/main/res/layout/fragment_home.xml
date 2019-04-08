@@ -30,15 +30,14 @@
 
         <TextView
             android:id="@+id/info_text_view"
+            style="@style/text_layout_title_color_accent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/mid_value"
             android:layout_marginBottom="@dimen/big_value"
             android:gravity="center"
-            android:text="@string/check_offers_text"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/layout_title_text_size" />
+            android:text="@string/check_offers_text" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -59,14 +58,12 @@
 
             <TextView
                 android:id="@+id/empty_state_coupons_text"
+                style="@style/text_regular_color_accent_bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/something_went_wrong_text"
-                android:textAlignment="center"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/mid_text_size"
-                android:textStyle="bold" />
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/empty_state_coupons_text_two"

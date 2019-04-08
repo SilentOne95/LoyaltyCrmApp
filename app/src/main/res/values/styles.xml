@@ -20,26 +20,132 @@
         <item name="android:windowBackground">@drawable/layout_launch_screen</item>
     </style>
 
-    <!-- Login fragments -->
+    <!-- Button -->
+    <style name="button_color_accent">
+        <item name="android:background">@drawable/rounded_corners_button_accent</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_h4</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="button_color_white">
+        <item name="android:background">@drawable/rounded_corners_button_white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_h4</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- TextInputLayout - TextInputEditText -->
+    <style name="text_input_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="boxStrokeColor">@color/colorAccent</item>
+        <item name="android:minWidth">@dimen/register_input_box_min_width</item>
+    </style>
+
+    <style name="text_input_edit_text_style">
+        <item name="android:background">@null</item>
+        <item name="android:inputType">phone</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+    </style>
+
     <style name="login_text_input_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/colorAccent</item>
     </style>
 
     <style name="login_edittext_error_appearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/colorErrorInput</item>
-        <item name="android:textSize">@dimen/very_small_text_size</item>
+        <item name="android:textSize">@dimen/text_size_h6</item>
     </style>
 
-    <!-- Barcode scanner layout -->
-    <style name="switch_button_barcode_scanner" parent="Theme.AppCompat.Light">
+    <!-- Switch -->
+    <style name="switch_style" parent="Theme.AppCompat.Light">
         <item name="android:scaleX">1.1</item>
         <item name="android:scaleY">1.1</item>
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
-    <!-- Settings alert dialog -->
+    <!-- Settings layout - alert dialog -->
     <style name="settings_alert_dialog_style">
         <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <!-- Text -->
+    <!-- H1 -->
+    <style name="text_layout_title">
+        <item name="android:textSize">@dimen/text_size_h1</item>
+    </style>
+
+    <style name="text_layout_title_color_accent" parent="text_layout_title">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <!-- H2 -->
+    <style name="text_header">
+        <item name="android:textSize">@dimen/text_size_h2</item>
+    </style>
+
+    <!-- H3 -->
+    <style name="text_default">
+        <item name="android:textSize">@dimen/text_size_h3</item>
+    </style>
+
+    <style name="text_default_color_white" parent="text_default">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="text_default_color_white_bold" parent="text_default_color_white">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_default_color_accent" parent="text_default">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="text_default_color_accent_bold" parent="text_default_color_accent">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- H4 -->
+    <style name="text_regular">
+        <item name="android:textSize">@dimen/text_size_h4</item>
+    </style>
+
+    <style name="text_regular_color_accent" parent="text_regular">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="text_regular_color_accent_bold" parent="text_regular_color_accent">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_regular_color_white" parent="text_regular">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="text_regular_color_white_bold" parent="text_regular_color_white">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- H5 -->
+    <style name="text_small">
+        <item name="android:textSize">@dimen/text_size_h5</item>
+    </style>
+
+    <style name="text_small_bold" parent="text_small">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- H6 -->
+    <style name="text_caption">
+        <item name="android:textSize">@dimen/text_size_h6</item>
+    </style>
+
+    <!-- Others -->
+    <style name="text_link_style" parent="text_regular">
+        <item name="android:textColor">@color/colorLink</item>
     </style>
 
 </resources>

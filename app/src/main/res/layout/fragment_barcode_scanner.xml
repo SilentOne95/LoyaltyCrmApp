@@ -17,14 +17,14 @@
 
         <TextView
             android:id="@+id/barcode_scanner_title_text_view"
+            style="@style/text_layout_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/small_value"
             android:layout_marginTop="@dimen/big_value"
             android:layout_marginEnd="@dimen/small_value"
-            android:text="@string/barcode_scanner_title"
-            android:textSize="@dimen/layout_title_text_size" />
+            android:text="@string/barcode_scanner_title" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -46,6 +46,7 @@
 
             <TextView
                 android:id="@+id/barcode_scanner_instruction_text_view"
+                style="@style/text_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mid_value"
@@ -54,7 +55,6 @@
                 android:layout_marginBottom="@dimen/small_value"
                 android:lineSpacingExtra="@dimen/barcode_scanner_instruction_spacing"
                 android:text="@string/barcode_scanner_instruction_body"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/barcode_scanner_instruction_text" />
@@ -63,6 +63,7 @@
 
         <TextView
             android:id="@+id/barcode_scanner_scan_result_text_view"
+            style="@style/text_default_color_accent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="@dimen/mid_value"
@@ -72,8 +73,6 @@
             android:paddingStart="@dimen/very_big_value"
             android:paddingEnd="@dimen/very_big_value"
             android:text="@string/barcode_scanner_code_text"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/big_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/barcode_scanner_instruction_text_view" />
@@ -86,13 +85,13 @@
 
             <TextView
                 android:id="@+id/barcode_scanner_switch_one_text_view"
+                style="@style/text_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mid_value"
                 android:layout_marginTop="@dimen/small_value"
                 android:layout_marginBottom="@dimen/small_value"
                 android:text="@string/barcode_scanner_switch_focus_text"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintBottom_toTopOf="@+id/barcode_scanner_switch_two_text_view"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -101,19 +100,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_value"
-                android:theme="@style/switch_button_barcode_scanner"
+                android:theme="@style/switch_style"
                 app:layout_constraintBottom_toBottomOf="@+id/barcode_scanner_switch_one_text_view"
                 app:layout_constraintStart_toEndOf="@+id/barcode_scanner_switch_one_text_view"
                 app:layout_constraintTop_toTopOf="@+id/barcode_scanner_switch_one_text_view" />
 
             <TextView
                 android:id="@+id/barcode_scanner_switch_two_text_view"
+                style="@style/text_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mid_value"
                 android:layout_marginBottom="@dimen/big_value"
                 android:text="@string/barcode_scanner_switch_flash_text"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintBottom_toTopOf="@+id/barcode_scanner_scan_button"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -121,23 +120,20 @@
                 android:id="@+id/barcode_scanner_switch_button_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/switch_button_barcode_scanner"
+                android:theme="@style/switch_style"
                 app:layout_constraintBottom_toBottomOf="@+id/barcode_scanner_switch_two_text_view"
                 app:layout_constraintStart_toStartOf="@+id/barcode_scanner_switch_button_one"
                 app:layout_constraintTop_toTopOf="@+id/barcode_scanner_switch_two_text_view" />
 
             <Button
                 android:id="@+id/barcode_scanner_scan_button"
+                style="@style/button_color_accent"
                 android:layout_width="@dimen/barcode_scanner_button_width"
                 android:layout_height="@dimen/barcode_scanner_button_height"
                 android:layout_marginStart="@dimen/small_value"
                 android:layout_marginEnd="@dimen/small_value"
                 android:layout_marginBottom="@dimen/mid_value"
-                android:background="@drawable/rounded_corners_button"
                 android:text="@string/barcode_scanner_button_text"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

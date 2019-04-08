@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragmentContract;
 import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
-import com.sellger.konta.sketch_loyaltyapp.ui.barcodeGenerator.BarcodeGenerator;
+import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccount;
 import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.BarcodeScanner;
 import com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.home.HomePresenter;
@@ -155,7 +155,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                     view.setFragment(new BarcodeScanner(), data);
                     break;
                 case "barcode":
-                    view.setFragment(new BarcodeGenerator(), data);
+                    view.setFragment(new MyAccount(), data);
                     break;
                 case "settings":
                     view.setActivity(SettingsActivity.class);

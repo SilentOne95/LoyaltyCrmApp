@@ -20,6 +20,7 @@
 
             <TextView
                 android:id="@+id/settings_label_notification"
+                style="@style/text_default_color_accent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mid_value"
@@ -28,13 +29,12 @@
                 android:drawablePadding="@dimen/small_value"
                 android:paddingBottom="@dimen/small_value"
                 android:text="@string/settings_push_notifications_label"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/settings_notification_one"
+                style="@style/text_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_value"
@@ -42,7 +42,6 @@
                 android:paddingStart="@dimen/small_value"
                 android:paddingEnd="@dimen/small_value"
                 android:text="@string/settings_notification_topic_news"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_label_notification" />
 
@@ -52,13 +51,14 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/mid_value"
                 android:paddingEnd="@dimen/mid_value"
-                android:theme="@style/switch_button_barcode_scanner"
+                android:theme="@style/switch_style"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_notification_one"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_notification_one" />
 
             <TextView
                 android:id="@+id/settings_notification_two"
+                style="@style/text_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_value"
@@ -66,7 +66,6 @@
                 android:paddingStart="@dimen/small_value"
                 android:paddingEnd="@dimen/small_value"
                 android:text="@string/settings_notification_topic_offers"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_notification_one" />
 
@@ -76,13 +75,14 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/mid_value"
                 android:paddingEnd="@dimen/mid_value"
-                android:theme="@style/switch_button_barcode_scanner"
+                android:theme="@style/switch_style"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_notification_two"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_notification_two" />
 
             <TextView
                 android:id="@+id/settings_notification_three"
+                style="@style/text_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_value"
@@ -90,7 +90,6 @@
                 android:paddingStart="@dimen/small_value"
                 android:paddingEnd="@dimen/small_value"
                 android:text="@string/settings_notification_topic_discount"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_notification_two" />
 
@@ -100,13 +99,14 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/mid_value"
                 android:paddingEnd="@dimen/mid_value"
-                android:theme="@style/switch_button_barcode_scanner"
+                android:theme="@style/switch_style"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_notification_three"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_notification_three" />
 
             <TextView
                 android:id="@+id/settings_label_permission"
+                style="@style/text_default_color_accent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mid_value"
@@ -115,13 +115,12 @@
                 android:drawablePadding="@dimen/small_value"
                 android:paddingBottom="@dimen/small_value"
                 android:text="@string/settings_permissions_label"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_notification_three" />
 
             <TextView
                 android:id="@+id/settings_permission_one"
+                style="@style/text_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_value"
@@ -129,7 +128,6 @@
                 android:paddingStart="@dimen/small_value"
                 android:paddingEnd="@dimen/small_value"
                 android:text="@string/settings_permission_location"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_label_permission" />
 
@@ -139,13 +137,14 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/mid_value"
                 android:paddingEnd="@dimen/mid_value"
-                android:theme="@style/switch_button_barcode_scanner"
+                android:theme="@style/switch_style"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_permission_one"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_permission_one" />
 
             <TextView
                 android:id="@+id/settings_label_terms"
+                style="@style/text_default_color_accent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mid_value"
@@ -154,13 +153,12 @@
                 android:drawablePadding="@dimen/small_value"
                 android:paddingBottom="@dimen/small_value"
                 android:text="@string/settings_terms_label"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/big_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_permission_one" />
 
             <TextView
                 android:id="@+id/settings_terms_one"
+                style="@style/text_link_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/mid_value"
@@ -168,13 +166,12 @@
                 android:paddingEnd="@dimen/mid_value"
                 android:paddingBottom="@dimen/small_value"
                 android:text="@string/settings_terms_conditions_link"
-                android:textColor="@color/colorLink"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_label_terms" />
 
             <TextView
                 android:id="@+id/settings_terms_two"
+                style="@style/text_link_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/mid_value"
@@ -182,13 +179,12 @@
                 android:paddingEnd="@dimen/mid_value"
                 android:paddingBottom="@dimen/small_value"
                 android:text="@string/settings_terms_privacy_link"
-                android:textColor="@color/colorLink"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_terms_one" />
 
             <TextView
                 android:id="@+id/settings_terms_three"
+                style="@style/text_link_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/mid_value"
@@ -196,8 +192,6 @@
                 android:paddingEnd="@dimen/mid_value"
                 android:paddingBottom="@dimen/small_value"
                 android:text="@string/settings_terms_licenses_link"
-                android:textColor="@color/colorLink"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_terms_two" />
 
@@ -212,12 +206,13 @@
                 android:paddingBottom="@dimen/small_value"
                 android:text="@string/settings_account_label"
                 android:textColor="@color/colorErrorInput"
-                android:textSize="@dimen/big_text_size"
+                android:textSize="@dimen/text_size_h3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_terms_three" />
 
             <TextView
                 android:id="@+id/settings_delete_account_text"
+                style="@style/text_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_value"
@@ -225,7 +220,6 @@
                 android:paddingStart="@dimen/small_value"
                 android:paddingEnd="@dimen/small_value"
                 android:text="@string/settings_acc_delete_instruction"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings_label_delete_account" />
 
@@ -238,7 +232,7 @@
                 android:text="@string/settings_delete_button"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/small_text_size"
+                android:textSize="@dimen/text_size_h5"
                 app:layout_constraintBottom_toBottomOf="@+id/settings_delete_account_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/settings_delete_account_text" />

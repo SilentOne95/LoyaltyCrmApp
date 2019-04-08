@@ -12,18 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/grid_item_shadow"
-        tools:context=".ui.barcodeGenerator.BarcodeGenerator">
+        tools:context=".ui.myAccount.MyAccount">
 
         <TextView
             android:id="@+id/my_account_title_text"
+            style="@style/text_layout_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_value"
             android:layout_marginTop="@dimen/big_value"
             android:layout_marginEnd="@dimen/small_value"
             android:text="@string/barcode_generator_title"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/layout_title_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,14 +41,13 @@
 
         <TextView
             android:id="@+id/my_account_code_text"
+            style="@style/text_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:paddingStart="@dimen/very_small_value"
             android:paddingTop="@dimen/my_account_desc_padding_top"
             android:paddingEnd="@dimen/very_small_value"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/mid_text_size"
             app:layout_constraintBottom_toBottomOf="@+id/my_account_barcode_image"
             app:layout_constraintEnd_toEndOf="@+id/my_account_barcode_image"
             app:layout_constraintStart_toStartOf="@+id/my_account_barcode_image" />

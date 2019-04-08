@@ -22,21 +22,19 @@
 
         <TextView
             android:id="@+id/notification_main_text"
+            style="@style/text_regular_color_white_bold"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/mid_text_size"
-            android:textStyle="bold" />
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/notification_secondary_text"
+            style="@style/text_small"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/small_text_size" />
+            android:textColor="@color/colorWhite" />
 
     </LinearLayout>
 

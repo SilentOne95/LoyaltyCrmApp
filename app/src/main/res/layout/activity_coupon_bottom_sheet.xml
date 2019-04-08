@@ -13,13 +13,12 @@
 
     <TextView
         android:id="@+id/bottom_coupon_advice_text_view"
+        style="@style/text_regular_color_accent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_value"
         android:gravity="center"
         android:text="@string/bottom_coupon_advice_text"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/mid_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,11 +62,11 @@
 
             <TextView
                 android:id="@+id/bottom_coupon_code_text"
+                style="@style/text_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="@dimen/big_text_size" />
+                android:gravity="center" />
 
         </ViewFlipper>
 

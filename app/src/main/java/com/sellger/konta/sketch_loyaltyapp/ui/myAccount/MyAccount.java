@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.ui.barcodeGenerator;
+package com.sellger.konta.sketch_loyaltyapp.ui.myAccount;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -26,7 +26,7 @@ import java.util.Map;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_HEIGHT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
 
-public class BarcodeGenerator extends BaseFragment {
+public class MyAccount extends BaseFragment {
 
     static final String BARCODE_DATA = "12345678901";
 
@@ -36,7 +36,7 @@ public class BarcodeGenerator extends BaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_barcode_generator;
+        return R.layout.fragment_my_account;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class BarcodeGenerator extends BaseFragment {
         textView.setVisibility(View.GONE);
         textView.setText(BARCODE_DATA);
 
-        outputImage = rootView.findViewById(R.id.imageView);
+        outputImage = rootView.findViewById(R.id.my_account_barcode_image);
 
         try {
             bitmap = encodeAsBitmap(BARCODE_DATA);

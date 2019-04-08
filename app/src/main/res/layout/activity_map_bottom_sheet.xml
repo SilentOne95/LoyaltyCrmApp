@@ -19,6 +19,7 @@
 
         <TextView
             android:id="@+id/bottom_sheet_icon_title"
+            style="@style/text_default"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/mid_value"
@@ -27,30 +28,29 @@
             android:drawableStart="@drawable/ic_marker"
             android:drawablePadding="@dimen/mid_value"
             android:gravity="center_vertical"
-            android:text="@string/bottom_place_title_text"
-            android:textSize="@dimen/big_text_size" />
+            android:text="@string/bottom_place_title_text" />
 
         <TextView
             android:id="@+id/bottom_sheet_place_address"
+            style="@style/text_small"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_general_text_icon_height"
             android:layout_marginStart="@dimen/mid_value"
             android:layout_marginEnd="@dimen/mid_value"
             android:layout_marginBottom="@dimen/very_small_value"
             android:gravity="center_vertical"
-            android:text="@string/bottom_place_address_text"
-            android:textSize="@dimen/small_text_size" />
+            android:text="@string/bottom_place_address_text" />
 
         <TextView
             android:id="@+id/bottom_sheet_place_hours"
+            style="@style/text_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginStart="@dimen/mid_value"
             android:layout_marginEnd="@dimen/mid_value"
             android:gravity="center_vertical"
-            android:text="@string/bottom_place_open_hours_text"
-            android:textSize="@dimen/mid_text_size" />
+            android:text="@string/bottom_place_open_hours_text" />
 
         <View
             android:id="@+id/view"

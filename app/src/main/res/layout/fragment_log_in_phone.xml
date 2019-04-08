@@ -23,8 +23,8 @@
             <LinearLayout
                 android:id="@+id/verify_number_text_container"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/verify_number_text_container_height"
-                android:background="@drawable/rounded_corners_orange"
+                android:layout_height="@dimen/register_number_container_height"
+                android:background="@drawable/rounded_corners_accent"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +32,7 @@
 
                 <TextView
                     android:id="@+id/verify_number_text"
+                    style="@style/text_default_color_white_bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/mid_value"
@@ -39,22 +40,18 @@
                     android:layout_marginEnd="@dimen/mid_value"
                     android:layout_marginBottom="@dimen/mid_value"
                     android:gravity="center"
-                    android:text="@string/verify_your_number_text"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/big_text_size"
-                    android:textStyle="bold" />
+                    android:text="@string/verify_your_number_text" />
 
                 <TextView
                     android:id="@+id/verify_number_instruction_text"
+                    style="@style/text_regular_color_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/mid_value"
                     android:layout_marginTop="@dimen/small_value"
                     android:layout_marginEnd="@dimen/mid_value"
                     android:gravity="center"
-                    android:text="@string/instruction_provide_number_text"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/mid_text_size" />
+                    android:text="@string/instruction_provide_number_text" />
 
             </LinearLayout>
 
@@ -71,53 +68,42 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/register_prefix_input_box"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    style="@style/text_input_layout_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/big_value"
                     android:layout_marginEnd="@dimen/mid_value"
                     android:layout_weight="2"
-                    android:minWidth="@dimen/register_input_box_min_width"
-                    android:textColorHint="@color/colorAccent"
-                    app:boxStrokeColor="@color/colorAccent"
                     app:errorEnabled="true"
                     app:errorTextAppearance="@style/login_edittext_error_appearance">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/register_prefix_input"
+                        style="@style/text_input_edit_text_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
                         android:drawableStart="@drawable/ic_plus_phone"
                         android:drawablePadding="@dimen/very_small_value"
-                        android:hint="@string/prefix_hint"
-                        android:inputType="phone"
-                        android:textColor="@color/colorAccent"
-                        android:textColorHint="@color/colorAccent" />
+                        android:hint="@string/prefix_hint" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/register_number_input_box"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    style="@style/text_input_layout_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/big_value"
                     android:layout_weight="5"
-                    android:textColorHint="@color/colorAccent"
-                    app:boxStrokeColor="@color/colorAccent"
                     app:errorEnabled="true"
                     app:errorTextAppearance="@style/login_edittext_error_appearance">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/register_number_input"
+                        style="@style/text_input_edit_text_style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/phone_number_hint"
-                        android:inputType="phone"
-                        android:textColor="@color/colorAccent"
-                        android:textColorHint="@color/colorAccent" />
+                        android:hint="@string/phone_number_hint" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -138,22 +124,20 @@
 
             <Button
                 android:id="@+id/register_number_button"
+                style="@style/button_color_accent"
                 android:layout_width="@dimen/register_number_button_width"
                 android:layout_height="@dimen/register_number_button_height"
                 android:layout_marginStart="@dimen/small_value"
                 android:layout_marginTop="@dimen/very_big_value"
                 android:layout_marginEnd="@dimen/small_value"
-                android:background="@drawable/rounded_corners_button"
                 android:text="@string/register_button_text"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/mid_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_input_container" />
 
             <TextView
                 android:id="@+id/terms_privacy_policy_link_text"
+                style="@style/text_link_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_value"
@@ -161,22 +145,19 @@
                 android:layout_marginEnd="@dimen/small_value"
                 android:padding="@dimen/small_value"
                 android:text="@string/terms_link_text"
-                android:textColor="@color/colorLink"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_number_button" />
 
             <TextView
                 android:id="@+id/more_info_link_text"
+                style="@style/text_link_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_value"
                 android:layout_marginEnd="@dimen/small_value"
                 android:padding="@dimen/small_value"
                 android:text="@string/more_info_text"
-                android:textColor="@color/colorLink"
-                android:textSize="@dimen/small_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/terms_privacy_policy_link_text" />

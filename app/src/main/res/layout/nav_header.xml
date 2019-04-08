@@ -27,6 +27,7 @@
 
         <TextView
             android:id="@+id/navigation_header_text"
+            style="@style/text_regular_color_white_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_value"
@@ -36,9 +37,6 @@
             android:paddingStart="@dimen/small_value"
             android:paddingEnd="@dimen/small_value"
             android:text="@string/nav_view_upgrade_acc_text"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/mid_text_size"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/navigation_header_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +56,7 @@
             android:text="@string/sign_up_text"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/small_text_size"
+            android:textSize="@dimen/text_size_h5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

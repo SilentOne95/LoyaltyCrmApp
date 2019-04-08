@@ -23,9 +23,9 @@
 
         <TextView
             android:id="@+id/grid_item_title_text"
+            style="@style/text_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/very_big_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,18 +35,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_value"
             android:text="@string/price_text"
-            android:textSize="@dimen/big_text_size"
+            android:textSize="@dimen/text_size_h3"
             app:layout_constraintStart_toStartOf="@+id/grid_item_title_text"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_title_text" />
 
         <TextView
             android:id="@+id/grid_item_price_amount"
+            style="@style/text_default_color_accent_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_value"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/big_text_size"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
             app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
             app:layout_constraintTop_toTopOf="@+id/grid_item_price_text" />
@@ -63,15 +61,11 @@
 
         <Button
             android:id="@+id/grid_item_view_details_button"
+            style="@style/button_color_accent"
             android:layout_width="@dimen/grid_item_button_details_width_one_row"
             android:layout_height="@dimen/grid_item_height_one_row"
             android:layout_marginTop="@dimen/big_value"
-            android:background="@drawable/rounded_corners_button"
-            android:gravity="center"
             android:text="@string/button_check_coupon"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/mid_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description"
