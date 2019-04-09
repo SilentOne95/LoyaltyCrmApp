@@ -19,9 +19,9 @@ public class BarcodeScanner extends BaseFragment implements View.OnClickListener
 
     private static final String TAG = CouponsFragment.class.getSimpleName();
 
-    private TextView scanResultText;
-    private Switch autoFocusSwitch, flashSwitch;
-    private Button scanButton;
+    private TextView mScanResultText;
+    private Switch mAutoFocusSwitch, mFlashSwitch;
+    private Button mScanButton;
 
     @Override
     protected int getLayout() {
@@ -36,11 +36,16 @@ public class BarcodeScanner extends BaseFragment implements View.OnClickListener
 
         setHasOptionsMenu(true);
 
-        autoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
-        flashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);
+        // Init views
+        initViews();
+        mScanButton.setOnClickListener(this);
+    }
 
-        scanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
-        scanButton.setOnClickListener(this);
+    public void initViews() {
+        mAutoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
+        mFlashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);
+
+        mScanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
     }
 
     @Override

@@ -64,11 +64,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         // Hide action bar
         ((BaseActivity) getActivity()).getSupportActionBar().hide();
 
-        // Assign views
-        mSignInWithGoogleButton = rootView.findViewById(R.id.login_google_button);
-        mSignInWithFacebookButton = rootView.findViewById(R.id.login_facebook_button);
-        mSignInWithPhoneButton = rootView.findViewById(R.id.login_phone_button);
-        mSignInAnonymously = rootView.findViewById(R.id.register_guest_text);
+        // Init views
+        initViews();
 
         // Button listeners
         mSignInWithGoogleButton.setOnClickListener(this);
@@ -102,6 +99,14 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 Log.w(TAG, "onError");
             }
         });
+    }
+
+    @Override
+    public void initViews() {
+        mSignInWithGoogleButton = rootView.findViewById(R.id.login_google_button);
+        mSignInWithFacebookButton = rootView.findViewById(R.id.login_facebook_button);
+        mSignInWithPhoneButton = rootView.findViewById(R.id.login_phone_button);
+        mSignInAnonymously = rootView.findViewById(R.id.register_guest_text);
     }
 
     @Override

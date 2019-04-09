@@ -87,8 +87,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private int mPreviousSelectedMarkerId;
 
     // BottomSheet PeekHeight Panel views
-    private View mPanelPeekHeight;
+    private View mPanelPeekHeight, mBottomSheet;
     private TextView mPanelPlaceTitle, mPanelAddress, mPanelTodayOpenHours;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
 
     @Override
     protected int getLayout() { return R.layout.fragment_google_map; }
@@ -101,9 +103,11 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         setHasOptionsMenu(true);
 
+        // Setting up presenter
         presenter = new MapPresenter(this, new MapModel());
         presenter.setUpObservable();
 
+        // Setting up map
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
@@ -117,29 +121,36 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
         mapFragment.getMapAsync(this);
 
-        // Set up BottomSheet
-        mPanelPeekHeight = rootView.findViewById(R.id.bottom_sheet_peek);
-        View mBottomSheet = rootView.findViewById(R.id.map_bottom_sheet);
+        // Init views
+        initViews();
+
+        // Setting up views
         mBottomSheet.setOnClickListener(this);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
         // Custom TabLayout with ViewPager set up
-        ViewPager viewPager = rootView.findViewById(R.id.view_pager);
         BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(getContext(), getFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
+        mViewPager.setAdapter(pagerAdapter);
 
-        TabLayout tabLayout = rootView.findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        mTabLayout.setupWithViewPager(mViewPager);
 
         // Setting up custom TabLayout view
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
+        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = mTabLayout.getTabAt(i);
             if (tab != null) {
                 tab.setCustomView(pagerAdapter.getTabView(i));
             }
         }
+    }
+
+    @Override
+    public void initViews() {
+        mPanelPeekHeight = rootView.findViewById(R.id.bottom_sheet_peek);
+        mBottomSheet = rootView.findViewById(R.id.map_bottom_sheet);
+        mViewPager = rootView.findViewById(R.id.view_pager);
+        mTabLayout = rootView.findViewById(R.id.tabs);
 
         // BottomSheet PeekHeight Panel
         mPanelPlaceTitle = rootView.findViewById(R.id.bottom_sheet_icon_title);

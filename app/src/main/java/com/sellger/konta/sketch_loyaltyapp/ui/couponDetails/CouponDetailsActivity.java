@@ -42,20 +42,21 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     CouponDetailsPresenter presenter;
 
-    private ProgressBar progressBar;
-    private View layoutContainer;
-    private ImageView couponImage;
-    private TextView couponMarker, couponDate, couponTitle, couponNewPrice, couponBasicPrice, couponDescription;
+    private ProgressBar mProgressBar;
+    private View mLayoutContainer;
+    private ImageView mCouponImage;
+    private TextView mCouponMarker, mCouponDate, mCouponTitle, mCouponNewPrice, mCouponBasicPrice, mCouponDescription;
     private Button showCouponCodeButton;
 
     private int couponId;
     private String couponCode;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
-    private BottomSheetBehavior bottomSheetBehavior;
-    private ViewFlipper viewFlipper;
-    private TextView bottomCouponCodeTextView;
-    private ImageView bottomBarcodeView, switchFlipperLeftArrow, switchFlipperRightArrow;
+    private View mBottomSheet;
+    private BottomSheetBehavior mBottomSheetBehavior;
+    private ViewFlipper mViewFlipper;
+    private TextView mBottomCouponCodeTextView;
+    private ImageView mBottomBarcodeView, mSwitchFlipperLeftArrow, mSwitchFlipperRightArrow;
     private Bitmap bitmap = null;
 
     @Override
@@ -73,36 +74,22 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             couponId = extras.getInt("EXTRA_ELEMENT_ID");
         }
 
-        layoutContainer = findViewById(R.id.layout_container);
-        layoutContainer.setVisibility(View.GONE);
-        progressBar = findViewById(R.id.progress_bar);
+        // Init views
+        initViews();
 
-        couponImage = findViewById(R.id.imageView);
-        couponMarker = findViewById(R.id.discount_marker_text_view);
-        couponDate = findViewById(R.id.valid_date_text_view);
-        couponTitle = findViewById(R.id.product_title_text_view);
-        couponNewPrice = findViewById(R.id.price_amount_text_view);
-        couponBasicPrice = findViewById(R.id.old_price_amount_text_view);
-        couponDescription = findViewById(R.id.coupon_description_text_view);
-
-        showCouponCodeButton = findViewById(R.id.show_coupon_button);
+        // Setting up views
+        mLayoutContainer.setVisibility(View.GONE);
         showCouponCodeButton.setOnClickListener(this);
 
-        // Bottom Sheet
-        View bottomSheet = findViewById(R.id.bottom_coupon_details_activity);
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        switchFlipperLeftArrow = findViewById(R.id.bottom_coupon_arrow_left);
-        switchFlipperRightArrow = findViewById(R.id.bottom_coupon_arrow_right);
-        viewFlipper = findViewById(R.id.bottom_coupon_view_flipper);
-        bottomCouponCodeTextView = findViewById(R.id.bottom_coupon_code_text);
-        bottomBarcodeView = findViewById(R.id.bottom_coupon_barcode_bitmap);
+        // Setting up BottomSheet views
+        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
-        switchFlipperLeftArrow.setOnClickListener(this);
-        switchFlipperLeftArrow.setColorFilter(new PorterDuffColorFilter(
+        mSwitchFlipperLeftArrow.setOnClickListener(this);
+        mSwitchFlipperLeftArrow.setColorFilter(new PorterDuffColorFilter(
                 ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
-        switchFlipperRightArrow.setOnClickListener(this);
-        switchFlipperRightArrow.setColorFilter(new PorterDuffColorFilter(
+        mSwitchFlipperRightArrow.setOnClickListener(this);
+        mSwitchFlipperRightArrow.setColorFilter(new PorterDuffColorFilter(
                 ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
 
         presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
@@ -110,9 +97,34 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     }
 
     @Override
+    public void initViews() {
+        mLayoutContainer = findViewById(R.id.layout_container);
+
+        mProgressBar = findViewById(R.id.progress_bar);
+
+        mCouponImage = findViewById(R.id.imageView);
+        mCouponMarker = findViewById(R.id.discount_marker_text_view);
+        mCouponDate = findViewById(R.id.valid_date_text_view);
+        mCouponTitle = findViewById(R.id.product_title_text_view);
+        mCouponNewPrice = findViewById(R.id.price_amount_text_view);
+        mCouponBasicPrice = findViewById(R.id.old_price_amount_text_view);
+        mCouponDescription = findViewById(R.id.coupon_description_text_view);
+
+        showCouponCodeButton = findViewById(R.id.show_coupon_button);
+
+        // Bottom Sheet
+        mBottomSheet = findViewById(R.id.bottom_coupon_details_activity);
+        mSwitchFlipperLeftArrow = findViewById(R.id.bottom_coupon_arrow_left);
+        mSwitchFlipperRightArrow = findViewById(R.id.bottom_coupon_arrow_right);
+        mViewFlipper = findViewById(R.id.bottom_coupon_view_flipper);
+        mBottomCouponCodeTextView = findViewById(R.id.bottom_coupon_code_text);
+        mBottomBarcodeView = findViewById(R.id.bottom_coupon_barcode_bitmap);
+    }
+
+    @Override
     public void hideProgressBar() {
-        layoutContainer.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.GONE);
+        mLayoutContainer.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -122,57 +134,57 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             Picasso.get()
                     .load(BASE_URL_IMAGES + coupon.getImage())
                     .error(R.drawable.no_image_available)
-                    .into(couponImage);
+                    .into(mCouponImage);
         } else {
             Picasso.get()
                     .load(R.drawable.no_image_available)
-                    .into(couponImage);
+                    .into(mCouponImage);
         }
 
         if (!TextUtils.isEmpty(coupon.getReductionAmount())) {
             if (coupon.getReductionType().equals("percent")) {
-                couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
+                mCouponMarker.setText("-".concat(coupon.getReductionAmount()).concat("%"));
             } else {
-                couponMarker.setText("-".concat(coupon.getReductionAmount()).concat("zł"));
+                mCouponMarker.setText("-".concat(coupon.getReductionAmount()).concat("zł"));
             }
         } else {
-            couponMarker.setText(DEFAULT_STRING);
+            mCouponMarker.setText(DEFAULT_STRING);
         }
 
         if (!TextUtils.isEmpty(coupon.getFreshTime())) {
-            couponDate.setText(coupon.getFreshTime());
+            mCouponDate.setText(coupon.getFreshTime());
         } else {
-            couponDate.setText(DEFAULT_STRING);
+            mCouponDate.setText(DEFAULT_STRING);
         }
 
         if (!TextUtils.isEmpty(coupon.getTitle())) {
-            couponTitle.setText(coupon.getTitle());
+            mCouponTitle.setText(coupon.getTitle());
         } else {
-            couponTitle.setText(DEFAULT_STRING);
+            mCouponTitle.setText(DEFAULT_STRING);
         }
 
         if (coupon.getPriceAfter() != null && !coupon.getPriceAfter().toString().trim().isEmpty()) {
-            couponNewPrice.setText(String.valueOf(decimalFormat.format(coupon.getPriceAfter())).concat(" zł"));
+            mCouponNewPrice.setText(String.valueOf(decimalFormat.format(coupon.getPriceAfter())).concat(" zł"));
         } else {
-            couponNewPrice.setText(DEFAULT_STRING);
+            mCouponNewPrice.setText(DEFAULT_STRING);
         }
 
         if (coupon.getPrice() != null && !coupon.getPrice().toString().trim().isEmpty()) {
-            couponBasicPrice.setText(String.valueOf(decimalFormat.format(coupon.getPrice())).concat(" zł"));
+            mCouponBasicPrice.setText(String.valueOf(decimalFormat.format(coupon.getPrice())).concat(" zł"));
         } else {
-            couponBasicPrice.setText(DEFAULT_STRING);
+            mCouponBasicPrice.setText(DEFAULT_STRING);
         }
 
         if (!TextUtils.isEmpty(coupon.getDescription())) {
-            couponDescription.setText(Html.fromHtml(coupon.getDescription()));
+            mCouponDescription.setText(Html.fromHtml(coupon.getDescription()));
         }
 
         if (!TextUtils.isEmpty(coupon.getCouponCode())) {
             couponCode = coupon.getCouponCode();
-            bottomCouponCodeTextView.setText(couponCode);
+            mBottomCouponCodeTextView.setText(couponCode);
             try {
                 bitmap = encodeAsBitmap(couponCode);
-                bottomBarcodeView.setImageBitmap(bitmap);
+                mBottomBarcodeView.setImageBitmap(bitmap);
             } catch (WriterException e) {
                 e.printStackTrace();
             }
@@ -197,14 +209,14 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
                 switchBottomSheetState();
                 break;
             case R.id.bottom_coupon_arrow_right:
-                viewFlipper.setInAnimation(this, R.anim.slide_in_right);
-                viewFlipper.setOutAnimation(this, R.anim.slide_out_right);
-                viewFlipper.showNext();
+                mViewFlipper.setInAnimation(this, R.anim.slide_in_right);
+                mViewFlipper.setOutAnimation(this, R.anim.slide_out_right);
+                mViewFlipper.showNext();
                 break;
             case R.id.bottom_coupon_arrow_left:
-                viewFlipper.setInAnimation(this, R.anim.slide_in_left);
-                viewFlipper.setOutAnimation(this, R.anim.slide_out_left);
-                viewFlipper.showPrevious();
+                mViewFlipper.setInAnimation(this, R.anim.slide_in_left);
+                mViewFlipper.setOutAnimation(this, R.anim.slide_out_left);
+                mViewFlipper.showPrevious();
                 break;
         }
     }
@@ -244,11 +256,11 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     }
 
     private void switchBottomSheetState() {
-        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             showCouponCodeButton.setText(R.string.hide_my_coupon_text);
         } else {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             showCouponCodeButton.setText(R.string.show_my_coupon_text);
         }
     }

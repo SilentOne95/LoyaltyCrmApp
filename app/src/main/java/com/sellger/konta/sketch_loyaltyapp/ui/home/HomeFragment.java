@@ -30,11 +30,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     HomePresenter presenter;
 
-    private ImageView specialOfferImage;
-    private TextView specialOfferText;
-    private RecyclerView recyclerView;
-    private View emptyStateView;
-    private ProgressBar progressBar;
+    private ImageView mSpecialOfferImage;
+    private TextView mSpecialOfferText;
+    private RecyclerView mRecyclerView;
+    private View mEmptyStateView;
+    private ProgressBar mProgressBar;
 
     @Override
     protected int getLayout() { return R.layout.fragment_home; }
@@ -48,20 +48,29 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         // Show action bar if view is shown after log in procedure
         ((BaseActivity) getActivity()).getSupportActionBar().show();
 
-        specialOfferImage = rootView.findViewById(R.id.special_offer_image);
-        specialOfferImage.setVisibility(View.GONE);
-        specialOfferText = rootView.findViewById(R.id.info_text_view);
-        specialOfferText.setVisibility(View.GONE);
-
-        progressBar = rootView.findViewById(R.id.progress_bar_home);
-        recyclerView = rootView.findViewById(R.id.recycler_view);
-        emptyStateView = rootView.findViewById(R.id.empty_state_home_container);
-        emptyStateView.setVisibility(View.GONE);
-
         setHasOptionsMenu(true);
 
+        // Init views
+        initViews();
+
+        // Setting up views
+        mSpecialOfferImage.setVisibility(View.GONE);
+        mSpecialOfferText.setVisibility(View.GONE);
+        mEmptyStateView.setVisibility(View.GONE);
+
+        // Setting up presenter
         presenter = new HomePresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
+    }
+
+    @Override
+    public void initViews() {
+        mSpecialOfferImage = rootView.findViewById(R.id.special_offer_image);
+        mSpecialOfferText = rootView.findViewById(R.id.info_text_view);
+
+        mProgressBar = rootView.findViewById(R.id.progress_bar_home);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        mEmptyStateView = rootView.findViewById(R.id.empty_state_home_container);
     }
 
     @Override
@@ -90,10 +99,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         } else {
             setUpEmptyStateView(false);
 
-            specialOfferText.setVisibility(View.VISIBLE);
-            specialOfferImage.setVisibility(View.VISIBLE);
+            mSpecialOfferText.setVisibility(View.VISIBLE);
+            mSpecialOfferImage.setVisibility(View.VISIBLE);
 
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
 
             CustomItemDecoration itemDecoration;
             if (numOfColumns == 1) {
@@ -101,24 +110,24 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             } else {
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
             }
-            recyclerView.addItemDecoration(itemDecoration);
-            recyclerView.setAdapter(new HomeAdapter(menuComponentList, recyclerItemClickListener, numOfColumns));
+            mRecyclerView.addItemDecoration(itemDecoration);
+            mRecyclerView.setAdapter(new HomeAdapter(menuComponentList, recyclerItemClickListener, numOfColumns));
         }
     }
 
     @Override
     public void setUpEmptyStateView(boolean isNeeded) {
         if (isNeeded) {
-            recyclerView.setVisibility(View.GONE);
-            emptyStateView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyStateView.setVisibility(View.VISIBLE);
         } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyStateView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmptyStateView.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
     }
 }

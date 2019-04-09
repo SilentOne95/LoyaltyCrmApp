@@ -23,7 +23,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
 
     ContactInfoPresenter presenter;
 
-    private TextView phoneTextView, emailTextView, websiteTextView;
+    private TextView mPhoneTextView, mEmailTextView, mWebsiteTextView;
 
     public ContactInfoFragment() {
         // Required empty public constructor
@@ -38,29 +38,36 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        phoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
-        emailTextView = rootView.findViewById(R.id.contact_info_email_view);
-        websiteTextView = rootView.findViewById(R.id.contact_info_website_view);
+        // Init views
+        initViews();
 
+        // Setting up presenter
         presenter = new ContactInfoPresenter(this, new MapModel());
         presenter.setUpObservable();
     }
 
     @Override
+    public void initViews() {
+        mPhoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
+        mEmailTextView = rootView.findViewById(R.id.contact_info_email_view);
+        mWebsiteTextView = rootView.findViewById(R.id.contact_info_website_view);
+    }
+
+    @Override
     public void setUpViewsWithData(String phoneNumber, String emailAddress, String websiteAddress) {
-        phoneTextView.setText(phoneNumber);
+        mPhoneTextView.setText(phoneNumber);
         if (!phoneNumber.equals(DEFAULT_STRING)) {
-            phoneTextView.setOnClickListener(this);
+            mPhoneTextView.setOnClickListener(this);
         }
 
-        emailTextView.setText(emailAddress);
+        mEmailTextView.setText(emailAddress);
         if (!emailAddress.equals(DEFAULT_STRING)) {
-            emailTextView.setOnClickListener(this);
+            mEmailTextView.setOnClickListener(this);
         }
 
-        websiteTextView.setText(websiteAddress);
+        mWebsiteTextView.setText(websiteAddress);
         if (!websiteAddress.equals(DEFAULT_STRING)) {
-            websiteTextView.setOnClickListener(this);
+            mWebsiteTextView.setOnClickListener(this);
         }
     }
 
@@ -70,7 +77,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
 
         switch (view.getId()) {
             case R.id.contact_info_phone_view:
-                stringWithData = phoneTextView.getText().toString();
+                stringWithData = mPhoneTextView.getText().toString();
                 Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", stringWithData, null));
 
                 try {
@@ -80,7 +87,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
                 }
                 break;
             case R.id.contact_info_email_view:
-                stringWithData = emailTextView.getText().toString();
+                stringWithData = mEmailTextView.getText().toString();
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setData(Uri.parse("mailto:" + stringWithData));
 
@@ -93,12 +100,12 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
 
             case R.id.contact_info_website_view:
 
-                if (websiteTextView.getText().toString().contains("http://")) {
-                    stringWithData = websiteTextView.getText().toString();
-                } else if (websiteTextView.getText().toString().contains("https://")) {
-                    stringWithData = websiteTextView.getText().toString();
+                if (mWebsiteTextView.getText().toString().contains("http://")) {
+                    stringWithData = mWebsiteTextView.getText().toString();
+                } else if (mWebsiteTextView.getText().toString().contains("https://")) {
+                    stringWithData = mWebsiteTextView.getText().toString();
                 } else {
-                    stringWithData = "http://" + websiteTextView.getText().toString();
+                    stringWithData = "http://" + mWebsiteTextView.getText().toString();
                 }
 
                 Intent webIntent = new Intent(Intent.ACTION_VIEW);

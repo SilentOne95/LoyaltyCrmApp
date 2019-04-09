@@ -8,6 +8,8 @@ public interface TermsContract {
 
     interface View {
 
+        void initViews();
+
         void hideProgressBar();
         void setUpViewWithData(Page page);
     }

@@ -4,6 +4,8 @@ public interface SettingsContract {
 
     interface View {
 
+        void initViews();
+
         void showDialogDeleteAccount();
         void deleteUserAccount();
     }

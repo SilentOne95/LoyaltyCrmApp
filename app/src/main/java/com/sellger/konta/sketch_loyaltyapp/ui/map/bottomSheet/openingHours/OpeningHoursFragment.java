@@ -17,6 +17,9 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
 
     OpeningHoursPresenter presenter;
 
+    private TextView mMondayHours, mTuesdayHours, mWednesdayHours, mThursdayHours, mFridayHours,
+            mSaturdayHours, mSundayHours;
+
     public OpeningHoursFragment() {
         // Required empty public constructor
     }
@@ -28,32 +31,33 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Init views
+        initViews();
+
+        // Setting up presenter
         presenter = new OpeningHoursPresenter(this, new MapModel());
         presenter.setUpObservable();
     }
 
     @Override
+    public void initViews() {
+        mMondayHours = rootView.findViewById(R.id.monday_hours_text);
+        mTuesdayHours = rootView.findViewById(R.id.tuesday_hours_text);
+        mWednesdayHours = rootView.findViewById(R.id.wednesday_hours_text);
+        mThursdayHours = rootView.findViewById(R.id.thursday_hours_text);
+        mFridayHours = rootView.findViewById(R.id.friday_hours_text);
+        mSaturdayHours = rootView.findViewById(R.id.saturday_hours_text);
+        mSundayHours = rootView.findViewById(R.id.sunday_hours_text);
+    }
+
+    @Override
     public void setUpViewsWithData(String[] singleDayOpenHours) {
-
-        TextView mondayHours = rootView.findViewById(R.id.monday_hours_text);
-        mondayHours.setText(singleDayOpenHours[0]);
-
-        TextView tuesdayHours = rootView.findViewById(R.id.tuesday_hours_text);
-        tuesdayHours.setText(singleDayOpenHours[1]);
-
-        TextView wednesdayHours = rootView.findViewById(R.id.wednesday_hours_text);
-        wednesdayHours.setText(singleDayOpenHours[2]);
-
-        TextView thursdayHours = rootView.findViewById(R.id.thursday_hours_text);
-        thursdayHours.setText(singleDayOpenHours[3]);
-
-        TextView fridayHours = rootView.findViewById(R.id.friday_hours_text);
-        fridayHours.setText(singleDayOpenHours[4]);
-
-        TextView saturdayHours = rootView.findViewById(R.id.saturday_hours_text);
-        saturdayHours.setText(singleDayOpenHours[5]);
-
-        TextView sundayHours = rootView.findViewById(R.id.sunday_hours_text);
-        sundayHours.setText(singleDayOpenHours[6]);
+        mMondayHours.setText(singleDayOpenHours[0]);
+        mTuesdayHours.setText(singleDayOpenHours[1]);
+        mWednesdayHours.setText(singleDayOpenHours[2]);
+        mThursdayHours.setText(singleDayOpenHours[3]);
+        mFridayHours.setText(singleDayOpenHours[4]);
+        mSaturdayHours.setText(singleDayOpenHours[5]);
+        mSundayHours.setText(singleDayOpenHours[6]);
     }
 }

@@ -16,6 +16,8 @@ public interface MainActivityContract {
 
     interface View {
 
+        void initViews();
+
         void setFragment(BaseFragment fragment, String data);
         void setActivity(Class<? extends Activity> activity);
         void setLogInFragment(BaseFragment fragment);

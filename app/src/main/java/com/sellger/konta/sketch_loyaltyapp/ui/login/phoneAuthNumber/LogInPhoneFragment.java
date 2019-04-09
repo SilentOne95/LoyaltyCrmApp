@@ -46,15 +46,20 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
         // Hide action bar
         ((BaseActivity) getActivity()).getSupportActionBar().hide();
 
-        // Views
+        // Init views
+        initViews();
+
+        // Listeners
+        mRegisterButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void initViews() {
         mTextInputLayoutPrefix = rootView.findViewById(R.id.register_prefix_input_box);
         mTextInputPrefix = rootView.findViewById(R.id.register_prefix_input);
         mTextInputLayoutPhoneNumber = rootView.findViewById(R.id.register_number_input_box);
         mTextInputPhoneNumber = rootView.findViewById(R.id.register_number_input);
         mRegisterButton = rootView.findViewById(R.id.register_number_button);
-
-        // Listeners
-        mRegisterButton.setOnClickListener(this);
     }
 
     @Override

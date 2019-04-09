@@ -65,11 +65,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         // Hide action bar
         ((BaseActivity) getActivity()).getSupportActionBar().hide();
 
-        // Views
-        mTextProvidedPhoneNumber = rootView.findViewById(R.id.verify_your_number_text);
-        mTextInputCode = rootView.findViewById(R.id.verify_code_input_text);
-        mTextWaitingForCode = rootView.findViewById(R.id.verify_waiting_for_code_text);
-        mProgressBar = rootView.findViewById(R.id.verify_progress_bar);
+        // Init views
+        initViews();
 
         // Log In with Phone Number
         mCallbacksPhoneNumber = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -104,6 +101,14 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
             mProvidedPhoneNumber = getResources().getText(R.string.verify_text) + " " + mProvidedPhoneNumber;
             mTextProvidedPhoneNumber.setText(mProvidedPhoneNumber);
         }
+    }
+
+    @Override
+    public void initViews() {
+        mTextProvidedPhoneNumber = rootView.findViewById(R.id.verify_your_number_text);
+        mTextInputCode = rootView.findViewById(R.id.verify_code_input_text);
+        mTextWaitingForCode = rootView.findViewById(R.id.verify_waiting_for_code_text);
+        mProgressBar = rootView.findViewById(R.id.verify_progress_bar);
     }
 
     @Override

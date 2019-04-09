@@ -8,6 +8,8 @@ public interface HomeContract {
 
     interface View {
 
+        void initViews();
+
         void setUpAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns);
         void setUpEmptyStateView(boolean isNeeded);
         void hideProgressBar();

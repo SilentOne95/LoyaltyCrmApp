@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     MainActivityPresenter presenter;
 
     private FirebaseAuth mFirebaseAuth;
+    private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     GoogleMapFragment mGoogleMapFragment;
@@ -75,6 +76,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Firebase
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseAuth.useAppLanguage();
 
@@ -87,10 +89,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         ((MyApplication) getApplication()).getApplicationComponent().inject(this);
         PACKAGE_NAME = getApplication().getPackageName();
 
-        // Init toolbar and action bar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setOnMenuItemClickListener(this);
+        // Init views
+        initViews();
+
+        // Set up Toolbar, ActionBar, DrawerLayout, NavigationView
+        setSupportActionBar(mToolbar);
+        mToolbar.setOnMenuItemClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -98,21 +102,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         }
 
-        // Init drawer layout
-        mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.addDrawerListener(this);
 
-        // Init navigation view
-        mNavigationView = findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
         hideNavDrawerScrollbar();
 
-        // Init navigation view header
-        View navigationViewHeader = mNavigationView.getHeaderView(0);
-        mNavViewHeaderShadeContainer = navigationViewHeader.findViewById(R.id.navigation_view_header_shade_container);
-        mNavViewHeaderButton = navigationViewHeader.findViewById(R.id.navigation_header_button);
         mNavViewHeaderButton.setOnClickListener(this);
 
+        // Set up presenter
         presenter = new MainActivityPresenter(this, new MainActivityModel());
         presenter.requestDataFromServer();
         presenter.setUpObservableHomeAdapter();
@@ -133,6 +130,17 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Using Retrofit to set up NavDrawer
 //        showInternetConnectionResult();
+    }
+
+    @Override
+    public void initViews() {
+        mToolbar = findViewById(R.id.toolbar);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mNavigationView = findViewById(R.id.nav_view);
+
+        View navigationViewHeader = mNavigationView.getHeaderView(0);
+        mNavViewHeaderShadeContainer = navigationViewHeader.findViewById(R.id.navigation_view_header_shade_container);
+        mNavViewHeaderButton = navigationViewHeader.findViewById(R.id.navigation_header_button);
     }
 
     protected boolean checkInternetConnection() {

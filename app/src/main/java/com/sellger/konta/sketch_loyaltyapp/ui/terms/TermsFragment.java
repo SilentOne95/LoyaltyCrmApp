@@ -35,14 +35,22 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
 
         setHasOptionsMenu(true);
 
-        mLayoutContainer = rootView.findViewById(R.id.layout_container);
+        // Init views
+        initViews();
+
+        // Setting up views
         mLayoutContainer.setVisibility(View.GONE);
-        mProgressBar = rootView.findViewById(R.id.progress_bar);
-        mTermsTextView = rootView.findViewById(R.id.terms_webview);
 
-
+        // Setting up presenter
         presenter = new TermsPresenter(this, new TermsModel());
         presenter.requestDataFromServer(1);
+    }
+
+    @Override
+    public void initViews() {
+        mLayoutContainer = rootView.findViewById(R.id.layout_container);
+        mProgressBar = rootView.findViewById(R.id.progress_bar);
+        mTermsTextView = rootView.findViewById(R.id.terms_webview);
     }
 
     @Override

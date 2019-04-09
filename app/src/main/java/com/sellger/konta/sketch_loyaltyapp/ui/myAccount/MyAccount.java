@@ -47,11 +47,12 @@ public class MyAccount extends BaseFragment {
 
         setHasOptionsMenu(true);
 
-        textView = rootView.findViewById(R.id.my_account_code_text);
+        // Init views
+        initViews();
+
+        // Setting up views
         textView.setVisibility(View.GONE);
         textView.setText(BARCODE_DATA);
-
-        outputImage = rootView.findViewById(R.id.my_account_barcode_image);
 
         try {
             bitmap = encodeAsBitmap(BARCODE_DATA);
@@ -60,6 +61,11 @@ public class MyAccount extends BaseFragment {
         } catch (WriterException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initViews() {
+        textView = rootView.findViewById(R.id.my_account_code_text);
+        outputImage = rootView.findViewById(R.id.my_account_barcode_image);
     }
 
     @Override

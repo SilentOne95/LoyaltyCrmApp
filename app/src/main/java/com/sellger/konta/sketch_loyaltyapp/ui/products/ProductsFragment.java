@@ -30,10 +30,10 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     ProductsPresenter presenter;
 
-    private RecyclerView recyclerView;
-    private View emptyStateView;
-    private ProgressBar progressBar;
-    private ProductAdapter adapter;
+    private RecyclerView mRecyclerView;
+    private View mEmptyStateView;
+    private ProgressBar mProgressBar;
+    private ProductAdapter mAdapter;
 
     @Override
     protected int getLayout() { return R.layout.fragment_products; }
@@ -46,13 +46,22 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
         setHasOptionsMenu(true);
 
-        progressBar = rootView.findViewById(R.id.progress_bar);
-        recyclerView = rootView.findViewById(R.id.recycler_view);
-        emptyStateView = rootView.findViewById(R.id.empty_state_products_container);
-        emptyStateView.setVisibility(View.GONE);
+        // Init views
+        initViews();
 
+        // Setting up views
+        mEmptyStateView.setVisibility(View.GONE);
+
+        // Setting up presenter
         presenter = new ProductsPresenter(this, new ProductsModel());
         presenter.requestDataFromServer();
+    }
+
+    @Override
+    public void initViews() {
+        mProgressBar = rootView.findViewById(R.id.progress_bar);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        mEmptyStateView = rootView.findViewById(R.id.empty_state_products_container);
     }
 
     private RecyclerItemClickListener.ProductRetrofitClickListener recyclerItemClickListener = productId -> {
@@ -81,7 +90,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
             setUpEmptyStateView(true);
         } else {
             setUpEmptyStateView(false);
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
 
             CustomItemDecoration itemDecoration;
             if (numOfColumns == 1) {
@@ -89,26 +98,26 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
             } else {
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
             }
-            recyclerView.addItemDecoration(itemDecoration);
-            adapter = new ProductAdapter(productList, recyclerItemClickListener, numOfColumns);
-            recyclerView.setAdapter(adapter);
+            mRecyclerView.addItemDecoration(itemDecoration);
+            mAdapter = new ProductAdapter(productList, recyclerItemClickListener, numOfColumns);
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 
     @Override
     public void setUpEmptyStateView(boolean isNeeded) {
         if (isNeeded) {
-            recyclerView.setVisibility(View.GONE);
-            emptyStateView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyStateView.setVisibility(View.VISIBLE);
         } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyStateView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmptyStateView.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -118,7 +127,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
+        mAdapter.getFilter().filter(newText);
         return false;
     }
 }

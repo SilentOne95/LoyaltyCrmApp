@@ -8,6 +8,8 @@ public interface CouponDetailsContract {
 
     interface View {
 
+        void initViews();
+
         void hideProgressBar();
         void setUpViewWithData(Coupon coupon);
     }

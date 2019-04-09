@@ -25,10 +25,10 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
     ProductDetailsPresenter presenter;
 
-    private ImageView productImage;
-    private TextView productTitle, productPrice, productDescription;
-    private ProgressBar progressBar;
-    private View layoutContainer;
+    private ImageView mProductImage;
+    private TextView mProductTitle, mProductPrice, mProductDescription;
+    private ProgressBar mProgressBar;
+    private View mLayoutContainer;
 
     private int productId;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -48,23 +48,32 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             productId = extras.getInt("EXTRA_ELEMENT_ID");
         }
 
-        layoutContainer = findViewById(R.id.layout_container);
-        layoutContainer.setVisibility(View.GONE);
-        progressBar = findViewById(R.id.progress_bar);
+        // Init views
+        initViews();
 
-        productImage = findViewById(R.id.imageView);
-        productTitle = findViewById(R.id.product_title_text_view);
-        productPrice = findViewById(R.id.price_amount_text_view);
-        productDescription = findViewById(R.id.product_description_text_view);
+        // Setting up views
+        mLayoutContainer.setVisibility(View.GONE);
 
+        // Setting up presenter
         presenter = new ProductDetailsPresenter(this, new ProductDetailsModel());
         presenter.requestDataFromServer(productId);
     }
 
     @Override
+    public void initViews() {
+        mLayoutContainer = findViewById(R.id.layout_container);
+
+        mProgressBar = findViewById(R.id.progress_bar);
+        mProductImage = findViewById(R.id.imageView);
+        mProductTitle = findViewById(R.id.product_title_text_view);
+        mProductPrice = findViewById(R.id.price_amount_text_view);
+        mProductDescription = findViewById(R.id.product_description_text_view);
+    }
+
+    @Override
     public void hideProgressBar() {
-        layoutContainer.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.GONE);
+        mLayoutContainer.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -74,29 +83,29 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             Picasso.get()
                     .load(BASE_URL_IMAGES + product.getImage())
                     .error(R.drawable.no_image_available)
-                    .into(productImage);
+                    .into(mProductImage);
         } else {
             Picasso.get()
                     .load(R.drawable.no_image_available)
-                    .into(productImage);
+                    .into(mProductImage);
         }
 
         if (!TextUtils.isEmpty(product.getTitle())) {
-            productTitle.setText(product.getTitle());
+            mProductTitle.setText(product.getTitle());
         } else {
-            productTitle.setText(DEFAULT_STRING);
+            mProductTitle.setText(DEFAULT_STRING);
         }
 
         if (product.getPrice() != null && !product.getPrice().toString().trim().isEmpty()) {
-            productPrice.setText(String.valueOf(decimalFormat.format(product.getPrice())).concat(" zł"));
+            mProductPrice.setText(String.valueOf(decimalFormat.format(product.getPrice())).concat(" zł"));
         } else {
-            productPrice.setText(DEFAULT_STRING);
+            mProductPrice.setText(DEFAULT_STRING);
         }
 
         if (!TextUtils.isEmpty(product.getDescription())) {
-            productDescription.setText(Html.fromHtml(product.getDescription()));
+            mProductDescription.setText(Html.fromHtml(product.getDescription()));
         } else {
-            productDescription.setText(DEFAULT_STRING);
+            mProductDescription.setText(DEFAULT_STRING);
         }
     }
 

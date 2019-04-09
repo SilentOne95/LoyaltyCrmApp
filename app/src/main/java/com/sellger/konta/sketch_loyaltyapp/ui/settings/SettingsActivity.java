@@ -19,8 +19,8 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
 
-    private TextView termsText, privacyText, licensesText;
-    private Button deleteButton;
+    private TextView mTermsText, mPrivacyText, mLicensesText;
+    private Button mDeleteButton;
 
     @Override
     protected int getLayout() {
@@ -33,15 +33,22 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
         setTitle("Ustawienia");
 
-        termsText = findViewById(R.id.settings_terms_one);
-        privacyText = findViewById(R.id.settings_terms_two);
-        licensesText = findViewById(R.id.settings_terms_three);
-        deleteButton = findViewById(R.id.settings_delete_button);
+        // Init views
+        initViews();
 
-        termsText.setOnClickListener(this);
-        privacyText.setOnClickListener(this);
-        licensesText.setOnClickListener(this);
-        deleteButton.setOnClickListener(this);
+        // Setting up views
+        mTermsText.setOnClickListener(this);
+        mPrivacyText.setOnClickListener(this);
+        mLicensesText.setOnClickListener(this);
+        mDeleteButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void initViews() {
+        mTermsText = findViewById(R.id.settings_terms_one);
+        mPrivacyText = findViewById(R.id.settings_terms_two);
+        mLicensesText = findViewById(R.id.settings_terms_three);
+        mDeleteButton = findViewById(R.id.settings_delete_button);
     }
 
     @Override

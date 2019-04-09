@@ -63,13 +63,21 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
         setHasOptionsMenu(true);
 
-        progressBar = rootView.findViewById(R.id.progress_bar);
-        recyclerView = rootView.findViewById(R.id.recycler_view);
-        emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
+        // Init views
+        initViews();
+
+        // Setting up views
         emptyStateView.setVisibility(View.GONE);
 
         presenter = new CouponsPresenter(this, new CouponsModel());
         presenter.requestDataFromServer();
+    }
+
+    @Override
+    public void initViews() {
+        progressBar = rootView.findViewById(R.id.progress_bar);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
+        emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
     }
 
     @Override
