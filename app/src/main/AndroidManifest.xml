@@ -41,6 +41,11 @@
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="true" />
+        <service
+            android:name="com.sellger.konta.sketch_loyaltyapp.service.LocationService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="true" />
 
         <activity
             android:name="com.sellger.konta.sketch_loyaltyapp.ui.launch.LaunchActivity"

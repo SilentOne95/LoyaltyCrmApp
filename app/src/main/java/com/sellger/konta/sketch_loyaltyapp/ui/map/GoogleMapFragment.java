@@ -6,11 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -30,6 +28,7 @@ import android.widget.Toast;
 import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
+import com.sellger.konta.sketch_loyaltyapp.service.LocationService;
 import com.sellger.konta.sketch_loyaltyapp.service.TrackerService;
 import com.sellger.konta.sketch_loyaltyapp.utils.CustomClusterRenderer;
 import com.sellger.konta.sketch_loyaltyapp.R;
@@ -40,10 +39,7 @@ import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
@@ -77,8 +73,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     MapPresenter presenter;
 
     GoogleMap mGoogleMap;
-    Location mLastLocation;
-    FusedLocationProviderClient mFusedLocationClient;
     protected LocationRequest mLocationRequest;
     protected GoogleApiClient mGoogleApiClient;
 
@@ -108,8 +102,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         presenter.setUpObservable();
 
         // Setting up map
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
-
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
 
@@ -188,7 +180,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mBottomSheetBehavior.setPeekHeight(mPanelPeekHeight.getHeight());
 
         setUpGoogleApiClient();
-
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(30 * 1000);
         mLocationRequest.setFastestInterval(10 * 1000);
@@ -200,8 +191,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 // Location Permission already granted
-                mFusedLocationClient.requestLocationUpdates(mLocationRequest,
-                        mLocationCallback, Looper.myLooper());
+                startLocationService();
                 mGoogleMap.setMyLocationEnabled(true);
             } else {
                 // Request Location Permission
@@ -209,7 +199,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             }
         }
         else {
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+            startLocationService();
             mGoogleMap.setMyLocationEnabled(true);
         }
 
@@ -333,41 +323,13 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
-    }
-
-    LocationCallback mLocationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            List<Location> locationList = locationResult.getLocations();
-            if (locationList.size() > 0) {
-                // The last location in the list is the newest
-                mLastLocation =  locationList.get(locationList.size() - 1);
-            }
-            super.onLocationResult(locationResult);
-        }
-    };
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        // Stop location updates when Activity is no longer active
-        if (mFusedLocationClient != null) {
-            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
-        }
-    }
-
     private void checkLocationPermission() {
         if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
         } else {
+            startLocationService();
             startTrackService();
         }
 
@@ -376,6 +338,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private void startTrackService() {
         if (getActivity() != null) {
             getActivity().startService(new Intent(getContext(), TrackerService.class));
+        }
+    }
+
+    private void startLocationService() {
+        if (getActivity() != null) {
+            getActivity().startService(new Intent(getContext(), LocationService.class));
         }
     }
 
@@ -393,10 +361,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
-                        mFusedLocationClient.requestLocationUpdates(mLocationRequest,
-                                mLocationCallback, Looper.myLooper());
                         mGoogleMap.setMyLocationEnabled(true);
 
+                        startLocationService();
                         startTrackService();
                     }
                 } else {
