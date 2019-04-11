@@ -33,8 +33,7 @@ import jp.wasabeef.picasso.transformations.GrayscaleTransformation;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS_ONE_COLUMN;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
@@ -113,7 +112,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
                             .noPlaceholder()
                             .transform(new BlurTransformation(couponImage.getContext()))
                             .transform(new GrayscaleTransformation())
-                            .transform(new RoundedCornersTransformation(BITMAP_CORNER_RADIUS_ONE_COLUMN, 0))
+                            .transform(new RoundedCornersTransformation(BITMAP_CORNER_RADIUS, 0))
                             .error(R.drawable.no_image_available)
                             .resize(BITMAP_WIDTH_ONE_COLUMN, BITMAP_HEIGHT_ONE_COLUMN)
                             .into(couponImage, new Callback() {
@@ -134,7 +133,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
                             .noPlaceholder()
                             .transform(new BlurTransformation(couponImage.getContext()))
                             .transform(new GrayscaleTransformation())
-                            .transform(new RoundedCornersTransformation(BITMAP_CORNER_RADIUS_TWO_COLUMNS, 0))
+                            .transform(new RoundedCornersTransformation(BITMAP_CORNER_RADIUS, 0))
                             .error(R.drawable.no_image_available)
                             .resize(BITMAP_WIDTH_TWO_COLUMNS, BITMAP_HEIGHT_TWO_COLUMNS)
                             .into(couponImage, new Callback() {

@@ -25,6 +25,10 @@
     <dimen name="rounded_corner_radius_barcode_scanner">2dp</dimen>
 
     <!-- Grid list item -->
+    <dimen name="grid_item_image_height_one_row">220dp</dimen>
+    <dimen name="grid_item_image_height_two_rows">120dp</dimen>
+    <dimen name="grid_item_home_image_height">50dp</dimen>
+
     <dimen name="discount_marker_width_one_row">70dp</dimen>
     <dimen name="discount_marker_height_one_row">50dp</dimen>
 

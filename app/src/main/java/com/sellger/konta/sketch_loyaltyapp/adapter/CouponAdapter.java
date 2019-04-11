@@ -24,8 +24,7 @@ import java.util.List;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS_ONE_COLUMN;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
@@ -109,21 +108,18 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final Coupon currentItem = listOfItems.get(position);
-        int cornerRadius, imageWidth, imageHeight;
+        int cornerRadius = BITMAP_CORNER_RADIUS, imageWidth, imageHeight;
 
         switch (numOfColumns) {
             case 1:
-                cornerRadius = BITMAP_CORNER_RADIUS_ONE_COLUMN;
                 imageWidth = BITMAP_WIDTH_ONE_COLUMN;
                 imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
                 break;
             case 2:
-                cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
                 imageWidth = BITMAP_WIDTH_TWO_COLUMNS;
                 imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
                 break;
             default:
-                cornerRadius = BITMAP_CORNER_RADIUS_ONE_COLUMN;
                 imageWidth = BITMAP_WIDTH_ONE_COLUMN;
                 imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
                 break;
@@ -133,7 +129,6 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             // TODO: Upload images to server and change "else" image to no_image_available
             Picasso.get()
                     .load(BASE_URL_IMAGES + currentItem.getImage())
-                    .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .error(R.drawable.no_image_available)
                     .resize(imageWidth, imageHeight)
@@ -141,7 +136,6 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         } else {
             Picasso.get()
                     .load(R.drawable.no_image_available)
-                    .placeholder(R.drawable.placeholder)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .resize(imageWidth, imageHeight)
                     .into(holder.imageView);

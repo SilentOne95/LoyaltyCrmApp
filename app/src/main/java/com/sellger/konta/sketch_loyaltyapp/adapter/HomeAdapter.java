@@ -20,8 +20,7 @@ import java.util.ArrayList;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS_ONE_COLUMN;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS_TWO_COLUMNS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
@@ -83,21 +82,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final MenuComponent currentItem = listOfItems.get(position);
-        int cornerRadius, imageWidth, imageHeight;
+        int imageWidth, imageHeight;
 
         switch (numOfColumns) {
             case 1:
-                cornerRadius = BITMAP_CORNER_RADIUS_ONE_COLUMN;
                 imageWidth = BITMAP_WIDTH_ONE_COLUMN;
                 imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
                 break;
             case 2:
-                cornerRadius = BITMAP_CORNER_RADIUS_TWO_COLUMNS;
                 imageWidth = BITMAP_WIDTH_TWO_COLUMNS;
                 imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
                 break;
             default:
-                cornerRadius = BITMAP_CORNER_RADIUS_ONE_COLUMN;
                 imageWidth = BITMAP_WIDTH_ONE_COLUMN;
                 imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
                 break;
@@ -111,7 +107,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
             Picasso.get()
                     .load(imageId)
-                    .placeholder(R.drawable.placeholder)
                     .into(holder.imageView, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -127,8 +122,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         } else {
             Picasso.get()
                     .load(R.drawable.no_image_available)
-                    .placeholder(R.drawable.placeholder)
-                    .transform(new RoundedCornersTransformation(cornerRadius, 0))
+                    .transform(new RoundedCornersTransformation(BITMAP_CORNER_RADIUS, 0))
                     .resize(imageWidth, imageHeight)
                     .into(holder.imageView);
         }

@@ -21,8 +21,7 @@ public final class Constants {
     // Adapter
     public static final int DEFAULT_NUM_OF_COLUMNS = 1;
 
-    public static final int BITMAP_CORNER_RADIUS_ONE_COLUMN = 8;
-    public static final int BITMAP_CORNER_RADIUS_TWO_COLUMNS = 15;
+    public static final int BITMAP_CORNER_RADIUS = 15;
 
     public static final int BITMAP_WIDTH_ONE_COLUMN = 1200;
     public static final int BITMAP_HEIGHT_ONE_COLUMN = 720;

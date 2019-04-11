@@ -12,14 +12,15 @@
     <ImageView
         android:id="@+id/grid_item_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/grid_item_image_height_two_rows"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/grid_list_item_content_desc" />
+        android:contentDescription="@string/grid_list_item_content_desc"
+        android:scaleType="fitStart" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/small_value"
+        android:layout_margin="@dimen/very_small_value"
         android:layout_weight="1">
 
         <TextView
