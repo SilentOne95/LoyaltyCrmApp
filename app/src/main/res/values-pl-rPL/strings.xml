@@ -86,12 +86,12 @@
     <string name="barcode_scanner_switch_flash_text">Latarka</string>
     <string name="barcode_scanner_switch_focus_text">Auto focus</string>
     <string name="barcode_scanner_code_text">TWÓJ KOD ZOSTANIE\n WYŚWIETLONY TUTAJ</string>
-    <string name="barcode_scanner_instruction_body">1.Wybierz dodatkowe opcje dostępne podczas skanowania.\n
-        2.Kliknij przycisk \"skanuj\".\n
-        3.Zatwierdź zgodę dostępu do kamery.\n
-        4.Najedź kamerą na kod kreskowy.\n
-        5.Kiedy pojawi się ramka wokół kodu,\n kliknij wewnątrz niej.\n
-        6.Kod zczytany z kodu kreskowego zostanie wyświetlony\n we wskazanym miejscu.</string>
+    <string name="barcode_scanner_instruction_body">1. Wybierz dodatkowe opcje dostępne podczas skanowania.\n
+        2. Kliknij przycisk \"skanuj\".\n
+        3. Zatwierdź zgodę dostępu do kamery.\n
+        4. Najedź kamerą na kod kreskowy.\n
+        5. Kiedy pojawi się ramka wokół kodu,\n kliknij wewnątrz niej.\n
+        6. Kod zczytany z kodu kreskowego zostanie wyświetlony\n we wskazanym miejscu.</string>
 
     <!-- Barcode generator -->
     <string name="barcode_generator_title">Twoja karta klienta</string>
