@@ -63,6 +63,7 @@
                 android:layout_marginStart="@dimen/small_value"
                 android:layout_marginTop="@dimen/register_phone_margin_top"
                 android:layout_marginEnd="@dimen/small_value"
+                app:hintTextAppearance="@style/login_edittext_label_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/verify_code_text_container">
@@ -71,7 +72,8 @@
                     android:id="@+id/verify_code_input_text"
                     style="@style/text_input_edit_text_style"
                     android:layout_width="@dimen/verify_code_input_box_width"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@drawable/edittext_cursor_style" />
 
             </android.support.design.widget.TextInputLayout>
 

@@ -60,6 +60,10 @@
         <item name="android:textSize">@dimen/text_size_h6</item>
     </style>
 
+    <style name="login_edittext_label_color" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
     <!-- Switch -->
     <style name="switch_style" parent="Theme.AppCompat.Light">
         <item name="android:scaleX">1.1</item>
