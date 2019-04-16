@@ -54,7 +54,7 @@
         <TextView
             android:id="@+id/grid_item_content_description"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/grid_item_button_details_width_one_row"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_value"
             android:maxLines="4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
             android:layout_width="@dimen/grid_item_button_details_width_one_row"
             android:layout_height="@dimen/grid_item_height_one_row"
             android:layout_marginTop="@dimen/big_value"
-            android:text="@string/button_check_coupon"
+            android:text="@string/button_check_product"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description"
