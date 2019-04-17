@@ -120,5 +120,6 @@
     <!-- Toast messages -->
     <string name="internet_connection_required">Połączenie z internetem jest wymagane</string>
     <string name="localization_permission_denied">Wyłączono usługi lokalizacyjne</string>
+    <string name="camera_permission_denied">Nie przyznano dostępu do aparatu</string>
 
 </resources>

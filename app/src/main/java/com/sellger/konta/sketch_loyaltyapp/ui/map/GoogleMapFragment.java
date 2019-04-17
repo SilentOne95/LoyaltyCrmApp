@@ -323,7 +323,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
-    private void checkLocationPermission() {
+    @Override
+    public void checkLocationPermission() {
         if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -332,16 +333,17 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             startLocationService();
             startTrackService();
         }
-
     }
 
-    private void startTrackService() {
+    @Override
+    public void startTrackService() {
         if (getActivity() != null) {
             getActivity().startService(new Intent(getContext(), TrackerService.class));
         }
     }
 
-    private void startLocationService() {
+    @Override
+    public void startLocationService() {
         if (getActivity() != null) {
             getActivity().startService(new Intent(getContext(), LocationService.class));
         }

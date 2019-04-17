@@ -15,6 +15,9 @@ public interface MapContract {
         void initViews();
 
         void setUpGoogleApiClient();
+        void checkLocationPermission();
+        void startTrackService();
+        void startLocationService();
 
         void setUpCluster(List<Marker> markerList);
 

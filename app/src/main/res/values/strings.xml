@@ -135,6 +135,7 @@
     <!-- Toast messages -->
     <string name="internet_connection_required">Internet connection is required</string>
     <string name="localization_permission_denied">Localization permission denied</string>
+    <string name="camera_permission_denied">Camera permission denied</string>
 
     <!-- Image content descriptions -->
     <string name="log_in_view_logo_desc" translatable="false">log_in_view_logo_desc</string>
