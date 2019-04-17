@@ -26,7 +26,7 @@ import java.util.Map;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_HEIGHT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
 
-public class MyAccount extends BaseFragment {
+public class MyAccountFragment extends BaseFragment {
 
     static final String BARCODE_DATA = "12345678901";
 

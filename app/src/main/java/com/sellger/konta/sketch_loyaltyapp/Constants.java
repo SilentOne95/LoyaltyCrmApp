@@ -18,6 +18,14 @@ public final class Constants {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public static final int REQUEST_CHECK_SETTINGS = 100;
 
+    // MyAccountFragment
+    public static final int BARCODE_WIDTH = 600;
+    public static final int BARCODE_HEIGHT = 300;
+    public static final int BARCODE_COUPON_HEIGHT = 150;
+
+    // BarcodeScanResultFragment
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 201;
+
     // Adapter
     public static final int DEFAULT_NUM_OF_COLUMNS = 1;
 
@@ -30,13 +38,7 @@ public final class Constants {
 
     public static final String DEFAULT_STRING = "Not available";
 
-    // Barcode generator
-    public static final int BARCODE_WIDTH = 600;
-    public static final int BARCODE_HEIGHT = 300;
-    public static final int BARCODE_COUPON_HEIGHT = 150;
-
     // Additional data while changing fragments
     public static final String ANONYMOUS_REGISTRATION = "anonymous";
     public static final String NOT_ANONYMOUS_REGISTRATION = "not anonymous";
-
 }

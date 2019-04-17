@@ -3,10 +3,11 @@ package com.sellger.konta.sketch_loyaltyapp.ui.main;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.BarcodeCameraFragment;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragmentContract;
 import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
-import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccount;
-import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.BarcodeScanner;
+import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.BarcodeScanResultFragment;
+import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccountFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.home.HomePresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
@@ -152,10 +153,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
                     view.setFragment(new ContactFragment(), data);
                     break;
                 case "scanner":
-                    view.setFragment(new BarcodeScanner(), data);
+                    view.setFragment(new BarcodeScanResultFragment(), data);
+                    break;
+                case "camera":
+                    view.setFragment(new BarcodeCameraFragment(), data);
                     break;
                 case "barcode":
-                    view.setFragment(new MyAccount(), data);
+                    view.setFragment(new MyAccountFragment(), data);
                     break;
                 case "settings":
                     view.setActivity(SettingsActivity.class);

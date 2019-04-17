@@ -1,8 +1,11 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,12 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment;
 
-public class BarcodeScanner extends BaseFragment implements View.OnClickListener {
+import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_CAMERA;
+
+public class BarcodeScanResultFragment extends BaseFragment implements View.OnClickListener {
 
     private static final String TAG = CouponsFragment.class.getSimpleName();
 
@@ -60,6 +66,37 @@ public class BarcodeScanner extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        checkCameraPermission();
+    }
 
+    private void checkCameraPermission() {
+        if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[] {Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            navigationPresenter.getSelectedLayoutType("camera", "");
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                // Permission granted. Do the needed location-related task
+                if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED) {
+
+                    navigationPresenter.getSelectedLayoutType("camera", "");
+                }
+            } else {
+                // Permission denied, display Toast message
+                Toast.makeText(getActivity(),
+                        getResources().getText(R.string.camera_permission_denied), Toast.LENGTH_LONG)
+                        .show();
+            }
+        }
     }
 }

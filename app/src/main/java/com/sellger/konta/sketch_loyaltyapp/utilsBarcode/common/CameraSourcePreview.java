@@ -29,7 +29,8 @@ import java.io.IOException;
 
 /** Preview the camera image in the screen. */
 public class CameraSourcePreview extends ViewGroup {
-    private static final String TAG = "MIDemoApp:Preview";
+
+    private static final String TAG = BitmapUtils.class.getSimpleName();
 
     private Context context;
     private SurfaceView surfaceView;

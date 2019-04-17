@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/grid_item_shadow"
-        tools:context=".ui.myAccount.MyAccount">
+        tools:context=".ui.myAccount.MyAccountFragment">
 
         <TextView
             android:id="@+id/my_account_title_text"

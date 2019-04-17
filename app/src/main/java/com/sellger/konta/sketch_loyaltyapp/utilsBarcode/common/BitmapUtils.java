@@ -18,6 +18,8 @@ import java.nio.ByteBuffer;
 /** Utils functions for bitmap conversions. */
 public class BitmapUtils {
 
+    private static final String TAG = BitmapUtils.class.getSimpleName();
+
     // Convert NV21 format byte buffer to bitmap.
     @Nullable
     public static Bitmap getBitmap(ByteBuffer data, FrameMetadata metadata) {
@@ -38,7 +40,7 @@ public class BitmapUtils {
                 return rotateBitmap(bmp, metadata.getRotation(), metadata.getCameraFacing());
             }
         } catch (Exception e) {
-            Log.e("VisionProcessorBase", "Error: " + e.getMessage());
+            Log.e(TAG, "Error: " + e.getMessage());
         }
         return null;
     }

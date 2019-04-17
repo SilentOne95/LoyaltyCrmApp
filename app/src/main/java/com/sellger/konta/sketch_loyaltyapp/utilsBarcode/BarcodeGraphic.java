@@ -14,19 +14,21 @@
 
 package com.sellger.konta.sketch_loyaltyapp.utilsBarcode;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
+import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay;
 import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay.Graphic;
 
 /** Graphic instance for rendering Barcode position and content information in an overlay view. */
 public class BarcodeGraphic extends Graphic {
 
-    private static final int TEXT_COLOR = Color.WHITE;
+    private Resources resources = getApplicationContext().getResources();
+    private final int TEXT_COLOR = resources.getColor(R.color.colorAccent);
     private static final float TEXT_SIZE = 54.0f;
     private static final float STROKE_WIDTH = 4.0f;
 
