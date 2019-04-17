@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner;
+package com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.instruction;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -21,7 +21,7 @@ import com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_CAMERA;
 
-public class BarcodeScanResultFragment extends BaseFragment implements View.OnClickListener {
+public class ScanResultFragment extends BaseFragment implements ScanResultContract.View, View.OnClickListener {
 
     private static final String TAG = CouponsFragment.class.getSimpleName();
 
@@ -31,7 +31,7 @@ public class BarcodeScanResultFragment extends BaseFragment implements View.OnCl
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_barcode_scanner;
+        return R.layout.fragment_scan_result;
     }
 
     @Override
@@ -47,6 +47,7 @@ public class BarcodeScanResultFragment extends BaseFragment implements View.OnCl
         mScanButton.setOnClickListener(this);
     }
 
+    @Override
     public void initViews() {
         mAutoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
         mFlashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);

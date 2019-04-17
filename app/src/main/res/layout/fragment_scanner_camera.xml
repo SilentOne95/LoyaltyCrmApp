@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorFragmentBackground"
-    tools:context=".ui.barcodeScanner.BarcodeCameraFragment">
+    tools:context=".ui.barcodeScanner.camera.ScannerCameraFragment">
 
     <com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.CameraSourcePreview
         android:id="@+id/camera_preview"

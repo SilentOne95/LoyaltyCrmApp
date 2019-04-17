@@ -358,7 +358,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
                     presenter.displaySelectedScreen("login", "");
                 } else if (!(fragment instanceof MyAccountFragment)) {
-                    presenter.displaySelectedScreen("barcode", "");
+                    presenter.displaySelectedScreen("account", "");
                     uncheckItemsNavDrawer();
                 }
                 break;

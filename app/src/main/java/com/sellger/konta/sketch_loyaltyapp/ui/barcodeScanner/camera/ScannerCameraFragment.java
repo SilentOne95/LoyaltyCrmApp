@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner;
+package com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.camera;
 
 import android.app.Dialog;
 import android.graphics.Bitmap;
@@ -30,9 +30,9 @@ import java.util.List;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_CAMERA;
 
-public class BarcodeCameraFragment extends BaseFragment {
+public class ScannerCameraFragment extends BaseFragment implements ScannerCameraContract.View {
 
-    private static final String TAG = BarcodeCameraFragment.class.getSimpleName();
+    private static final String TAG = ScannerCameraFragment.class.getSimpleName();
 
     private CameraSource mCameraSource = null;
     private CameraSourcePreview mCameraSourcePreview;
@@ -41,7 +41,7 @@ public class BarcodeCameraFragment extends BaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_barcode_camera;
+        return R.layout.fragment_scanner_camera;
     }
 
     @Override
@@ -53,10 +53,15 @@ public class BarcodeCameraFragment extends BaseFragment {
         setHasOptionsMenu(true);
 
         // Init views
-        mCameraSourcePreview = rootView.findViewById(R.id.camera_preview);
-        mGraphicOverlay = rootView.findViewById(R.id.graphic_overlay);
+        initViews();
 
         createCameraSource();
+    }
+
+    @Override
+    public void initViews() {
+        mCameraSourcePreview = rootView.findViewById(R.id.camera_preview);
+        mGraphicOverlay = rootView.findViewById(R.id.graphic_overlay);
     }
 
     @Override
@@ -69,7 +74,8 @@ public class BarcodeCameraFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private void createCameraSource() {
+    @Override
+    public void createCameraSource() {
         FirebaseVisionBarcodeDetectorOptions options = new FirebaseVisionBarcodeDetectorOptions.Builder()
                 .setBarcodeFormats(
                         FirebaseVisionBarcode.FORMAT_UPC_A,
@@ -90,7 +96,8 @@ public class BarcodeCameraFragment extends BaseFragment {
         startCameraSource();
     }
 
-    private void startCameraSource() {
+    @Override
+    public void startCameraSource() {
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext());
         Log.d(TAG, "startCameraSource + " + code);
 
@@ -113,7 +120,7 @@ public class BarcodeCameraFragment extends BaseFragment {
         }
     }
 
-    public BarcodeScanningProcessor.BarcodeResultListener getBarcodeResultListener() {
+    private BarcodeScanningProcessor.BarcodeResultListener getBarcodeResultListener() {
         return new BarcodeScanningProcessor.BarcodeResultListener() {
             @Override
             public void onSuccess(@Nullable Bitmap originalCameraImage,

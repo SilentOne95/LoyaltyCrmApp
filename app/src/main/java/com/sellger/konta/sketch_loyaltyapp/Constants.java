@@ -23,7 +23,7 @@ public final class Constants {
     public static final int BARCODE_HEIGHT = 300;
     public static final int BARCODE_COUPON_HEIGHT = 150;
 
-    // BarcodeScanResultFragment
+    // ScanResultFragment
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 201;
 
     // Adapter
