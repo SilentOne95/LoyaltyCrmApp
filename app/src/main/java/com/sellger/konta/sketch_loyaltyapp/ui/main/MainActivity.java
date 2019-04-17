@@ -214,15 +214,25 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onBackPressed() {
         // If back button is pressed on certain view, set up desired view
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
-        if (fragment instanceof LogInPhoneFragment || fragment instanceof  LogInVerifyFragment) {
-            setLogInFragment(new LogInFragment());
-        } else if (fragment instanceof LogInFragment && mFirebaseAuth.getCurrentUser() != null) {
-            // TODO:
-            // Replace hardcoded variables
-            presenter.displaySelectedScreen("home", "");
-            presenter.passIdOfSelectedView(0);
-        } else {
-            super.onBackPressed();
+        switch (fragment.getClass().getSimpleName()) {
+            case "LogInPhoneFragment":
+                setLogInFragment(new LogInFragment());
+                break;
+            case "LogInVerifyFragment":
+                setLogInFragment(new LogInFragment());
+                break;
+            case "LogInFragment":
+                // TODO:
+                // Replace hardcoded variables
+                presenter.displaySelectedScreen("home", "");
+                presenter.passIdOfSelectedView(0);
+                break;
+            case "ScannerCameraFragment":
+                presenter.displaySelectedScreen("scanner", "");
+                break;
+            default:
+                super.onBackPressed();
+                break;
         }
     }
 
