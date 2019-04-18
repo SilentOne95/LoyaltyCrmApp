@@ -59,8 +59,8 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
     public void initViews() {
         mScanResultTextView = rootView.findViewById(R.id.barcode_scanner_scan_result_text_view);
 
-        mAutoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
-        mFlashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);
+//        mAutoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
+//        mFlashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);
 
         mScanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
     }

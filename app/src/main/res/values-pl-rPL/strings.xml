@@ -82,16 +82,16 @@
     <!-- Barcode scanner -->
     <string name="barcode_scanner_title">Skaner kodów kreskowych</string>
     <string name="barcode_scanner_instruction_text">Instrukcja</string>
-    <string name="barcode_scanner_button_text">Skanuj</string>
-    <string name="barcode_scanner_switch_flash_text">Latarka</string>
-    <string name="barcode_scanner_switch_focus_text">Auto focus</string>
+    <string name="barcode_scanner_instruction_body">1. Kliknij przycisk \"skanuj\".\n
+        2. Zatwierdź zgodę na użycie kamery aparatu.\n
+        3. Nakieruj kamerę na kod kreskowy.\n
+        4. Poczekaj, aż kamera złapie ostrość.\n
+        5. Aplikacja automatycznie powróci do tego widoku, jak tylko kod kreskowy zostanie odszyfrowany.\n
+        6. Twój kod zostanie wyświetlony we wskazanym miejscu.</string>
     <string name="barcode_scanner_code_text">TWÓJ KOD ZOSTANIE\n WYŚWIETLONY TUTAJ</string>
-    <string name="barcode_scanner_instruction_body">1. Wybierz dodatkowe opcje dostępne podczas skanowania.\n
-        2. Kliknij przycisk \"skanuj\".\n
-        3. Zatwierdź zgodę dostępu do kamery.\n
-        4. Najedź kamerą na kod kreskowy.\n
-        5. Kiedy pojawi się ramka wokół kodu,\n kliknij wewnątrz niej.\n
-        6. Kod zczytany z kodu kreskowego zostanie wyświetlony\n we wskazanym miejscu.</string>
+    <string name="barcode_scanner_switch_focus_text">Auto focus</string>
+    <string name="barcode_scanner_switch_flash_text">Latarka</string>
+    <string name="barcode_scanner_button_text">Skanuj</string>
 
     <!-- Barcode generator -->
     <string name="barcode_generator_title">Twoja karta klienta</string>

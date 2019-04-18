@@ -96,12 +96,12 @@
     <!-- Barcode scanner -->
     <string name="barcode_scanner_title">Barcode Scanner</string>
     <string name="barcode_scanner_instruction_text">Instruction</string>
-    <string name="barcode_scanner_instruction_body">1. Choose the options.\n
-        2. Click the scan button.\n
-        3. Agree to useyour camera.\n
-        4. Search for barcode.\n
-        5. Click on marked barcode.\n
-        6. You can use a code to geta discount on your next order.</string>
+    <string name="barcode_scanner_instruction_body">1. Click the scan button.\n
+        2. Allow this app to use camera.\n
+        3. Aim the camera at barcode.\n
+        4. Let camera get focus.\n
+        5. You will return to this view as soon as app decode barcode.\n
+        6. You can use displayed code to get a discount on your next order.</string>
     <string name="barcode_scanner_code_text">YOUR CODE WILL BE DISPLAYED HERE</string>
     <string name="barcode_scanner_switch_focus_text">Auto Focus</string>
     <string name="barcode_scanner_switch_flash_text">Flash</string>
