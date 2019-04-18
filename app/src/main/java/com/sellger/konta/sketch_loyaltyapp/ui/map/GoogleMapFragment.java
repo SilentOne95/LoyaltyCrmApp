@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +27,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
@@ -58,7 +61,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REQUEST_CHECK_SETTINGS;
@@ -175,6 +180,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
 
+        // Setting map's custom style depending on day time
+        setCustomMapStyle();
+
         // Setting up BottomSheet height as layout height. It has to be implemented here to measure
         // view after it's created to get different value than 0
         mBottomSheetBehavior.setPeekHeight(mPanelPeekHeight.getHeight());
@@ -229,6 +237,28 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         );
 
         mGoogleMap.setOnMyLocationButtonClickListener(this);
+    }
+
+    @Override
+    public void setCustomMapStyle() {
+        int mapStyleResId;
+
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Warsaw"));
+        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        if (hourOfDay >= 7 && hourOfDay <= 22) {
+            mapStyleResId = R.raw.map_style_day;
+        } else {
+            mapStyleResId = R.raw.map_style_night;
+        }
+
+        try {
+            boolean isSuccessful = mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), mapStyleResId));
+            if (isSuccessful) {
+                Log.d(TAG, "Map's style applied successfully");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.d(TAG, "Map's style not applied. Error: " + e);
+        }
     }
 
     @Override

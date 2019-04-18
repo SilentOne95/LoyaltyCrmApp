@@ -19,6 +19,7 @@ public interface MapContract {
         void startTrackService();
         void startLocationService();
 
+        void setCustomMapStyle();
         void setUpCluster(List<Marker> markerList);
 
         int getBottomSheetState();
