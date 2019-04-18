@@ -41,4 +41,22 @@ public final class Constants {
     // Additional data while changing fragments
     public static final String ANONYMOUS_REGISTRATION = "anonymous";
     public static final String NOT_ANONYMOUS_REGISTRATION = "not anonymous";
+
+    // Layout types
+    public static final String LAYOUT_TYPE_HOME = "home";
+    public static final String LAYOUT_TYPE_PRODUCTS = "products";
+    public static final String LAYOUT_TYPE_COUPONS = "coupons";
+    public static final String LAYOUT_TYPE_MAP = "map";
+    public static final String LAYOUT_TYPE_URL = "url";
+    public static final String LAYOUT_TYPE_TERMS = "terms";
+    public static final String LAYOUT_TYPE_CONTACT = "contact";
+    public static final String LAYOUT_TYPE_SCANNER = "scanner";
+    public static final String LAYOUT_TYPE_CAMERA = "camera";
+    public static final String LAYOUT_TYPE_ACCOUNT = "account";
+    public static final String LAYOUT_TYPE_SETTINGS = "settings";
+    public static final String LAYOUT_TYPE_LOGIN = "login";
+    public static final String LAYOUT_TYPE_PHONE = "phone";
+    public static final String LAYOUT_TYPE_CODE = "code";
+
+    public static final String LAYOUT_DATA_EMPTY_STRING = "";
 }

@@ -37,6 +37,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.Arrays;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_REGISTRATION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PHONE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.RC_SIGN_IN;
 
@@ -121,7 +124,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     facebookSignIn();
                     break;
                 case R.id.login_phone_button:
-                    navigationPresenter.getSelectedLayoutType("phone", "");
+                    navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_PHONE, LAYOUT_DATA_EMPTY_STRING);
                     break;
                 case R.id.register_guest_text:
                     if (mFirebaseAuth.getCurrentUser() != null) {
@@ -175,7 +178,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Open "home" view
                         // TODO: Workaround
                         // Pass string to display / hide information about account in nav view header
-                        navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION);
+                        navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user
                         Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
@@ -213,7 +216,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Open "home" view
                         // TODO: Workaround
                         // Pass string to display / hide information about account in nav view header
-                        navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION);
+                        navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user
                         Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
@@ -256,7 +259,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Open "home" view
                         // TODO: Workaround
                         // Pass string to display / hide information about account in nav view header
-                        navigationPresenter.getSelectedLayoutType("home", ANONYMOUS_REGISTRATION);
+                        navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInAnonymously:failure", task.getException());
@@ -277,7 +280,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Open "home" view
                         // TODO: Workaround
                         // Pass string to display / hide information about account in nav view header
-                        navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION);
+                        navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
                         Toast.makeText(getContext(), "Authentication failed",

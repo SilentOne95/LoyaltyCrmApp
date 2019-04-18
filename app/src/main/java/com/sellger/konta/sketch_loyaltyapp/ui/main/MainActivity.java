@@ -41,6 +41,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_REGISTRATION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_ACCOUNT;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_LOGIN;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SCANNER;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SETTINGS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_FIRST_GROUP_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_ORDER;
@@ -123,9 +129,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // TODO:
         // Replace hardcoded variables
         if (mFirebaseAuth.getCurrentUser() != null) {
-            presenter.displayHomeScreen("home");
+            presenter.displayHomeScreen(LAYOUT_TYPE_HOME);
         } else {
-            presenter.displayHomeScreen("login");
+            presenter.displayHomeScreen(LAYOUT_TYPE_LOGIN);
         }
 
         // Using Retrofit to set up NavDrawer
@@ -224,11 +230,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             case "LogInFragment":
                 // TODO:
                 // Replace hardcoded variables
-                presenter.displaySelectedScreen("home", "");
+                presenter.displaySelectedScreen(LAYOUT_TYPE_HOME, LAYOUT_DATA_EMPTY_STRING);
                 presenter.passIdOfSelectedView(0);
                 break;
             case "ScannerCameraFragment":
-                presenter.displaySelectedScreen("scanner", "");
+                presenter.displaySelectedScreen(LAYOUT_TYPE_SCANNER, LAYOUT_DATA_EMPTY_STRING);
                 break;
             default:
                 super.onBackPressed();
@@ -289,7 +295,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Assign clicked menuItem IDs and layout type to global variables
         if (!menuItem.isChecked()) {
             if (menuItem.getGroupId() == 2) {
-                layoutType = "settings";
+                layoutType = LAYOUT_TYPE_SETTINGS;
             } else {
                 layoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
             }
@@ -317,7 +323,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void onDrawerClosed(@NonNull View view) {
-        presenter.displaySelectedScreen(layoutType, "");
+        presenter.displaySelectedScreen(layoutType, LAYOUT_DATA_EMPTY_STRING);
         // Set layoutType to null to avoid creating new instance of fragment, when closing nav drawer
         // by clicking next to the view
         layoutType = null;
@@ -366,14 +372,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             case R.id.main_menu_my_account:
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
                 if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
-                    presenter.displaySelectedScreen("login", "");
+                    presenter.displaySelectedScreen(LAYOUT_TYPE_LOGIN, LAYOUT_DATA_EMPTY_STRING);
                 } else if (!(fragment instanceof MyAccountFragment)) {
-                    presenter.displaySelectedScreen("account", "");
+                    presenter.displaySelectedScreen(LAYOUT_TYPE_ACCOUNT, LAYOUT_DATA_EMPTY_STRING);
                     uncheckItemsNavDrawer();
                 }
                 break;
             case R.id.main_menu_options:
-                presenter.displaySelectedScreen("settings", "");
+                presenter.displaySelectedScreen(LAYOUT_TYPE_SETTINGS, LAYOUT_DATA_EMPTY_STRING);
                 break;
         }
 

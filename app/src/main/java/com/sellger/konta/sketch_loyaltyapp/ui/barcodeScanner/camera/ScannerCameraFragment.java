@@ -28,6 +28,7 @@ import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay;
 import java.io.IOException;
 import java.util.List;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SCANNER;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_CAMERA;
 
 public class ScannerCameraFragment extends BaseFragment implements ScannerCameraContract.View {
@@ -131,7 +132,7 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
                 if (barcodes.size() != 0) {
                     for (FirebaseVisionBarcode barcode : barcodes) {
                         Log.d(TAG, "onSuccess: " + barcode.getRawValue());
-                        navigationPresenter.getSelectedLayoutType("scanner", barcode.getRawValue());
+                        navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_SCANNER, barcode.getRawValue());
                     }
                 }
             }

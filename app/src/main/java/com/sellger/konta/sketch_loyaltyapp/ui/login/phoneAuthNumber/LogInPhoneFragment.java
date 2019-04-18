@@ -18,6 +18,8 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CODE;
+
 public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContract.View, View.OnClickListener {
 
     private static final String TAG = LogInPhoneFragment.class.getSimpleName();
@@ -68,7 +70,7 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
             // Hide keyboard and display next view
             mTextInputPrefix.onEditorAction(EditorInfo.IME_ACTION_DONE);
             mTextInputPhoneNumber.onEditorAction(EditorInfo.IME_ACTION_DONE);
-            navigationPresenter.getSelectedLayoutType("code", mProvidedPhoneNumber);
+            navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_CODE, mProvidedPhoneNumber);
         }
     }
 

@@ -28,8 +28,26 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_ACCOUNT;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CAMERA;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CODE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CONTACT;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_COUPONS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_LOGIN;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_MAP;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PHONE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PRODUCTS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SCANNER;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SETTINGS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_TERMS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_URL;
+
 public class MainActivityPresenter implements MainActivityContract.Presenter,
         BaseFragmentContract.Presenter {
+
+    private static final String TAG = MainActivityPresenter.class.getSimpleName();
 
     @Nullable
     private MainActivityContract.View view;
@@ -51,7 +69,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
     @Override
     public void displayHomeScreen(String layoutType) {
-        displaySelectedScreen(layoutType, "");
+        displaySelectedScreen(layoutType, LAYOUT_DATA_EMPTY_STRING);
     }
 
     @Override
@@ -81,28 +99,28 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         String iconName;
 
         switch (layoutType) {
-            case "home":
+            case LAYOUT_TYPE_HOME:
                 iconName = "ic_menu_home";
                 break;
-            case "products":
+            case LAYOUT_TYPE_PRODUCTS:
                 iconName = "ic_menu_product";
                 break;
-            case "coupons":
+            case LAYOUT_TYPE_COUPONS:
                 iconName = "ic_menu_coupon";
                 break;
-            case "map":
+            case LAYOUT_TYPE_MAP:
                 iconName = "ic_menu_map";
                 break;
-            case "url":
+            case LAYOUT_TYPE_URL:
                 iconName = "ic_menu_website";
                 break;
-            case "terms":
+            case LAYOUT_TYPE_TERMS:
                 iconName = "ic_menu_terms";
                 break;
-            case "contact":
+            case LAYOUT_TYPE_CONTACT:
                 iconName = "ic_menu_contact";
                 break;
-            case "scanner":
+            case LAYOUT_TYPE_SCANNER:
                 iconName = "ic_menu_scanner";
                 break;
             default:
@@ -131,48 +149,48 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
         if (layoutType != null && view != null) {
             switch (layoutType) {
-                case "home":
+                case LAYOUT_TYPE_HOME:
                     view.setFragment(new HomeFragment(), data);
                     break;
-                case "products":
+                case LAYOUT_TYPE_PRODUCTS:
                     view.setFragment(new ProductsFragment(), data);
                     break;
-                case "coupons":
+                case LAYOUT_TYPE_COUPONS:
                     view.setFragment(new CouponsFragment(), data);
                     break;
-                case "map":
+                case LAYOUT_TYPE_MAP:
                     view.setFragment(new GoogleMapFragment(), data);
                     break;
-                case "url":
+                case LAYOUT_TYPE_URL:
                     view.setFragment(new WebsiteFragment(), data);
                     break;
-                case "terms":
+                case LAYOUT_TYPE_TERMS:
                     view.setFragment(new TermsFragment(), data);
                     break;
-                case "contact":
+                case LAYOUT_TYPE_CONTACT:
                     view.setFragment(new ContactFragment(), data);
                     break;
-                case "scanner":
+                case LAYOUT_TYPE_SCANNER:
                     view.setFragment(new ScanResultFragment(), data);
                     break;
-                case "camera":
+                case LAYOUT_TYPE_CAMERA:
                     view.setFragment(new ScannerCameraFragment(), data);
                     break;
-                case "account":
+                case LAYOUT_TYPE_ACCOUNT:
                     view.setFragment(new MyAccountFragment(), data);
                     break;
-                case "settings":
+                case LAYOUT_TYPE_SETTINGS:
                     view.setActivity(SettingsActivity.class);
                     break;
 
                 // Registration views
-                case "login":
+                case LAYOUT_TYPE_LOGIN:
                     view.setFragment(new LogInFragment(), data);
                     break;
-                case "phone":
+                case LAYOUT_TYPE_PHONE:
                     view.setFragment(new LogInPhoneFragment(), data);
                     break;
-                case "code":
+                case LAYOUT_TYPE_CODE:
                     view.setFragment(new LogInVerifyFragment(), data);
                     break;
                 default:
@@ -191,23 +209,23 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         Observer<Integer> observer = new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.d("home", "onSubscribe");
+                Log.d(TAG, "onSubscribe");
             }
 
             @Override
             public void onNext(Integer viewPosition) {
-                Log.d("home", "onNext" + String.valueOf(viewPosition));
+                Log.d(TAG, "onNext" + String.valueOf(viewPosition));
                 passIdOfSelectedView(viewPosition);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d("home", "onError");
+                Log.d(TAG, "onError");
             }
 
             @Override
             public void onComplete() {
-                Log.d("home", "onComplete");
+                Log.d(TAG, "onComplete");
             }
         };
 

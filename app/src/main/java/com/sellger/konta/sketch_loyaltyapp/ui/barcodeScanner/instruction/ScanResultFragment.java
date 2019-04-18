@@ -19,6 +19,8 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CAMERA;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_CAMERA;
 
 public class ScanResultFragment extends BaseFragment implements ScanResultContract.View, View.OnClickListener {
@@ -83,7 +85,7 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[] {Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
         } else {
-            navigationPresenter.getSelectedLayoutType("camera", "");
+            navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_CAMERA, LAYOUT_DATA_EMPTY_STRING);
         }
     }
 
@@ -98,7 +100,7 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
                         Manifest.permission.CAMERA)
                         == PackageManager.PERMISSION_GRANTED) {
 
-                    navigationPresenter.getSelectedLayoutType("camera", "");
+                    navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_CAMERA, LAYOUT_DATA_EMPTY_STRING);
                 }
             } else {
                 // Permission denied, display Toast message
