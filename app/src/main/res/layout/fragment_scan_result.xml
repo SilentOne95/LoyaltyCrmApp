@@ -68,7 +68,7 @@
             android:layout_height="0dp"
             android:layout_margin="@dimen/mid_value"
             android:layout_weight="1"
-            android:background="@drawable/rounded_corners_barcode_scanner"
+            android:background="@drawable/rounded_corners_result_field"
             android:gravity="center"
             android:paddingStart="@dimen/very_big_value"
             android:paddingEnd="@dimen/very_big_value"

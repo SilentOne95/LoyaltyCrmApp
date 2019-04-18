@@ -101,7 +101,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_sellger_logo" />
+            android:resource="@drawable/logo_icon" />
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"

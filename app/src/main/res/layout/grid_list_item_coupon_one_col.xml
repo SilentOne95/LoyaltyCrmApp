@@ -4,7 +4,7 @@
     android:id="@+id/grid_item_coupon"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_corners_grid_item"
+    android:background="@drawable/grid_item_shadow"
     android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout

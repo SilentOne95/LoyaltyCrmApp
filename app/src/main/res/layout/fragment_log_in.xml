@@ -23,7 +23,7 @@
             android:contentDescription="@string/log_in_view_logo_desc"
             android:padding="@dimen/small_value"
             android:scaleType="fitCenter"
-            android:src="@drawable/sellger_logo"
+            android:src="@drawable/logo_big"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

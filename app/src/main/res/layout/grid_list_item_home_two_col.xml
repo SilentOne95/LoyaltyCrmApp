@@ -4,7 +4,7 @@
     android:id="@+id/grid_item_home"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_corners_grid_item">
+    android:background="@drawable/rounded_corners_button_white">
 
     <ImageView
         android:id="@+id/grid_item_image"

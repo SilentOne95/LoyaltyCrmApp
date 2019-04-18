@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/navigation_header_logo_desc"
         android:padding="@dimen/big_value"
-        android:src="@drawable/sellger_logo_portrait_white"
+        android:src="@drawable/logo_portrait_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
