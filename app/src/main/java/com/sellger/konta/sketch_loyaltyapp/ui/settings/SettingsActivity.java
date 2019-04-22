@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,11 +17,15 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity;
 
-public class SettingsActivity extends BaseActivity implements SettingsContract.View, View.OnClickListener {
+public class SettingsActivity extends BaseActivity implements SettingsContract.View, View.OnClickListener,
+        CompoundButton.OnCheckedChangeListener {
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
 
+    SettingsPresenter presenter;
+
     private TextView mTermsText, mPrivacyText, mLicensesText;
+    private Switch mSwitchFirstTopic, mSwitchSecondTopic, mSwitchThirdTopic;
     private Button mDeleteButton;
 
     @Override
@@ -40,7 +46,15 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         mTermsText.setOnClickListener(this);
         mPrivacyText.setOnClickListener(this);
         mLicensesText.setOnClickListener(this);
+
+        mSwitchFirstTopic.setOnCheckedChangeListener(this);
+        mSwitchSecondTopic.setOnCheckedChangeListener(this);
+        mSwitchThirdTopic.setOnCheckedChangeListener(this);
+
         mDeleteButton.setOnClickListener(this);
+
+        // Setting up presenter
+        presenter = new SettingsPresenter(this);
     }
 
     @Override
@@ -48,6 +62,9 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         mTermsText = findViewById(R.id.settings_terms_one);
         mPrivacyText = findViewById(R.id.settings_terms_two);
         mLicensesText = findViewById(R.id.settings_terms_three);
+        mSwitchFirstTopic = findViewById(R.id.settings_notification_switch_one);
+        mSwitchSecondTopic = findViewById(R.id.settings_notification_switch_two);
+        mSwitchThirdTopic = findViewById(R.id.settings_notification_switch_three);
         mDeleteButton = findViewById(R.id.settings_delete_button);
     }
 
@@ -60,6 +77,20 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
             default:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
                 startActivity(browserIntent);
+                break;
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()) {
+            case R.id.settings_notification_switch_one:
+                break;
+            case R.id.settings_notification_switch_two:
+                break;
+            case R.id.settings_notification_switch_three:
+                break;
+            default:
                 break;
         }
     }

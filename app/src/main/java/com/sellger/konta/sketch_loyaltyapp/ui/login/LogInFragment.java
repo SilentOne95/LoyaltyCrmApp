@@ -31,7 +31,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Arrays;
@@ -42,10 +41,15 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PHONE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.RC_SIGN_IN;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_ANONYMOUS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
 
 public class LogInFragment extends BaseFragment implements LogInContract.View, View.OnClickListener {
 
     private static final String TAG = LogInFragment.class.getSimpleName();
+
+    LogInPresenter presenter;
 
     private FirebaseAuth mFirebaseAuth;
     private GoogleSignInClient mGoogleSignInClient;
@@ -75,6 +79,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mSignInWithFacebookButton.setOnClickListener(this);
         mSignInWithPhoneButton.setOnClickListener(this);
         mSignInAnonymously.setOnClickListener(this);
+
+        // Setting up presenter
+        presenter = new LogInPresenter(this);
 
         // Log In with Google
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -171,9 +178,10 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                        // Subscribe user to topics of push notifications
+                        subscribeToTopics(REGISTRATION_NORMAL);
 
                         // Open "home" view
                         // TODO: Workaround
@@ -209,9 +217,10 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                        // Subscribe user to topics of push notifications
+                        subscribeToTopics(REGISTRATION_NORMAL);
 
                         // Open "home" view
                         // TODO: Workaround
@@ -252,9 +261,10 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mFirebaseAuth.signInAnonymously()
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInAnonymously:success");
-                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
+                        // Subscribe user to topics of push notifications
+                        subscribeToTopics(ANONYMOUS_REGISTRATION);
 
                         // Open "home" view
                         // TODO: Workaround
@@ -275,7 +285,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "linkWithCredential:success");
-                        FirebaseUser user = task.getResult().getUser();
+
+                        // Subscribe user to topics of push notifications
+                        subscribeToTopics(REGISTRATION_CONVERSION);
 
                         // Open "home" view
                         // TODO: Workaround
@@ -292,5 +304,27 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     @Override
     public void displayAccountAlreadyExists() {
         Toast.makeText(getContext(), "Already signed in as a guest!\nPlease choose other option", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void subscribeToTopics(String subscriptionType) {
+        switch (subscriptionType) {
+            case REGISTRATION_NORMAL:
+                presenter.subscribeToFirstTopic();
+                presenter.subscribeToSecondTopic();
+                presenter.subscribeToThirdTopic();
+                break;
+            case REGISTRATION_ANONYMOUS:
+                presenter.subscribeToAnonymousTopic();
+                break;
+            case REGISTRATION_CONVERSION:
+                presenter.subscribeToFirstTopic();
+                presenter.subscribeToSecondTopic();
+                presenter.subscribeToThirdTopic();
+                presenter.unsubscribeFromAnonymousTopic();
+                break;
+            default:
+                break;
+        }
     }
 }

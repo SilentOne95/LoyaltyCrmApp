@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.ui.settings;
+package com.sellger.konta.sketch_loyaltyapp.ui.login;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -6,19 +6,20 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sellger.konta.sketch_loyaltyapp.service.SubscribeToTopic;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
 
-public class SettingsPresenter implements SettingsContract.Presenter, SubscribeToTopic.NonAnonymousTopic,
-        SubscribeToTopic.UnsubscribeFromTopic {
+public class LogInPresenter implements LogInContract.Presenter, SubscribeToTopic.NonAnonymousTopic,
+        SubscribeToTopic.AnonymousTopic {
 
-    private static final String TAG = SettingsPresenter.class.getSimpleName();
+    private static final String TAG = LogInPresenter.class.getSimpleName();
 
     @Nullable
-    private SettingsContract.View view;
+    private LogInContract.View view;
 
-    SettingsPresenter(@Nullable SettingsContract.View view) {
+    LogInPresenter(@Nullable LogInContract.View view) {
         this.view = view;
     }
 
@@ -50,29 +51,20 @@ public class SettingsPresenter implements SettingsContract.Presenter, SubscribeT
     }
 
     @Override
-    public void unsubscribeFromFirstTopic() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(FIRST_TOPIC_NAME).addOnCompleteListener(task -> {
+    public void subscribeToAnonymousTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic(ANONYMOUS_TOPIC_NAME).addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsubscription failed: news");
+                Log.d(TAG, "Unsuccessfully subscribed to: anonymous");
             }
         });
     }
 
     @Override
-    public void unsubscribeFromSecondTopic() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(SECOND_TOPIC_NAME).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsubscription failed: offers");
-            }
-        });
-    }
-
-    @Override
-    public void unsubscribeFromThirdTopic() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(THIRD_TOPIC_NAME).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsubscription failed: discounts");
-            }
+    public void unsubscribeFromAnonymousTopic() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(ANONYMOUS_TOPIC_NAME).addOnCompleteListener(task -> {
+           if (!task.isSuccessful()) {
+               Log.d(TAG, "Unsubscription failed: anonymous");
+           }
         });
     }
 }

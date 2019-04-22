@@ -23,6 +23,8 @@ public interface LogInContract {
         void convertAnonymousAccount(AuthCredential credential);
 
         void displayAccountAlreadyExists();
+
+        void subscribeToTopics(String subscriptionType);
     }
 
     interface Presenter {

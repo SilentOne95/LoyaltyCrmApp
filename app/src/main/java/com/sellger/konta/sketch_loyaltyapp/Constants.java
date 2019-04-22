@@ -42,6 +42,17 @@ public final class Constants {
     public static final String ANONYMOUS_REGISTRATION = "anonymous";
     public static final String NOT_ANONYMOUS_REGISTRATION = "not anonymous";
 
+    // Type of registration method
+    public static final String REGISTRATION_NORMAL = "normal";
+    public static final String REGISTRATION_ANONYMOUS = "anonymous";
+    public static final String REGISTRATION_CONVERSION = "conversion";
+
+    // Subscription topics - push notifications
+    public static final String FIRST_TOPIC_NAME = "news";
+    public static final String SECOND_TOPIC_NAME = "offers";
+    public static final String THIRD_TOPIC_NAME = "discounts";
+    public static final String ANONYMOUS_TOPIC_NAME = "anonymous";
+
     // Layout types
     public static final String LAYOUT_TYPE_HOME = "home";
     public static final String LAYOUT_TYPE_PRODUCTS = "products";
