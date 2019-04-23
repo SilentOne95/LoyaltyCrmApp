@@ -30,7 +30,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     private TextView mTermsText, mPrivacyText, mLicensesText;
     private Switch mSwitchFirstTopic, mSwitchSecondTopic, mSwitchThirdTopic;
-    private Button mDeleteButton;
+    private Button mLogOutButton, mDeleteButton;
 
     @Override
     protected int getLayout() {
@@ -58,6 +58,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         mSwitchThirdTopic.setChecked(true);
         mSwitchThirdTopic.setOnCheckedChangeListener(this);
 
+        mLogOutButton.setOnClickListener(this);
         mDeleteButton.setOnClickListener(this);
 
         // Setting up presenter
@@ -72,12 +73,16 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         mSwitchFirstTopic = findViewById(R.id.settings_notification_switch_one);
         mSwitchSecondTopic = findViewById(R.id.settings_notification_switch_two);
         mSwitchThirdTopic = findViewById(R.id.settings_notification_switch_three);
+        mLogOutButton = findViewById(R.id.settings_log_out_button);
         mDeleteButton = findViewById(R.id.settings_delete_button);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.settings_log_out_button:
+                showDialogLogOut();
+                break;
             case R.id.settings_delete_button:
                 showDialogDeleteAccount();
                 break;
@@ -118,8 +123,19 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     }
 
     @Override
+    public void showDialogLogOut() {
+        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_log_out_style))
+                .setCancelable(true)
+                .setTitle(R.string.settings_log_out_alert_title)
+                .setMessage(R.string.settings_log_out_account_alert_message)
+                .setPositiveButton(R.string.settings_log_out_account_alert_confirm, (dialog, which) -> logOutAccount())
+                .setNegativeButton(R.string.settings_log_out_account_alert_decline, null)
+                .show();
+    }
+
+    @Override
     public void showDialogDeleteAccount(){
-        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_style))
+        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_delete_style))
                 .setCancelable(true)
                 .setTitle(R.string.settings_delete_account_alert_title)
                 .setMessage(R.string.settings_delete_account_alert_message)
@@ -129,19 +145,31 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     }
 
     @Override
+    public void logOutAccount() {
+        FirebaseAuth.getInstance().signOut();
+
+        unsubscribeAndUpdateUI();
+    }
+
+    @Override
     public void deleteUserAccount() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.delete().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Remove topics subscriptions
-                String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
-                for (String topic : topicsList) {
-                    presenter.unsubscribeFromTopic(topic);
-                }
-
-                // Start MainActivity to show Login layout as current account was deleted
-                SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                unsubscribeAndUpdateUI();
             }
         });
+    }
+
+    @Override
+    public void unsubscribeAndUpdateUI() {
+        // Remove topics subscriptions
+        String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
+        for (String topic : topicsList) {
+            presenter.unsubscribeFromTopic(topic);
+        }
+
+        // Start MainActivity to show Login layout as current account was deleted
+        SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
     }
 }

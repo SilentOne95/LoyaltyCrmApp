@@ -72,8 +72,12 @@
     </style>
 
     <!-- Settings layout - alert dialog -->
-    <style name="settings_alert_dialog_style">
+    <style name="settings_alert_dialog_log_out_style">
         <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="settings_alert_dialog_delete_style">
+        <item name="android:textColor">@color/colorErrorInput</item>
     </style>
 
     <!-- Text -->

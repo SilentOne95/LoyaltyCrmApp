@@ -123,9 +123,17 @@
     <string name="settings_terms_conditions_link"><![CDATA[Terms & conditions]]></string>
     <string name="settings_terms_privacy_link">Privacy policy</string>
     <string name="settings_terms_licenses_link">Licenses</string>
+    <string name="settings_log_out_label">Log out:</string>
+    <string name="settings_log_out_text">To log out, click button</string>
+    <string name="settings_log_out_button">Log Out</string>
     <string name="settings_account_label">Delete account:</string>
     <string name="settings_acc_delete_instruction">To delete account, click button</string>
     <string name="settings_delete_button">Delete</string>
+
+    <string name="settings_log_out_alert_title">Log Out</string>
+    <string name="settings_log_out_account_alert_message">Are you sure to log out?</string>
+    <string name="settings_log_out_account_alert_confirm">Confirm</string>
+    <string name="settings_log_out_account_alert_decline">Cancel</string>
 
     <string name="settings_delete_account_alert_title">Delete account</string>
     <string name="settings_delete_account_alert_message">Are you sure to delete your account?\n You cannot undo this action</string>

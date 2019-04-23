@@ -6,8 +6,13 @@ public interface SettingsContract {
 
         void initViews();
 
+        void showDialogLogOut();
+        void logOutAccount();
+
         void showDialogDeleteAccount();
         void deleteUserAccount();
+
+        void unsubscribeAndUpdateUI();
     }
 
     interface Presenter {

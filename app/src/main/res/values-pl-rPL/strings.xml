@@ -108,9 +108,17 @@
     <string name="settings_terms_conditions_link">Warunki i zasady świadczenia usług</string>
     <string name="settings_terms_privacy_link">Polityka prywatności</string>
     <string name="settings_terms_licenses_link">Licencje</string>
+    <string name="settings_log_out_label">Wyloguj się:</string>
+    <string name="settings_log_out_text">Aby się wylogować, kliknij przycisk</string>
+    <string name="settings_log_out_button">Wyloguj</string>
     <string name="settings_account_label">Usuń konto:</string>
     <string name="settings_acc_delete_instruction">Aby usunąć konto, kliknij przycisk</string>
     <string name="settings_delete_button">Usuń</string>
+
+    <string name="settings_log_out_alert_title">Wyloguj się</string>
+    <string name="settings_log_out_account_alert_message">Czy jesteś pewny, że chcesz się wylogować?</string>
+    <string name="settings_log_out_account_alert_confirm">Wyloguj</string>
+    <string name="settings_log_out_account_alert_decline">Przerwij</string>
 
     <string name="settings_delete_account_alert_title">Usuń konto</string>
     <string name="settings_delete_account_alert_message">Czy jesteś pewny, że chcesz usunąć swoje konto? Nie będzie można przywrócić tego konta</string>

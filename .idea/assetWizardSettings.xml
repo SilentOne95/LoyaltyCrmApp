@@ -45,8 +45,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\png\ic_menu_options.png" />
-                                      <entry key="outputName" value="ic_menu_options" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\ic_log_off_account.png" />
+                                      <entry key="outputName" value="ic_log_out_account" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
                                     </map>
