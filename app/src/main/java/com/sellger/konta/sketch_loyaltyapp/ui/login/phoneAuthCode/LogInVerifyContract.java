@@ -17,5 +17,11 @@ public interface LogInVerifyContract {
         void signInWithPhoneAuthCredential(PhoneAuthCredential credential);
 
         void convertAnonymousAccount(AuthCredential credential);
+
+        void subscribeToTopics(String subscriptionType);
+    }
+
+    interface Presenter {
+
     }
 }

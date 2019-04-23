@@ -20,17 +20,24 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthSettings;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
 
 public class LogInVerifyFragment extends BaseFragment implements LogInVerifyContract.View {
 
     private static final String TAG = LogInVerifyFragment.class.getSimpleName();
+
+    LogInVerifyPresenter presenter;
 
     private TextInputEditText mTextInputCode;
     private TextView mTextWaitingForCode , mTextProvidedPhoneNumber;
@@ -67,6 +74,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
         // Init views
         initViews();
+
+        // Setting up presenter
+        presenter = new LogInVerifyPresenter(this);
 
         // Log In with Phone Number
         mCallbacksPhoneNumber = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -191,7 +201,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = task.getResult().getUser();
+
+                        // Subscribe user to topics of push notifications
+                        subscribeToTopics(REGISTRATION_NORMAL);
 
                         // Switch layout to "home" with delay
                         // TODO: Workaround
@@ -212,7 +224,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "linkWithCredential:success");
-                        FirebaseUser user = task.getResult().getUser();
+
+                        // Subscribe user to topics of push notifications
+                        subscribeToTopics(REGISTRATION_CONVERSION);
 
                         // Switch layout to "home" with delay
                         // TODO: Workaround
@@ -224,5 +238,26 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    public void subscribeToTopics(String subscriptionType) {
+        String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
+
+        switch (subscriptionType) {
+            case REGISTRATION_NORMAL:
+                for (String topic : topicsList) {
+                    presenter.subscribeToTopic(topic);
+                }
+                break;
+            case REGISTRATION_CONVERSION:
+                for (String topic : topicsList) {
+                    presenter.subscribeToTopic(topic);
+                }
+                presenter.unsubscribeFromTopic(ANONYMOUS_TOPIC_NAME);
+                break;
+            default:
+                break;
+        }
     }
 }

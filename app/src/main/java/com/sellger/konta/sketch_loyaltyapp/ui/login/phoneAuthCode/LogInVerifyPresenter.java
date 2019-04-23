@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.ui.login;
+package com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -6,14 +6,14 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sellger.konta.sketch_loyaltyapp.service.ManageTopicsSubscriptions;
 
-public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubscriptions {
+public class LogInVerifyPresenter implements LogInVerifyContract.Presenter, ManageTopicsSubscriptions {
 
-    private static final String TAG = LogInPresenter.class.getSimpleName();
+    private static final String TAG = LogInVerifyPresenter.class.getSimpleName();
 
     @Nullable
-    private LogInContract.View view;
+    private LogInVerifyContract.View view;
 
-    LogInPresenter(@Nullable LogInContract.View view) {
+    LogInVerifyPresenter(@Nullable LogInVerifyContract.View view) {
         this.view = view;
     }
 
