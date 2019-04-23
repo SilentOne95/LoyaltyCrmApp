@@ -17,6 +17,10 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
+
 public class SettingsActivity extends BaseActivity implements SettingsContract.View, View.OnClickListener,
         CompoundButton.OnCheckedChangeListener {
 
@@ -47,8 +51,11 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         mPrivacyText.setOnClickListener(this);
         mLicensesText.setOnClickListener(this);
 
+        mSwitchFirstTopic.setChecked(true);
         mSwitchFirstTopic.setOnCheckedChangeListener(this);
+        mSwitchSecondTopic.setChecked(true);
         mSwitchSecondTopic.setOnCheckedChangeListener(this);
+        mSwitchThirdTopic.setChecked(true);
         mSwitchThirdTopic.setOnCheckedChangeListener(this);
 
         mDeleteButton.setOnClickListener(this);
@@ -85,10 +92,25 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.settings_notification_switch_one:
+                if (isChecked) {
+                    presenter.subscribeToTopic(FIRST_TOPIC_NAME);
+                } else {
+                    presenter.unsubscribeFromTopic(FIRST_TOPIC_NAME);
+                }
                 break;
             case R.id.settings_notification_switch_two:
+                if (isChecked) {
+                    presenter.subscribeToTopic(SECOND_TOPIC_NAME);
+                } else {
+                    presenter.unsubscribeFromTopic(SECOND_TOPIC_NAME);
+                }
                 break;
             case R.id.settings_notification_switch_three:
+                if (isChecked) {
+                    presenter.subscribeToTopic(THIRD_TOPIC_NAME);
+                } else {
+                    presenter.unsubscribeFromTopic(THIRD_TOPIC_NAME);
+                }
                 break;
             default:
                 break;
@@ -111,6 +133,12 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.delete().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                // Remove topics subscriptions
+                String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
+                for (String topic : topicsList) {
+                    presenter.unsubscribeFromTopic(topic);
+                }
+
                 // Start MainActivity to show Login layout as current account was deleted
                 SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
             }

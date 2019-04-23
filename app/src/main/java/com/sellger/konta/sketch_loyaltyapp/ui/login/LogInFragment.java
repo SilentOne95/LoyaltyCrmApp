@@ -36,6 +36,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.Arrays;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_REGISTRATION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PHONE;
@@ -44,6 +46,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.RC_SIGN_IN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_ANONYMOUS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
 
 public class LogInFragment extends BaseFragment implements LogInContract.View, View.OnClickListener {
 
@@ -308,20 +312,22 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     @Override
     public void subscribeToTopics(String subscriptionType) {
+        String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
+
         switch (subscriptionType) {
             case REGISTRATION_NORMAL:
-                presenter.subscribeToFirstTopic();
-                presenter.subscribeToSecondTopic();
-                presenter.subscribeToThirdTopic();
+                for (String topic : topicsList) {
+                    presenter.subscribeToTopic(topic);
+                }
                 break;
             case REGISTRATION_ANONYMOUS:
-                presenter.subscribeToAnonymousTopic();
+                presenter.subscribeToTopic(ANONYMOUS_TOPIC_NAME);
                 break;
             case REGISTRATION_CONVERSION:
-                presenter.subscribeToFirstTopic();
-                presenter.subscribeToSecondTopic();
-                presenter.subscribeToThirdTopic();
-                presenter.unsubscribeFromAnonymousTopic();
+                for (String topic : topicsList) {
+                    presenter.subscribeToTopic(topic);
+                }
+                presenter.unsubscribeFromTopic(ANONYMOUS_TOPIC_NAME);
                 break;
             default:
                 break;

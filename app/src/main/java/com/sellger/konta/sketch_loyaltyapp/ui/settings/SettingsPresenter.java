@@ -4,14 +4,9 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.sellger.konta.sketch_loyaltyapp.service.SubscribeToTopic;
+import com.sellger.konta.sketch_loyaltyapp.service.ManageTopicsSubscriptions;
 
-import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
-
-public class SettingsPresenter implements SettingsContract.Presenter, SubscribeToTopic.NonAnonymousTopic,
-        SubscribeToTopic.UnsubscribeFromTopic {
+public class SettingsPresenter implements SettingsContract.Presenter, ManageTopicsSubscriptions {
 
     private static final String TAG = SettingsPresenter.class.getSimpleName();
 
@@ -23,55 +18,19 @@ public class SettingsPresenter implements SettingsContract.Presenter, SubscribeT
     }
 
     @Override
-    public void subscribeToFirstTopic() {
-        FirebaseMessaging.getInstance().subscribeToTopic(FIRST_TOPIC_NAME).addOnCompleteListener(task -> {
+    public void subscribeToTopic(String topic) {
+        FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsuccessfully subscribed to: news");
+                Log.d(TAG, "Subscribe failed: " + topic);
             }
         });
     }
 
     @Override
-    public void subscribeToSecondTopic() {
-        FirebaseMessaging.getInstance().subscribeToTopic(SECOND_TOPIC_NAME).addOnCompleteListener(task -> {
+    public void unsubscribeFromTopic(String topic) {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(topic).addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsuccessfully subscribed to: offers");
-            }
-        });
-    }
-
-    @Override
-    public void subscribeToThirdTopic() {
-        FirebaseMessaging.getInstance().subscribeToTopic(THIRD_TOPIC_NAME).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsuccessfully subscribed to: discounts");
-            }
-        });
-    }
-
-    @Override
-    public void unsubscribeFromFirstTopic() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(FIRST_TOPIC_NAME).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsubscription failed: news");
-            }
-        });
-    }
-
-    @Override
-    public void unsubscribeFromSecondTopic() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(SECOND_TOPIC_NAME).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsubscription failed: offers");
-            }
-        });
-    }
-
-    @Override
-    public void unsubscribeFromThirdTopic() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(THIRD_TOPIC_NAME).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsubscription failed: discounts");
+                Log.d(TAG, "Unsubscribe failed: " + topic);
             }
         });
     }
