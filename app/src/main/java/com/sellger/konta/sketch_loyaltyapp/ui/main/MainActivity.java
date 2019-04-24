@@ -228,10 +228,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 setLogInFragment(new LogInFragment());
                 break;
             case "LogInFragment":
-                // TODO:
-                // Replace hardcoded variables
-                presenter.displaySelectedScreen(LAYOUT_TYPE_HOME, LAYOUT_DATA_EMPTY_STRING);
-                presenter.passIdOfSelectedView(0);
+                if (mFirebaseAuth.getCurrentUser() != null) {
+                    presenter.displaySelectedScreen(LAYOUT_TYPE_HOME, LAYOUT_DATA_EMPTY_STRING);
+                    presenter.passIdOfSelectedView(0);
+                }
                 break;
             case "ScannerCameraFragment":
                 presenter.displaySelectedScreen(LAYOUT_TYPE_SCANNER, LAYOUT_DATA_EMPTY_STRING);
