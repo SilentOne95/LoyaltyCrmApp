@@ -102,8 +102,6 @@
     <string name="settings_notification_topic_news">Nowości</string>
     <string name="settings_notification_topic_offers">Oferty specjalne</string>
     <string name="settings_notification_topic_discount">Zniżki</string>
-    <string name="settings_permissions_label">Udzielone zgody:</string>
-    <string name="settings_permission_location">Lokalizacja urządzenia</string>
     <string name="settings_terms_label">Regulaminy:</string>
     <string name="settings_terms_conditions_link">Warunki i zasady świadczenia usług</string>
     <string name="settings_terms_privacy_link">Polityka prywatności</string>

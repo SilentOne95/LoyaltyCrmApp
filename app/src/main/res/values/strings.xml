@@ -117,8 +117,6 @@
     <string name="settings_notification_topic_news">News</string>
     <string name="settings_notification_topic_offers">Special offers</string>
     <string name="settings_notification_topic_discount">Discounts</string>
-    <string name="settings_permissions_label">Permissions:</string>
-    <string name="settings_permission_location">Access to device location</string>
     <string name="settings_terms_label">Terms and privacy policy:</string>
     <string name="settings_terms_conditions_link"><![CDATA[Terms & conditions]]></string>
     <string name="settings_terms_privacy_link">Privacy policy</string>
