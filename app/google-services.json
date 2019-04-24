@@ -29,6 +29,10 @@
             "package_name": "com.sellger.konta.sketch_loyaltyapp",
             "certificate_hash": "00be513ce6453ea6bce8e951de44ffb811354a66"
           }
+        },
+        {
+          "client_id": "580087034404-mnh7qoedfvb40ih9qfda1nrpml3s6jap.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
