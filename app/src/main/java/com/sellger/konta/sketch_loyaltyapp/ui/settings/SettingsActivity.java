@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +12,17 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity;
+
+import java.util.List;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
@@ -146,9 +153,36 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     @Override
     public void logOutAccount() {
+        switch (checkAuthMethod()) {
+            case "google.com":
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .build();
+                GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+                mGoogleSignInClient.signOut();
+                break;
+            case "facebook.com":
+                LoginManager.getInstance().logOut();
+                break;
+            default:
+                break;
+        }
+
         FirebaseAuth.getInstance().signOut();
 
         unsubscribeAndUpdateUI();
+    }
+
+    private String checkAuthMethod() {
+        String authMethod = "";
+        if (FirebaseAuth.getInstance().getCurrentUser().getProviders() != null) {
+            List<String> providers = FirebaseAuth.getInstance().getCurrentUser().getProviders();
+            for (String string : providers) {
+                Log.d(TAG, "provider " + string);
+                authMethod = string;
+            }
+        }
+
+        return authMethod;
     }
 
     @Override
