@@ -2,6 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.settings;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SHARED_PREF_FILE_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
 
 public class SettingsActivity extends BaseActivity implements SettingsContract.View, View.OnClickListener,
@@ -39,6 +41,8 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     private Switch mSwitchFirstTopic, mSwitchSecondTopic, mSwitchThirdTopic;
     private Button mLogOutButton, mDeleteButton;
 
+    private SharedPreferences preferences;
+
     @Override
     protected int getLayout() {
         return R.layout.activity_settings;
@@ -50,6 +54,12 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
         setTitle("Ustawienia");
 
+        // Setting up presenter
+        presenter = new SettingsPresenter(this);
+
+        // Init SharedPrefs for saving switch states
+        preferences = getSharedPreferences(SHARED_PREF_FILE_NAME, MODE_PRIVATE);
+
         // Init views
         initViews();
 
@@ -58,18 +68,16 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         mPrivacyText.setOnClickListener(this);
         mLicensesText.setOnClickListener(this);
 
-        mSwitchFirstTopic.setChecked(true);
+        mSwitchFirstTopic.setChecked(presenter.getSwitchState(preferences, FIRST_TOPIC_NAME));
+        mSwitchSecondTopic.setChecked(presenter.getSwitchState(preferences, SECOND_TOPIC_NAME));
+        mSwitchThirdTopic.setChecked(presenter.getSwitchState(preferences, THIRD_TOPIC_NAME));
+
         mSwitchFirstTopic.setOnCheckedChangeListener(this);
-        mSwitchSecondTopic.setChecked(true);
         mSwitchSecondTopic.setOnCheckedChangeListener(this);
-        mSwitchThirdTopic.setChecked(true);
         mSwitchThirdTopic.setOnCheckedChangeListener(this);
 
         mLogOutButton.setOnClickListener(this);
         mDeleteButton.setOnClickListener(this);
-
-        // Setting up presenter
-        presenter = new SettingsPresenter(this);
     }
 
     @Override
@@ -104,27 +112,13 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.settings_notification_switch_one:
-                if (isChecked) {
-                    presenter.subscribeToTopic(FIRST_TOPIC_NAME);
-                } else {
-                    presenter.unsubscribeFromTopic(FIRST_TOPIC_NAME);
-                }
+                presenter.saveSwitchState(preferences, FIRST_TOPIC_NAME, isChecked);
                 break;
             case R.id.settings_notification_switch_two:
-                if (isChecked) {
-                    presenter.subscribeToTopic(SECOND_TOPIC_NAME);
-                } else {
-                    presenter.unsubscribeFromTopic(SECOND_TOPIC_NAME);
-                }
+                presenter.saveSwitchState(preferences, SECOND_TOPIC_NAME, isChecked);
                 break;
             case R.id.settings_notification_switch_three:
-                if (isChecked) {
-                    presenter.subscribeToTopic(THIRD_TOPIC_NAME);
-                } else {
-                    presenter.unsubscribeFromTopic(THIRD_TOPIC_NAME);
-                }
-                break;
-            default:
+                presenter.saveSwitchState(preferences, THIRD_TOPIC_NAME, isChecked);
                 break;
         }
     }

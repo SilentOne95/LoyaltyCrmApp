@@ -70,4 +70,7 @@ public final class Constants {
     public static final String LAYOUT_TYPE_CODE = "code";
 
     public static final String LAYOUT_DATA_EMPTY_STRING = "";
+
+    // Settings - SharedPref file name
+    public static final String SHARED_PREF_FILE_NAME = "switchState";
 }
