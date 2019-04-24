@@ -11,10 +11,12 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -74,6 +76,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         private ImageView imageView;
         private TextView titleView, codeText, descriptionText, discountMarker, basicPrice, newPrice;
         private Button checkCodeButton, showDetailsButton;
+        private ProgressBar progressBar;
 
         ViewHolder(@NonNull final View view) {
             super(view);
@@ -88,6 +91,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             showDetailsButton.setOnClickListener(this);
             checkCodeButton = view.findViewById(R.id.grid_item_show_code_button);
             checkCodeButton.setOnClickListener(this);
+            progressBar = view.findViewById(R.id.progress_bar_coupon);
         }
 
         @Override
@@ -132,7 +136,17 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .error(R.drawable.no_image_available)
                     .resize(imageWidth, imageHeight)
-                    .into(holder.imageView);
+                    .into(holder.imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.progressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            holder.progressBar.setVisibility(View.GONE);
+                        }
+                    });
         } else {
             Picasso.get()
                     .load(R.drawable.no_image_available)
