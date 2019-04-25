@@ -26,9 +26,6 @@ public interface MapContract {
         void setBottomSheetState(int state);
 
         void setUpBottomSheetPanelWithData(String title, String address, String openHours);
-
-        String getDefaultPlaceTitle();
-        String getDefaultPlaceData();
     }
 
     interface Presenter {
@@ -39,10 +36,9 @@ public interface MapContract {
         void switchBottomSheetState(Object object);
 
         void setUpObservable();
-        void passDataToView(Marker marker);
+        void passDataToView(String title, String address, String openHours);
 
-        void findSelectedMarkerId(int markerId);
-        String getCurrentDay();
+        void findSelectedMarkerData(int markerId);
         void passDataToBottomSheet(int markerId);
     }
 
@@ -52,5 +48,7 @@ public interface MapContract {
 
         Disposable fetchDataFromServer(OpeningHoursPresenter openingHoursPresenter);
         Disposable fetchDataFromServer(ContactInfoPresenter contactInfoPresenter);
+
+        void getMarkerData(int markerId);
     }
 }

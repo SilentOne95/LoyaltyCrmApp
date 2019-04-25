@@ -126,8 +126,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
 
         // Display relevant view based on whether user is already logged or not
-        // TODO:
-        // Replace hardcoded variables
         if (mFirebaseAuth.getCurrentUser() != null) {
             presenter.displayHomeScreen(LAYOUT_TYPE_HOME);
         } else {

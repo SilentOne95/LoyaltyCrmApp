@@ -1,11 +1,15 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
+import android.text.TextUtils;
+
 import com.sellger.konta.sketch_loyaltyapp.network.Api;
 import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
 import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
+import com.sellger.konta.sketch_loyaltyapp.pojo.map.OpenHour;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.contactInfo.ContactInfoPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours.OpeningHoursPresenter;
 
+import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -19,6 +23,10 @@ public class MapModel implements MapContract.Model {
     private MapPresenter presenter;
     private OpeningHoursPresenter openingHoursPresenter;
     private ContactInfoPresenter contactInfoPresenter;
+
+    private List<Marker> listOfMarkers = null;
+    private int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+
 
     @Override
     public Disposable fetchDataFromServer(MapPresenter presenter) {
@@ -37,6 +45,7 @@ public class MapModel implements MapContract.Model {
         return new DisposableSingleObserver<List<Marker>>() {
             @Override
             public void onSuccess(List<Marker> markerList) {
+                listOfMarkers = markerList;
                 presenter.passDataToCluster(markerList);
             }
 
@@ -79,5 +88,93 @@ public class MapModel implements MapContract.Model {
     public Disposable fetchDataFromServer(ContactInfoPresenter contactInfoPresenter) {
         this.contactInfoPresenter = contactInfoPresenter;
         return getObservable().subscribeWith(getObserverContact());
+    }
+
+    @Override
+    public void getMarkerData(int markerId) {
+        int markerPosition = 0;
+
+        for (int i = 0; i < listOfMarkers.size(); i++) {
+            if (listOfMarkers.get(i).getId().equals(markerId)) {
+                markerPosition = i;
+                break;
+            }
+        }
+
+        Marker selectedMarker = listOfMarkers.get(markerPosition);
+
+        String title, address, openHours;
+        title = address = openHours = "Unable to display";
+
+        if (!TextUtils.isEmpty(selectedMarker.getTitle())) {
+            title = selectedMarker.getTitle();
+        }
+
+        if (!TextUtils.isEmpty(selectedMarker.getAddress()) && !TextUtils.isEmpty(selectedMarker.getPostCode())
+                && !TextUtils.isEmpty(selectedMarker.getCity())) {
+            address = selectedMarker.getAddress() + ", " +
+                    selectedMarker.getPostCode() + " " +
+                    selectedMarker.getCity();
+        }
+
+        if (selectedMarker.getOpenHours() != null && selectedMarker.getOpenHours().get(0).getDayName() != null) {
+            for (int i = 0; i < selectedMarker.getOpenHours().size(); i++) {
+                if (selectedMarker.getOpenHours().get(i).getDayName().equals(getCurrentDay())) {
+                    OpenHour obj = selectedMarker.getOpenHours().get(i);
+                    if (!obj.getOpenHour().equals("None") && !obj.getOpenMinute().equals("None") &&
+                            !obj.getCloseHour().equals("None") && !obj.getCloseMinute().equals("None")){
+                        openHours = "Today open:" + " " +
+                                obj.getOpenHour() + ":" +
+                                obj.getOpenMinute() + " - " +
+                                obj.getCloseHour() + ":" +
+                                obj.getCloseMinute();
+                    } else if (obj.getOpenHour().equals(obj.getCloseHour()) &&
+                            obj.getOpenMinute().equals(obj.getCloseMinute()) &&
+                            !obj.getOpenHour().equals("None")) {
+                        openHours = "All day";
+                    } else {
+                        openHours = "Closed";
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        presenter.passDataToView(title, address, openHours);
+    }
+
+    private String getCurrentDay() {
+        String day;
+
+        switch (currentDay){
+            case 1:
+                day = "sunday";
+                break;
+            case 2:
+                day = "monday";
+                break;
+            case 3:
+                day = "tuesday";
+                break;
+            case 4:
+                day = "wednesday";
+                break;
+            case 5:
+                day = "thursday";
+                break;
+            case 6:
+                day = "friday";
+                break;
+            case 7:
+                day = "saturday";
+                break;
+
+            default:
+                day = "";
+                break;
+        }
+
+        return day;
     }
 }

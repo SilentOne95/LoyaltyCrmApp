@@ -472,17 +472,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mBottomSheetBehavior.setState(state);
     }
 
-    // TODO: Display relevant info
-    @Override
-    public String getDefaultPlaceTitle() {
-        return " ";
-    }
-
-    @Override
-    public String getDefaultPlaceData() {
-        return " ";
-    }
-
     @Override
     public void setUpBottomSheetPanelWithData(String title, String address, String openHours) {
         if (openHours.contains("Today open:")) {
