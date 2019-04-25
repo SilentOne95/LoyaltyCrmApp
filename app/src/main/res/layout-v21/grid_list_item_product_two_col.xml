@@ -9,13 +9,32 @@
     android:elevation="@dimen/grid_item_elevation"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/grid_item_image"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/grid_item_image_height_two_rows"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/grid_list_item_content_desc"
-        android:scaleType="fitStart" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/grid_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/grid_item_image_height_two_rows"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/grid_list_item_content_desc"
+            android:scaleType="fitStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_product"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/grid_item_image_height_two_rows"
+            android:layout_centerInParent="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

@@ -11,10 +11,12 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.pojo.product.Product;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -73,6 +75,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         private ImageView imageView;
         private TextView titleView, price, shortDescription;
         private Button button;
+        private ProgressBar progressBar;
 
         ViewHolder(@NonNull View view) {
             super(view);
@@ -82,6 +85,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             shortDescription = view.findViewById(R.id.grid_item_content_description);
             button = view.findViewById(R.id.grid_item_view_details_button);
             button.setOnClickListener(this);
+            progressBar = view.findViewById(R.id.progress_bar_product);
         }
 
         @Override
@@ -117,7 +121,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .error(R.drawable.no_image_available)
                     .resize(imageWidth, imageHeight)
-                    .into(holder.imageView);
+                    .into(holder.imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.progressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            holder.progressBar.setVisibility(View.GONE);
+                        }
+                    });
         } else {
             Picasso.get()
                     .load(R.drawable.no_image_available)
