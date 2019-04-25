@@ -472,18 +472,15 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mBottomSheetBehavior.setState(state);
     }
 
+    // TODO: Display relevant info
     @Override
     public String getDefaultPlaceTitle() {
         return " ";
-//        return getString(getResources()
-//                .getIdentifier("bottom_sheet_default_place_title", "string", PACKAGE_NAME));
     }
 
     @Override
     public String getDefaultPlaceData() {
         return " ";
-//        return getString(getResources()
-//                .getIdentifier("bottom_sheet_default_no_info_text", "string", PACKAGE_NAME));
     }
 
     @Override

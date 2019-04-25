@@ -25,13 +25,9 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_TOPIC_NAME;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
 
 public class LogInVerifyFragment extends BaseFragment implements LogInVerifyContract.View {
 
@@ -203,11 +199,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         Log.d(TAG, "signInWithCredential:success");
 
                         // Subscribe user to topics of push notifications
-                        subscribeToTopics(REGISTRATION_NORMAL);
+                        presenter.manageTopicsSubscriptions(REGISTRATION_NORMAL);
 
-                        // Switch layout to "home" with delay
-                        // TODO: Workaround
-                        // Pass string to display / hide information about account in nav view header
+                        // Open "home" view with delay, pass string to display / hide information about account in nav view header
                         new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),2000);
                     } else {
                         Log.d(TAG, "signInWithCredential:failure", task.getException());
@@ -226,11 +220,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         Log.d(TAG, "linkWithCredential:success");
 
                         // Subscribe user to topics of push notifications
-                        subscribeToTopics(REGISTRATION_CONVERSION);
+                        presenter.manageTopicsSubscriptions(REGISTRATION_CONVERSION);
 
-                        // Switch layout to "home" with delay
-                        // TODO: Workaround
-                        // Pass string to display / hide information about account in nav view header
+                        // Open "home" view with delay, pass string to display / hide information about account in nav view header
                         new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),5000);
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
@@ -238,26 +230,5 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    @Override
-    public void subscribeToTopics(String subscriptionType) {
-        String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
-
-        switch (subscriptionType) {
-            case REGISTRATION_NORMAL:
-                for (String topic : topicsList) {
-                    presenter.subscribeToTopic(topic);
-                }
-                break;
-            case REGISTRATION_CONVERSION:
-                for (String topic : topicsList) {
-                    presenter.subscribeToTopic(topic);
-                }
-                presenter.unsubscribeFromTopic(ANONYMOUS_TOPIC_NAME);
-                break;
-            default:
-                break;
-        }
     }
 }

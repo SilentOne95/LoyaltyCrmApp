@@ -99,7 +99,7 @@ public class MapPresenter implements MapContract.Presenter {
 
             @Override
             public void onNext(Integer markerId) {
-                Log.d(TAG, "onNext" + String.valueOf(markerId));
+                Log.d(TAG, "onNext" + markerId);
                 findSelectedMarkerId(markerId);
             }
 

@@ -14,7 +14,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
 
-public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubscriptions {
+public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubscriptions.ManageSingleTopic,
+        ManageTopicsSubscriptions.ManageAllTopics {
 
     private static final String TAG = LogInPresenter.class.getSimpleName();
 

@@ -7,7 +7,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sellger.konta.sketch_loyaltyapp.service.ManageTopicsSubscriptions;
 
-public class SettingsPresenter implements SettingsContract.Presenter, ManageTopicsSubscriptions {
+public class SettingsPresenter implements SettingsContract.Presenter, ManageTopicsSubscriptions.ManageSingleTopic {
 
     private static final String TAG = SettingsPresenter.class.getSimpleName();
 
