@@ -77,80 +77,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/barcode_scanner_instruction_text_view" />
 
-        <!--<android.support.constraint.ConstraintLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@drawable/grid_item_shadow"-->
-            <!--tools:context=".ui.barcodeScanner.instruction.ScanResultFragment">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/barcode_scanner_switch_one_text_view"-->
-                <!--style="@style/text_regular"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="@dimen/mid_value"-->
-                <!--android:layout_marginTop="@dimen/small_value"-->
-                <!--android:layout_marginBottom="@dimen/small_value"-->
-                <!--android:text="@string/barcode_scanner_switch_focus_text"-->
-                <!--app:layout_constraintBottom_toTopOf="@+id/barcode_scanner_switch_two_text_view"-->
-                <!--app:layout_constraintStart_toStartOf="parent" />-->
-
-            <!--<Switch-->
-                <!--android:id="@+id/barcode_scanner_switch_button_one"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="@dimen/small_value"-->
-                <!--android:theme="@style/switch_style"-->
-                <!--app:layout_constraintBottom_toBottomOf="@+id/barcode_scanner_switch_one_text_view"-->
-                <!--app:layout_constraintStart_toEndOf="@+id/barcode_scanner_switch_one_text_view"-->
-                <!--app:layout_constraintTop_toTopOf="@+id/barcode_scanner_switch_one_text_view" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/barcode_scanner_switch_two_text_view"-->
-                <!--style="@style/text_regular"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="@dimen/mid_value"-->
-                <!--android:layout_marginBottom="@dimen/big_value"-->
-                <!--android:text="@string/barcode_scanner_switch_flash_text"-->
-                <!--app:layout_constraintBottom_toTopOf="@+id/barcode_scanner_scan_button"-->
-                <!--app:layout_constraintStart_toStartOf="parent" />-->
-
-            <!--<Switch-->
-                <!--android:id="@+id/barcode_scanner_switch_button_two"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:theme="@style/switch_style"-->
-                <!--app:layout_constraintBottom_toBottomOf="@+id/barcode_scanner_switch_two_text_view"-->
-                <!--app:layout_constraintStart_toStartOf="@+id/barcode_scanner_switch_button_one"-->
-                <!--app:layout_constraintTop_toTopOf="@+id/barcode_scanner_switch_two_text_view" />-->
-
-            <!--<Button-->
-                <!--android:id="@+id/barcode_scanner_scan_button"-->
-                <!--style="@style/button_color_accent"-->
-                <!--android:layout_width="@dimen/button_basic_width"-->
-                <!--android:layout_height="@dimen/button_basic_height"-->
-                <!--android:layout_marginStart="@dimen/small_value"-->
-                <!--android:layout_marginEnd="@dimen/small_value"-->
-                <!--android:layout_marginBottom="@dimen/mid_value"-->
-                <!--android:text="@string/barcode_scanner_button_text"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent" />-->
-
-        <!--</android.support.constraint.ConstraintLayout>-->
-
         <Button
             android:id="@+id/barcode_scanner_scan_button"
             style="@style/button_color_accent"
             android:layout_width="@dimen/button_basic_width"
             android:layout_height="@dimen/button_basic_height"
+            android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/small_value"
+            android:layout_marginTop="@dimen/very_big_value"
             android:layout_marginEnd="@dimen/small_value"
             android:layout_marginBottom="@dimen/mid_value"
-            android:layout_marginTop="@dimen/very_big_value"
-            android:text="@string/barcode_scanner_button_text"
-            android:layout_gravity="center_horizontal"/>
+            android:text="@string/barcode_scanner_button_text" />
 
     </LinearLayout>
 

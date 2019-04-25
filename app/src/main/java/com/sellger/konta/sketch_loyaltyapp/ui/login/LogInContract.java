@@ -11,23 +11,22 @@ public interface LogInContract {
         void initViews();
 
         void googleSignIn();
-        void signInWithGoogleCredential(AuthCredential credential);
         void firebaseAuthWithGoogle(GoogleSignInAccount account);
 
         void facebookSignIn();
-        void signInWithFacebookCredential(AuthCredential credential);
         void handleFacebookAccessToken(AccessToken token);
+
+        void signInWithCredential(AuthCredential credential);
 
         void anonymousSignIn();
 
         void convertAnonymousAccount(AuthCredential credential);
 
         void displayAccountAlreadyExists();
-
-        void subscribeToTopics(String subscriptionType);
     }
 
     interface Presenter {
 
+        void manageTopicsSubscriptions(String subscriptionType);
     }
 }

@@ -36,18 +36,13 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.Arrays;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_REGISTRATION;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_TOPIC_NAME;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PHONE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.RC_SIGN_IN;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_ANONYMOUS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
 
 public class LogInFragment extends BaseFragment implements LogInContract.View, View.OnClickListener {
 
@@ -173,30 +168,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         if (mFirebaseAuth.getCurrentUser() != null) {
             convertAnonymousAccount(credential);
         } else {
-            signInWithGoogleCredential(credential);
+            signInWithCredential(credential);
         }
-    }
-
-    @Override
-    public void signInWithGoogleCredential(AuthCredential credential) {
-        mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), task -> {
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithCredential:success");
-
-                        // Subscribe user to topics of push notifications
-                        subscribeToTopics(REGISTRATION_NORMAL);
-
-                        // Open "home" view
-                        // TODO: Workaround
-                        // Pass string to display / hide information about account in nav view header
-                        navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
-                    } else {
-                        // If sign in fails, display a message to the user
-                        Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
-                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-                    }
-                });
     }
 
     @Override
@@ -212,23 +185,21 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         if (mFirebaseAuth.getCurrentUser() != null) {
             convertAnonymousAccount(credential);
         } else {
-            signInWithFacebookCredential(credential);
+            signInWithCredential(credential);
         }
     }
 
     @Override
-    public void signInWithFacebookCredential(AuthCredential credential) {
+    public void signInWithCredential(AuthCredential credential) {
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
 
                         // Subscribe user to topics of push notifications
-                        subscribeToTopics(REGISTRATION_NORMAL);
+                        presenter.manageTopicsSubscriptions(REGISTRATION_NORMAL);
 
-                        // Open "home" view
-                        // TODO: Workaround
-                        // Pass string to display / hide information about account in nav view header
+                        // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user
@@ -268,11 +239,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         Log.d(TAG, "signInAnonymously:success");
 
                         // Subscribe user to topics of push notifications
-                        subscribeToTopics(ANONYMOUS_REGISTRATION);
+                        presenter.manageTopicsSubscriptions(ANONYMOUS_REGISTRATION);
 
-                        // Open "home" view
-                        // TODO: Workaround
-                        // Pass string to display / hide information about account in nav view header
+                        // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user.
@@ -291,11 +260,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         Log.d(TAG, "linkWithCredential:success");
 
                         // Subscribe user to topics of push notifications
-                        subscribeToTopics(REGISTRATION_CONVERSION);
+                        presenter.manageTopicsSubscriptions(REGISTRATION_CONVERSION);
 
-                        // Open "home" view
-                        // TODO: Workaround
-                        // Pass string to display / hide information about account in nav view header
+                        // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
@@ -308,29 +275,5 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     @Override
     public void displayAccountAlreadyExists() {
         Toast.makeText(getContext(), "Already signed in as a guest!\nPlease choose other option", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void subscribeToTopics(String subscriptionType) {
-        String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
-
-        switch (subscriptionType) {
-            case REGISTRATION_NORMAL:
-                for (String topic : topicsList) {
-                    presenter.subscribeToTopic(topic);
-                }
-                break;
-            case REGISTRATION_ANONYMOUS:
-                presenter.subscribeToTopic(ANONYMOUS_TOPIC_NAME);
-                break;
-            case REGISTRATION_CONVERSION:
-                for (String topic : topicsList) {
-                    presenter.subscribeToTopic(topic);
-                }
-                presenter.unsubscribeFromTopic(ANONYMOUS_TOPIC_NAME);
-                break;
-            default:
-                break;
-        }
     }
 }

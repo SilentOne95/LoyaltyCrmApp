@@ -6,6 +6,14 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sellger.konta.sketch_loyaltyapp.service.ManageTopicsSubscriptions;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_ANONYMOUS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
+
 public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubscriptions {
 
     private static final String TAG = LogInPresenter.class.getSimpleName();
@@ -15,6 +23,30 @@ public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubs
 
     LogInPresenter(@Nullable LogInContract.View view) {
         this.view = view;
+    }
+
+    @Override
+    public void manageTopicsSubscriptions(String subscriptionType) {
+        String[] topicsList = new String[]{FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
+
+        switch (subscriptionType) {
+            case REGISTRATION_NORMAL:
+                for (String topic : topicsList) {
+                    subscribeToTopic(topic);
+                }
+                break;
+            case REGISTRATION_ANONYMOUS:
+                subscribeToTopic(ANONYMOUS_TOPIC_NAME);
+                break;
+            case REGISTRATION_CONVERSION:
+                for (String topic : topicsList) {
+                    subscribeToTopic(topic);
+                }
+                unsubscribeFromTopic(ANONYMOUS_TOPIC_NAME);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

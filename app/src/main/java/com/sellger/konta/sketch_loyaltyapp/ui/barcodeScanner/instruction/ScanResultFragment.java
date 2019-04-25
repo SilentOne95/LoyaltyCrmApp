@@ -11,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
     private static final String TAG = CouponsFragment.class.getSimpleName();
 
     private TextView mScanResultTextView;
-    private Switch mAutoFocusSwitch, mFlashSwitch;
     private Button mScanButton;
 
     @Override
@@ -58,10 +56,6 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
     @Override
     public void initViews() {
         mScanResultTextView = rootView.findViewById(R.id.barcode_scanner_scan_result_text_view);
-
-//        mAutoFocusSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_one);
-//        mFlashSwitch = rootView.findViewById(R.id.barcode_scanner_switch_button_two);
-
         mScanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
     }
 
