@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -99,8 +100,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     // Geofences
     private GeofencingClient mGeofencingClient;
-    private List<Geofence> geofenceList = new ArrayList<>();
-    private PendingIntent geofencePendingIntent;
+    private List<Geofence> mGeofenceList = new ArrayList<>();
+    private PendingIntent mGeofencePendingIntent;
 
     @Override
     protected int getLayout() {
@@ -156,16 +157,16 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     private void startGeofence() {
+        Log.d(TAG, "startGeofence");
         mGeofencingClient = LocationServices.getGeofencingClient(getContext());
-        geofenceList.add(new Geofence.Builder()
+        mGeofenceList.add(new Geofence.Builder()
                 .setRequestId(TAG)
-                .setCircularRegion(52.2299, 21.003, 1500)
+                .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                .setCircularRegion(52.2299, 21.003, 500)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build());
 
-        int permission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
-
-        if (permission == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             mGeofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
                     .addOnSuccessListener(getActivity(), taskSuccess -> Log.d(TAG, "addGeofence: ok"))
                     .addOnFailureListener(getActivity(), taskFail -> Log.d(TAG, "addGeofence: fail"));
@@ -175,19 +176,29 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private GeofencingRequest getGeofencingRequest() {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
         builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
-        builder.addGeofences(geofenceList);
+        builder.addGeofences(mGeofenceList);
         return builder.build();
     }
 
     private PendingIntent getGeofencePendingIntent() {
-        if (geofencePendingIntent != null) {
-            return geofencePendingIntent;
+        if (mGeofencePendingIntent != null) {
+            return mGeofencePendingIntent;
         }
 
         Intent intent = new Intent(getContext(), GeofenceTransitionsIntentService.class);
-        geofencePendingIntent = PendingIntent.getService(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        mGeofencePendingIntent = PendingIntent.getService(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        return geofencePendingIntent;
+        return mGeofencePendingIntent;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mGeofencePendingIntent != null) {
+            mGeofencingClient.removeGeofences(getGeofencePendingIntent())
+                    .addOnSuccessListener(getActivity(), aVoid -> Log.d(TAG, "removeGeofences: success"))
+                    .addOnFailureListener(getActivity(), e -> Log.d(TAG, "removeGeofences: failure"));
+        }
     }
 
     @Override
