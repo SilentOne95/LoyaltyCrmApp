@@ -44,6 +44,7 @@
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="true" />
+        <service android:name=".service.GeofenceTransitionsIntentService" />
 
         <activity
             android:name="com.sellger.konta.sketch_loyaltyapp.ui.launch.LaunchActivity"

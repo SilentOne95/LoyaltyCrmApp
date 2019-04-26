@@ -2,6 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -27,10 +28,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
+import com.sellger.konta.sketch_loyaltyapp.service.GeofenceTransitionsIntentService;
 import com.sellger.konta.sketch_loyaltyapp.service.LocationService;
 import com.sellger.konta.sketch_loyaltyapp.service.TrackerService;
 import com.sellger.konta.sketch_loyaltyapp.utils.CustomClusterRenderer;
@@ -61,6 +66,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -91,8 +97,15 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
+    // Geofences
+    private GeofencingClient mGeofencingClient;
+    private List<Geofence> geofenceList = new ArrayList<>();
+    private PendingIntent geofencePendingIntent;
+
     @Override
-    protected int getLayout() { return R.layout.fragment_google_map; }
+    protected int getLayout() {
+        return R.layout.fragment_google_map;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -140,6 +153,41 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                 tab.setCustomView(pagerAdapter.getTabView(i));
             }
         }
+    }
+
+    private void startGeofence() {
+        mGeofencingClient = LocationServices.getGeofencingClient(getContext());
+        geofenceList.add(new Geofence.Builder()
+                .setRequestId(TAG)
+                .setCircularRegion(52.2299, 21.003, 1500)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build());
+
+        int permission = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permission == PackageManager.PERMISSION_GRANTED) {
+            mGeofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
+                    .addOnSuccessListener(getActivity(), taskSuccess -> Log.d(TAG, "addGeofence: ok"))
+                    .addOnFailureListener(getActivity(), taskFail -> Log.d(TAG, "addGeofence: fail"));
+        }
+    }
+
+    private GeofencingRequest getGeofencingRequest() {
+        GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
+        builder.addGeofences(geofenceList);
+        return builder.build();
+    }
+
+    private PendingIntent getGeofencePendingIntent() {
+        if (geofencePendingIntent != null) {
+            return geofencePendingIntent;
+        }
+
+        Intent intent = new Intent(getContext(), GeofenceTransitionsIntentService.class);
+        geofencePendingIntent = PendingIntent.getService(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        return geofencePendingIntent;
     }
 
     @Override
@@ -397,6 +445,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
                         startLocationService();
                         startTrackService();
+                        startGeofence();
                     }
                 } else {
                     // Permission denied, display Toast message
