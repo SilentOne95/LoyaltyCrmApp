@@ -8,6 +8,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DATABASE_PATH_LAT;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DATABASE_PATH_LNG;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DATABASE_PATH_LOCATION;
+
 class LocationResultHelper {
 
     private static final String TAG = LocationResultHelper.class.getSimpleName();
@@ -21,19 +25,19 @@ class LocationResultHelper {
     }
 
     void sendDataToServer() {
-        String userKey = FirebaseDatabase.getInstance().getReference(userId + "location").push().getKey();
+        String userKey = FirebaseDatabase.getInstance().getReference(userId + DATABASE_PATH_LOCATION).push().getKey();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
                 .child(userId)
-                .child("location")
+                .child(DATABASE_PATH_LOCATION)
                 .child(userKey);
 
         for (int i = 0; i < mLocations.size(); i++) {
             reference
-                    .child("lat")
+                    .child(DATABASE_PATH_LAT)
                     .setValue(mLocations.get(i).getLatitude());
 
             reference
-                    .child("lng")
+                    .child(DATABASE_PATH_LNG)
                     .setValue(mLocations.get(i).getLongitude());
         }
     }

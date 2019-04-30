@@ -28,7 +28,8 @@ public class LocationUpdatesBroadcastReceiver extends BroadcastReceiver {
                     LocationResultHelper locationResultHelper = new LocationResultHelper(locations);
                     locationResultHelper.sendDataToServer();
 
-                    SendNotificationHelper sendNotificationHelper = new SendNotificationHelper(context, "broadcast");
+                    SendNotificationHelper sendNotificationHelper = new SendNotificationHelper(context,
+                            "Location data has been sent to server");
                     sendNotificationHelper.send();
                 }
             }

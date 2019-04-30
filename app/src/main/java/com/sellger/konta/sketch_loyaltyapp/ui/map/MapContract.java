@@ -18,8 +18,6 @@ public interface MapContract {
 
         void setUpGoogleApiClient();
         void checkLocationPermission();
-        void startTrackService();
-        void startLocationService();
         void requestLocationUpdates();
         PendingIntent getPendingIntent();
 

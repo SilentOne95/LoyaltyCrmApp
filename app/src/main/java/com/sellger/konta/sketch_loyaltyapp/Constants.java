@@ -77,4 +77,9 @@ public final class Constants {
 
     // Settings - SharedPref file name
     public static final String SHARED_PREF_FILE_NAME = "switchState";
+
+    // Firebase Realtime Database path
+    public static final String DATABASE_PATH_LOCATION = "location";
+    public static final String DATABASE_PATH_LAT = "latitude";
+    public static final String DATABASE_PATH_LNG = "longitude";
 }
