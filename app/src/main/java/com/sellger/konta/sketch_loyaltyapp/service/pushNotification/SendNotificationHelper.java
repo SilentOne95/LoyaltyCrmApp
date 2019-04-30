@@ -14,19 +14,19 @@ import android.util.Log;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity;
 
-class SendNotificationHelper {
+public class SendNotificationHelper {
 
     private static final String TAG = SendNotificationHelper.class.getSimpleName();
 
     private Context mContext;
     private String mMessageBody;
 
-    SendNotificationHelper(Context context, String messageBody) {
+    public SendNotificationHelper(Context context, String messageBody) {
         mContext = context;
         mMessageBody = messageBody;
     }
 
-    void send() {
+    public void send() {
         Log.d(TAG, "sendNotification: " + mMessageBody);
 
         Intent intent = new Intent(mContext, MainActivity.class);

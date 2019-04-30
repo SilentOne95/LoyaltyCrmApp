@@ -109,7 +109,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     // Geofences
     private GeofencingClient mGeofencingClient;
     private List<Geofence> mGeofenceList = new ArrayList<>();
-    private PendingIntent mGeofencePendingIntent;
+    private PendingIntent mGeofencePendingIntent = null;
 
     @Override
     protected int getLayout() {
@@ -165,16 +165,22 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     private void startGeofence() {
-        Log.d(TAG, "startGeofence");
         mGeofencingClient = LocationServices.getGeofencingClient(getContext());
         mGeofenceList.add(new Geofence.Builder()
-                .setRequestId(TAG)
+                .setRequestId("1")
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
                 .setCircularRegion(52.2299, 21.003, 500)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
                 .build());
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        mGeofenceList.add(new Geofence.Builder()
+                .setRequestId("2")
+                .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                .setCircularRegion(52.1791, 21.0031, 500)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build());
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGeofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
                     .addOnSuccessListener(getActivity(), taskSuccess -> Log.d(TAG, "addGeofence: ok"))
                     .addOnFailureListener(getActivity(), taskFail -> Log.d(TAG, "addGeofence: fail"));
@@ -194,8 +200,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
 
         Intent intent = new Intent(getContext(), GeofenceTransitionsIntentService.class);
-        mGeofencePendingIntent = PendingIntent.getService(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        return mGeofencePendingIntent;
+        return PendingIntent.getService(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @Override
