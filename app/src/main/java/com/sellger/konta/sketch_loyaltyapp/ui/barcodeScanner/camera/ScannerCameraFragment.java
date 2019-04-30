@@ -19,11 +19,11 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.BarcodeScanningProcessor;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.CameraSource;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.CameraSourcePreview;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.FrameMetadata;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.BarcodeScanningProcessor;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.CameraSource;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.CameraSourcePreview;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.FrameMetadata;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.GraphicOverlay;
 
 import java.io.IOException;
 import java.util.List;

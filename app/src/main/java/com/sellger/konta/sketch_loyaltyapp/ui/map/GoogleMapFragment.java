@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -33,6 +35,8 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
@@ -41,7 +45,7 @@ import com.sellger.konta.sketch_loyaltyapp.service.geofencing.GeofenceTransition
 import com.sellger.konta.sketch_loyaltyapp.service.location.LocationService;
 import com.sellger.konta.sketch_loyaltyapp.service.location.LocationUpdatesBroadcastReceiver;
 import com.sellger.konta.sketch_loyaltyapp.service.location.TrackerService;
-import com.sellger.konta.sketch_loyaltyapp.utils.CustomClusterRenderer;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomClusterRenderer;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
@@ -92,7 +96,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     GoogleMap mGoogleMap;
     protected GoogleApiClient mGoogleApiClient;
     protected LocationRequest mLocationRequest;
-    protected FusedLocationProviderClient mFusedLocationProviderClient;
+    protected FusedLocationProviderClient mFusedLocationClient;
+    protected Location mLastLocation;
 
     private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -164,7 +169,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     private void startGeofence() {
         Log.d(TAG, "startGeofence");
-        requestLocationUpdates();
         mGeofencingClient = LocationServices.getGeofencingClient(getContext());
         mGeofenceList.add(new Geofence.Builder()
                 .setRequestId(TAG)
@@ -204,6 +208,18 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             mGeofencingClient.removeGeofences(getGeofencePendingIntent())
                     .addOnSuccessListener(getActivity(), aVoid -> Log.d(TAG, "removeGeofences: success"))
                     .addOnFailureListener(getActivity(), e -> Log.d(TAG, "removeGeofences: failure"));
+        }
+
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mFusedLocationClient != null) {
+            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
         }
     }
 
@@ -256,7 +272,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         // view after it's created to get different value than 0
         mBottomSheetBehavior.setPeekHeight(mPanelPeekHeight.getHeight());
 
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
         setUpGoogleApiClient();
         mLocationRequest = new LocationRequest();
@@ -271,7 +287,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 // Location Permission already granted
-                requestLocationUpdates();
+                mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                 mGoogleMap.setMyLocationEnabled(true);
             } else {
                 // Request Location Permission
@@ -279,7 +295,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             }
         }
         else {
-            requestLocationUpdates();
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             mGoogleMap.setMyLocationEnabled(true);
         }
 
@@ -432,7 +448,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
         } else {
-            requestLocationUpdates();
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
         }
     }
 
@@ -466,7 +482,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
                         mGoogleMap.setMyLocationEnabled(true);
 
-                        requestLocationUpdates();
+                        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                         startGeofence();
                     }
                 } else {
@@ -479,22 +495,36 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
-    private void requestLocationUpdates() {
+    @Override
+    public void requestLocationUpdates() {
         try {
             Log.d(TAG, "Starting location updates");
-            mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
         } catch (SecurityException e) {
             Log.d(TAG, "Starting location updates: failed");
             e.printStackTrace();
         }
     }
 
-    private PendingIntent getPendingIntent() {
+    @Override
+    public PendingIntent getPendingIntent() {
         Log.d(TAG, "kick off Service with Intent");
         Intent intent = new Intent(getContext(), LocationUpdatesBroadcastReceiver.class);
         intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
         return PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
+
+    LocationCallback mLocationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            List<Location> locationList = locationResult.getLocations();
+            if (locationList.size() > 0) {
+                // The last location in the list is the newest
+                mLastLocation =  locationList.get(locationList.size() - 1);
+            }
+            super.onLocationResult(locationResult);
+        }
+    };
 
     @Override
     public void setUpCluster(final List<Marker> markerList) {

@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common;
+package com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

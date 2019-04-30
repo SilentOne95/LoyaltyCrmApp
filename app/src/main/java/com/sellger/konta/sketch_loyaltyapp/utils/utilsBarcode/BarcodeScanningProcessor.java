@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.sellger.konta.sketch_loyaltyapp.utilsBarcode;
+package com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
@@ -24,9 +24,9 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.sellger.konta.sketch_loyaltyapp.base.VisionProcessorBase;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.CameraImageGraphic;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.FrameMetadata;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.CameraImageGraphic;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.FrameMetadata;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.GraphicOverlay;
 
 import java.io.IOException;
 import java.util.List;

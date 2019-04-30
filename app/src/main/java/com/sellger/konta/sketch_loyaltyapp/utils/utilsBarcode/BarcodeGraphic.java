@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.sellger.konta.sketch_loyaltyapp.utilsBarcode;
+package com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -21,8 +21,8 @@ import android.graphics.RectF;
 
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay.Graphic;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.GraphicOverlay;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.GraphicOverlay.Graphic;
 
 /** Graphic instance for rendering Barcode position and content information in an overlay view. */
 public class BarcodeGraphic extends Graphic {

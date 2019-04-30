@@ -18,7 +18,7 @@ public final class Constants {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public static final int REQUEST_CHECK_SETTINGS = 100;
 
-    public static final int UPDATE_INTERVAL = 60 * 1000;
+    public static final int UPDATE_INTERVAL = 30 * 1000;
     public static final int FASTEST_UPDATE_INTERVAL = UPDATE_INTERVAL / 2;
     public static final int MAX_WAIT_TIME = UPDATE_INTERVAL * 3;
 

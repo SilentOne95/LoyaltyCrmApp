@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common;
+package com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

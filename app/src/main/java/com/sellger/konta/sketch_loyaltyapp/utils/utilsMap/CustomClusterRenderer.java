@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.utils;
+package com.sellger.konta.sketch_loyaltyapp.utils.utilsMap;
 
 import android.content.Context;
 import android.graphics.Color;

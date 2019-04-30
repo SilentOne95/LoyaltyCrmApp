@@ -24,10 +24,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.BitmapUtils;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.FrameMetadata;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay;
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.VisionImageProcessor;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.BitmapUtils;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.FrameMetadata;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.GraphicOverlay;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.VisionImageProcessor;
 
 import java.nio.ByteBuffer;
 

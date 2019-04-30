@@ -22,7 +22,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.ui.couponDetails.CouponDetailsActivity;
-import com.sellger.konta.sketch_loyaltyapp.utils.CustomItemDecoration;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

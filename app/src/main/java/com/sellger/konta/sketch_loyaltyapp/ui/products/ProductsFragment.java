@@ -20,7 +20,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.pojo.product.Product;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.ui.productDetails.ProductDetailsActivity;
-import com.sellger.konta.sketch_loyaltyapp.utils.CustomItemDecoration;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;
 
 import java.util.List;
 

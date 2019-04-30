@@ -1,10 +1,10 @@
-package com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common;
+package com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.sellger.konta.sketch_loyaltyapp.utilsBarcode.common.GraphicOverlay.Graphic;
+import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.GraphicOverlay.Graphic;
 
 public class CameraImageGraphic extends Graphic {
 
