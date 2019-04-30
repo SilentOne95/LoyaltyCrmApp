@@ -27,7 +27,7 @@
         android:theme="@style/BaseAppTheme.NoActionBar">
 
         <service
-            android:name="com.sellger.konta.sketch_loyaltyapp.service.MyFirebaseMessagingService"
+            android:name="com.sellger.konta.sketch_loyaltyapp.service.pushNotification.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -35,16 +35,16 @@
             </intent-filter>
         </service>
         <service
-            android:name="com.sellger.konta.sketch_loyaltyapp.service.TrackerService"
+            android:name="com.sellger.konta.sketch_loyaltyapp.service.location.TrackerService"
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="true" />
         <service
-            android:name="com.sellger.konta.sketch_loyaltyapp.service.LocationService"
+            android:name="com.sellger.konta.sketch_loyaltyapp.service.location.LocationService"
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="true" />
-        <service android:name=".service.GeofenceTransitionsIntentService" />
+        <service android:name=".service.geofencing.GeofenceTransitionsIntentService" />
 
         <activity
             android:name="com.sellger.konta.sketch_loyaltyapp.ui.launch.LaunchActivity"

@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.sellger.konta.sketch_loyaltyapp.service.ManageTopicsSubscriptions;
+import com.sellger.konta.sketch_loyaltyapp.service.pushNotification.ManageTopicsSubscriptions;
 
 public class SettingsPresenter implements SettingsContract.Presenter, ManageTopicsSubscriptions.ManageSingleTopic {
 

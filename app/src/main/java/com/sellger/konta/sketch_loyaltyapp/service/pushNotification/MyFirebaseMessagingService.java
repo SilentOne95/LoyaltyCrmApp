@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.service;
+package com.sellger.konta.sketch_loyaltyapp.service.pushNotification;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -37,7 +37,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Generate own notifications
         String message = remoteMessage.getNotification().getBody();
-        sendNotification(message);
+        SendNotificationHelper sendNotificationHelper = new SendNotificationHelper(this, message);
+        sendNotificationHelper.send();
     }
 
     /**
@@ -67,7 +68,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // TODO: Implement this method to send token to your app server.
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendCustomNotification(String messageBody) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -80,7 +81,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Two notification layouts - default and custom
         // For now custom notification is not used
         NotificationCompat.Builder notificationBuilder;
-        if (true) {
+        if (false) {
             notificationBuilder = new NotificationCompat.Builder(this, channelId)
                     .setSmallIcon(R.drawable.logo_icon)
                     .setContentText(messageBody)

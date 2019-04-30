@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.service;
+package com.sellger.konta.sketch_loyaltyapp.service.geofencing;
 
 import android.app.IntentService;
 import android.app.NotificationChannel;

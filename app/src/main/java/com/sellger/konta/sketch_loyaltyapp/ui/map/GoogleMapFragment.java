@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
@@ -36,9 +37,10 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
-import com.sellger.konta.sketch_loyaltyapp.service.GeofenceTransitionsIntentService;
-import com.sellger.konta.sketch_loyaltyapp.service.LocationService;
-import com.sellger.konta.sketch_loyaltyapp.service.TrackerService;
+import com.sellger.konta.sketch_loyaltyapp.service.geofencing.GeofenceTransitionsIntentService;
+import com.sellger.konta.sketch_loyaltyapp.service.location.LocationService;
+import com.sellger.konta.sketch_loyaltyapp.service.location.LocationUpdatesBroadcastReceiver;
+import com.sellger.konta.sketch_loyaltyapp.service.location.TrackerService;
 import com.sellger.konta.sketch_loyaltyapp.utils.CustomClusterRenderer;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -72,8 +74,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.FASTEST_UPDATE_INTERVAL;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.MAX_WAIT_TIME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REQUEST_CHECK_SETTINGS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.UPDATE_INTERVAL;
 
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
         View.OnClickListener, MapContract.View, GoogleMap.OnMyLocationButtonClickListener,
@@ -85,8 +90,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     MapPresenter presenter;
 
     GoogleMap mGoogleMap;
-    protected LocationRequest mLocationRequest;
     protected GoogleApiClient mGoogleApiClient;
+    protected LocationRequest mLocationRequest;
+    protected FusedLocationProviderClient mFusedLocationProviderClient;
 
     private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -158,6 +164,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     private void startGeofence() {
         Log.d(TAG, "startGeofence");
+        requestLocationUpdates();
         mGeofencingClient = LocationServices.getGeofencingClient(getContext());
         mGeofenceList.add(new Geofence.Builder()
                 .setRequestId(TAG)
@@ -187,7 +194,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         Intent intent = new Intent(getContext(), GeofenceTransitionsIntentService.class);
         mGeofencePendingIntent = PendingIntent.getService(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
         return mGeofencePendingIntent;
     }
 
@@ -228,6 +234,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public void setUpGoogleApiClient() {
+        if (mGoogleApiClient != null) {
+            return;
+        }
+
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -246,10 +256,13 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         // view after it's created to get different value than 0
         mBottomSheetBehavior.setPeekHeight(mPanelPeekHeight.getHeight());
 
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+
         setUpGoogleApiClient();
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(30 * 1000);
-        mLocationRequest.setFastestInterval(10 * 1000);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL);
+        mLocationRequest.setMaxWaitTime(MAX_WAIT_TIME);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         // Initialize Google Play Services
@@ -258,7 +271,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 // Location Permission already granted
-                startLocationService();
+                requestLocationUpdates();
                 mGoogleMap.setMyLocationEnabled(true);
             } else {
                 // Request Location Permission
@@ -266,7 +279,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             }
         }
         else {
-            startLocationService();
+            requestLocationUpdates();
             mGoogleMap.setMyLocationEnabled(true);
         }
 
@@ -419,8 +432,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
         } else {
-            startLocationService();
-            startTrackService();
+            requestLocationUpdates();
         }
     }
 
@@ -454,8 +466,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
                         mGoogleMap.setMyLocationEnabled(true);
 
-                        startLocationService();
-                        startTrackService();
+                        requestLocationUpdates();
                         startGeofence();
                     }
                 } else {
@@ -466,6 +477,23 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                 }
             }
         }
+    }
+
+    private void requestLocationUpdates() {
+        try {
+            Log.d(TAG, "Starting location updates");
+            mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
+        } catch (SecurityException e) {
+            Log.d(TAG, "Starting location updates: failed");
+            e.printStackTrace();
+        }
+    }
+
+    private PendingIntent getPendingIntent() {
+        Log.d(TAG, "kick off Service with Intent");
+        Intent intent = new Intent(getContext(), LocationUpdatesBroadcastReceiver.class);
+        intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
+        return PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @Override

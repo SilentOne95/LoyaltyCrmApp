@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.service;
+package com.sellger.konta.sketch_loyaltyapp.service.location;
 
 import android.app.Service;
 import android.content.Intent;
