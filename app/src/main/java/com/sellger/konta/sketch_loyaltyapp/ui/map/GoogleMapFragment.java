@@ -42,9 +42,6 @@ import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
 import com.sellger.konta.sketch_loyaltyapp.service.geofencing.GeofenceTransitionsIntentService;
-import com.sellger.konta.sketch_loyaltyapp.service.location.LocationService;
-import com.sellger.konta.sketch_loyaltyapp.service.location.LocationUpdatesBroadcastReceiver;
-import com.sellger.konta.sketch_loyaltyapp.service.location.TrackerService;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomClusterRenderer;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -453,20 +450,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void startTrackService() {
-        if (getActivity() != null) {
-            getActivity().startService(new Intent(getContext(), TrackerService.class));
-        }
-    }
-
-    @Override
-    public void startLocationService() {
-        if (getActivity() != null) {
-            getActivity().startService(new Intent(getContext(), LocationService.class));
-        }
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -493,25 +476,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                 }
             }
         }
-    }
-
-    @Override
-    public void requestLocationUpdates() {
-        try {
-            Log.d(TAG, "Starting location updates");
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, getPendingIntent());
-        } catch (SecurityException e) {
-            Log.d(TAG, "Starting location updates: failed");
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public PendingIntent getPendingIntent() {
-        Log.d(TAG, "kick off Service with Intent");
-        Intent intent = new Intent(getContext(), LocationUpdatesBroadcastReceiver.class);
-        intent.setAction(LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES);
-        return PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     LocationCallback mLocationCallback = new LocationCallback() {

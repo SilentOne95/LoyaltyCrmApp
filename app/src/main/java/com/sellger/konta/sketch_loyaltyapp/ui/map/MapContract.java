@@ -1,7 +1,5 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
-import android.app.PendingIntent;
-
 import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.contactInfo.ContactInfoPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours.OpeningHoursPresenter;
@@ -18,10 +16,6 @@ public interface MapContract {
 
         void setUpGoogleApiClient();
         void checkLocationPermission();
-        void startTrackService();
-        void startLocationService();
-        void requestLocationUpdates();
-        PendingIntent getPendingIntent();
 
         void setCustomMapStyle();
         void setUpCluster(List<Marker> markerList);

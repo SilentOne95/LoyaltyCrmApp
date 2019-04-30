@@ -34,22 +34,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <receiver android:name=".service.location.LocationUpdatesBroadcastReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name=".service.LocationUpdatesBroadcastReceiver.ACTION_PROCESS_UPDATES" />
-            </intent-filter>
-        </receiver>
-        <service
-            android:name="com.sellger.konta.sketch_loyaltyapp.service.location.TrackerService"
-            android:enabled="true"
-            android:exported="true"
-            android:stopWithTask="true" />
-        <service
-            android:name="com.sellger.konta.sketch_loyaltyapp.service.location.LocationService"
-            android:enabled="true"
-            android:exported="true"
-            android:stopWithTask="true" />
         <service android:name=".service.geofencing.GeofenceTransitionsIntentService" />
 
         <activity
