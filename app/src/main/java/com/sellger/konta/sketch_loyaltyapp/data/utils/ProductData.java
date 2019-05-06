@@ -1,7 +1,7 @@
-package com.sellger.konta.sketch_loyaltyapp.pojo.adapter;
+package com.sellger.konta.sketch_loyaltyapp.data.utils;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
-import com.sellger.konta.sketch_loyaltyapp.pojo.product.Product;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 
 import java.util.List;
 

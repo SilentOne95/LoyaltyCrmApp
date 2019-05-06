@@ -2,7 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.home;
 
 import android.support.annotation.Nullable;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivityContract;
 
 import java.util.ArrayList;

@@ -3,8 +3,8 @@ package com.sellger.konta.sketch_loyaltyapp.ui.main;
 import android.app.Activity;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.HelperArray;
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMenuArray;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.ui.home.HomePresenter;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public interface MainActivityContract {
 
         void fetchedDataForNavDrawer(List<MenuComponent> listOfItems);
         void fetchedDataForHomeView(List<MenuComponent> listOfItems);
-        HelperArray refactorFetchedData(List<MenuComponent> listOfItems);
+        HelperMenuArray refactorFetchedData(List<MenuComponent> listOfItems);
 
         String getMenuLayoutType(int itemId);
         String getSubmenuLayoutType(int itemId);

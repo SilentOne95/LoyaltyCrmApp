@@ -2,9 +2,9 @@ package com.sellger.konta.sketch_loyaltyapp.ui.products;
 
 import com.sellger.konta.sketch_loyaltyapp.network.Api;
 import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
-import com.sellger.konta.sketch_loyaltyapp.pojo.adapter.ProductData;
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
-import com.sellger.konta.sketch_loyaltyapp.pojo.product.Product;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.ProductData;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

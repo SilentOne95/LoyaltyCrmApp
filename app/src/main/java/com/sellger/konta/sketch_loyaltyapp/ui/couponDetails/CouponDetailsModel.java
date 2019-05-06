@@ -2,7 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.couponDetails;
 
 import com.sellger.konta.sketch_loyaltyapp.network.Api;
 import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
-import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

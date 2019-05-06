@@ -8,12 +8,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.maps.android.clustering.ClusterItem;
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.OpenHour;
 
 import java.util.List;
 
 @Entity(tableName = "marker_table")
-public class MarkerEntity implements ClusterItem {
+public class Marker implements ClusterItem {
 
     @PrimaryKey
     @SerializedName("id")
@@ -76,7 +75,7 @@ public class MarkerEntity implements ClusterItem {
     @ColumnInfo(name = "open_hours")
     private List<OpenHour> mOpenHours = null;
 
-    public MarkerEntity(double lat, double lng, int id) {
+    public Marker(double lat, double lng, int id) {
         mLat = lat;
         mLng = lng;
         mId = id;

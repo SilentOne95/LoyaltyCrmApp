@@ -2,7 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.products;
 
 import android.support.annotation.Nullable;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.product.Product;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 
 import java.util.List;
 

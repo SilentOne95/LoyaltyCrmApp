@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
-import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;

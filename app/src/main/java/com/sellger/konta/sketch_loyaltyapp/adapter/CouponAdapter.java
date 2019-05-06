@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

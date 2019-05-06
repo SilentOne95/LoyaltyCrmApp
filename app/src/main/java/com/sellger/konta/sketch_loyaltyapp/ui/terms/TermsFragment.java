@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.pojo.staticPage.Page;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
 public class TermsFragment extends BaseFragment implements TermsContract.View {
 

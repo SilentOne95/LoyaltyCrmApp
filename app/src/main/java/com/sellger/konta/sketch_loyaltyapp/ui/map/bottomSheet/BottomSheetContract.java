@@ -1,7 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.OpenHour;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
 
 import java.util.List;
 

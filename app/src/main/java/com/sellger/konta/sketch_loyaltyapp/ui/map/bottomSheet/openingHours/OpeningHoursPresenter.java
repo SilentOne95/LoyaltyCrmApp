@@ -4,8 +4,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.OpenHour;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapModel;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;

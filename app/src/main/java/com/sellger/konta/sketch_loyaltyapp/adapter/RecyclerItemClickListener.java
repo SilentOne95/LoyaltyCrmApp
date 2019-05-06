@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.adapter;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 
 public interface RecyclerItemClickListener {
 

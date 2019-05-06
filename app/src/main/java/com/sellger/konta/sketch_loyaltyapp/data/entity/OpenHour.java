@@ -8,7 +8,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "hour_table")
-public class OpenHourEntity {
+public class OpenHour {
 
     @PrimaryKey
     @SerializedName("id")

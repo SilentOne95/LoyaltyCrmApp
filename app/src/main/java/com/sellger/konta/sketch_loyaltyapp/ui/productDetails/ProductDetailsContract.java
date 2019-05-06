@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.productDetails;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.product.Product;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 
 import io.reactivex.disposables.Disposable;
 

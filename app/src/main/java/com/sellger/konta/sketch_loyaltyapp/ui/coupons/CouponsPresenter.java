@@ -2,7 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
 import android.support.annotation.Nullable;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 
 import java.util.List;
 

@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;

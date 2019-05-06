@@ -1,13 +1,15 @@
-package com.sellger.konta.sketch_loyaltyapp.pojo.menu;
+package com.sellger.konta.sketch_loyaltyapp.data.utils;
+
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 
 import java.util.ArrayList;
 
-public class HelperArray {
+public class HelperMenuArray {
 
     private ArrayList<MenuComponent> menuArray;
     private ArrayList<MenuComponent> submenuArray;
 
-    public HelperArray(ArrayList<MenuComponent> menuArray, ArrayList<MenuComponent> submenuArray) {
+    public HelperMenuArray(ArrayList<MenuComponent> menuArray, ArrayList<MenuComponent> submenuArray) {
         this.menuArray = menuArray;
         this.submenuArray = submenuArray;
     }

@@ -8,7 +8,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "product_table")
-public class ProductEntity {
+public class Product {
 
     @PrimaryKey
     @SerializedName("id")

@@ -4,8 +4,8 @@ import android.text.TextUtils;
 
 import com.sellger.konta.sketch_loyaltyapp.network.Api;
 import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.OpenHour;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.contactInfo.ContactInfoPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours.OpeningHoursPresenter;
 

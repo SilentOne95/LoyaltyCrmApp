@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

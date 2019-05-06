@@ -1,8 +1,8 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.main;
 
 import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.HelperArray;
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMenuArray;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.network.Api;
 import com.sellger.konta.sketch_loyaltyapp.ui.home.HomePresenter;
 
@@ -62,9 +62,9 @@ public class MainActivityModel implements MainActivityContract.Model {
     public void fetchedDataForNavDrawer(List<MenuComponent> listOfItems) {
         int homeScreenId = 0;
 
-        HelperArray helperArray = refactorFetchedData(listOfItems);
-        menuArray = helperArray.getMenuArray();
-        submenuArray = helperArray.getSubmenuArray();
+        HelperMenuArray helperMenuArray = refactorFetchedData(listOfItems);
+        menuArray = helperMenuArray.getMenuArray();
+        submenuArray = helperMenuArray.getSubmenuArray();
 
         for (int i = 0; i < menuArray.size(); i++) {
             if (menuArray.get(i).getIsHomePage().equals(1)) {
@@ -86,9 +86,9 @@ public class MainActivityModel implements MainActivityContract.Model {
     @Override
     public void fetchedDataForHomeView(List<MenuComponent> listOfItems) {
         int numOfColumns = 2;
-        HelperArray helperArray = refactorFetchedData(listOfItems);
-        navDrawerArray = helperArray.getMenuArray();
-        navDrawerArray.addAll(helperArray.getSubmenuArray());
+        HelperMenuArray helperMenuArray = refactorFetchedData(listOfItems);
+        navDrawerArray = helperMenuArray.getMenuArray();
+        navDrawerArray.addAll(helperMenuArray.getSubmenuArray());
 
         for (int i = 0; i < navDrawerArray.size(); i++) {
             if (navDrawerArray.get(i).getIsHomePage().equals(1)) {
@@ -102,7 +102,7 @@ public class MainActivityModel implements MainActivityContract.Model {
     }
 
     @Override
-    public HelperArray refactorFetchedData(List<MenuComponent> listOfItems) {
+    public HelperMenuArray refactorFetchedData(List<MenuComponent> listOfItems) {
         String menuType;
         ArrayList<MenuComponent> menuLocalArray = new ArrayList<>();
         ArrayList<MenuComponent> submenuLocalArray = new ArrayList<>();
@@ -155,7 +155,7 @@ public class MainActivityModel implements MainActivityContract.Model {
 
         } while (sortedSubmenuArray.size() < submenuLocalArray.size());
 
-        return new HelperArray(sortedMenuArray, sortedSubmenuArray);
+        return new HelperMenuArray(sortedMenuArray, sortedSubmenuArray);
     }
 
     @Override

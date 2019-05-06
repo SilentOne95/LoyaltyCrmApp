@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.contactInfo.ContactInfoPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours.OpeningHoursPresenter;
 

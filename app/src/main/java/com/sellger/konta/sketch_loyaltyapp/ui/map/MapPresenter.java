@@ -6,7 +6,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.util.Log;
 import android.view.View;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;

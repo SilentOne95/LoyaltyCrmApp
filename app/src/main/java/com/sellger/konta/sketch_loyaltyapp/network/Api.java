@@ -1,10 +1,10 @@
 package com.sellger.konta.sketch_loyaltyapp.network;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
-import com.sellger.konta.sketch_loyaltyapp.pojo.product.Product;
-import com.sellger.konta.sketch_loyaltyapp.pojo.staticPage.Page;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
 import java.util.List;
 

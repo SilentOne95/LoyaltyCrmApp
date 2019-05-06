@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import com.sellger.konta.sketch_loyaltyapp.adapter.ProductAdapter;
 import com.sellger.konta.sketch_loyaltyapp.adapter.RecyclerItemClickListener;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.pojo.product.Product;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.ui.productDetails.ProductDetailsActivity;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;

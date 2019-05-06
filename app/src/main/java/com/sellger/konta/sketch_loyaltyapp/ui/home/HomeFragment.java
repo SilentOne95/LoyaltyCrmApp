@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.sellger.konta.sketch_loyaltyapp.adapter.HomeAdapter;
 import com.sellger.konta.sketch_loyaltyapp.adapter.RecyclerItemClickListener;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
-import com.sellger.konta.sketch_loyaltyapp.pojo.menu.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivityModel;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;

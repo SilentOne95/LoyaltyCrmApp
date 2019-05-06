@@ -40,7 +40,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.pojo.map.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.service.geofencing.GeofenceTransitionsIntentService;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomClusterRenderer;
 import com.sellger.konta.sketch_loyaltyapp.R;

@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.sellger.konta.sketch_loyaltyapp.adapter.CouponAdapter;
 import com.sellger.konta.sketch_loyaltyapp.adapter.RecyclerItemClickListener;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.ui.couponDetails.CouponDetailsActivity;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;

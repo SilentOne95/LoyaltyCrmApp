@@ -2,7 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.terms;
 
 import com.sellger.konta.sketch_loyaltyapp.network.Api;
 import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
-import com.sellger.konta.sketch_loyaltyapp.pojo.staticPage.Page;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,7 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.adapter.CouponData;
-import com.sellger.konta.sketch_loyaltyapp.pojo.coupon.Coupon;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.CouponData;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 
 import java.util.ArrayList;
 import java.util.List;

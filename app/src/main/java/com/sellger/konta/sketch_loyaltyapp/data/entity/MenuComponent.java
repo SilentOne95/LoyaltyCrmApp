@@ -8,7 +8,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "marker_table")
-public class MenuEntity {
+public class MenuComponent {
 
     @PrimaryKey
     @SerializedName("id")

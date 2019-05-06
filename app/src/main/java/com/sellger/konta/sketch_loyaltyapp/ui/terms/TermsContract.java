@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.terms;
 
-import com.sellger.konta.sketch_loyaltyapp.pojo.staticPage.Page;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
 import io.reactivex.disposables.Disposable;
 
