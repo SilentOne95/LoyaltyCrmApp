@@ -8,17 +8,17 @@ import android.content.Context;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Test;
 
 @Database(entities = {Test.class}, version = 1)
-public abstract class TestRoomDatabase extends RoomDatabase {
+public abstract class LoyaltyRoomDatabase extends RoomDatabase {
 
     public abstract TestDao testDao();
-    private static volatile TestRoomDatabase INSTANCE;
+    private static volatile LoyaltyRoomDatabase INSTANCE;
 
-    public static TestRoomDatabase getDatabase(Context context) {
+    public static LoyaltyRoomDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
-            synchronized (TestRoomDatabase.class) {
+            synchronized (LoyaltyRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TestRoomDatabase.class, "test_database")
+                            LoyaltyRoomDatabase.class, "test_database")
                             .build();
                 }
             }

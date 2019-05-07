@@ -1,46 +1,62 @@
 package com.sellger.konta.sketch_loyaltyapp.data;
 
-import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.os.AsyncTask;
+import androidx.annotation.NonNull;
 
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Test;
 import com.sellger.konta.sketch_loyaltyapp.data.local.TestDao;
-import com.sellger.konta.sketch_loyaltyapp.data.local.TestRoomDatabase;
 
-import java.util.List;
+public class LoyaltyRepository implements LoyaltyDataSource {
 
-public class LoyaltyRepository {
+    private static LoyaltyRepository INSTANCE = null;
+
+    private final LoyaltyDataSource mLoyaltyRemoteDataSource;
+    private final LoyaltyDataSource mLoyaltyLocalDataSource;
 
     private TestDao mTestDao;
-    private LiveData<List<Test>> mAllTests;
 
-    public LoyaltyRepository(Application application) {
-        TestRoomDatabase database = TestRoomDatabase.getDatabase(application);
-        mTestDao = database.testDao();
-        mAllTests = mTestDao.getAllTests();
+    // Prevent direct instantiation
+    private LoyaltyRepository(@NonNull LoyaltyDataSource loyaltyRemoteDataSource,
+                              @NonNull LoyaltyDataSource loyaltyLocalDataSource) {
+        mLoyaltyRemoteDataSource = loyaltyRemoteDataSource;
+        mLoyaltyLocalDataSource = loyaltyLocalDataSource;
     }
 
-    public LiveData<List<Test>> getAllTests() {
-        return mAllTests;
-    }
-
-    public void insert(Test test) {
-        new insertAsyncTask(mTestDao).execute(test);
-    }
-
-    private static class insertAsyncTask extends AsyncTask<Test, Void, Void> {
-
-        private TestDao mAsyncTaskDao;
-
-        insertAsyncTask(TestDao dao) {
-            mAsyncTaskDao = dao;
+    /**
+     * Returns the single instance of this class, creating it if necessary.
+     *
+     * @param loyaltyRemoteDataSource the backend data source
+     * @param loyaltyLocalDataSource  the device storage data source
+     * @return the {@link LoyaltyRepository} instance
+     */
+    public static LoyaltyRepository getInstance(LoyaltyDataSource loyaltyRemoteDataSource,
+                                                LoyaltyDataSource loyaltyLocalDataSource) {
+        if (INSTANCE == null) {
+            INSTANCE = new LoyaltyRepository(loyaltyRemoteDataSource, loyaltyLocalDataSource);
         }
+        return INSTANCE;
+    }
 
-        @Override
-        protected Void doInBackground(final Test... params) {
-            mAsyncTaskDao.insert(params[0]);
-            return null;
-        }
+    @Override
+    public void getMenu() {
+
+    }
+
+    @Override
+    public void getAllProducts() {
+
+    }
+
+    @Override
+    public void getAllCoupons() {
+
+    }
+
+    @Override
+    public void getAllMarkers() {
+
+    }
+
+    @Override
+    public void getStaticPage(int id) {
+
     }
 }
