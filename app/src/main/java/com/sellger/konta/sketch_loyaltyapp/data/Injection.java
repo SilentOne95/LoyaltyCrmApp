@@ -35,6 +35,6 @@ public class Injection {
     public static LoyaltyRepository provideLoyaltyRepository(@NonNull Context context) {
         LoyaltyRoomDatabase database = LoyaltyRoomDatabase.getDatabase(context);
         return LoyaltyRepository.getInstance(LoyaltyRemoteDataSource.getInstance(),
-                LoyaltyLocalDataSource.getInstance(new AppExecutors(), database.testDao()));
+                LoyaltyLocalDataSource.getInstance(new AppExecutors(), database.loyaltyDao()));
     }
 }

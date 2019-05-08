@@ -12,20 +12,20 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
 
     private static volatile LoyaltyLocalDataSource INSTANCE;
 
-    private TestDao mTestDao;
+    private LoyaltyDao mLoyaltyDao;
     private AppExecutors mAppExecutors;
 
     // Prevent direct instantiation
-    private LoyaltyLocalDataSource(@NonNull AppExecutors appExecutors, @NonNull TestDao testDao) {
+    private LoyaltyLocalDataSource(@NonNull AppExecutors appExecutors, @NonNull LoyaltyDao loyaltyDao) {
         mAppExecutors = appExecutors;
-        mTestDao = testDao;
+        mLoyaltyDao = loyaltyDao;
     }
 
-    public static LoyaltyLocalDataSource getInstance(@NonNull AppExecutors appExecutors, @NonNull TestDao testDao) {
+    public static LoyaltyLocalDataSource getInstance(@NonNull AppExecutors appExecutors, @NonNull LoyaltyDao loyaltyDao) {
         if (INSTANCE == null) {
             synchronized (LoyaltyLocalDataSource.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new LoyaltyLocalDataSource(appExecutors, testDao);
+                    INSTANCE = new LoyaltyLocalDataSource(appExecutors, loyaltyDao);
                 }
             }
         }
@@ -33,7 +33,10 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
         return INSTANCE;
     }
 
-    // Get data
+    /**
+     * Note: {@link LoadDataCallback#onDataNotAvailable()} is fired if the database doesn't exist
+     * or the table is empty.
+     */
     @Override
     public void getMenu(@NonNull LoadDataCallback callback) {
 

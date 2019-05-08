@@ -6,8 +6,8 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.util.Log;
 import android.view.View;
 
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.google.android.gms.maps.model.LatLng;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class MapPresenter implements MapContract.Presenter {
     }
 
     @Override
-    public void passDataToCluster(List<Marker> markerList) {
+    public void passDataToCluster(List<HelperMarker> markerList) {
         if (view != null) {
             view.setUpCluster(markerList);
         }
@@ -50,7 +50,7 @@ public class MapPresenter implements MapContract.Presenter {
     public void switchBottomSheetState(Object object) {
 
         if (view != null) {
-            if (object instanceof Marker) {
+            if (object instanceof HelperMarker) {
                 if (view.getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
                     view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
                 } else {

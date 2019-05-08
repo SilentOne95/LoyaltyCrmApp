@@ -5,19 +5,19 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.clustering.view.DefaultClusterRenderer;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 
-public class CustomClusterRenderer extends DefaultClusterRenderer<Marker> {
+public class CustomClusterRenderer extends DefaultClusterRenderer<HelperMarker> {
 
      private final Context mContext;
 
-    public CustomClusterRenderer(Context context, GoogleMap map, ClusterManager<Marker> clusterManager) {
+    public CustomClusterRenderer(Context context, GoogleMap map, ClusterManager<HelperMarker> clusterManager) {
         super(context, map, clusterManager);
         mContext = context;
     }
@@ -28,7 +28,7 @@ public class CustomClusterRenderer extends DefaultClusterRenderer<Marker> {
     }
 
     @Override
-    protected void onBeforeClusterItemRendered(Marker itemLocation, MarkerOptions markerOptions) {
+    protected void onBeforeClusterItemRendered(HelperMarker itemLocation, MarkerOptions markerOptions) {
         // Set custom color of markers
         String string = "#" + Integer.toHexString(ContextCompat.getColor(mContext, R.color.colorAccentDark));
         final BitmapDescriptor markerDescriptorCustom = CustomBitmapDescriptorFactory.fromColorString(string);

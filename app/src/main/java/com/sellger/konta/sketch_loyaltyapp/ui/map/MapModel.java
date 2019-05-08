@@ -2,9 +2,9 @@ package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
 import android.text.TextUtils;
 
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 import com.sellger.konta.sketch_loyaltyapp.network.Api;
 import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.contactInfo.ContactInfoPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours.OpeningHoursPresenter;
@@ -24,7 +24,7 @@ public class MapModel implements MapContract.Model {
     private OpeningHoursPresenter openingHoursPresenter;
     private ContactInfoPresenter contactInfoPresenter;
 
-    private List<Marker> listOfMarkers = null;
+    private List<HelperMarker> listOfMarkers = null;
     private int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
 
@@ -34,17 +34,17 @@ public class MapModel implements MapContract.Model {
         return getObservable().subscribeWith(getObserver());
     }
 
-    private Single<List<Marker>> getObservable() {
+    private Single<List<HelperMarker>> getObservable() {
         return RetrofitClient.getInstance().create(Api.class)
                 .getAllMarkers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private DisposableSingleObserver<List<Marker>> getObserver() {
-        return new DisposableSingleObserver<List<Marker>>() {
+    private DisposableSingleObserver<List<HelperMarker>> getObserver() {
+        return new DisposableSingleObserver<List<HelperMarker>>() {
             @Override
-            public void onSuccess(List<Marker> markerList) {
+            public void onSuccess(List<HelperMarker> markerList) {
                 listOfMarkers = markerList;
                 presenter.passDataToCluster(markerList);
             }
@@ -54,10 +54,10 @@ public class MapModel implements MapContract.Model {
         };
     }
 
-    private DisposableSingleObserver<List<Marker>> getObserverOpening() {
-        return new DisposableSingleObserver<List<Marker>>() {
+    private DisposableSingleObserver<List<HelperMarker>> getObserverOpening() {
+        return new DisposableSingleObserver<List<HelperMarker>>() {
             @Override
-            public void onSuccess(List<Marker> markerList) {
+            public void onSuccess(List<HelperMarker> markerList) {
                 openingHoursPresenter.formatOpenHoursData(markerList);
             }
 
@@ -66,10 +66,10 @@ public class MapModel implements MapContract.Model {
         };
     }
 
-    private DisposableSingleObserver<List<Marker>> getObserverContact() {
-        return new DisposableSingleObserver<List<Marker>>() {
+    private DisposableSingleObserver<List<HelperMarker>> getObserverContact() {
+        return new DisposableSingleObserver<List<HelperMarker>>() {
             @Override
-            public void onSuccess(List<Marker> markerList) {
+            public void onSuccess(List<HelperMarker> markerList) {
                 contactInfoPresenter.formatContactInfoData(markerList);
             }
 
@@ -101,7 +101,7 @@ public class MapModel implements MapContract.Model {
             }
         }
 
-        Marker selectedMarker = listOfMarkers.get(markerPosition);
+        HelperMarker selectedMarker = listOfMarkers.get(markerPosition);
 
         String title, address, openHours;
         title = address = openHours = "Unable to display";
@@ -110,10 +110,10 @@ public class MapModel implements MapContract.Model {
             title = selectedMarker.getTitle();
         }
 
-        if (!TextUtils.isEmpty(selectedMarker.getAddress()) && !TextUtils.isEmpty(selectedMarker.getPostCode())
+        if (!TextUtils.isEmpty(selectedMarker.getAddress()) && !TextUtils.isEmpty(selectedMarker.getPostalCode())
                 && !TextUtils.isEmpty(selectedMarker.getCity())) {
             address = selectedMarker.getAddress() + ", " +
-                    selectedMarker.getPostCode() + " " +
+                    selectedMarker.getPostalCode() + " " +
                     selectedMarker.getCity();
         }
 

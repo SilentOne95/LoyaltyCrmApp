@@ -1,10 +1,10 @@
 package com.sellger.konta.sketch_loyaltyapp.network;
 
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 
 import java.util.List;
 
@@ -36,11 +36,11 @@ public interface Api {
 
     // Get all markers
     @GET("/localizations")
-    Single<List<Marker>> getAllMarkers();
+    Single<List<HelperMarker>> getAllMarkers();
 
     // Get single marker
     @GET("/localizations/{id}")
-    Single<Marker> getSingleMarker(@Path("id") int id);
+    Single<HelperMarker> getSingleMarker(@Path("id") int id);
 
     // Get static page
     @GET("/page/{id}")

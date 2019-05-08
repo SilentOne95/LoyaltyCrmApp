@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "coupon_table")
+@Entity(tableName = "page_table")
 public class Page {
 
     @PrimaryKey

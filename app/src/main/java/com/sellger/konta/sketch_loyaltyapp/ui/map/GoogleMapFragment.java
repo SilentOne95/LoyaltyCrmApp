@@ -40,7 +40,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 import com.sellger.konta.sketch_loyaltyapp.service.geofencing.GeofenceTransitionsIntentService;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomClusterRenderer;
 import com.sellger.konta.sketch_loyaltyapp.R;
@@ -96,7 +96,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     protected FusedLocationProviderClient mFusedLocationClient;
     protected Location mLastLocation;
 
-    private ClusterManager<Marker> mClusterManager;
+    private ClusterManager<HelperMarker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
     private int mPreviousSelectedMarkerId;
 
@@ -496,9 +496,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     };
 
     @Override
-    public void setUpCluster(final List<Marker> markerList) {
+    public void setUpCluster(final List<HelperMarker> markerList) {
         // Add markers to cluster
-        for (Marker marker : markerList) {
+        for (HelperMarker marker : markerList) {
             mClusterManager.addItem(marker);
         }
 

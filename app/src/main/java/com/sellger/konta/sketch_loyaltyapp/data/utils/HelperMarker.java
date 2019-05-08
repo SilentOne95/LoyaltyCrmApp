@@ -1,47 +1,64 @@
-package com.sellger.konta.sketch_loyaltyapp.data.entity;
+package com.sellger.konta.sketch_loyaltyapp.data.utils;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import com.google.maps.android.clustering.ClusterItem;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
 
-@Entity(tableName = "marker_table")
-public class Marker {
+import java.util.List;
 
-    @PrimaryKey
-    @ColumnInfo(name = "id")
+public class HelperMarker implements ClusterItem {
+
+    @SerializedName("id")
+    @Expose
     private Integer mId;
 
-    @ColumnInfo(name = "title")
+    @SerializedName("title")
+    @Expose
     private String mTitle;
 
-    @ColumnInfo(name = "lat")
+    @SerializedName("lat")
+    @Expose
     private Double mLat;
 
-    @ColumnInfo(name = "lng")
+    @SerializedName("lng")
+    @Expose
     private Double mLng;
 
-    @ColumnInfo(name = "shop_name")
+    @SerializedName("shop_name")
+    @Expose
     private String mShopName;
 
-    @ColumnInfo(name = "address")
+    @SerializedName("address")
+    @Expose
     private String mAddress;
 
-    @ColumnInfo(name = "postal_code")
+    @SerializedName("post_code")
+    @Expose
     private String mPostalCode;
 
-    @ColumnInfo(name = "city")
+    @SerializedName("city")
+    @Expose
     private String mCity;
 
-    @ColumnInfo(name = "mail")
+    @SerializedName("mail")
+    @Expose
     private String mMail;
 
-    @ColumnInfo(name = "phone_number")
+    @SerializedName("phone_number")
+    @Expose
     private String mPhoneNumber;
 
-    @ColumnInfo(name = "website")
+    @SerializedName("website")
+    @Expose
     private String mWebsite;
 
-    public Marker(double lat, double lng, int id) {
+    @SerializedName("open_hours")
+    @Expose
+    private List<OpenHour> mOpenHours = null;
+
+    public HelperMarker(double lat, double lng, int id) {
         mLat = lat;
         mLng = lng;
         mId = id;
@@ -123,4 +140,17 @@ public class Marker {
     public void setWebsite(String website) {
         mWebsite = website;
     }
+
+    public List<OpenHour> getOpenHours() {
+        return mOpenHours;
+    }
+    public void setOpenHours(List<OpenHour> openHours) {
+        mOpenHours = openHours;
+    }
+
+    @Override
+    public LatLng getPosition() { return new LatLng(mLat, mLng); }
+
+    @Override
+    public String getSnippet() { return null; }
 }

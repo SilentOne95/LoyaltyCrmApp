@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.contactInfo.ContactInfoPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours.OpeningHoursPresenter;
 
@@ -18,7 +18,7 @@ public interface MapContract {
         void checkLocationPermission();
 
         void setCustomMapStyle();
-        void setUpCluster(List<Marker> markerList);
+        void setUpCluster(List<HelperMarker> markerList);
 
         int getBottomSheetState();
         void setBottomSheetState(int state);
@@ -29,7 +29,7 @@ public interface MapContract {
     interface Presenter {
 
         void requestDataFromServer();
-        void passDataToCluster(List<Marker> markerList);
+        void passDataToCluster(List<HelperMarker> markerList);
 
         void switchBottomSheetState(Object object);
 

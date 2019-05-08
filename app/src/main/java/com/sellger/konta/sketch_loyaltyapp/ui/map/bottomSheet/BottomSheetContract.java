@@ -1,7 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet;
 
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 
 import java.util.List;
 
@@ -27,10 +27,10 @@ public interface BottomSheetContract {
 
         void getMarkerList();
 
-        void formatContactInfoData(List<Marker> markerList);
-        String formatPhoneNumber(Marker marker);
-        String formatEmailAddress(Marker marker);
-        String formatWebsiteAddress(Marker marker);
+        void formatContactInfoData(List<HelperMarker> markerList);
+        String formatPhoneNumber(HelperMarker marker);
+        String formatEmailAddress(HelperMarker marker);
+        String formatWebsiteAddress(HelperMarker marker);
         void passDataToView(String phoneNumber, String emailAddress, String websiteAddress);
     }
 
@@ -39,7 +39,7 @@ public interface BottomSheetContract {
         void setUpObservable();
 
         void getMarkerList();
-        void formatOpenHoursData(List<Marker> markerList);
+        void formatOpenHoursData(List<HelperMarker> markerList);
         String checkIfOpenHoursAreValid(OpenHour time);
     }
 }

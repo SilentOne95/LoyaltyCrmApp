@@ -4,8 +4,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapModel;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
@@ -71,7 +71,7 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
     }
 
     @Override
-    public void formatOpenHoursData(List<Marker> markerList) {
+    public void formatOpenHoursData(List<HelperMarker> markerList) {
         String monday, tuesday, wednesday, thursday, friday, saturday, sunday;
         monday = tuesday = wednesday = thursday = friday = saturday = sunday = "Closed";
         String[] days;
@@ -84,7 +84,7 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
             }
         }
 
-        Marker marker = markerList.get(markerPosition);
+        HelperMarker marker = markerList.get(markerPosition);
         List<OpenHour> openHourList = marker.getOpenHours();
 
         for (OpenHour time : openHourList) {

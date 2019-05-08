@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapContract;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
@@ -71,7 +71,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public void formatContactInfoData(List<Marker> markerList) {
+    public void formatContactInfoData(List<HelperMarker> markerList) {
         String phoneNumber, emailAddress, websiteAddress;
         int markerPosition = 0;
 
@@ -90,7 +90,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public String formatPhoneNumber(Marker marker) {
+    public String formatPhoneNumber(HelperMarker marker) {
         String phoneNumber = DEFAULT_STRING;
         String[] phonePrefix = {"0048", "48", "0"};
 
@@ -124,7 +124,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public String formatEmailAddress(Marker marker) {
+    public String formatEmailAddress(HelperMarker marker) {
         String emailAddress = DEFAULT_STRING;
 
         if (!TextUtils.isEmpty(marker.getMail())) {
@@ -135,7 +135,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public String formatWebsiteAddress(Marker marker) {
+    public String formatWebsiteAddress(HelperMarker marker) {
         String websiteAddress = DEFAULT_STRING;
 
         if (!TextUtils.isEmpty(marker.getWebsite())) {
