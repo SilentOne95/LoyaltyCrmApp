@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.data.remote;
 
+import androidx.annotation.NonNull;
+
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 
 /**
@@ -22,27 +24,42 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     // Get data
     @Override
-    public void getMenu() {
+    public void getMenu(@NonNull LoadDataCallback callback) {
 
     }
 
     @Override
-    public void getAllProducts() {
+    public void getAllProducts(@NonNull LoadDataCallback callback) {
 
     }
 
     @Override
-    public void getAllCoupons() {
+    public void getSingleProduct(@NonNull LoadDataCallback callback, int id) {
 
     }
 
     @Override
-    public void getAllMarkers() {
+    public void getAllCoupons(@NonNull LoadDataCallback callback) {
 
     }
 
     @Override
-    public void getStaticPage(int id) {
+    public void getSingleCoupon(@NonNull LoadDataCallback callback, int id) {
+
+    }
+
+    @Override
+    public void getAllMarkers(@NonNull LoadDataCallback callback) {
+
+    }
+
+    @Override
+    public void getSingleMarker(@NonNull LoadDataCallback callback, int id) {
+
+    }
+
+    @Override
+    public void getStaticPage(@NonNull LoadDataCallback callback, int id) {
 
     }
 }

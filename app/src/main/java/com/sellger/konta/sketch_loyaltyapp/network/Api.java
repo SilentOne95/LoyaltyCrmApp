@@ -38,6 +38,10 @@ public interface Api {
     @GET("/localizations")
     Single<List<Marker>> getAllMarkers();
 
+    // Get single marker
+    @GET("/localizations/{id}")
+    Single<Marker> getSingleMarker(@Path("id") int id);
+
     // Get static page
     @GET("/page/{id}")
     Single<Page> getStaticPage(@Path("id") int id);
