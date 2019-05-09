@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 
+import io.reactivex.disposables.CompositeDisposable;
+
 /**
  * Concrete implementation of a data source as a network connection
  */
 public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     private static LoyaltyRemoteDataSource INSTANCE;
+
+    private CompositeDisposable disposable = new CompositeDisposable();
 
     public static LoyaltyRemoteDataSource getInstance() {
         if (INSTANCE == null) {
@@ -22,7 +26,12 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     // Prevent direct instantiation
     private LoyaltyRemoteDataSource() {}
 
-    // Get data
+    /**
+     * Get all the data from server.
+     *
+     * Note: {@link LoadDataCallback#onDataNotAvailable()} is fired if the database doesn't exist
+     * or the table is empty.
+     */
     @Override
     public void getMenu(@NonNull LoadDataCallback callback) {
 
@@ -34,7 +43,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     }
 
     @Override
-    public void getSingleProduct(@NonNull LoadDataCallback callback, int id) {
+    public void getSingleProduct(int id, @NonNull GetSingleDataCallback callback) {
 
     }
 
@@ -44,7 +53,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     }
 
     @Override
-    public void getSingleCoupon(@NonNull LoadDataCallback callback, int id) {
+    public void getSingleCoupon(int id, @NonNull GetSingleDataCallback callback) {
 
     }
 
@@ -54,12 +63,32 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     }
 
     @Override
-    public void getSingleMarker(@NonNull LoadDataCallback callback, int id) {
+    public void getSingleMarker(int id, @NonNull GetSingleDataCallback callback) {
 
     }
 
     @Override
-    public void getStaticPage(@NonNull LoadDataCallback callback, int id) {
+    public void getAllOpenHours(@NonNull LoadDataCallback callback) {
 
+    }
+
+    @Override
+    public void getSingleOpenHour(int id, @NonNull GetSingleDataCallback callback) {
+
+    }
+
+    @Override
+    public void getAllPages(@NonNull LoadDataCallback callback) {
+
+    }
+
+    @Override
+    public void getSinglePage(int id, @NonNull GetSingleDataCallback callback) {
+
+    }
+
+    @Override
+    public void deleteData() {
+        // Clear disposables
     }
 }

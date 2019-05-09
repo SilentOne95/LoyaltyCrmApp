@@ -7,14 +7,13 @@ import androidx.annotation.NonNull;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
-import com.sellger.konta.sketch_loyaltyapp.data.local.TestDao;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Nonnull;
 
 public class LoyaltyRepository implements LoyaltyDataSource {
 
@@ -22,24 +21,26 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
     private final LoyaltyDataSource mLoyaltyRemoteDataSource;
     private final LoyaltyDataSource mLoyaltyLocalDataSource;
-    private TestDao mTestDao;
 
     /**
-     * Those variables has package local visibility so it can be accessed from tests.
+     * Cached data maps.
      */
-    Map<String, MenuComponent> mCachedMenu;
-    Map<String, Product> mCachedProduct;
-    Map<String, Coupon> mCachedCoupon;
-    Map<String, Marker> mCachedMarker;
+    private Map<String, MenuComponent> mCachedMenu;
+    private Map<String, Product> mCachedProduct;
+    private Map<String, Coupon> mCachedCoupon;
+    private Map<String, Marker> mCachedMarker;
+    private Map<String, OpenHour> mCachedOpenHour;
+    private Map<String, Page> mCachedPage;
 
     /**
-     * Marks the cache as invalid, to force an update the next time data is requested. This variable
-     * has package local visibility so it can be accessed from tests.
+     * Marks the cache as invalid, to force an update the next time data is requested.
      */
-    boolean mCacheMenuIsDirty = false;
-    boolean mCacheProductIsDirty = false;
-    boolean mCacheCouponIsDirty = false;
-    boolean mCacheMarkerIsDirty = false;
+    private boolean mCacheMenuIsDirty = true;
+    private boolean mCacheProductIsDirty = true;
+    private boolean mCacheCouponIsDirty = true;
+    private boolean mCacheMarkerIsDirty = true;
+    private boolean mCacheOpenHourIsDirty = true;
+    private boolean mCachePageIsDirty = true;
 
     // Prevent direct instantiation
     private LoyaltyRepository(@NonNull LoyaltyDataSource loyaltyRemoteDataSource,
@@ -82,18 +83,18 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         if (mCacheMenuIsDirty) {
             // If the cache is dirty we need to fetch new data from the network
-            // TODO:
+            getMenuFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
             mLoyaltyLocalDataSource.getMenu(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
-                    // TODO:
+                    callback.onDataLoaded(new ArrayList<>(mCachedMenu.values()));
                 }
 
                 @Override
                 public void onDataNotAvailable() {
-                    // TODO:
+                    getMenuFromRemoteDataSource(callback);
                 }
             });
         }
@@ -111,49 +112,49 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         if (mCacheProductIsDirty) {
             // If the cache is dirty we need to fetch new data from the network
-            // TODO:
+            getProductsFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
             mLoyaltyLocalDataSource.getAllProducts(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
-                    // TODO:
+                    callback.onDataLoaded(new ArrayList<>(mCachedProduct.values()));
                 }
 
                 @Override
                 public void onDataNotAvailable() {
-                    // TODO:
+                    callback.onDataNotAvailable();
                 }
             });
         }
     }
 
     @Override
-    public void getSingleProduct(@NonNull LoadDataCallback callback, int id) {
+    public void getSingleProduct(int id, @NonNull GetSingleDataCallback callback) {
         checkNotNull(callback);
 
         // Respond immediately with cache if available and not dirty
         if (mCachedProduct != null && !mCacheProductIsDirty) {
-            callback.onDataLoaded(new ArrayList<>(mCachedProduct.values()));
+            // TODO:
             return;
         }
 
         if (mCacheProductIsDirty) {
             // If the cache is dirty we need to fetch new data from the network
-            // TODO:
+            getSingleProductFromRemoteDataSource(id, callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getSingleProduct(new LoadDataCallback() {
+            mLoyaltyLocalDataSource.getSingleProduct(id, new GetSingleDataCallback() {
                 @Override
-                public void onDataLoaded(List<?> data) {
+                public void onDataLoaded(Object object) {
                     // TODO:
                 }
 
                 @Override
                 public void onDataNotAvailable() {
-                    // TODO:
+                    callback.onDataNotAvailable();
                 }
-            }, id);
+            });
         }
     }
 
@@ -169,49 +170,49 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         if (mCacheCouponIsDirty) {
             // If the cache is dirty we need to fetch new data from the network
-            // TODO:
+            getCouponsFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
             mLoyaltyLocalDataSource.getAllCoupons(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
-                    // TODO:
+                    callback.onDataLoaded(new ArrayList<>(mCachedCoupon.values()));
                 }
 
                 @Override
                 public void onDataNotAvailable() {
-                    // TODO:
+                    callback.onDataNotAvailable();
                 }
             });
         }
     }
 
     @Override
-    public void getSingleCoupon(@NonNull LoadDataCallback callback, int id) {
+    public void getSingleCoupon(int id, @NonNull GetSingleDataCallback callback) {
         checkNotNull(callback);
 
         // Respond immediately with cache if available and not dirty
         if (mCachedCoupon != null && !mCacheCouponIsDirty) {
-            callback.onDataLoaded(new ArrayList<>(mCachedCoupon.values()));
+            // TODO:
             return;
         }
 
         if (mCacheCouponIsDirty) {
             // If the cache is dirty we need to fetch new data from the network
-            // TODO:
+            getSingleCouponFromRemoteDataSource(id, callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getSingleCoupon(new LoadDataCallback() {
+            mLoyaltyLocalDataSource.getSingleCoupon(id, new GetSingleDataCallback() {
                 @Override
-                public void onDataLoaded(List<?> data) {
+                public void onDataLoaded(Object object) {
                     // TODO:
                 }
 
                 @Override
                 public void onDataNotAvailable() {
-                    // TODO:
+                    callback.onDataNotAvailable();
                 }
-            }, id);
+            });
         }
     }
 
@@ -227,182 +228,331 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         if (mCacheMarkerIsDirty) {
             // If the cache is dirty we need to fetch new data from the network
-            // TODO: Call necessary method
+            getMarkersFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
             mLoyaltyLocalDataSource.getAllMarkers(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
-                    // TODO:
+                    callback.onDataLoaded(new ArrayList<>(mCachedMarker.values()));
                 }
 
                 @Override
                 public void onDataNotAvailable() {
-                    // TODO:
+                    callback.onDataNotAvailable();
                 }
             });
         }
     }
 
     @Override
-    public void getSingleMarker(@NonNull LoadDataCallback callback, int id) {
+    public void getSingleMarker(int id, @NonNull GetSingleDataCallback callback) {
         checkNotNull(callback);
 
         // Respond immediately with cache if available and not dirty
         if (mCachedMarker != null && !mCacheMarkerIsDirty) {
-            callback.onDataLoaded(new ArrayList<>(mCachedMarker.values()));
+            // TODO:
             return;
         }
 
         if (mCacheMarkerIsDirty) {
             // If the cache is dirty we need to fetch new data from the network
-            // TODO: Call necessary method
+            getSingleMarkerFromRemoteDataSource(id, callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getSingleMarker(new LoadDataCallback() {
+            mLoyaltyLocalDataSource.getSingleMarker(id, new GetSingleDataCallback() {
                 @Override
-                public void onDataLoaded(List<?> data) {
+                public void onDataLoaded(Object object) {
                     // TODO:
                 }
 
                 @Override
                 public void onDataNotAvailable() {
-                    // TODO:
+                    callback.onDataNotAvailable();
                 }
-            }, id);
+            });
         }
     }
 
     @Override
-    public void getStaticPage(@NonNull final LoadDataCallback callback, int id) {
+    public void getAllOpenHours(@NonNull LoadDataCallback callback) {
         checkNotNull(callback);
 
-        // Query the local storage if available, but if not, query the network
-        mLoyaltyLocalDataSource.getStaticPage(new LoadDataCallback() {
-            @Override
-            public void onDataLoaded(List<?> data) {
-                // TODO:
-            }
+        // Respond immediately with cache if available and not dirty
+        if (mCachedOpenHour != null && !mCacheOpenHourIsDirty) {
+            callback.onDataLoaded(new ArrayList<>(mCachedOpenHour.values()));
+            return;
+        }
 
-            @Override
-            public void onDataNotAvailable() {
-                // TODO:
-            }
-        }, id);
+        if (mCacheOpenHourIsDirty) {
+            // If the cache is dirty we need to fetch new data from the network
+            getOpenHoursFromRemoteDataSource(callback);
+        } else {
+            // Query the local storage if available, but if not, query the network
+            mLoyaltyLocalDataSource.getAllOpenHours(new LoadDataCallback() {
+                @Override
+                public void onDataLoaded(List<?> data) {
+                    callback.onDataLoaded(new ArrayList<>(mCachedOpenHour.values()));
+                }
+
+                @Override
+                public void onDataNotAvailable() {
+                    callback.onDataNotAvailable();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void getSingleOpenHour(int id, @NonNull GetSingleDataCallback callback) {
+        checkNotNull(callback);
+
+        // Respond immediately with cache if available and not dirty
+        if (mCachedOpenHour != null && !mCacheOpenHourIsDirty) {
+            // TODO:
+            return;
+        }
+
+        if (mCacheOpenHourIsDirty) {
+            // If the cache is dirty we need to fetch new data from the network
+            getSingleOpenHourFromRemoteDataSource(id, callback);
+        } else {
+            // Query the local storage if available, but if not, query the network
+            mLoyaltyLocalDataSource.getSingleOpenHour(id, new GetSingleDataCallback() {
+                @Override
+                public void onDataLoaded(Object object) {
+                    // TODO:
+                }
+
+                @Override
+                public void onDataNotAvailable() {
+                    callback.onDataNotAvailable();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void getAllPages(@NonNull LoadDataCallback callback) {
+        checkNotNull(callback);
+
+        // Respond immediately with cache if available and not dirty
+        if (mCachedPage != null && !mCachePageIsDirty) {
+            callback.onDataLoaded(new ArrayList<>(mCachedPage.values()));
+            return;
+        }
+
+        if (mCachePageIsDirty) {
+            // If the cache is dirty we need to fetch new data from the network
+            getPagesFromRemoteDataSource(callback);
+        } else {
+            // Query the local storage if available, but if not, query the network
+            mLoyaltyLocalDataSource.getAllPages(new LoadDataCallback() {
+                @Override
+                public void onDataLoaded(List<?> data) {
+                    callback.onDataLoaded(new ArrayList<>(mCachedPage.values()));
+                }
+
+                @Override
+                public void onDataNotAvailable() {
+                    callback.onDataNotAvailable();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void getSinglePage(int id, @NonNull GetSingleDataCallback callback) {
+        checkNotNull(callback);
+
+        // Respond immediately with cache if available and not dirty
+        if (mCachedPage != null && !mCachePageIsDirty) {
+            // TODO:
+            return;
+        }
+
+        if (mCachePageIsDirty) {
+            // If the cache is dirty we need to fetch new data from the network
+            getSinglePageFromRemoteDataSource(id, callback);
+        } else {
+            // Query the local storage if available, but if not, query the network
+            mLoyaltyLocalDataSource.getSinglePage(id, new GetSingleDataCallback() {
+                @Override
+                public void onDataLoaded(Object object) {
+                    // TODO:
+                }
+
+                @Override
+                public void onDataNotAvailable() {
+                    callback.onDataNotAvailable();
+                }
+            });
+        }
+    }
+
+    /**
+     * Remove local data to get new one next time when app is launched and clear disposable.
+     */
+    @Override
+    public void deleteData() {
+        mLoyaltyLocalDataSource.deleteData();
+        mLoyaltyRemoteDataSource.deleteData();
     }
 
     /**
      * Remote data source.
      */
-    private void getMenuFromRemoteDataSource(@Nonnull final LoadDataCallback callback) {
+    private void getMenuFromRemoteDataSource(@NonNull final LoadDataCallback callback) {
         mLoyaltyRemoteDataSource.getMenu(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                // TODO:
+                callback.onDataLoaded(new ArrayList<>(mCachedMenu.values()));
             }
 
             @Override
             public void onDataNotAvailable() {
-                // TODO:
+                callback.onDataNotAvailable();
             }
         });
     }
 
-    private void getProductsFromRemoteDataSource(@Nonnull final LoadDataCallback callback) {
+    private void getProductsFromRemoteDataSource(@NonNull final LoadDataCallback callback) {
         mLoyaltyRemoteDataSource.getAllProducts(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                // TODO:
+                callback.onDataLoaded(new ArrayList<>(mCachedProduct.values()));
             }
 
             @Override
             public void onDataNotAvailable() {
-                // TODO:
+                callback.onDataNotAvailable();
             }
         });
     }
 
-    private void getSingleProductFromRemoteDataSource(@Nonnull final LoadDataCallback callback, int id) {
-        mLoyaltyRemoteDataSource.getSingleProduct(new LoadDataCallback() {
+    private void getSingleProductFromRemoteDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyRemoteDataSource.getSingleProduct(id, new GetSingleDataCallback() {
             @Override
-            public void onDataLoaded(List<?> data) {
+            public void onDataLoaded(Object object) {
                 // TODO:
             }
 
             @Override
             public void onDataNotAvailable() {
-                // TODO:
+                callback.onDataNotAvailable();
             }
-        }, id);
+        });
     }
 
-    private void getCouponsFromRemoteDataSource(@Nonnull final LoadDataCallback callback) {
+    private void getCouponsFromRemoteDataSource(@NonNull final LoadDataCallback callback) {
         mLoyaltyRemoteDataSource.getAllCoupons(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                // TODO:
+                callback.onDataLoaded(data);
             }
 
             @Override
             public void onDataNotAvailable() {
-                // TODO:
+                callback.onDataNotAvailable();
             }
         });
     }
 
-    private void getSingleCouponFromRemoteDataSource(@Nonnull final LoadDataCallback callback, int id) {
-        mLoyaltyRemoteDataSource.getSingleProduct(new LoadDataCallback() {
+    private void getSingleCouponFromRemoteDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyRemoteDataSource.getSingleProduct(id, new GetSingleDataCallback() {
             @Override
-            public void onDataLoaded(List<?> data) {
+            public void onDataLoaded(Object object) {
                 // TODO:
             }
 
             @Override
             public void onDataNotAvailable() {
-                // TODO:
+                callback.onDataNotAvailable();
             }
-        }, id);
+        });
     }
 
-    private void getMarkersFromRemoteDataSource(@Nonnull final LoadDataCallback callback) {
+    private void getMarkersFromRemoteDataSource(@NonNull final LoadDataCallback callback) {
         mLoyaltyRemoteDataSource.getAllMarkers(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                // TODO:
+                callback.onDataLoaded(data);
             }
 
             @Override
             public void onDataNotAvailable() {
-                // TODO:
+                callback.onDataNotAvailable();
             }
         });
     }
 
-    private void getSingleMarkerFromRemoteDataSource(@Nonnull final LoadDataCallback callback, int id) {
-        mLoyaltyRemoteDataSource.getSingleMarker(new LoadDataCallback() {
+    private void getSingleMarkerFromRemoteDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyRemoteDataSource.getSingleMarker(id, new GetSingleDataCallback() {
             @Override
-            public void onDataLoaded(List<?> data) {
+            public void onDataLoaded(Object object) {
                 // TODO:
             }
 
             @Override
             public void onDataNotAvailable() {
-                // TODO:
+                callback.onDataNotAvailable();
             }
-        }, id);
+        });
     }
 
-    private void getPageFromRemoteDataSource(@Nonnull final LoadDataCallback callback, int id) {
-        mLoyaltyRemoteDataSource.getStaticPage(new LoadDataCallback() {
+    private void getOpenHoursFromRemoteDataSource(@NonNull final LoadDataCallback callback) {
+        mLoyaltyRemoteDataSource.getAllOpenHours(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
+                callback.onDataLoaded(data);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getSingleOpenHourFromRemoteDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyRemoteDataSource.getSingleOpenHour(id, new GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
                 // TODO:
             }
 
             @Override
             public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getPagesFromRemoteDataSource(@NonNull final LoadDataCallback callback) {
+        mLoyaltyRemoteDataSource.getAllPages(new LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<?> data) {
+                callback.onDataLoaded(data);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getSinglePageFromRemoteDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyRemoteDataSource.getSinglePage(id, new GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
                 // TODO:
             }
-        }, id);
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
     }
 }

@@ -13,19 +13,34 @@ public interface LoyaltyDataSource {
         void onDataNotAvailable();
     }
 
+    interface GetSingleDataCallback<T> {
+
+        void onDataLoaded(T object);
+
+        void onDataNotAvailable();
+    }
+
     void getMenu(@NonNull final LoadDataCallback callback);
 
     void getAllProducts(@NonNull final LoadDataCallback callback);
 
-    void getSingleProduct(@NonNull final LoadDataCallback callback, int id);
+    void getSingleProduct(int id, @NonNull final GetSingleDataCallback callback);
 
     void getAllCoupons(@NonNull final LoadDataCallback callback);
 
-    void getSingleCoupon(@NonNull final LoadDataCallback callback, int id);
+    void getSingleCoupon(int id, @NonNull final GetSingleDataCallback callback);
 
     void getAllMarkers(@NonNull final LoadDataCallback callback);
 
-    void getSingleMarker(@NonNull final LoadDataCallback callback, int id);
+    void getSingleMarker(int id, @NonNull final GetSingleDataCallback callback);
 
-    void getStaticPage(@NonNull final LoadDataCallback callback, int id);
+    void getAllOpenHours(@NonNull final LoadDataCallback callback);
+
+    void getSingleOpenHour(int id, @NonNull final GetSingleDataCallback callback);
+
+    void getAllPages(@NonNull final LoadDataCallback callback);
+
+    void getSinglePage(int id, @NonNull final GetSingleDataCallback callback);
+
+    void deleteData();
 }
