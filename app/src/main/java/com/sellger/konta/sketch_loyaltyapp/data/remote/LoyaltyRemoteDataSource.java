@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 
+import java.util.List;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -38,8 +40,20 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     }
 
     @Override
+    public void saveMenu(@NonNull List<?> menuComponentsList) {
+        // Not required for the remote data source, because there is no option for saving data
+        // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
+    }
+
+    @Override
     public void getAllProducts(@NonNull LoadDataCallback callback) {
 
+    }
+
+    @Override
+    public void saveAllProducts(@NonNull List<?> productsList) {
+        // Not required for the remote data source, because there is no option for saving data
+        // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
     }
 
     @Override
@@ -53,6 +67,12 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     }
 
     @Override
+    public void saveAllCoupons(@NonNull List<?> couponsList) {
+        // Not required for the remote data source, because there is no option for saving data
+        // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
+    }
+
+    @Override
     public void getSingleCoupon(int id, @NonNull GetSingleDataCallback callback) {
 
     }
@@ -60,6 +80,12 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     @Override
     public void getAllMarkers(@NonNull LoadDataCallback callback) {
 
+    }
+
+    @Override
+    public void saveAllMarkers(@NonNull List<?> markersList) {
+        // Not required for the remote data source, because there is no option for saving data
+        // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
     }
 
     @Override
@@ -73,6 +99,12 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     }
 
     @Override
+    public void saveAllOpenHours(@NonNull List<?> openHoursList) {
+        // Not required for the remote data source, because there is no option for saving data
+        // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
+    }
+
+    @Override
     public void getSingleOpenHour(int id, @NonNull GetSingleDataCallback callback) {
 
     }
@@ -80,6 +112,12 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     @Override
     public void getAllPages(@NonNull LoadDataCallback callback) {
 
+    }
+
+    @Override
+    public void saveAllPages(@NonNull List<?> pagesList) {
+        // Not required for the remote data source, because there is no option for saving data
+        // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
     }
 
     @Override

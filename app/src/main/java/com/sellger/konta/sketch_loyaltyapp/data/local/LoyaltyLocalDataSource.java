@@ -11,6 +11,8 @@ import com.sellger.konta.sketch_loyaltyapp.data.local.dao.PageDao;
 import com.sellger.konta.sketch_loyaltyapp.data.local.dao.ProductDao;
 import com.sellger.konta.sketch_loyaltyapp.utils.AppExecutors;
 
+import java.util.List;
+
 /**
  * Concrete implementation of a data source as a db
  */
@@ -69,7 +71,17 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
     }
 
     @Override
+    public void saveMenu(@NonNull List<?> menuComponentsList) {
+
+    }
+
+    @Override
     public void getAllProducts(@NonNull LoadDataCallback callback) {
+
+    }
+
+    @Override
+    public void saveAllProducts(@NonNull List<?> productsList) {
 
     }
 
@@ -84,12 +96,22 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
     }
 
     @Override
+    public void saveAllCoupons(@NonNull List<?> couponsList) {
+
+    }
+
+    @Override
     public void getSingleCoupon(int id, @NonNull GetSingleDataCallback callback) {
 
     }
 
     @Override
     public void getAllMarkers(@NonNull LoadDataCallback callback) {
+
+    }
+
+    @Override
+    public void saveAllMarkers(@NonNull List<?> markersList) {
 
     }
 
@@ -104,12 +126,22 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
     }
 
     @Override
+    public void saveAllOpenHours(@NonNull List<?> openHoursList) {
+
+    }
+
+    @Override
     public void getSingleOpenHour(int id, @NonNull GetSingleDataCallback callback) {
 
     }
 
     @Override
     public void getAllPages(@NonNull LoadDataCallback callback) {
+
+    }
+
+    @Override
+    public void saveAllPages(@NonNull List<?> pagesList) {
 
     }
 
