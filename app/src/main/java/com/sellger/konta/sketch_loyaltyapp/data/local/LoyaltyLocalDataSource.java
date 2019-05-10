@@ -73,7 +73,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
      */
     @Override
     public void getMenu(@NonNull LoadDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final List<MenuComponent> menuComponentList = mMenuDao.getMenu();
 
             mAppExecutors.mainThread().execute(() -> {
@@ -86,12 +86,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getAllProducts(@NonNull LoadDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final List<Product> productList = mProductDao.getAllProducts();
 
             mAppExecutors.mainThread().execute(() -> {
@@ -104,12 +104,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getSingleProduct(int id, @NonNull GetSingleDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final Product product = mProductDao.getSingleProduct(id);
 
             mAppExecutors.mainThread().execute(() -> {
@@ -121,12 +121,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getAllCoupons(@NonNull LoadDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final List<Coupon> couponList = mCouponDao.getAllCoupons();
 
             mAppExecutors.mainThread().execute(() -> {
@@ -139,12 +139,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getSingleCoupon(int id, @NonNull GetSingleDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final Coupon coupon = mCouponDao.getSingleCoupon(id);
 
             mAppExecutors.mainThread().execute(() -> {
@@ -156,12 +156,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getAllMarkers(@NonNull LoadDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final List<Marker> markerList = mMarkerDao.getAllMarkers();
 
             mAppExecutors.mainThread().execute(() -> {
@@ -174,12 +174,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getSingleMarker(int id, @NonNull GetSingleDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final Marker marker = mMarkerDao.getSingleMarker(id);
 
             mAppExecutors.mainThread().execute(() -> {
@@ -191,12 +191,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getAllOpenHours(@NonNull LoadDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final List<OpenHour> openHourList = mOpenHourDao.getAllOpenHours();
 
             mAppExecutors.mainThread().execute(() -> {
@@ -209,12 +209,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getSingleOpenHour(int id, @NonNull GetSingleDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final OpenHour openHour = mOpenHourDao.getSingleOpenHour(id);
 
             mAppExecutors.mainThread().execute(() -> {
@@ -226,12 +226,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getAllPages(@NonNull LoadDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final List<Page> pageList = mPageDao.getAllPages();
 
             mAppExecutors.mainThread().execute(() -> {
@@ -244,12 +244,12 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     @Override
     public void getSinglePage(int id, @NonNull GetSingleDataCallback callback) {
-        Runnable runnable = () -> {
+        Runnable getRunnable = () -> {
             final Page page = mPageDao.getSinglePage(id);
 
             mAppExecutors.mainThread().execute(() -> {
@@ -261,13 +261,13 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             });
         };
 
-        mAppExecutors.diskIO().execute(runnable);
+        mAppExecutors.diskIO().execute(getRunnable);
     }
 
     /**
-     * Call relevant insert
+     * Call relevant insert statement
      *
-     * @param dataType of fetched data, it's necessary to trigger relevant insert call
+     * @param dataType of fetched data, it's necessary to trigger relevant insert statement
      * @param dataList of data, which is going to be stored in local db
      */
     @Override
@@ -275,13 +275,23 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
 
     }
 
+    /**
+     * Delete data from the table.
+     *
+     * @param dataType of fetched data, it's necessary to trigger relevant delete statement
+     */
     @Override
-    public void deleteData(String dataType, @NonNull List<?> dataList) {
+    public void deleteData(String dataType) {
 
     }
 
+    /**
+     * Delete data when app is killed and should be fetched from server again.
+     */
     @Override
-    public void clearAllData() {
+    public void clearData() {
+        Runnable deleteRunnable = () -> mCouponDao.deleteAllCoupons();
 
+        mAppExecutors.diskIO().execute(deleteRunnable);
     }
 }

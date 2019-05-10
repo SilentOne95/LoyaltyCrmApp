@@ -405,7 +405,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     }
 
     @Override
-    public void deleteData(String dataType, @NonNull List<?> dataList) {
+    public void deleteData(String dataType) {
 
     }
 
@@ -413,9 +413,9 @@ public class LoyaltyRepository implements LoyaltyDataSource {
      * Remove local data to get new one next time when app is launched and clear disposable.
      */
     @Override
-    public void clearAllData() {
-        mLoyaltyLocalDataSource.clearAllData();
-        mLoyaltyRemoteDataSource.clearAllData();
+    public void clearData() {
+        mLoyaltyLocalDataSource.clearData();
+        mLoyaltyRemoteDataSource.clearData();
     }
 
     /**
