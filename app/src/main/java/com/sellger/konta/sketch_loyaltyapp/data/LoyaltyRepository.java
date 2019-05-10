@@ -10,6 +10,8 @@ import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
+import com.sellger.konta.sketch_loyaltyapp.data.local.LoyaltyLocalDataSource;
+import com.sellger.konta.sketch_loyaltyapp.data.remote.LoyaltyRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,11 +103,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     }
 
     @Override
-    public void saveMenu(@NonNull List<?> menuComponentsList) {
-        mLoyaltyLocalDataSource.saveMenu(menuComponentsList);
-    }
-
-    @Override
     public void getAllProducts(@NonNull final LoadDataCallback callback) {
         checkNotNull(callback);
 
@@ -132,11 +129,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
                 }
             });
         }
-    }
-
-    @Override
-    public void saveAllProducts(@NonNull List<?> productsList) {
-        mLoyaltyLocalDataSource.saveAllProducts(productsList);
     }
 
     @Override
@@ -198,11 +190,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     }
 
     @Override
-    public void saveAllCoupons(@NonNull List<?> couponsList) {
-        mLoyaltyLocalDataSource.saveAllCoupons(couponsList);
-    }
-
-    @Override
     public void getSingleCoupon(int id, @NonNull GetSingleDataCallback callback) {
         checkNotNull(callback);
 
@@ -258,11 +245,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
                 }
             });
         }
-    }
-
-    @Override
-    public void saveAllMarkers(@NonNull List<?> markersList) {
-        mLoyaltyLocalDataSource.saveAllMarkers(markersList);
     }
 
     @Override
@@ -324,11 +306,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     }
 
     @Override
-    public void saveAllOpenHours(@NonNull List<?> openHoursList) {
-        mLoyaltyLocalDataSource.saveAllOpenHours(openHoursList);
-    }
-
-    @Override
     public void getSingleOpenHour(int id, @NonNull GetSingleDataCallback callback) {
         checkNotNull(callback);
 
@@ -387,11 +364,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     }
 
     @Override
-    public void saveAllPages(@NonNull List<?> pagesList) {
-        mLoyaltyLocalDataSource.saveAllPages(pagesList);
-    }
-
-    @Override
     public void getSinglePage(int id, @NonNull GetSingleDataCallback callback) {
         checkNotNull(callback);
 
@@ -421,12 +393,29 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     }
 
     /**
+     * Pass fetched data from {@link LoyaltyRemoteDataSource} to {@link LoyaltyLocalDataSource}
+     * to let store these in SQLite db.
+     *
+     * @param dataType of fetched data, it's necessary to trigger relevant insert call
+     * @param dataList of data, which is going to be stored in local db
+     */
+    @Override
+    public void saveData(String dataType, @NonNull List<?> dataList) {
+
+    }
+
+    @Override
+    public void deleteData(String dataType, @NonNull List<?> dataList) {
+
+    }
+
+    /**
      * Remove local data to get new one next time when app is launched and clear disposable.
      */
     @Override
-    public void deleteData() {
-        mLoyaltyLocalDataSource.deleteData();
-        mLoyaltyRemoteDataSource.deleteData();
+    public void clearAllData() {
+        mLoyaltyLocalDataSource.clearAllData();
+        mLoyaltyRemoteDataSource.clearAllData();
     }
 
     /**
@@ -436,7 +425,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getMenu(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                saveMenu(data);
                 callback.onDataLoaded(new ArrayList<>(mCachedMenu.values()));
             }
 
@@ -451,7 +439,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllProducts(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                saveAllProducts(data);
                 callback.onDataLoaded(new ArrayList<>(mCachedProduct.values()));
             }
 
@@ -480,7 +467,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllCoupons(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                saveAllCoupons(data);
                 callback.onDataLoaded(new ArrayList<>(mCachedCoupon.values()));
             }
 
@@ -509,7 +495,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllMarkers(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                saveAllMarkers(data);
                 callback.onDataLoaded(new ArrayList<>(mCachedMarker.values()));
             }
 
@@ -538,7 +523,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllOpenHours(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                saveAllOpenHours(data);
                 callback.onDataLoaded(new ArrayList<>(mCachedOpenHour.values()));
             }
 
@@ -567,7 +551,6 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllPages(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                saveAllPages(data);
                 callback.onDataLoaded(new ArrayList<>(mCachedPage.values()));
             }
 
