@@ -1,6 +1,12 @@
 package com.sellger.konta.sketch_loyaltyapp.data;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_COUPON;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_MARKER;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_MENU;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_OPEN_HOUR;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_PAGE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_PRODUCT;
 
 import androidx.annotation.NonNull;
 
@@ -14,6 +20,7 @@ import com.sellger.konta.sketch_loyaltyapp.data.local.LoyaltyLocalDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.remote.LoyaltyRemoteDataSource;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,12 +34,12 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     /**
      * Cached data maps.
      */
-    private Map<String, MenuComponent> mCachedMenu;
-    private Map<String, Product> mCachedProduct;
-    private Map<String, Coupon> mCachedCoupon;
-    private Map<String, Marker> mCachedMarker;
-    private Map<String, OpenHour> mCachedOpenHour;
-    private Map<String, Page> mCachedPage;
+    private Map<Integer, MenuComponent> mCachedMenu;
+    private Map<Integer, Product> mCachedProduct;
+    private Map<Integer, Coupon> mCachedCoupon;
+    private Map<Integer, Marker> mCachedMarker;
+    private Map<Integer, OpenHour> mCachedOpenHour;
+    private Map<Integer, Page> mCachedPage;
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested.
@@ -91,6 +98,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getMenu(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
+                    refreshCache(TYPE_MENU, data);
                     callback.onDataLoaded(new ArrayList<>(mCachedMenu.values()));
                 }
 
@@ -120,6 +128,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getAllProducts(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
+                    refreshCache(TYPE_PRODUCT, data);
                     callback.onDataLoaded(new ArrayList<>(mCachedProduct.values()));
                 }
 
@@ -178,6 +187,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getAllCoupons(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
+                    refreshCache(TYPE_COUPON, data);
                     callback.onDataLoaded(new ArrayList<>(mCachedCoupon.values()));
                 }
 
@@ -236,6 +246,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getAllMarkers(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
+                    refreshCache(TYPE_MARKER, data);
                     callback.onDataLoaded(new ArrayList<>(mCachedMarker.values()));
                 }
 
@@ -294,6 +305,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getAllOpenHours(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
+                    refreshCache(TYPE_OPEN_HOUR, data);
                     callback.onDataLoaded(new ArrayList<>(mCachedOpenHour.values()));
                 }
 
@@ -352,6 +364,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getAllPages(new LoadDataCallback() {
                 @Override
                 public void onDataLoaded(List<?> data) {
+                    refreshCache(TYPE_PAGE, data);
                     callback.onDataLoaded(new ArrayList<>(mCachedPage.values()));
                 }
 
@@ -396,17 +409,21 @@ public class LoyaltyRepository implements LoyaltyDataSource {
      * Pass fetched data from {@link LoyaltyRemoteDataSource} to {@link LoyaltyLocalDataSource}
      * to let store these in SQLite db.
      *
-     * @param dataType of fetched data, it's necessary to trigger relevant insert call
+     * @param dataType of fetched data, it's necessary to trigger relevant insert statement
      * @param dataList of data, which is going to be stored in local db
      */
     @Override
     public void saveData(String dataType, @NonNull List<?> dataList) {
+        checkNotNull(dataList);
 
+        // Clear local data before storing new one to ensure storing list up to date
+        clearTableData(dataType);
+        mLoyaltyLocalDataSource.saveData(dataType, dataList);
     }
 
     @Override
-    public void deleteData(String dataType) {
-
+    public void clearTableData(String dataType) {
+        mLoyaltyLocalDataSource.clearTableData(dataType);
     }
 
     /**
@@ -425,6 +442,8 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getMenu(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_MENU, data);
+                saveData(TYPE_MENU, data);
                 callback.onDataLoaded(new ArrayList<>(mCachedMenu.values()));
             }
 
@@ -439,6 +458,8 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllProducts(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_PRODUCT, data);
+                saveData(TYPE_PRODUCT, data);
                 callback.onDataLoaded(new ArrayList<>(mCachedProduct.values()));
             }
 
@@ -467,6 +488,8 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllCoupons(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_COUPON, data);
+                saveData(TYPE_COUPON, data);
                 callback.onDataLoaded(new ArrayList<>(mCachedCoupon.values()));
             }
 
@@ -495,6 +518,8 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllMarkers(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_MARKER, data);
+                saveData(TYPE_MARKER, data);
                 callback.onDataLoaded(new ArrayList<>(mCachedMarker.values()));
             }
 
@@ -523,6 +548,8 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllOpenHours(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_OPEN_HOUR, data);
+                saveData(TYPE_OPEN_HOUR, data);
                 callback.onDataLoaded(new ArrayList<>(mCachedOpenHour.values()));
             }
 
@@ -551,6 +578,8 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllPages(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_PAGE, data);
+                saveData(TYPE_PAGE, data);
                 callback.onDataLoaded(new ArrayList<>(mCachedPage.values()));
             }
 
@@ -573,5 +602,76 @@ public class LoyaltyRepository implements LoyaltyDataSource {
                 callback.onDataNotAvailable();
             }
         });
+    }
+
+    /**
+     * Store fetched data in cache to prevent triggering multiple SQLite statements.
+     *
+     * @param dataType of the passed dataList
+     * @param dataList of data, which is going to be cached
+     */
+    private void refreshCache(String dataType, List<?> dataList) {
+        switch (dataType) {
+            case TYPE_MENU:
+                if (mCachedMenu == null) {
+                    mCachedMenu = new LinkedHashMap<>();
+                }
+                mCachedMenu.clear();
+                for (Object menuComponent : dataList) {
+                    mCachedMenu.put(((MenuComponent) menuComponent).getId(), ((MenuComponent) menuComponent));
+                }
+                mCacheMenuIsDirty = false;
+                break;
+            case TYPE_PRODUCT:
+                if (mCachedProduct == null) {
+                    mCachedProduct = new LinkedHashMap<>();
+                }
+                mCachedProduct.clear();
+                for (Object product : dataList) {
+                    mCachedProduct.put(((Product) product).getId(), ((Product) product));
+                }
+                mCacheProductIsDirty = false;
+                break;
+            case TYPE_COUPON:
+                if (mCachedCoupon == null) {
+                    mCachedCoupon = new LinkedHashMap<>();
+                }
+                mCachedCoupon.clear();
+                for (Object coupon : dataList) {
+                    mCachedCoupon.put(((Coupon) coupon).getId(), ((Coupon) coupon));
+                }
+                mCacheCouponIsDirty = false;
+                break;
+            case TYPE_MARKER:
+                if (mCachedMarker == null) {
+                    mCachedMarker = new LinkedHashMap<>();
+                }
+                mCachedMarker.clear();
+                for (Object marker : dataList) {
+                    mCachedMarker.put(((Marker) marker).getId(), ((Marker) marker));
+                }
+                mCacheMarkerIsDirty = false;
+                break;
+            case TYPE_OPEN_HOUR:
+                if (mCachedOpenHour == null) {
+                    mCachedOpenHour = new LinkedHashMap<>();
+                }
+                mCachedOpenHour.clear();
+                for (Object openHour : dataList) {
+                    mCachedOpenHour.put(((OpenHour) openHour).getId(), ((OpenHour) openHour));
+                }
+                mCacheOpenHourIsDirty = false;
+                break;
+            case TYPE_PAGE:
+                if (mCachedPage == null) {
+                    mCachedPage = new LinkedHashMap<>();
+                }
+                mCachedPage.clear();
+                for (Object page : dataList) {
+                    mCachedPage.put(((Page) page).getId(), ((Page) page));
+                }
+                mCachePageIsDirty = false;
+                break;
+        }
     }
 }

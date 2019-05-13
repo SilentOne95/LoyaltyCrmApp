@@ -44,7 +44,7 @@ public interface LoyaltyDataSource {
 
     void saveData(String dataType, @NonNull final List<?> dataList);
 
-    void deleteData(String dataType);
+    void clearTableData(String dataType);
 
     void clearData();
 }

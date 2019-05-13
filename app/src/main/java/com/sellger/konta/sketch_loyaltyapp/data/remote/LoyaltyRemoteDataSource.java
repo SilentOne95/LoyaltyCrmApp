@@ -96,8 +96,8 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     }
 
     @Override
-    public void deleteData(String dataType) {
-        // Not required for the remote data source, because there is no option for deletin data
+    public void clearTableData(String dataType) {
+        // Not required for the remote data source, because there is no option for refreshing data
         // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
     }
 

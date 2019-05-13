@@ -281,7 +281,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
      * @param dataType of fetched data, it's necessary to trigger relevant delete statement
      */
     @Override
-    public void deleteData(String dataType) {
+    public void clearTableData(String dataType) {
 
     }
 
