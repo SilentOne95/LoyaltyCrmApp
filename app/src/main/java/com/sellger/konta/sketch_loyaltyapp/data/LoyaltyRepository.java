@@ -146,7 +146,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         // Respond immediately with cache if available and not dirty
         if (mCachedProduct != null && !mCacheProductIsDirty) {
-            // TODO:
+            callback.onDataLoaded(mCachedProduct.get(id));
             return;
         }
 
@@ -158,7 +158,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getSingleProduct(id, new GetSingleDataCallback() {
                 @Override
                 public void onDataLoaded(Object object) {
-                    // TODO:
+                    callback.onDataLoaded(object);
                 }
 
                 @Override
@@ -205,7 +205,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         // Respond immediately with cache if available and not dirty
         if (mCachedCoupon != null && !mCacheCouponIsDirty) {
-            // TODO:
+            callback.onDataLoaded(mCachedCoupon.get(id));
             return;
         }
 
@@ -217,7 +217,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getSingleCoupon(id, new GetSingleDataCallback() {
                 @Override
                 public void onDataLoaded(Object object) {
-                    // TODO:
+                    callback.onDataLoaded(object);
                 }
 
                 @Override
@@ -264,7 +264,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         // Respond immediately with cache if available and not dirty
         if (mCachedMarker != null && !mCacheMarkerIsDirty) {
-            // TODO:
+            callback.onDataLoaded(mCachedMarker.get(id));
             return;
         }
 
@@ -276,7 +276,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getSingleMarker(id, new GetSingleDataCallback() {
                 @Override
                 public void onDataLoaded(Object object) {
-                    // TODO:
+                    callback.onDataLoaded(object);
                 }
 
                 @Override
@@ -323,7 +323,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         // Respond immediately with cache if available and not dirty
         if (mCachedOpenHour != null && !mCacheOpenHourIsDirty) {
-            // TODO:
+            callback.onDataLoaded(mCachedOpenHour.get(id));
             return;
         }
 
@@ -335,7 +335,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getSingleOpenHour(id, new GetSingleDataCallback() {
                 @Override
                 public void onDataLoaded(Object object) {
-                    // TODO:
+                    callback.onDataLoaded(object);
                 }
 
                 @Override
@@ -382,7 +382,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
         // Respond immediately with cache if available and not dirty
         if (mCachedPage != null && !mCachePageIsDirty) {
-            // TODO:
+            callback.onDataLoaded(mCachedPage.get(id));
             return;
         }
 
@@ -394,7 +394,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             mLoyaltyLocalDataSource.getSinglePage(id, new GetSingleDataCallback() {
                 @Override
                 public void onDataLoaded(Object object) {
-                    // TODO:
+                    callback.onDataLoaded(object);
                 }
 
                 @Override

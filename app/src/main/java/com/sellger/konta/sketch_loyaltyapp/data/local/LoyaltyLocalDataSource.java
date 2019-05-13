@@ -2,6 +2,8 @@ package com.sellger.konta.sketch_loyaltyapp.data.local;
 
 import androidx.annotation.NonNull;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
@@ -18,6 +20,13 @@ import com.sellger.konta.sketch_loyaltyapp.data.local.dao.ProductDao;
 import com.sellger.konta.sketch_loyaltyapp.utils.AppExecutors;
 
 import java.util.List;
+
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_COUPON;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_MARKER;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_MENU;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_OPEN_HOUR;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_PAGE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_PRODUCT;
 
 /**
  * Concrete implementation of a data source as a db
@@ -272,7 +281,31 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
      */
     @Override
     public void saveData(String dataType, @NonNull List<?> dataList) {
+        checkNotNull(dataList);
+        Runnable saveRunnable = null;
 
+        switch (dataType) {
+            case TYPE_MENU:
+                saveRunnable = () -> mMenuDao.insertMenu((List<MenuComponent>) dataList);
+                break;
+            case TYPE_PRODUCT:
+                saveRunnable = () -> mProductDao.insertAllProducts((List<Product>) dataList);
+                break;
+            case TYPE_COUPON:
+                saveRunnable = () -> mCouponDao.insertAllCoupons((List<Coupon>) dataList);
+                break;
+            case TYPE_MARKER:
+                saveRunnable = () -> mMarkerDao.insertAllMarkers((List<Marker>) dataList);
+                break;
+            case TYPE_OPEN_HOUR:
+                saveRunnable = () -> mOpenHourDao.insertAllOpenHours((List<OpenHour>) dataList);
+                break;
+            case TYPE_PAGE:
+                saveRunnable = () -> mPageDao.insertAllPages((List<Page>) dataList);
+                break;
+        }
+
+        mAppExecutors.diskIO().execute(saveRunnable);
     }
 
     /**
@@ -282,7 +315,30 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
      */
     @Override
     public void clearTableData(String dataType) {
+        Runnable deleteRunnable = null;
 
+        switch (dataType) {
+            case TYPE_MENU:
+                deleteRunnable = () -> mMenuDao.deleteAllMenu();
+                break;
+            case TYPE_PRODUCT:
+                deleteRunnable = () -> mProductDao.deleteAllProducts();
+                break;
+            case TYPE_COUPON:
+                deleteRunnable = () -> mCouponDao.deleteAllCoupons();
+                break;
+            case TYPE_MARKER:
+                deleteRunnable = () -> mMarkerDao.deleteAllMarkers();
+                break;
+            case TYPE_OPEN_HOUR:
+                deleteRunnable = () -> mOpenHourDao.deleteAllOpenHours();
+                break;
+            case TYPE_PAGE:
+                deleteRunnable = () -> mPageDao.deleteAllPages();
+                break;
+        }
+
+        mAppExecutors.diskIO().execute(deleteRunnable);
     }
 
     /**

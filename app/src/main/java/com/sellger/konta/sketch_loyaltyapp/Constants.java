@@ -77,4 +77,12 @@ public final class Constants {
 
     // Settings - SharedPref file name
     public static final String SHARED_PREF_FILE_NAME = "switchState";
+
+    // Repository - fetched data type
+    public static final String TYPE_MENU = "menu";
+    public static final String TYPE_PRODUCT = "product";
+    public static final String TYPE_COUPON = "coupon";
+    public static final String TYPE_MARKER = "marker";
+    public static final String TYPE_OPEN_HOUR = "open_hour";
+    public static final String TYPE_PAGE = "page";
 }
