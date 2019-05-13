@@ -89,7 +89,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
                 if (!menuComponentList.isEmpty()) {
                     callback.onDataLoaded(menuComponentList);
                 } else {
-                    // TODO:
+                    // This will be called if the table is new or just empty
                     callback.onDataNotAvailable();
                 }
             });
@@ -107,7 +107,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
                 if (!productList.isEmpty()) {
                     callback.onDataLoaded(productList);
                 } else {
-                    // TODO:
+                    // This will be called if the table is new or just empty
                     callback.onDataNotAvailable();
                 }
             });
@@ -125,6 +125,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
                 if (product != null) {
                     callback.onDataLoaded(product);
                 } else {
+                    // This will be called if the table is new or just empty
                     callback.onDataNotAvailable();
                 }
             });
@@ -142,7 +143,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
                 if (!couponList.isEmpty()) {
                     callback.onDataLoaded(couponList);
                 } else {
-                    // TODO:
+                    // This will be called if the table is new or just empty
                     callback.onDataNotAvailable();
                 }
             });
@@ -160,6 +161,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
                 if (coupon != null) {
                     callback.onDataLoaded(coupon);
                 } else {
+                    // This will be called if the table is new or just empty
                     callback.onDataNotAvailable();
                 }
             });
@@ -177,7 +179,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
                 if (!markerList.isEmpty()) {
                     callback.onDataLoaded(markerList);
                 } else {
-                    // TODO:
+                    // This will be called if the table is new or just empty
                     callback.onDataNotAvailable();
                 }
             });
@@ -212,7 +214,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
                 if (!openHourList.isEmpty()) {
                     callback.onDataLoaded(openHourList);
                 } else {
-                    // TODO:
+                    // This will be called if the table is new or just empty
                     callback.onDataNotAvailable();
                 }
             });
@@ -247,7 +249,7 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
                 if (!pageList.isEmpty()) {
                     callback.onDataLoaded(pageList);
                 } else {
-                    // TODO:
+                    // This will be called if the table is new or just empty
                     callback.onDataNotAvailable();
                 }
             });

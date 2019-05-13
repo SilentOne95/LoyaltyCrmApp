@@ -3,10 +3,14 @@ package com.sellger.konta.sketch_loyaltyapp.data.remote;
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
+import com.sellger.konta.sketch_loyaltyapp.network.Api;
+import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
 
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Concrete implementation of a data source as a network connection
@@ -36,57 +40,103 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
      */
     @Override
     public void getMenu(@NonNull LoadDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getMenuComponents()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getAllProducts(@NonNull LoadDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getAllProducts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getSingleProduct(int id, @NonNull GetSingleDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getSingleProduct(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getAllCoupons(@NonNull LoadDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getAllCoupons()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getSingleCoupon(int id, @NonNull GetSingleDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getSingleCoupon(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getAllMarkers(@NonNull LoadDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getAllMarkers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getSingleMarker(int id, @NonNull GetSingleDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getSingleMarker(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getAllOpenHours(@NonNull LoadDataCallback callback) {
-
+        // This data is nested in Marker's info, so it's necessary to fetch and refactor Markers data
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getAllMarkers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getSingleOpenHour(int id, @NonNull GetSingleDataCallback callback) {
-
+        // This data is nested in Marker's info, so it's necessary to fetch and refactor it's data
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getSingleMarker(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getAllPages(@NonNull LoadDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getAllPages()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
     public void getSinglePage(int id, @NonNull GetSingleDataCallback callback) {
-
+        disposable.add(RetrofitClient.getInstance().create(Api.class)
+                .getStaticPage(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback::onDataLoaded));
     }
 
     @Override
@@ -101,8 +151,11 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
     }
 
+    /**
+     * Clear disposable.
+     */
     @Override
     public void clearData() {
-        // Clear disposables
+        disposable.clear();
     }
 }
