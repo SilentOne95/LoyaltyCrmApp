@@ -19,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity;
@@ -168,12 +169,11 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     private String checkAuthMethod() {
         String authMethod = "";
-        if (FirebaseAuth.getInstance().getCurrentUser().getProviders() != null) {
-            List<String> providers = FirebaseAuth.getInstance().getCurrentUser().getProviders();
-            for (String string : providers) {
-                Log.d(TAG, "provider " + string);
-                authMethod = string;
-            }
+        FirebaseAuth.getInstance().getCurrentUser().getProviderData();
+        List<? extends UserInfo> providers = FirebaseAuth.getInstance().getCurrentUser().getProviderData();
+        for (UserInfo userInfo : providers) {
+            Log.d(TAG, "provider: " + userInfo.getProviderId());
+            authMethod = userInfo.getProviderId();
         }
 
         return authMethod;

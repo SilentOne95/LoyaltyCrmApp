@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.data;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 

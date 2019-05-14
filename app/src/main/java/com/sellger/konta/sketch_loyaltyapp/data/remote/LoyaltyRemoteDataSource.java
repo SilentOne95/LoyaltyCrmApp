@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.data.remote;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.network.Api;

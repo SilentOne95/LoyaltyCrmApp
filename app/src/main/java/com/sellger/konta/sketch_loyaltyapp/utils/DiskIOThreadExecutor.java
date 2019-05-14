@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.utils;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

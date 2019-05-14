@@ -18,8 +18,7 @@ package com.sellger.konta.sketch_loyaltyapp.utils;
 
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
+import android.support.annotation.NonNull;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -40,7 +39,6 @@ public class AppExecutors {
 
     private final Executor mainThread;
 
-    @VisibleForTesting
     AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread) {
         this.diskIO = diskIO;
         this.networkIO = networkIO;

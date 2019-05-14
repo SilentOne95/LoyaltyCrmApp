@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.data;
 
+import android.support.annotation.NonNull;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_COUPON;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_MARKER;
@@ -7,8 +9,6 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_MENU;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_OPEN_HOUR;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_PAGE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TYPE_PRODUCT;
-
-import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;

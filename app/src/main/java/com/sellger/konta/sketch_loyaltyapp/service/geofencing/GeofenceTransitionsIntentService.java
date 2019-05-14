@@ -2,10 +2,9 @@ package com.sellger.konta.sketch_loyaltyapp.service.geofencing;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
