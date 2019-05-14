@@ -7,7 +7,9 @@ import com.sellger.konta.sketch_loyaltyapp.network.Api;
 import com.sellger.konta.sketch_loyaltyapp.network.RetrofitClient;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -34,6 +36,19 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     private LoyaltyRemoteDataSource() {}
 
     /**
+     * Zip with timer all requests to display loading indicator at least for 1 sec to prevent from
+     * undesirable blink effect.
+     *
+     * @param observable data request
+     * @param <T> generic type of parameter is going to be passed
+     * @return Single observable zipped with timer - disposable
+     */
+    private static <T> Single<T> zipWithTimer(Single<T> observable) {
+        return Single.zip(observable, Single.timer(1000, TimeUnit.MILLISECONDS),
+                (data, timerValue) -> data);
+    }
+
+    /**
      * Get all the data from server.
      *
      * Note: {@link LoadDataCallback#onDataNotAvailable()} is fired if the database doesn't exist
@@ -41,17 +56,16 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
      */
     @Override
     public void getMenu(@NonNull LoadDataCallback callback) {
-        disposable.add(api
-                .getMenuComponents()
+        disposable.add(zipWithTimer(api.getMenuComponents())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
+;
     }
 
     @Override
     public void getAllProducts(@NonNull LoadDataCallback callback) {
-        disposable.add(api
-                .getAllProducts()
+        disposable.add(zipWithTimer(api.getAllProducts())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -59,8 +73,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     @Override
     public void getSingleProduct(int id, @NonNull GetSingleDataCallback callback) {
-        disposable.add(api
-                .getSingleProduct(id)
+        disposable.add(zipWithTimer(api.getSingleProduct(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -68,8 +81,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     @Override
     public void getAllCoupons(@NonNull LoadDataCallback callback) {
-        disposable.add(api
-                .getAllCoupons()
+        disposable.add(zipWithTimer(api.getAllCoupons())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -77,8 +89,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     @Override
     public void getSingleCoupon(int id, @NonNull GetSingleDataCallback callback) {
-        disposable.add(api
-                .getSingleCoupon(id)
+        disposable.add(zipWithTimer(api.getSingleCoupon(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -86,8 +97,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     @Override
     public void getAllMarkers(@NonNull LoadDataCallback callback) {
-        disposable.add(api
-                .getAllMarkers()
+        disposable.add(zipWithTimer(api.getAllMarkers())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -95,8 +105,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     @Override
     public void getSingleMarker(int id, @NonNull GetSingleDataCallback callback) {
-        disposable.add(api
-                .getSingleMarker(id)
+        disposable.add(zipWithTimer(api.getSingleMarker(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -105,8 +114,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     @Override
     public void getAllOpenHours(@NonNull LoadDataCallback callback) {
         // This data is nested in Marker's info, so it's necessary to fetch and refactor Markers data
-        disposable.add(api
-                .getAllMarkers()
+        disposable.add(zipWithTimer(api.getAllMarkers())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -115,8 +123,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
     @Override
     public void getSingleOpenHour(int id, @NonNull GetSingleDataCallback callback) {
         // This data is nested in Marker's info, so it's necessary to fetch and refactor it's data
-        disposable.add(api
-                .getSingleMarker(id)
+        disposable.add(zipWithTimer(api.getSingleMarker(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -124,8 +131,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     @Override
     public void getAllPages(@NonNull LoadDataCallback callback) {
-        disposable.add(api
-                .getAllPages()
+        disposable.add(zipWithTimer(api.getAllPages())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
@@ -133,8 +139,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     @Override
     public void getSinglePage(int id, @NonNull GetSingleDataCallback callback) {
-        disposable.add(api
-                .getStaticPage(id)
+        disposable.add(zipWithTimer(api.getSinglePage(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));

@@ -48,5 +48,5 @@ public interface Api {
 
     // Get static page
     @GET("/page/{id}")
-    Single<Page> getStaticPage(@Path("id") int id);
+    Single<Page> getSinglePage(@Path("id") int id);
 }

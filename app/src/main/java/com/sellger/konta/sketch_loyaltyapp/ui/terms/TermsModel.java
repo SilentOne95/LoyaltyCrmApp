@@ -34,7 +34,7 @@ public class TermsModel implements TermsContract.Model {
 
     private Single<Page> getObservable(int pageId) {
         return RetrofitClient.getInstance().create(Api.class)
-                .getStaticPage(pageId)
+                .getSinglePage(pageId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
