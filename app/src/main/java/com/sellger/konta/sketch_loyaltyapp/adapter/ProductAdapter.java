@@ -114,7 +114,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 break;
         }
 
-        if (currentItem.getImage() != null && !currentItem.getImage().trim().isEmpty() && !currentItem.getImage().equals("")) {
+        if (!TextUtils.isEmpty(currentItem.getImage())) {
             // TODO: Upload images to server and change "else" image to no_image_available
             Picasso.get()
                     .load(BASE_URL_IMAGES + currentItem.getImage())
@@ -133,6 +133,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         }
                     });
         } else {
+            holder.progressBar.setVisibility(View.GONE);
+
             Picasso.get()
                     .load(R.drawable.no_image_available)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))

@@ -148,6 +148,8 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
                         }
                     });
         } else {
+            holder.progressBar.setVisibility(View.GONE);
+
             Picasso.get()
                     .load(R.drawable.no_image_available)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
