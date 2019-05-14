@@ -14,6 +14,10 @@ public final class Constants {
     public static final int NAV_VIEW_THIRD_GROUP_ID = 2;
     public static final int NAV_VIEW_ORDER = 0;
 
+    // MainActivityPresenter
+    public static final String NAV_DRAWER_TYPE_MENU = "menu";
+    public static final String NAV_DRAWER_TYPE_SUBMENU = "submenu";
+
     // MapFragment
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public static final int REQUEST_CHECK_SETTINGS = 100;

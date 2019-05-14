@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccountFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
@@ -67,7 +68,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private Button mNavViewHeaderButton;
 
     // Field that stores layout type of clicked menu item
-    private String layoutType = null;
+    private String mLayoutType = null;
 
     public static String PACKAGE_NAME;
 
@@ -106,14 +107,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mNavViewHeaderButton.setOnClickListener(this);
 
         // Set up presenter
-        presenter = new MainActivityPresenter(this, new MainActivityModel());
+        presenter = new MainActivityPresenter(this, Injection.provideLoyaltyRepository(getApplicationContext()));
         presenter.requestDataFromServer();
         presenter.setUpObservableHomeAdapter();
-
-        // Remove nav view header shade if an account is not anonymous
-        if (mFirebaseAuth.getCurrentUser() != null && !mFirebaseAuth.getCurrentUser().isAnonymous()){
-            setNavViewHeaderVisibility(NOT_ANONYMOUS_REGISTRATION);
-        }
 
         // Display relevant view based on whether user is already logged or not
         if (mFirebaseAuth.getCurrentUser() != null) {
@@ -283,12 +279,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Assign clicked menuItem IDs and layout type to global variables
         if (!menuItem.isChecked()) {
             if (menuItem.getGroupId() == 2) {
-                layoutType = LAYOUT_TYPE_SETTINGS;
+                mLayoutType = LAYOUT_TYPE_SETTINGS;
             } else {
-                layoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
+                mLayoutType = presenter.getLayoutType(menuItem.getGroupId(), menuItem.getItemId());
             }
         } else {
-            layoutType = null;
+            mLayoutType = null;
         }
 
         // Uncheck all checked menu items
@@ -311,10 +307,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void onDrawerClosed(@NonNull View view) {
-        presenter.displaySelectedScreen(layoutType, LAYOUT_DATA_EMPTY_STRING);
+        presenter.displaySelectedScreen(mLayoutType, LAYOUT_DATA_EMPTY_STRING);
         // Set layoutType to null to avoid creating new instance of fragment, when closing nav drawer
         // by clicking next to the view
-        layoutType = null;
+        mLayoutType = null;
 //        showInternetConnectionResult();
     }
 
@@ -376,7 +372,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void onClick(View v) {
-        layoutType = "login";
+        mLayoutType = "login";
 
         // Close drawer after delay when item is tapped
         new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), 200);
