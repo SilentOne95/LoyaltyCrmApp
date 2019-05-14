@@ -21,6 +21,8 @@ public interface ProductsContract {
 
         void requestDataFromServer();
 
+        void refactorFetchedData(List<Product> couponList, int numOfColumns);
+
         void hideProgressBar();
 
         void passDataToAdapter(List<Product> productList, int numOfColumns);

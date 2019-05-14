@@ -9,6 +9,7 @@ import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 
 import java.util.List;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_NUM_OF_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PRODUCTS;
 
 public class ProductsPresenter implements ProductsContract.Presenter {
@@ -32,10 +33,9 @@ public class ProductsPresenter implements ProductsContract.Presenter {
                 loyaltyRepository.getMenu(new LoyaltyDataSource.LoadDataCallback() {
                     @Override
                     public void onDataLoaded(List<?> data) {
-                        for (Object menuComponent : data) {
-                            if (((MenuComponent) menuComponent).getType().equals(LAYOUT_TYPE_PRODUCTS)) {
-                                hideProgressBar();
-                                passDataToAdapter(productList, ((MenuComponent) menuComponent).getNumberOfColumns());
+                        for (Object object : data) {
+                            if (((MenuComponent) object).getType().equals(LAYOUT_TYPE_PRODUCTS)) {
+                                refactorFetchedData(productList, ((MenuComponent) object).getNumberOfColumns());
                             }
                         }
                     }
@@ -52,6 +52,16 @@ public class ProductsPresenter implements ProductsContract.Presenter {
                 hideProgressBar();
             }
         });
+    }
+
+    @Override
+    public void refactorFetchedData(List<Product> productList, int numOfColumns) {
+        if (numOfColumns < 1 || numOfColumns > 3) {
+            numOfColumns = DEFAULT_NUM_OF_COLUMNS;
+        }
+
+        hideProgressBar();
+        passDataToAdapter(productList, numOfColumns);
     }
 
     @Override
