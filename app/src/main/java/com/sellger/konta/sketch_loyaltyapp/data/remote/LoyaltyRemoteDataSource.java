@@ -60,7 +60,6 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded));
-;
     }
 
     @Override

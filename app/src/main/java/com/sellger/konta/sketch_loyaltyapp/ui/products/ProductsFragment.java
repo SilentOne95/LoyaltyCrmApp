@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import com.sellger.konta.sketch_loyaltyapp.adapter.ProductAdapter;
 import com.sellger.konta.sketch_loyaltyapp.adapter.RecyclerItemClickListener;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.ui.productDetails.ProductDetailsActivity;
@@ -53,7 +54,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         mEmptyStateView.setVisibility(View.GONE);
 
         // Setting up presenter
-        presenter = new ProductsPresenter(this, new ProductsModel());
+        presenter = new ProductsPresenter(this, Injection.provideLoyaltyRepository(getContext()));
         presenter.requestDataFromServer();
     }
 

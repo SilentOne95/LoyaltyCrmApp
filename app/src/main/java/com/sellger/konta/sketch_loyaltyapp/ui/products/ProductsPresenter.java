@@ -2,43 +2,69 @@ package com.sellger.konta.sketch_loyaltyapp.ui.products;
 
 import android.support.annotation.Nullable;
 
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 
 import java.util.List;
 
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PRODUCTS;
 
 public class ProductsPresenter implements ProductsContract.Presenter {
 
     @Nullable
     private ProductsContract.View view;
-    private ProductsContract.Model model;
+    private LoyaltyRepository loyaltyRepository;
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    ProductsPresenter(@Nullable ProductsContract.View view, ProductsContract.Model model) {
+    ProductsPresenter(@Nullable ProductsContract.View view, LoyaltyRepository loyaltyRepository) {
         this.view = view;
-        this.model = model;
+        this.loyaltyRepository = loyaltyRepository;
     }
 
     @Override
     public void requestDataFromServer() {
-        Disposable disposable = model.fetchDataFromServer(this);
-        compositeDisposable.add(disposable);
-    }
+        loyaltyRepository.getAllProducts(new LoyaltyDataSource.LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<?> data) {
+                List<Product> productList = (List<Product>) data;
 
-    @Override
-    public void passDataToAdapter(List<Product> productList, int numOfColumns) {
-        if (view != null) {
-            view.setUpAdapter(productList, numOfColumns);
-        }
+                loyaltyRepository.getMenu(new LoyaltyDataSource.LoadDataCallback() {
+                    @Override
+                    public void onDataLoaded(List<?> data) {
+                        for (Object menuComponent : data) {
+                            if (((MenuComponent) menuComponent).getType().equals(LAYOUT_TYPE_PRODUCTS)) {
+                                hideProgressBar();
+                                passDataToAdapter(productList, ((MenuComponent) menuComponent).getNumberOfColumns());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onDataNotAvailable() {
+                        hideProgressBar();
+                    }
+                });
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                hideProgressBar();
+            }
+        });
     }
 
     @Override
     public void hideProgressBar() {
         if (view != null) {
             view.hideProgressBar();
+        }
+    }
+
+    @Override
+    public void passDataToAdapter(List<Product> productList, int numOfColumns) {
+        if (view != null) {
+            view.setUpAdapter(productList, numOfColumns);
         }
     }
 }
