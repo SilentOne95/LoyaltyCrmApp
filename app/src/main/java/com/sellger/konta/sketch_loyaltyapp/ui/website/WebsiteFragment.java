@@ -13,10 +13,13 @@ import android.webkit.WebViewClient;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 
-public class WebsiteFragment extends BaseFragment {
+public class WebsiteFragment extends BaseFragment implements WebsiteContract.View {
 
     private static final String TAG = WebsiteFragment.class.getSimpleName();
+
+    WebsitePresenter presenter;
 
     private WebView mWebView;
 
@@ -32,11 +35,12 @@ public class WebsiteFragment extends BaseFragment {
 
         setHasOptionsMenu(true);
 
-        mWebView = rootView.findViewById(R.id.webview);
-        mWebView.setWebViewClient(new WebViewClient());
-        mWebView.getSettings().setDomStorageEnabled(true);
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("https://www.google.com/");
+        // Init views
+        initViews();
+        setUpViewWithData("https://www.google.com/");
+
+        presenter = new WebsitePresenter(this, Injection.provideLoyaltyRepository(getContext()));
+        presenter.requestDataFromServer(1);
     }
 
     @Override
@@ -47,5 +51,19 @@ public class WebsiteFragment extends BaseFragment {
         optionsItem.setVisible(false);
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void initViews() {
+        mWebView = rootView.findViewById(R.id.webview);
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    @Override
+    public void setUpViewWithData(String websiteUrl) {
+        mWebView.setWebViewClient(new WebViewClient());
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.loadUrl(websiteUrl);
     }
 }

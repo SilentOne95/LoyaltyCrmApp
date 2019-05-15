@@ -4,13 +4,17 @@ public interface WebsiteContract {
 
     interface View {
 
+        void initViews();
+
+        void setUpViewWithData(String websiteUrl);
     }
 
     interface Presenter {
 
-    }
+        void requestDataFromServer(int pageId);
 
-    interface Model {
+        void hideProgressBar();
 
+        void passDataToView(String websiteUrl);
     }
 }
