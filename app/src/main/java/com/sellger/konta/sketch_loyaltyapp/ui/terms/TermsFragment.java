@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
 public class TermsFragment extends BaseFragment implements TermsContract.View {
@@ -42,7 +43,7 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
         mLayoutContainer.setVisibility(View.GONE);
 
         // Setting up presenter
-        presenter = new TermsPresenter(this, new TermsModel());
+        presenter = new TermsPresenter(this, Injection.provideLoyaltyRepository(getContext()));
         presenter.requestDataFromServer(1);
     }
 

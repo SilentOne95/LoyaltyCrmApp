@@ -474,7 +474,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getSingleProduct(id, new GetSingleDataCallback() {
             @Override
             public void onDataLoaded(Object object) {
-                // TODO:
+                callback.onDataLoaded(object);
             }
 
             @Override
@@ -504,7 +504,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getSingleProduct(id, new GetSingleDataCallback() {
             @Override
             public void onDataLoaded(Object object) {
-                // TODO:
+                callback.onDataLoaded(object);
             }
 
             @Override
@@ -534,7 +534,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getSingleMarker(id, new GetSingleDataCallback() {
             @Override
             public void onDataLoaded(Object object) {
-                // TODO:
+                callback.onDataLoaded(object);
             }
 
             @Override
@@ -564,7 +564,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getSingleOpenHour(id, new GetSingleDataCallback() {
             @Override
             public void onDataLoaded(Object object) {
-                // TODO:
+                callback.onDataLoaded(object);
             }
 
             @Override
@@ -594,7 +594,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getSinglePage(id, new GetSingleDataCallback() {
             @Override
             public void onDataLoaded(Object object) {
-                // TODO:
+                callback.onDataLoaded(object);
             }
 
             @Override
