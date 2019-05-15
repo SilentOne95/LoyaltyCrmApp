@@ -3,6 +3,7 @@ package com.sellger.konta.sketch_loyaltyapp.data.local;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
@@ -17,9 +18,11 @@ import com.sellger.konta.sketch_loyaltyapp.data.local.dao.MenuDao;
 import com.sellger.konta.sketch_loyaltyapp.data.local.dao.OpenHourDao;
 import com.sellger.konta.sketch_loyaltyapp.data.local.dao.PageDao;
 import com.sellger.konta.sketch_loyaltyapp.data.local.dao.ProductDao;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.OpenHourTypeConverter;
 
 @Database(entities = {MenuComponent.class, Product.class, Coupon.class, Marker.class, OpenHour.class,
         Page.class}, version = 1)
+@TypeConverters({OpenHourTypeConverter.class})
 public abstract class LoyaltyRoomDatabase extends RoomDatabase {
 
     public abstract MenuDao menuDao();

@@ -3,49 +3,78 @@ package com.sellger.konta.sketch_loyaltyapp.data.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import com.sellger.konta.sketch_loyaltyapp.data.utils.OpenHourTypeConverter;
+
+import java.util.List;
 
 @Entity(tableName = "marker_table")
 public class Marker {
 
     @PrimaryKey
+    @SerializedName("id")
+    @Expose
     @ColumnInfo(name = "id")
     private Integer mId;
 
+    @SerializedName("title")
+    @Expose
     @ColumnInfo(name = "title")
     private String mTitle;
 
+    @SerializedName("lat")
+    @Expose
     @ColumnInfo(name = "lat")
     private Double mLat;
 
+    @SerializedName("lng")
+    @Expose
     @ColumnInfo(name = "lng")
     private Double mLng;
 
+    @SerializedName("shop_name")
+    @Expose
     @ColumnInfo(name = "shop_name")
     private String mShopName;
 
+    @SerializedName("address")
+    @Expose
     @ColumnInfo(name = "address")
     private String mAddress;
 
+    @SerializedName("post_code")
+    @Expose
     @ColumnInfo(name = "postal_code")
     private String mPostalCode;
 
+    @SerializedName("city")
+    @Expose
     @ColumnInfo(name = "city")
     private String mCity;
 
+    @SerializedName("mail")
+    @Expose
     @ColumnInfo(name = "mail")
     private String mMail;
 
+    @SerializedName("phone_number")
+    @Expose
     @ColumnInfo(name = "phone_number")
     private String mPhoneNumber;
 
+    @SerializedName("website")
+    @Expose
     @ColumnInfo(name = "website")
     private String mWebsite;
 
-    public Marker(double lat, double lng, int id) {
-        mLat = lat;
-        mLng = lng;
-        mId = id;
-    }
+    @SerializedName("open_hour_list")
+    @Expose
+    @ColumnInfo(name = "open_hour_list")
+    @TypeConverters(OpenHourTypeConverter.class)
+    private List<OpenHour> mOpenHourList = null;
 
     public Integer getId() {
         return mId;
@@ -122,5 +151,12 @@ public class Marker {
     }
     public void setWebsite(String website) {
         mWebsite = website;
+    }
+
+    public List<OpenHour> getOpenHourList() {
+        return mOpenHourList;
+    }
+    public void setOpenHourList(List<OpenHour> openHourList) {
+        mOpenHourList = openHourList;
     }
 }
