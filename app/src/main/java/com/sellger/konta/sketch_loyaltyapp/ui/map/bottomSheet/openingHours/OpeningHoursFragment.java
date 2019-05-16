@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.ui.map.MapModel;
+import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
 public class OpeningHoursFragment extends BaseFragment implements BottomSheetContract.OpeningHoursView {
@@ -35,7 +35,7 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
         initViews();
 
         // Setting up presenter
-        presenter = new OpeningHoursPresenter(this, new MapModel());
+        presenter = new OpeningHoursPresenter(this, Injection.provideLoyaltyRepository(getContext()));
         presenter.setUpObservable();
     }
 

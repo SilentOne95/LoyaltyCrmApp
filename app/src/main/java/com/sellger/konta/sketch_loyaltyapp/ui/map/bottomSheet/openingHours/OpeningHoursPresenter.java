@@ -1,12 +1,14 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
-import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
-import com.sellger.konta.sketch_loyaltyapp.ui.map.MapModel;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
@@ -14,28 +16,25 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter{
+public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter {
+
+    private static final String TAG = OpeningHoursPresenter.class.getSimpleName();
 
     @Nullable
     private BottomSheetContract.OpeningHoursView view;
-    private MapModel model;
 
-    private static final String TAG = "OpeningHoursFragment";
+    @NonNull
+    private LoyaltyRepository loyaltyRepository;
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private int selectedMarkerId;
-
-    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view, MapModel model) {
+    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
-        this.model = model;
+        this.loyaltyRepository = loyaltyRepository;
     }
 
     @Override
     public void setUpObservable() {
-
         Observable<Integer> observable = MapPresenter.getObservable();
         Observer<Integer> observer = new Observer<Integer>() {
             @Override
@@ -45,9 +44,8 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
 
             @Override
             public void onNext(Integer markerId) {
-                Log.d(TAG, "onNext" + String.valueOf(markerId));
-                selectedMarkerId = markerId;
-                getMarkerList();
+                Log.d(TAG, "onNext" + markerId);
+                getSelectedMarker(markerId);
             }
 
             @Override
@@ -65,27 +63,27 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
     }
 
     @Override
-    public void getMarkerList() {
-       Disposable disposable = model.fetchDataFromServer(this);
-       compositeDisposable.add(disposable);
+    public void getSelectedMarker(int markerId) {
+        loyaltyRepository.getSingleMarker(markerId, new LoyaltyDataSource.GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                formatMarkerData((Marker) object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
     }
 
     @Override
-    public void formatOpenHoursData(List<HelperMarker> markerList) {
+    public void formatMarkerData(Marker marker) {
         String monday, tuesday, wednesday, thursday, friday, saturday, sunday;
         monday = tuesday = wednesday = thursday = friday = saturday = sunday = "Closed";
         String[] days;
-        int markerPosition = 0;
 
-        for (int i = 0; i < markerList.size(); i++) {
-            if (markerList.get(i).getId().equals(selectedMarkerId)) {
-                markerPosition = i;
-                break;
-            }
-        }
-
-        HelperMarker marker = markerList.get(markerPosition);
-        List<OpenHour> openHourList = marker.getOpenHours();
+        List<OpenHour> openHourList = marker.getOpenHourList();
 
         for (OpenHour time : openHourList) {
             if (!TextUtils.isEmpty(time.getDayName())) {
@@ -117,9 +115,7 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
 
         days = new String[] {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
 
-        if (view != null) {
-            view.setUpViewsWithData(days);
-        }
+        passDataToView(days);
     }
 
     @Override
@@ -136,5 +132,12 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
         }
 
         return day;
+    }
+
+    @Override
+    public void passDataToView(String[] singleDayOpenHours) {
+        if (view != null) {
+            view.setUpViewsWithData(singleDayOpenHours);
+        }
     }
 }

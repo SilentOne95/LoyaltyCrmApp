@@ -1,36 +1,35 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.contactInfo;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMarker;
-import com.sellger.konta.sketch_loyaltyapp.ui.map.MapContract;
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
 
 public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPresenter {
 
+    private static final String TAG = ContactInfoPresenter.class.getSimpleName();
+
     @Nullable
     private BottomSheetContract.ContactInfoView view;
-    private MapContract.Model model;
 
-    private static final String TAG = ContactInfoPresenter.class.getSimpleName();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private int selectedMarkerId;
+    @NonNull
+    private LoyaltyRepository loyaltyRepository;
 
-    ContactInfoPresenter(@Nullable BottomSheetContract.ContactInfoView view, MapContract.Model model) {
+    ContactInfoPresenter(@Nullable BottomSheetContract.ContactInfoView view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
-        this.model = model;
+        this.loyaltyRepository = loyaltyRepository;
     }
 
     @Override
@@ -46,8 +45,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
             @Override
             public void onNext(Integer markerId) {
                 Log.d(TAG, "onNext");
-                selectedMarkerId = markerId;
-                getMarkerList();
+                getSelectedMarker(markerId);
             }
 
             @Override
@@ -65,32 +63,33 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public void getMarkerList() {
-        Disposable disposable = model.fetchDataFromServer(this);
-        compositeDisposable.add(disposable);
+    public void getSelectedMarker(int markerId) {
+        loyaltyRepository.getSingleMarker(markerId, new LoyaltyDataSource.GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                formatMarkerData((Marker) object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
     }
 
     @Override
-    public void formatContactInfoData(List<HelperMarker> markerList) {
+    public void formatMarkerData(Marker marker) {
         String phoneNumber, emailAddress, websiteAddress;
-        int markerPosition = 0;
 
-        for (int i = 0; i < markerList.size(); i++) {
-            if (markerList.get(i).getId().equals(selectedMarkerId)) {
-                markerPosition = i;
-                break;
-            }
-        }
-
-        phoneNumber = formatPhoneNumber(markerList.get(markerPosition));
-        emailAddress = formatEmailAddress(markerList.get(markerPosition));
-        websiteAddress = formatWebsiteAddress(markerList.get(markerPosition));
+        phoneNumber = formatPhoneNumber(marker);
+        emailAddress = formatEmailAddress(marker);
+        websiteAddress = formatWebsiteAddress(marker);
 
         passDataToView(phoneNumber, emailAddress, websiteAddress);
     }
 
     @Override
-    public String formatPhoneNumber(HelperMarker marker) {
+    public String formatPhoneNumber(Marker marker) {
         String phoneNumber = DEFAULT_STRING;
         String[] phonePrefix = {"0048", "48", "0"};
 
@@ -124,7 +123,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public String formatEmailAddress(HelperMarker marker) {
+    public String formatEmailAddress(Marker marker) {
         String emailAddress = DEFAULT_STRING;
 
         if (!TextUtils.isEmpty(marker.getMail())) {
@@ -135,7 +134,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     }
 
     @Override
-    public String formatWebsiteAddress(HelperMarker marker) {
+    public String formatWebsiteAddress(Marker marker) {
         String websiteAddress = DEFAULT_STRING;
 
         if (!TextUtils.isEmpty(marker.getWebsite())) {

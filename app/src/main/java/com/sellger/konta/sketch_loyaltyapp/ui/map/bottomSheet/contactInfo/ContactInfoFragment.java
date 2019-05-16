@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
-import com.sellger.konta.sketch_loyaltyapp.ui.map.MapModel;
+import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
@@ -42,7 +42,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         initViews();
 
         // Setting up presenter
-        presenter = new ContactInfoPresenter(this, new MapModel());
+        presenter = new ContactInfoPresenter(this, Injection.provideLoyaltyRepository(getContext()));
         presenter.setUpObservable();
     }
 
