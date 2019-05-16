@@ -14,6 +14,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_FETCHING_DATA;
+
 /**
  * Concrete implementation of a data source as a network connection.
  */
@@ -44,7 +46,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
      * @return Single observable zipped with timer - disposable
      */
     private static <T> Single<T> zipWithTimer(Single<T> observable) {
-        return Single.zip(observable, Single.timer(1000, TimeUnit.MILLISECONDS),
+        return Single.zip(observable, Single.timer(DELAY_FETCHING_DATA, TimeUnit.MILLISECONDS),
                 (data, timerValue) -> data);
     }
 

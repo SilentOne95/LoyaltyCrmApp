@@ -21,7 +21,20 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.ALL_DAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.CLOSED_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_UNABLE_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_BOTTOMSHEET_ACTION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.ERROR_NONE_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.FRIDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.MONDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SATURDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SUNDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.THURSDAY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TODAY_OPEN_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TUESDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.WEDNESDAY_STRING;
 
 public class MapPresenter implements MapContract.Presenter {
 
@@ -104,7 +117,7 @@ public class MapPresenter implements MapContract.Presenter {
                 view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
             } else {
                 view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
-                new Handler().postDelayed(() -> view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED), 300);
+                new Handler().postDelayed(() -> view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED), DELAY_BOTTOMSHEET_ACTION);
             }
         } else if (object instanceof LatLng) {
             if (view.getBottomSheetState() != BottomSheetBehavior.STATE_HIDDEN) {
@@ -144,7 +157,7 @@ public class MapPresenter implements MapContract.Presenter {
         List<OpenHour> openHourList = marker.getOpenHourList();
 
         String title, address, openHours;
-        title = address = openHours = "Unable to display";
+        title = address = openHours = DEFAULT_UNABLE_STRING;
 
         if (!TextUtils.isEmpty(marker.getTitle())) {
             title = marker.getTitle();
@@ -160,26 +173,24 @@ public class MapPresenter implements MapContract.Presenter {
         if (openHourList != null) {
             for (OpenHour openHour : openHourList) {
                 if (openHour.getDayName().equals(getCurrentDay())) {
-                    if (!openHour.getOpenHour().equals("None") && !openHour.getOpenMinute().equals("None") &&
-                            !openHour.getCloseHour().equals("None") && !openHour.getCloseMinute().equals("None")) {
-                        openHours = "Today open:" + " " +
+                    if (!openHour.getOpenHour().equals(ERROR_NONE_STRING) && !openHour.getOpenMinute().equals(ERROR_NONE_STRING) &&
+                            !openHour.getCloseHour().equals(ERROR_NONE_STRING) && !openHour.getCloseMinute().equals(ERROR_NONE_STRING)) {
+                        openHours = TODAY_OPEN_STRING + " " +
                                 openHour.getOpenHour() + ":" +
                                 openHour.getOpenMinute() + " - " +
                                 openHour.getCloseHour() + ":" +
                                 openHour.getCloseMinute();
                     } else if (openHour.getOpenHour().equals(openHour.getCloseHour()) &&
                             openHour.getOpenMinute().equals(openHour.getCloseMinute()) &&
-                            !openHour.getOpenHour().equals("None")) {
-                        openHours = "All day";
+                            !openHour.getOpenHour().equals(ERROR_NONE_STRING)) {
+                        openHours = ALL_DAY_STRING;
                     } else {
-                        openHours = "Closed";
+                        openHours = CLOSED_STRING;
                     }
 
                     break;
                 }
             }
-        } else {
-            // TODO: Handle null array
         }
 
         passDataToView(title, address, openHours);
@@ -191,25 +202,25 @@ public class MapPresenter implements MapContract.Presenter {
 
         switch (mCurrentDay) {
             case 1:
-                day = "sunday";
+                day = SUNDAY_STRING;
                 break;
             case 2:
-                day = "monday";
+                day = MONDAY_STRING;
                 break;
             case 3:
-                day = "tuesday";
+                day = TUESDAY_STRING;
                 break;
             case 4:
-                day = "wednesday";
+                day = WEDNESDAY_STRING;
                 break;
             case 5:
-                day = "thursday";
+                day = THURSDAY_STRING;
                 break;
             case 6:
-                day = "friday";
+                day = FRIDAY_STRING;
                 break;
             case 7:
-                day = "saturday";
+                day = SATURDAY_STRING;
                 break;
         }
 

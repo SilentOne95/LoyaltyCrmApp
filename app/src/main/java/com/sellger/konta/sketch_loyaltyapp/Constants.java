@@ -26,6 +26,24 @@ public final class Constants {
     public static final int FASTEST_UPDATE_INTERVAL = UPDATE_INTERVAL / 2;
     public static final int MAX_WAIT_TIME = UPDATE_INTERVAL * 3;
 
+    // Map related static fields
+    public static final String MONDAY_STRING = "monday";
+    public static final String TUESDAY_STRING = "tuesday";
+    public static final String WEDNESDAY_STRING = "wednesday";
+    public static final String THURSDAY_STRING = "thursday";
+    public static final String FRIDAY_STRING = "friday";
+    public static final String SATURDAY_STRING = "saturday";
+    public static final String SUNDAY_STRING = "sunday";
+
+    public static final String DEFAULT_UNABLE_STRING = "Unable to display";
+    public static final String TODAY_OPEN_STRING = "Today open:";
+    public static final String ALL_DAY_STRING = "All day";
+
+    public static final String CLOSED_STRING = "Closed";
+    public static final String OPEN_STRING = "Open 24/7";
+
+    public static final String ERROR_NONE_STRING = "None";
+
     // MyAccountFragment
     public static final int BARCODE_WIDTH = 600;
     public static final int BARCODE_HEIGHT = 300;
@@ -93,4 +111,13 @@ public final class Constants {
     // Toast messages
     public static final String TOAST_DATA_ERROR_MESSAGE = "Oops.. something went wrong.\nCheck your " +
             "internet connection or try again later";
+
+    // Delay timer in milliseconds
+    public static final int DELAY_DRAWER_ACTION = 200;
+    public static final int DELAY_BOTTOMSHEET_ACTION = 200;
+    public static final int DELAY_FETCHING_DATA = 1000;
+    public static final int DELAY_PHONE_AUTH = 1000;
+    public static final int DELAY_PHONE_AUTH_DISMISS_ERROR = 2000;
+    public static final int DELAY_SET_SMS_CODE = 3000;
+    public static final int DELAY_LOGIN_SWITCH_LAYOUT = 2000;
 }

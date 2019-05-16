@@ -38,6 +38,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_REGISTRATION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_DRAWER_ACTION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_ACCOUNT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
@@ -294,7 +295,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         menuItem.setChecked(true).setCheckable(true);
 
         // Close drawer after delay when item is tapped
-        new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), 200);
+        new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), DELAY_DRAWER_ACTION);
 
         return true;
     }
@@ -375,7 +376,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mLayoutType = LAYOUT_TYPE_LOGIN;
 
         // Close drawer after delay when item is tapped
-        new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), 200);
+        new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), DELAY_DRAWER_ACTION);
     }
 
     @Override

@@ -17,7 +17,17 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.CLOSED_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.ERROR_NONE_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.FRIDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.MONDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.OPEN_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SATURDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.SUNDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.THURSDAY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TUESDAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.WEDNESDAY_STRING;
 
 public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter {
 
@@ -81,7 +91,7 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
     @Override
     public void formatMarkerData(Marker marker) {
         String monday, tuesday, wednesday, thursday, friday, saturday, sunday;
-        monday = tuesday = wednesday = thursday = friday = saturday = sunday = "Closed";
+        monday = tuesday = wednesday = thursday = friday = saturday = sunday = CLOSED_STRING;
         String[] days;
 
         List<OpenHour> openHourList = marker.getOpenHourList();
@@ -89,25 +99,25 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
         for (OpenHour time : openHourList) {
             if (!TextUtils.isEmpty(time.getDayName())) {
                 switch (time.getDayName()) {
-                    case "monday":
+                    case MONDAY_STRING:
                         monday = checkIfOpenHoursAreValid(time);
                         break;
-                    case "tuesday":
+                    case TUESDAY_STRING:
                         tuesday = checkIfOpenHoursAreValid(time);
                         break;
-                    case "wednesday":
+                    case WEDNESDAY_STRING:
                         wednesday = checkIfOpenHoursAreValid(time);
                         break;
-                    case "thursday":
+                    case THURSDAY_STRING:
                         thursday = checkIfOpenHoursAreValid(time);
                         break;
-                    case "friday":
+                    case FRIDAY_STRING:
                         friday = checkIfOpenHoursAreValid(time);
                         break;
-                    case "saturday":
+                    case SATURDAY_STRING:
                         saturday = checkIfOpenHoursAreValid(time);
                         break;
-                    case "sunday":
+                    case SUNDAY_STRING:
                         sunday = checkIfOpenHoursAreValid(time);
                         break;
                 }
@@ -123,10 +133,10 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
     public String checkIfOpenHoursAreValid(OpenHour time) {
         String day;
 
-        if (time.getOpenHour().isEmpty() || time.getOpenHour().equals("None")) {
-            day = "Closed";
+        if (time.getOpenHour().isEmpty() || time.getOpenHour().equals(ERROR_NONE_STRING)) {
+            day = CLOSED_STRING;
         } else if (time.getOpenHour().equals(time.getCloseHour())) {
-            day = "Open 24/7";
+            day = OPEN_STRING;
         } else {
             day = time.getOpenHour() + ":" + time.getOpenMinute() + " - " +
                     time.getCloseHour() + ":" + time.getCloseMinute();

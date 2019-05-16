@@ -28,7 +28,6 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
     @Override
     protected int getLayout() { return R.layout.fragment_website; }
 
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

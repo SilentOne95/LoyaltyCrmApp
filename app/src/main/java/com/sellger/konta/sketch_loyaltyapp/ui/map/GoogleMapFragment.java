@@ -76,10 +76,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.ALL_DAY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.FASTEST_UPDATE_INTERVAL;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MAX_WAIT_TIME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REQUEST_CHECK_SETTINGS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TODAY_OPEN_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.UPDATE_INTERVAL;
 
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
@@ -562,9 +564,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public void setUpBottomSheetPanelWithData(String title, String address, String openHours) {
-        if (openHours.contains("Today open:")) {
-            openHours = openHours.replace("Today open:", getResources().getString(R.string.bottom_sheet_today_open_text));
-        } else if (openHours.contains("All day")) {
+        if (openHours.contains(TODAY_OPEN_STRING)) {
+            openHours = openHours.replace(TODAY_OPEN_STRING, getResources().getString(R.string.bottom_sheet_today_open_text));
+        } else if (openHours.contains(ALL_DAY_STRING)) {
             openHours = getResources().getString(R.string.bottom_sheet_today_open_all_day_text);
         } else {
             openHours = getResources().getString(R.string.bottom_sheet_today_closed_text);

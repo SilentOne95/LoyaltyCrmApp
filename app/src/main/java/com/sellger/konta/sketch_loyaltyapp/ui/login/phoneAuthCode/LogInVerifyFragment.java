@@ -25,6 +25,9 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_LOGIN_SWITCH_LAYOUT;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_PHONE_AUTH;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_SET_SMS_CODE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
@@ -143,9 +146,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
                         setCodeInEditText(phoneAuthCredential.getSmsCode());
                         if (mFirebaseAuth.getCurrentUser() != null) {
-                            new Handler().postDelayed(() -> convertAnonymousAccount(phoneAuthCredential), 1000);
+                            new Handler().postDelayed(() -> convertAnonymousAccount(phoneAuthCredential), DELAY_PHONE_AUTH);
                         } else {
-                            new Handler().postDelayed(() -> signInWithPhoneAuthCredential(phoneAuthCredential), 1000);
+                            new Handler().postDelayed(() -> signInWithPhoneAuthCredential(phoneAuthCredential), DELAY_PHONE_AUTH);
                         }
                     }
 
@@ -174,10 +177,10 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
             mTextInputCode.setText(code);
             mTextWaitingForCode.setVisibility(View.GONE);
             mProgressBar.setVisibility(View.GONE);
-        }, 3000);
+        }, DELAY_SET_SMS_CODE);
 
         // Verify sms code with delay
-        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(mVerificationId, mSmsCode), 1000);
+        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(mVerificationId, mSmsCode), DELAY_PHONE_AUTH);
     }
 
     @Override
@@ -202,7 +205,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         presenter.manageTopicsSubscriptions(REGISTRATION_NORMAL);
 
                         // Open "home" view with delay, pass string to display / hide information about account in nav view header
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),2000);
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
                     } else {
                         Log.d(TAG, "signInWithCredential:failure", task.getException());
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -223,7 +226,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         presenter.manageTopicsSubscriptions(REGISTRATION_CONVERSION);
 
                         // Open "home" view with delay, pass string to display / hide information about account in nav view header
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),5000);
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
                         Toast.makeText(getContext(), "Authentication failed",

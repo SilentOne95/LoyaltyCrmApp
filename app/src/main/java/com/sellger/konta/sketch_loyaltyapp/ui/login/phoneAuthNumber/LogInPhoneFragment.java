@@ -18,6 +18,7 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_PHONE_AUTH_DISMISS_ERROR;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CODE;
 
 public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContract.View, View.OnClickListener {
@@ -161,6 +162,6 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
                 default:
                     break;
             }
-        }, 2000);
+        }, DELAY_PHONE_AUTH_DISMISS_ERROR);
     }
 }

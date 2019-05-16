@@ -2,6 +2,7 @@
   <dictionary name="konta">
     <words>
       <w>barcodes</w>
+      <w>bottomsheet</w>
       <w>crashlytics</w>
       <w>edittext</w>
       <w>firebase</w>
