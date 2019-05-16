@@ -89,4 +89,8 @@ public final class Constants {
     public static final String TYPE_MARKER = "marker";
     public static final String TYPE_OPEN_HOUR = "open_hour";
     public static final String TYPE_PAGE = "page";
+
+    // Toast messages
+    public static final String TOAST_DATA_ERROR_MESSAGE = "Oops.. something went wrong.\nCheck your " +
+            "internet connection or try again later";
 }

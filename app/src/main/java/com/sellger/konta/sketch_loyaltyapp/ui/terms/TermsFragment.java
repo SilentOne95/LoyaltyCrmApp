@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
@@ -73,5 +74,10 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
     @Override
     public void setUpViewWithData(Page page) {
         mTermsTextView.loadData(page.getBody(), "text/html", null);
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

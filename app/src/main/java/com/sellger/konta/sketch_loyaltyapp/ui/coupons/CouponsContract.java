@@ -16,6 +16,8 @@ public interface CouponsContract {
         void setUpEmptyStateView(boolean isNeeded);
 
         void hideProgressBar();
+
+        void displayToastMessage(String message);
     }
 
     interface Presenter {

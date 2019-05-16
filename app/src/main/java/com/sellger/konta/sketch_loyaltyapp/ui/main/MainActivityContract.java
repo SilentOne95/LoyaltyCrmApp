@@ -15,8 +15,10 @@ public interface MainActivityContract {
 
         void initViews();
 
-        void setFragment(BaseFragment fragment, String data);
         void setActivity(Class<? extends Activity> activity);
+
+        void setFragment(BaseFragment fragment, String data);
+
         void setLogInFragment(BaseFragment fragment);
 
         void hideNavDrawerScrollbar();
@@ -24,10 +26,14 @@ public interface MainActivityContract {
         void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
                                 ArrayList<MenuComponent> submenuSectionArray,
                                 int homeScreenId, String[] iconNameArray);
+
         void setDisplayItemChecked(int viewPosition);
+
         void uncheckItemsNavDrawer();
 
         void setNavViewHeaderVisibility(String isAccountAnonymous);
+
+        void displayToastMessage(String message);
     }
 
     interface Presenter {

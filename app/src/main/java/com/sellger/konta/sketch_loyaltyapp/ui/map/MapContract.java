@@ -23,6 +23,8 @@ public interface MapContract {
         void setBottomSheetState(int state);
 
         void setUpBottomSheetPanelWithData(String title, String address, String openHours);
+
+        void displayToastMessage(String message);
     }
 
     interface Presenter {

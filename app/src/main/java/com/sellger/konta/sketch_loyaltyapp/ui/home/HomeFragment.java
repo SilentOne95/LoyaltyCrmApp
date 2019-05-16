@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.adapter.HomeAdapter;
 import com.sellger.konta.sketch_loyaltyapp.adapter.RecyclerItemClickListener;
@@ -129,5 +130,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

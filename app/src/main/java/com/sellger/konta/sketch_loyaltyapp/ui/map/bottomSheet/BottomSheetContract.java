@@ -5,6 +5,28 @@ import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
 
 public interface BottomSheetContract {
 
+    interface OpeningHoursView {
+
+        void initViews();
+
+        void setUpViewsWithData(String[] singleDayOpenHours);
+
+        void displayToastMessage(String message);
+    }
+
+    interface OpeningHoursPresenter {
+
+        void setUpObservable();
+
+        void getSelectedMarker(int markerId);
+
+        void formatMarkerData(Marker marker);
+
+        String checkIfOpenHoursAreValid(OpenHour time);
+
+        void passDataToView(String[] singleDayOpenHours);
+    }
+
     interface ContactInfoView {
 
         void initViews();
@@ -27,25 +49,5 @@ public interface BottomSheetContract {
         String formatWebsiteAddress(Marker marker);
 
         void passDataToView(String phoneNumber, String emailAddress, String websiteAddress);
-    }
-
-    interface OpeningHoursView {
-
-        void initViews();
-
-        void setUpViewsWithData(String[] singleDayOpenHours);
-    }
-
-    interface OpeningHoursPresenter {
-
-        void setUpObservable();
-
-        void getSelectedMarker(int markerId);
-
-        void formatMarkerData(Marker marker);
-
-        String checkIfOpenHoursAreValid(OpenHour time);
-
-        void passDataToView(String[] singleDayOpenHours);
     }
 }

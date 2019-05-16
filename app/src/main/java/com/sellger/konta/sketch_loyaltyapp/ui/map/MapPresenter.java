@@ -21,6 +21,8 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+
 public class MapPresenter implements MapContract.Presenter {
 
     private static final String TAG = MapPresenter.class.getSimpleName();
@@ -85,39 +87,34 @@ public class MapPresenter implements MapContract.Presenter {
 
             @Override
             public void onDataNotAvailable() {
-
+                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
             }
         });
     }
 
     @Override
     public void passDataToCluster(List<Marker> markerList) {
-        if (view != null) {
-            view.setUpCluster(markerList);
-        }
+        view.setUpCluster(markerList);
     }
 
     @Override
     public void switchBottomSheetState(Object object) {
-
-        if (view != null) {
-            if (object instanceof Marker) {
-                if (view.getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
-                    view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
-                } else {
-                    view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
-                    new Handler().postDelayed(() -> view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED), 300);
-                }
-            } else if (object instanceof LatLng) {
-                if (view.getBottomSheetState() != BottomSheetBehavior.STATE_HIDDEN) {
-                    view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
-                }
-            } else if (object instanceof View) {
-                if (view.getBottomSheetState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                    view.setBottomSheetState(BottomSheetBehavior.STATE_EXPANDED);
-                } else {
-                    view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
+        if (object instanceof Marker) {
+            if (view.getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
+                view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
+            } else {
+                view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
+                new Handler().postDelayed(() -> view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED), 300);
+            }
+        } else if (object instanceof LatLng) {
+            if (view.getBottomSheetState() != BottomSheetBehavior.STATE_HIDDEN) {
+                view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
+            }
+        } else if (object instanceof View) {
+            if (view.getBottomSheetState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                view.setBottomSheetState(BottomSheetBehavior.STATE_EXPANDED);
+            } else {
+                view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         }
     }
@@ -221,8 +218,6 @@ public class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void passDataToView(String title, String address, String openHours) {
-        if (view != null) {
-            view.setUpBottomSheetPanelWithData(title, address, openHours);
-        }
+        view.setUpBottomSheetPanelWithData(title, address, openHours);
     }
 }

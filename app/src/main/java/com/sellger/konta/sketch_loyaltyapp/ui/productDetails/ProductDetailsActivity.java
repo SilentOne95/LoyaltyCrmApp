@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.R;
@@ -108,6 +109,11 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         } else {
             mProductDescription.setText(DEFAULT_STRING);
         }
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

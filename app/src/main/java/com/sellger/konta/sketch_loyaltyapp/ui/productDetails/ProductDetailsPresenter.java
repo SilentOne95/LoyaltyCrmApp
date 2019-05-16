@@ -6,6 +6,8 @@ import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+
 public class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
 
     private static final String TAG = ProductDetailsPresenter.class.getSimpleName();
@@ -32,7 +34,8 @@ public class ProductDetailsPresenter implements ProductDetailsContract.Presenter
 
             @Override
             public void onDataNotAvailable() {
-
+                hideProgressBar();
+                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
             }
         });
     }

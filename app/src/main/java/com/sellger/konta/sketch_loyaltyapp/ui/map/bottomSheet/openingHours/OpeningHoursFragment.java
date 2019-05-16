@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
@@ -59,5 +60,10 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
         mFridayHours.setText(singleDayOpenHours[4]);
         mSaturdayHours.setText(singleDayOpenHours[5]);
         mSundayHours.setText(singleDayOpenHours[6]);
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

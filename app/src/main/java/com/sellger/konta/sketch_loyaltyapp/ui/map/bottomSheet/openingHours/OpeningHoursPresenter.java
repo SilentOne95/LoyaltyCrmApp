@@ -17,6 +17,8 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+
 public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPresenter {
 
     private static final String TAG = OpeningHoursPresenter.class.getSimpleName();
@@ -71,7 +73,7 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
 
             @Override
             public void onDataNotAvailable() {
-
+                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
             }
         });
     }

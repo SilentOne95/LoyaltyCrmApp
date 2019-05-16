@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.adapter.CouponAdapter;
 import com.sellger.konta.sketch_loyaltyapp.adapter.RecyclerItemClickListener;
@@ -189,6 +190,11 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override

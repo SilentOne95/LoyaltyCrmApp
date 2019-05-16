@@ -11,6 +11,8 @@ public interface TermsContract {
         void hideProgressBar();
 
         void setUpViewWithData(Page page);
+
+        void displayToastMessage(String message);
     }
 
     interface Presenter {

@@ -11,6 +11,8 @@ public interface ProductDetailsContract {
         void hideProgressBar();
 
         void setUpViewWithData(Product product);
+
+        void displayToastMessage(String message);
     }
 
     interface Presenter {

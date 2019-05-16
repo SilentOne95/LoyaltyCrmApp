@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
@@ -266,5 +267,10 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             showCouponCodeButton.setText(R.string.show_my_coupon_text);
         }
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

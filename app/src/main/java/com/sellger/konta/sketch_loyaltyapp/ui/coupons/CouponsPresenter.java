@@ -1,7 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
@@ -19,16 +18,17 @@ import java.util.TimeZone;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_NUM_OF_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_COUPONS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
 
 public class CouponsPresenter implements CouponsContract.Presenter {
 
-    @Nullable
+    @NonNull
     private CouponsContract.View view;
 
     @NonNull
     private LoyaltyRepository loyaltyRepository;
 
-    CouponsPresenter(@Nullable CouponsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
+    CouponsPresenter(@NonNull CouponsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }
@@ -53,6 +53,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
                     @Override
                     public void onDataNotAvailable() {
                         hideProgressBar();
+                        view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
                     }
                 });
             }
@@ -60,6 +61,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
             @Override
             public void onDataNotAvailable() {
                 hideProgressBar();
+                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
             }
         });
     }
@@ -108,15 +110,11 @@ public class CouponsPresenter implements CouponsContract.Presenter {
 
     @Override
     public void hideProgressBar() {
-        if (view != null) {
-            view.hideProgressBar();
-        }
+        view.hideProgressBar();
     }
 
     @Override
     public void passDataToAdapter(List<Coupon> couponList, int numOfColumns) {
-        if (view != null) {
-            view.setUpAdapter(couponList, numOfColumns);
-        }
+        view.setUpAdapter(couponList, numOfColumns);
     }
 }

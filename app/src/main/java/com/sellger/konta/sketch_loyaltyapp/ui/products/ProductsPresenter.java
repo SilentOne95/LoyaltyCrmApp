@@ -11,6 +11,7 @@ import java.util.List;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_NUM_OF_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PRODUCTS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
 
 public class ProductsPresenter implements ProductsContract.Presenter {
 
@@ -45,6 +46,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
                     @Override
                     public void onDataNotAvailable() {
                         hideProgressBar();
+                        view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
                     }
                 });
             }
@@ -52,6 +54,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
             @Override
             public void onDataNotAvailable() {
                 hideProgressBar();
+                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
             }
         });
     }

@@ -372,7 +372,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void onClick(View v) {
-        mLayoutType = "login";
+        mLayoutType = LAYOUT_TYPE_LOGIN;
 
         // Close drawer after delay when item is tapped
         new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), 200);
@@ -388,5 +388,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 mNavViewHeaderShadeContainer.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

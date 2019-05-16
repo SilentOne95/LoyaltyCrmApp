@@ -10,10 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
 public class WebsiteFragment extends BaseFragment implements WebsiteContract.View {
 
@@ -37,10 +39,9 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
 
         // Init views
         initViews();
-        setUpViewWithData("https://www.google.com/");
 
         presenter = new WebsitePresenter(this, Injection.provideLoyaltyRepository(getContext()));
-        presenter.requestDataFromServer(1);
+        presenter.requestDataFromServer(2);
     }
 
     @Override
@@ -60,10 +61,15 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void setUpViewWithData(String websiteUrl) {
+    public void setUpViewWithData(Page page) {
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl(websiteUrl);
+        mWebView.loadUrl(page.getBody());
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

@@ -20,6 +20,8 @@ public interface CouponDetailsContract {
         Bitmap encodeAsBitmap(String contents) throws WriterException;
 
         void switchBottomSheetState();
+
+        void displayToastMessage(String message);
     }
 
     interface Presenter {
