@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.products;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
@@ -14,11 +14,13 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PRODUCTS
 
 public class ProductsPresenter implements ProductsContract.Presenter {
 
-    @Nullable
+    @NonNull
     private ProductsContract.View view;
+
+    @NonNull
     private LoyaltyRepository loyaltyRepository;
 
-    ProductsPresenter(@Nullable ProductsContract.View view, LoyaltyRepository loyaltyRepository) {
+    ProductsPresenter(@NonNull ProductsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }
@@ -66,15 +68,11 @@ public class ProductsPresenter implements ProductsContract.Presenter {
 
     @Override
     public void hideProgressBar() {
-        if (view != null) {
-            view.hideProgressBar();
-        }
+        view.hideProgressBar();
     }
 
     @Override
     public void passDataToAdapter(List<Product> productList, int numOfColumns) {
-        if (view != null) {
-            view.setUpAdapter(productList, numOfColumns);
-        }
+        view.setUpAdapter(productList, numOfColumns);
     }
 }

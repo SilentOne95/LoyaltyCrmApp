@@ -2,7 +2,6 @@ package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,7 +25,7 @@ public class MapPresenter implements MapContract.Presenter {
 
     private static final String TAG = MapPresenter.class.getSimpleName();
 
-    @Nullable
+    @NonNull
     private MapContract.View view;
 
     @NonNull
@@ -36,7 +35,7 @@ public class MapPresenter implements MapContract.Presenter {
     private int mCurrentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
 
-    MapPresenter(@Nullable MapContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
+    MapPresenter(@NonNull MapContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }

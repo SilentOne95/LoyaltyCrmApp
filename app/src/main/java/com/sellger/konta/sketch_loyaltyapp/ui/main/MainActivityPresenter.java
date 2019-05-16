@@ -58,6 +58,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
     @NonNull
     private MainActivityContract.View view;
+
+    @NonNull
     private LoyaltyRepository loyaltyRepository;
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();

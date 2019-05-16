@@ -1,16 +1,18 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.website;
 
-import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
+import android.support.annotation.NonNull;
 
-import javax.annotation.Nullable;
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 
 public class WebsitePresenter implements WebsiteContract.Presenter {
 
-    @Nullable
+    @NonNull
     private WebsiteContract.View view;
+
+    @NonNull
     private LoyaltyRepository loyaltyRepository;
 
-    WebsitePresenter(@Nullable WebsiteContract.View view, LoyaltyRepository loyaltyRepository) {
+    WebsitePresenter(@NonNull WebsiteContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }

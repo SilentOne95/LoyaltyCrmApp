@@ -1,7 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.contactInfo;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -21,13 +20,13 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
     private static final String TAG = ContactInfoPresenter.class.getSimpleName();
 
-    @Nullable
+    @NonNull
     private BottomSheetContract.ContactInfoView view;
 
     @NonNull
     private LoyaltyRepository loyaltyRepository;
 
-    ContactInfoPresenter(@Nullable BottomSheetContract.ContactInfoView view, @NonNull LoyaltyRepository loyaltyRepository) {
+    ContactInfoPresenter(@NonNull BottomSheetContract.ContactInfoView view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }
@@ -146,8 +145,6 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
     @Override
     public void passDataToView(String phoneNumber, String emailAddress, String websiteAddress) {
-        if (view != null) {
-            view.setUpViewsWithData(phoneNumber, emailAddress, websiteAddress);
-        }
+        view.setUpViewsWithData(phoneNumber, emailAddress, websiteAddress);
     }
 }

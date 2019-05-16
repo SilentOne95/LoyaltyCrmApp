@@ -1,5 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -23,9 +24,11 @@ public class CouponsPresenter implements CouponsContract.Presenter {
 
     @Nullable
     private CouponsContract.View view;
+
+    @NonNull
     private LoyaltyRepository loyaltyRepository;
 
-    CouponsPresenter(@Nullable CouponsContract.View view, LoyaltyRepository loyaltyRepository) {
+    CouponsPresenter(@Nullable CouponsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }

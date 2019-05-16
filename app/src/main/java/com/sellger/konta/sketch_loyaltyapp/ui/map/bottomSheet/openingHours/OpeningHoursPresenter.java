@@ -1,7 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,13 +21,13 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
 
     private static final String TAG = OpeningHoursPresenter.class.getSimpleName();
 
-    @Nullable
+    @NonNull
     private BottomSheetContract.OpeningHoursView view;
 
     @NonNull
     private LoyaltyRepository loyaltyRepository;
 
-    OpeningHoursPresenter(@Nullable BottomSheetContract.OpeningHoursView view, @NonNull LoyaltyRepository loyaltyRepository) {
+    OpeningHoursPresenter(@NonNull BottomSheetContract.OpeningHoursView view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }
@@ -136,8 +135,6 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
 
     @Override
     public void passDataToView(String[] singleDayOpenHours) {
-        if (view != null) {
-            view.setUpViewsWithData(singleDayOpenHours);
-        }
+        view.setUpViewsWithData(singleDayOpenHours);
     }
 }

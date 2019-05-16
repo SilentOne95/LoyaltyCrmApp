@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.login;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -19,10 +19,10 @@ public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubs
 
     private static final String TAG = LogInPresenter.class.getSimpleName();
 
-    @Nullable
+    @NonNull
     private LogInContract.View view;
 
-    LogInPresenter(@Nullable LogInContract.View view) {
+    LogInPresenter(@NonNull LogInContract.View view) {
         this.view = view;
     }
 

@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.productDetails;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 
@@ -9,13 +9,13 @@ import io.reactivex.disposables.Disposable;
 
 public class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
 
-    @Nullable
+    @NonNull
     private ProductDetailsContract.View view;
     private ProductDetailsContract.Model model;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    ProductDetailsPresenter(@Nullable ProductDetailsContract.View view,
+    ProductDetailsPresenter(@NonNull ProductDetailsContract.View view,
                             ProductDetailsContract.Model model) {
         this.view = view;
         this.model = model;
@@ -29,15 +29,11 @@ public class ProductDetailsPresenter implements ProductDetailsContract.Presenter
 
     @Override
     public void passDataToView(Product product) {
-        if (view != null) {
-            view.setUpViewWithData(product);
-        }
+        view.setUpViewWithData(product);
     }
 
     @Override
     public void hideProgressBar() {
-        if (view != null) {
-            view.hideProgressBar();
-        }
+        view.hideProgressBar();
     }
 }

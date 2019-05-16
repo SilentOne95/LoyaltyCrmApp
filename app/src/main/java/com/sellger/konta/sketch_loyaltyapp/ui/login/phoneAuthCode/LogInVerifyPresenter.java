@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -18,10 +18,10 @@ public class LogInVerifyPresenter implements LogInVerifyContract.Presenter, Mana
 
     private static final String TAG = LogInVerifyPresenter.class.getSimpleName();
 
-    @Nullable
+    @NonNull
     private LogInVerifyContract.View view;
 
-    LogInVerifyPresenter(@Nullable LogInVerifyContract.View view) {
+    LogInVerifyPresenter(@NonNull LogInVerifyContract.View view) {
         this.view = view;
     }
 

@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.home;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
@@ -18,14 +18,16 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_DRAWER_TYPE_SUBM
 
 public class HomePresenter implements HomeContract.Presenter {
 
-    @Nullable
+    @NonNull
     private HomeContract.View view;
+
+    @NonNull
     private LoyaltyRepository loyaltyRepository;
 
     private static PublishSubject<Integer> mMarkerIdSubject = PublishSubject.create();
     private ArrayList<MenuComponent> mNavDrawerArray = new ArrayList<>();
 
-    HomePresenter(@Nullable HomeContract.View view, LoyaltyRepository loyaltyRepository) {
+    HomePresenter(@NonNull HomeContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }
@@ -48,9 +50,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void hideProgressBar() {
-        if (view != null) {
-            view.hideProgressBar();
-        }
+        view.hideProgressBar();
     }
 
     @Override
@@ -129,7 +129,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void passDataToAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
-        if (view != null && menuComponentList != null) {
+        if (menuComponentList != null) {
             view.setUpAdapter(menuComponentList, numOfColumns);
         }
     }

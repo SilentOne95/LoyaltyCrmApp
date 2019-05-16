@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.terms;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
@@ -8,11 +8,13 @@ import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
 public class TermsPresenter implements TermsContract.Presenter {
 
-    @Nullable
+    @NonNull
     private TermsContract.View view;
+
+    @NonNull
     private LoyaltyRepository loyaltyRepository;
 
-    TermsPresenter(@Nullable TermsContract.View view, LoyaltyRepository loyaltyRepository) {
+    TermsPresenter(@NonNull TermsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
     }
@@ -35,15 +37,11 @@ public class TermsPresenter implements TermsContract.Presenter {
 
     @Override
     public void hideProgressBar() {
-        if (view != null) {
-            view.hideProgressBar();
-        }
+        view.hideProgressBar();
     }
 
     @Override
     public void passDataToView(Page page) {
-        if (view != null) {
-            view.setUpViewWithData(page);
-        }
+        view.setUpViewWithData(page);
     }
 }
