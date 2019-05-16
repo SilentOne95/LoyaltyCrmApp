@@ -2,38 +2,48 @@ package com.sellger.konta.sketch_loyaltyapp.ui.productDetails;
 
 import android.support.annotation.NonNull;
 
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
+import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
-
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 public class ProductDetailsPresenter implements ProductDetailsContract.Presenter {
 
+    private static final String TAG = ProductDetailsPresenter.class.getSimpleName();
+
     @NonNull
     private ProductDetailsContract.View view;
-    private ProductDetailsContract.Model model;
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    @NonNull
+    private LoyaltyRepository loyaltyRepository;
 
-    ProductDetailsPresenter(@NonNull ProductDetailsContract.View view,
-                            ProductDetailsContract.Model model) {
+    ProductDetailsPresenter(@NonNull ProductDetailsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
-        this.model = model;
+        this.loyaltyRepository = loyaltyRepository;
     }
 
     @Override
     public void requestDataFromServer(int productId) {
-        Disposable disposable = model.fetchDataFromServer(this, productId);
-        compositeDisposable.add(disposable);
-    }
+        loyaltyRepository.getSingleProduct(productId, new LoyaltyDataSource.GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                hideProgressBar();
+                passDataToView((Product) object);
+            }
 
-    @Override
-    public void passDataToView(Product product) {
-        view.setUpViewWithData(product);
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
     }
 
     @Override
     public void hideProgressBar() {
         view.hideProgressBar();
+    }
+
+    @Override
+    public void passDataToView(Product product) {
+        view.setUpViewWithData(product);
     }
 }

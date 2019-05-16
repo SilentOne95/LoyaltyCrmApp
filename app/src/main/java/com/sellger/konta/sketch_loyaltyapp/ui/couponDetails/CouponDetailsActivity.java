@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
+import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.zxing.BarcodeFormat;
@@ -92,7 +93,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         mSwitchFlipperRightArrow.setColorFilter(new PorterDuffColorFilter(
                 ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
 
-        presenter = new CouponDetailsPresenter(this, new CouponDetailsModel());
+        presenter = new CouponDetailsPresenter(this, Injection.provideLoyaltyRepository(getApplicationContext()));
         presenter.requestDataFromServer(couponId);
     }
 
@@ -221,7 +222,8 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         }
     }
 
-    private Bitmap encodeAsBitmap(String contents) throws WriterException {
+    @Override
+    public Bitmap encodeAsBitmap(String contents) throws WriterException {
         if (contents == null) {
             return null;
         }
@@ -255,7 +257,8 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         return bitmap;
     }
 
-    private void switchBottomSheetState() {
+    @Override
+    public void switchBottomSheetState() {
         if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             showCouponCodeButton.setText(R.string.hide_my_coupon_text);

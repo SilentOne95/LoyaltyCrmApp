@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.R;
+import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 import com.squareup.picasso.Picasso;
 
@@ -55,7 +56,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         mLayoutContainer.setVisibility(View.GONE);
 
         // Setting up presenter
-        presenter = new ProductDetailsPresenter(this, new ProductDetailsModel());
+        presenter = new ProductDetailsPresenter(this, Injection.provideLoyaltyRepository(getApplicationContext()));
         presenter.requestDataFromServer(productId);
     }
 

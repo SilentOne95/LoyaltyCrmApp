@@ -1,5 +1,8 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.couponDetails;
 
+import android.graphics.Bitmap;
+
+import com.google.zxing.WriterException;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 
 import io.reactivex.disposables.Disposable;
@@ -11,20 +14,20 @@ public interface CouponDetailsContract {
         void initViews();
 
         void hideProgressBar();
+
         void setUpViewWithData(Coupon coupon);
+
+        Bitmap encodeAsBitmap(String contents) throws WriterException;
+
+        void switchBottomSheetState();
     }
 
     interface Presenter {
 
         void requestDataFromServer(int couponId);
-        void passDataToView(Coupon coupon);
+
         void hideProgressBar();
-    }
 
-    interface Model {
-
-        Disposable fetchDataFromServer(CouponDetailsPresenter presenter, int couponId);
-
-        void isCouponDataValid(Coupon coupon);
+        void passDataToView(Coupon coupon);
     }
 }
