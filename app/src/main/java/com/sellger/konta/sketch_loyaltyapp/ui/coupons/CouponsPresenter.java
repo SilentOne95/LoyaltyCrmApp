@@ -22,11 +22,19 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MES
 
 public class CouponsPresenter implements CouponsContract.Presenter {
 
+    private static final String TAG = CouponsPresenter.class.getSimpleName();
+
     @NonNull
     private CouponsContract.View view;
 
     @NonNull
     private LoyaltyRepository loyaltyRepository;
+
+    private ArrayList<Coupon> validCouponsList = new ArrayList<>();
+    private SimpleDateFormat currentCouponDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
+    private SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL"));
+    private Date couponDate = new Date();
+    private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("CET"));
 
     CouponsPresenter(@NonNull CouponsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
@@ -82,12 +90,6 @@ public class CouponsPresenter implements CouponsContract.Presenter {
 
     @Override
     public ArrayList<Coupon> isCouponDataValid(List<Coupon> couponList) {
-        ArrayList<Coupon> validCouponsList = new ArrayList<>();
-        SimpleDateFormat currentCouponDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
-        SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL"));
-        Date couponDate = new Date();
-
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("CET"));
         calendar.add(Calendar.DATE, 1);
         Date date = calendar.getTime();
 

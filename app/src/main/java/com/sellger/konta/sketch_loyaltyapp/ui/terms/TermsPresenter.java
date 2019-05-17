@@ -10,6 +10,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MES
 
 public class TermsPresenter implements TermsContract.Presenter {
 
+    private static final String TAG = TermsPresenter.class.getSimpleName();
+
     @NonNull
     private TermsContract.View view;
 

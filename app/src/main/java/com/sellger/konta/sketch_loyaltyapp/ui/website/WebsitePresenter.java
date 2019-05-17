@@ -10,6 +10,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MES
 
 public class WebsitePresenter implements WebsiteContract.Presenter {
 
+    private static final String TAG = WebsitePresenter.class.getSimpleName();
+
     @NonNull
     private WebsiteContract.View view;
 

@@ -19,6 +19,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MES
 
 public class HomePresenter implements HomeContract.Presenter {
 
+    private static final String TAG = HomePresenter.class.getSimpleName();
+
     @NonNull
     private HomeContract.View view;
 
