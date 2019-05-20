@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "580087034404-d82jofmbneblfsh5ckv5nemn364o0gu0.apps.googleusercontent.com",
+          "client_id": "580087034404-c79r9v4bq58ic7lq7m8s37h9i7m051o4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sellger.konta.sketch_loyaltyapp",
-            "certificate_hash": "7f5a7ca766be399dcba099e562294b389026e922"
+            "certificate_hash": "677d0e37fcc2660af2f31c991ec855f2773c3239"
           }
         },
         {
@@ -28,6 +28,14 @@
           "android_info": {
             "package_name": "com.sellger.konta.sketch_loyaltyapp",
             "certificate_hash": "00be513ce6453ea6bce8e951de44ffb811354a66"
+          }
+        },
+        {
+          "client_id": "580087034404-d82jofmbneblfsh5ckv5nemn364o0gu0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sellger.konta.sketch_loyaltyapp",
+            "certificate_hash": "7f5a7ca766be399dcba099e562294b389026e922"
           }
         },
         {
