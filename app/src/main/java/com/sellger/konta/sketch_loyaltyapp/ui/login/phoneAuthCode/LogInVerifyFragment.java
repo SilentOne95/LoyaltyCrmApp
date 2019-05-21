@@ -25,12 +25,16 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_SMS_CODE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_LOGIN_SWITCH_LAYOUT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_PHONE_AUTH;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_SET_SMS_CODE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_SMS_LIMIT;
 
 public class LogInVerifyFragment extends BaseFragment implements LogInVerifyContract.View {
 
@@ -84,7 +88,12 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 Log.d(TAG,"onVerificationCompleted:" + phoneAuthCredential);
 
                 mSmsCode = phoneAuthCredential.getSmsCode();
-                setCodeInEditText(mSmsCode);
+                Log.d(TAG, "sms code: " + mSmsCode);
+                if (mSmsCode != null) {
+                    displayCodeInEditText(mSmsCode);
+                } else {
+                    displaySmsCodeLimitInfo(phoneAuthCredential);
+                }
             }
 
             @Override
@@ -144,7 +153,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                     public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                         Log.d(TAG, "testOnVerificationCompleted: " + phoneAuthCredential);
 
-                        setCodeInEditText(phoneAuthCredential.getSmsCode());
+                        displayCodeInEditText(phoneAuthCredential.getSmsCode());
                         if (mFirebaseAuth.getCurrentUser() != null) {
                             new Handler().postDelayed(() -> convertAnonymousAccount(phoneAuthCredential), DELAY_PHONE_AUTH);
                         } else {
@@ -171,7 +180,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     }
 
     @Override
-    public void setCodeInEditText(String code) {
+    public void displayCodeInEditText(String code) {
         new Handler().postDelayed(() -> {
             mTextInputCode.setFocusableInTouchMode(true);
             mTextInputCode.setText(code);
@@ -180,13 +189,24 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         }, DELAY_SET_SMS_CODE);
 
         // Verify sms code with delay
-        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(mVerificationId, mSmsCode), DELAY_PHONE_AUTH);
+        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(PhoneAuthProvider.getCredential(mVerificationId, mSmsCode)), DELAY_PHONE_AUTH);
     }
 
     @Override
-    public void verifyPhoneNumberWithCode(String verificationId, String code) {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+    public void displaySmsCodeLimitInfo(PhoneAuthCredential credential) {
+        new Handler().postDelayed(() -> {
+            mTextInputCode.setFocusableInTouchMode(true);
+            mTextInputCode.setText(DEFAULT_SMS_CODE);
+            mTextWaitingForCode.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.GONE);
+        }, DELAY_SET_SMS_CODE);
 
+        displayToastMessage(TOAST_SMS_LIMIT);
+        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(credential), DELAY_PHONE_AUTH);
+    }
+
+    @Override
+    public void verifyPhoneNumberWithCode(PhoneAuthCredential credential) {
         if (mFirebaseAuth.getCurrentUser() != null) {
             convertAnonymousAccount(credential);
         } else {
@@ -205,7 +225,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         presenter.manageTopicsSubscriptions(REGISTRATION_NORMAL);
 
                         // Open "home" view with delay, pass string to display / hide information about account in nav view header
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
                     } else {
                         Log.d(TAG, "signInWithCredential:failure", task.getException());
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -226,12 +246,26 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         presenter.manageTopicsSubscriptions(REGISTRATION_CONVERSION);
 
                         // Open "home" view with delay, pass string to display / hide information about account in nav view header
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType("home", NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
+                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
                     } else {
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
                         Toast.makeText(getContext(), "Authentication failed",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        switch (message) {
+            case TOAST_ERROR:
+                message = (String) getText(R.string.default_toast_error_message);
+            case TOAST_SMS_LIMIT:
+                message = (String) getText(R.string.sms_code_limit_reached);
+            default:
+                break;
+        }
+
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

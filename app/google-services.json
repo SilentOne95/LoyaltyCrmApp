@@ -15,23 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "580087034404-c79r9v4bq58ic7lq7m8s37h9i7m051o4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sellger.konta.sketch_loyaltyapp",
-            "certificate_hash": "677d0e37fcc2660af2f31c991ec855f2773c3239"
-          }
-        },
-        {
-          "client_id": "580087034404-4akokjvpt7fohvk022mf32fhiq43koms.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sellger.konta.sketch_loyaltyapp",
-            "certificate_hash": "00be513ce6453ea6bce8e951de44ffb811354a66"
-          }
-        },
-        {
-          "client_id": "580087034404-d82jofmbneblfsh5ckv5nemn364o0gu0.apps.googleusercontent.com",
+          "client_id": "580087034404-fq257f0rlbeqpmocgn586t64cndfgoa7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sellger.konta.sketch_loyaltyapp",
@@ -39,7 +23,15 @@
           }
         },
         {
-          "client_id": "580087034404-mnh7qoedfvb40ih9qfda1nrpml3s6jap.apps.googleusercontent.com",
+          "client_id": "580087034404-vrb9asicfk1jrvnhhqa2ns51q0ugcmcr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sellger.konta.sketch_loyaltyapp",
+            "certificate_hash": "00be513ce6453ea6bce8e951de44ffb811354a66"
+          }
+        },
+        {
+          "client_id": "580087034404-j2bkn8b2j0dch9tkrvdcat99ih207ba4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -52,7 +44,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "580087034404-mnh7qoedfvb40ih9qfda1nrpml3s6jap.apps.googleusercontent.com",
+              "client_id": "580087034404-j2bkn8b2j0dch9tkrvdcat99ih207ba4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

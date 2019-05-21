@@ -3,7 +3,7 @@
     <string name="app_name">Sellger</string>
 
     <!-- Required for Google Auth, Firebase Web ID -->
-    <string name="server_client_id" translatable="false">580087034404-mnh7qoedfvb40ih9qfda1nrpml3s6jap.apps.googleusercontent.com</string>
+    <string name="server_client_id" translatable="false">580087034404-j2bkn8b2j0dch9tkrvdcat99ih207ba4.apps.googleusercontent.com</string>
     <string name="facebook_app_id" translatable="false">2252363271523504</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb2252363271523504</string>
 
@@ -143,6 +143,8 @@
     <string name="internet_connection_required">Internet connection is required</string>
     <string name="localization_permission_denied">Localization permission denied</string>
     <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="sms_code_limit_reached">You have reached daily limit for sending SMS codes. Process will continue with default code</string>
+    <string name="default_toast_error_message">Oops.. something went wrong. Check your internet connection or try again later</string>
 
     <!-- Image content descriptions -->
     <string name="log_in_view_logo_desc" translatable="false">log_in_view_logo_desc</string>

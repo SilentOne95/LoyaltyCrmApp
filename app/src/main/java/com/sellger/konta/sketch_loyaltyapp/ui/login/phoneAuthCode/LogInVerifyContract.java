@@ -12,11 +12,18 @@ public interface LogInVerifyContract {
         void testPhoneSignIn();
 
         void phoneNumberSignIn(String phoneNumber);
-        void setCodeInEditText(String code);
-        void verifyPhoneNumberWithCode(String verificationId, String code);
+
+        void displayCodeInEditText(String code);
+
+        void displaySmsCodeLimitInfo(PhoneAuthCredential credential);
+
+        void verifyPhoneNumberWithCode(PhoneAuthCredential credential);
+
         void signInWithPhoneAuthCredential(PhoneAuthCredential credential);
 
         void convertAnonymousAccount(AuthCredential credential);
+
+        void displayToastMessage(String message);
     }
 
     interface Presenter {

@@ -127,5 +127,7 @@
     <string name="internet_connection_required">Połączenie z internetem jest wymagane</string>
     <string name="localization_permission_denied">Wyłączono usługi lokalizacyjne</string>
     <string name="camera_permission_denied">Nie przyznano dostępu do aparatu</string>
+    <string name="sms_code_limit_reached">Osiągnięto czasowy limit wysyłki kodów SMS. Weryfikacja zostanie ukończona domyślnym kodem weryfikacyjnym</string>
+    <string name="default_toast_error_message">Uups.. coś poszło nie tak. Sprawdź połączenie z internetem lub spróbuj ponownie później</string>
 
 </resources>

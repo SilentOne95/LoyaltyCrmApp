@@ -108,9 +108,15 @@ public final class Constants {
     public static final String TYPE_OPEN_HOUR = "open_hour";
     public static final String TYPE_PAGE = "page";
 
-    // Toast messages
-    public static final String TOAST_DATA_ERROR_MESSAGE = "Oops.. something went wrong.\nCheck your " +
-            "internet connection or try again later";
+    // Toast messages types
+    public static final String TOAST_ERROR = "error";
+    public static final String TOAST_SMS_LIMIT = "limit";
+    public static final String TOAST_DATA_ERROR_MESSAGE = "Oops.. something went wrong.\nCheck your internet connection or try again later";
+    public static final String TOAST_SMS_LIMIT_MESSAGE = "You have reached daily limit for sending " +
+            "SMS codes.\nProcess will continue with default code";
+
+    // Phone number auth - default code
+    public static final String DEFAULT_SMS_CODE = "000000";
 
     // Delay timer in milliseconds
     public static final int DELAY_DRAWER_ACTION = 200;
