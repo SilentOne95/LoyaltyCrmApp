@@ -43,6 +43,10 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGIST
 import static com.sellger.konta.sketch_loyaltyapp.Constants.RC_SIGN_IN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ACCOUNT_AUTH_FAILED;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ACCOUNT_EXISTS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_INTERNET_CONNECTION_REQUIRED;
 
 public class LogInFragment extends BaseFragment implements LogInContract.View, View.OnClickListener {
 
@@ -134,16 +138,14 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     break;
                 case R.id.register_guest_text:
                     if (mFirebaseAuth.getCurrentUser() != null) {
-                        displayAccountAlreadyExists();
+                        displayToastMessage(TOAST_ACCOUNT_EXISTS);
                     } else {
                         anonymousSignIn();
                     }
                     break;
             }
         } else {
-            Toast.makeText(getContext(),
-                    getResources().getText(R.string.internet_connection_required), Toast.LENGTH_LONG)
-                    .show();
+            displayToastMessage(TOAST_INTERNET_CONNECTION_REQUIRED);
         }
     }
 
@@ -203,7 +205,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user
-                        Toast.makeText(getContext(), "Oops, something went wrong", Toast.LENGTH_LONG).show();
+                        displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                     }
                 });
@@ -245,9 +247,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, ANONYMOUS_REGISTRATION);
                     } else {
                         // If sign in fails, display a message to the user.
+                        displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                         Log.w(TAG, "signInAnonymously:failure", task.getException());
-                        Toast.makeText(getContext(), "Authentication failed",
-                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -265,15 +266,29 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
+                        displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
-                        Toast.makeText(getContext(), "Authentication failed",
-                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     @Override
-    public void displayAccountAlreadyExists() {
-        Toast.makeText(getContext(), "Already signed in as a guest!\nPlease choose other option", Toast.LENGTH_LONG).show();
+    public void displayToastMessage(String message) {
+        switch (message) {
+            case TOAST_ACCOUNT_EXISTS:
+                message = getString(R.string.account_already_exits);
+                break;
+            case TOAST_ERROR:
+                message = getString(R.string.default_toast_error_message);
+                break;
+            case TOAST_INTERNET_CONNECTION_REQUIRED:
+                message = getString(R.string.internet_connection_required);
+                break;
+            case TOAST_ACCOUNT_AUTH_FAILED:
+                message = getString(R.string.account_auth_failed);
+                break;
+        }
+
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

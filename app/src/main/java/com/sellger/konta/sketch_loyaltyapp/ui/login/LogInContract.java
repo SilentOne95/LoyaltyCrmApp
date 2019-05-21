@@ -11,9 +11,11 @@ public interface LogInContract {
         void initViews();
 
         void googleSignIn();
+
         void firebaseAuthWithGoogle(GoogleSignInAccount account);
 
         void facebookSignIn();
+
         void handleFacebookAccessToken(AccessToken token);
 
         void signInWithCredential(AuthCredential credential);
@@ -22,7 +24,7 @@ public interface LogInContract {
 
         void convertAnonymousAccount(AuthCredential credential);
 
-        void displayAccountAlreadyExists();
+        void displayToastMessage(String message);
     }
 
     interface Presenter {

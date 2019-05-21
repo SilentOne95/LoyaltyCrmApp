@@ -33,6 +33,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ACCOUNT_AUTH_FAILED;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_SMS_LIMIT;
 
@@ -227,6 +228,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         // Open "home" view with delay, pass string to display / hide information about account in nav view header
                         new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
                     } else {
+                        displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                         Log.d(TAG, "signInWithCredential:failure", task.getException());
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             // The verification code entered was invalid
@@ -248,9 +250,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         // Open "home" view with delay, pass string to display / hide information about account in nav view header
                         new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
                     } else {
+                        displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
-                        Toast.makeText(getContext(), "Authentication failed",
-                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -259,10 +260,13 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     public void displayToastMessage(String message) {
         switch (message) {
             case TOAST_ERROR:
-                message = (String) getText(R.string.default_toast_error_message);
+                message = getString(R.string.default_toast_error_message);
+                break;
             case TOAST_SMS_LIMIT:
-                message = (String) getText(R.string.sms_code_limit_reached);
-            default:
+                message = getString(R.string.sms_code_limit_reached);
+                break;
+            case TOAST_ACCOUNT_AUTH_FAILED:
+                message = getString(R.string.account_auth_failed);
                 break;
         }
 

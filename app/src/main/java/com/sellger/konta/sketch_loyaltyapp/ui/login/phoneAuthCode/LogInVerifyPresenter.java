@@ -41,8 +41,6 @@ public class LogInVerifyPresenter implements LogInVerifyContract.Presenter, Mana
                 }
                 unsubscribeFromTopic(ANONYMOUS_TOPIC_NAME);
                 break;
-            default:
-                break;
         }
     }
 

@@ -45,8 +45,6 @@ public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubs
                 }
                 unsubscribeFromTopic(ANONYMOUS_TOPIC_NAME);
                 break;
-            default:
-                break;
         }
     }
 

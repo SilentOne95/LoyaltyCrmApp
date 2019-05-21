@@ -20,6 +20,11 @@ import com.google.i18n.phonenumbers.Phonenumber;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_PHONE_AUTH_DISMISS_ERROR;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CODE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.PHONE_EMPTY_DATA;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.PHONE_EMPTY_NUMBER;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.PHONE_EMPTY_PREFIX;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.PHONE_WRONG_DATA;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.PHONE_WRONG_TYPE;
 
 public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContract.View, View.OnClickListener {
 
@@ -99,19 +104,19 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
                 mProvidedPhoneNumber = phone;
                 return true;
             } else {
-                displayErrorInputMessage("wrong data");
+                displayErrorInputMessage(PHONE_WRONG_DATA);
                 return false;
             }
 
         } else {
             if (TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                errorType = "empty data";
+                errorType = PHONE_EMPTY_DATA;
             } else if (TextUtils.isEmpty(mTextInputPrefix.getText()) && !TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                errorType = "empty prefix";
+                errorType = PHONE_EMPTY_PREFIX;
             } else if (!TextUtils.isEmpty(mTextInputPrefix.getText()) && TextUtils.isEmpty(mTextInputPhoneNumber.getText())) {
-                errorType = "empty number";
+                errorType = PHONE_EMPTY_NUMBER;
             } else {
-                errorType = "wrong type";
+                errorType = PHONE_WRONG_TYPE;
             }
 
             displayErrorInputMessage(errorType);
@@ -124,25 +129,25 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
     public void displayErrorInputMessage(String type) {
 
         switch (type) {
-            case "empty data":
+            case PHONE_EMPTY_DATA:
                 mTextInputLayoutPrefix.setError(" ");
                 mTextInputLayoutPhoneNumber.setError(getResources().getText(R.string.verify_error_empty_data));
                 dismissError(mTextInputLayoutPrefix);
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;
-            case "empty prefix":
+            case PHONE_EMPTY_PREFIX:
                 mTextInputLayoutPrefix.setError(" ");
                 dismissError(mTextInputLayoutPrefix);
                 break;
-            case "empty number":
+            case PHONE_EMPTY_NUMBER:
                 mTextInputLayoutPhoneNumber.setError(getResources().getText(R.string.verify_error_empty_number));
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;
-            case "wrong type":
+            case PHONE_WRONG_TYPE:
                 mTextInputLayoutPhoneNumber.setError(getResources().getText(R.string.verify_error_wrong_type));
                 dismissError(mTextInputLayoutPhoneNumber);
                 break;
-            case "wrong data":
+            case PHONE_WRONG_DATA:
                 mTextInputLayoutPrefix.setError(" ");
                 mTextInputLayoutPhoneNumber.setError(getResources().getText(R.string.verify_error_wrong_data));
                 dismissError(mTextInputLayoutPrefix);

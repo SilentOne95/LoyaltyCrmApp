@@ -100,6 +100,13 @@ public final class Constants {
     // Settings - SharedPref file name
     public static final String SHARED_PREF_FILE_NAME = "switchState";
 
+    // LogInPhoneFragment - error types
+    public static final String PHONE_EMPTY_DATA = "empty data";
+    public static final String PHONE_EMPTY_PREFIX = "empty prefix";
+    public static final String PHONE_EMPTY_NUMBER = "empty number";
+    public static final String PHONE_WRONG_TYPE = "wrong type";
+    public static final String PHONE_WRONG_DATA = "wrong data";
+
     // Repository - fetched data type
     public static final String TYPE_MENU = "menu";
     public static final String TYPE_PRODUCT = "product";
@@ -110,10 +117,11 @@ public final class Constants {
 
     // Toast messages types
     public static final String TOAST_ERROR = "error";
+    public static final String TOAST_INTERNET_CONNECTION_REQUIRED = "internet";
     public static final String TOAST_SMS_LIMIT = "limit";
+    public static final String TOAST_ACCOUNT_EXISTS = "exists";
+    public static final String TOAST_ACCOUNT_AUTH_FAILED = "auth";
     public static final String TOAST_DATA_ERROR_MESSAGE = "Oops.. something went wrong.\nCheck your internet connection or try again later";
-    public static final String TOAST_SMS_LIMIT_MESSAGE = "You have reached daily limit for sending " +
-            "SMS codes.\nProcess will continue with default code";
 
     // Phone number auth - default code
     public static final String DEFAULT_SMS_CODE = "000000";
