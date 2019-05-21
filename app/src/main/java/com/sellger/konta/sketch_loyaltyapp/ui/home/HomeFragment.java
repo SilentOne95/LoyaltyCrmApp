@@ -25,6 +25,8 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 
 import java.util.ArrayList;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+
 public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
@@ -134,6 +136,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void displayToastMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
+        Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
     }
 }

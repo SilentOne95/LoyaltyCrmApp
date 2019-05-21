@@ -32,6 +32,8 @@ public interface BottomSheetContract {
         void initViews();
 
         void setUpViewsWithData(String phoneNumber, String emailAddress, String websiteAddress);
+
+        void displayToastMessage(String message);
     }
 
     interface ContactInfoPresenter {

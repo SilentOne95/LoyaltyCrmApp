@@ -12,6 +12,8 @@ import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+
 public class OpeningHoursFragment extends BaseFragment implements BottomSheetContract.OpeningHoursView {
 
     private static final String TAG = OpeningHoursFragment.class.getSimpleName();
@@ -64,6 +66,10 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
 
     @Override
     public void displayToastMessage(String message) {
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

@@ -26,6 +26,8 @@ import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;
 
 import java.util.List;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+
 public class ProductsFragment extends BaseFragment implements ProductsContract.View, SearchView.OnQueryTextListener {
 
     private static final String TAG = ProductsFragment.class.getSimpleName();
@@ -124,7 +126,11 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     @Override
     public void displayToastMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
+        Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
     }
 
     @Override

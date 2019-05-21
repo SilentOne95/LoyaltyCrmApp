@@ -40,6 +40,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_ONE_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class CouponsFragment extends BaseFragment implements CouponsContract.View, SearchView.OnQueryTextListener {
 
@@ -194,7 +195,11 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
     @Override
     public void displayToastMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
+        Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
     }
 
     @Override

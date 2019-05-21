@@ -15,7 +15,7 @@ import io.reactivex.subjects.PublishSubject;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_DRAWER_TYPE_MENU;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_DRAWER_TYPE_SUBMENU;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class HomePresenter implements HomeContract.Presenter {
 
@@ -47,7 +47,7 @@ public class HomePresenter implements HomeContract.Presenter {
             @Override
             public void onDataNotAvailable() {
                 hideProgressBar();
-                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
+                view.displayToastMessage(TOAST_ERROR);
             }
         });
     }

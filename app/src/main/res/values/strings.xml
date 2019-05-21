@@ -147,6 +147,10 @@
     <string name="account_already_exits">Already signed in as a guest!\nPlease choose other option</string>
     <string name="account_auth_failed">Authorization failed. Please check your internet connection or try again later</string>
     <string name="default_toast_error_message">Oops.. something went wrong. Check your internet connection or try again later</string>
+    <string name="settings_acc_log_out_successfully">Logged out successfully</string>
+    <string name="settings_acc_delete_successfully">Account deleted successfully</string>
+    <string name="map_connection_suspended">Connection with Google services was suspended</string>
+    <string name="map_connection_failed">Connection with Google services failed</string>
 
     <!-- Image content descriptions -->
     <string name="log_in_view_logo_desc" translatable="false">log_in_view_logo_desc</string>

@@ -37,6 +37,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_COUPON_HEIGH
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class CouponDetailsActivity extends BaseActivity implements CouponDetailsContract.View, View.OnClickListener {
 
@@ -271,6 +272,10 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     @Override
     public void displayToastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
+        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
     }
 }

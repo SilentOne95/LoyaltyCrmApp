@@ -20,6 +20,7 @@ import java.text.DecimalFormat;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View{
 
@@ -113,7 +114,11 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
     @Override
     public void displayToastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
+        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
     }
 
     @Override

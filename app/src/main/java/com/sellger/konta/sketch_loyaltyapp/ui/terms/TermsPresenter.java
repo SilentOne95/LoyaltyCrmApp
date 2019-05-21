@@ -6,7 +6,7 @@ import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
-import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class TermsPresenter implements TermsContract.Presenter {
 
@@ -35,7 +35,7 @@ public class TermsPresenter implements TermsContract.Presenter {
             @Override
             public void onDataNotAvailable() {
                 hideProgressBar();
-                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
+                view.displayToastMessage(TOAST_ERROR);
             }
         });
     }

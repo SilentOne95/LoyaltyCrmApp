@@ -17,6 +17,8 @@ import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+
 public class WebsiteFragment extends BaseFragment implements WebsiteContract.View {
 
     private static final String TAG = WebsiteFragment.class.getSimpleName();
@@ -69,6 +71,10 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
 
     @Override
     public void displayToastMessage(String message) {
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

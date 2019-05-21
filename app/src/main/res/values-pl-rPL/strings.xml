@@ -131,5 +131,9 @@
     <string name="account_already_exits">Już zalogowany jako gość.\nProszę wybrać inną opcję lub cofnąć do ekranu głównego</string>
     <string name="account_auth_failed">Autoryzacja nie powiodła się. Sprawdź połączenie z internetem lub spróbuj ponownie później</string>
     <string name="default_toast_error_message">Uups.. coś poszło nie tak. Sprawdź połączenie z internetem lub spróbuj ponownie później</string>
+    <string name="settings_acc_log_out_successfully">Wylogowano pomyślnie</string>
+    <string name="settings_acc_delete_successfully">Konto zostało pomyślnie usunięte</string>
+    <string name="map_connection_suspended">Połączenie z serwisem Google zostało zawieszone</string>
+    <string name="map_connection_failed">Połączenie z serwisem Google zostało zerwane</string>
 
 </resources>

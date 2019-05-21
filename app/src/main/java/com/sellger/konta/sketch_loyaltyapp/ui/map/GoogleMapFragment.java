@@ -81,6 +81,10 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.FASTEST_UPDATE_INTER
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MAX_WAIT_TIME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REQUEST_CHECK_SETTINGS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_CONNECTION_FAILED;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_CONNECTION_SUSPENDED;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_LOCATION_PERMISSION_DENIED;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TODAY_OPEN_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.UPDATE_INTERVAL;
 
@@ -393,12 +397,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public void onConnectionSuspended(int i) {
-        Toast.makeText(getContext(), "onConnectionSuspended", Toast.LENGTH_LONG).show();
+        displayToastMessage(TOAST_CONNECTION_SUSPENDED);
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(getContext(), "onConnectionFailed", Toast.LENGTH_LONG).show();
+        displayToastMessage(TOAST_CONNECTION_FAILED);
     }
 
     @Override
@@ -428,21 +432,19 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
-        switch (requestCode) {
-            case 101:
-                switch (resultCode) {
-                    case Activity.RESULT_OK:
-                        // All required changes were successfully made
-                        Toast.makeText(getActivity(),states.isLocationPresent() + "", Toast.LENGTH_SHORT).show();
-                        break;
-                    case Activity.RESULT_CANCELED:
-                        // The user was asked to change settings, but chose not to
-                        Toast.makeText(getActivity(),"Canceled", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
-                break;
+        if (requestCode == 101) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    // All required changes were successfully made
+                    Toast.makeText(getActivity(), states.isLocationPresent() + "", Toast.LENGTH_SHORT).show();
+                    break;
+                case Activity.RESULT_CANCELED:
+                    // The user was asked to change settings, but chose not to
+                    Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -460,28 +462,24 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        // If request is cancelled, the result arrays are empty
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // Permission granted. Do the needed location-related task
-                    if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(),
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted. Do the needed location-related task
+                if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
 
-                        mGoogleMap.setMyLocationEnabled(true);
+                    mGoogleMap.setMyLocationEnabled(true);
 
-                        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
-                        startGeofence();
-                    }
-                } else {
-                    // Permission denied, display Toast message
-                    Toast.makeText(getActivity(),
-                            getResources().getText(R.string.localization_permission_denied), Toast.LENGTH_LONG)
-                            .show();
+                    mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                    startGeofence();
                 }
+            } else {
+                // Permission denied, display Toast message
+                displayToastMessage(TOAST_LOCATION_PERMISSION_DENIED);
             }
         }
     }
@@ -579,6 +577,21 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public void displayToastMessage(String message) {
+        switch (message) {
+            case TOAST_ERROR:
+                message = getString(R.string.default_toast_error_message);
+                break;
+            case TOAST_LOCATION_PERMISSION_DENIED:
+                message = getString(R.string.localization_permission_denied);
+                break;
+            case TOAST_CONNECTION_SUSPENDED:
+                message = getString(R.string.map_connection_suspended);
+                break;
+            case TOAST_CONNECTION_FAILED:
+                message = getString(R.string.map_connection_failed);
+                break;
+        }
+
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 

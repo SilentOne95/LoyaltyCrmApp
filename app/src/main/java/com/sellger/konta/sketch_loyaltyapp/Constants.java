@@ -121,7 +121,11 @@ public final class Constants {
     public static final String TOAST_SMS_LIMIT = "limit";
     public static final String TOAST_ACCOUNT_EXISTS = "exists";
     public static final String TOAST_ACCOUNT_AUTH_FAILED = "auth";
-    public static final String TOAST_DATA_ERROR_MESSAGE = "Oops.. something went wrong.\nCheck your internet connection or try again later";
+    public static final String TOAST_LOG_OUT_SUCCESS = "log out";
+    public static final String TOAST_DELETE_SUCCESS = "delete";
+    public static final String TOAST_CONNECTION_SUSPENDED = "connection suspended";
+    public static final String TOAST_CONNECTION_FAILED = "connection failed";
+    public static final String TOAST_LOCATION_PERMISSION_DENIED = "location permission";
 
     // Phone number auth - default code
     public static final String DEFAULT_SMS_CODE = "000000";

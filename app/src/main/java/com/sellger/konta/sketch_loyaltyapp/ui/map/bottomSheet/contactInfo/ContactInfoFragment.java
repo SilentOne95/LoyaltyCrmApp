@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
@@ -15,6 +16,7 @@ import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class ContactInfoFragment extends BaseFragment implements BottomSheetContract.ContactInfoView,
         View.OnClickListener {
@@ -117,9 +119,15 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
                     e.printStackTrace();
                 }
                 break;
-
-            default:
-                break;
         }
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

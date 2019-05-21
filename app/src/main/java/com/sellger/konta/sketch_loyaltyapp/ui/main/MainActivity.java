@@ -51,6 +51,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_ORDER;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_SECOND_GROUP_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_THIRD_GROUP_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
         NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View, Toolbar.OnMenuItemClickListener, View.OnClickListener {
@@ -267,11 +268,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -393,6 +394,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void displayToastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
+        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
     }
 }

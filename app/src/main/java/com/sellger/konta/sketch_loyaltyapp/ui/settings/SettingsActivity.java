@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,6 +31,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.FIRST_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SHARED_PREF_FILE_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DELETE_SUCCESS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_LOG_OUT_SUCCESS;
 
 public class SettingsActivity extends BaseActivity implements SettingsContract.View, View.OnClickListener,
         CompoundButton.OnCheckedChangeListener {
@@ -158,16 +161,16 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
             case "facebook.com":
                 LoginManager.getInstance().logOut();
                 break;
-            default:
-                break;
         }
 
         FirebaseAuth.getInstance().signOut();
+        displayToastMessage(TOAST_LOG_OUT_SUCCESS);
 
         unsubscribeAndUpdateUI();
     }
 
-    private String checkAuthMethod() {
+    @Override
+    public String checkAuthMethod() {
         String authMethod = "";
         FirebaseAuth.getInstance().getCurrentUser().getProviderData();
         List<? extends UserInfo> providers = FirebaseAuth.getInstance().getCurrentUser().getProviderData();
@@ -184,6 +187,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.delete().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                displayToastMessage(TOAST_DELETE_SUCCESS);
                 unsubscribeAndUpdateUI();
             }
         });
@@ -199,5 +203,16 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
         // Start MainActivity to show Login layout as current account was deleted
         SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+    }
+
+    @Override
+    public void displayToastMessage(String message) {
+        if (message.equals(TOAST_LOG_OUT_SUCCESS)) {
+            message = getString(R.string.settings_acc_log_out_successfully);
+        } else if (message.equals(TOAST_DELETE_SUCCESS)) {
+            message = getString(R.string.settings_acc_delete_successfully);
+        }
+
+        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
     }
 }

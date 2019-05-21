@@ -18,7 +18,7 @@ import java.util.TimeZone;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_NUM_OF_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_COUPONS;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class CouponsPresenter implements CouponsContract.Presenter {
 
@@ -61,7 +61,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
                     @Override
                     public void onDataNotAvailable() {
                         hideProgressBar();
-                        view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
+                        view.displayToastMessage(TOAST_ERROR);
                     }
                 });
             }
@@ -69,7 +69,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
             @Override
             public void onDataNotAvailable() {
                 hideProgressBar();
-                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
+                view.displayToastMessage(TOAST_ERROR);
             }
         });
     }

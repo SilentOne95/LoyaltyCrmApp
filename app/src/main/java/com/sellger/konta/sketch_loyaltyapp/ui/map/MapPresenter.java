@@ -31,7 +31,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.MONDAY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SATURDAY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SUNDAY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.THURSDAY_STRING;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DATA_ERROR_MESSAGE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TODAY_OPEN_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TUESDAY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.WEDNESDAY_STRING;
@@ -100,7 +100,7 @@ public class MapPresenter implements MapContract.Presenter {
 
             @Override
             public void onDataNotAvailable() {
-                view.displayToastMessage(TOAST_DATA_ERROR_MESSAGE);
+                view.displayToastMessage(TOAST_ERROR);
             }
         });
     }
@@ -147,7 +147,7 @@ public class MapPresenter implements MapContract.Presenter {
 
             @Override
             public void onDataNotAvailable() {
-
+                view.displayToastMessage(TOAST_ERROR);
             }
         });
     }

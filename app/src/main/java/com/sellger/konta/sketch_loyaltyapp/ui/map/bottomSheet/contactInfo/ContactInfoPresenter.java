@@ -15,6 +15,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPresenter {
 
@@ -71,7 +72,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
             @Override
             public void onDataNotAvailable() {
-
+                view.displayToastMessage(TOAST_ERROR);
             }
         });
     }
