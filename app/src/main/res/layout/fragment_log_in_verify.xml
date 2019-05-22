@@ -55,6 +55,19 @@
 
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/verify_phone_icon_image"
+                android:layout_width="@dimen/register_icon_image_size"
+                android:layout_height="@dimen/register_icon_image_size"
+                android:layout_marginStart="@dimen/small_value"
+                android:layout_marginTop="@dimen/verify_phone_icon_image_margin_top"
+                android:layout_marginEnd="@dimen/small_value"
+                android:contentDescription="@string/text_icon_verify_code_desc"
+                android:src="@drawable/ic_circle_message"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/verify_code_input_box"
                 style="@style/text_input_layout_style"
@@ -76,19 +89,6 @@
                     android:textCursorDrawable="@drawable/edittext_cursor_style" />
 
             </android.support.design.widget.TextInputLayout>
-
-            <ImageView
-                android:id="@+id/verify_phone_icon_image"
-                android:layout_width="@dimen/register_icon_image_size"
-                android:layout_height="@dimen/register_icon_image_size"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/verify_phone_icon_image_margin_top"
-                android:layout_marginEnd="@dimen/small_value"
-                android:contentDescription="@string/text_icon_verify_code_desc"
-                android:src="@drawable/ic_circle_message"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/verify_waiting_for_code_text"
@@ -115,6 +115,31 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/verify_waiting_for_code_text" />
+
+            <TextView
+                android:id="@+id/verify_sms_limit_reached_text"
+                style="@style/text_regular_color_accent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_value"
+                android:layout_marginTop="@dimen/very_big_value"
+                android:layout_marginEnd="@dimen/small_value"
+                android:gravity="center"
+                android:text="@string/verify_sms_limit_information"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/verify_code_input_box" />
+
+            <Button
+                android:id="@+id/verify_sms_limit_reached_button"
+                style="@style/button_color_accent"
+                android:layout_width="@dimen/button_basic_width"
+                android:layout_height="@dimen/button_basic_height"
+                android:layout_marginTop="@dimen/very_big_value"
+                android:text="@string/verify_sms_limit_button_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/verify_sms_limit_reached_text" />
 
         </android.support.constraint.ConstraintLayout>
 

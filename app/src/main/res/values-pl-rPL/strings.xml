@@ -79,6 +79,9 @@
     <string name="bottom_sheet_today_closed_text">Dziś jest zamknięte</string>
     <string name="contact_us_text">W razie jakichkolwiek pytań,\n prosimy o kontakt:</string>
 
+    <string name="verify_sms_limit_information">Osiągnięto dzienny limit wysyłki SMS-ów z kodem weryfikacyjnym.\n Weryfikacja konta przebiegła pomyślnie, kliknij "kontyuuj", aby przejść do ekranu głównego.</string>
+    <string name="verify_sms_limit_button_text">Kontynuuj</string>
+
     <!-- Barcode scanner -->
     <string name="barcode_scanner_title">Skaner kodów kreskowych</string>
     <string name="barcode_scanner_instruction_text">Instrukcja</string>

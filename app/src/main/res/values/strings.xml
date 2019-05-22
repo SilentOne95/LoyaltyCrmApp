@@ -47,6 +47,9 @@
     <string name="verify_error_wrong_type">Wrong format of data</string>
     <string name="verify_error_wrong_data">Wrong prefix or phone number</string>
 
+    <string name="verify_sms_limit_information">You have reached daily sending SMS limit.\n Verification has been processed successfully, click "continue" to go to the main screen.</string>
+    <string name="verify_sms_limit_button_text">Continue</string>
+
     <!-- Fragment home -->
     <string name="check_offers_text">Check offers!</string>
     <string name="something_went_wrong_text">Ooops! Something went wrong. \nPlease check your internet connection</string>

@@ -118,7 +118,6 @@ public final class Constants {
     // Toast messages types
     public static final String TOAST_ERROR = "error";
     public static final String TOAST_INTERNET_CONNECTION_REQUIRED = "internet";
-    public static final String TOAST_SMS_LIMIT = "limit";
     public static final String TOAST_ACCOUNT_EXISTS = "exists";
     public static final String TOAST_ACCOUNT_AUTH_FAILED = "auth";
     public static final String TOAST_LOG_OUT_SUCCESS = "log out";

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,21 +36,22 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERS
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ACCOUNT_AUTH_FAILED;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_SMS_LIMIT;
 
-public class LogInVerifyFragment extends BaseFragment implements LogInVerifyContract.View {
+public class LogInVerifyFragment extends BaseFragment implements LogInVerifyContract.View, View.OnClickListener {
 
     private static final String TAG = LogInVerifyFragment.class.getSimpleName();
 
     LogInVerifyPresenter presenter;
 
     private TextInputEditText mTextInputCode;
-    private TextView mTextWaitingForCode , mTextProvidedPhoneNumber;
+    private TextView mTextWaitingForCode , mTextProvidedPhoneNumber, mTextSmsLimitReached;
     private ProgressBar mProgressBar;
+    private Button mButtonSmsLimitReached;
 
     private FirebaseAuth mFirebaseAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
+    private PhoneAuthCredential mPhoneAuthCredential;
     private String mSmsCode, mVerificationId;
 
     // TODO: Replace this variable
@@ -78,6 +80,10 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
         // Init views
         initViews();
+
+        mTextSmsLimitReached.setVisibility(View.GONE);
+        mButtonSmsLimitReached.setVisibility(View.GONE);
+        mButtonSmsLimitReached.setOnClickListener(this);
 
         // Setting up presenter
         presenter = new LogInVerifyPresenter(this);
@@ -128,6 +134,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         mTextInputCode = rootView.findViewById(R.id.verify_code_input_text);
         mTextWaitingForCode = rootView.findViewById(R.id.verify_waiting_for_code_text);
         mProgressBar = rootView.findViewById(R.id.verify_progress_bar);
+        mTextSmsLimitReached = rootView.findViewById(R.id.verify_sms_limit_reached_text);
+        mButtonSmsLimitReached = rootView.findViewById(R.id.verify_sms_limit_reached_button);
     }
 
     @Override
@@ -195,15 +203,18 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     @Override
     public void displaySmsCodeLimitInfo(PhoneAuthCredential credential) {
+        mPhoneAuthCredential = credential;
+
         new Handler().postDelayed(() -> {
             mTextInputCode.setFocusableInTouchMode(true);
             mTextInputCode.setText(DEFAULT_SMS_CODE);
             mTextWaitingForCode.setVisibility(View.GONE);
             mProgressBar.setVisibility(View.GONE);
+            mTextSmsLimitReached.setVisibility(View.VISIBLE);
+            mButtonSmsLimitReached.setVisibility(View.VISIBLE);
         }, DELAY_SET_SMS_CODE);
 
-        displayToastMessage(TOAST_SMS_LIMIT);
-        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(credential), DELAY_PHONE_AUTH);
+//        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(credential), DELAY_PHONE_AUTH);
     }
 
     @Override
@@ -262,14 +273,18 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
             case TOAST_ERROR:
                 message = getString(R.string.default_toast_error_message);
                 break;
-            case TOAST_SMS_LIMIT:
-                message = getString(R.string.sms_code_limit_reached);
-                break;
             case TOAST_ACCOUNT_AUTH_FAILED:
                 message = getString(R.string.account_auth_failed);
                 break;
         }
 
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mPhoneAuthCredential != null) {
+            verifyPhoneNumberWithCode(mPhoneAuthCredential);
+        }
     }
 }
