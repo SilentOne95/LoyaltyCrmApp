@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
@@ -26,7 +28,10 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
+
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_SMS_CODE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_LOADING_LOGIN_SWITCH_LAYOUT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_LOGIN_SWITCH_LAYOUT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_PHONE_AUTH;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_SET_SMS_CODE;
@@ -46,7 +51,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     private TextInputEditText mTextInputCode;
     private TextView mTextWaitingForCode , mTextProvidedPhoneNumber, mTextSmsLimitReached;
     private ProgressBar mProgressBar;
-    private Button mButtonSmsLimitReached;
+    private CircularProgressButton mCircularProgressButton;
 
     private FirebaseAuth mFirebaseAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber;
@@ -82,8 +87,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         initViews();
 
         mTextSmsLimitReached.setVisibility(View.GONE);
-        mButtonSmsLimitReached.setVisibility(View.GONE);
-        mButtonSmsLimitReached.setOnClickListener(this);
+        mCircularProgressButton.setVisibility(View.GONE);
+        mCircularProgressButton.setOnClickListener(this);
 
         // Setting up presenter
         presenter = new LogInVerifyPresenter(this);
@@ -135,7 +140,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         mTextWaitingForCode = rootView.findViewById(R.id.verify_waiting_for_code_text);
         mProgressBar = rootView.findViewById(R.id.verify_progress_bar);
         mTextSmsLimitReached = rootView.findViewById(R.id.verify_sms_limit_reached_text);
-        mButtonSmsLimitReached = rootView.findViewById(R.id.verify_sms_limit_reached_button);
+        mCircularProgressButton = rootView.findViewById(R.id.verify_sms_limit_reached_button);
     }
 
     @Override
@@ -164,9 +169,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
                         displayCodeInEditText(phoneAuthCredential.getSmsCode());
                         if (mFirebaseAuth.getCurrentUser() != null) {
-                            new Handler().postDelayed(() -> convertAnonymousAccount(phoneAuthCredential), DELAY_PHONE_AUTH);
+                            new Handler().postDelayed(() -> convertAnonymousAccount(phoneAuthCredential, false), DELAY_PHONE_AUTH);
                         } else {
-                            new Handler().postDelayed(() -> signInWithPhoneAuthCredential(phoneAuthCredential), DELAY_PHONE_AUTH);
+                            new Handler().postDelayed(() -> signInWithPhoneAuthCredential(phoneAuthCredential, false), DELAY_PHONE_AUTH);
                         }
                     }
 
@@ -198,7 +203,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         }, DELAY_SET_SMS_CODE);
 
         // Verify sms code with delay
-        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(PhoneAuthProvider.getCredential(mVerificationId, mSmsCode)), DELAY_PHONE_AUTH);
+        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(PhoneAuthProvider.getCredential(mVerificationId, mSmsCode), false), DELAY_PHONE_AUTH);
     }
 
     @Override
@@ -211,23 +216,29 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
             mTextWaitingForCode.setVisibility(View.GONE);
             mProgressBar.setVisibility(View.GONE);
             mTextSmsLimitReached.setVisibility(View.VISIBLE);
-            mButtonSmsLimitReached.setVisibility(View.VISIBLE);
+            mCircularProgressButton.setVisibility(View.VISIBLE);
         }, DELAY_SET_SMS_CODE);
-
-//        new Handler().postDelayed(() -> verifyPhoneNumberWithCode(credential), DELAY_PHONE_AUTH);
     }
 
     @Override
-    public void verifyPhoneNumberWithCode(PhoneAuthCredential credential) {
-        if (mFirebaseAuth.getCurrentUser() != null) {
-            convertAnonymousAccount(credential);
-        } else {
-            signInWithPhoneAuthCredential(credential);
+    public void onClick(View v) {
+        if (mPhoneAuthCredential != null) {
+            mCircularProgressButton.startMorphAnimation();
+            verifyPhoneNumberWithCode(mPhoneAuthCredential, true);
         }
     }
 
     @Override
-    public void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+    public void verifyPhoneNumberWithCode(PhoneAuthCredential credential, boolean isSmsLimitReached) {
+        if (mFirebaseAuth.getCurrentUser() != null) {
+            convertAnonymousAccount(credential, isSmsLimitReached);
+        } else {
+            signInWithPhoneAuthCredential(credential, isSmsLimitReached);
+        }
+    }
+
+    @Override
+    public void signInWithPhoneAuthCredential(PhoneAuthCredential credential, boolean isSmsLimitReached) {
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
@@ -237,7 +248,11 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         presenter.manageTopicsSubscriptions(REGISTRATION_NORMAL);
 
                         // Open "home" view with delay, pass string to display / hide information about account in nav view header
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
+                        if (isSmsLimitReached) {
+                            finishLoadingAndSwitchScreen();
+                        } else {
+                            switchScreen();
+                        }
                     } else {
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                         Log.d(TAG, "signInWithCredential:failure", task.getException());
@@ -249,7 +264,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     }
 
     @Override
-    public void convertAnonymousAccount(AuthCredential credential) {
+    public void convertAnonymousAccount(AuthCredential credential, boolean isSmsLimitReached) {
         mFirebaseAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
@@ -259,13 +274,30 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         presenter.manageTopicsSubscriptions(REGISTRATION_CONVERSION);
 
                         // Open "home" view with delay, pass string to display / hide information about account in nav view header
-                        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
+                        if (isSmsLimitReached) {
+                            finishLoadingAndSwitchScreen();
+                        } else {
+                            switchScreen();
+                        }
                     } else {
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                         Log.w(TAG, "linkWithCredential:failure", task.getException());
                     }
                 });
     }
+
+    @Override
+    public void finishLoadingAndSwitchScreen() {
+        new Handler().postDelayed(() -> mCircularProgressButton.doneLoadingAnimation(Color.rgb(255,152,0),
+                BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_check)),DELAY_LOGIN_SWITCH_LAYOUT);
+        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOADING_LOGIN_SWITCH_LAYOUT);
+    }
+
+    @Override
+    public void switchScreen() {
+        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
+    }
+
 
     @Override
     public void displayToastMessage(String message) {
@@ -279,12 +311,5 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         }
 
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (mPhoneAuthCredential != null) {
-            verifyPhoneNumberWithCode(mPhoneAuthCredential);
-        }
     }
 }

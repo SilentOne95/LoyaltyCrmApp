@@ -17,11 +17,15 @@ public interface LogInVerifyContract {
 
         void displaySmsCodeLimitInfo(PhoneAuthCredential credential);
 
-        void verifyPhoneNumberWithCode(PhoneAuthCredential credential);
+        void verifyPhoneNumberWithCode(PhoneAuthCredential credential, boolean isSmsLimitReached);
 
-        void signInWithPhoneAuthCredential(PhoneAuthCredential credential);
+        void signInWithPhoneAuthCredential(PhoneAuthCredential credential, boolean isSmsLimitReached);
 
-        void convertAnonymousAccount(AuthCredential credential);
+        void convertAnonymousAccount(AuthCredential credential, boolean isSmsLimitReached);
+
+        void finishLoadingAndSwitchScreen();
+
+        void switchScreen();
 
         void displayToastMessage(String message);
     }

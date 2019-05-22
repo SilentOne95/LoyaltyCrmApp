@@ -71,6 +71,9 @@
 
     <dimen name="edittext_cursor_width">2dp</dimen>
 
+    <dimen name="verify_continue_button_width">100dp</dimen>
+    <dimen name="verify_continue_button_height">40dp</dimen>
+
     <!-- Coupon details activity -->
     <dimen name="coupon_details_image_container_height">300dp</dimen>
 

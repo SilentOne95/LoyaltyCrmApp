@@ -137,4 +137,5 @@ public final class Constants {
     public static final int DELAY_PHONE_AUTH_DISMISS_ERROR = 2000;
     public static final int DELAY_SET_SMS_CODE = 3000;
     public static final int DELAY_LOGIN_SWITCH_LAYOUT = 2000;
+    public static final int DELAY_LOADING_LOGIN_SWITCH_LAYOUT = 4000;
 }
