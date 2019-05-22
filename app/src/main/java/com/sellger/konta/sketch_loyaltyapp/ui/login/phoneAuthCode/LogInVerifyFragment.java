@@ -2,9 +2,9 @@ package com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.textfield.TextInputEditText;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;

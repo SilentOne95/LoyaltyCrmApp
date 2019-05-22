@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.login;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;

@@ -17,7 +17,7 @@
 package com.sellger.konta.sketch_loyaltyapp.data;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.local.LoyaltyLocalDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.local.LoyaltyRoomDatabase;

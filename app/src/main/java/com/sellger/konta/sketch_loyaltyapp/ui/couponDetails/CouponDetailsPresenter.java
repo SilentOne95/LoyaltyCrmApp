@@ -1,6 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.couponDetails;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;

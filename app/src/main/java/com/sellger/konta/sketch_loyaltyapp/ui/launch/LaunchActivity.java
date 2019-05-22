@@ -1,7 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.launch;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity;

@@ -2,7 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.utils.utilsMap;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.android.gms.maps.GoogleMap;
