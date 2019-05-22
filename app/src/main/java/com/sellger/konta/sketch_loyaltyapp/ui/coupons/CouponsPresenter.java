@@ -35,10 +35,13 @@ public class CouponsPresenter implements CouponsContract.Presenter {
     private SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL"));
     private Date couponDate = new Date();
     private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("CET"));
+    private Date date = calendar.getTime();
 
     CouponsPresenter(@NonNull CouponsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
+
+        calendar.add(Calendar.DATE, 1);
     }
 
     @Override
@@ -90,9 +93,6 @@ public class CouponsPresenter implements CouponsContract.Presenter {
 
     @Override
     public ArrayList<Coupon> isCouponDataValid(List<Coupon> couponList) {
-        calendar.add(Calendar.DATE, 1);
-        Date date = calendar.getTime();
-
         for (Coupon coupon : couponList) {
 
             try {
