@@ -46,7 +46,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     private static final String TAG = LogInVerifyFragment.class.getSimpleName();
 
-    LogInVerifyPresenter presenter;
+    private LogInVerifyPresenter presenter;
 
     private TextInputEditText mTextInputCode;
     private TextView mTextWaitingForCode , mTextProvidedPhoneNumber, mTextSmsLimitReached;

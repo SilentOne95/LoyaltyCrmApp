@@ -52,7 +52,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     private static final String TAG = LogInFragment.class.getSimpleName();
 
-    LogInPresenter presenter;
+    private LogInPresenter presenter;
 
     private FirebaseAuth mFirebaseAuth;
     private GoogleSignInClient mGoogleSignInClient;

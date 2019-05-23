@@ -18,7 +18,7 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
 
     private static final String TAG = OpeningHoursFragment.class.getSimpleName();
 
-    OpeningHoursPresenter presenter;
+    private OpeningHoursPresenter presenter;
 
     private TextView mMondayHours, mTuesdayHours, mWednesdayHours, mThursdayHours, mFridayHours,
             mSaturdayHours, mSundayHours;

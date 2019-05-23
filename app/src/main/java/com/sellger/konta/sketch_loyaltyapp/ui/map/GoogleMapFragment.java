@@ -96,13 +96,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     private static final String TAG = GoogleMapFragment.class.getSimpleName();
 
-    MapPresenter presenter;
+    private MapPresenter presenter;
 
-    GoogleMap mGoogleMap;
-    protected GoogleApiClient mGoogleApiClient;
-    protected LocationRequest mLocationRequest;
-    protected FusedLocationProviderClient mFusedLocationClient;
-    protected Location mLastLocation;
+    private GoogleMap mGoogleMap;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     private ClusterManager<Marker> mClusterManager;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -480,13 +479,13 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
-    LocationCallback mLocationCallback = new LocationCallback() {
+    private LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             List<Location> locationList = locationResult.getLocations();
             if (locationList.size() > 0) {
                 // The last location in the list is the newest
-                mLastLocation =  locationList.get(locationList.size() - 1);
+                Location mLastLocation = locationList.get(locationList.size() - 1);
             }
             super.onLocationResult(locationResult);
         }

@@ -23,7 +23,7 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
 
     private static final String TAG = WebsiteFragment.class.getSimpleName();
 
-    WebsitePresenter presenter;
+    private WebsitePresenter presenter;
 
     private WebView mWebView;
 

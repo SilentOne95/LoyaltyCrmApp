@@ -23,7 +23,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
 
     private static final String TAG = ContactInfoFragment.class.getSimpleName();
 
-    ContactInfoPresenter presenter;
+    private ContactInfoPresenter presenter;
 
     private TextView mPhoneTextView, mEmailTextView, mWebsiteTextView;
 

@@ -32,7 +32,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     private static final String TAG = ProductsFragment.class.getSimpleName();
 
-    ProductsPresenter presenter;
+    private ProductsPresenter presenter;
 
     private RecyclerView mRecyclerView;
     private View mEmptyStateView;

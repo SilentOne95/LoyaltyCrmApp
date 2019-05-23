@@ -39,7 +39,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
 
-    SettingsPresenter presenter;
+    private SettingsPresenter presenter;
 
     private TextView mTermsText, mPrivacyText, mLicensesText;
     private Switch mSwitchFirstTopic, mSwitchSecondTopic, mSwitchThirdTopic;

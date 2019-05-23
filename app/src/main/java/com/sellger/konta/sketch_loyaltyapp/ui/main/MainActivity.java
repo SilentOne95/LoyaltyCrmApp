@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    MainActivityPresenter presenter;
+    private MainActivityPresenter presenter;
 
     private FirebaseAuth mFirebaseAuth;
     private Toolbar mToolbar;

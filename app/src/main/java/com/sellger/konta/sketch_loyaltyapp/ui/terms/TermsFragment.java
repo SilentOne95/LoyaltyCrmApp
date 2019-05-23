@@ -22,7 +22,7 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
 
     private static final String TAG = TermsFragment.class.getSimpleName();
 
-    TermsPresenter presenter;
+    private TermsPresenter presenter;
 
     private ProgressBar mProgressBar;
     private View mLayoutContainer;

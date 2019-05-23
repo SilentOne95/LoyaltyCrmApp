@@ -46,7 +46,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
     private static final String TAG = CouponsFragment.class.getSimpleName();
 
-    CouponsPresenter presenter;
+    private CouponsPresenter presenter;
 
     private RecyclerView recyclerView;
     private View emptyStateView;

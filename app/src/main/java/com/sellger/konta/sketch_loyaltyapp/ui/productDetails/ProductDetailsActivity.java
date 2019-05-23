@@ -26,7 +26,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
     private static final String TAG = ProductDetailsActivity.class.getSimpleName();
 
-    ProductDetailsPresenter presenter;
+    private ProductDetailsPresenter presenter;
 
     private ImageView mProductImage;
     private TextView mProductTitle, mProductPrice, mProductDescription;

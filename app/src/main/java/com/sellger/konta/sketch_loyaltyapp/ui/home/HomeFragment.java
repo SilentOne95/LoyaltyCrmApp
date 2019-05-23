@@ -31,7 +31,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
 
-    HomePresenter presenter;
+    private HomePresenter presenter;
 
     private ImageView mSpecialOfferImage;
     private TextView mSpecialOfferText;

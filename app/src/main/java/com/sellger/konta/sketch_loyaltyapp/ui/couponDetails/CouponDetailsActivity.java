@@ -43,7 +43,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     private static final String TAG = CouponDetailsActivity.class.getSimpleName();
 
-    CouponDetailsPresenter presenter;
+    private CouponDetailsPresenter presenter;
 
     private ProgressBar mProgressBar;
     private View mLayoutContainer;
@@ -52,7 +52,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     private Button showCouponCodeButton;
 
     private int couponId;
-    private String couponCode;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     private View mBottomSheet;
@@ -60,7 +59,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     private ViewFlipper mViewFlipper;
     private TextView mBottomCouponCodeTextView;
     private ImageView mBottomBarcodeView, mSwitchFlipperLeftArrow, mSwitchFlipperRightArrow;
-    private Bitmap bitmap = null;
 
     @Override
     protected int getLayout() { return R.layout.activity_coupon_details; }
@@ -182,11 +180,12 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             mCouponDescription.setText(Html.fromHtml(coupon.getDescription()));
         }
 
+        String couponCode;
         if (!TextUtils.isEmpty(coupon.getCouponCode())) {
             couponCode = coupon.getCouponCode();
             mBottomCouponCodeTextView.setText(couponCode);
             try {
-                bitmap = encodeAsBitmap(couponCode);
+                Bitmap bitmap = encodeAsBitmap(couponCode);
                 mBottomBarcodeView.setImageBitmap(bitmap);
             } catch (WriterException e) {
                 e.printStackTrace();
