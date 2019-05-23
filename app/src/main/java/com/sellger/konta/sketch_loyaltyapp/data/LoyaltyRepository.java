@@ -19,9 +19,13 @@ import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 import com.sellger.konta.sketch_loyaltyapp.data.local.LoyaltyLocalDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.remote.LoyaltyRemoteDataSource;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class LoyaltyRepository implements LoyaltyDataSource {
@@ -50,6 +54,13 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     private boolean mCacheMarkerIsDirty = true;
     private boolean mCacheOpenHourIsDirty = true;
     private boolean mCachePageIsDirty = true;
+
+    /**
+     * Date instances to refactor coupon date into more simple format.
+     */
+    private SimpleDateFormat currentCouponDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL"));
+    private Date couponDate = new Date();
 
     // Prevent direct instantiation
     private LoyaltyRepository(@NonNull LoyaltyDataSource loyaltyRemoteDataSource,
@@ -436,6 +447,28 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     }
 
     /**
+     * Refactor complex date format to simple dd/MM/yyyy.
+     *
+     * @param data list of coupons fetched with RemoteDataSource
+     * @return list of coupons with refactored date format
+     */
+    private List<Coupon> refactorCouponDateFormat(List<?> data) {
+        List<Coupon> couponList = (List<Coupon>) data;
+
+        for (Coupon coupon : couponList) {
+            try {
+                couponDate = currentCouponDateFormat.parse(coupon.getFreshTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            coupon.setFreshTime(simpleDateFormat.format(couponDate));
+        }
+
+        return couponList;
+    }
+
+    /**
      * Remote data source.
      */
     private void getMenuFromRemoteDataSource(@NonNull final LoadDataCallback callback) {
@@ -488,8 +521,9 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         mLoyaltyRemoteDataSource.getAllCoupons(new LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
-                refreshCache(TYPE_COUPON, data);
-                saveData(TYPE_COUPON, data);
+                List<Coupon> coupons = refactorCouponDateFormat(data);
+                refreshCache(TYPE_COUPON, coupons);
+                saveData(TYPE_COUPON, coupons);
                 callback.onDataLoaded(new ArrayList<>(mCachedCoupon.values()));
             }
 

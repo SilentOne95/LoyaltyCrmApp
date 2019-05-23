@@ -31,17 +31,12 @@ public class CouponsPresenter implements CouponsContract.Presenter {
     private LoyaltyRepository loyaltyRepository;
 
     private ArrayList<Coupon> validCouponsList = new ArrayList<>();
-    private SimpleDateFormat currentCouponDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
-    private SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL"));
-    private Date couponDate = new Date();
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("pl", "PL"));
     private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("CET"));
-    private Date date = calendar.getTime();
 
     CouponsPresenter(@NonNull CouponsContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
-
-        calendar.add(Calendar.DATE, 1);
     }
 
     @Override
@@ -93,21 +88,28 @@ public class CouponsPresenter implements CouponsContract.Presenter {
 
     @Override
     public ArrayList<Coupon> isCouponDataValid(List<Coupon> couponList) {
+        calendar.add(Calendar.DATE, 1);
+
         for (Coupon coupon : couponList) {
+            Date couponDate = parseDate(coupon.getFreshTime());
 
-            try {
-                couponDate = currentCouponDateFormat.parse(coupon.getFreshTime());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            if (!date.after(couponDate)) {
-                coupon.setFreshTime(newDateFormat.format(couponDate));
+            if (!parseDate(simpleDateFormat.format(calendar.getTime())).after(couponDate)) {
+                coupon.setFreshTime(simpleDateFormat.format(couponDate));
                 validCouponsList.add(coupon);
             }
         }
 
         return validCouponsList;
+    }
+
+    @Override
+    public Date parseDate(String date) {
+        try {
+            return simpleDateFormat.parse(simpleDateFormat.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

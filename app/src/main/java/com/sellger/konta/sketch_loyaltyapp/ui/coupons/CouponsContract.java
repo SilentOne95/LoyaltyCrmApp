@@ -3,6 +3,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public interface CouponsContract {
@@ -27,6 +28,8 @@ public interface CouponsContract {
         void refactorFetchedData(List<Coupon> couponList, int numOfColumns);
 
         ArrayList<Coupon> isCouponDataValid(List<Coupon> couponList);
+
+        Date parseDate(String date);
 
         void hideProgressBar();
 
