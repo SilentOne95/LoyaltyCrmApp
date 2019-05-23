@@ -105,7 +105,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
     @Override
     public Date parseDate(String date) {
         try {
-            return simpleDateFormat.parse(simpleDateFormat.format(date));
+            return simpleDateFormat.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
