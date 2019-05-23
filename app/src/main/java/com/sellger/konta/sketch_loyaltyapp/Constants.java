@@ -26,6 +26,8 @@ public final class Constants {
     public static final int FASTEST_UPDATE_INTERVAL = UPDATE_INTERVAL / 2;
     public static final int MAX_WAIT_TIME = UPDATE_INTERVAL * 3;
 
+    public static final int GEOFENCE_DEFAULT_RADIUS = 500;
+
     // Map related static fields
     public static final String MONDAY_STRING = "monday";
     public static final String TUESDAY_STRING = "tuesday";

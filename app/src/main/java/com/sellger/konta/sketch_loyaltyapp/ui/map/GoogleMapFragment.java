@@ -78,6 +78,7 @@ import java.util.TimeZone;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ALL_DAY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.FASTEST_UPDATE_INTERVAL;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.GEOFENCE_DEFAULT_RADIUS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MAX_WAIT_TIME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_LOCATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REQUEST_CHECK_SETTINGS;
@@ -171,21 +172,17 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
-    private void startGeofence() {
+    private void startGeofence(List<Marker> markerList) {
         mGeofencingClient = LocationServices.getGeofencingClient(getContext());
-        mGeofenceList.add(new Geofence.Builder()
-                .setRequestId("1")
-                .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                .setCircularRegion(52.2299, 21.003, 500)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
-                .build());
 
-        mGeofenceList.add(new Geofence.Builder()
-                .setRequestId("2")
-                .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                .setCircularRegion(52.1791, 21.0031, 500)
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
-                .build());
+        for (Marker marker : markerList) {
+            mGeofenceList.add(new Geofence.Builder()
+                    .setRequestId(String.valueOf(marker.getId()))
+                    .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                    .setCircularRegion(marker.getLat(), marker.getLng(), GEOFENCE_DEFAULT_RADIUS)
+                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
+                    .build());
+        }
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGeofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
@@ -475,7 +472,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                     mGoogleMap.setMyLocationEnabled(true);
 
                     mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
-                    startGeofence();
                 }
             } else {
                 // Permission denied, display Toast message
@@ -498,6 +494,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public void setUpCluster(final List<Marker> markerList) {
+        startGeofence(markerList);
+
         // Add markers to cluster
         for (Marker marker : markerList) {
             mClusterManager.addItem(marker);
