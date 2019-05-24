@@ -80,6 +80,7 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
         FirebaseVisionBarcodeDetectorOptions options = new FirebaseVisionBarcodeDetectorOptions.Builder()
                 .setBarcodeFormats(
                         FirebaseVisionBarcode.FORMAT_UPC_A,
+                        FirebaseVisionBarcode.FORMAT_EAN_13,
                         FirebaseVisionBarcode.FORMAT_QR_CODE)
                 .build();
 

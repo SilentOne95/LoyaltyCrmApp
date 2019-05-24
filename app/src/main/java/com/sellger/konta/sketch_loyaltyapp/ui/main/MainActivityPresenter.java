@@ -33,6 +33,14 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_CONTACT;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_COUPONS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_HOME;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_MAP;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_PRODUCTS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_SCANNER;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_TERMS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_WEBSITE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_ACCOUNT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CAMERA;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CODE;
@@ -67,6 +75,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
     private ArrayList<MenuComponent> mMenuArray = new ArrayList<>();
     private ArrayList<MenuComponent> mSubmenuArray = new ArrayList<>();
+    private ArrayList<MenuComponent> mAllMenuItemsArray = new ArrayList<>();
 
     MainActivityPresenter(@NonNull MainActivityContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
@@ -119,6 +128,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         if (mFirebaseAuth.getCurrentUser() != null && !mFirebaseAuth.getCurrentUser().isAnonymous()){
             view.setNavViewHeaderVisibility(NOT_ANONYMOUS_REGISTRATION);
         }
+
+        mAllMenuItemsArray.addAll(mMenuArray);
+        mAllMenuItemsArray.addAll(mSubmenuArray);
 
         passDataToNavDrawer(mMenuArray, mSubmenuArray, homeScreenId);
     }
@@ -339,5 +351,47 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     @Override
     public void passIdOfSelectedView(int viewPosition) {
         view.setDisplayItemChecked(viewPosition);
+    }
+
+    // TODO:
+    @Override
+    public void matchRelevantLayoutType(String displayedLayoutName) {
+        String layoutType = "";
+        int menuIdToSelect = 0;
+        switch (displayedLayoutName) {
+            case LAYOUT_NAME_HOME:
+                layoutType = LAYOUT_TYPE_HOME;
+                break;
+            case LAYOUT_NAME_PRODUCTS:
+                layoutType = LAYOUT_TYPE_PRODUCTS;
+                break;
+            case LAYOUT_NAME_COUPONS:
+                layoutType = LAYOUT_TYPE_COUPONS;
+                break;
+            case LAYOUT_NAME_MAP:
+                layoutType = LAYOUT_TYPE_MAP;
+                break;
+            case LAYOUT_NAME_SCANNER:
+                layoutType = LAYOUT_TYPE_SCANNER;
+                break;
+            case LAYOUT_NAME_WEBSITE:
+                layoutType = LAYOUT_TYPE_URL;
+                break;
+            case LAYOUT_NAME_TERMS:
+                layoutType = LAYOUT_TYPE_TERMS;
+                break;
+            case LAYOUT_NAME_CONTACT:
+                layoutType = LAYOUT_TYPE_CONTACT;
+                break;
+        }
+
+        for (int i = 0; mAllMenuItemsArray.size() > i; i++) {
+            if (mAllMenuItemsArray.get(i).getType().equals(layoutType)) {
+                menuIdToSelect = i;
+                break;
+            }
+        }
+
+        passIdOfSelectedView(menuIdToSelect);
     }
 }

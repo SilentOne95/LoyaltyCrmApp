@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,10 @@ import java.util.ArrayList;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_DRAWER_ACTION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_LOGIN;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_PHONE_CODE;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_PHONE_NUM;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_SCANNER;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_ACCOUNT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_LOGIN;
@@ -171,8 +176,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
 
         // Replacing the fragment
-        if (fragment instanceof LogInPhoneFragment || fragment instanceof LogInVerifyFragment
-                || fragment instanceof MyAccountFragment) {
+        if (fragment instanceof LogInPhoneFragment || fragment instanceof LogInVerifyFragment) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left)
@@ -183,12 +187,25 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     .beginTransaction()
                     .replace(R.id.switch_view_layout, fragment)
                     .commit();
+        } else if (fragment instanceof MyAccountFragment) {
+            boolean fragmentPopped = getSupportFragmentManager().popBackStackImmediate(fragment.getClass().getSimpleName(), 0);
+            if (!fragmentPopped) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.switch_view_layout, fragment)
+                        .addToBackStack(fragment.getClass().getSimpleName())
+                        .commit();
+            }
         } else {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right)
-                    .replace(R.id.switch_view_layout, fragment)
-                    .commit();
+            boolean fragmentPopped = getSupportFragmentManager().popBackStackImmediate(fragment.getClass().getSimpleName(), 0);
+            if (!fragmentPopped) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right)
+                        .replace(R.id.switch_view_layout, fragment)
+                        .addToBackStack(fragment.getClass().getSimpleName())
+                        .commit();
+            }
         }
     }
 
@@ -208,23 +225,29 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // If back button is pressed on certain view, set up desired view
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
         switch (fragment.getClass().getSimpleName()) {
-            case "LogInPhoneFragment":
+            case LAYOUT_NAME_PHONE_NUM:
                 setLogInFragment(new LogInFragment());
                 break;
-            case "LogInVerifyFragment":
+            case LAYOUT_NAME_PHONE_CODE:
                 setLogInFragment(new LogInFragment());
                 break;
-            case "LogInFragment":
+            case LAYOUT_NAME_LOGIN:
                 if (mFirebaseAuth.getCurrentUser() != null) {
                     presenter.displaySelectedScreen(LAYOUT_TYPE_HOME, LAYOUT_DATA_EMPTY_STRING);
                     presenter.passIdOfSelectedView(0);
                 }
                 break;
-            case "ScannerCameraFragment":
+            case LAYOUT_NAME_SCANNER:
                 presenter.displaySelectedScreen(LAYOUT_TYPE_SCANNER, LAYOUT_DATA_EMPTY_STRING);
                 break;
             default:
-                super.onBackPressed();
+                if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+                    super.onBackPressed();
+                    // TODO:
+                    presenter.matchRelevantLayoutType(getSupportFragmentManager().findFragmentById(R.id.switch_view_layout).getClass().getSimpleName());
+                } else {
+                    finish();
+                }
                 break;
         }
     }

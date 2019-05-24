@@ -99,6 +99,19 @@ public final class Constants {
 
     public static final String LAYOUT_DATA_EMPTY_STRING = "";
 
+    // Layout names
+    public static final String LAYOUT_NAME_HOME = "HomeFragment";
+    public static final String LAYOUT_NAME_PRODUCTS = "ProductsFragment";
+    public static final String LAYOUT_NAME_COUPONS = "CouponsFragment";
+    public static final String LAYOUT_NAME_MAP = "GoogleMapFragment";
+    public static final String LAYOUT_NAME_SCANNER = "ScannerCameraFragment";
+    public static final String LAYOUT_NAME_WEBSITE = "WebsiteFragment";
+    public static final String LAYOUT_NAME_TERMS = "TermsFragment";
+    public static final String LAYOUT_NAME_CONTACT = "ContactFragment";
+    public static final String LAYOUT_NAME_LOGIN = "LogInFragment";
+    public static final String LAYOUT_NAME_PHONE_NUM = "LogInPhoneFragment";
+    public static final String LAYOUT_NAME_PHONE_CODE = "LogInVerifyFragment";
+
     // Settings - SharedPref file name
     public static final String SHARED_PREF_FILE_NAME = "switchState";
 

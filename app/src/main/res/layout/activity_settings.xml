@@ -222,7 +222,7 @@
             android:layout_width="@dimen/button_basic_width"
             android:layout_height="@dimen/button_basic_height"
             android:layout_marginEnd="@dimen/mid_value"
-            android:background="@drawable/rounded_corners_red"
+            android:background="@drawable/rounded_corners_button_red"
             android:text="@string/settings_delete_button"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"

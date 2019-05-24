@@ -31,6 +31,7 @@
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#ff9800</color>
     <color name="colorLink">#0645ad</color>
     <color name="colorErrorInput">#a70000</color>
+    <color name="colorErrorInputDark">#880000</color>
 
     <color name="colorBlackTransparent">#B3000000</color>
 </resources>

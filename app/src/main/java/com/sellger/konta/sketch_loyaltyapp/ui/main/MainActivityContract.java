@@ -57,5 +57,7 @@ public interface MainActivityContract {
         void setUpObservableHomeAdapter();
 
         void passIdOfSelectedView(int viewPosition);
+
+        void matchRelevantLayoutType(String displayedLayoutName);
     }
 }
