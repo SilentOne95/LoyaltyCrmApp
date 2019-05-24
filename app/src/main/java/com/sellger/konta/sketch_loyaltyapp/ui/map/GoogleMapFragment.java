@@ -176,10 +176,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         for (Marker marker : markerList) {
             mGeofenceList.add(new Geofence.Builder()
-                    .setRequestId(String.valueOf(marker.getId()))
+                    .setRequestId(marker.getTitle())
                     .setExpirationDuration(Geofence.NEVER_EXPIRE)
                     .setCircularRegion(marker.getLat(), marker.getLng(), GEOFENCE_DEFAULT_RADIUS)
-                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
+                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
                     .build());
         }
 

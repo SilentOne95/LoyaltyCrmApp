@@ -45,7 +45,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
 
         setTitle("Produkt");
 
-        // Temporary solution - setting up sample pojo
+        // TODO:
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             productId = extras.getInt("EXTRA_ELEMENT_ID");

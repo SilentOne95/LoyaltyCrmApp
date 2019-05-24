@@ -69,7 +69,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
         setTitle("Kupon");
 
-        // Receiving id of the clicked coupon
+        // TODO:
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             couponId = extras.getInt("EXTRA_ELEMENT_ID");

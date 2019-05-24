@@ -60,7 +60,10 @@ public class GeofenceTransitionsIntentService extends IntentService {
         }
         String triggeringGeofencesIdsString = TextUtils.join(", ", triggeringGeofencesIdsList);
 
-        return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
+        // TODO:
+        // Temporary for the testing purpose set hardcoded string
+//        return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
+        return "You're in the area of " + triggeringGeofencesIdsString + ". Check our new offers!";
     }
 
     private String getTransitionString(int transitionType) {
