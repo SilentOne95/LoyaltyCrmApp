@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +20,8 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_DATA_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CAMERA;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_CAMERA;
@@ -38,18 +42,20 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Skaner");
-
         setHasOptionsMenu(true);
 
         // Init views
         initViews();
         mScanButton.setOnClickListener(this);
 
-        // Extract additional data
+        // Extract additional data, which is fragment's title and scan result
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            mScanResultTextView.setText(bundle.getString("DATA_STRING"));
+            getActivity().setTitle(bundle.getString(BUNDLE_TITLE_STRING));
+            mScanResultTextView.setText(bundle.getString(BUNDLE_DATA_STRING));
+            Log.d("test", bundle.getString(BUNDLE_TITLE_STRING) + " " + bundle.getString(BUNDLE_DATA_STRING));
+        } else {
+            getActivity().setTitle("Skaner");
         }
     }
 

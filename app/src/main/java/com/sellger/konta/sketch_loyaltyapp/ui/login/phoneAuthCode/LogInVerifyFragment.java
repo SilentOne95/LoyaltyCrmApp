@@ -30,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_DATA_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_SMS_CODE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_LOADING_LOGIN_SWITCH_LAYOUT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_LOGIN_SWITCH_LAYOUT;
@@ -127,7 +128,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         // Extract additional data
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            mProvidedPhoneNumber = bundle.getString("DATA_STRING");
+            mProvidedPhoneNumber = bundle.getString(BUNDLE_DATA_STRING);
             mProvidedPhoneNumber = getResources().getText(R.string.verify_text) + " " + mProvidedPhoneNumber;
             mTextProvidedPhoneNumber.setText(mProvidedPhoneNumber);
         }

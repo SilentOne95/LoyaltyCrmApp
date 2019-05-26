@@ -40,6 +40,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_ONE_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class CouponsFragment extends BaseFragment implements CouponsContract.View, SearchView.OnQueryTextListener {
@@ -61,7 +62,13 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Kupony");
+        // Extract additional data, which is fragment's title
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            getActivity().setTitle(bundle.getString(BUNDLE_TITLE_STRING));
+        } else {
+            getActivity().setTitle("Kupony");
+        }
 
         setHasOptionsMenu(true);
 

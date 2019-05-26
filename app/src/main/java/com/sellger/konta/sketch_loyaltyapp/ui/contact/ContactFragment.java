@@ -11,6 +11,8 @@ import android.view.View;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
+
 public class ContactFragment extends BaseFragment {
 
     private static final String TAG = ContactFragment.class.getSimpleName();
@@ -22,7 +24,13 @@ public class ContactFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Kontakt");
+        // Extract additional data, which is fragment's title
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            getActivity().setTitle(bundle.getString(BUNDLE_TITLE_STRING));
+        } else {
+            getActivity().setTitle("Kontakt");
+        }
 
         setHasOptionsMenu(true);
     }

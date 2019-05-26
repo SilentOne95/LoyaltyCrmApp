@@ -264,38 +264,37 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
     @Override
     public void displaySelectedScreen(String layoutType, String data) {
-
         if (layoutType != null) {
             switch (layoutType) {
                 case LAYOUT_TYPE_HOME:
-                    view.setFragment(new HomeFragment(), data);
+                    view.setFragment(new HomeFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_PRODUCTS:
-                    view.setFragment(new ProductsFragment(), data);
+                    view.setFragment(new ProductsFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_COUPONS:
-                    view.setFragment(new CouponsFragment(), data);
+                    view.setFragment(new CouponsFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_MAP:
-                    view.setFragment(new GoogleMapFragment(), data);
+                    view.setFragment(new GoogleMapFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_URL:
-                    view.setFragment(new WebsiteFragment(), data);
+                    view.setFragment(new WebsiteFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_TERMS:
-                    view.setFragment(new TermsFragment(), data);
+                    view.setFragment(new TermsFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_CONTACT:
-                    view.setFragment(new ContactFragment(), data);
+                    view.setFragment(new ContactFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_SCANNER:
-                    view.setFragment(new ScanResultFragment(), data);
+                    view.setFragment(new ScanResultFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_CAMERA:
-                    view.setFragment(new ScannerCameraFragment(), data);
+                    view.setFragment(new ScannerCameraFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_ACCOUNT:
-                    view.setFragment(new MyAccountFragment(), data);
+                    view.setFragment(new MyAccountFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_SETTINGS:
                     view.setActivity(SettingsActivity.class);
@@ -303,16 +302,29 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
 
                 // Registration views
                 case LAYOUT_TYPE_LOGIN:
-                    view.setFragment(new LogInFragment(), data);
+                    view.setFragment(new LogInFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_PHONE:
-                    view.setFragment(new LogInPhoneFragment(), data);
+                    view.setFragment(new LogInPhoneFragment(), getLayoutTitle(layoutType), data);
                     break;
                 case LAYOUT_TYPE_CODE:
-                    view.setFragment(new LogInVerifyFragment(), data);
+                    view.setFragment(new LogInVerifyFragment(), getLayoutTitle(layoutType), data);
                     break;
             }
         }
+    }
+
+    @Override
+    public String getLayoutTitle(String layoutType) {
+        String layoutName = "";
+        for(MenuComponent component : mAllMenuItemsArray) {
+            if (component.getType().equals(layoutType)) {
+                layoutName = component.getComponentTitle();
+                break;
+            }
+        }
+
+        return layoutName;
     }
 
     @Override

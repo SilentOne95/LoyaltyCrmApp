@@ -40,6 +40,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_REGISTRATION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_DATA_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_DRAWER_ACTION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_LOGIN;
@@ -162,14 +164,20 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void setFragment(BaseFragment fragment, String data) {
+    public void setFragment(BaseFragment fragment, String fragmentTitle, String data) {
         fragment.attachPresenter(presenter);
+        Bundle bundle = new Bundle();
+
+        // Adding layout title
+        if (!fragmentTitle.equals("")) {
+            bundle.putString(BUNDLE_TITLE_STRING, fragmentTitle);
+            fragment.setArguments(bundle);
+        }
 
         // Adding data
         if (!data.equals("") && !data.equals(ANONYMOUS_REGISTRATION)
                 && !data.equals(NOT_ANONYMOUS_REGISTRATION) ) {
-            Bundle bundle = new Bundle();
-            bundle.putString("DATA_STRING", data);
+            bundle.putString(BUNDLE_DATA_STRING, data);
             fragment.setArguments(bundle);
         } else if (data.equals(ANONYMOUS_REGISTRATION) || data.equals(NOT_ANONYMOUS_REGISTRATION)) {
             setNavViewHeaderVisibility(data);

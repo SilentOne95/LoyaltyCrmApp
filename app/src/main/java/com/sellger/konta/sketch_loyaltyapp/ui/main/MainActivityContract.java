@@ -17,7 +17,7 @@ public interface MainActivityContract {
 
         void setActivity(Class<? extends Activity> activity);
 
-        void setFragment(BaseFragment fragment, String data);
+        void setFragment(BaseFragment fragment, String fragmentTitle, String data);
 
         void setLogInFragment(BaseFragment fragment);
 
@@ -51,6 +51,8 @@ public interface MainActivityContract {
         String matchRelevantIconName(String layoutType);
 
         String getLayoutType(int groupId, int itemId);
+
+        String getLayoutTitle(String layoutType);
 
         void displaySelectedScreen(String layoutType, String data);
 

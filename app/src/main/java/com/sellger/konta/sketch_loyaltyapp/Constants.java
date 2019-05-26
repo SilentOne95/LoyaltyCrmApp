@@ -153,4 +153,8 @@ public final class Constants {
     public static final int DELAY_SET_SMS_CODE = 3000;
     public static final int DELAY_LOGIN_SWITCH_LAYOUT = 2000;
     public static final int DELAY_LOADING_LOGIN_SWITCH_LAYOUT = 4000;
+
+    // Bundle keys
+    public static final String BUNDLE_DATA_STRING = "DATA_STRING";
+    public static final String BUNDLE_TITLE_STRING = "TITLE_STRING";
 }

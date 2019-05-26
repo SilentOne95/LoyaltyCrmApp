@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;
 
 import java.util.List;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class ProductsFragment extends BaseFragment implements ProductsContract.View, SearchView.OnQueryTextListener {
@@ -46,7 +48,13 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Produkty");
+        // Extract additional data, which is fragment's title
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            getActivity().setTitle(bundle.getString(BUNDLE_TITLE_STRING));
+        } else {
+            getActivity().setTitle("Produkty");
+        }
 
         setHasOptionsMenu(true);
 

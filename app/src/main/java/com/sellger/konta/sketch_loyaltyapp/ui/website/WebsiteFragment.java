@@ -17,6 +17,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class WebsiteFragment extends BaseFragment implements WebsiteContract.View {
@@ -34,7 +35,13 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Nasza strona");
+        // Extract additional data, which is fragment's title
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            getActivity().setTitle(bundle.getString(BUNDLE_TITLE_STRING));
+        } else {
+            getActivity().setTitle("Nasza strona");
+        }
 
         setHasOptionsMenu(true);
 

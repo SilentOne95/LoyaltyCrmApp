@@ -77,6 +77,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ALL_DAY_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.FASTEST_UPDATE_INTERVAL;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.GEOFENCE_DEFAULT_RADIUS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MAX_WAIT_TIME;
@@ -127,7 +128,13 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Mapa");
+        // Extract additional data, which is fragment's title
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            getActivity().setTitle(bundle.getString(BUNDLE_TITLE_STRING));
+        } else {
+            getActivity().setTitle("Mapa");
+        }
 
         setHasOptionsMenu(true);
 

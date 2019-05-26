@@ -28,6 +28,7 @@ import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.GraphicOver
 import java.io.IOException;
 import java.util.List;
 
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SCANNER;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.MY_PERMISSIONS_REQUEST_CAMERA;
 
@@ -49,7 +50,13 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Skaner");
+        // Extract additional data, which is fragment's title
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            getActivity().setTitle(bundle.getString(BUNDLE_TITLE_STRING));
+        } else {
+            getActivity().setTitle("Skaner");
+        }
 
         setHasOptionsMenu(true);
 
