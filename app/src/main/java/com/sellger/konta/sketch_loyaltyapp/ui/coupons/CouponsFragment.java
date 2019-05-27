@@ -41,6 +41,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class CouponsFragment extends BaseFragment implements CouponsContract.View, SearchView.OnQueryTextListener {
@@ -106,7 +107,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         @Override
         public void onItemCouponDetailsClick(int couponId) {
             Intent startCouponDetailsActivity = new Intent(getContext(), CouponDetailsActivity.class);
-            startCouponDetailsActivity.putExtra("EXTRA_ELEMENT_ID", couponId);
+            startCouponDetailsActivity.putExtra(EXTRAS_ELEMENT_ID, couponId);
             startActivity(startCouponDetailsActivity);
         }
 

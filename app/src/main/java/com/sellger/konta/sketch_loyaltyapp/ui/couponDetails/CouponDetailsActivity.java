@@ -37,6 +37,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_COUPON_HEIGH
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class CouponDetailsActivity extends BaseActivity implements CouponDetailsContract.View, View.OnClickListener {
@@ -72,7 +73,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         // TODO:
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            couponId = extras.getInt("EXTRA_ELEMENT_ID");
+            couponId = extras.getInt(EXTRAS_ELEMENT_ID);
         }
 
         // Init views

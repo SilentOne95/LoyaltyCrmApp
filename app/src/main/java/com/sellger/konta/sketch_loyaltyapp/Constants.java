@@ -157,4 +157,5 @@ public final class Constants {
     // Bundle keys
     public static final String BUNDLE_DATA_STRING = "DATA_STRING";
     public static final String BUNDLE_TITLE_STRING = "TITLE_STRING";
+    public static final String EXTRAS_ELEMENT_ID = "EXTRA_ELEMENT_ID";
 }

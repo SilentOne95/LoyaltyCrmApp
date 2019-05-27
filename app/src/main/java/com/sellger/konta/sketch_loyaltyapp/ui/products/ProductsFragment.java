@@ -28,6 +28,7 @@ import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;
 import java.util.List;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class ProductsFragment extends BaseFragment implements ProductsContract.View, SearchView.OnQueryTextListener {
@@ -78,7 +79,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
     private RecyclerItemClickListener.ProductRetrofitClickListener recyclerItemClickListener = productId -> {
         Intent startProductDetailsActivity = new Intent(getContext(), ProductDetailsActivity.class);
-        startProductDetailsActivity.putExtra("EXTRA_ELEMENT_ID", productId);
+        startProductDetailsActivity.putExtra(EXTRAS_ELEMENT_ID, productId);
         startActivity(startProductDetailsActivity);
     };
 

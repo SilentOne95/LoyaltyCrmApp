@@ -20,6 +20,7 @@ import java.text.DecimalFormat;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View{
@@ -48,7 +49,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         // TODO:
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            productId = extras.getInt("EXTRA_ELEMENT_ID");
+            productId = extras.getInt(EXTRAS_ELEMENT_ID);
         }
 
         // Init views
