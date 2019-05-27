@@ -7,15 +7,19 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
+
 import android.os.Bundle;
+
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
@@ -83,7 +87,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public static String PACKAGE_NAME;
 
     @Override
-    protected int getLayout() { return R.layout.activity_main; }
+    protected int getLayout() {
+        return R.layout.activity_main;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +182,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Adding data
         if (!data.equals("") && !data.equals(ANONYMOUS_REGISTRATION)
-                && !data.equals(NOT_ANONYMOUS_REGISTRATION) ) {
+                && !data.equals(NOT_ANONYMOUS_REGISTRATION)) {
             bundle.putString(BUNDLE_DATA_STRING, data);
             fragment.setArguments(bundle);
         } else if (data.equals(ANONYMOUS_REGISTRATION) || data.equals(NOT_ANONYMOUS_REGISTRATION)) {
@@ -195,21 +201,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     .beginTransaction()
                     .replace(R.id.switch_view_layout, fragment)
                     .commit();
-        } else if (fragment instanceof MyAccountFragment) {
-            boolean fragmentPopped = getSupportFragmentManager().popBackStackImmediate(fragment.getClass().getSimpleName(), 0);
-            if (!fragmentPopped) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.switch_view_layout, fragment)
-                        .addToBackStack(fragment.getClass().getSimpleName())
-                        .commit();
-            }
         } else {
             boolean fragmentPopped = getSupportFragmentManager().popBackStackImmediate(fragment.getClass().getSimpleName(), 0);
             if (!fragmentPopped) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right)
+                        .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right, R.anim.slide_in_left, R.anim.slide_out_left)
                         .replace(R.id.switch_view_layout, fragment)
                         .addToBackStack(fragment.getClass().getSimpleName())
                         .commit();
@@ -223,7 +220,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right)
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_right, R.anim.slide_in_left, R.anim.slide_out_left)
                 .replace(R.id.switch_view_layout, fragment)
                 .commit();
     }
@@ -250,8 +247,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 break;
             default:
                 if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-                    super.onBackPressed();
-                    // TODO:
+                    getSupportFragmentManager().popBackStack();
                     presenter.matchRelevantLayoutType(getSupportFragmentManager().findFragmentById(R.id.switch_view_layout).getClass().getSimpleName());
                 } else {
                     finish();
@@ -299,7 +295,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
             return true;
@@ -334,10 +330,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void onDrawerSlide(@NonNull View view, float v) { }
+    public void onDrawerSlide(@NonNull View view, float v) {
+    }
 
     @Override
-    public void onDrawerOpened(@NonNull View view) { }
+    public void onDrawerOpened(@NonNull View view) {
+    }
 
     @Override
     public void onDrawerClosed(@NonNull View view) {
@@ -349,7 +347,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void onDrawerStateChanged(int i) { }
+    public void onDrawerStateChanged(int i) {
+    }
 
     @Override
     public void setDisplayItemChecked(int viewPosition) {
@@ -430,6 +429,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             message = getString(R.string.default_toast_error_message);
         }
 
-        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
