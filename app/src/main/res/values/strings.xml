@@ -126,10 +126,8 @@
     <string name="settings_terms_privacy_link">Privacy policy</string>
     <string name="settings_terms_licenses_link">Licenses</string>
     <string name="settings_log_out_label">Log out:</string>
-    <string name="settings_log_out_text">To log out, click button</string>
     <string name="settings_log_out_button">Log Out</string>
     <string name="settings_account_label">Delete account:</string>
-    <string name="settings_acc_delete_instruction">To delete account, click button</string>
     <string name="settings_delete_button">Delete</string>
 
     <string name="settings_log_out_alert_title">Log Out</string>

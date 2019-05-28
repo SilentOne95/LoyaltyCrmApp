@@ -166,20 +166,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/settings_terms_three" />
 
-        <TextView
-            android:id="@+id/settings_log_out_text"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_value"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingTop="@dimen/very_small_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:paddingBottom="@dimen/very_small_value"
-            android:text="@string/settings_log_out_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_label_log_out" />
-
         <Button
             android:id="@+id/settings_log_out_button"
             style="@style/button_color_accent"
@@ -187,9 +173,9 @@
             android:layout_height="@dimen/button_basic_height"
             android:layout_marginEnd="@dimen/mid_value"
             android:text="@string/settings_log_out_button"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_log_out_text"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_label_log_out"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/settings_log_out_text" />
+            app:layout_constraintTop_toTopOf="@+id/settings_label_log_out" />
 
         <TextView
             android:id="@+id/settings_label_delete_account"
@@ -198,22 +184,10 @@
             android:layout_marginStart="@dimen/mid_value"
             android:drawableStart="@drawable/ic_delete_account"
             android:drawablePadding="@dimen/small_value"
-            android:paddingBottom="@dimen/small_value"
+            android:layout_marginBottom="@dimen/mid_value"
             android:text="@string/settings_account_label"
             android:textColor="@color/colorErrorInput"
             android:textSize="@dimen/text_size_h3"
-            app:layout_constraintBottom_toTopOf="@+id/settings_delete_account_text"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/settings_delete_account_text"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/mid_value"
-            android:layout_marginEnd="@dimen/mid_value"
-            android:layout_marginBottom="@dimen/big_value"
-            android:text="@string/settings_acc_delete_instruction"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -227,9 +201,9 @@
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_h4"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_delete_account_text"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_label_delete_account"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/settings_delete_account_text" />
+            app:layout_constraintTop_toTopOf="@+id/settings_label_delete_account" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

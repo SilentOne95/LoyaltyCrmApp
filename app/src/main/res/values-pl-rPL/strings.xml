@@ -110,10 +110,8 @@
     <string name="settings_terms_privacy_link">Polityka prywatności</string>
     <string name="settings_terms_licenses_link">Licencje</string>
     <string name="settings_log_out_label">Wyloguj się:</string>
-    <string name="settings_log_out_text">Aby się wylogować, kliknij przycisk</string>
     <string name="settings_log_out_button">Wyloguj</string>
     <string name="settings_account_label">Usuń konto:</string>
-    <string name="settings_acc_delete_instruction">Aby usunąć konto, kliknij przycisk</string>
     <string name="settings_delete_button">Usuń</string>
 
     <string name="settings_log_out_alert_title">Wyloguj się</string>
