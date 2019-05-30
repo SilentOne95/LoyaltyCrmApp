@@ -1,88 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nested_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/special_offer_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/mid_value"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/fragment_home_special_image_desc"
-            android:focusableInTouchMode="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/image_main"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/info_text_view"
-            style="@style/text_layout_title_color_accent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/mid_value"
-            android:layout_marginBottom="@dimen/big_value"
-            android:gravity="center"
-            android:text="@string/check_offers_text" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:padding="@dimen/small_value"
-            android:scrollbars="none" />
+        android:background="@color/colorWhite">
 
         <LinearLayout
-            android:id="@+id/empty_state_home_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/big_value"
-            android:background="@color/colorFragmentBackground"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/special_offer_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/mid_value"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/fragment_home_special_image_desc"
+                android:focusableInTouchMode="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                android:id="@+id/empty_state_coupons_text"
-                style="@style/text_regular_color_accent_bold"
+                android:id="@+id/info_text_view"
+                style="@style/text_layout_title_color_accent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/mid_value"
+                android:layout_marginBottom="@dimen/big_value"
+                android:gravity="center"
+                android:text="@string/check_offers_text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="@dimen/small_value"
+                android:scrollbars="none" />
+
+            <LinearLayout
+                android:id="@+id/empty_state_home_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/something_went_wrong_text"
-                android:textAlignment="center" />
+                android:layout_margin="@dimen/big_value"
+                android:background="@color/colorFragmentBackground"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/empty_state_coupons_text_two"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/mid_value"
-                android:text="@string/try_again_later_text"
-                android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/empty_state_coupons_text"
+                    style="@style/text_regular_color_accent_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/something_went_wrong_text"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/empty_state_coupons_text_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mid_value"
+                    android:text="@string/try_again_later_text"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progress_bar_home"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/mid_value" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar_home"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="@dimen/mid_value" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>
