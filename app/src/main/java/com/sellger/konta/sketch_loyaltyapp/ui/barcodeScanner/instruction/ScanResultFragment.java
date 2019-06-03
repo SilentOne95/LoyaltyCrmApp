@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,7 +52,9 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             getActivity().setTitle(bundle.getString(BUNDLE_TITLE_STRING));
-            mScanResultTextView.setText(bundle.getString(BUNDLE_DATA_STRING));
+            if (!TextUtils.isEmpty(bundle.getString(BUNDLE_DATA_STRING))) {
+                mScanResultTextView.setText(bundle.getString(BUNDLE_DATA_STRING));
+            }
         } else {
             getActivity().setTitle("Skaner");
         }
