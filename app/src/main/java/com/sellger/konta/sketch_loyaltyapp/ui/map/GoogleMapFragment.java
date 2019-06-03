@@ -1,6 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -10,19 +11,25 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.widget.SearchView;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -90,10 +97,10 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_LOCATION_PERMI
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TODAY_OPEN_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.UPDATE_INTERVAL;
 
-public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback,
-        View.OnClickListener, MapContract.View, GoogleMap.OnMyLocationButtonClickListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        ResultCallback, OnCompleteListener<LocationSettingsResponse>, SearchView.OnQueryTextListener {
+public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback, MapContract.View,
+        GoogleMap.OnMyLocationButtonClickListener, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, ResultCallback,
+        OnCompleteListener<LocationSettingsResponse>, SearchView.OnQueryTextListener, View.OnClickListener {
 
     private static final String TAG = GoogleMapFragment.class.getSimpleName();
 
@@ -114,6 +121,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
+    private FloatingActionButton fab;
+    private String mLastSelectedMarkerTitle;
+
     // Geofences
     private GeofencingClient mGeofencingClient;
     private List<Geofence> mGeofenceList = new ArrayList<>();
@@ -124,6 +134,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         return R.layout.fragment_google_map;
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -158,10 +169,24 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         initViews();
 
         // Setting up views
-        mBottomSheet.setOnClickListener(this);
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        fab.setVisibility(View.GONE);
+        fab.setOnClickListener(this);
+        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int newState) {
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float slideOffset) {
+                fab.setVisibility(View.VISIBLE);
+                if (slideOffset < 0.0) {
+                    fab.animate().scaleX(1 + slideOffset).scaleY(1 + slideOffset).setDuration(0).start();
+                }
+            }
+        });
 
         // Custom TabLayout with ViewPager set up
         BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(getContext(), getFragmentManager());
@@ -242,6 +267,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mViewPager = rootView.findViewById(R.id.view_pager);
         mTabLayout = rootView.findViewById(R.id.tabs);
 
+        fab = rootView.findViewById(R.id.fab);
+
         // BottomSheet PeekHeight Panel
         mPanelPlaceTitle = rootView.findViewById(R.id.bottom_sheet_icon_title);
         mPanelAddress = rootView.findViewById(R.id.bottom_sheet_place_address);
@@ -305,8 +332,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                 // Request Location Permission
                 checkLocationPermission();
             }
-        }
-        else {
+        } else {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             mGoogleMap.setMyLocationEnabled(true);
         }
@@ -528,7 +554,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 16));
 
             // Preventing from selecting the same marker
-            if (mPreviousSelectedMarkerId != marker.getId()) {
+            if (mPreviousSelectedMarkerId == marker.getId() && getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
+                presenter.switchBottomSheetState(marker);
+            } else if (mPreviousSelectedMarkerId != marker.getId()) {
                 presenter.passClickedMarkerId(marker.getId());
                 presenter.switchBottomSheetState(marker);
                 mPreviousSelectedMarkerId = marker.getId();
@@ -552,9 +580,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void onClick(View view) { presenter.switchBottomSheetState(view); }
-
-    @Override
     public int getBottomSheetState() {
         return mBottomSheetBehavior.getState();
     }
@@ -574,6 +599,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             openHours = getResources().getString(R.string.bottom_sheet_today_closed_text);
         }
 
+        mLastSelectedMarkerTitle = title;
         mPanelPlaceTitle.setText(title);
         mPanelAddress.setText(address);
         mPanelTodayOpenHours.setText(openHours);
@@ -607,5 +633,15 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     public boolean onQueryTextChange(String s) {
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mLastSelectedMarkerTitle != null) {
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("https://www.google.com/maps/search/?api=1&query=" +
+                            mLastSelectedMarkerTitle.replaceAll(" ", "+")));
+            startActivity(intent);
+        }
     }
 }

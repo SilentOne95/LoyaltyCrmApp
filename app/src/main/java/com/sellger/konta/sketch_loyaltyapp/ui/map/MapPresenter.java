@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -122,12 +121,6 @@ public class MapPresenter implements MapContract.Presenter {
         } else if (object instanceof LatLng) {
             if (view.getBottomSheetState() != BottomSheetBehavior.STATE_HIDDEN) {
                 view.setBottomSheetState(BottomSheetBehavior.STATE_HIDDEN);
-            }
-        } else if (object instanceof View) {
-            if (view.getBottomSheetState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                view.setBottomSheetState(BottomSheetBehavior.STATE_EXPANDED);
-            } else {
-                view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         }
     }

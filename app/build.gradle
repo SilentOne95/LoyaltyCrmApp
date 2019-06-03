@@ -42,7 +42,7 @@ dependencies {
     // Sing-in methods: Google, Facebook, Phone number
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation "com.google.android.gms:play-services-auth-api-phone:16.0.0"
-    implementation 'com.facebook.android:facebook-login:4.42.0'
+    implementation 'com.facebook.android:facebook-login:5.0.1'
 
     // Google Maps
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
@@ -95,7 +95,7 @@ dependencies {
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 
     // Firebase Crashlytics
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     // Android Checks
     implementation 'com.google.guava:guava:27.1-android'

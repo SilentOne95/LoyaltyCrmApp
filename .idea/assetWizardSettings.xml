@@ -45,8 +45,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\png\ic_check.png" />
-                                      <entry key="outputName" value="ic_check" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\ic_route.png" />
+                                      <entry key="outputName" value="ic_route" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
