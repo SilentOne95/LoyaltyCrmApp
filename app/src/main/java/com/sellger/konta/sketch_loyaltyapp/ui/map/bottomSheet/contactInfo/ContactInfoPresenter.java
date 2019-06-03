@@ -91,7 +91,7 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     @Override
     public String formatPhoneNumber(Marker marker) {
         String phoneNumber = DEFAULT_STRING;
-        String[] phonePrefix = {"0048", "48", "0"};
+        String[] phonePrefix = {"0048", "48", "0", "22"};
 
         if (!TextUtils.isEmpty(marker.getPhoneNumber())) {
             phoneNumber = marker.getPhoneNumber()
@@ -106,13 +106,16 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
             switch (caseCounter) {
                 case 0:
-                    phoneNumber = phoneNumber.substring(4);
+                    phoneNumber = phoneNumber.substring(4).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "+48 $1-$2-$3");
                     break;
                 case 1:
-                    phoneNumber = phoneNumber.substring(2);
+                    phoneNumber = phoneNumber.substring(2).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "+48 $1-$2-$3");
                     break;
                 case 2:
-                    phoneNumber = phoneNumber.substring(1);
+                    phoneNumber = phoneNumber.substring(1).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "+48 $1-$2-$3");
+                    break;
+                case 3:
+                    phoneNumber = phoneNumber.substring(2).replaceFirst("(\\d{3})(\\d{2})(\\d+)", "+48 22 $1-$2-$3");
                     break;
                 default:
                     break;
