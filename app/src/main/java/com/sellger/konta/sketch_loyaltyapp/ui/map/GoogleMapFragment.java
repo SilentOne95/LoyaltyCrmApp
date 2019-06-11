@@ -121,7 +121,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
-    private FloatingActionButton fab;
+    private FloatingActionButton mFab;
     private String mLastSelectedMarkerTitle;
 
     // Geofences
@@ -172,8 +172,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
         mBottomSheetBehavior.setHideable(true);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        fab.setVisibility(View.GONE);
-        fab.setOnClickListener(this);
+        mFab.setVisibility(View.GONE);
+        mFab.setOnClickListener(this);
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int newState) {
@@ -181,9 +181,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
             @Override
             public void onSlide(@NonNull View view, float slideOffset) {
-                fab.setVisibility(View.VISIBLE);
+                mFab.setVisibility(View.VISIBLE);
                 if (slideOffset < 0.0) {
-                    fab.animate().scaleX(1 + slideOffset).scaleY(1 + slideOffset).setDuration(0).start();
+                    mFab.animate().scaleX(1 + slideOffset).scaleY(1 + slideOffset).setDuration(0).start();
                 }
             }
         });
@@ -267,7 +267,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mViewPager = rootView.findViewById(R.id.view_pager);
         mTabLayout = rootView.findViewById(R.id.tabs);
 
-        fab = rootView.findViewById(R.id.fab);
+        mFab = rootView.findViewById(R.id.fab);
 
         // BottomSheet PeekHeight Panel
         mPanelPlaceTitle = rootView.findViewById(R.id.bottom_sheet_icon_title);
