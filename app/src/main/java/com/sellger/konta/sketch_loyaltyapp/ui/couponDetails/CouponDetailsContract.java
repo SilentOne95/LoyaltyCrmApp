@@ -17,6 +17,8 @@ public interface CouponDetailsContract {
 
         void setUpViewWithData(Coupon coupon);
 
+        String formatPrice(float price);
+
         Bitmap encodeAsBitmap(String contents) throws WriterException;
 
         void switchBottomSheetState();

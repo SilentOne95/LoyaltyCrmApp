@@ -30,6 +30,7 @@ import com.google.zxing.common.BitMatrix;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -53,7 +54,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     private Button showCouponCodeButton;
 
     private int couponId;
-    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     private View mBottomSheet;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -166,13 +166,13 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         }
 
         if (coupon.getPriceAfter() != null && !coupon.getPriceAfter().toString().trim().isEmpty()) {
-            mCouponNewPrice.setText(String.valueOf(decimalFormat.format(coupon.getPriceAfter())).concat(" zł"));
+            mCouponNewPrice.setText(String.valueOf(formatPrice(coupon.getPriceAfter())).concat(" zł"));
         } else {
             mCouponNewPrice.setText(DEFAULT_STRING);
         }
 
         if (coupon.getPrice() != null && !coupon.getPrice().toString().trim().isEmpty()) {
-            mCouponBasicPrice.setText(String.valueOf(decimalFormat.format(coupon.getPrice())).concat(" zł"));
+            mCouponBasicPrice.setText(String.valueOf(formatPrice(coupon.getPrice())).concat(" zł"));
         } else {
             mCouponBasicPrice.setText(DEFAULT_STRING);
         }
@@ -194,6 +194,18 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         } else {
             couponCode = DEFAULT_STRING;
         }
+    }
+
+    @Override
+    public String formatPrice(float price) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setDecimalFormatSymbols(symbols);
+        decimalFormat.setGroupingSize(3);
+        decimalFormat.setMaximumFractionDigits(2);
+
+        return decimalFormat.format(price);
     }
 
     @Override

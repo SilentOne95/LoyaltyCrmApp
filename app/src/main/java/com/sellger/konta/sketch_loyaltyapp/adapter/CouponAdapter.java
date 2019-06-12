@@ -20,6 +20,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,13 +33,13 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> implements Filterable {
 
     private List<Coupon> listOfItems, listOfItemsHelper;
     private RecyclerItemClickListener.CouponRetrofitClickListener couponClickListener;
     private int numOfColumns;
-    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     public CouponAdapter(List<Coupon> items,
                          RecyclerItemClickListener.CouponRetrofitClickListener clickListener,
@@ -130,9 +131,10 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         }
 
         if (!TextUtils.isEmpty(currentItem.getImage())) {
-            // TODO: Upload images to server and change "else" image to no_image_available
+            int id = holder.imageView.getResources().getIdentifier(currentItem.getImage(), "drawable", PACKAGE_NAME);
+
             Picasso.get()
-                    .load(BASE_URL_IMAGES + currentItem.getImage())
+                    .load(id)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .error(R.drawable.no_image_available)
                     .resize(imageWidth, imageHeight)
@@ -181,13 +183,13 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         }
 
         if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
-            holder.basicPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())).concat("zł"));
+            holder.basicPrice.setText(String.valueOf(formatPrice(currentItem.getPrice())).concat("zł"));
         } else {
             holder.basicPrice.setText(DEFAULT_STRING);
         }
 
         if (currentItem.getPriceAfter() != null && !currentItem.getPriceAfter().toString().trim().isEmpty()) {
-            holder.newPrice.setText(String.valueOf(decimalFormat.format(currentItem.getPriceAfter())).concat("zł"));
+            holder.newPrice.setText(String.valueOf(formatPrice(currentItem.getPriceAfter())).concat("zł"));
         } else {
             holder.newPrice.setText(DEFAULT_STRING);
         }
@@ -197,6 +199,17 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         } else {
             holder.descriptionText.setText(DEFAULT_STRING);
         }
+    }
+
+    public String formatPrice(float price) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setDecimalFormatSymbols(symbols);
+        decimalFormat.setGroupingSize(3);
+        decimalFormat.setMaximumFractionDigits(2);
+
+        return decimalFormat.format(price);
     }
 
     @Override

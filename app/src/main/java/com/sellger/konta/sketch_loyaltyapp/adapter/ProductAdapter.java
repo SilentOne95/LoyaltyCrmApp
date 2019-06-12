@@ -20,6 +20,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,13 +33,13 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements Filterable {
 
     private List<Product> listOfItems, listOfItemsHelper;
     private RecyclerItemClickListener.ProductRetrofitClickListener productClickListener;
     private int numOfColumns;
-    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     public ProductAdapter(List<Product> items,
                           RecyclerItemClickListener.ProductRetrofitClickListener clickListener,
@@ -115,9 +116,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
 
         if (!TextUtils.isEmpty(currentItem.getImage())) {
-            // TODO: Upload images to server and change "else" image to no_image_available
+            int id = holder.imageView.getResources().getIdentifier(currentItem.getImage(), "drawable", PACKAGE_NAME);
+
             Picasso.get()
-                    .load(BASE_URL_IMAGES + currentItem.getImage())
+                    .load(id)
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .error(R.drawable.no_image_available)
                     .resize(imageWidth, imageHeight)
@@ -149,7 +151,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
 
         if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
-            holder.price.setText(String.valueOf(decimalFormat.format(currentItem.getPrice())).concat("zł"));
+            holder.price.setText(String.valueOf(formatPrice(currentItem.getPrice())).concat("zł"));
         } else {
             holder.price.setText(DEFAULT_STRING);
         }
@@ -158,6 +160,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         } else {
             holder.shortDescription.setText(DEFAULT_STRING);
         }
+    }
+
+    private String formatPrice(float price) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setDecimalFormatSymbols(symbols);
+        decimalFormat.setGroupingSize(3);
+        decimalFormat.setMaximumFractionDigits(2);
+
+        return decimalFormat.format(price);
     }
 
     @Override
