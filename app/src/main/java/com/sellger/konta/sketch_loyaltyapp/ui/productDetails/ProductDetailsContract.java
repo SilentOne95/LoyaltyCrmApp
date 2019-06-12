@@ -12,6 +12,8 @@ public interface ProductDetailsContract {
 
         void setUpViewWithData(Product product);
 
+        String formatPrice(float price);
+
         void displayToastMessage(String message);
     }
 

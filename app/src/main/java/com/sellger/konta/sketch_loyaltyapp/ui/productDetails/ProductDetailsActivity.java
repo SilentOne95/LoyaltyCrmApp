@@ -100,15 +100,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             mProductTitle.setText(DEFAULT_STRING);
         }
 
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        symbols.setGroupingSeparator(' ');
-        DecimalFormat decimalFormat = new DecimalFormat();
-        decimalFormat.setDecimalFormatSymbols(symbols);
-        decimalFormat.setGroupingSize(3);
-        decimalFormat.setMaximumFractionDigits(2);
-
         if (product.getPrice() != null && !product.getPrice().toString().trim().isEmpty()) {
-            mProductPrice.setText(String.valueOf(decimalFormat.format(product.getPrice())).concat(" zł"));
+            mProductPrice.setText(String.valueOf(formatPrice(product.getPrice())).concat(" zł"));
         } else {
             mProductPrice.setText(DEFAULT_STRING);
         }
@@ -118,6 +111,18 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         } else {
             mProductDescription.setText(DEFAULT_STRING);
         }
+    }
+
+    @Override
+    public String formatPrice(float price) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setDecimalFormatSymbols(symbols);
+        decimalFormat.setGroupingSize(3);
+        decimalFormat.setMaximumFractionDigits(2);
+
+        return decimalFormat.format(price);
     }
 
     @Override
