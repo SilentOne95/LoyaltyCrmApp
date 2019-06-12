@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Intent;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
@@ -26,7 +25,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
         if (geofencingEvent.hasError()) {
             String errorMsg = String.valueOf(geofencingEvent.getErrorCode());
-            Log.d(TAG, "onHandleIntent error: " + errorMsg);
             return;
         }
 
@@ -43,9 +41,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
             SendNotificationHelper sendNotificationHelper = new SendNotificationHelper(getApplicationContext(), geofenceTransitionDetails);
             sendNotificationHelper.send();
-            Log.d(TAG, geofenceTransitionDetails);
-        } else {
-            Log.d(TAG, "geofenceTransition invalid type");
         }
     }
 
@@ -63,7 +58,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
         // TODO:
         // Temporary for the testing purpose set hardcoded string
 //        return geofenceTransitionString + ": " + triggeringGeofencesIdsString;
-        return "You're in the area of " + triggeringGeofencesIdsString + ". Check our new offers!";
+        return "You're in the area of\n" + triggeringGeofencesIdsString + " :)";
     }
 
     private String getTransitionString(int transitionType) {

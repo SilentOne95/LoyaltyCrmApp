@@ -7,7 +7,6 @@ import android.net.NetworkInfo;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -98,18 +97,15 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         LoginManager.getInstance().registerCallback(mCallbackFacebookManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "onSuccess");
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
             public void onCancel() {
-                Log.d(TAG, "onCancel");
             }
 
             @Override
             public void onError(FacebookException error) {
-                Log.w(TAG, "onError");
             }
         });
     }
@@ -164,8 +160,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     @Override
     public void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
-
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         if (mFirebaseAuth.getCurrentUser() != null) {
             convertAnonymousAccount(credential);
@@ -181,8 +175,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     @Override
     public void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         if (mFirebaseAuth.getCurrentUser() != null) {
             convertAnonymousAccount(credential);
@@ -196,8 +188,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithCredential:success");
-
                         // Subscribe user to topics of push notifications
                         presenter.manageTopicsSubscriptions(REGISTRATION_NORMAL);
 
@@ -206,7 +196,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     } else {
                         // If sign in fails, display a message to the user
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
-                        Log.w(TAG, "signInWithCredential:failure", task.getException());
                     }
                 });
     }
@@ -224,7 +213,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Log.d(TAG, "Google sign in failed", e);
             }
         }
 
@@ -238,8 +226,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mFirebaseAuth.signInAnonymously()
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "signInAnonymously:success");
-
                         // Subscribe user to topics of push notifications
                         presenter.manageTopicsSubscriptions(ANONYMOUS_REGISTRATION);
 
@@ -248,7 +234,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     } else {
                         // If sign in fails, display a message to the user.
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
-                        Log.w(TAG, "signInAnonymously:failure", task.getException());
                     }
                 });
     }
@@ -258,8 +243,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mFirebaseAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "linkWithCredential:success");
-
                         // Subscribe user to topics of push notifications
                         presenter.manageTopicsSubscriptions(REGISTRATION_CONVERSION);
 
@@ -267,7 +250,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
-                        Log.w(TAG, "linkWithCredential:failure", task.getException());
                     }
                 });
     }

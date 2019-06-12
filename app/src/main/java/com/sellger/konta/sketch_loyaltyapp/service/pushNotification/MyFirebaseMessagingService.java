@@ -9,7 +9,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
@@ -26,15 +25,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
-        // TODO(developer): Handle FCM messages here.
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-        }
-
         // Generate own notifications
         String message = remoteMessage.getNotification().getBody();
         SendNotificationHelper sendNotificationHelper = new SendNotificationHelper(this, message);
@@ -48,8 +38,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      */
     @Override
     public void onNewToken(final String token) {
-        Log.d(TAG, "Refreshed token: " + token);
-
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.

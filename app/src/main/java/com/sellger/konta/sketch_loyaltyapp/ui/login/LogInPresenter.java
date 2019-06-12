@@ -1,7 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.login;
 
 import androidx.annotation.NonNull;
-import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sellger.konta.sketch_loyaltyapp.service.pushNotification.ManageTopicsSubscriptions;
@@ -50,19 +49,11 @@ public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubs
 
     @Override
     public void subscribeToTopic(String topic) {
-        FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.d(TAG, "Subscribe failed: " + topic);
-            }
-        });
+        FirebaseMessaging.getInstance().subscribeToTopic(topic);
     }
 
     @Override
     public void unsubscribeFromTopic(String topic) {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(topic).addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.d(TAG, "Unsubscribe failed: " + topic);
-            }
-        });
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(topic);
     }
 }

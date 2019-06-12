@@ -7,9 +7,7 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.textfield.TextInputEditText;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,6 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthSettings;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
@@ -56,15 +53,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     private FirebaseAuth mFirebaseAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber;
-    private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthCredential mPhoneAuthCredential;
     private String mSmsCode, mVerificationId;
-
-    // TODO: Replace this variable
-    // Add white-listed data: emulator's or real phone number and verification code:
-    private String mPhoneNumber = "";
-    private String mTestPhoneNumber = "";
-    private String mTestVerificationCode = "";
     private String mProvidedPhoneNumber;
 
     public LogInVerifyFragment() {
@@ -98,10 +88,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         mCallbacksPhoneNumber = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                Log.d(TAG,"onVerificationCompleted:" + phoneAuthCredential);
-
                 mSmsCode = phoneAuthCredential.getSmsCode();
-                Log.d(TAG, "sms code: " + mSmsCode);
                 if (mSmsCode != null) {
                     displayCodeInEditText(mSmsCode);
                 } else {
@@ -111,17 +98,12 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                Log.w(TAG, "onVerificationFailed", e);
             }
 
             @Override
             public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(verificationId, forceResendingToken);
-                Log.d(TAG,"onCodeSent:" + forceResendingToken);
-                Log.d(TAG,"onCodeSent:" + verificationId);
-
                 mVerificationId = verificationId;
-                mResendToken = forceResendingToken;
             }
         };
 
@@ -147,41 +129,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     @Override
     public void onStart() {
         super.onStart();
-        // TODO:
-        // Decide whether run on emulator (testPhoneSignIn) or real device (phoneNumberSignIn)
         phoneNumberSignIn(mProvidedPhoneNumber);
-    }
-
-    @Override
-    public void testPhoneSignIn() {
-        FirebaseAuthSettings firebaseAuthSettings = mFirebaseAuth.getFirebaseAuthSettings();
-        firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(mTestPhoneNumber, mTestVerificationCode);
-
-        PhoneAuthProvider phoneAuthProvider = PhoneAuthProvider.getInstance();
-        phoneAuthProvider.verifyPhoneNumber(
-                mTestPhoneNumber,
-                60L,
-                TimeUnit.SECONDS,
-                TaskExecutors.MAIN_THREAD,
-                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                        Log.d(TAG, "testOnVerificationCompleted: " + phoneAuthCredential);
-
-                        displayCodeInEditText(phoneAuthCredential.getSmsCode());
-                        if (mFirebaseAuth.getCurrentUser() != null) {
-                            new Handler().postDelayed(() -> convertAnonymousAccount(phoneAuthCredential, false), DELAY_PHONE_AUTH);
-                        } else {
-                            new Handler().postDelayed(() -> signInWithPhoneAuthCredential(phoneAuthCredential, false), DELAY_PHONE_AUTH);
-                        }
-                    }
-
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        Log.w(TAG, "testOnVerificationFailed", e);
-                    }
-                }
-        );
     }
 
     @Override
@@ -243,8 +191,6 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithCredential:success");
-
                         // Subscribe user to topics of push notifications
                         presenter.manageTopicsSubscriptions(REGISTRATION_NORMAL);
 
@@ -256,8 +202,8 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         }
                     } else {
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
-                        Log.d(TAG, "signInWithCredential:failure", task.getException());
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            // TODO:
                             // The verification code entered was invalid
                         }
                     }
@@ -269,8 +215,6 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         mFirebaseAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "linkWithCredential:success");
-
                         // Subscribe user to topics of push notifications
                         presenter.manageTopicsSubscriptions(REGISTRATION_CONVERSION);
 
@@ -282,7 +226,6 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                         }
                     } else {
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
-                        Log.w(TAG, "linkWithCredential:failure", task.getException());
                     }
                 });
     }

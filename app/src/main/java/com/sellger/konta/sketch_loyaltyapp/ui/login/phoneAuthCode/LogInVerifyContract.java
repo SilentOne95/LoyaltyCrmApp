@@ -9,8 +9,6 @@ public interface LogInVerifyContract {
 
         void initViews();
 
-        void testPhoneSignIn();
-
         void phoneNumberSignIn(String phoneNumber);
 
         void displayCodeInEditText(String code);

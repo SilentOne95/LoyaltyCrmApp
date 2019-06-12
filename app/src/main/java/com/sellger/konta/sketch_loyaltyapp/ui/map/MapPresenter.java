@@ -4,7 +4,6 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -66,23 +65,19 @@ public class MapPresenter implements MapContract.Presenter {
         Observer<Integer> observer = new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.d(TAG, "onSubscribe");
             }
 
             @Override
             public void onNext(Integer markerId) {
-                Log.d(TAG, "onNext" + markerId);
                 getSelectedMarker(markerId);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError");
             }
 
             @Override
             public void onComplete() {
-                Log.d(TAG, "onComplete");
             }
         };
 

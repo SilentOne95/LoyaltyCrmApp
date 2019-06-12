@@ -30,7 +30,6 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.widget.SearchView;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -216,9 +215,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mGeofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent())
-                    .addOnSuccessListener(getActivity(), taskSuccess -> Log.d(TAG, "addGeofence: ok"))
-                    .addOnFailureListener(getActivity(), taskFail -> Log.d(TAG, "addGeofence: fail"));
+            mGeofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent());
         }
     }
 
@@ -242,9 +239,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     public void onDestroy() {
         super.onDestroy();
         if (mGeofencePendingIntent != null) {
-            mGeofencingClient.removeGeofences(getGeofencePendingIntent())
-                    .addOnSuccessListener(getActivity(), aVoid -> Log.d(TAG, "removeGeofences: success"))
-                    .addOnFailureListener(getActivity(), e -> Log.d(TAG, "removeGeofences: failure"));
+            mGeofencingClient.removeGeofences(getGeofencePendingIntent());
         }
 
         if (mGoogleApiClient.isConnected()) {
@@ -377,13 +372,11 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             mapStyleResId = R.raw.map_style_night;
         }
 
+        // TODO:
         try {
             boolean isSuccessful = mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), mapStyleResId));
-            if (isSuccessful) {
-                Log.d(TAG, "Map's style applied successfully");
-            }
         } catch (Resources.NotFoundException e) {
-            Log.d(TAG, "Map's style not applied. Error: " + e);
+            // Catch exception
         }
     }
 

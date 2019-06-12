@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -108,7 +107,6 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
     @Override
     public void startCameraSource() {
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext());
-        Log.d(TAG, "startCameraSource + " + code);
 
         if (code != ConnectionResult.SUCCESS) {
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(getActivity(), code, MY_PERMISSIONS_REQUEST_CAMERA);
@@ -117,15 +115,11 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
 
         if (mCameraSource != null && mCameraSourcePreview != null && mGraphicOverlay != null) {
             try {
-                Log.d(TAG, "startCameraSource: ");
                 mCameraSourcePreview.start(mCameraSource, mGraphicOverlay);
             } catch (IOException e) {
-                Log.d(TAG, "IOException " + e);
                 mCameraSource.release();
                 mCameraSource = null;
             }
-        } else {
-            Log.d(TAG, "startCameraSource: not started");
         }
     }
 
@@ -136,10 +130,8 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
                                   @NonNull List<FirebaseVisionBarcode> barcodes,
                                   @NonNull FrameMetadata frameMetadata,
                                   @NonNull GraphicOverlay graphicOverlay) {
-                Log.d(TAG, "onSuccess: " + barcodes.size());
                 if (barcodes.size() != 0) {
                     for (FirebaseVisionBarcode barcode : barcodes) {
-                        Log.d(TAG, "onSuccess: " + barcode.getRawValue());
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_SCANNER, barcode.getRawValue());
                     }
                 }
@@ -147,7 +139,6 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
 
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "onFailure");
             }
         };
     }

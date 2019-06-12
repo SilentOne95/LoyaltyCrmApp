@@ -1,7 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.main;
 
 import androidx.annotation.NonNull;
-import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -337,23 +336,19 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         Observer<Integer> observer = new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.d(TAG, "onSubscribe");
             }
 
             @Override
             public void onNext(Integer viewPosition) {
-                Log.d(TAG, "onNext" + viewPosition);
                 passIdOfSelectedView(viewPosition);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "onError");
             }
 
             @Override
             public void onComplete() {
-                Log.d(TAG, "onComplete");
             }
         };
 
