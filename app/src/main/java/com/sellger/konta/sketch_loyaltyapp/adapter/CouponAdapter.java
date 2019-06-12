@@ -33,7 +33,6 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
-import static com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> implements Filterable {
 
@@ -131,10 +130,9 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         }
 
         if (!TextUtils.isEmpty(currentItem.getImage())) {
-            int id = holder.imageView.getResources().getIdentifier(currentItem.getImage(), "drawable", PACKAGE_NAME);
-
+            // TODO: Upload images to server and change "else" image to no_image_available
             Picasso.get()
-                    .load(id)
+                    .load(BASE_URL_IMAGES + currentItem.getImage())
                     .transform(new RoundedCornersTransformation(cornerRadius, 0))
                     .error(R.drawable.no_image_available)
                     .resize(imageWidth, imageHeight)

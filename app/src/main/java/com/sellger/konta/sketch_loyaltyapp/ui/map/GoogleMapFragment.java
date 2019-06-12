@@ -119,7 +119,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private TextView mPanelPlaceTitle, mPanelAddress, mPanelTodayOpenHours;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-
     private FloatingActionButton mFab;
     private String mLastSelectedMarkerTitle;
 
@@ -147,6 +146,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
 
         setHasOptionsMenu(true);
+
+        mPreviousSelectedMarkerId = 0;
 
         // Setting up presenter
         presenter = new MapPresenter(this, Injection.provideLoyaltyRepository(getContext()));
@@ -350,11 +351,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
 
         // Set BottomSheet state when map is clicked
-        mGoogleMap.setOnMapClickListener(latLng -> {
-                    presenter.switchBottomSheetState(latLng);
-                    // Set markerId to 0 to enable BottomSheet appear
-                    mPreviousSelectedMarkerId = 0;
-                }
+        mGoogleMap.setOnMapClickListener(latLng -> presenter.switchBottomSheetState(latLng)
         );
 
         mGoogleMap.setOnMyLocationButtonClickListener(this);
