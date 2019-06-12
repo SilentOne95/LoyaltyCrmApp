@@ -26,6 +26,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
     private ContactInfoPresenter presenter;
 
     private TextView mPhoneTextView, mEmailTextView, mWebsiteTextView;
+    private View mPhoneContainer, mEmailContainer, mWebsiteContainer;
 
     public ContactInfoFragment() {
         // Required empty public constructor
@@ -53,23 +54,26 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         mPhoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
         mEmailTextView = rootView.findViewById(R.id.contact_info_email_view);
         mWebsiteTextView = rootView.findViewById(R.id.contact_info_website_view);
+        mPhoneContainer = rootView.findViewById(R.id.contact_phone_container);
+        mEmailContainer = rootView.findViewById(R.id.contact_email_container);
+        mWebsiteContainer = rootView.findViewById(R.id.contact_website_container);
     }
 
     @Override
     public void setUpViewsWithData(String phoneNumber, String emailAddress, String websiteAddress) {
         mPhoneTextView.setText(phoneNumber);
         if (!phoneNumber.equals(DEFAULT_STRING)) {
-            mPhoneTextView.setOnClickListener(this);
+            mPhoneContainer.setOnClickListener(this);
         }
 
         mEmailTextView.setText(emailAddress);
         if (!emailAddress.equals(DEFAULT_STRING)) {
-            mEmailTextView.setOnClickListener(this);
+            mEmailContainer.setOnClickListener(this);
         }
 
         mWebsiteTextView.setText(websiteAddress);
         if (!websiteAddress.equals(DEFAULT_STRING)) {
-            mWebsiteTextView.setOnClickListener(this);
+            mWebsiteContainer.setOnClickListener(this);
         }
     }
 
@@ -78,7 +82,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         String stringWithData;
 
         switch (view.getId()) {
-            case R.id.contact_info_phone_view:
+            case R.id.contact_phone_container:
                 stringWithData = mPhoneTextView.getText().toString();
                 Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", stringWithData, null));
 
@@ -88,7 +92,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
                     e.printStackTrace();
                 }
                 break;
-            case R.id.contact_info_email_view:
+            case R.id.contact_email_container:
                 stringWithData = mEmailTextView.getText().toString();
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setData(Uri.parse("mailto:" + stringWithData));
@@ -100,7 +104,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
                 }
                 break;
 
-            case R.id.contact_info_website_view:
+            case R.id.contact_website_container:
 
                 if (mWebsiteTextView.getText().toString().contains("http://")) {
                     stringWithData = mWebsiteTextView.getText().toString();

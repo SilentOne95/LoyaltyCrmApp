@@ -17,6 +17,7 @@ import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
@@ -35,7 +36,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     private View mLayoutContainer;
 
     private int productId;
-    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     @Override
     protected int getLayout() { return R.layout.activity_product_details; }
@@ -99,6 +99,13 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         } else {
             mProductTitle.setText(DEFAULT_STRING);
         }
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+        DecimalFormat decimalFormat = new DecimalFormat();
+        decimalFormat.setDecimalFormatSymbols(symbols);
+        decimalFormat.setGroupingSize(3);
+        decimalFormat.setMaximumFractionDigits(2);
 
         if (product.getPrice() != null && !product.getPrice().toString().trim().isEmpty()) {
             mProductPrice.setText(String.valueOf(decimalFormat.format(product.getPrice())).concat(" zł"));

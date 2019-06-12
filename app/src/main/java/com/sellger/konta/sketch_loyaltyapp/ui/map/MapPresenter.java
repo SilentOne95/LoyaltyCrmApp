@@ -159,7 +159,7 @@ public class MapPresenter implements MapContract.Presenter {
         if (!TextUtils.isEmpty(marker.getAddress()) && !TextUtils.isEmpty(marker.getPostalCode())
                 && !TextUtils.isEmpty(marker.getCity())) {
             address = marker.getAddress() + ", " +
-                    marker.getPostalCode() + " " +
+                    marker.getPostalCode().substring(0, 2) + "-" + marker.getPostalCode().substring(2) + " " +
                     marker.getCity();
         }
 
