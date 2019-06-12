@@ -189,7 +189,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         });
 
         // Custom TabLayout with ViewPager set up
-        BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(getContext(), getFragmentManager());
+        BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
 
         mTabLayout.setupWithViewPager(mViewPager);
