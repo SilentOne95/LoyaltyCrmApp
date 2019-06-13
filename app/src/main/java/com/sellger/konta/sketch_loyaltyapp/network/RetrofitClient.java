@@ -1,30 +1,52 @@
 package com.sellger.konta.sketch_loyaltyapp.network;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL;
+import static com.sellger.konta.sketch_loyaltyapp.root.MyApplication.getContext;
 
 public class RetrofitClient {
 
-    private static Retrofit retrofit;
+    private static Api mApi;
+    private static Retrofit mRetrofit;
 
-    public static Retrofit getInstance() {
-        if (retrofit == null) {
+    public static Api getApi() {
+        if (mApi == null) {
+            mApi = provideRetrofit().create(Api.class);
+        }
 
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            OkHttpClient okHttpClient = builder.build();
+        return mApi;
+    }
 
-            retrofit = new Retrofit.Builder()
+    private static Retrofit provideRetrofit() {
+        if (mRetrofit == null) {
+            mRetrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .client(okHttpClient)
+                    .client(provideOkHttpClient())
                     .build();
         }
 
-        return retrofit;
+        return mRetrofit;
+    }
+
+    private static OkHttpClient provideOkHttpClient() {
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        return builder.connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .addInterceptor(new NetworkConnectionInterceptor(getContext()))
+                .addInterceptor(httpLoggingInterceptor)
+                .build();
     }
 }

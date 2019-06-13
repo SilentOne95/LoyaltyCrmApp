@@ -37,7 +37,6 @@ import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode.LogInVerifyFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.GoogleMapFragment;
-import com.sellger.konta.sketch_loyaltyapp.root.MyApplication;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -99,7 +98,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseAuth.useAppLanguage();
 
-        ((MyApplication) getApplication()).getApplicationComponent().inject(this);
         PACKAGE_NAME = getApplication().getPackageName();
 
         // Init views

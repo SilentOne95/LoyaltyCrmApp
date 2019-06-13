@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.data.remote;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -23,7 +25,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
 
     private static LoyaltyRemoteDataSource INSTANCE;
 
-    private Api api = RetrofitClient.getInstance().create(Api.class);
+    private Api api = RetrofitClient.getApi();
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public static LoyaltyRemoteDataSource getInstance() {
@@ -61,7 +63,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getMenuComponents())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -69,7 +71,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getAllProducts())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -77,7 +79,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getSingleProduct(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -85,7 +87,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getAllCoupons())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -93,7 +95,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getSingleCoupon(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -101,7 +103,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getAllMarkers())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -109,7 +111,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getSingleMarker(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -118,7 +120,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getAllMarkers())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -127,7 +129,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getSingleMarker(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -135,7 +137,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getAllPages())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
@@ -143,7 +145,7 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
         disposable.add(zipWithTimer(api.getSinglePage(id))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback::onDataLoaded));
+                .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
     }
 
     @Override
