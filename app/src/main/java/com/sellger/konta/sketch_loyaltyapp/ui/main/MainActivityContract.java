@@ -15,6 +15,12 @@ public interface MainActivityContract {
 
         void initViews();
 
+        void registerNetworkReceiver();
+
+        void displaySnackbar(boolean isNetwork);
+
+        void unregisterNetworkReceiver();
+
         void setActivity(Class<? extends Activity> activity);
 
         void setFragment(BaseFragment fragment, String fragmentTitle, String data);

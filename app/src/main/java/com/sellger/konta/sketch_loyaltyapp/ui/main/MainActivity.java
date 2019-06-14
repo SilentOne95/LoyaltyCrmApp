@@ -1,11 +1,13 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.main;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
@@ -21,17 +23,21 @@ import androidx.appcompat.app.ActionBar;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.network.NetworkStateReceiver;
 import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccountFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
@@ -39,6 +45,7 @@ import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode.LogInVerifyFra
 import com.sellger.konta.sketch_loyaltyapp.ui.map.GoogleMapFragment;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.sellger.konta.sketch_loyaltyapp.utils.CustomSnackbar;
 
 import java.util.ArrayList;
 
@@ -63,6 +70,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_SECOND_GROU
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_THIRD_GROUP_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+import static com.sellger.konta.sketch_loyaltyapp.network.NetworkStateReceiver.IS_NETWORK_AVAILABLE;
 
 public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
         NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View, Toolbar.OnMenuItemClickListener, View.OnClickListener {
@@ -71,12 +79,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     private MainActivityPresenter presenter;
 
+    private BroadcastReceiver mNetworkReceiver;
     private FirebaseAuth mFirebaseAuth;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     GoogleMapFragment mGoogleMapFragment;
 
+    private ViewGroup mParentLayout;
     private View mNavViewHeaderShadeContainer;
     private Button mNavViewHeaderButton;
 
@@ -102,6 +112,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Init views
         initViews();
+
+        // Init network BroadcastReceiver
+        mNetworkReceiver = new NetworkStateReceiver();
+        registerNetworkReceiver();
 
         // Set up Toolbar, ActionBar, DrawerLayout, NavigationView
         setSupportActionBar(mToolbar);
@@ -131,13 +145,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         } else {
             presenter.displayHomeScreen(LAYOUT_TYPE_LOGIN);
         }
-
-        // Using Retrofit to set up NavDrawer
-//        showInternetConnectionResult();
     }
 
     @Override
     public void initViews() {
+        mParentLayout = findViewById(R.id.parent_layout);
         mToolbar = findViewById(R.id.toolbar);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.nav_view);
@@ -147,18 +159,45 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mNavViewHeaderButton = navigationViewHeader.findViewById(R.id.navigation_header_button);
     }
 
-    protected boolean checkInternetConnection() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+    @Override
+    public void registerNetworkReceiver() {
+        registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        return networkInfo != null && networkInfo.isConnected();
+        IntentFilter intentFilter = new IntentFilter(NetworkStateReceiver.NETWORK_AVAILABLE_ACTION);
+        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getBooleanExtra(IS_NETWORK_AVAILABLE, false)) {
+                    displaySnackbar(true);
+                } else {
+                    displaySnackbar(false);
+                }
+            }
+        }, intentFilter);
     }
 
-    private void showInternetConnectionResult() {
-        if (checkInternetConnection()) {
-            Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
+    @Override
+    public void displaySnackbar(boolean isNetwork) {
+        CustomSnackbar customSnackbar = CustomSnackbar.make(mParentLayout, CustomSnackbar.LENGTH_LONG);
+        customSnackbar.getView().setPadding(0,0,0,0);
+        TextView snackbarTextView = customSnackbar.getView().findViewById(R.id.snackbar_text);
+        if (isNetwork) {
+            customSnackbar.getView().setBackgroundColor(Color.GREEN);
+            snackbarTextView.setText(R.string.snackbar_connection_restored);
+            customSnackbar.show();
         } else {
-            Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
+            customSnackbar.getView().setBackgroundColor(Color.RED);
+            snackbarTextView.setText(R.string.snackbar_no_network_connection);
+            customSnackbar.show();
+        }
+    }
+
+    @Override
+    public void unregisterNetworkReceiver(){
+        try {
+            unregisterReceiver(mNetworkReceiver);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
     }
 
@@ -341,7 +380,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Set layoutType to null to avoid creating new instance of fragment, when closing nav drawer
         // by clicking next to the view
         mLayoutType = null;
-//        showInternetConnectionResult();
     }
 
     @Override
@@ -428,5 +466,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
 
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterNetworkReceiver();
     }
 }

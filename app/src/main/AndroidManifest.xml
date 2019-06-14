@@ -38,6 +38,12 @@
         </service>
         <service android:name=".service.geofencing.GeofenceTransitionsIntentService" />
 
+        <receiver android:name=".network.NetworkStateReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="com.sellger.konta.sketch_loyaltyapp.ui.launch.LaunchActivity"
             android:screenOrientation="portrait"
