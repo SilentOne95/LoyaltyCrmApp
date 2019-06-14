@@ -137,4 +137,8 @@
     <string name="map_connection_suspended">Połączenie z serwisem Google zostało zawieszone</string>
     <string name="map_connection_failed">Połączenie z serwisem Google zostało zerwane</string>
 
+    <!-- Snackbar -->
+    <string name="snackbar_no_network_connection">Brak połączenia z internetem</string>
+    <string name="snackbar_connection_restored">Połączenie zostało przywrócone</string>
+
 </resources>
