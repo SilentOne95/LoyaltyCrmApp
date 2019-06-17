@@ -1,13 +1,9 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.main;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
@@ -15,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -23,7 +20,6 @@ import androidx.appcompat.app.ActionBar;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +33,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
-import com.sellger.konta.sketch_loyaltyapp.network.NetworkStateReceiver;
+import com.sellger.konta.sketch_loyaltyapp.service.network.NetworkSchedulerService;
 import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccountFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
@@ -70,16 +66,15 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_SECOND_GROU
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_THIRD_GROUP_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
-import static com.sellger.konta.sketch_loyaltyapp.network.NetworkStateReceiver.IS_NETWORK_AVAILABLE;
 
 public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
-        NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View, Toolbar.OnMenuItemClickListener, View.OnClickListener {
+        NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View,
+        Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private MainActivityPresenter presenter;
 
-    private BroadcastReceiver mNetworkReceiver;
     private FirebaseAuth mFirebaseAuth;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -113,10 +108,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         // Init views
         initViews();
 
-        // Init network BroadcastReceiver
-        mNetworkReceiver = new NetworkStateReceiver();
-        registerNetworkReceiver();
-
         // Set up Toolbar, ActionBar, DrawerLayout, NavigationView
         setSupportActionBar(mToolbar);
         mToolbar.setOnMenuItemClickListener(this);
@@ -136,6 +127,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Set up presenter
         presenter = new MainActivityPresenter(this, Injection.provideLoyaltyRepository(getApplicationContext()));
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            presenter.scheduleJob(this);
+        }
         presenter.requestDataFromServer();
         presenter.setUpObservableHomeAdapter();
 
@@ -157,48 +151,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         View navigationViewHeader = mNavigationView.getHeaderView(0);
         mNavViewHeaderShadeContainer = navigationViewHeader.findViewById(R.id.navigation_view_header_shade_container);
         mNavViewHeaderButton = navigationViewHeader.findViewById(R.id.navigation_header_button);
-    }
-
-    @Override
-    public void registerNetworkReceiver() {
-        registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-
-        IntentFilter intentFilter = new IntentFilter(NetworkStateReceiver.NETWORK_AVAILABLE_ACTION);
-        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getBooleanExtra(IS_NETWORK_AVAILABLE, false)) {
-                    displaySnackbar(true);
-                } else {
-                    displaySnackbar(false);
-                }
-            }
-        }, intentFilter);
-    }
-
-    @Override
-    public void displaySnackbar(boolean isNetwork) {
-        CustomSnackbar customSnackbar = CustomSnackbar.make(mParentLayout, CustomSnackbar.LENGTH_LONG);
-        customSnackbar.getView().setPadding(0,0,0,0);
-        TextView snackbarTextView = customSnackbar.getView().findViewById(R.id.snackbar_text);
-        if (isNetwork) {
-            customSnackbar.getView().setBackgroundColor(Color.GREEN);
-            snackbarTextView.setText(R.string.snackbar_connection_restored);
-            customSnackbar.show();
-        } else {
-            customSnackbar.getView().setBackgroundColor(Color.RED);
-            snackbarTextView.setText(R.string.snackbar_no_network_connection);
-            customSnackbar.show();
-        }
-    }
-
-    @Override
-    public void unregisterNetworkReceiver(){
-        try {
-            unregisterReceiver(mNetworkReceiver);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -460,6 +412,25 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
+    public void displaySnackbar(boolean isNetwork) {
+        if (isNetwork) {
+            CustomSnackbar customSnackbar = CustomSnackbar.make(mParentLayout, CustomSnackbar.LENGTH_LONG);
+            customSnackbar.getView().setPadding(0,0,0,0);
+            TextView snackbarTextView = customSnackbar.getView().findViewById(R.id.snackbar_text);
+            customSnackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorNetworkSnackbarAvailable));
+            snackbarTextView.setText(R.string.snackbar_connection_restored);
+            customSnackbar.show();
+        } else {
+            CustomSnackbar customSnackbar = CustomSnackbar.make(mParentLayout, CustomSnackbar.LENGTH_INDEFINITE);
+            customSnackbar.getView().setPadding(0,0,0,0);
+            TextView snackbarTextView = customSnackbar.getView().findViewById(R.id.snackbar_text);
+            customSnackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorNetworkSnackbarNotAvailable));
+            snackbarTextView.setText(R.string.snackbar_no_network_connection);
+            customSnackbar.show();
+        }
+    }
+
+    @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {
             message = getString(R.string.default_toast_error_message);
@@ -468,10 +439,15 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.startNetworkIntentService(this);
+    }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterNetworkReceiver();
+    protected void onStop() {
+        stopService(new Intent(this, NetworkSchedulerService.class));
+        super.onStop();
     }
 }

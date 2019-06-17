@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <permission
         android:name="com.sellger.konta.sketch_loyaltyapp.permission.MAPS_RECEIVE"
@@ -28,6 +29,7 @@
         android:theme="@style/BaseAppTheme.NoActionBar"
         tools:targetApi="n">
 
+        <!-- Services -->
         <service
             android:name="com.sellger.konta.sketch_loyaltyapp.service.pushNotification.MyFirebaseMessagingService"
             android:enabled="true"
@@ -37,13 +39,12 @@
             </intent-filter>
         </service>
         <service android:name=".service.geofencing.GeofenceTransitionsIntentService" />
+        <service
+            android:name=".service.network.NetworkSchedulerService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
 
-        <receiver android:name=".network.NetworkStateReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-
+        <!-- Activities -->
         <activity
             android:name="com.sellger.konta.sketch_loyaltyapp.ui.launch.LaunchActivity"
             android:screenOrientation="portrait"
@@ -83,7 +84,7 @@
                 android:value="com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity" />
         </activity>
 
-
+        <!-- Others -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

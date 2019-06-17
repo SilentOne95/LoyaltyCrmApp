@@ -9,7 +9,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL;
-import static com.sellger.konta.sketch_loyaltyapp.root.MyApplication.getContext;
 
 public class RetrofitClient {
 
@@ -45,7 +44,6 @@ public class RetrofitClient {
         return builder.connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(new NetworkConnectionInterceptor(getContext()))
                 .addInterceptor(httpLoggingInterceptor)
                 .build();
     }

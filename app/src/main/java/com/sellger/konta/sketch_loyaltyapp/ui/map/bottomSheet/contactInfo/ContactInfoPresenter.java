@@ -33,7 +33,6 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
 
     @Override
     public void setUpObservable() {
-
         Observable<Integer> observable = MapPresenter.getObservable();
         Observer<Integer> onMarkerClickObserver = new Observer<Integer>() {
             @Override

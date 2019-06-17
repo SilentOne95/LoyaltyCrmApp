@@ -158,4 +158,7 @@ public final class Constants {
     public static final String BUNDLE_DATA_STRING = "DATA_STRING";
     public static final String BUNDLE_TITLE_STRING = "TITLE_STRING";
     public static final String EXTRAS_ELEMENT_ID = "EXTRA_ELEMENT_ID";
+
+    // Network
+    public final static String CONNECTIVITY_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
 }

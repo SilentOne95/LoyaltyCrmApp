@@ -47,7 +47,6 @@ public class MapPresenter implements MapContract.Presenter {
     private static PublishSubject<Integer> mMarkerIdSubject;
     private int mCurrentDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
-
     MapPresenter(@NonNull MapContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
