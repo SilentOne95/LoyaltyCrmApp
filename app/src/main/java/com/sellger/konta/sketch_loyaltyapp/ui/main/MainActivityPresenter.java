@@ -86,6 +86,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     private ArrayList<MenuComponent> mSubmenuArray = new ArrayList<>();
     private ArrayList<MenuComponent> mAllMenuItemsArray = new ArrayList<>();
 
+    private boolean mIsFirstNetworkCallback = true;
+
     MainActivityPresenter(@NonNull MainActivityContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
@@ -120,13 +122,20 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     @Override
     public void setUpNetworkObservable() {
         Observable<Boolean> observable = NetworkSchedulerService.getObservable();
-        Observer<Boolean> onMarkerClickObserver = new Observer<Boolean>() {
+        Observer<Boolean> onNetworkObserver = new Observer<Boolean>() {
             @Override
             public void onSubscribe(Disposable d) { }
 
             @Override
-            public void onNext(Boolean aBoolean) {
-                view.displaySnackbar(aBoolean);
+            public void onNext(Boolean isOnline) {
+                if (mIsFirstNetworkCallback) {
+                    if (!isOnline) {
+                        view.displaySnackbar(isOnline);
+                    }
+                    mIsFirstNetworkCallback = false;
+                } else {
+                    view.displaySnackbar(isOnline);
+                }
             }
 
             @Override
@@ -136,7 +145,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
             public void onComplete() { }
         };
 
-        observable.subscribe(onMarkerClickObserver);
+        observable.subscribe(onNetworkObserver);
     }
 
     @Override
