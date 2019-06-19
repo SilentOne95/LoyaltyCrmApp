@@ -113,8 +113,12 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
         @Override
         public void onItemCouponCodeCheckClick(int position, String imageUrl) {
-            ImageView couponImage = recyclerView.getChildAt(position).findViewById(R.id.grid_item_image);
-            TextView couponCodeText = recyclerView.getChildAt(position).findViewById(R.id.grid_item_code_text);
+            ImageView couponImage = recyclerView.getLayoutManager()
+                    .findViewByPosition(position)
+                    .findViewById(R.id.grid_item_image);
+            TextView couponCodeText = recyclerView.getLayoutManager()
+                    .findViewByPosition(position)
+                    .findViewById(R.id.grid_item_code_text);
 
             switch (numOfColumns) {
                 case 1:
