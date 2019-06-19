@@ -7,8 +7,6 @@ public interface BottomSheetContract {
 
     interface OpeningHoursView {
 
-        void initViews();
-
         void setUpViewsWithData(String[] singleDayOpenHours);
 
         void displayToastMessage(String message);
@@ -28,8 +26,6 @@ public interface BottomSheetContract {
     }
 
     interface ContactInfoView {
-
-        void initViews();
 
         void setUpViewsWithData(String phoneNumber, String emailAddress, String websiteAddress);
 

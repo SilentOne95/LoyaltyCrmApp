@@ -8,8 +8,6 @@ public interface LogInContract {
 
     interface View {
 
-        void initViews();
-
         void googleSignIn();
 
         void firebaseAuthWithGoogle(GoogleSignInAccount account);

@@ -5,12 +5,4 @@ public interface ContactContract {
     interface View {
 
     }
-
-    interface Presenter {
-
-    }
-
-    interface Model {
-
-    }
 }

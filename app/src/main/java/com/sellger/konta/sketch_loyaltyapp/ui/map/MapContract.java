@@ -8,8 +8,6 @@ public interface MapContract {
 
     interface View {
 
-        void initViews();
-
         void setUpGoogleApiClient();
 
         void setCustomMapStyle();

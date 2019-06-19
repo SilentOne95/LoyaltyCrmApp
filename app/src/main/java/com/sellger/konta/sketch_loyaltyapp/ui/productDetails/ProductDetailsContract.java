@@ -6,8 +6,6 @@ public interface ProductDetailsContract {
 
     interface View {
 
-        void initViews();
-
         void hideProgressBar();
 
         void setUpViewWithData(Product product);

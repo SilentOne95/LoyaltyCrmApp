@@ -22,7 +22,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -76,7 +75,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private NavigationView mNavigationView;
     GoogleMapFragment mGoogleMapFragment;
 
-    private ViewGroup mParentLayout;
     private View mNavViewHeaderShadeContainer;
     private Button mNavViewHeaderButton;
 
@@ -135,7 +133,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     public void initViews() {
-        mParentLayout = findViewById(R.id.parent_layout);
         mToolbar = findViewById(R.id.toolbar);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.nav_view);

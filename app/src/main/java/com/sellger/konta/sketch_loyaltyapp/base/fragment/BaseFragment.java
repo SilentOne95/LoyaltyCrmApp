@@ -24,6 +24,8 @@ public abstract class BaseFragment extends Fragment implements BaseFragmentContr
 
     protected abstract int getLayout();
 
+    public abstract void initViews();
+
     @Override
     public void attachPresenter(BaseFragmentContract.Presenter presenter) {
         navigationPresenter = presenter;

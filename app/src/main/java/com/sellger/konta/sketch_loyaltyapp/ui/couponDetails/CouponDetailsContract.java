@@ -5,13 +5,9 @@ import android.graphics.Bitmap;
 import com.google.zxing.WriterException;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 
-import io.reactivex.disposables.Disposable;
-
 public interface CouponDetailsContract {
 
     interface View {
-
-        void initViews();
 
         void hideProgressBar();
 

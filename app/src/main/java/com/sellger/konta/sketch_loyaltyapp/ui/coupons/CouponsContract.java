@@ -10,8 +10,6 @@ public interface CouponsContract {
 
     interface View {
 
-        void initViews();
-
         void setUpAdapter(List<Coupon> couponList, int numOfColumns);
 
         void setUpEmptyStateView(boolean isNeeded);

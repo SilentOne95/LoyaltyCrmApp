@@ -4,6 +4,5 @@ public interface ScanResultContract {
 
     interface View {
 
-        void initViews();
     }
 }

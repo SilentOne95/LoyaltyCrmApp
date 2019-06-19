@@ -13,7 +13,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 
-public class ContactFragment extends BaseFragment {
+public class ContactFragment extends BaseFragment implements ContactContract.View {
 
     private static final String TAG = ContactFragment.class.getSimpleName();
 
@@ -34,6 +34,9 @@ public class ContactFragment extends BaseFragment {
 
         setHasOptionsMenu(true);
     }
+
+    @Override
+    public void initViews() { }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

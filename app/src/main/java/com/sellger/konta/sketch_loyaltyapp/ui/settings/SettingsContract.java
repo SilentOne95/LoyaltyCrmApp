@@ -7,8 +7,6 @@ public interface SettingsContract {
 
     interface View {
 
-        void initViews();
-
         void showDialogLogOut();
 
         void showDialogDeleteAccount();

@@ -8,8 +8,6 @@ public interface ProductsContract {
 
     interface View {
 
-        void initViews();
-
         void setUpAdapter(List<Product> productList, int numOfColumns);
 
         void setUpEmptyStateView(boolean isNeeded);

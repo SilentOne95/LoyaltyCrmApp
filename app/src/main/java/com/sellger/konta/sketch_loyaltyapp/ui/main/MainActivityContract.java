@@ -13,8 +13,6 @@ public interface MainActivityContract {
 
     interface View {
 
-        void initViews();
-
         void setActivity(Class<? extends Activity> activity);
 
         void setFragment(BaseFragment fragment, String fragmentTitle, String data);

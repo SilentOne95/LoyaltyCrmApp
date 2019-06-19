@@ -6,8 +6,6 @@ public interface WebsiteContract {
 
     interface View {
 
-        void initViews();
-
         void setUpViewWithData(Page page);
 
         void displayToastMessage(String message);

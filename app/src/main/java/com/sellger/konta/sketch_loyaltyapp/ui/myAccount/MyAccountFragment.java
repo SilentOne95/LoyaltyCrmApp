@@ -63,7 +63,8 @@ public class MyAccountFragment extends BaseFragment {
         }
     }
 
-    private void initViews() {
+    @Override
+    public void initViews() {
         textView = rootView.findViewById(R.id.my_account_code_text);
         outputImage = rootView.findViewById(R.id.my_account_barcode_image);
     }
