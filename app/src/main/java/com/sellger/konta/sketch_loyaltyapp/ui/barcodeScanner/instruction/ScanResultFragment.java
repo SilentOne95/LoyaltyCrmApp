@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_DATA_STRING;

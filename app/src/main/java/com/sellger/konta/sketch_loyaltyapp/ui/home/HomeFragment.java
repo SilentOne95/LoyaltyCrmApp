@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.adapter.HomeAdapter;
 import com.sellger.konta.sketch_loyaltyapp.adapter.RecyclerItemClickListener;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
+import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.R;
 
 import java.util.ArrayList;

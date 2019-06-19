@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.adapter.ProductAdapter;
 import com.sellger.konta.sketch_loyaltyapp.adapter.RecyclerItemClickListener;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
 import com.sellger.konta.sketch_loyaltyapp.R;

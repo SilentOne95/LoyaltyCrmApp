@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;

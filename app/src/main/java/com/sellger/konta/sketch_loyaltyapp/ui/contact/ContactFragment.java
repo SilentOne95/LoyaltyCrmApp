@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 

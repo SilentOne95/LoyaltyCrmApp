@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.base;
+package com.sellger.konta.sketch_loyaltyapp.base.activity;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;

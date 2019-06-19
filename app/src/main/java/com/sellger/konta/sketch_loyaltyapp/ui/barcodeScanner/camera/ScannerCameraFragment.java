@@ -17,7 +17,7 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.BarcodeScanningProcessor;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.CameraSource;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsBarcode.common.CameraSourcePreview;

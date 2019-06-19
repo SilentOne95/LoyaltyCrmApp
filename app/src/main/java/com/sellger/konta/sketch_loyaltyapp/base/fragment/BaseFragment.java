@@ -1,4 +1,4 @@
-package com.sellger.konta.sketch_loyaltyapp.base;
+package com.sellger.konta.sketch_loyaltyapp.base.fragment;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;

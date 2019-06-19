@@ -3,7 +3,6 @@ package com.sellger.konta.sketch_loyaltyapp.ui.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,20 +19,17 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
-import com.sellger.konta.sketch_loyaltyapp.service.network.NetworkSchedulerService;
 import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccountFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
@@ -42,7 +37,6 @@ import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode.LogInVerifyFra
 import com.sellger.konta.sketch_loyaltyapp.ui.map.GoogleMapFragment;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.sellger.konta.sketch_loyaltyapp.utils.CustomSnackbar;
 
 import java.util.ArrayList;
 

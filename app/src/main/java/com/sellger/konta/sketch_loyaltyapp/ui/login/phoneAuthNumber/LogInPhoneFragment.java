@@ -12,8 +12,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseActivity;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;

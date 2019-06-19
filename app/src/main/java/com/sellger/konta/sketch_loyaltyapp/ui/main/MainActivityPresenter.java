@@ -7,7 +7,7 @@ import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMenuArray;
 import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.camera.ScannerCameraFragment;
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragmentContract;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragmentContract;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.instruction.ScanResultFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccountFragment;

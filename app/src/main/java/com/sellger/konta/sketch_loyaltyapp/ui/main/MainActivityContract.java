@@ -2,7 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.main;
 
 import android.app.Activity;
 
-import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMenuArray;
 
