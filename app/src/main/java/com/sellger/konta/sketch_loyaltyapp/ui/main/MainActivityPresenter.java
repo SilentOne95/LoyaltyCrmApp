@@ -1,21 +1,11 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.main;
 
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Handler;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMenuArray;
-import com.sellger.konta.sketch_loyaltyapp.service.network.NetworkSchedulerService;
 import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.camera.ScannerCameraFragment;
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragmentContract;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
@@ -86,66 +76,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     private ArrayList<MenuComponent> mSubmenuArray = new ArrayList<>();
     private ArrayList<MenuComponent> mAllMenuItemsArray = new ArrayList<>();
 
-    private boolean mIsFirstNetworkCallback = true;
-
     MainActivityPresenter(@NonNull MainActivityContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
         this.view = view;
         this.loyaltyRepository = loyaltyRepository;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public void scheduleJob(Context context) {
-        JobInfo jobInfo = new JobInfo.Builder(0, new ComponentName(context, NetworkSchedulerService.class))
-                .setRequiresCharging(true)
-                .setMinimumLatency(1000)
-                .setOverrideDeadline(2000)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                .setPersisted(true)
-                .build();
-
-        JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        jobScheduler.schedule(jobInfo);
-    }
-
-    // TODO: Temporary workaround
-    @Override
-    public void startNetworkIntentService(Context context) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Intent startServiceIntent = new Intent(context, NetworkSchedulerService.class);
-            context.startService(startServiceIntent);
-            new Handler().postDelayed(this::setUpNetworkObservable, 3000);
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public void setUpNetworkObservable() {
-        Observable<Boolean> observable = NetworkSchedulerService.getObservable();
-        Observer<Boolean> onNetworkObserver = new Observer<Boolean>() {
-            @Override
-            public void onSubscribe(Disposable d) { }
-
-            @Override
-            public void onNext(Boolean isOnline) {
-                if (mIsFirstNetworkCallback) {
-                    if (!isOnline) {
-                        view.displaySnackbar(isOnline);
-                    }
-                    mIsFirstNetworkCallback = false;
-                } else {
-                    view.displaySnackbar(isOnline);
-                }
-            }
-
-            @Override
-            public void onError(Throwable e) { }
-
-            @Override
-            public void onComplete() { }
-        };
-
-        observable.subscribe(onNetworkObserver);
     }
 
     @Override

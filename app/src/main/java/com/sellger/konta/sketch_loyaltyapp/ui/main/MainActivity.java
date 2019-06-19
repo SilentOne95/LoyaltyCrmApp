@@ -21,6 +21,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -127,9 +128,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         // Set up presenter
         presenter = new MainActivityPresenter(this, Injection.provideLoyaltyRepository(getApplicationContext()));
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            presenter.scheduleJob(this);
-        }
         presenter.requestDataFromServer();
         presenter.setUpObservableHomeAdapter();
 
@@ -412,42 +410,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void displaySnackbar(boolean isNetwork) {
-        if (isNetwork) {
-            CustomSnackbar customSnackbar = CustomSnackbar.make(mParentLayout, CustomSnackbar.LENGTH_LONG);
-            customSnackbar.getView().setPadding(0,0,0,0);
-            TextView snackbarTextView = customSnackbar.getView().findViewById(R.id.snackbar_text);
-            customSnackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorNetworkSnackbarAvailable));
-            snackbarTextView.setText(R.string.snackbar_connection_restored);
-            customSnackbar.show();
-        } else {
-            CustomSnackbar customSnackbar = CustomSnackbar.make(mParentLayout, CustomSnackbar.LENGTH_INDEFINITE);
-            customSnackbar.getView().setPadding(0,0,0,0);
-            TextView snackbarTextView = customSnackbar.getView().findViewById(R.id.snackbar_text);
-            customSnackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorNetworkSnackbarNotAvailable));
-            snackbarTextView.setText(R.string.snackbar_no_network_connection);
-            customSnackbar.show();
-        }
-    }
-
-    @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {
             message = getString(R.string.default_toast_error_message);
         }
 
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.startNetworkIntentService(this);
-    }
-
-    @Override
-    protected void onPause() {
-        stopService(new Intent(this, NetworkSchedulerService.class));
-        super.onPause();
     }
 }

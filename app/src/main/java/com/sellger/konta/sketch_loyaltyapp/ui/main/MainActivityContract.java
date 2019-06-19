@@ -1,7 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.main;
 
 import android.app.Activity;
-import android.content.Context;
 
 import com.sellger.konta.sketch_loyaltyapp.base.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
@@ -34,18 +33,10 @@ public interface MainActivityContract {
 
         void setNavViewHeaderVisibility(String isAccountAnonymous);
 
-        void displaySnackbar(boolean isNetwork);
-
         void displayToastMessage(String message);
     }
 
     interface Presenter {
-
-        void scheduleJob(Context context);
-
-        void startNetworkIntentService(Context context);
-
-        void setUpNetworkObservable();
 
         void requestDataFromServer();
 
