@@ -5,7 +5,6 @@ public final class Constants {
 
     // General
     public static final String BASE_URL = "https://my-loyalty-project.herokuapp.com/";
-    public static final String BASE_URL_IMAGES = "http://10.0.2.2:5000";
 
     // MainActivity
     public static final int RC_SIGN_IN = 9001;

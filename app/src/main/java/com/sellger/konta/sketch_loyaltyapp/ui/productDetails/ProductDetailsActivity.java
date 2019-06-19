@@ -19,7 +19,6 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
@@ -83,9 +82,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     @Override
     public void setUpViewWithData(Product product) {
         if (!TextUtils.isEmpty(product.getImage())) {
-            // TODO: Upload images to server
             Picasso.get()
-                    .load(BASE_URL_IMAGES + product.getImage())
+                    .load(product.getImage())
                     .error(R.drawable.no_image_available)
                     .into(mProductImage);
         } else {

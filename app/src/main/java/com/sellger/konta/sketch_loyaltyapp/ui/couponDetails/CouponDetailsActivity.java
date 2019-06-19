@@ -36,7 +36,6 @@ import java.util.Map;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_COUPON_HEIGHT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
@@ -132,9 +131,8 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     @Override
     public void setUpViewWithData(Coupon coupon) {
         if (!TextUtils.isEmpty(coupon.getImage())) {
-            // TODO: Upload images to server
             Picasso.get()
-                    .load(BASE_URL_IMAGES + coupon.getImage())
+                    .load(coupon.getImage())
                     .error(R.drawable.no_image_available)
                     .into(mCouponImage);
         } else {

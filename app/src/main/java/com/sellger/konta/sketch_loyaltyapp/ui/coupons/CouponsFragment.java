@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,7 +35,6 @@ import jp.wasabeef.picasso.transformations.BlurTransformation;
 import jp.wasabeef.picasso.transformations.GrayscaleTransformation;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BASE_URL_IMAGES;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
@@ -119,7 +119,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
             switch (numOfColumns) {
                 case 1:
                     Picasso.get()
-                            .load(BASE_URL_IMAGES + imageUrl)
+                            .load(imageUrl)
                             .noPlaceholder()
                             .transform(new BlurTransformation(couponImage.getContext()))
                             .transform(new GrayscaleTransformation())
@@ -140,7 +140,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
                     break;
                 case 2:
                     Picasso.get()
-                            .load(BASE_URL_IMAGES + imageUrl)
+                            .load(imageUrl)
                             .noPlaceholder()
                             .transform(new BlurTransformation(couponImage.getContext()))
                             .transform(new GrayscaleTransformation())
