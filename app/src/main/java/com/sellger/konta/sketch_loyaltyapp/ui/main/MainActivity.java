@@ -440,14 +440,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         presenter.startNetworkIntentService(this);
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         stopService(new Intent(this, NetworkSchedulerService.class));
-        super.onStop();
+        super.onPause();
     }
 }

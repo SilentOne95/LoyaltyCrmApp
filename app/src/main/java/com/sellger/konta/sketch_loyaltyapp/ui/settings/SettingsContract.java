@@ -1,5 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.settings;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 public interface SettingsContract {
@@ -28,5 +29,7 @@ public interface SettingsContract {
         void saveSwitchState(SharedPreferences preferences, String name, boolean state);
 
         boolean getSwitchState(SharedPreferences preferences, String name);
+
+        boolean isNetworkAvailable(Context context);
     }
 }

@@ -31,6 +31,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.SECOND_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.SHARED_PREF_FILE_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.THIRD_TOPIC_NAME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_DELETE_SUCCESS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_INTERNET_CONNECTION_REQUIRED;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_LOG_OUT_SUCCESS;
 
 public class SettingsActivity extends BaseActivity implements SettingsContract.View, View.OnClickListener,
@@ -115,13 +117,28 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.settings_notification_switch_one:
-                presenter.saveSwitchState(preferences, FIRST_TOPIC_NAME, isChecked);
+                if (presenter.isNetworkAvailable(this)) {
+                    presenter.saveSwitchState(preferences, FIRST_TOPIC_NAME, isChecked);
+                } else {
+                    mSwitchFirstTopic.setChecked(presenter.getSwitchState(preferences, FIRST_TOPIC_NAME));
+                    displayToastMessage(TOAST_INTERNET_CONNECTION_REQUIRED);
+                }
                 break;
             case R.id.settings_notification_switch_two:
-                presenter.saveSwitchState(preferences, SECOND_TOPIC_NAME, isChecked);
+                if (presenter.isNetworkAvailable(this)) {
+                    presenter.saveSwitchState(preferences, SECOND_TOPIC_NAME, isChecked);
+                } else {
+                    mSwitchSecondTopic.setChecked(presenter.getSwitchState(preferences, SECOND_TOPIC_NAME));
+                    displayToastMessage(TOAST_INTERNET_CONNECTION_REQUIRED);
+                }
                 break;
             case R.id.settings_notification_switch_three:
-                presenter.saveSwitchState(preferences, THIRD_TOPIC_NAME, isChecked);
+                if (presenter.isNetworkAvailable(this)) {
+                    presenter.saveSwitchState(preferences, THIRD_TOPIC_NAME, isChecked);
+                } else {
+                    mSwitchThirdTopic.setChecked(presenter.getSwitchState(preferences, THIRD_TOPIC_NAME));
+                    displayToastMessage(TOAST_INTERNET_CONNECTION_REQUIRED);
+                }
                 break;
         }
     }
@@ -188,7 +205,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 displayToastMessage(TOAST_DELETE_SUCCESS);
                 unsubscribeAndUpdateUI();
             }
-        });
+        }).addOnFailureListener(task -> displayToastMessage(TOAST_ERROR));
     }
 
     @Override
@@ -205,10 +222,19 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     @Override
     public void displayToastMessage(String message) {
-        if (message.equals(TOAST_LOG_OUT_SUCCESS)) {
-            message = getString(R.string.settings_acc_log_out_successfully);
-        } else if (message.equals(TOAST_DELETE_SUCCESS)) {
-            message = getString(R.string.settings_acc_delete_successfully);
+        switch (message) {
+            case TOAST_LOG_OUT_SUCCESS:
+                message = getString(R.string.settings_acc_log_out_successfully);
+                break;
+            case TOAST_DELETE_SUCCESS:
+                message = getString(R.string.settings_acc_delete_successfully);
+                break;
+            case TOAST_INTERNET_CONNECTION_REQUIRED:
+                message = getString(R.string.internet_connection_required);
+                break;
+            case TOAST_ERROR:
+                message = getString(R.string.default_toast_error_message);
+                break;
         }
 
         Toast.makeText(this, message , Toast.LENGTH_LONG).show();
