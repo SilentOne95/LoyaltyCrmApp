@@ -197,7 +197,7 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         }
     }
 
-    public String formatPrice(float price) {
+    private String formatPrice(float price) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator(' ');
         DecimalFormat decimalFormat = new DecimalFormat();

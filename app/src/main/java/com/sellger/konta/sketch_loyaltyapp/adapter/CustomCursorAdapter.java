@@ -16,7 +16,7 @@ public class CustomCursorAdapter extends CursorAdapter {
     private LayoutInflater mLayoutInflater;
 
     public CustomCursorAdapter(Context context, Cursor cursor) {
-        super(context, cursor);
+        super(context, cursor, false);
         mLayoutInflater = LayoutInflater.from(context);
     }
 
@@ -27,8 +27,7 @@ public class CustomCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        String text = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         TextView textView = view.findViewById(R.id.searchbar_map_item_text);
-        textView.setText(text);
+        textView.setText(cursor.getString(cursor.getColumnIndexOrThrow("title")));
     }
 }

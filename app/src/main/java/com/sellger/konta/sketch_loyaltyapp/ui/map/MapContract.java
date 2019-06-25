@@ -2,6 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
 import android.database.Cursor;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public interface MapContract {
         void setUpBottomSheetPanelWithData(String title, String address, String openHours);
 
         void setUpSearchViewAdapter(Cursor cursor);
+
+        void goToMarkerAndShowBottomSheet(Object selectedPlace);
 
         void displayToastMessage(String message);
     }
@@ -50,5 +53,9 @@ public interface MapContract {
         String getCurrentDay();
 
         void passDataToView(String title, String address, String openHours);
+
+        LatLng getPositionFromObject(Object selectedPlace);
+
+        int getIdFromObject(Object selectedPlace);
     }
 }

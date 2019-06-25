@@ -102,7 +102,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.UPDATE_INTERVAL;
 public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallback, MapContract.View,
         GoogleMap.OnMyLocationButtonClickListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, ResultCallback,
-        OnCompleteListener<LocationSettingsResponse>, SearchView.OnQueryTextListener, View.OnClickListener {
+        OnCompleteListener<LocationSettingsResponse>, SearchView.OnQueryTextListener,
+        View.OnClickListener, SearchView.OnSuggestionListener {
 
     private static final String TAG = GoogleMapFragment.class.getSimpleName();
 
@@ -242,26 +243,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mGeofencePendingIntent != null) {
-            mGeofencingClient.removeGeofences(getGeofencePendingIntent());
-        }
-
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mFusedLocationClient != null) {
-            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
-        }
-    }
-
-    @Override
     public void initViews() {
         mPanelPeekHeight = rootView.findViewById(R.id.bottom_sheet_peek);
         mBottomSheet = rootView.findViewById(R.id.map_bottom_sheet);
@@ -285,8 +266,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        mSearchView.setOnQueryTextListener(this);
         mSearchView.setQueryHint("Search");
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setOnSuggestionListener(this);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -549,16 +531,18 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             return true;
         });
         mClusterManager.setOnClusterItemClickListener(marker -> {
-            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 16));
-
-            // Preventing from selecting the same marker
-            if (mPreviousSelectedMarkerId == marker.getId() && getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
-                presenter.switchBottomSheetState(marker);
-            } else if (mPreviousSelectedMarkerId != marker.getId()) {
-                presenter.passClickedMarkerId(marker.getId());
-                presenter.switchBottomSheetState(marker);
-                mPreviousSelectedMarkerId = marker.getId();
-            }
+            // TODO:
+            goToMarkerAndShowBottomSheet(marker);
+//            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 16));
+//
+//            // Preventing from selecting the same marker
+//            if (mPreviousSelectedMarkerId == marker.getId() && getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
+//                presenter.switchBottomSheetState(marker);
+//            } else if (mPreviousSelectedMarkerId != marker.getId()) {
+//                presenter.passClickedMarkerId(marker.getId());
+//                presenter.switchBottomSheetState(marker);
+//                mPreviousSelectedMarkerId = marker.getId();
+//            }
 
             return true;
         });
@@ -635,8 +619,42 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
+    public boolean onSuggestionSelect(int position) {
+        return true;
+    }
+
+    @Override
+    public boolean onSuggestionClick(int position) {
+        Cursor cursor = mSearchView.getSuggestionsAdapter().getCursor();
+        cursor.moveToPosition(position);
+        mSearchView.setQuery(cursor.getString(cursor.getColumnIndexOrThrow("title")), true);
+
+        goToMarkerAndShowBottomSheet(cursor);
+        return false;
+    }
+
+    @Override
     public void setUpSearchViewAdapter(Cursor cursor) {
         mSearchView.setSuggestionsAdapter(new CustomCursorAdapter(getContext(), cursor));
+    }
+
+    @Override
+    public void goToMarkerAndShowBottomSheet(Object selectedPlace) {
+        int markerId = presenter.getIdFromObject(selectedPlace);
+        LatLng position = presenter.getPositionFromObject(selectedPlace);
+
+        // Animate camera
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
+
+        // Preventing from selecting the same marker
+        // TODO: Improve showing BottomSheet
+        if (mPreviousSelectedMarkerId == markerId && getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
+            presenter.switchBottomSheetState(selectedPlace);
+        } else if (mPreviousSelectedMarkerId != markerId) {
+            presenter.passClickedMarkerId(markerId);
+            presenter.switchBottomSheetState(markerId);
+            mPreviousSelectedMarkerId = markerId;
+        }
     }
 
     @Override
@@ -646,6 +664,26 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                     Uri.parse("https://www.google.com/maps/search/?api=1&query=" +
                             mLastSelectedMarkerTitle.replaceAll(" ", "+")));
             startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mGeofencePendingIntent != null) {
+            mGeofencingClient.removeGeofences(getGeofencePendingIntent());
+        }
+
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mFusedLocationClient != null) {
+            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
         }
     }
 }

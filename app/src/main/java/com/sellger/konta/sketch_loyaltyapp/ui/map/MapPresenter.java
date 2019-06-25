@@ -234,4 +234,36 @@ public class MapPresenter implements MapContract.Presenter {
     public void passDataToView(String title, String address, String openHours) {
         view.setUpBottomSheetPanelWithData(title, address, openHours);
     }
+
+    @Override
+    public LatLng getPositionFromObject(Object selectedPlace) {
+        LatLng position;
+
+        if (selectedPlace instanceof Marker) {
+            Marker marker = (Marker) selectedPlace;
+            position = new LatLng(marker.getLat(), marker.getLng());
+        } else {
+            Cursor cursor = (Cursor) selectedPlace;
+            double lat = Double.parseDouble(cursor.getString(cursor.getColumnIndexOrThrow("lat")));
+            double lng = Double.parseDouble(cursor.getString(cursor.getColumnIndexOrThrow("lng")));
+            position = new LatLng(lat, lng);
+        }
+
+        return position;
+    }
+
+    @Override
+    public int getIdFromObject(Object selectedPlace) {
+        int markerId;
+
+        if (selectedPlace instanceof Marker) {
+            Marker marker = (Marker) selectedPlace;
+            markerId = marker.getId();
+        } else {
+            Cursor cursor = (Cursor) selectedPlace;
+            markerId = Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id")));
+        }
+
+        return markerId;
+    }
 }
