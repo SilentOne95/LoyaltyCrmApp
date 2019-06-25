@@ -141,4 +141,7 @@
     <string name="snackbar_no_network_connection">Brak połączenia z internetem</string>
     <string name="snackbar_connection_restored">Połączenie zostało przywrócone</string>
 
+    <!-- Searchable -->
+    <string name="searchview_hint">Szukaj…</string>
+
 </resources>

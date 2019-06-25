@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/searchbar_map_item_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/small_value">
+
+    <TextView
+        android:id="@+id/searchbar_map_item_text"
+        style="@style/text_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_value"
+        android:layout_marginEnd="@dimen/small_value"
+        android:layout_marginBottom="@dimen/very_small_value"
+        android:drawableStart="@drawable/ic_marker"
+        android:drawablePadding="@dimen/small_value" />
+
+</LinearLayout>

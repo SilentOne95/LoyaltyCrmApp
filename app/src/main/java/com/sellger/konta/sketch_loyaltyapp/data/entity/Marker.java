@@ -16,7 +16,10 @@ import java.util.List;
 @Entity(tableName = "marker_table")
 public class Marker implements ClusterItem {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "_id")
+    private int _id;
+
     @SerializedName("id")
     @Expose
     @ColumnInfo(name = "id")

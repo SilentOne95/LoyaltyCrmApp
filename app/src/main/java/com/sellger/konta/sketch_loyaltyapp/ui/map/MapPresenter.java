@@ -1,5 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
+import android.database.Cursor;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -101,6 +102,21 @@ public class MapPresenter implements MapContract.Presenter {
     @Override
     public void passDataToCluster(List<Marker> markerList) {
         view.setUpCluster(markerList);
+    }
+
+    @Override
+    public void getCursorMarker(String providedText) {
+        loyaltyRepository.getCursorMarker(providedText, new LoyaltyDataSource.GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                view.setUpSearchViewAdapter((Cursor) object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                view.displayToastMessage(TOAST_ERROR);
+            }
+        });
     }
 
     @Override

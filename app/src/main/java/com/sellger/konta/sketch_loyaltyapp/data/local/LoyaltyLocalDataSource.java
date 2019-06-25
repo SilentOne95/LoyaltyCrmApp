@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.data.local;
 
+import android.database.Cursor;
+
 import androidx.annotation.NonNull;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -196,6 +198,24 @@ public class LoyaltyLocalDataSource implements LoyaltyDataSource {
             mAppExecutors.mainThread().execute(() -> {
                 if (marker != null) {
                     callback.onDataLoaded(marker);
+                } else {
+                    callback.onDataNotAvailable();
+                }
+            });
+        };
+
+        mAppExecutors.diskIO().execute(getRunnable);
+    }
+
+
+    @Override
+    public void getCursorMarker(String providedText, @NonNull GetSingleDataCallback callback) {
+        Runnable getRunnable = () -> {
+            final Cursor cursor = mMarkerDao.getCursorMarker("%" + providedText + "%");
+
+            mAppExecutors.mainThread().execute(() -> {
+                if (cursor != null && cursor.getColumnCount() != 0) {
+                    callback.onDataLoaded(cursor);
                 } else {
                     callback.onDataNotAvailable();
                 }

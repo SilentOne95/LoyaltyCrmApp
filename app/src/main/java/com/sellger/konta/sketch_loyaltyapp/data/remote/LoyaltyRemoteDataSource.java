@@ -1,7 +1,5 @@
 package com.sellger.konta.sketch_loyaltyapp.data.remote;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -112,6 +110,12 @@ public class LoyaltyRemoteDataSource implements LoyaltyDataSource {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback::onDataLoaded, throwable -> callback.onDataNotAvailable()));
+    }
+
+    @Override
+    public void getCursorMarker(String providedText, @NonNull GetSingleDataCallback callback) {
+        // Not required for the remote data source, because there is no option for retrieving Cursor data
+        // anywhere besides SQLite DB using {@link LoyaltyLocalDataSource}
     }
 
     @Override

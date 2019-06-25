@@ -299,6 +299,21 @@ public class LoyaltyRepository implements LoyaltyDataSource {
     }
 
     @Override
+    public void getCursorMarker(String providedText, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyLocalDataSource.getCursorMarker(providedText, new GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                callback.onDataLoaded(object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    @Override
     public void getAllOpenHours(@NonNull LoadDataCallback callback) {
         checkNotNull(callback);
 

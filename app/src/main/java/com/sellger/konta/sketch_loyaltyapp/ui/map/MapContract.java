@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
+import android.database.Cursor;
+
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public interface MapContract {
 
         void setUpBottomSheetPanelWithData(String title, String address, String openHours);
 
+        void setUpSearchViewAdapter(Cursor cursor);
+
         void displayToastMessage(String message);
     }
 
@@ -32,6 +36,8 @@ public interface MapContract {
         void requestDataFromServer();
 
         void passDataToCluster(List<Marker> markerList);
+
+        void getCursorMarker(String providedText);
 
         void switchBottomSheetState(Object object);
 

@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.data.local.dao;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -41,4 +43,12 @@ public interface MarkerDao {
      */
     @Query("DELETE FROM marker_table")
     void deleteAllMarkers();
+
+    /**
+     * Get cursor when using SearchView.
+     *
+     * @return Cursor with data that contains provided text inside title.
+     */
+    @Query("SELECT * FROM marker_table WHERE title LIKE :providedText")
+    Cursor getCursorMarker(String providedText);
 }

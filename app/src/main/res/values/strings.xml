@@ -157,6 +157,9 @@
     <string name="snackbar_no_network_connection">No internet connection</string>
     <string name="snackbar_connection_restored">Connection restored</string>
 
+    <!-- Searchable -->
+    <string name="searchview_hint">Search for…</string>
+
     <!-- Image content descriptions -->
     <string name="log_in_view_logo_desc" translatable="false">log_in_view_logo_desc</string>
     <string name="navigation_header_logo_desc" translatable="false">Navigation header company logo</string>

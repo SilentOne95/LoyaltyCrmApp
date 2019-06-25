@@ -4,11 +4,13 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -45,6 +47,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.sellger.konta.sketch_loyaltyapp.adapter.BottomSheetViewPagerAdapter;
+import com.sellger.konta.sketch_loyaltyapp.adapter.CustomCursorAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
@@ -104,6 +107,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private static final String TAG = GoogleMapFragment.class.getSimpleName();
 
     private MapPresenter presenter;
+
+    private SearchView mSearchView;
 
     private GoogleMap mGoogleMap;
     private GoogleApiClient mGoogleApiClient;
@@ -276,9 +281,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
         MenuItem optionsItem = menu.findItem(R.id.main_menu_options);
         optionsItem.setVisible(false);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint("Search");
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.setQueryHint("Search");
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -621,8 +629,14 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public boolean onQueryTextChange(String s) {
-        return false;
+    public boolean onQueryTextChange(String newText) {
+        presenter.getCursorMarker(newText);
+        return true;
+    }
+
+    @Override
+    public void setUpSearchViewAdapter(Cursor cursor) {
+        mSearchView.setSuggestionsAdapter(new CustomCursorAdapter(getContext(), cursor));
     }
 
     @Override

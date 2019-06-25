@@ -34,6 +34,8 @@ public interface LoyaltyDataSource {
 
     void getSingleMarker(int id, @NonNull final GetSingleDataCallback callback);
 
+    void getCursorMarker(String providedText, @NonNull final GetSingleDataCallback callback);
+
     void getAllOpenHours(@NonNull final LoadDataCallback callback);
 
     void getSingleOpenHour(int id, @NonNull final GetSingleDataCallback callback);
