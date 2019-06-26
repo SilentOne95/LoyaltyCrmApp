@@ -45,10 +45,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\ic_route.png" />
-                                      <entry key="outputName" value="ic_route" />
+                                      <entry key="imageAsset" value="C:\Users\Marcin\Desktop\ic_marker_accent.png" />
+                                      <entry key="outputName" value="ic_marker_accent" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="ffffff" />
+                                      <entry key="themeColor" value="ff9800" />
                                     </map>
                                   </option>
                                 </PersistentState>

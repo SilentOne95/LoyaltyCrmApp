@@ -27,7 +27,7 @@ public interface MapContract {
 
         void setUpSearchViewAdapter(Cursor cursor);
 
-        void goToMarkerAndShowBottomSheet(Object selectedPlace);
+        void animateCameraAndShowBottomSheet(Object selectedPlace);
 
         void displayToastMessage(String message);
     }

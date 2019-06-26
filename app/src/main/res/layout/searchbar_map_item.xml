@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/small_value"
         android:layout_marginEnd="@dimen/small_value"
         android:layout_marginBottom="@dimen/very_small_value"
-        android:drawableStart="@drawable/ic_marker"
+        android:drawableStart="@drawable/ic_marker_accent"
         android:drawablePadding="@dimen/small_value" />
 
 </LinearLayout>

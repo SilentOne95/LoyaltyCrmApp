@@ -531,18 +531,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             return true;
         });
         mClusterManager.setOnClusterItemClickListener(marker -> {
-            // TODO:
-            goToMarkerAndShowBottomSheet(marker);
-//            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 16));
-//
-//            // Preventing from selecting the same marker
-//            if (mPreviousSelectedMarkerId == marker.getId() && getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
-//                presenter.switchBottomSheetState(marker);
-//            } else if (mPreviousSelectedMarkerId != marker.getId()) {
-//                presenter.passClickedMarkerId(marker.getId());
-//                presenter.switchBottomSheetState(marker);
-//                mPreviousSelectedMarkerId = marker.getId();
-//            }
+            animateCameraAndShowBottomSheet(marker);
 
             return true;
         });
@@ -629,7 +618,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         cursor.moveToPosition(position);
         mSearchView.setQuery(cursor.getString(cursor.getColumnIndexOrThrow("title")), true);
 
-        goToMarkerAndShowBottomSheet(cursor);
+        animateCameraAndShowBottomSheet(cursor);
         return false;
     }
 
@@ -639,7 +628,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void goToMarkerAndShowBottomSheet(Object selectedPlace) {
+    public void animateCameraAndShowBottomSheet(Object selectedPlace) {
         int markerId = presenter.getIdFromObject(selectedPlace);
         LatLng position = presenter.getPositionFromObject(selectedPlace);
 
@@ -647,12 +636,11 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
 
         // Preventing from selecting the same marker
-        // TODO: Improve showing BottomSheet
         if (mPreviousSelectedMarkerId == markerId && getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
             presenter.switchBottomSheetState(selectedPlace);
         } else if (mPreviousSelectedMarkerId != markerId) {
             presenter.passClickedMarkerId(markerId);
-            presenter.switchBottomSheetState(markerId);
+            presenter.switchBottomSheetState(selectedPlace);
             mPreviousSelectedMarkerId = markerId;
         }
     }

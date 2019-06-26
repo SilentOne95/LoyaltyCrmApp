@@ -121,7 +121,7 @@ public class MapPresenter implements MapContract.Presenter {
 
     @Override
     public void switchBottomSheetState(Object object) {
-        if (object instanceof Marker) {
+        if (object instanceof Marker || object instanceof Cursor) {
             if (view.getBottomSheetState() == BottomSheetBehavior.STATE_HIDDEN) {
                 view.setBottomSheetState(BottomSheetBehavior.STATE_COLLAPSED);
             } else {
