@@ -81,6 +81,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     // Field that stores layout type of clicked menu item
     private String mLayoutType = null;
 
+    // Helper variable for selecting relevant item in NavDrawer after popBackStack
+    private int mBackStackCounter = 0;
+
     public static String PACKAGE_NAME;
 
     @Override
@@ -129,6 +132,14 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         } else {
             presenter.displayHomeScreen(LAYOUT_TYPE_LOGIN);
         }
+
+        // TODO: Testing solution for back fragment transaction and selecting relevant item in nav drawer
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            if (getSupportFragmentManager().getBackStackEntryCount() < mBackStackCounter) {
+                presenter.getLayoutTypeOfSelectedScreen(getSupportFragmentManager().findFragmentById(R.id.switch_view_layout).getClass().getSimpleName());
+            }
+            mBackStackCounter = getSupportFragmentManager().getBackStackEntryCount();
+        });
     }
 
     @Override
@@ -226,7 +237,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             default:
                 if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
                     getSupportFragmentManager().popBackStack();
-                    presenter.matchRelevantLayoutType(getSupportFragmentManager().findFragmentById(R.id.switch_view_layout).getClass().getSimpleName());
                 } else {
                     finish();
                 }

@@ -360,9 +360,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         view.setDisplayItemChecked(viewPosition);
     }
 
-    // TODO:
     @Override
-    public void matchRelevantLayoutType(String displayedLayoutName) {
+    public void getLayoutTypeOfSelectedScreen(String displayedLayoutName) {
         String layoutType = "";
         int menuIdToSelect = 0;
         switch (displayedLayoutName) {

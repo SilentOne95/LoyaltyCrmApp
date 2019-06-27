@@ -58,6 +58,6 @@ public interface MainActivityContract {
 
         void passIdOfSelectedView(int viewPosition);
 
-        void matchRelevantLayoutType(String displayedLayoutName);
+        void getLayoutTypeOfSelectedScreen(String displayedLayoutName);
     }
 }
