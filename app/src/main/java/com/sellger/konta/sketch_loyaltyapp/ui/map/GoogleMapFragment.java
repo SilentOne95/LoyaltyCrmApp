@@ -12,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -314,6 +313,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                 // Location Permission already granted
                 mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                 mGoogleMap.setMyLocationEnabled(true);
+                displayEnableGpsDialog();
             } else {
                 // Request Location Permission
                 checkLocationPermission();
@@ -321,7 +321,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         } else {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             mGoogleMap.setMyLocationEnabled(true);
+            displayEnableGpsDialog();
         }
+
+        mGoogleMap.setOnMyLocationButtonClickListener(this);
 
         // Add default geo location to set camera on certain country
         LatLng poland = new LatLng(51.253679, 19.069815);
@@ -341,10 +344,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.setOnCameraIdleListener(mClusterManager);
 
         // Set BottomSheet state when map is clicked
-        mGoogleMap.setOnMapClickListener(latLng -> presenter.switchBottomSheetState(latLng)
-        );
-
-        mGoogleMap.setOnMyLocationButtonClickListener(this);
+        mGoogleMap.setOnMapClickListener(latLng -> presenter.switchBottomSheetState(latLng));
     }
 
     @Override
@@ -368,7 +368,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
+    public void displayEnableGpsDialog() {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
         builder.setAlwaysShow(true);
@@ -376,6 +376,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         Task<LocationSettingsResponse> task = LocationServices.getSettingsClient(getContext()).checkLocationSettings(builder.build());
         task.addOnCompleteListener(this);
     }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) { }
 
     @Override
     public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
@@ -481,9 +484,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
                         Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
 
-                    mGoogleMap.setMyLocationEnabled(true);
-
                     mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                    mGoogleMap.setMyLocationEnabled(true);
+                    displayEnableGpsDialog();
                 }
             } else {
                 // Permission denied, display Toast message
@@ -539,14 +542,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     @Override
     public boolean onMyLocationButtonClick() {
-        LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        // If GPS is off and user click on button to localize position on map,
-        // dialog window will pop up to turn on GPS
-        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            setUpGoogleApiClient();
-        }
-
+        displayEnableGpsDialog();
         return false;
     }
 

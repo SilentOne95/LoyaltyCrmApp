@@ -15,6 +15,8 @@ public interface MapContract {
 
         void setCustomMapStyle();
 
+        void displayEnableGpsDialog();
+
         void checkLocationPermission();
 
         void setUpCluster(List<Marker> markerList);
