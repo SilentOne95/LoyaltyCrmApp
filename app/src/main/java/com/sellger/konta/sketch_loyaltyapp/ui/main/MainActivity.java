@@ -29,6 +29,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
+import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.instruction.ScanResultFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccountFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
@@ -142,6 +143,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         });
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mToolbar = findViewById(R.id.toolbar);
@@ -153,11 +157,52 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         mNavViewHeaderButton = navigationViewHeader.findViewById(R.id.navigation_header_button);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to hide scrollbar in NavDrawer view.
+     */
+    @Override
+    public void hideNavDrawerScrollbar() {
+        // If NavView is not null, hide scrollbar
+        if (mNavigationView != null) {
+            NavigationMenuView navigationMenuView = (NavigationMenuView) mNavigationView.getChildAt(0);
+            if (navigationMenuView != null) {
+                navigationMenuView.setVerticalScrollBarEnabled(false);
+            }
+        }
+    }
+
+    /**
+     * Populates menu with custom layout.
+     *
+     * @param menu is the options menu in which you place items
+     * @return true for the menu to be displayed
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    /**
+     * Called from {@link MainActivityPresenter#displaySelectedScreen(String, String)} to open relevant
+     * activity.
+     *
+     * @param activity which is going to be opened
+     */
     @Override
     public void setActivity(Class<? extends Activity> activity) {
         MainActivity.this.startActivity(new Intent(MainActivity.this, activity));
     }
 
+    /**
+     * Called from {@link MainActivityPresenter#displaySelectedScreen(String, String)} to open relevant
+     * fragment.
+     *
+     * @param fragment which is going to be opened
+     * @param fragmentTitle of fragment
+     * @param data passed from previous screen. Depends on needs, it can be information if user is
+     *             logged anonymously or it's just data passed to next screen
+     */
     @Override
     public void setFragment(BaseFragment fragment, String fragmentTitle, String data) {
         fragment.attachPresenter(presenter);
@@ -203,6 +248,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
     }
 
+    /**
+     * Called from {@link #setLogInFragment(BaseFragment)} to open log in screen in certain situation
+     * when onBackPressed is triggered.
+     *
+     * @param fragment which is going to be opened
+     */
     @Override
     public void setLogInFragment(BaseFragment fragment) {
         fragment.attachPresenter(presenter);
@@ -214,6 +265,9 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 .commit();
     }
 
+    /**
+     * Called when the activity has detected the user's press of the back key.
+     */
     @Override
     public void onBackPressed() {
         // If back button is pressed on certain view, set up desired view
@@ -244,16 +298,15 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
     }
 
-    @Override
-    public void hideNavDrawerScrollbar() {
-        if (mNavigationView != null) {
-            NavigationMenuView navigationMenuView = (NavigationMenuView) mNavigationView.getChildAt(0);
-            if (navigationMenuView != null) {
-                navigationMenuView.setVerticalScrollBarEnabled(false);
-            }
-        }
-    }
-
+    /**
+     * Called from {@link MainActivityPresenter#passDataToNavDrawer(ArrayList, ArrayList, int)} to refactor
+     * and set data in NavDrawer view.
+     *
+     * @param menuSectionArray of NavDrawer menu data which is going to be set in first 'section'
+     * @param submenuSectionArray of NavDrawer submenu data which is going to be set just below menu data
+     * @param homeScreenId is an int ID of screen which was chosen to be a 'home screen' of the app
+     * @param iconNameArray of strings that contain icon name for every menu item in NavDrawer view
+     */
     @Override
     public void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
                                    ArrayList<MenuComponent> submenuSectionArray,
@@ -262,6 +315,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         Menu menu = mNavigationView.getMenu();
         int arrayIndex = 0;
 
+        // Get title, icon name and set up NavView menu items
         for (int i = 0; i < menuSectionArray.size(); i++) {
             menu.add(NAV_VIEW_FIRST_GROUP_ID, i, NAV_VIEW_ORDER,
                     menuSectionArray.get(i).getComponentTitle())
@@ -276,12 +330,19 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             arrayIndex++;
         }
 
+        // Set additional menu item group, which is options screen
         menu.add(NAV_VIEW_THIRD_GROUP_ID, 0, NAV_VIEW_ORDER, R.string.menu_nav_view_settings_text).setIcon(R.drawable.ic_menu_options);
 
-        // Set checked home screen in Navigation Drawer
+        // Set home screen as checked in NavView
         mNavigationView.getMenu().getItem(homeScreenId).setChecked(true).setCheckable(true);
     }
 
+    /**
+     * This hook is called whenever an item in options menu is selected.
+     *
+     * @param item is a selected item
+     * @return false to allow normal menu processing to proceed
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -292,9 +353,16 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Listener for handling events on navigation items.
+     *
+     * @param menuItem is an item which was clicked
+     * @return true to display the item as the selected one
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        // Assign clicked menuItem IDs and layout type to global variables
+        // Assign clicked menuItem IDs and layout type to global variables to pass them as arguments
+        // in another method that is responsible for displaying new screen
         if (!menuItem.isChecked()) {
             if (menuItem.getGroupId() == 2) {
                 mLayoutType = LAYOUT_TYPE_SETTINGS;
@@ -306,7 +374,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
 
         // Uncheck all checked menu items
-        uncheckItemsNavDrawer();
+        uncheckItemsNavView();
 
         // Set item as selected to persist highlight
         menuItem.setChecked(true).setCheckable(true);
@@ -315,6 +383,20 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), DELAY_DRAWER_ACTION);
 
         return true;
+    }
+
+    /**
+     * One of four listeners for monitoring events about drawers, which is called when a drawer has
+     * settled in a completely closed state.
+     *
+     * @param view of the drawer
+     */
+    @Override
+    public void onDrawerClosed(@NonNull View view) {
+        presenter.displaySelectedScreen(mLayoutType, LAYOUT_DATA_EMPTY_STRING);
+        // Set layoutType to null to avoid creating new instance of fragment, when closing nav drawer
+        // by clicking next to the view
+        mLayoutType = null;
     }
 
     @Override
@@ -326,34 +408,42 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     @Override
-    public void onDrawerClosed(@NonNull View view) {
-        presenter.displaySelectedScreen(mLayoutType, LAYOUT_DATA_EMPTY_STRING);
-        // Set layoutType to null to avoid creating new instance of fragment, when closing nav drawer
-        // by clicking next to the view
-        mLayoutType = null;
-    }
-
-    @Override
     public void onDrawerStateChanged(int i) {
     }
 
+    /**
+     * Called from {@link MainActivityPresenter#passIdOfSelectedView(int)} to set checked menu item
+     * in NavDrawer.
+     *
+     * @param viewPosition of the menu item which should be set as checked
+     */
     @Override
     public void setDisplayItemChecked(int viewPosition) {
         // Uncheck all checked menu items
-        uncheckItemsNavDrawer();
+        uncheckItemsNavView();
 
-        // Set checked item related to selected screen in Navigation Drawer
+        // Set menu item with given position as checked in NavView
         mNavigationView.getMenu().getItem(viewPosition).setChecked(true).setCheckable(true);
     }
 
+    /**
+     * Called from {@link #setDisplayItemChecked(int)} to uncheck all previous selected menu items.
+     */
     @Override
-    public void uncheckItemsNavDrawer() {
+    public void uncheckItemsNavView() {
         int size = mNavigationView.getMenu().size();
         for (int i = 0; i < size; i++) {
             mNavigationView.getMenu().getItem(i).setChecked(false);
         }
     }
 
+    /**
+     * Retrieves the results for permission requests in {@link GoogleMapFragment} and {@link ScanResultFragment}.
+     *
+     * @param requestCode is an int of permission that was requested
+     * @param permissions that were requested
+     * @param grantResults are results for the corresponding permissions which is either granted or denied
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -364,14 +454,15 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
+    /**
+     * Interface definition for a callback to be invoked when a menu item is clicked.
+     *
+     * @param menuItem which was invoked
+     * @return boolean whether other callbacks should be executed or not
+     */
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
+        // Assign relevant action based on which option was clicked
         switch (menuItem.getItemId()) {
             case R.id.main_menu_my_account:
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
@@ -379,7 +470,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
                     presenter.displaySelectedScreen(LAYOUT_TYPE_LOGIN, LAYOUT_DATA_EMPTY_STRING);
                 } else if (!(fragment instanceof MyAccountFragment)) {
                     presenter.displaySelectedScreen(LAYOUT_TYPE_ACCOUNT, LAYOUT_DATA_EMPTY_STRING);
-                    uncheckItemsNavDrawer();
+                    uncheckItemsNavView();
                 }
                 break;
             case R.id.main_menu_options:
@@ -390,14 +481,26 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         return false;
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param view which was clicked
+     */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         mLayoutType = LAYOUT_TYPE_LOGIN;
 
         // Close drawer after delay when item is tapped
         new Handler().postDelayed(() -> mDrawerLayout.closeDrawer(GravityCompat.START), DELAY_DRAWER_ACTION);
     }
 
+    /**
+     * Called from {@link #setFragment(BaseFragment, String, String)} to set visibility of certain view
+     * placed in NavViewHeader depends on whether account is anonymous or not.
+     *
+     * @param isAccountAnonymous string of data passed to {@link #setFragment(BaseFragment, String, String)}
+     *                           with information about registration method
+     */
     @Override
     public void setNavViewHeaderVisibility(String isAccountAnonymous) {
         switch (isAccountAnonymous) {
@@ -410,6 +513,12 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         }
     }
 
+    /**
+     * Called from {@link MainActivityPresenter#requestDataFromServer()} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {

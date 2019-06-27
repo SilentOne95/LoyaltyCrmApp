@@ -13,13 +13,13 @@ public interface MainActivityContract {
 
     interface View {
 
+        void hideNavDrawerScrollbar();
+
         void setActivity(Class<? extends Activity> activity);
 
         void setFragment(BaseFragment fragment, String fragmentTitle, String data);
 
         void setLogInFragment(BaseFragment fragment);
-
-        void hideNavDrawerScrollbar();
 
         void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
                                 ArrayList<MenuComponent> submenuSectionArray,
@@ -27,7 +27,7 @@ public interface MainActivityContract {
 
         void setDisplayItemChecked(int viewPosition);
 
-        void uncheckItemsNavDrawer();
+        void uncheckItemsNavView();
 
         void setNavViewHeaderVisibility(String isAccountAnonymous);
 

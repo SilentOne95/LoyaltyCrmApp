@@ -1,6 +1,10 @@
 package com.sellger.konta.sketch_loyaltyapp;
 
+/**
+ * Contains all const variables.
+ */
 public final class Constants {
+
     private Constants() {}
 
     // General
