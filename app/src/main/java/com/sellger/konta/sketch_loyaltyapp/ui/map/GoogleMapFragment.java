@@ -643,6 +643,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
             presenter.switchBottomSheetState(selectedPlace);
             mPreviousSelectedMarkerId = markerId;
         }
+        mSearchView.clearFocus();
     }
 
     @Override

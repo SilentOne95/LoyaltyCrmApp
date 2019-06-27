@@ -45,7 +45,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Marcin\Desktop\ic_marker_accent.png" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\png\ic_marker.png" />
                                       <entry key="outputName" value="ic_marker_accent" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="ff9800" />
