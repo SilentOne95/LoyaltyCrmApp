@@ -62,8 +62,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.NAV_VIEW_THIRD_GROUP
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
-public class MainActivity extends BaseActivity implements DrawerLayout.DrawerListener,
-        NavigationView.OnNavigationItemSelectedListener, MainActivityContract.View,
+public class MainActivity extends BaseActivity implements MainActivityContract.View,
+        DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener,
         Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -134,7 +134,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             presenter.displayHomeScreen(LAYOUT_TYPE_LOGIN);
         }
 
-        // TODO: Testing solution for back fragment transaction and selecting relevant item in nav drawer
+        // TODO: Testing solution for back fragment transaction and selecting relevant item in NavView
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
             if (getSupportFragmentManager().getBackStackEntryCount() < mBackStackCounter) {
                 presenter.getLayoutTypeOfSelectedScreen(getSupportFragmentManager().findFragmentById(R.id.switch_view_layout).getClass().getSimpleName());
@@ -198,10 +198,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
      * Called from {@link MainActivityPresenter#displaySelectedScreen(String, String)} to open relevant
      * fragment.
      *
-     * @param fragment which is going to be opened
+     * @param fragment      which is going to be opened
      * @param fragmentTitle of fragment
-     * @param data passed from previous screen. Depends on needs, it can be information if user is
-     *             logged anonymously or it's just data passed to next screen
+     * @param data          passed from previous screen. Depends on needs, it can be information if user is
+     *                      logged anonymously or it's just data passed to next screen
      */
     @Override
     public void setFragment(BaseFragment fragment, String fragmentTitle, String data) {
@@ -302,10 +302,10 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
      * Called from {@link MainActivityPresenter#passDataToNavDrawer(ArrayList, ArrayList, int)} to refactor
      * and set data in NavDrawer view.
      *
-     * @param menuSectionArray of NavDrawer menu data which is going to be set in first 'section'
+     * @param menuSectionArray    of NavDrawer menu data which is going to be set in first 'section'
      * @param submenuSectionArray of NavDrawer submenu data which is going to be set just below menu data
-     * @param homeScreenId is an int ID of screen which was chosen to be a 'home screen' of the app
-     * @param iconNameArray of strings that contain icon name for every menu item in NavDrawer view
+     * @param homeScreenId        is an int ID of screen which was chosen to be a 'home screen' of the app
+     * @param iconNameArray       of strings that contain icon name for every menu item in NavDrawer view
      */
     @Override
     public void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
@@ -440,8 +440,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     /**
      * Retrieves the results for permission requests in {@link GoogleMapFragment} and {@link ScanResultFragment}.
      *
-     * @param requestCode is an int of permission that was requested
-     * @param permissions that were requested
+     * @param requestCode  is an int of permission that was requested
+     * @param permissions  that were requested
      * @param grantResults are results for the corresponding permissions which is either granted or denied
      */
     @Override

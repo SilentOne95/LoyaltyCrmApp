@@ -1,8 +1,13 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.main;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMenuArray;
@@ -81,6 +86,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link MainActivity#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     */
     @Override
     public void requestDataFromServer() {
         loyaltyRepository.getMenu(new LoyaltyDataSource.LoadDataCallback() {
@@ -96,19 +104,31 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         });
     }
 
+    /**
+     * Called from {@link MainActivity#onCreate(Bundle)} if user has already signed in.
+     *
+     * @param layoutType is a string with data which screen should be opened
+     */
     @Override
     public void displayHomeScreen(String layoutType) {
         displaySelectedScreen(layoutType, LAYOUT_DATA_EMPTY_STRING);
     }
 
+    /**
+     * Called from {@link #refactorFetchedData(List)} to refactor fetched data and pass it to view.
+     *
+     * @param menuComponentList is a list of fetched data of {@link MenuComponent}
+     */
     @Override
     public void refactorFetchedData(List<MenuComponent> menuComponentList) {
         int homeScreenId = 0;
 
+        // Sort fetched data and pass to separate arrays
         HelperMenuArray helperMenuArray = sortMenuDataList(menuComponentList);
         mMenuArray = helperMenuArray.getMenuArray();
         mSubmenuArray = helperMenuArray.getSubmenuArray();
 
+        // Get id of screen which was set as "home" screen
         for (int i = 0; i < mMenuArray.size(); i++) {
             if (mMenuArray.get(i).getIsHomePage().equals(1)) {
                 homeScreenId = mMenuArray.get(i).getPosition() - 1;
@@ -134,6 +154,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         passDataToNavDrawer(mMenuArray, mSubmenuArray, homeScreenId);
     }
 
+    /**
+     * Called from {@link #refactorFetchedData(List)} to sort all items based on menu section
+     * (first or second) and target position in related menu section.
+     *
+     * @param listOfItems of {@link MenuComponent}
+     * @return {@link HelperMenuArray} with two sorted menu arrays
+     */
     @Override
     public HelperMenuArray sortMenuDataList(List<MenuComponent> listOfItems) {
         String menuType;
@@ -191,6 +218,14 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         return new HelperMenuArray(sortedMenuArray, sortedSubmenuArray);
     }
 
+    /**
+     * Called from {@link #refactorFetchedData(List)} to prepare data to set in NavView.
+     * This method assigns relevant icon to every menu item and pass all data to view.
+     *
+     * @param menu is array contains menu items of 'first section'
+     * @param submenu is array contains menu items of 'second section'
+     * @param homeScreenId is int contains id of screen chosen as 'home' screen
+     */
     @Override
     public void passDataToNavDrawer(ArrayList<MenuComponent> menu,
                                     ArrayList<MenuComponent> submenu, int homeScreenId) {
@@ -198,6 +233,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         int arrayIndex = 0;
         String[] iconNameArray = new String[arraySize];
 
+        // Get layout type and match with icons which should be assign to menu item
         for (int i = 0; i < menu.size(); i++) {
             iconNameArray[arrayIndex] = matchRelevantIconName(menu.get(i).getType());
             arrayIndex++;
@@ -211,6 +247,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         view.setDataToNavDrawer(menu, submenu, homeScreenId, iconNameArray);
     }
 
+    /**
+     * Called from {@link #passDataToNavDrawer(ArrayList, ArrayList, int)} to match fetched menu
+     * layout types with icon names available in the app.
+     *
+     * @param layoutType of item we are going to assign icon
+     * @return icon name
+     */
     @Override
     public String matchRelevantIconName(String layoutType) {
         String iconName;
@@ -248,6 +291,14 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         return iconName;
     }
 
+    /**
+     * Called from {@link MainActivity#onNavigationItemSelected(MenuItem)} to get type of layout
+     * with should be opened next, based on ID's assigned to selected menu item in NavView.
+     *
+     * @param groupId of selected menu item
+     * @param itemId of selected menu item
+     * @return layout type of selected menu item
+     */
     @Override
     public String getLayoutType(int groupId, int itemId) {
         String layoutType;
@@ -261,6 +312,14 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         return layoutType;
     }
 
+    /**
+     * Called from {@link #getSelectedLayoutType(String, String)}, {@link #displayHomeScreen(String)},
+     * {@link MainActivity#onBackPressed()}, {@link MainActivity#onDrawerClosed(View)} and
+     * {@link MainActivity#onMenuItemClick(MenuItem)} to set new fragment based on passed parameter.
+     *
+     * @param layoutType of screen that should be opened
+     * @param data which is passed to {@link MainActivity#setFragment(BaseFragment, String, String)}
+     */
     @Override
     public void displaySelectedScreen(String layoutType, String data) {
         if (layoutType != null) {
@@ -313,6 +372,13 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         }
     }
 
+    /**
+     * Called from {@link #displaySelectedScreen(String, String)} to get layout title of fragment
+     * which is going to be opened.
+     *
+     * @param layoutType of fragment is going to be opened
+     * @return layout title of fragment
+     */
     @Override
     public String getLayoutTitle(String layoutType) {
         String layoutName = "";
@@ -326,12 +392,23 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         return layoutName;
     }
 
+    /**
+     * Called from callback listener implemented in {@link HomeFragment} which enable switching fragments
+     * from inside fragment.
+     *
+     * @param item is a layout type
+     * @param data is additional data which can be passed
+     */
     @Override
     public void getSelectedLayoutType(String item, String data) { displaySelectedScreen(item, data); }
 
+    /**
+     * Called from {@link MainActivity#onCreate(Bundle)} to set up Observable which listen which item
+     * was clicked in {@link HomeFragment} and is going to be opened with
+     * method {@link #getSelectedLayoutType(String, String)}.
+     */
     @Override
     public void setUpObservableHomeAdapter() {
-
         Observable<Integer> observable = HomePresenter.getObservableSelectedView();
         Observer<Integer> observer = new Observer<Integer>() {
             @Override
@@ -355,11 +432,23 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         observable.subscribe(observer);
     }
 
+    /**
+     * Called from {@link #getLayoutTypeOfSelectedScreen(String)} and
+     * {@link #setUpObservableHomeAdapter()} to set relevant item in NavView as checked.
+     *
+     * @param viewPosition is an int that represent position of item that is going to be set as checked
+     */
     @Override
     public void passIdOfSelectedView(int viewPosition) {
         view.setDisplayItemChecked(viewPosition);
     }
 
+    /**
+     * Called from callback listener set in {@link MainActivity#onCreate(Bundle)} whenever back
+     * button is pressed, so fragment could switch and it's necessary to set relevant menu item as checked.
+     *
+     * @param displayedLayoutName is layout name of displayed fragment
+     */
     @Override
     public void getLayoutTypeOfSelectedScreen(String displayedLayoutName) {
         String layoutType = "";
