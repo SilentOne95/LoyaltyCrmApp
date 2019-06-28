@@ -115,12 +115,11 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     /**
-     * Called from {@link #refactorFetchedData(List)} to refactor fetched data and pass it to view.
+     * Called from {@link #requestDataFromServer()} to refactor fetched data.
      *
      * @param menuComponentList of fetched data of {@link MenuComponent}
      */
-    @Override
-    public void refactorFetchedData(List<MenuComponent> menuComponentList) {
+    private void refactorFetchedData(List<MenuComponent> menuComponentList) {
         int homeScreenId = 0;
 
         // Sort fetched data and pass to separate arrays
@@ -161,8 +160,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * @param listOfItems of {@link MenuComponent}
      * @return {@link HelperMenuArray} with two sorted menu arrays
      */
-    @Override
-    public HelperMenuArray sortMenuDataList(List<MenuComponent> listOfItems) {
+    private HelperMenuArray sortMenuDataList(List<MenuComponent> listOfItems) {
         String menuType;
         ArrayList<MenuComponent> menuLocalArray = new ArrayList<>();
         ArrayList<MenuComponent> submenuLocalArray = new ArrayList<>();
@@ -221,8 +219,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * @param submenu is array contains menu items of 'second section'
      * @param homeScreenId contains id of screen chosen as 'home' screen
      */
-    @Override
-    public void passDataToNavDrawer(ArrayList<MenuComponent> menu,
+    private void passDataToNavDrawer(ArrayList<MenuComponent> menu,
                                     ArrayList<MenuComponent> submenu, int homeScreenId) {
         int arraySize = menu.size() + submenu.size();
         int arrayIndex = 0;
@@ -249,8 +246,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * @param layoutType of item we are going to assign icon
      * @return icon name
      */
-    @Override
-    public String matchRelevantIconName(String layoutType) {
+    private String matchRelevantIconName(String layoutType) {
         String iconName;
 
         switch (layoutType) {
@@ -374,8 +370,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * @param layoutType of fragment is going to be opened
      * @return layout title of fragment
      */
-    @Override
-    public String getLayoutTitle(String layoutType) {
+    private String getLayoutTitle(String layoutType) {
         String layoutName = "";
         for(MenuComponent component : mAllMenuItemsArray) {
             if (component.getType().equals(layoutType)) {
@@ -428,8 +423,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     /**
-     * Called from {@link #getLayoutTypeOfSelectedScreen(String)} and
-     * {@link #setUpObservableHomeAdapter()} to set relevant item in NavView as checked.
+     * Called from {@link #getLayoutTypeOfSelectedScreen(String)}, {@link #setUpObservableHomeAdapter()}
+     * and {@link MainActivity#onBackPressed()} to set relevant item in NavView as checked.
      *
      * @param viewPosition represents position of item that is going to be set as checked
      */

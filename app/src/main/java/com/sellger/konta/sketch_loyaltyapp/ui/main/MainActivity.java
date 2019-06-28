@@ -160,8 +160,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     /**
      * Called from {@link #onCreate(Bundle)} to hide scrollbar in NavDrawer view.
      */
-    @Override
-    public void hideNavDrawerScrollbar() {
+    private void hideNavDrawerScrollbar() {
         // If NavView is not null, hide scrollbar
         if (mNavigationView != null) {
             NavigationMenuView navigationMenuView = (NavigationMenuView) mNavigationView.getChildAt(0);
@@ -254,8 +253,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
      *
      * @param fragment which is going to be opened
      */
-    @Override
-    public void setLogInFragment(BaseFragment fragment) {
+    private void setLogInFragment(BaseFragment fragment) {
         fragment.attachPresenter(presenter);
 
         getSupportFragmentManager()
@@ -429,8 +427,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
     /**
      * Called from {@link #setDisplayItemChecked(int)} to uncheck all previous selected menu items.
      */
-    @Override
-    public void uncheckItemsNavView() {
+    private void uncheckItemsNavView() {
         int size = mNavigationView.getMenu().size();
         for (int i = 0; i < size; i++) {
             mNavigationView.getMenu().getItem(i).setChecked(false);

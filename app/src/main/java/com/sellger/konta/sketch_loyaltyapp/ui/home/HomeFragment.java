@@ -145,8 +145,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
      *
      * @param isNeeded boolean parameter to decide whether view should be visible or not
      */
-    @Override
-    public void setUpEmptyStateView(boolean isNeeded) {
+    private void setUpEmptyStateView(boolean isNeeded) {
         if (isNeeded) {
             mRecyclerView.setVisibility(View.GONE);
             mEmptyStateView.setVisibility(View.VISIBLE);

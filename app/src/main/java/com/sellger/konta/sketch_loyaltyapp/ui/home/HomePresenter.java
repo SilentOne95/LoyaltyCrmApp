@@ -62,8 +62,7 @@ public class HomePresenter implements HomeContract.Presenter {
     /**
      * Called from {@link #requestDataFromServer()} to hide progress bar when data is fetched or not.
      */
-    @Override
-    public void hideProgressBar() {
+    private void hideProgressBar() {
         view.hideProgressBar();
     }
 
@@ -72,8 +71,7 @@ public class HomePresenter implements HomeContract.Presenter {
      *
      * @param listOfItems of fetched data of {@link MenuComponent}
      */
-    @Override
-    public void refactorFetchedData(List<MenuComponent> listOfItems) {
+    private void refactorFetchedData(List<MenuComponent> listOfItems) {
         int numOfColumns = 2;
 
         // Sort fetched data and pass to an array
@@ -158,8 +156,7 @@ public class HomePresenter implements HomeContract.Presenter {
      * @param menuComponentList of items are going to be displayed with adapter
      * @param numOfColumns that data is going to be displayed in
      */
-    @Override
-    public void passDataToAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
+    private void passDataToAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
         if (menuComponentList != null) {
             view.setUpAdapter(menuComponentList, numOfColumns);
         }
