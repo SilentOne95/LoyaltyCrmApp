@@ -1,11 +1,15 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.home;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
+import com.sellger.konta.sketch_loyaltyapp.adapter.HomeAdapter;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.data.utils.HelperMenuArray;
+import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivityPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +31,7 @@ public class HomePresenter implements HomeContract.Presenter {
     @NonNull
     private LoyaltyRepository loyaltyRepository;
 
-    private static PublishSubject<Integer> mMarkerIdSubject = PublishSubject.create();
+    private static PublishSubject<Integer> mItemIdSubject = PublishSubject.create();
     private ArrayList<MenuComponent> mNavDrawerArray = new ArrayList<>();
 
     HomePresenter(@NonNull HomeContract.View view, @NonNull LoyaltyRepository loyaltyRepository) {
@@ -35,6 +39,9 @@ public class HomePresenter implements HomeContract.Presenter {
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link HomeFragment#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     */
     @Override
     public void requestDataFromServer() {
         loyaltyRepository.getMenu(new LoyaltyDataSource.LoadDataCallback() {
@@ -52,18 +59,30 @@ public class HomePresenter implements HomeContract.Presenter {
         });
     }
 
+    /**
+     * Called from {@link #requestDataFromServer()} to hide progress bar when data is fetched or not.
+     */
     @Override
     public void hideProgressBar() {
         view.hideProgressBar();
     }
 
+    /**
+     * Called from {@link #requestDataFromServer()} to refactor fetched data and pass it to {@link HomeAdapter}.
+     *
+     * @param listOfItems of fetched data of {@link MenuComponent}
+     */
     @Override
     public void refactorFetchedData(List<MenuComponent> listOfItems) {
         int numOfColumns = 2;
+
+        // Sort fetched data and pass to an array
         HelperMenuArray helperMenuArray = sortMenuDataList(listOfItems);
         mNavDrawerArray = helperMenuArray.getMenuArray();
         mNavDrawerArray.addAll(helperMenuArray.getSubmenuArray());
 
+        // Get num of columns in which data should be displayed and remove 'home' screen from this list
+        // as it shouldn't be accessible from itself
         for (int i = 0; i < mNavDrawerArray.size(); i++) {
             if (mNavDrawerArray.get(i).getIsHomePage().equals(1)) {
                 numOfColumns = mNavDrawerArray.get(i).getNumberOfColumns();
@@ -75,6 +94,13 @@ public class HomePresenter implements HomeContract.Presenter {
         passDataToAdapter(mNavDrawerArray, numOfColumns);
     }
 
+    /**
+     * Called from {@link #refactorFetchedData(List)} to sort all items based on menu section
+     * (first or second) and target position in related menu section.
+     *
+     * @param listOfItems of {@link MenuComponent}
+     * @return {@link HelperMenuArray} with two sorted menu arrays
+     */
     private HelperMenuArray sortMenuDataList(List<MenuComponent> listOfItems) {
         String menuType;
         ArrayList<MenuComponent> menuLocalArray = new ArrayList<>();
@@ -99,7 +125,6 @@ public class HomePresenter implements HomeContract.Presenter {
         int position = 1;
 
         do {
-
             if (menuLocalArray.get(index).getPosition() == position) {
                 sortedMenuArray.add(menuLocalArray.get(index));
 
@@ -108,14 +133,12 @@ public class HomePresenter implements HomeContract.Presenter {
             } else {
                 index++;
             }
-
         } while (sortedMenuArray.size() < menuLocalArray.size());
 
         index = 0;
         position = 1;
 
         do {
-
             if (submenuLocalArray.get(index).getPosition() == position) {
                 sortedSubmenuArray.add(submenuLocalArray.get(index));
 
@@ -124,13 +147,17 @@ public class HomePresenter implements HomeContract.Presenter {
             } else {
                 index++;
             }
-
-
         } while (sortedSubmenuArray.size() < submenuLocalArray.size());
 
         return new HelperMenuArray(sortedMenuArray, sortedSubmenuArray);
     }
 
+    /**
+     * Called from {@link #refactorFetchedData(List)} to pass refactored data to adapter.
+     *
+     * @param menuComponentList of items are going to be displayed with adapter
+     * @param numOfColumns that data is going to be displayed in
+     */
     @Override
     public void passDataToAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
         if (menuComponentList != null) {
@@ -138,12 +165,23 @@ public class HomePresenter implements HomeContract.Presenter {
         }
     }
 
+    /**
+     * Called from callback listener implemented in {@link HomeFragment} to notify Observer set up
+     * in {@link MainActivityPresenter#setUpObservableHomeAdapter()} which item was clicked.
+     *
+     * @param viewId represents position of item that is going to be set as checked
+     */
     @Override
     public void passIdOfSelectedView(int viewId) {
-        mMarkerIdSubject.onNext(viewId);
+        mItemIdSubject.onNext(viewId);
     }
 
+    /**
+     * Public static observable set up for Observer in {@link MainActivityPresenter#setUpObservableHomeAdapter()}.
+     *
+     * @return id of selected item
+     */
     public static Observable<Integer> getObservableSelectedView() {
-        return mMarkerIdSubject;
+        return mItemIdSubject;
     }
 }

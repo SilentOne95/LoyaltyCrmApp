@@ -107,7 +107,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     /**
      * Called from {@link MainActivity#onCreate(Bundle)} if user has already signed in.
      *
-     * @param layoutType is a string with data which screen should be opened
+     * @param layoutType string with data which screen should be opened
      */
     @Override
     public void displayHomeScreen(String layoutType) {
@@ -117,7 +117,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     /**
      * Called from {@link #refactorFetchedData(List)} to refactor fetched data and pass it to view.
      *
-     * @param menuComponentList is a list of fetched data of {@link MenuComponent}
+     * @param menuComponentList of fetched data of {@link MenuComponent}
      */
     @Override
     public void refactorFetchedData(List<MenuComponent> menuComponentList) {
@@ -186,7 +186,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         int position = 1;
 
         do {
-
             if (menuLocalArray.get(index).getPosition() == position) {
                 sortedMenuArray.add(menuLocalArray.get(index));
 
@@ -195,14 +194,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
             } else {
                 index++;
             }
-
         } while (sortedMenuArray.size() < menuLocalArray.size());
 
         index = 0;
         position = 1;
 
         do {
-
             if (submenuLocalArray.get(index).getPosition() == position) {
                 sortedSubmenuArray.add(submenuLocalArray.get(index));
 
@@ -211,8 +208,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
             } else {
                 index++;
             }
-
-
         } while (sortedSubmenuArray.size() < submenuLocalArray.size());
 
         return new HelperMenuArray(sortedMenuArray, sortedSubmenuArray);
@@ -224,7 +219,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      *
      * @param menu is array contains menu items of 'first section'
      * @param submenu is array contains menu items of 'second section'
-     * @param homeScreenId is int contains id of screen chosen as 'home' screen
+     * @param homeScreenId contains id of screen chosen as 'home' screen
      */
     @Override
     public void passDataToNavDrawer(ArrayList<MenuComponent> menu,
@@ -403,7 +398,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     public void getSelectedLayoutType(String item, String data) { displaySelectedScreen(item, data); }
 
     /**
-     * Called from {@link MainActivity#onCreate(Bundle)} to set up Observable which listen which item
+     * Called from {@link MainActivity#onCreate(Bundle)} to set up Observer which listen which item
      * was clicked in {@link HomeFragment} and is going to be opened with
      * method {@link #getSelectedLayoutType(String, String)}.
      */
@@ -436,7 +431,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * Called from {@link #getLayoutTypeOfSelectedScreen(String)} and
      * {@link #setUpObservableHomeAdapter()} to set relevant item in NavView as checked.
      *
-     * @param viewPosition is an int that represent position of item that is going to be set as checked
+     * @param viewPosition represents position of item that is going to be set as checked
      */
     @Override
     public void passIdOfSelectedView(int viewPosition) {
@@ -444,10 +439,10 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     /**
-     * Called from callback listener set in {@link MainActivity#onCreate(Bundle)} whenever back
+     * Called from callback listener implemented in {@link MainActivity#onCreate(Bundle)} whenever back
      * button is pressed, so fragment could switch and it's necessary to set relevant menu item as checked.
      *
-     * @param displayedLayoutName is layout name of displayed fragment
+     * @param displayedLayoutName of displayed fragment
      */
     @Override
     public void getLayoutTypeOfSelectedScreen(String displayedLayoutName) {
