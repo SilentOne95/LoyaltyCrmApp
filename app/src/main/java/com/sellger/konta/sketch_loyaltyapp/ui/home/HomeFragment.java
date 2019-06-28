@@ -57,16 +57,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         // Init views
         initViews();
 
-        // Setting up views
-        mSpecialOfferImage.setVisibility(View.GONE);
-        mSpecialOfferText.setVisibility(View.GONE);
-        mEmptyStateView.setVisibility(View.GONE);
-
         // Setting up presenter
         presenter = new HomePresenter(this, Injection.provideLoyaltyRepository(getContext()));
         presenter.requestDataFromServer();
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mSpecialOfferImage = rootView.findViewById(R.id.special_offer_image);
@@ -75,8 +73,19 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         mProgressBar = rootView.findViewById(R.id.progress_bar_home);
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mEmptyStateView = rootView.findViewById(R.id.empty_state_home_container);
+
+        // Setting up views visibility
+        mSpecialOfferImage.setVisibility(View.GONE);
+        mSpecialOfferText.setVisibility(View.GONE);
+        mEmptyStateView.setVisibility(View.GONE);
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
@@ -87,6 +96,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * Implementation of callback listener that handle adapter items click events.
+     * See interface {@link RecyclerItemClickListener}.
+     */
     private RecyclerItemClickListener.HomeRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.HomeRetrofitClickListener() {
         @Override
         public void onItemHomeClick(MenuComponent item, int selectedViewId) {
@@ -96,8 +109,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         }
     };
 
+    /**
+     * Called from {@link HomePresenter#passDataToAdapter(ArrayList, int)} to populate adapter with data.
+     *
+     * @param menuComponentList of items that are going to pass to adapter
+     * @param numOfColumns in which data will be displayed
+     */
     @Override
     public void setUpAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
+        // If list is empty, display custom EmptyStateView
         if (menuComponentList.size() == 0) {
             setUpEmptyStateView(true);
         } else {
@@ -108,6 +128,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
             mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
 
+            // Set up custom
             CustomItemDecoration itemDecoration;
             if (numOfColumns == 1) {
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.mid_value);
@@ -119,6 +140,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         }
     }
 
+    /**
+     * Called from {@link #setUpAdapter(ArrayList, int)} to change visibility of custom EmptyStateView.
+     *
+     * @param isNeeded boolean parameter to decide whether view should be visible or not
+     */
     @Override
     public void setUpEmptyStateView(boolean isNeeded) {
         if (isNeeded) {
@@ -130,11 +156,20 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         }
     }
 
+    /**
+     * Called from {@link HomePresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
+     */
     @Override
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
     }
 
+    /**
+     * Called from {@link HomePresenter#requestDataFromServer()} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {
