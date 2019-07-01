@@ -57,6 +57,7 @@ public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubs
 
     /**
      * Called from {@link #manageTopicsSubscriptions(String)} to subscribe to relevant FCM topic.
+     * Refer {@link ManageTopicsSubscriptions}.
      *
      * @param topic that app should subscribe to
      */
@@ -67,6 +68,7 @@ public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubs
 
     /**
      * Called from {@link #manageTopicsSubscriptions(String)} to unsubscribe from relevant FCM topic.
+     * Refer {@link ManageTopicsSubscriptions}.
      *
      * @param topic that app should unsubscribe from
      */

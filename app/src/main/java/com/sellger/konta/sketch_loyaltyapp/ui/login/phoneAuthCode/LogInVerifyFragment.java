@@ -77,10 +77,6 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         // Init views
         initViews();
 
-        mTextSmsLimitReached.setVisibility(View.GONE);
-        mCircularProgressButton.setVisibility(View.GONE);
-        mCircularProgressButton.setOnClickListener(this);
-
         // Setting up presenter
         presenter = new LogInVerifyPresenter(this);
 
@@ -116,6 +112,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         }
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mTextProvidedPhoneNumber = rootView.findViewById(R.id.verify_your_number_text);
@@ -124,16 +123,18 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         mProgressBar = rootView.findViewById(R.id.verify_progress_bar);
         mTextSmsLimitReached = rootView.findViewById(R.id.verify_sms_limit_reached_text);
         mCircularProgressButton = rootView.findViewById(R.id.verify_sms_limit_reached_button);
+
+        mTextSmsLimitReached.setVisibility(View.GONE);
+        mCircularProgressButton.setVisibility(View.GONE);
+        mCircularProgressButton.setOnClickListener(this);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        phoneNumberSignIn(mProvidedPhoneNumber);
-    }
-
-    @Override
-    public void phoneNumberSignIn(String phoneNumber) {
+    /**
+     * Called from {@link #onStart()} to kick off phone number registration method.
+     *
+     * @param phoneNumber string
+     */
+    private void phoneNumberSignIn(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,
                 60,
@@ -142,8 +143,13 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 mCallbacksPhoneNumber);
     }
 
-    @Override
-    public void displayCodeInEditText(String code) {
+    /**
+     * Called from callback listener implemented in {@link #onCreate(Bundle)} to set received verification
+     * SMS code and set in EditText and verify phone number with this code.
+     *
+     * @param code string verification
+     */
+    private void displayCodeInEditText(String code) {
         new Handler().postDelayed(() -> {
             mTextInputCode.setFocusableInTouchMode(true);
             mTextInputCode.setText(code);
@@ -155,8 +161,13 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         new Handler().postDelayed(() -> verifyPhoneNumberWithCode(PhoneAuthProvider.getCredential(mVerificationId, mSmsCode), false), DELAY_PHONE_AUTH);
     }
 
-    @Override
-    public void displaySmsCodeLimitInfo(PhoneAuthCredential credential) {
+    /**
+     * Called from callback listener implemented in {@link #onCreate(Bundle)} to display info about
+     * reached sending SMS limit with verification code.
+     *
+     * @param credential that wraps phone number and verification information for authentication purposes
+     */
+    private void displaySmsCodeLimitInfo(PhoneAuthCredential credential) {
         mPhoneAuthCredential = credential;
 
         new Handler().postDelayed(() -> {
@@ -169,16 +180,14 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         }, DELAY_SET_SMS_CODE);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (mPhoneAuthCredential != null) {
-            mCircularProgressButton.startMorphAnimation();
-            verifyPhoneNumberWithCode(mPhoneAuthCredential, true);
-        }
-    }
-
-    @Override
-    public void verifyPhoneNumberWithCode(PhoneAuthCredential credential, boolean isSmsLimitReached) {
+    /**
+     * Called from {@link #displayCodeInEditText(String)} and {@link #onClick(View)} to consider
+     * whether account should be converted from anonymous or just created new one.
+     *
+     * @param credential that wraps phone number and verification information for authentication purposes
+     * @param isSmsLimitReached boolean value that inform about reached sending SMS limit
+     */
+    private void verifyPhoneNumberWithCode(PhoneAuthCredential credential, boolean isSmsLimitReached) {
         if (mFirebaseAuth.getCurrentUser() != null) {
             convertAnonymousAccount(credential, isSmsLimitReached);
         } else {
@@ -186,8 +195,14 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         }
     }
 
-    @Override
-    public void signInWithPhoneAuthCredential(PhoneAuthCredential credential, boolean isSmsLimitReached) {
+    /**
+     * Called from {@link #verifyPhoneNumberWithCode(PhoneAuthCredential, boolean)} to sign user with
+     * phone number auth credentials and subscribe to push notification topics.
+     *
+     * @param credential that wraps phone number and verification information for authentication purposes
+     * @param isSmsLimitReached boolean value that inform about reached sending SMS limit
+     */
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential, boolean isSmsLimitReached) {
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
@@ -210,8 +225,14 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 });
     }
 
-    @Override
-    public void convertAnonymousAccount(AuthCredential credential, boolean isSmsLimitReached) {
+    /**
+     * Called from {@link #verifyPhoneNumberWithCode(PhoneAuthCredential, boolean)} to convert
+     * anonymous account to Google / Facebook depends on the choice.
+     *
+     * @param credential that wraps phone number and verification information for authentication purposes
+     * @param isSmsLimitReached boolean value that inform about reached sending SMS limit
+     */
+    private void convertAnonymousAccount(AuthCredential credential, boolean isSmsLimitReached) {
         mFirebaseAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
@@ -230,21 +251,42 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 });
     }
 
-    @Override
-    public void finishLoadingAndSwitchScreen() {
+    /**
+     * Called from {@link #signInWithPhoneAuthCredential(PhoneAuthCredential, boolean)} and
+     * {@link #convertAnonymousAccount(AuthCredential, boolean)} (if reached SMS limit) to set
+     * loading indicator to finish state and switch screen.
+     */
+    private void finishLoadingAndSwitchScreen() {
         new Handler().postDelayed(() -> mCircularProgressButton.doneLoadingAnimation(Color.rgb(255,152,0),
                 BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_check)),DELAY_LOGIN_SWITCH_LAYOUT);
         new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOADING_LOGIN_SWITCH_LAYOUT);
     }
 
-    @Override
-    public void switchScreen() {
+    /**
+     * Called from {@link #signInWithPhoneAuthCredential(PhoneAuthCredential, boolean)} and
+     * {@link #convertAnonymousAccount(AuthCredential, boolean)} (if didn't reach SMS limit) to
+     * switch screen.
+     */
+    private void switchScreen() {
         new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
     }
 
-
     @Override
-    public void displayToastMessage(String message) {
+    public void onClick(View v) {
+        if (mPhoneAuthCredential != null) {
+            mCircularProgressButton.startMorphAnimation();
+            verifyPhoneNumberWithCode(mPhoneAuthCredential, true);
+        }
+    }
+
+    /**
+     * Called from {@link #signInWithPhoneAuthCredential(PhoneAuthCredential, boolean)} and
+     * {@link #convertAnonymousAccount(AuthCredential, boolean)} to display to user relevant
+     * string with toast message.
+     *
+     * @param message that contains info what kind of message should be displayed
+     */
+    private void displayToastMessage(String message) {
         switch (message) {
             case TOAST_ERROR:
                 message = getString(R.string.default_toast_error_message);
@@ -255,5 +297,11 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         }
 
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        phoneNumberSignIn(mProvidedPhoneNumber);
     }
 }

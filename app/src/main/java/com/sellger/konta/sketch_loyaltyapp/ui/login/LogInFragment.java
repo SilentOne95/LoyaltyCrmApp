@@ -212,7 +212,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     /**
      * Called from {@link #firebaseAuthWithGoogle(GoogleSignInAccount)} and {@link #firebaseAuthWithGoogle(GoogleSignInAccount)}
-     * sign user with Google or Facebook credentials and subscribe to push notification topics.
+     * to sign user with Google or Facebook credentials and subscribe to push notification topics.
      *
      * @param credential retrieved from {@link #onActivityResult(int, int, Intent)}
      */

@@ -8,6 +8,5 @@ public interface LogInContract {
 
     interface Presenter {
 
-        void manageTopicsSubscriptions(String subscriptionType);
     }
 }
