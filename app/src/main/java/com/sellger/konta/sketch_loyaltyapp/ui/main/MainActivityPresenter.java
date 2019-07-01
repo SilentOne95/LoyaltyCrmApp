@@ -117,7 +117,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     /**
      * Called from {@link #requestDataFromServer()} to refactor fetched data.
      *
-     * @param menuComponentList of fetched data of {@link MenuComponent}
+     * @param menuComponentList of fetched items of {@link MenuComponent}
      */
     private void refactorFetchedData(List<MenuComponent> menuComponentList) {
         int homeScreenId = 0;

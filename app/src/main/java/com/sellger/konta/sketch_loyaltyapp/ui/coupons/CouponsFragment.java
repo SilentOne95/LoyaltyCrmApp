@@ -83,6 +83,9 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         presenter.requestDataFromServer();
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         progressBar = rootView.findViewById(R.id.progress_bar);
@@ -90,6 +93,12 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
@@ -103,6 +112,10 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * Implementation of callback listener that handle adapter items click events.
+     * See interface {@link RecyclerItemClickListener}.
+     */
     private RecyclerItemClickListener.CouponRetrofitClickListener recyclerItemClickListener = new RecyclerItemClickListener.CouponRetrofitClickListener() {
         @Override
         public void onItemCouponDetailsClick(int couponId) {
@@ -120,6 +133,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
                     .findViewByPosition(position)
                     .findViewById(R.id.grid_item_code_text);
 
+            // Blur, gray out and display coupon code on selected image
             switch (numOfColumns) {
                 case 1:
                     Picasso.get()
@@ -167,10 +181,15 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         }
     };
 
+    /**
+     * Called from {@link CouponsPresenter#passDataToAdapter(List, int)} to populate adapter with data.
+     *
+     * @param couponList of items that are going to pass to adapter
+     * @param numOfColumns in which data will be displayed
+     */
     @Override
     public void setUpAdapter(List<Coupon> couponList, int numOfColumns) {
         this.numOfColumns = numOfColumns;
-        // Set empty state view if needed
         if (couponList.isEmpty()) {
             setUpEmptyStateView(true);
         } else {
@@ -189,6 +208,11 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         }
     }
 
+    /**
+     * Called from {@link #setUpAdapter(List, int)} to change visibility of custom EmptyStateView.
+     *
+     * @param isNeeded boolean parameter to decide whether view should be visible or not
+     */
     @Override
     public void setUpEmptyStateView(boolean isNeeded) {
         if (isNeeded) {
@@ -200,11 +224,20 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         }
     }
 
+    /**
+     * Called from {@link CouponsPresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
+     */
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
     }
 
+    /**
+     * Called from {@link CouponsPresenter#requestDataFromServer()} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {
@@ -214,14 +247,22 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Implementation of SearchView callbacks for changes to the query text.
+     * @see CouponAdapter for implementation of filtering logic
+     *
+     * @param newText provided by the user in a SearchView
+     * @return set false if the SearchView should perform the default action of showing
+     * any suggestions if available
+     */
     @Override
-    public boolean onQueryTextSubmit(String query) {
+    public boolean onQueryTextChange(String newText) {
+        adapter.getFilter().filter(newText);
         return false;
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
+    public boolean onQueryTextSubmit(String query) {
         return false;
     }
 }

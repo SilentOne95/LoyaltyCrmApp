@@ -153,7 +153,7 @@ public class HomePresenter implements HomeContract.Presenter {
     /**
      * Called from {@link #refactorFetchedData(List)} to pass refactored data to adapter.
      *
-     * @param menuComponentList of items are going to be displayed with adapter
+     * @param menuComponentList of items are going to be displayed using adapter
      * @param numOfColumns that data is going to be displayed in
      */
     private void passDataToAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {

@@ -117,7 +117,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
      */
     @Override
     public void setUpAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
-        // If list is empty, display custom EmptyStateView
         if (menuComponentList.size() == 0) {
             setUpEmptyStateView(true);
         } else {

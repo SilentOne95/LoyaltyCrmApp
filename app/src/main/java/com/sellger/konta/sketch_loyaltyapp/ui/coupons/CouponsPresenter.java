@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -39,6 +41,9 @@ public class CouponsPresenter implements CouponsContract.Presenter {
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link CouponsFragment#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     */
     @Override
     public void requestDataFromServer() {
         loyaltyRepository.getAllCoupons(new LoyaltyDataSource.LoadDataCallback() {
@@ -72,8 +77,13 @@ public class CouponsPresenter implements CouponsContract.Presenter {
         });
     }
 
-    @Override
-    public void refactorFetchedData(List<Coupon> couponList, int numOfColumns) {
+    /**
+     * Called from {@link #requestDataFromServer()} to refactor fetched data.
+     *
+     * @param couponList of fetched items of {@link Coupon}
+     * @param numOfColumns that data is going to be displayed in
+     */
+    private void refactorFetchedData(List<Coupon> couponList, int numOfColumns) {
         ArrayList<Coupon> validCouponsList;
 
         if (numOfColumns < 1 || numOfColumns > 3) {
@@ -86,8 +96,13 @@ public class CouponsPresenter implements CouponsContract.Presenter {
         passDataToAdapter(validCouponsList, numOfColumns);
     }
 
-    @Override
-    public ArrayList<Coupon> isCouponDataValid(List<Coupon> couponList) {
+    /**
+     * Called from {@link #refactorFetchedData(List, int)} to filter valid coupons.
+     *
+     * @param couponList of items to filter
+     * @return list of valid coupons
+     */
+    private ArrayList<Coupon> isCouponDataValid(List<Coupon> couponList) {
         calendar.add(Calendar.DATE, 1);
 
         for (Coupon coupon : couponList) {
@@ -102,8 +117,13 @@ public class CouponsPresenter implements CouponsContract.Presenter {
         return validCouponsList;
     }
 
-    @Override
-    public Date parseDate(String date) {
+    /**
+     * Called from {@link #isCouponDataValid(List)} as helper method to parse dates.
+     *
+     * @param date to parse
+     * @return date formatted to desired pattern
+     */
+    private Date parseDate(String date) {
         try {
             return simpleDateFormat.parse(date);
         } catch (ParseException e) {
@@ -112,13 +132,20 @@ public class CouponsPresenter implements CouponsContract.Presenter {
         }
     }
 
-    @Override
-    public void hideProgressBar() {
+    /**
+     * Called from {@link #requestDataFromServer()} to hide progress bar when data is fetched or not.
+     */
+    private void hideProgressBar() {
         view.hideProgressBar();
     }
 
-    @Override
-    public void passDataToAdapter(List<Coupon> couponList, int numOfColumns) {
+    /**
+     * Called from {@link #refactorFetchedData(List, int)} to pass refactored data to adapter,
+     *
+     * @param couponList of items are going to be displayed using adapter
+     * @param numOfColumns that data is going to be displayed in
+     */
+    private void passDataToAdapter(List<Coupon> couponList, int numOfColumns) {
         view.setUpAdapter(couponList, numOfColumns);
     }
 }
