@@ -70,18 +70,15 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         presenter.requestDataFromServer();
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mProgressBar = rootView.findViewById(R.id.progress_bar);
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mEmptyStateView = rootView.findViewById(R.id.empty_state_products_container);
     }
-
-    private RecyclerItemClickListener.ProductRetrofitClickListener recyclerItemClickListener = productId -> {
-        Intent startProductDetailsActivity = new Intent(getContext(), ProductDetailsActivity.class);
-        startProductDetailsActivity.putExtra(EXTRAS_ELEMENT_ID, productId);
-        startActivity(startProductDetailsActivity);
-    };
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -96,9 +93,25 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * Implementation of callback listener that handle adapter items click events.
+     * See interface {@link RecyclerItemClickListener}.
+     */
+    private RecyclerItemClickListener.ProductRetrofitClickListener recyclerItemClickListener = productId -> {
+        Intent startProductDetailsActivity = new Intent(getContext(), ProductDetailsActivity.class);
+        startProductDetailsActivity.putExtra(EXTRAS_ELEMENT_ID, productId);
+        startActivity(startProductDetailsActivity);
+    };
+
+    /**
+     * Called from {@link ProductsPresenter#passDataToAdapter(List, int)} to set up adapter
+     * {@link ProductAdapter} with data.
+     *
+     * @param productList of items that are going to pass to adapter
+     * @param numOfColumns in which data will be displayed
+     */
     @Override
     public void setUpAdapter(List<Product> productList, int numOfColumns) {
-        // Set empty state view if needed
         if (productList.isEmpty()) {
             setUpEmptyStateView(true);
         } else {
@@ -117,8 +130,12 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         }
     }
 
-    @Override
-    public void setUpEmptyStateView(boolean isNeeded) {
+    /**
+     * Called from {@link #setUpAdapter(List, int)} to change visibility of custom EmptyStateView.
+     *
+     * @param isNeeded boolean parameter to decide whether view should be visible or not
+     */
+    private void setUpEmptyStateView(boolean isNeeded) {
         if (isNeeded) {
             mRecyclerView.setVisibility(View.GONE);
             mEmptyStateView.setVisibility(View.VISIBLE);
@@ -128,11 +145,20 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         }
     }
 
+    /**
+     * Called from {@link ProductsPresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
+     */
     @Override
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
     }
 
+    /**
+     * Called from {@link ProductsPresenter#requestDataFromServer()} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {
@@ -142,14 +168,23 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
     }
 
+
+    /**
+     * Implementation of SearchView callbacks for changes to the query text.
+     * @see ProductAdapter for implementation of filtering logic
+     *
+     * @param newText provided by the user in a SearchView
+     * @return set false if the SearchView should perform the default action of showing
+     * any suggestions if available
+     */
     @Override
-    public boolean onQueryTextSubmit(String query) {
+    public boolean onQueryTextChange(String newText) {
+        mAdapter.getFilter().filter(newText);
         return false;
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        mAdapter.getFilter().filter(newText);
+    public boolean onQueryTextSubmit(String query) {
         return false;
     }
 }

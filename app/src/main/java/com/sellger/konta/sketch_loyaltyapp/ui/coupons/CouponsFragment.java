@@ -182,7 +182,8 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     };
 
     /**
-     * Called from {@link CouponsPresenter#passDataToAdapter(List, int)} to populate adapter with data.
+     * Called from {@link CouponsPresenter#passDataToAdapter(List, int)} to set up adapter
+     * {@link CouponAdapter} with data.
      *
      * @param couponList of items that are going to pass to adapter
      * @param numOfColumns in which data will be displayed
@@ -213,8 +214,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
      *
      * @param isNeeded boolean parameter to decide whether view should be visible or not
      */
-    @Override
-    public void setUpEmptyStateView(boolean isNeeded) {
+    private void setUpEmptyStateView(boolean isNeeded) {
         if (isNeeded) {
             recyclerView.setVisibility(View.GONE);
             emptyStateView.setVisibility(View.VISIBLE);

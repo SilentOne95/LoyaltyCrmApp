@@ -12,8 +12,6 @@ public interface CouponsContract {
 
         void setUpAdapter(List<Coupon> couponList, int numOfColumns);
 
-        void setUpEmptyStateView(boolean isNeeded);
-
         void hideProgressBar();
 
         void displayToastMessage(String message);

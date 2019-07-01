@@ -10,8 +10,6 @@ public interface ProductsContract {
 
         void setUpAdapter(List<Product> productList, int numOfColumns);
 
-        void setUpEmptyStateView(boolean isNeeded);
-
         void hideProgressBar();
 
         void displayToastMessage(String message);
@@ -20,11 +18,5 @@ public interface ProductsContract {
     interface Presenter {
 
         void requestDataFromServer();
-
-        void refactorFetchedData(List<Product> couponList, int numOfColumns);
-
-        void hideProgressBar();
-
-        void passDataToAdapter(List<Product> productList, int numOfColumns);
     }
 }

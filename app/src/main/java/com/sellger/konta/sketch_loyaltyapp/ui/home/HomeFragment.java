@@ -110,7 +110,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     };
 
     /**
-     * Called from {@link HomePresenter#passDataToAdapter(ArrayList, int)} to populate adapter with data.
+     * Called from {@link HomePresenter#passDataToAdapter(ArrayList, int)} to set up adapter
+     * {@link HomeAdapter} with data.
      *
      * @param menuComponentList of items that are going to pass to adapter
      * @param numOfColumns in which data will be displayed

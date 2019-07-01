@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.products;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -28,6 +30,9 @@ public class ProductsPresenter implements ProductsContract.Presenter {
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link ProductsFragment#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     */
     @Override
     public void requestDataFromServer() {
         loyaltyRepository.getAllProducts(new LoyaltyDataSource.LoadDataCallback() {
@@ -61,8 +66,13 @@ public class ProductsPresenter implements ProductsContract.Presenter {
         });
     }
 
-    @Override
-    public void refactorFetchedData(List<Product> productList, int numOfColumns) {
+    /**
+     * Called from {@link #requestDataFromServer()} to refactor fetched data.
+     *
+     * @param productList of fetched items of {@link Product}
+     * @param numOfColumns that data is going to be displayed in
+     */
+    private void refactorFetchedData(List<Product> productList, int numOfColumns) {
         if (numOfColumns < 1 || numOfColumns > 3) {
             numOfColumns = DEFAULT_NUM_OF_COLUMNS;
         }
@@ -71,13 +81,20 @@ public class ProductsPresenter implements ProductsContract.Presenter {
         passDataToAdapter(productList, numOfColumns);
     }
 
-    @Override
-    public void hideProgressBar() {
+    /**
+     * Called from {@link #requestDataFromServer()} to hide progress bar when data is fetched or not.
+     */
+    private void hideProgressBar() {
         view.hideProgressBar();
     }
 
-    @Override
-    public void passDataToAdapter(List<Product> productList, int numOfColumns) {
+    /**
+     * Called from {@link #refactorFetchedData(List, int)} to pass refactored data to adapter,
+     *
+     * @param productList of items are going to be displayed using adapter
+     * @param numOfColumns that data is going to be displayed in
+     */
+    private void passDataToAdapter(List<Product> productList, int numOfColumns) {
         view.setUpAdapter(productList, numOfColumns);
     }
 }
