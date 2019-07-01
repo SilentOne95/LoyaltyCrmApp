@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.couponDetails;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -23,6 +25,9 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter {
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link CouponDetailsActivity#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     */
     @Override
     public void requestDataFromServer(int couponId) {
         loyaltyRepository.getSingleCoupon(couponId, new LoyaltyDataSource.GetSingleDataCallback() {
@@ -40,13 +45,19 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter {
         });
     }
 
-    @Override
-    public void hideProgressBar() {
+    /**
+     * Called from {@link #requestDataFromServer(int)} to hide progress bar when data is fetched or not.
+     */
+    private void hideProgressBar() {
         view.hideProgressBar();
     }
 
-    @Override
-    public void passDataToView(Coupon coupon) {
+    /**
+     * Called from {@link #requestDataFromServer(int)} to pass refactored data to view.
+     *
+     * @param coupon item containing all details, refer {@link Coupon}
+     */
+    private void passDataToView(Coupon coupon) {
         view.setUpViewWithData(coupon);
     }
 }

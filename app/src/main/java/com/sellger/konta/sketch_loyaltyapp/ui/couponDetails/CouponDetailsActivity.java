@@ -97,6 +97,9 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         presenter.requestDataFromServer(couponId);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mLayoutContainer = findViewById(R.id.layout_container);
@@ -122,12 +125,11 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         mBottomBarcodeView = findViewById(R.id.bottom_coupon_barcode_bitmap);
     }
 
-    @Override
-    public void hideProgressBar() {
-        mLayoutContainer.setVisibility(View.VISIBLE);
-        mProgressBar.setVisibility(View.GONE);
-    }
-
+    /**
+     * Called from {@link CouponDetailsPresenter#passDataToView(Coupon)} to populate view with {@link Coupon} details.
+     *
+     * @param coupon item containing all details, refer {@link Coupon}
+     */
     @Override
     public void setUpViewWithData(Coupon coupon) {
         if (!TextUtils.isEmpty(coupon.getImage())) {
@@ -194,8 +196,13 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         }
     }
 
-    @Override
-    public String formatPrice(float price) {
+    /**
+     * Called from {@link #setUpViewWithData(Coupon)} to edit price format.
+     *
+     * @param price get from {@link Coupon} item
+     * @return formatted price form
+     */
+    private String formatPrice(float price) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator(' ');
         DecimalFormat decimalFormat = new DecimalFormat();
@@ -206,6 +213,12 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         return decimalFormat.format(price);
     }
 
+    /**
+     * This hook is called whenever an item in options menu is selected.
+     *
+     * @param item is a selected item
+     * @return false to allow normal menu processing to proceed
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -215,27 +228,14 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.show_coupon_button:
-                switchBottomSheetState();
-                break;
-            case R.id.bottom_coupon_arrow_right:
-                mViewFlipper.setInAnimation(this, R.anim.slide_in_right);
-                mViewFlipper.setOutAnimation(this, R.anim.slide_out_right);
-                mViewFlipper.showNext();
-                break;
-            case R.id.bottom_coupon_arrow_left:
-                mViewFlipper.setInAnimation(this, R.anim.slide_in_left);
-                mViewFlipper.setOutAnimation(this, R.anim.slide_out_left);
-                mViewFlipper.showPrevious();
-                break;
-        }
-    }
-
-    @Override
-    public Bitmap encodeAsBitmap(String contents) throws WriterException {
+    /**
+     * Called from {@link #setUpViewWithData(Coupon)} to generate barcode bitmap from string.
+     *
+     * @param contents is string of barcode number
+     * @return generated barcode bitmap from given string
+     * @throws WriterException covers the range of exceptions which may occur when encoding a barcode
+     */
+    private Bitmap encodeAsBitmap(String contents) throws WriterException {
         if (contents == null) {
             return null;
         }
@@ -269,8 +269,10 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         return bitmap;
     }
 
-    @Override
-    public void switchBottomSheetState() {
+    /**
+     * Called from {@link #onClick(View)} to change BottomSheetState.
+     */
+    private void switchBottomSheetState() {
         if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             showCouponCodeButton.setText(R.string.hide_my_coupon_text);
@@ -278,6 +280,39 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             showCouponCodeButton.setText(R.string.show_my_coupon_text);
         }
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param view which was clicked
+     */
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.show_coupon_button:
+                switchBottomSheetState();
+                break;
+            case R.id.bottom_coupon_arrow_right:
+                mViewFlipper.setInAnimation(this, R.anim.slide_in_right);
+                mViewFlipper.setOutAnimation(this, R.anim.slide_out_right);
+                mViewFlipper.showNext();
+                break;
+            case R.id.bottom_coupon_arrow_left:
+                mViewFlipper.setInAnimation(this, R.anim.slide_in_left);
+                mViewFlipper.setOutAnimation(this, R.anim.slide_out_left);
+                mViewFlipper.showPrevious();
+                break;
+        }
+    }
+
+    /**
+     * Called from {@link CouponDetailsPresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
+     */
+    @Override
+    public void hideProgressBar() {
+        mLayoutContainer.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
