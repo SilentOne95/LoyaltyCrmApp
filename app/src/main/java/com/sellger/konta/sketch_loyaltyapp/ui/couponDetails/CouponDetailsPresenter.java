@@ -27,6 +27,8 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter {
 
     /**
      * Called from {@link CouponDetailsActivity#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     *
+     * @param couponId of the item which info is going to be fetched
      */
     @Override
     public void requestDataFromServer(int couponId) {

@@ -49,21 +49,29 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
         // Init views
         initViews();
 
-        // Setting up views
-        mLayoutContainer.setVisibility(View.GONE);
-
         // Setting up presenter
         presenter = new TermsPresenter(this, Injection.provideLoyaltyRepository(getContext()));
         presenter.requestDataFromServer(1);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mLayoutContainer = rootView.findViewById(R.id.layout_container);
         mProgressBar = rootView.findViewById(R.id.progress_bar);
         mTermsTextView = rootView.findViewById(R.id.terms_webview);
+
+        mLayoutContainer.setVisibility(View.GONE);
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
@@ -74,17 +82,31 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * Called from {@link TermsPresenter#passDataToView(Page)} to populate view with {@link Page} details.
+     *
+     * @param page item containing all details, refer {@link Page}
+     */
+    @Override
+    public void setUpViewWithData(Page page) {
+        mTermsTextView.loadData(page.getBody(), "text/html", null);
+    }
+
+    /**
+     * Called from {@link TermsPresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
+     */
     @Override
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
         mLayoutContainer.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void setUpViewWithData(Page page) {
-        mTermsTextView.loadData(page.getBody(), "text/html", null);
-    }
-
+    /**
+     * Called from {@link TermsPresenter#requestDataFromServer(int)} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {

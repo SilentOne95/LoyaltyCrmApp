@@ -16,9 +16,5 @@ public interface TermsContract {
     interface Presenter {
 
         void requestDataFromServer(int pageId);
-
-        void hideProgressBar();
-
-        void passDataToView(Page page);
     }
 }

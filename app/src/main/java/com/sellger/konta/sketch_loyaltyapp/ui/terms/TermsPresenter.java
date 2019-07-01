@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.terms;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -23,6 +25,11 @@ public class TermsPresenter implements TermsContract.Presenter {
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link TermsFragment#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     *
+     * @param pageId of the item which info is going to be fetched
+     */
     @Override
     public void requestDataFromServer(int pageId) {
         loyaltyRepository.getSinglePage(pageId, new LoyaltyDataSource.GetSingleDataCallback() {
@@ -40,13 +47,19 @@ public class TermsPresenter implements TermsContract.Presenter {
         });
     }
 
-    @Override
-    public void hideProgressBar() {
+    /**
+     * Called from {@link #requestDataFromServer(int)} to hide progress bar when data is fetched or not.
+     */
+    private void hideProgressBar() {
         view.hideProgressBar();
     }
 
-    @Override
-    public void passDataToView(Page page) {
+    /**
+     * Called from {@link #requestDataFromServer(int)} to pass refactored data to view.
+     *
+     * @param page item containing all details, refer {@link Page}
+     */
+    private void passDataToView(Page page) {
         view.setUpViewWithData(page);
     }
 }

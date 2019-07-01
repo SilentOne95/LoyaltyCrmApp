@@ -105,23 +105,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         // Init views
         initViews();
 
-        // Set up Toolbar, ActionBar, DrawerLayout, NavigationView
-        setSupportActionBar(mToolbar);
-        mToolbar.setOnMenuItemClickListener(this);
-
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        }
-
-        mDrawerLayout.addDrawerListener(this);
-
-        mNavigationView.setNavigationItemSelectedListener(this);
-        hideNavDrawerScrollbar();
-
-        mNavViewHeaderButton.setOnClickListener(this);
-
         // Set up presenter
         presenter = new MainActivityPresenter(this, Injection.provideLoyaltyRepository(getApplicationContext()));
         presenter.requestDataFromServer();
@@ -155,6 +138,23 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         View navigationViewHeader = mNavigationView.getHeaderView(0);
         mNavViewHeaderShadeContainer = navigationViewHeader.findViewById(R.id.navigation_view_header_shade_container);
         mNavViewHeaderButton = navigationViewHeader.findViewById(R.id.navigation_header_button);
+
+        // Set up Toolbar, ActionBar, DrawerLayout, NavigationView
+        setSupportActionBar(mToolbar);
+        mToolbar.setOnMenuItemClickListener(this);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
+
+        mDrawerLayout.addDrawerListener(this);
+
+        mNavigationView.setNavigationItemSelectedListener(this);
+        hideNavDrawerScrollbar();
+
+        mNavViewHeaderButton.setOnClickListener(this);
     }
 
     /**

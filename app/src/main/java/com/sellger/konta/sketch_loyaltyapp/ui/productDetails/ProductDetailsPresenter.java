@@ -27,6 +27,8 @@ public class ProductDetailsPresenter implements ProductDetailsContract.Presenter
 
     /**
      * Called from {@link ProductDetailsActivity#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     *
+     * @param productId of the item which info is going to be fetched
      */
     @Override
     public void requestDataFromServer(int productId) {
