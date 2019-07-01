@@ -67,8 +67,22 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
         // Init views
         initViews();
+    }
 
-        // Setting up views
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
+    @Override
+    public void initViews() {
+        mTermsText = findViewById(R.id.settings_terms_one);
+        mPrivacyText = findViewById(R.id.settings_terms_two);
+        mLicensesText = findViewById(R.id.settings_terms_three);
+        mSwitchFirstTopic = findViewById(R.id.settings_notification_switch_one);
+        mSwitchSecondTopic = findViewById(R.id.settings_notification_switch_two);
+        mSwitchThirdTopic = findViewById(R.id.settings_notification_switch_three);
+        mLogOutButton = findViewById(R.id.settings_log_out_button);
+        mDeleteButton = findViewById(R.id.settings_delete_button);
+
         mTermsText.setOnClickListener(this);
         mPrivacyText.setOnClickListener(this);
         mLicensesText.setOnClickListener(this);
@@ -85,26 +99,19 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         mDeleteButton.setOnClickListener(this);
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param view which was clicked
+     */
     @Override
-    public void initViews() {
-        mTermsText = findViewById(R.id.settings_terms_one);
-        mPrivacyText = findViewById(R.id.settings_terms_two);
-        mLicensesText = findViewById(R.id.settings_terms_three);
-        mSwitchFirstTopic = findViewById(R.id.settings_notification_switch_one);
-        mSwitchSecondTopic = findViewById(R.id.settings_notification_switch_two);
-        mSwitchThirdTopic = findViewById(R.id.settings_notification_switch_three);
-        mLogOutButton = findViewById(R.id.settings_log_out_button);
-        mDeleteButton = findViewById(R.id.settings_delete_button);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.settings_log_out_button:
-                showDialogLogOut();
+                showLogOutDialog();
                 break;
             case R.id.settings_delete_button:
-                showDialogDeleteAccount();
+                showDeleteAccountDialog();
                 break;
             default:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
@@ -113,6 +120,12 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         }
     }
 
+    /**
+     * Interface definition for a callback to be invoked when the checked state of a compound button changed.
+     *
+     * @param buttonView which was clicked
+     * @param isChecked is boolean value depends on whether view is checked or not
+     */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
@@ -143,8 +156,10 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         }
     }
 
-    @Override
-    public void showDialogLogOut() {
+    /**
+     * Called from {@link #onClick(View)} to show AlertDialog to user to confirm if want to log out.
+     */
+    private void showLogOutDialog() {
         new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_log_out_style))
                 .setCancelable(true)
                 .setTitle(R.string.settings_log_out_alert_title)
@@ -154,8 +169,10 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 .show();
     }
 
-    @Override
-    public void showDialogDeleteAccount(){
+    /**
+     * Called from {@link #onClick(View)} to show AlertDialog to user to confirm if want to delete account.
+     */
+    private void showDeleteAccountDialog(){
         new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_delete_style))
                 .setCancelable(true)
                 .setTitle(R.string.settings_delete_account_alert_title)
@@ -165,8 +182,10 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 .show();
     }
 
-    @Override
-    public void logOutAccount() {
+    /**
+     * Called from {@link #showLogOutDialog()} to log out and switch layout.
+     */
+    private void logOutAccount() {
         switch (checkAuthMethod()) {
             case "google.com":
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -185,8 +204,12 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         unsubscribeAndUpdateUI();
     }
 
-    @Override
-    public String checkAuthMethod() {
+    /**
+     * Called from {@link #logOutAccount()} to check authentication option of current account.
+     *
+     * @return string that contains auth option
+     */
+    private String checkAuthMethod() {
         String authMethod = "";
         FirebaseAuth.getInstance().getCurrentUser().getProviderData();
         List<? extends UserInfo> providers = FirebaseAuth.getInstance().getCurrentUser().getProviderData();
@@ -197,8 +220,10 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         return authMethod;
     }
 
-    @Override
-    public void deleteUserAccount() {
+    /**
+     * Called from {@link #showDeleteAccountDialog()} to log out and switch layout.
+     */
+    private void deleteUserAccount() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         user.delete().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -208,8 +233,11 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         }).addOnFailureListener(task -> displayToastMessage(TOAST_ERROR));
     }
 
-    @Override
-    public void unsubscribeAndUpdateUI() {
+    /**
+     * Called from {@link #deleteUserAccount()} to unsubscribe from every push notification topic and
+     * switch layout.
+     */
+    private void unsubscribeAndUpdateUI() {
         // Remove topics subscriptions
         String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
         for (String topic : topicsList) {
@@ -220,8 +248,13 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
         SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
     }
 
-    @Override
-    public void displayToastMessage(String message) {
+    /**
+     * Called from {@link #onCheckedChanged(CompoundButton, boolean)}, {@link #logOutAccount()} and
+     * {@link #deleteUserAccount()} to display relevant information to user with toast message.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
+    private void displayToastMessage(String message) {
         switch (message) {
             case TOAST_LOG_OUT_SUCCESS:
                 message = getString(R.string.settings_acc_log_out_successfully);

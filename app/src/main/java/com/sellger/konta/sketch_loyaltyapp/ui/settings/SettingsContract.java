@@ -7,19 +7,6 @@ public interface SettingsContract {
 
     interface View {
 
-        void showDialogLogOut();
-
-        void showDialogDeleteAccount();
-
-        void logOutAccount();
-
-        String checkAuthMethod();
-
-        void deleteUserAccount();
-
-        void unsubscribeAndUpdateUI();
-
-        void displayToastMessage(String message);
     }
 
     interface Presenter {

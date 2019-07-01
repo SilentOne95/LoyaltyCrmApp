@@ -50,10 +50,6 @@ public class MyAccountFragment extends BaseFragment {
         // Init views
         initViews();
 
-        // Setting up views
-        textView.setVisibility(View.GONE);
-        textView.setText(BARCODE_DATA);
-
         try {
             bitmap = encodeAsBitmap(BARCODE_DATA);
             outputImage.setImageBitmap(bitmap);
@@ -63,12 +59,24 @@ public class MyAccountFragment extends BaseFragment {
         }
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         textView = rootView.findViewById(R.id.my_account_code_text);
         outputImage = rootView.findViewById(R.id.my_account_barcode_image);
+
+        textView.setVisibility(View.GONE);
+        textView.setText(BARCODE_DATA);
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
@@ -79,6 +87,13 @@ public class MyAccountFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to generate barcode bitmap from string.
+     *
+     * @param contents is string of barcode number
+     * @return generated barcode bitmap from given string
+     * @throws WriterException covers the range of exceptions which may occur when encoding a barcode
+     */
     private Bitmap encodeAsBitmap(String contents) throws WriterException {
         if (contents == null) {
             return null;
