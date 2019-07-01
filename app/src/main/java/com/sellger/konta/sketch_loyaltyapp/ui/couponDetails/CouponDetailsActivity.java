@@ -191,8 +191,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             } catch (WriterException e) {
                 e.printStackTrace();
             }
-        } else {
-            couponCode = DEFAULT_STRING;
         }
     }
 
@@ -315,6 +313,12 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         mProgressBar.setVisibility(View.GONE);
     }
 
+    /**
+     * Called from {@link CouponDetailsPresenter#requestDataFromServer(int)} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {

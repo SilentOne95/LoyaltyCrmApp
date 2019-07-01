@@ -62,6 +62,9 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         presenter.requestDataFromServer(productId);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mLayoutContainer = findViewById(R.id.layout_container);
@@ -73,12 +76,11 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         mProductDescription = findViewById(R.id.product_description_text_view);
     }
 
-    @Override
-    public void hideProgressBar() {
-        mLayoutContainer.setVisibility(View.VISIBLE);
-        mProgressBar.setVisibility(View.GONE);
-    }
-
+    /**
+     * Called from {@link ProductDetailsPresenter#passDataToView(Product)} to populate view with {@link Product} details.
+     *
+     * @param product item containing all details, refer {@link Product}
+     */
     @Override
     public void setUpViewWithData(Product product) {
         if (!TextUtils.isEmpty(product.getImage())) {
@@ -111,8 +113,13 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         }
     }
 
-    @Override
-    public String formatPrice(float price) {
+    /**
+     * Called from {@link #setUpViewWithData(Product)} to edit price format.
+     *
+     * @param price get from {@link Product} item
+     * @return formatted price form
+     */
+    private String formatPrice(float price) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator(' ');
         DecimalFormat decimalFormat = new DecimalFormat();
@@ -123,15 +130,12 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         return decimalFormat.format(price);
     }
 
-    @Override
-    public void displayToastMessage(String message) {
-        if (message.equals(TOAST_ERROR)) {
-            message = getString(R.string.default_toast_error_message);
-        }
-
-        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
-    }
-
+    /**
+     * This hook is called whenever an item in options menu is selected.
+     *
+     * @param item is a selected item
+     * @return false to allow normal menu processing to proceed
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -139,5 +143,29 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Called from {@link ProductDetailsPresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
+     */
+    @Override
+    public void hideProgressBar() {
+        mLayoutContainer.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    /**
+     * Called from {@link ProductDetailsPresenter#requestDataFromServer(int)} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
+    @Override
+    public void displayToastMessage(String message) {
+        if (message.equals(TOAST_ERROR)) {
+            message = getString(R.string.default_toast_error_message);
+        }
+
+        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
     }
 }

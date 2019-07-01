@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.productDetails;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -23,6 +25,9 @@ public class ProductDetailsPresenter implements ProductDetailsContract.Presenter
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link ProductDetailsActivity#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     */
     @Override
     public void requestDataFromServer(int productId) {
         loyaltyRepository.getSingleProduct(productId, new LoyaltyDataSource.GetSingleDataCallback() {
@@ -40,13 +45,19 @@ public class ProductDetailsPresenter implements ProductDetailsContract.Presenter
         });
     }
 
-    @Override
-    public void hideProgressBar() {
+    /**
+     * Called from {@link #requestDataFromServer(int)} to hide progress bar when data is fetched or not.
+     */
+    private void hideProgressBar() {
         view.hideProgressBar();
     }
 
-    @Override
-    public void passDataToView(Product product) {
+    /**
+     * Called from {@link #requestDataFromServer(int)} to pass refactored data to view.
+     *
+     * @param product item containing all details, refer {@link Product}
+     */
+    private void passDataToView(Product product) {
         view.setUpViewWithData(product);
     }
 }

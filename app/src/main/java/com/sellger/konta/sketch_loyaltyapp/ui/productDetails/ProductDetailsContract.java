@@ -10,17 +10,11 @@ public interface ProductDetailsContract {
 
         void setUpViewWithData(Product product);
 
-        String formatPrice(float price);
-
         void displayToastMessage(String message);
     }
 
     interface Presenter {
 
         void requestDataFromServer(int productId);
-
-        void hideProgressBar();
-
-        void passDataToView(Product product);
     }
 }
