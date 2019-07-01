@@ -110,6 +110,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         });
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mSignInWithGoogleButton = rootView.findViewById(R.id.login_google_button);
@@ -118,11 +121,16 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mSignInAnonymously = rootView.findViewById(R.id.register_guest_text);
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v is view which was clicked
+     */
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
 
         if (checkInternetConnection()) {
-            switch (view.getId()) {
+            switch (v.getId()) {
                 case R.id.login_google_button:
                     googleSignIn();
                     break;
@@ -145,21 +153,33 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         }
     }
 
-    protected boolean checkInternetConnection() {
+    /**
+     * Called from {@link #onClick(View)} to verify if internet connection is available.
+     *
+     * @return boolean depends on whether connection is available or not
+     */
+    private boolean checkInternetConnection() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    @Override
-    public void googleSignIn() {
+    /**
+     * Called from {@link #onClick(View)} to continue with Google account.
+     */
+    private void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    @Override
-    public void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+    /**
+     * Called from {@link #onActivityResult(int, int, Intent)} if auth was successful to consider
+     * whether account should be converted from anonymous or just created new one.
+     *
+     * @param account Google object
+     */
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         if (mFirebaseAuth.getCurrentUser() != null) {
             convertAnonymousAccount(credential);
@@ -168,13 +188,20 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         }
     }
 
-    @Override
-    public void facebookSignIn() {
+    /**
+     * Called from {@link #onClick(View)} to continue with Facebook account.
+     */
+    private void facebookSignIn() {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
     }
 
-    @Override
-    public void handleFacebookAccessToken(AccessToken token) {
+    /**
+     * Called from {@link #onActivityResult(int, int, Intent)} if auth was successful to consider
+     * whether account should be converted from anonymous or just created new one.
+     *
+     * @param token Facebook object
+     */
+    private void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         if (mFirebaseAuth.getCurrentUser() != null) {
             convertAnonymousAccount(credential);
@@ -183,8 +210,13 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         }
     }
 
-    @Override
-    public void signInWithCredential(AuthCredential credential) {
+    /**
+     * Called from {@link #firebaseAuthWithGoogle(GoogleSignInAccount)} and {@link #firebaseAuthWithGoogle(GoogleSignInAccount)}
+     * sign user with Google or Facebook credentials and subscribe to push notification topics.
+     *
+     * @param credential retrieved from {@link #onActivityResult(int, int, Intent)}
+     */
+    private void signInWithCredential(AuthCredential credential) {
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
@@ -200,6 +232,14 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 });
     }
 
+    /**
+     * Retrieves the results for registration / login with Google / Facebook account.
+     *
+     * @param requestCode is an int of permission that was requested
+     * @param resultCode is either RESULT_OK if the operation was successful or RESULT_CANCELED
+     *                   if the user backed out or the operation failed for some reason
+     * @param data carries the result data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -221,8 +261,10 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mCallbackFacebookManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void anonymousSignIn() {
+    /**
+     * Called from {@link #onClick(View)} to continue with anonymous account.
+     */
+    private void anonymousSignIn() {
         mFirebaseAuth.signInAnonymously()
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
@@ -238,8 +280,13 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 });
     }
 
-    @Override
-    public void convertAnonymousAccount(AuthCredential credential) {
+    /**
+     * Called from {@link #firebaseAuthWithGoogle(GoogleSignInAccount)} and {@link #handleFacebookAccessToken(AccessToken)}
+     * to convert anonymous account to Google / Facebook depends on the choice.
+     *
+     * @param credential that the Firebase Authentication server can use to authenticate a user
+     */
+    private void convertAnonymousAccount(AuthCredential credential) {
         mFirebaseAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
@@ -254,8 +301,13 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 });
     }
 
-    @Override
-    public void displayToastMessage(String message) {
+    /**
+     * Called from {@link #onClick(View)}, {@link #signInWithCredential(AuthCredential)}, {@link #anonymousSignIn()}
+     * and {@link #convertAnonymousAccount(AuthCredential)} to display to user relevant string with toast message.
+     *
+     * @param message that contains info what kind of message should be displayed
+     */
+    private void displayToastMessage(String message) {
         switch (message) {
             case TOAST_ACCOUNT_EXISTS:
                 message = getString(R.string.account_already_exits);

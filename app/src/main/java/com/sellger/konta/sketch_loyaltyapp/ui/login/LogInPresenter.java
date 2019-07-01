@@ -2,6 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.login;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sellger.konta.sketch_loyaltyapp.service.pushNotification.ManageTopicsSubscriptions;
 
@@ -25,6 +26,13 @@ public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubs
         this.view = view;
     }
 
+    /**
+     * Called from {@link LogInFragment#signInWithCredential(AuthCredential)}, {@link LogInFragment#anonymousSignIn()}
+     * and {@link LogInFragment#convertAnonymousAccount(AuthCredential)} to manage push notification
+     * subscriptions.
+     *
+     * @param subscriptionType that should be performed based on auth method
+     */
     @Override
     public void manageTopicsSubscriptions(String subscriptionType) {
         String[] topicsList = new String[]{FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
@@ -47,11 +55,21 @@ public class LogInPresenter implements LogInContract.Presenter, ManageTopicsSubs
         }
     }
 
+    /**
+     * Called from {@link #manageTopicsSubscriptions(String)} to subscribe to relevant FCM topic.
+     *
+     * @param topic that app should subscribe to
+     */
     @Override
     public void subscribeToTopic(String topic) {
         FirebaseMessaging.getInstance().subscribeToTopic(topic);
     }
 
+    /**
+     * Called from {@link #manageTopicsSubscriptions(String)} to unsubscribe from relevant FCM topic.
+     *
+     * @param topic that app should unsubscribe from
+     */
     @Override
     public void unsubscribeFromTopic(String topic) {
         FirebaseMessaging.getInstance().unsubscribeFromTopic(topic);
