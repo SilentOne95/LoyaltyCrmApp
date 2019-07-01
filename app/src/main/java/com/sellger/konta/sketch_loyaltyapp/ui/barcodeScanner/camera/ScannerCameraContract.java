@@ -4,8 +4,5 @@ public interface ScannerCameraContract {
 
     interface View {
 
-        void createCameraSource();
-
-        void startCameraSource();
     }
 }

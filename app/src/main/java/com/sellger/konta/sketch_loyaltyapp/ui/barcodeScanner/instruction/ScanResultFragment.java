@@ -60,12 +60,21 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
         }
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mScanResultTextView = rootView.findViewById(R.id.barcode_scanner_scan_result_text_view);
         mScanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
@@ -81,8 +90,10 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
         checkCameraPermission();
     }
 
+    /**
+     * Called from {@link #onClick(View)} when view to open camera is clicked to check permission.
+     */
     private void checkCameraPermission() {
-
         if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[] {Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
@@ -91,6 +102,13 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
         }
     }
 
+    /**
+     * Retrieves the results for camera permission.
+     *
+     * @param requestCode  is an int of permission that was requested
+     * @param permissions  that were requested
+     * @param grantResults are results for the corresponding permissions which is either granted or denied
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA) {

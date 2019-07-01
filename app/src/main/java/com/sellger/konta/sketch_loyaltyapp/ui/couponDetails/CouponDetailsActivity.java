@@ -283,11 +283,11 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     /**
      * Called when a view has been clicked.
      *
-     * @param view which was clicked
+     * @param v is view which was clicked
      */
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.show_coupon_button:
                 switchBottomSheetState();
                 break;

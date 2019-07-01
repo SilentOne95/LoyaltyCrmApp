@@ -65,12 +65,21 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
         createCameraSource();
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mCameraSourcePreview = rootView.findViewById(R.id.camera_preview);
         mGraphicOverlay = rootView.findViewById(R.id.graphic_overlay);
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
@@ -81,8 +90,10 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override
-    public void createCameraSource() {
+    /**
+     * Called from {@link #onCreate(Bundle)} to prepare camera to kick off.
+     */
+    private void createCameraSource() {
         FirebaseVisionBarcodeDetectorOptions options = new FirebaseVisionBarcodeDetectorOptions.Builder()
                 .setBarcodeFormats(
                         FirebaseVisionBarcode.FORMAT_UPC_A,
@@ -104,8 +115,10 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
         startCameraSource();
     }
 
-    @Override
-    public void startCameraSource() {
+    /**
+     * Called from {@link #createCameraSource()} to kick off camera.
+     */
+    private void startCameraSource() {
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext());
 
         if (code != ConnectionResult.SUCCESS) {
@@ -123,6 +136,9 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
         }
     }
 
+    /**
+     * Implementation of listener that handle camera barcode scan results.
+     */
     private BarcodeScanningProcessor.BarcodeResultListener getBarcodeResultListener() {
         return new BarcodeScanningProcessor.BarcodeResultListener() {
             @Override
