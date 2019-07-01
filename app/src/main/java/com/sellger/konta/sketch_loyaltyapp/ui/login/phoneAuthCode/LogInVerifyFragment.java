@@ -271,6 +271,11 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
         new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v is view which was clicked
+     */
     @Override
     public void onClick(View v) {
         if (mPhoneAuthCredential != null) {

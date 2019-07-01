@@ -56,11 +56,11 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
 
         // Init views
         initViews();
-
-        // Listeners
-        mRegisterButton.setOnClickListener(this);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mTextInputLayoutPrefix = rootView.findViewById(R.id.register_prefix_input_box);
@@ -68,8 +68,15 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
         mTextInputLayoutPhoneNumber = rootView.findViewById(R.id.register_number_input_box);
         mTextInputPhoneNumber = rootView.findViewById(R.id.register_number_input);
         mRegisterButton = rootView.findViewById(R.id.register_number_button);
+
+        mRegisterButton.setOnClickListener(this);
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v is view which was clicked
+     */
     @Override
     public void onClick(View v) {
         if (isInputEditTextValid()) {
@@ -80,8 +87,12 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
         }
     }
 
-    @Override
-    public boolean isInputEditTextValid() {
+    /**
+     * Called from {@link #onClick(View)} to check if provided phone number and prefix is valid.
+     *
+     * @return boolean depends on whether validation was successful or not
+     */
+    private boolean isInputEditTextValid() {
         String prefix, phoneNumber, errorType;
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
         boolean isValid = false;
@@ -125,9 +136,13 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
         }
     }
 
-    @Override
-    public void displayErrorInputMessage(String type) {
-
+    /**
+     * Called from {@link #isInputEditTextValid()} to display relevant error message if validation
+     * wasn't successful.
+     *
+     * @param type of error that should be displayed
+     */
+    private void displayErrorInputMessage(String type) {
         switch (type) {
             case PHONE_EMPTY_DATA:
                 mTextInputLayoutPrefix.setError(" ");
@@ -156,8 +171,12 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
         }
     }
 
-    @Override
-    public void dismissError(View v) {
+    /**
+     * Called from {@link #displayErrorInputMessage(String)} to dismiss displayed error after short time.
+     *
+     * @param v where error should be dismissed from
+     */
+    private void dismissError(View v) {
         new Handler().postDelayed(() -> {
             switch (v.getId()) {
                 case R.id.register_prefix_input_box:
