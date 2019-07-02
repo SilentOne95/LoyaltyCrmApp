@@ -46,7 +46,6 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
 
         // Init views
         initViews();
-        mScanButton.setOnClickListener(this);
 
         // Extract additional data, which is fragment's title and scan result
         Bundle bundle = this.getArguments();
@@ -67,6 +66,8 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
     public void initViews() {
         mScanResultTextView = rootView.findViewById(R.id.barcode_scanner_scan_result_text_view);
         mScanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
+
+        mScanButton.setOnClickListener(this);
     }
 
     /**
@@ -85,8 +86,14 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * Called when a view has been clicked.
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
+     *
+     * @param view which was clicked
+     */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         checkCameraPermission();
     }
 
@@ -103,7 +110,8 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
     }
 
     /**
-     * Retrieves the results for camera permission.
+     * Retrieves the results for location permission.
+     * @see <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback">Google Dev Doc</a>
      *
      * @param requestCode  is an int of permission that was requested
      * @param permissions  that were requested

@@ -89,15 +89,16 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
 
     /**
      * Called when a view has been clicked.
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
-     * @param v is view which was clicked
+     * @param view which was clicked
      */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         String stringWithData;
 
         // Open phone, email or website with marker's data based on chosen option
-        switch (v.getId()) {
+        switch (view.getId()) {
             case R.id.contact_phone_container:
                 stringWithData = mPhoneTextView.getText().toString();
                 Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", stringWithData, null));

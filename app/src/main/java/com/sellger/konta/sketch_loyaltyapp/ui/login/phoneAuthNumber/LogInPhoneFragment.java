@@ -74,11 +74,12 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
 
     /**
      * Called when a view has been clicked.
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
-     * @param v is view which was clicked
+     * @param view which was clicked
      */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         if (isInputEditTextValid()) {
             // Hide keyboard and display next view
             mTextInputPrefix.onEditorAction(EditorInfo.IME_ACTION_DONE);

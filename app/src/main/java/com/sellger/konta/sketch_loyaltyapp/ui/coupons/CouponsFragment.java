@@ -76,9 +76,6 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         // Init views
         initViews();
 
-        // Setting up views
-        emptyStateView.setVisibility(View.GONE);
-
         presenter = new CouponsPresenter(this, Injection.provideLoyaltyRepository(getContext()));
         presenter.requestDataFromServer();
     }
@@ -91,6 +88,9 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         progressBar = rootView.findViewById(R.id.progress_bar);
         recyclerView = rootView.findViewById(R.id.recycler_view);
         emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
+
+        // Setting up views
+        emptyStateView.setVisibility(View.GONE);
     }
 
     /**
@@ -248,12 +248,12 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     }
 
     /**
-     * Implementation of SearchView callbacks for changes to the query text.
-     * @see CouponAdapter for implementation of filtering logic
+     * Callbacks for changes to the query text.
+     * Called when the query text is changed by the user and populate data with {@link CouponAdapter}.
+     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
      *
-     * @param newText provided by the user in a SearchView
-     * @return set false if the SearchView should perform the default action of showing
-     * any suggestions if available
+     * @param newText provided by user
+     * @return true if the action was handled by the listener
      */
     @Override
     public boolean onQueryTextChange(String newText) {

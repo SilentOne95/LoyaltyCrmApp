@@ -35,9 +35,18 @@ public class ContactFragment extends BaseFragment implements ContactContract.Vie
         setHasOptionsMenu(true);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() { }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);

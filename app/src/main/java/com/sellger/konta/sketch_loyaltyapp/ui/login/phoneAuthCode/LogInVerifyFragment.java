@@ -52,7 +52,6 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     private CircularProgressButton mCircularProgressButton;
 
     private FirebaseAuth mFirebaseAuth;
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber;
     private PhoneAuthCredential mPhoneAuthCredential;
     private String mSmsCode, mVerificationId;
     private String mProvidedPhoneNumber;
@@ -79,29 +78,6 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
         // Setting up presenter
         presenter = new LogInVerifyPresenter(this);
-
-        // Log In with Phone Number
-        mCallbacksPhoneNumber = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            @Override
-            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                mSmsCode = phoneAuthCredential.getSmsCode();
-                if (mSmsCode != null) {
-                    displayCodeInEditText(mSmsCode);
-                } else {
-                    displaySmsCodeLimitInfo(phoneAuthCredential);
-                }
-            }
-
-            @Override
-            public void onVerificationFailed(FirebaseException e) {
-            }
-
-            @Override
-            public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                super.onCodeSent(verificationId, forceResendingToken);
-                mVerificationId = verificationId;
-            }
-        };
 
         // Extract additional data
         Bundle bundle = this.getArguments();
@@ -131,6 +107,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     /**
      * Called from {@link #onStart()} to kick off phone number registration method.
+     * @see <a href="https://firebase.google.com/docs/auth/android/phone-auth">Firebase Doc</a>
      *
      * @param phoneNumber string
      */
@@ -142,6 +119,32 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 TaskExecutors.MAIN_THREAD,
                 mCallbacksPhoneNumber);
     }
+
+    /**
+     * Implementation of callback listener that handle auth events.
+     * @see <a href="https://firebase.google.com/docs/reference/android/com/google/firebase/auth/PhoneAuthProvider.OnVerificationStateChangedCallbacks">Firebase Doc</a>
+     */
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        @Override
+        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+            mSmsCode = phoneAuthCredential.getSmsCode();
+            if (mSmsCode != null) {
+                displayCodeInEditText(mSmsCode);
+            } else {
+                displaySmsCodeLimitInfo(phoneAuthCredential);
+            }
+        }
+
+        @Override
+        public void onVerificationFailed(FirebaseException e) {
+        }
+
+        @Override
+        public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(verificationId, forceResendingToken);
+            mVerificationId = verificationId;
+        }
+    };
 
     /**
      * Called from callback listener implemented in {@link #onCreate(Bundle)} to set received verification
@@ -273,11 +276,12 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     /**
      * Called when a view has been clicked.
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
-     * @param v is view which was clicked
+     * @param view which was clicked
      */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         if (mPhoneAuthCredential != null) {
             mCircularProgressButton.startMorphAnimation();
             verifyPhoneNumberWithCode(mPhoneAuthCredential, true);

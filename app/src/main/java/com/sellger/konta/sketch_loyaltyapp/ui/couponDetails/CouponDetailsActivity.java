@@ -1,7 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.couponDetails;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
@@ -22,20 +21,12 @@ import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.EnumMap;
-import java.util.Map;
 
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_COUPON_HEIGHT;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
@@ -185,7 +176,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             couponCode = coupon.getCouponCode();
             mBottomCouponCodeTextView.setText(couponCode);
             try {
-                Bitmap bitmap = encodeAsBitmap(couponCode);
+                Bitmap bitmap = presenter.encodeAsBitmap(couponCode);
                 mBottomBarcodeView.setImageBitmap(bitmap);
             } catch (WriterException e) {
                 e.printStackTrace();
@@ -226,47 +217,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     }
 
     /**
-     * Called from {@link #setUpViewWithData(Coupon)} to generate barcode bitmap from string.
-     *
-     * @param contents is string of barcode number
-     * @return generated barcode bitmap from given string
-     * @throws WriterException covers the range of exceptions which may occur when encoding a barcode
-     */
-    private Bitmap encodeAsBitmap(String contents) throws WriterException {
-        if (contents == null) {
-            return null;
-        }
-
-        Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
-        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-        MultiFormatWriter writer = new MultiFormatWriter();
-        BitMatrix result;
-
-        try {
-            result = writer.encode(contents, BarcodeFormat.CODE_128, BARCODE_WIDTH, BARCODE_COUPON_HEIGHT, hints);
-        } catch (IllegalArgumentException iae) {
-            // Unsupported format
-            return null;
-        }
-
-        int width = result.getWidth();
-        int height = result.getHeight();
-        int[] pixels = new int[width * height];
-
-        for (int y = 0; y < height; y++) {
-            int offset = y * width;
-            for (int x = 0; x < width; x++) {
-                pixels[offset + x] = result.get(x, y) ? Color.BLACK : Color.WHITE;
-            }
-        }
-
-        Bitmap bitmap = Bitmap.createBitmap(width, height,
-                Bitmap.Config.ARGB_8888);
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-        return bitmap;
-    }
-
-    /**
      * Called from {@link #onClick(View)} to change BottomSheetState.
      */
     private void switchBottomSheetState() {
@@ -281,12 +231,13 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     /**
      * Called when a view has been clicked.
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
-     * @param v is view which was clicked
+     * @param view which was clicked
      */
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.show_coupon_button:
                 switchBottomSheetState();
                 break;

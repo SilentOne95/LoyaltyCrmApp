@@ -76,12 +76,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         // Init views
         initViews();
 
-        // Button listeners
-        mSignInWithGoogleButton.setOnClickListener(this);
-        mSignInWithFacebookButton.setOnClickListener(this);
-        mSignInWithPhoneButton.setOnClickListener(this);
-        mSignInAnonymously.setOnClickListener(this);
-
         // Setting up presenter
         presenter = new LogInPresenter(this);
 
@@ -119,18 +113,25 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
         mSignInWithFacebookButton = rootView.findViewById(R.id.login_facebook_button);
         mSignInWithPhoneButton = rootView.findViewById(R.id.login_phone_button);
         mSignInAnonymously = rootView.findViewById(R.id.register_guest_text);
+
+        // Button listeners
+        mSignInWithGoogleButton.setOnClickListener(this);
+        mSignInWithFacebookButton.setOnClickListener(this);
+        mSignInWithPhoneButton.setOnClickListener(this);
+        mSignInAnonymously.setOnClickListener(this);
     }
 
     /**
      * Called when a view has been clicked.
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
-     * @param v is view which was clicked
+     * @param view which was clicked
      */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
 
         if (checkInternetConnection()) {
-            switch (v.getId()) {
+            switch (view.getId()) {
                 case R.id.login_google_button:
                     googleSignIn();
                     break;
@@ -167,6 +168,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     /**
      * Called from {@link #onClick(View)} to continue with Google account.
+     * @see <a href="https://firebase.google.com/docs/auth/android/google-signin">Firebase Doc</a>
      */
     private void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -190,6 +192,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     /**
      * Called from {@link #onClick(View)} to continue with Facebook account.
+     * @see <a href="https://firebase.google.com/docs/auth/android/facebook-login">Firebase Doc</a>
      */
     private void facebookSignIn() {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));

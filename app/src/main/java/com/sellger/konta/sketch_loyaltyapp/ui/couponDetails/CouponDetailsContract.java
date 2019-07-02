@@ -1,5 +1,8 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.couponDetails;
 
+import android.graphics.Bitmap;
+
+import com.google.zxing.WriterException;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 
 public interface CouponDetailsContract {
@@ -16,5 +19,7 @@ public interface CouponDetailsContract {
     interface Presenter {
 
         void requestDataFromServer(int couponId);
+
+        Bitmap encodeAsBitmap(String contents) throws WriterException;
     }
 }

@@ -168,14 +168,13 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
     }
 
-
     /**
-     * Implementation of SearchView callbacks for changes to the query text.
-     * @see ProductAdapter for implementation of filtering logic
+     * Callbacks for changes to the query text.
+     * Called when the query text is changed by the user and populate data with {@link ProductAdapter}.
+     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
      *
-     * @param newText provided by the user in a SearchView
-     * @return set false if the SearchView should perform the default action of showing
-     * any suggestions if available
+     * @param newText provided by user
+     * @return true if the action was handled by the listener
      */
     @Override
     public boolean onQueryTextChange(String newText) {

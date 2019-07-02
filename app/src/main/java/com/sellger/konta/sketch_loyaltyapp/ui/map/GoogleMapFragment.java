@@ -63,7 +63,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -516,6 +515,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     /**
      * Retrieves the results for location permission.
+     * @see <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback">Google Dev Doc</a>
      *
      * @param requestCode  is an int of permission that was requested
      * @param permissions  that were requested

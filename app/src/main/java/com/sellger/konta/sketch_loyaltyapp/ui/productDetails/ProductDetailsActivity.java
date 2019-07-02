@@ -54,9 +54,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         // Init views
         initViews();
 
-        // Setting up views
-        mLayoutContainer.setVisibility(View.GONE);
-
         // Setting up presenter
         presenter = new ProductDetailsPresenter(this, Injection.provideLoyaltyRepository(getApplicationContext()));
         presenter.requestDataFromServer(productId);
@@ -74,6 +71,9 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         mProductTitle = findViewById(R.id.product_title_text_view);
         mProductPrice = findViewById(R.id.price_amount_text_view);
         mProductDescription = findViewById(R.id.product_description_text_view);
+
+        // Setting up views
+        mLayoutContainer.setVisibility(View.GONE);
     }
 
     /**

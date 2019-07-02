@@ -101,6 +101,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     /**
      * Called when a view has been clicked.
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
      */

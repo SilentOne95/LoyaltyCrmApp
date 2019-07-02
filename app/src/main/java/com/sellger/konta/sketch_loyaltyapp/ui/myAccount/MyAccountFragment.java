@@ -1,7 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.myAccount;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.os.Bundle;
@@ -14,19 +13,11 @@ import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
 
-import java.util.EnumMap;
-import java.util.Map;
+public class MyAccountFragment extends BaseFragment implements MyAccountContract.View{
 
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_HEIGHT;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
-
-public class MyAccountFragment extends BaseFragment {
+    private MyAccountPresenter presenter;
 
     static final String BARCODE_DATA = "12345678901";
 
@@ -50,8 +41,11 @@ public class MyAccountFragment extends BaseFragment {
         // Init views
         initViews();
 
+        // Setting up presenter
+        presenter = new MyAccountPresenter(this);
+
         try {
-            bitmap = encodeAsBitmap(BARCODE_DATA);
+            bitmap = presenter.encodeAsBitmap(BARCODE_DATA);
             outputImage.setImageBitmap(bitmap);
             textView.setVisibility(View.VISIBLE);
         } catch (WriterException e) {
@@ -85,46 +79,5 @@ public class MyAccountFragment extends BaseFragment {
         accountItem.setVisible(false);
 
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    /**
-     * Called from {@link #onCreate(Bundle)} to generate barcode bitmap from string.
-     *
-     * @param contents is string of barcode number
-     * @return generated barcode bitmap from given string
-     * @throws WriterException covers the range of exceptions which may occur when encoding a barcode
-     */
-    private Bitmap encodeAsBitmap(String contents) throws WriterException {
-        if (contents == null) {
-            return null;
-        }
-
-        Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
-        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-        MultiFormatWriter writer = new MultiFormatWriter();
-        BitMatrix result;
-
-        try {
-            result = writer.encode(contents, BarcodeFormat.UPC_A, BARCODE_WIDTH, BARCODE_HEIGHT, hints);
-        } catch (IllegalArgumentException iae) {
-            // Unsupported format
-            return null;
-        }
-
-        int width = result.getWidth();
-        int height = result.getHeight();
-        int[] pixels = new int[width * height];
-
-        for (int y = 0; y < height; y++) {
-            int offset = y * width;
-            for (int x = 0; x < width; x++) {
-                pixels[offset + x] = result.get(x, y) ? Color.BLACK : Color.WHITE;
-            }
-        }
-
-        Bitmap bitmap = Bitmap.createBitmap(width, height,
-                Bitmap.Config.ARGB_8888);
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-        return bitmap;
     }
 }
