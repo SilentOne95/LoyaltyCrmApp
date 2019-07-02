@@ -78,21 +78,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         // Init views
         initViews();
 
-        // Setting up views
-        mLayoutContainer.setVisibility(View.GONE);
-        showCouponCodeButton.setOnClickListener(this);
-
-        // Setting up BottomSheet views
-        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-
-        mSwitchFlipperLeftArrow.setOnClickListener(this);
-        mSwitchFlipperLeftArrow.setColorFilter(new PorterDuffColorFilter(
-                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
-        mSwitchFlipperRightArrow.setOnClickListener(this);
-        mSwitchFlipperRightArrow.setColorFilter(new PorterDuffColorFilter(
-                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
-
         presenter = new CouponDetailsPresenter(this, Injection.provideLoyaltyRepository(getApplicationContext()));
         presenter.requestDataFromServer(couponId);
     }
@@ -123,6 +108,20 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         mViewFlipper = findViewById(R.id.bottom_coupon_view_flipper);
         mBottomCouponCodeTextView = findViewById(R.id.bottom_coupon_code_text);
         mBottomBarcodeView = findViewById(R.id.bottom_coupon_barcode_bitmap);
+
+        // Setting up views
+        mLayoutContainer.setVisibility(View.GONE);
+        showCouponCodeButton.setOnClickListener(this);
+
+        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        mSwitchFlipperLeftArrow.setOnClickListener(this);
+        mSwitchFlipperLeftArrow.setColorFilter(new PorterDuffColorFilter(
+                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+        mSwitchFlipperRightArrow.setOnClickListener(this);
+        mSwitchFlipperRightArrow.setColorFilter(new PorterDuffColorFilter(
+                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
     }
 
     /**

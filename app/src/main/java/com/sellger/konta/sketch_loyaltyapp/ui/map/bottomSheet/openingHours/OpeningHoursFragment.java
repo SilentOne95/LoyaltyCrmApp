@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
@@ -42,6 +43,9 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
         presenter.setUpObservable();
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mMondayHours = rootView.findViewById(R.id.monday_hours_text);
@@ -53,6 +57,11 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
         mSundayHours = rootView.findViewById(R.id.sunday_hours_text);
     }
 
+    /**
+     * Called from {@link OpeningHoursPresenter#getSelectedMarker(int)} to populate view.
+     *
+     * @param singleDayOpenHours list of strings retrieved from {@link Marker} object
+     */
     @Override
     public void setUpViewsWithData(String[] singleDayOpenHours) {
         mMondayHours.setText(singleDayOpenHours[0]);
@@ -64,6 +73,12 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
         mSundayHours.setText(singleDayOpenHours[6]);
     }
 
+    /**
+     * Called from {@link OpeningHoursPresenter#getSelectedMarker(int)} whenever data is
+     * unavailable to get.
+     *
+     * @param message string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {

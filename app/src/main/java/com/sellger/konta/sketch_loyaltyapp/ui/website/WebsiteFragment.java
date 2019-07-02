@@ -52,6 +52,20 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
         presenter.requestDataFromServer(2);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
+    @Override
+    public void initViews() {
+        mWebView = rootView.findViewById(R.id.webview);
+    }
+
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
@@ -62,11 +76,11 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override
-    public void initViews() {
-        mWebView = rootView.findViewById(R.id.webview);
-    }
-
+    /**
+     * Called from {@link WebsitePresenter#requestDataFromServer(int)} to populate view with {@link Page} details.
+     *
+     * @param page item containing all details, refer {@link Page}
+     */
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void setUpViewWithData(Page page) {
@@ -76,6 +90,12 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
         mWebView.loadUrl(page.getBody());
     }
 
+    /**
+     * Called from {@link WebsitePresenter#requestDataFromServer(int)} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {

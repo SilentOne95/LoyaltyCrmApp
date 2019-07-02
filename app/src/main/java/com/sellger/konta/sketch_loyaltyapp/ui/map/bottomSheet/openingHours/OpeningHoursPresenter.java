@@ -1,12 +1,16 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours;
 
 import androidx.annotation.NonNull;
+
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyRepository;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.OpenHour;
+import com.sellger.konta.sketch_loyaltyapp.ui.map.GoogleMapFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.MapPresenter;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
@@ -43,6 +47,10 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link OpeningHoursFragment#onViewCreated(View, Bundle)} to set up Observable which
+     * listen which item was clicked in {@link GoogleMapFragment} and then pass selected {@link Marker} object.
+     */
     @Override
     public void setUpObservable() {
         Observable<Integer> observable = MapPresenter.getObservable();
@@ -68,8 +76,12 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
         observable.subscribe(observer);
     }
 
-    @Override
-    public void getSelectedMarker(int markerId) {
+    /**
+     * Called from {@link #setUpObservable()} to fetch necessary data about selected marker.
+     *
+     * @param markerId of selected marker
+     */
+    private void getSelectedMarker(int markerId) {
         loyaltyRepository.getSingleMarker(markerId, new LoyaltyDataSource.GetSingleDataCallback() {
             @Override
             public void onDataLoaded(Object object) {
@@ -83,8 +95,12 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
         });
     }
 
-    @Override
-    public void formatMarkerData(Marker marker) {
+    /**
+     * Called from {@link #getSelectedMarker(int)} to get needed data from {@link Marker} object.
+     *
+     * @param marker object
+     */
+    private void formatMarkerData(Marker marker) {
         String monday, tuesday, wednesday, thursday, friday, saturday, sunday;
         monday = tuesday = wednesday = thursday = friday = saturday = sunday = CLOSED_STRING;
         String[] days;
@@ -124,8 +140,13 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
         passDataToView(days);
     }
 
-    @Override
-    public String checkIfOpenHoursAreValid(OpenHour time) {
+    /**
+     * Called from {@link #formatMarkerData(Marker)} to check if opening hours data is valid.
+     *
+     * @param time is {@link OpenHour} object
+     * @return string that contains opening hours for a single day
+     */
+    private String checkIfOpenHoursAreValid(OpenHour time) {
         String day;
 
         if (time.getOpenHour().isEmpty() || time.getOpenHour().equals(ERROR_NONE_STRING)) {
@@ -140,8 +161,12 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
         return day;
     }
 
-    @Override
-    public void passDataToView(String[] singleDayOpenHours) {
+    /**
+     * Called from {@link #formatMarkerData(Marker)} to pass prepared data to view.
+     *
+     * @param singleDayOpenHours list of strings retrieved from {@link Marker} object
+     */
+    private void passDataToView(String[] singleDayOpenHours) {
         view.setUpViewsWithData(singleDayOpenHours);
     }
 }

@@ -49,6 +49,9 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         presenter.setUpObservable();
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mPhoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
@@ -59,6 +62,13 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         mWebsiteContainer = rootView.findViewById(R.id.contact_website_container);
     }
 
+    /**
+     * Called from {@link ContactInfoPresenter#passDataToView(String, String, String)} to populate view.
+     *
+     * @param phoneNumber string of selected marker on map
+     * @param emailAddress string of selected marker on map
+     * @param websiteAddress string of selected marker on map
+     */
     @Override
     public void setUpViewsWithData(String phoneNumber, String emailAddress, String websiteAddress) {
         mPhoneTextView.setText(phoneNumber);
@@ -77,11 +87,17 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         }
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v is view which was clicked
+     */
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
         String stringWithData;
 
-        switch (view.getId()) {
+        // Open phone, email or website with marker's data based on chosen option
+        switch (v.getId()) {
             case R.id.contact_phone_container:
                 stringWithData = mPhoneTextView.getText().toString();
                 Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", stringWithData, null));
@@ -126,6 +142,12 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
         }
     }
 
+    /**
+     * Called from {@link ContactInfoPresenter#getSelectedMarker(int)} whenever data is
+     * unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         if (message.equals(TOAST_ERROR)) {

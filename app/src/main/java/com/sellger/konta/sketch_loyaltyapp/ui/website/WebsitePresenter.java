@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.website;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -23,6 +25,11 @@ public class WebsitePresenter implements WebsiteContract.Presenter {
         this.loyaltyRepository = loyaltyRepository;
     }
 
+    /**
+     * Called from {@link WebsiteFragment#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     *
+     * @param pageId of the item which info is going to be fetched
+     */
     @Override
     public void requestDataFromServer(int pageId) {
         loyaltyRepository.getSinglePage(pageId, new LoyaltyDataSource.GetSingleDataCallback() {
