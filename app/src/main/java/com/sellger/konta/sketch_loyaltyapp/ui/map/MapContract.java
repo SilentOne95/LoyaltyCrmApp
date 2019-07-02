@@ -11,12 +11,6 @@ public interface MapContract {
 
     interface View {
 
-        void setUpGoogleApiClient();
-
-        void setCustomMapStyle();
-
-        void displayEnableGpsDialog();
-
         void checkLocationPermission();
 
         void setUpCluster(List<Marker> markerList);
@@ -29,8 +23,6 @@ public interface MapContract {
 
         void setUpSearchViewAdapter(Cursor cursor);
 
-        void animateCameraAndShowBottomSheet(Object selectedPlace);
-
         void displayToastMessage(String message);
     }
 
@@ -40,21 +32,11 @@ public interface MapContract {
 
         void requestDataFromServer();
 
-        void passDataToCluster(List<Marker> markerList);
-
         void getCursorMarker(String providedText);
 
         void switchBottomSheetState(Object object);
 
         void passClickedMarkerId(int markerId);
-
-        void getSelectedMarker(int markerId);
-
-        void formatMarkerData(Marker marker);
-
-        String getCurrentDay();
-
-        void passDataToView(String title, String address, String openHours);
 
         LatLng getPositionFromObject(Object selectedPlace);
 

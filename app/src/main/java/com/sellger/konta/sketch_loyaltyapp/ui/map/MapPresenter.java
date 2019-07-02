@@ -1,10 +1,14 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
 import android.database.Cursor;
+import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.sellger.konta.sketch_loyaltyapp.data.LoyaltyDataSource;
@@ -53,10 +57,10 @@ public class MapPresenter implements MapContract.Presenter {
         this.loyaltyRepository = loyaltyRepository;
     }
 
-    public static Observable<Integer> getObservable() {
-        return mMarkerIdSubject;
-    }
-
+    /**
+     * Called from {@link GoogleMapFragment#onViewCreated(View, Bundle)} to set up Observable which
+     * listen which item was clicked in {@link GoogleMapFragment} and then pass selected {@link Marker} object.
+     */
     @Override
     public void setUpObservable() {
         mMarkerIdSubject = PublishSubject.create();
@@ -84,6 +88,13 @@ public class MapPresenter implements MapContract.Presenter {
         observable.subscribe(observer);
     }
 
+    public static Observable<Integer> getObservable() {
+        return mMarkerIdSubject;
+    }
+
+    /**
+     * Called from {@link GoogleMapFragment#onViewCreated(View, Bundle)} to fetch required data from {@link LoyaltyRepository}.
+     */
     @Override
     public void requestDataFromServer() {
         loyaltyRepository.getAllMarkers(new LoyaltyDataSource.LoadDataCallback() {
@@ -99,11 +110,21 @@ public class MapPresenter implements MapContract.Presenter {
         });
     }
 
-    @Override
-    public void passDataToCluster(List<Marker> markerList) {
+    /**
+     * Called from {@link #requestDataFromServer()} to pass list of markers to cluster in {@link GoogleMapFragment}.
+     *
+     * @param markerList of {@link Marker} objects
+     */
+    private void passDataToCluster(List<Marker> markerList) {
         view.setUpCluster(markerList);
     }
 
+    /**
+     * Called from {@link GoogleMapFragment#onQueryTextChange(String)} to get {@link Cursor} object
+     * with {@link Marker} data that contains matching provided text by user.
+     *
+     * @param providedText by the user in a SearchView
+     */
     @Override
     public void getCursorMarker(String providedText) {
         loyaltyRepository.getCursorMarker(providedText, new LoyaltyDataSource.GetSingleDataCallback() {
@@ -119,6 +140,12 @@ public class MapPresenter implements MapContract.Presenter {
         });
     }
 
+    /**
+     * Called from {@link GoogleMapFragment#onMapReady(GoogleMap)} and
+     * {@link GoogleMapFragment#animateCameraAndShowBottomSheet(Object)} to change BottomSheet state.
+     *
+     * @param object that was clicked on map on which depends which action should be triggered
+     */
     @Override
     public void switchBottomSheetState(Object object) {
         if (object instanceof Marker || object instanceof Cursor) {
@@ -135,13 +162,23 @@ public class MapPresenter implements MapContract.Presenter {
         }
     }
 
+    /**
+     * Called from {@link GoogleMapFragment#animateCameraAndShowBottomSheet(Object)} to pass ID of
+     * clicked marker on map.
+     *
+     * @param markerId of clicked {@link Marker}
+     */
     @Override
     public void passClickedMarkerId(int markerId) {
         mMarkerIdSubject.onNext(markerId);
     }
 
-    @Override
-    public void getSelectedMarker(int markerId) {
+    /**
+     * Called from {@link #setUpObservable()} to get {@link Marker} object of selected marker.
+     *
+     * @param markerId of clicked {@link Marker}
+     */
+    private void getSelectedMarker(int markerId) {
         loyaltyRepository.getSingleMarker(markerId, new LoyaltyDataSource.GetSingleDataCallback() {
             @Override
             public void onDataLoaded(Object object) {
@@ -155,8 +192,12 @@ public class MapPresenter implements MapContract.Presenter {
         });
     }
 
-    @Override
-    public void formatMarkerData(Marker marker) {
+    /**
+     * Called from {@link #getSelectedMarker(int)} to get needed data from {@link Marker} object.
+     *
+     * @param marker object
+     */
+    private void formatMarkerData(Marker marker) {
         List<OpenHour> openHourList = marker.getOpenHourList();
 
         String title, address, openHours;
@@ -199,8 +240,12 @@ public class MapPresenter implements MapContract.Presenter {
         passDataToView(title, address, openHours);
     }
 
-    @Override
-    public String getCurrentDay() {
+    /**
+     * Called from {@link #formatMarkerData(Marker)} to determine what day is while user is running the app.
+     *
+     * @return string with current day
+     */
+    private String getCurrentDay() {
         String day = "";
 
         switch (mCurrentDay) {
@@ -230,11 +275,24 @@ public class MapPresenter implements MapContract.Presenter {
         return day;
     }
 
-    @Override
-    public void passDataToView(String title, String address, String openHours) {
+    /**
+     * Called from {@link #formatMarkerData(Marker)} to pass prepared data to view.
+     *
+     * @param title string of selected marker on map
+     * @param address string of selected marker on map
+     * @param openHours string of selected marker on map
+     */
+    private void passDataToView(String title, String address, String openHours) {
         view.setUpBottomSheetPanelWithData(title, address, openHours);
     }
 
+    /**
+     * Called from {@link GoogleMapFragment#animateCameraAndShowBottomSheet(Object)} to get position
+     * of marker either from {@link Marker} object or {@link Cursor}.
+     *
+     * @param selectedPlace is object type of selected marker. It can be either {@link Marker} or {@link Cursor}
+     * @return LatLng object with retrieved position
+     */
     @Override
     public LatLng getPositionFromObject(Object selectedPlace) {
         LatLng position;
@@ -252,6 +310,13 @@ public class MapPresenter implements MapContract.Presenter {
         return position;
     }
 
+    /**
+     * Called from {@link GoogleMapFragment#animateCameraAndShowBottomSheet(Object)} to get ID
+     * of marker either from {@link Marker} object or {@link Cursor}.
+     *
+     * @param selectedPlace is object type of selected marker. It can be either {@link Marker} or {@link Cursor}
+     * @return int object with retrieved ID
+     */
     @Override
     public int getIdFromObject(Object selectedPlace) {
         int markerId;

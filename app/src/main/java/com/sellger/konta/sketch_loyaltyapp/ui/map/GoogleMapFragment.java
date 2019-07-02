@@ -2,7 +2,6 @@ package com.sellger.konta.sketch_loyaltyapp.ui.map;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
@@ -172,40 +171,6 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
         // Init views
         initViews();
-
-        // Setting up views
-        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setHideable(true);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        mFab.setVisibility(View.GONE);
-        mFab.setOnClickListener(this);
-        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View view, int newState) {
-            }
-
-            @Override
-            public void onSlide(@NonNull View view, float slideOffset) {
-                mFab.setVisibility(View.VISIBLE);
-                if (slideOffset < 0.0) {
-                    mFab.animate().scaleX(1 + slideOffset).scaleY(1 + slideOffset).setDuration(0).start();
-                }
-            }
-        });
-
-        // Custom TabLayout with ViewPager set up
-        BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(getContext(), getChildFragmentManager());
-        mViewPager.setAdapter(pagerAdapter);
-
-        mTabLayout.setupWithViewPager(mViewPager);
-
-        // Setting up custom TabLayout view
-        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = mTabLayout.getTabAt(i);
-            if (tab != null) {
-                tab.setCustomView(pagerAdapter.getTabView(i));
-            }
-        }
     }
 
     private void startGeofence(List<Marker> markerList) {
@@ -241,6 +206,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         return PendingIntent.getService(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
+    /**
+     * Called from {@link #onCreate(Bundle)} to init all the views.
+     */
     @Override
     public void initViews() {
         mPanelPeekHeight = rootView.findViewById(R.id.bottom_sheet_peek);
@@ -254,8 +222,36 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mPanelPlaceTitle = rootView.findViewById(R.id.bottom_sheet_icon_title);
         mPanelAddress = rootView.findViewById(R.id.bottom_sheet_place_address);
         mPanelTodayOpenHours = rootView.findViewById(R.id.bottom_sheet_place_hours);
+
+        // Setting up views
+        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
+        mBottomSheetBehavior.setHideable(true);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        mFab.hide();
+        mFab.setOnClickListener(this);
+        mBottomSheetBehavior.setBottomSheetCallback(mBottomSheetBehaviorCallback);
+
+        // Custom TabLayout with ViewPager set up
+        BottomSheetViewPagerAdapter pagerAdapter = new BottomSheetViewPagerAdapter(getContext(), getChildFragmentManager());
+        mViewPager.setAdapter(pagerAdapter);
+
+        mTabLayout.setupWithViewPager(mViewPager);
+
+        // Setting up custom TabLayout view
+        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = mTabLayout.getTabAt(i);
+            if (tab != null) {
+                tab.setCustomView(pagerAdapter.getTabView(i));
+            }
+        }
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu and sets up items visibility.
+     *
+     * @param menu in which you place items
+     * @param inflater menu inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
@@ -272,19 +268,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override
-    public void setUpGoogleApiClient() {
-        if (mGoogleApiClient != null) {
-            return;
-        }
-
-        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this).build();
-        mGoogleApiClient.connect();
-    }
-
+    /**
+     * Called when the map is ready to be used. Contains all the necessary options that have to be set up.
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback">Google API Doc</a>
+     *
+     * @param googleMap object instance
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
@@ -347,8 +336,25 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mGoogleMap.setOnMapClickListener(latLng -> presenter.switchBottomSheetState(latLng));
     }
 
-    @Override
-    public void setCustomMapStyle() {
+    /**
+     * Called from {@link #onMapReady(GoogleMap)} to prepare GoogleApiClient.
+     */
+    private void setUpGoogleApiClient() {
+        if (mGoogleApiClient != null) {
+            return;
+        }
+
+        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this).build();
+        mGoogleApiClient.connect();
+    }
+
+    /**
+     * Called from {@link #onMapReady(GoogleMap)} to change default style of the map.
+     */
+    private void setCustomMapStyle() {
         int mapStyleResId;
 
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Warsaw"));
@@ -367,8 +373,30 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
-    @Override
-    public void displayEnableGpsDialog() {
+    /**
+     * Implementation of callback listener that handle BottomSheet state changes.
+     */
+    private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
+        @Override
+        public void onStateChanged(@NonNull View view, int slideOffset) {
+            mFab.show();
+            if (slideOffset < 0.0) {
+                mFab.animate().scaleX(1 + slideOffset).scaleY(1 + slideOffset).setDuration(0).start();
+            }
+        }
+
+        @Override
+        public void onSlide(@NonNull View view, float v) {
+
+        }
+    };
+
+    /**
+     * Called from {@link #onMapReady(GoogleMap)}, {@link #requestPermissions(String[], int)} or
+     * {@link #onMyLocationButtonClick()} if location permission is enabled to display dialog
+     * to turn GPS location on.
+     */
+    private void displayEnableGpsDialog() {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
         builder.setAlwaysShow(true);
@@ -377,9 +405,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         task.addOnCompleteListener(this);
     }
 
-    @Override
-    public void onConnected(@Nullable Bundle bundle) { }
-
+    /**
+     * Implementation of OnCompleteListener that is called when the Task completes.
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/tasks/OnCompleteListener">Google API Doc</a>
+     *
+     * @param task is completed Task object
+     */
     @Override
     public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
         try {
@@ -407,16 +438,45 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
+    /**
+     * Callbacks that are called when the client is connected or disconnected from the GoogleApiService.
+     * This method will be invoked asynchronously when the connect request has successfully completed.
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks">Google API Doc</a>
+     *
+     * @param bundle of data provided to clients by Google Play services
+     */
+    @Override
+    public void onConnected(@Nullable Bundle bundle) { }
+
+    /**
+     * Called when the client is temporarily in a disconnected state.
+     *
+     * @param i represents a suspension cause informing either about loosing connection (value: 2) or
+     *          service has been killed (value: 1)
+     */
     @Override
     public void onConnectionSuspended(int i) {
         displayToastMessage(TOAST_CONNECTION_SUSPENDED);
     }
 
+    /**
+     * Called when there was an error connecting the client to the service.
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.OnConnectionFailedListener">Google API Doc</a>
+     *
+     * @param connectionResult object
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         displayToastMessage(TOAST_CONNECTION_FAILED);
     }
 
+    // TODO:
+    /**
+     * An interface for receiving a Result from a PendingResult as an asynchronous callback.
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/ResultCallback">Google API Doc</a>
+     *
+     * @param result object
+     */
     @Override
     public void onResult(@NonNull Result result) {
         final Status status = result.getStatus();
@@ -440,26 +500,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
-    // TODO: Check toasts
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
-        if (requestCode == 101) {
-            switch (resultCode) {
-                case Activity.RESULT_OK:
-                    // All required changes were successfully made
-                    Toast.makeText(getActivity(), states.isLocationPresent() + "", Toast.LENGTH_SHORT).show();
-                    break;
-                case Activity.RESULT_CANCELED:
-                    // The user was asked to change settings, but chose not to
-                    Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
+    /**
+     * Called from {@link #onMapReady(GoogleMap)} to ask for permission if it's not granted yet.
+     */
     @Override
     public void checkLocationPermission() {
         if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -471,6 +514,13 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
+    /**
+     * Retrieves the results for location permission.
+     *
+     * @param requestCode  is an int of permission that was requested
+     * @param permissions  that were requested
+     * @param grantResults are results for the corresponding permissions which is either granted or denied
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -495,6 +545,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     }
 
+    /**
+     * Implementation of callback listener that handle location changes.
+     */
     private LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
@@ -507,6 +560,11 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         }
     };
 
+    /**
+     * Called from {@link MapPresenter#passDataToCluster(List)} to set up {@link Marker} cluster.
+     *
+     * @param markerList of {@link Marker} objects
+     */
     @Override
     public void setUpCluster(final List<Marker> markerList) {
         startGeofence(markerList);
@@ -540,22 +598,45 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         });
     }
 
+    /**
+     * Called when the my location button is clicked.
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap.OnMyLocationButtonClickListener">Google API Doc</a>
+     *
+     * @return either true if the default behavior should not occur or false
+     */
     @Override
     public boolean onMyLocationButtonClick() {
         displayEnableGpsDialog();
         return false;
     }
 
+    /**
+     * Called from {@link MapPresenter#switchBottomSheetState(Object)} to get BottomSheet state.
+     *
+     * @return int representing state
+     */
     @Override
     public int getBottomSheetState() {
         return mBottomSheetBehavior.getState();
     }
 
+    /**
+     * Called from {@link MapPresenter#switchBottomSheetState(Object)} to set BottomSheet state.
+     *
+     * @param state int representing state
+     */
     @Override
     public void setBottomSheetState(int state) {
         mBottomSheetBehavior.setState(state);
     }
 
+    /**
+     * Called from {@link MapPresenter#passDataToView(String, String, String)} to set data in views.
+     *
+     * @param title string of selected marker on map
+     * @param address string of selected marker on map
+     * @param openHours string of selected marker on map
+     */
     @Override
     public void setUpBottomSheetPanelWithData(String title, String address, String openHours) {
         if (openHours.contains(TODAY_OPEN_STRING)) {
@@ -572,6 +653,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mPanelTodayOpenHours.setText(openHours);
     }
 
+    /**
+     * Called from {@link MapPresenter#requestDataFromServer()}, {@link MapPresenter#getCursorMarker(String)}
+     * and {@link GoogleMapFragment} whenever data is unavailable to get.
+     *
+     * @param message is a string with type of toast that should be displayed
+     */
     @Override
     public void displayToastMessage(String message) {
         switch (message) {
@@ -592,11 +679,15 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
-    }
 
+    /**
+     * Callbacks for changes to the query text.
+     * Called when the query text is changed by the user.
+     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
+     *
+     * @param newText provided by user
+     * @return true if the action was handled by the listener
+     */
     @Override
     public boolean onQueryTextChange(String newText) {
         presenter.getCursorMarker(newText);
@@ -604,10 +695,18 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
-    public boolean onSuggestionSelect(int position) {
-        return true;
+    public boolean onQueryTextSubmit(String s) {
+        return false;
     }
 
+    /**
+     * Callback interface for selection events on suggestions.
+     * Called when a suggestion was clicked.
+     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnSuggestionListener">Android Dev Doc</a>
+     *
+     * @param position of the clicked item
+     * @return false to not override default behavior
+     */
     @Override
     public boolean onSuggestionClick(int position) {
         Cursor cursor = mSearchView.getSuggestionsAdapter().getCursor();
@@ -619,12 +718,28 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     @Override
+    public boolean onSuggestionSelect(int position) {
+        return true;
+    }
+
+    /**
+     * Called from {@link MapPresenter#getCursorMarker(String)} to pass suggestions to adapter.
+     *
+     * @param cursor object
+     */
+    @Override
     public void setUpSearchViewAdapter(Cursor cursor) {
         mSearchView.setSuggestionsAdapter(new CustomCursorAdapter(getContext(), cursor));
     }
 
-    @Override
-    public void animateCameraAndShowBottomSheet(Object selectedPlace) {
+    /**
+     * Called from {@link #setUpCluster(List)} and {@link #onSuggestionClick(int)} to change camera
+     * position and show BottomSheet with data of selected marker.
+     *
+     * @param selectedPlace is either {@link Marker} or {@link Cursor} depends on what was clicked
+     *                      (marker from the list in SearView or selected from map)
+     */
+    private void animateCameraAndShowBottomSheet(Object selectedPlace) {
         int markerId = presenter.getIdFromObject(selectedPlace);
         LatLng position = presenter.getPositionFromObject(selectedPlace);
 
@@ -642,8 +757,14 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         mSearchView.clearFocus();
     }
 
+    /**
+     * Called when a view has been clicked.
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
+     *
+     * @param view which was clicked
+     */
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         if (mLastSelectedMarkerTitle != null) {
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                     Uri.parse("https://www.google.com/maps/search/?api=1&query=" +
