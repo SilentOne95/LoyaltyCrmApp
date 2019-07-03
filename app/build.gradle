@@ -57,7 +57,7 @@ dependencies {
     // Retrofit2
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.0.0'
 
     // Picasso library for images
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -69,7 +69,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-auth:18.0.0'
     implementation 'com.google.firebase:firebase-database:18.0.0'
-    implementation 'com.google.firebase:firebase-messaging:19.0.0'
+    implementation 'com.google.firebase:firebase-messaging:19.0.1'
     implementation 'com.google.firebase:firebase-ml-vision:21.0.0'
 
     // Mobile Vision

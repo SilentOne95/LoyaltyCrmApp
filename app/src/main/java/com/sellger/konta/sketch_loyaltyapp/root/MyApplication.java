@@ -1,19 +1,22 @@
 package com.sellger.konta.sketch_loyaltyapp.root;
 
-import android.app.Application;
 import android.content.Context;
 
-public class MyApplication extends Application {
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
-    private static MyApplication instance;
+public class MyApplication extends MultiDexApplication {
 
-    public static Context getContext() {
-        return instance.getApplicationContext();
+    private Context mContext;
+
+    public Context getContext() {
+        return mContext;
     }
 
     @Override
-    public void onCreate() {
-        instance = this;
-        super.onCreate();
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(context);
+        MultiDex.install(this);
+        mContext = context;
     }
 }
