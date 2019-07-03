@@ -128,6 +128,8 @@
     <string name="internet_connection_required">Połączenie z internetem jest wymagane</string>
     <string name="localization_permission_denied">Wyłączono usługi lokalizacyjne</string>
     <string name="camera_permission_denied">Nie przyznano dostępu do aparatu</string>
+    <string name="phone_number_auth_failed">Próba autoryzacji numeru telefonu nie powiodła się. Proszę spróbować później</string>
+    <string name="auth_email_already_exists">Ten email został już wykorzystany podczas rejestracji inną metodą</string>
     <string name="sms_code_limit_reached">Osiągnięto czasowy limit wysyłki kodów SMS. Weryfikacja zostanie ukończona domyślnym kodem weryfikacyjnym</string>
     <string name="account_already_exits">Już zalogowany jako gość.\nProszę wybrać inną opcję lub cofnąć do ekranu głównego</string>
     <string name="account_auth_failed">Autoryzacja nie powiodła się. Sprawdź połączenie z internetem lub spróbuj ponownie później</string>

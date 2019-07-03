@@ -144,6 +144,8 @@
     <string name="internet_connection_required">Internet connection is required</string>
     <string name="localization_permission_denied">Localization permission denied</string>
     <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="phone_number_auth_failed">There was an error with authorization your phone number, please try again later</string>
+    <string name="auth_email_already_exists">This email has been already used with different type of registration method</string>
     <string name="sms_code_limit_reached">You have reached daily limit for sending SMS codes. Process will continue with default code</string>
     <string name="account_already_exits">Already signed in as a guest!\nPlease choose other option</string>
     <string name="account_auth_failed">Authorization failed. Please check your internet connection or try again later</string>

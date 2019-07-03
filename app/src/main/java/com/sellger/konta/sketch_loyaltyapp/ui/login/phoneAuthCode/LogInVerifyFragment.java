@@ -4,9 +4,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.android.material.textfield.TextInputEditText;
+
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,6 +42,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERS
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ACCOUNT_AUTH_FAILED;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_PHONE_NUMBER_AUTH_FAILED;
 
 public class LogInVerifyFragment extends BaseFragment implements LogInVerifyContract.View, View.OnClickListener {
 
@@ -47,7 +51,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     private LogInVerifyPresenter presenter;
 
     private TextInputEditText mTextInputCode;
-    private TextView mTextWaitingForCode , mTextProvidedPhoneNumber, mTextSmsLimitReached;
+    private TextView mTextWaitingForCode, mTextProvidedPhoneNumber, mTextSmsLimitReached;
     private ProgressBar mProgressBar;
     private CircularProgressButton mCircularProgressButton;
 
@@ -61,7 +65,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     }
 
     @Override
-    protected int getLayout() { return R.layout.fragment_log_in_verify; }
+    protected int getLayout() {
+        return R.layout.fragment_log_in_verify;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -107,9 +113,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     /**
      * Called from {@link #onStart()} to kick off phone number registration method.
-     * @see <a href="https://firebase.google.com/docs/auth/android/phone-auth">Firebase Doc</a>
      *
      * @param phoneNumber string
+     * @see <a href="https://firebase.google.com/docs/auth/android/phone-auth">Firebase Doc</a>
      */
     private void phoneNumberSignIn(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -122,6 +128,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
     /**
      * Implementation of callback listener that handle auth events.
+     *
      * @see <a href="https://firebase.google.com/docs/reference/android/com/google/firebase/auth/PhoneAuthProvider.OnVerificationStateChangedCallbacks">Firebase Doc</a>
      */
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacksPhoneNumber = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -137,6 +144,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
+            displayToastMessage(TOAST_PHONE_NUMBER_AUTH_FAILED);
         }
 
         @Override
@@ -187,7 +195,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
      * Called from {@link #displayCodeInEditText(String)} and {@link #onClick(View)} to consider
      * whether account should be converted from anonymous or just created new one.
      *
-     * @param credential that wraps phone number and verification information for authentication purposes
+     * @param credential        that wraps phone number and verification information for authentication purposes
      * @param isSmsLimitReached boolean value that inform about reached sending SMS limit
      */
     private void verifyPhoneNumberWithCode(PhoneAuthCredential credential, boolean isSmsLimitReached) {
@@ -202,7 +210,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
      * Called from {@link #verifyPhoneNumberWithCode(PhoneAuthCredential, boolean)} to sign user with
      * phone number auth credentials and subscribe to push notification topics.
      *
-     * @param credential that wraps phone number and verification information for authentication purposes
+     * @param credential        that wraps phone number and verification information for authentication purposes
      * @param isSmsLimitReached boolean value that inform about reached sending SMS limit
      */
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential, boolean isSmsLimitReached) {
@@ -232,7 +240,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
      * Called from {@link #verifyPhoneNumberWithCode(PhoneAuthCredential, boolean)} to convert
      * anonymous account to Google / Facebook depends on the choice.
      *
-     * @param credential that wraps phone number and verification information for authentication purposes
+     * @param credential        that wraps phone number and verification information for authentication purposes
      * @param isSmsLimitReached boolean value that inform about reached sending SMS limit
      */
     private void convertAnonymousAccount(AuthCredential credential, boolean isSmsLimitReached) {
@@ -260,9 +268,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
      * loading indicator to finish state and switch screen.
      */
     private void finishLoadingAndSwitchScreen() {
-        new Handler().postDelayed(() -> mCircularProgressButton.doneLoadingAnimation(Color.rgb(255,152,0),
-                BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_check)),DELAY_LOGIN_SWITCH_LAYOUT);
-        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOADING_LOGIN_SWITCH_LAYOUT);
+        new Handler().postDelayed(() -> mCircularProgressButton.doneLoadingAnimation(Color.rgb(255, 152, 0),
+                BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_check)), DELAY_LOGIN_SWITCH_LAYOUT);
+        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION), DELAY_LOADING_LOGIN_SWITCH_LAYOUT);
     }
 
     /**
@@ -271,14 +279,14 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
      * switch screen.
      */
     private void switchScreen() {
-        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION),DELAY_LOGIN_SWITCH_LAYOUT);
+        new Handler().postDelayed(() -> navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION), DELAY_LOGIN_SWITCH_LAYOUT);
     }
 
     /**
      * Called when a view has been clicked.
-     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      */
     @Override
     public void onClick(View view) {
@@ -302,6 +310,9 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
                 break;
             case TOAST_ACCOUNT_AUTH_FAILED:
                 message = getString(R.string.account_auth_failed);
+                break;
+            case TOAST_PHONE_NUMBER_AUTH_FAILED:
+                message = getString(R.string.phone_number_auth_failed);
                 break;
         }
 

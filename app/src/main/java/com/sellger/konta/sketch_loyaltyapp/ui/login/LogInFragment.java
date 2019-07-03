@@ -4,14 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
@@ -44,6 +47,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERS
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ACCOUNT_AUTH_FAILED;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ACCOUNT_EXISTS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_AUTH_EMAIL_ALREADY_EXISTS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_INTERNET_CONNECTION_REQUIRED;
 
@@ -61,7 +65,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     private TextView mSignInAnonymously;
 
     @Override
-    protected int getLayout() { return R.layout.fragment_log_in; }
+    protected int getLayout() {
+        return R.layout.fragment_log_in;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -123,9 +129,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     /**
      * Called when a view has been clicked.
-     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      */
     @Override
     public void onClick(View view) {
@@ -168,6 +174,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     /**
      * Called from {@link #onClick(View)} to continue with Google account.
+     *
      * @see <a href="https://firebase.google.com/docs/auth/android/google-signin">Firebase Doc</a>
      */
     private void googleSignIn() {
@@ -192,6 +199,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     /**
      * Called from {@link #onClick(View)} to continue with Facebook account.
+     *
      * @see <a href="https://firebase.google.com/docs/auth/android/facebook-login">Firebase Doc</a>
      */
     private void facebookSignIn() {
@@ -229,8 +237,13 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
-                        // If sign in fails, display a message to the user
-                        displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
+                        // Check if user has already used this email with different auth method
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            displayToastMessage(TOAST_AUTH_EMAIL_ALREADY_EXISTS);
+                        } else {
+                            // If sign in fails, display a message to the user
+                            displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
+                        }
                     }
                 });
     }
@@ -239,9 +252,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
      * Retrieves the results for registration / login with Google / Facebook account.
      *
      * @param requestCode is an int of permission that was requested
-     * @param resultCode is either RESULT_OK if the operation was successful or RESULT_CANCELED
-     *                   if the user backed out or the operation failed for some reason
-     * @param data carries the result data
+     * @param resultCode  is either RESULT_OK if the operation was successful or RESULT_CANCELED
+     *                    if the user backed out or the operation failed for some reason
+     * @param data        carries the result data
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -323,6 +336,9 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 break;
             case TOAST_ACCOUNT_AUTH_FAILED:
                 message = getString(R.string.account_auth_failed);
+                break;
+            case TOAST_AUTH_EMAIL_ALREADY_EXISTS:
+                message = getString(R.string.auth_email_already_exists);
                 break;
         }
 

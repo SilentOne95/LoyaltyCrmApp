@@ -125,6 +125,9 @@ public final class Constants {
     public static final String PHONE_WRONG_TYPE = "wrong type";
     public static final String PHONE_WRONG_DATA = "wrong data";
 
+    // Phone number auth - default code
+    public static final String DEFAULT_SMS_CODE = "000000";
+
     // Repository - fetched data type
     public static final String TYPE_MENU = "menu";
     public static final String TYPE_PRODUCT = "product";
@@ -135,6 +138,8 @@ public final class Constants {
 
     // Toast messages types
     public static final String TOAST_ERROR = "error";
+    public static final String TOAST_PHONE_NUMBER_AUTH_FAILED = "phone auth failed";
+    public static final String TOAST_AUTH_EMAIL_ALREADY_EXISTS = "auth email exists";
     public static final String TOAST_INTERNET_CONNECTION_REQUIRED = "internet";
     public static final String TOAST_ACCOUNT_EXISTS = "exists";
     public static final String TOAST_ACCOUNT_AUTH_FAILED = "auth";
@@ -144,8 +149,6 @@ public final class Constants {
     public static final String TOAST_CONNECTION_FAILED = "connection failed";
     public static final String TOAST_LOCATION_PERMISSION_DENIED = "location permission";
 
-    // Phone number auth - default code
-    public static final String DEFAULT_SMS_CODE = "000000";
 
     // Delay timer in milliseconds
     public static final int DELAY_DRAWER_ACTION = 200;
