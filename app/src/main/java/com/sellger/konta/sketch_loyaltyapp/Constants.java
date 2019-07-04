@@ -11,7 +11,8 @@ public final class Constants {
     public static final String BASE_URL = "https://my-loyalty-project.herokuapp.com/";
 
     // MainActivity
-    public static final int RC_SIGN_IN = 9001;
+    public static final int GOOGLE_SIGN_IN = 9001;
+    public static final int FACEBOOK_SIGN_IN = 64206;
     public static final int NAV_VIEW_FIRST_GROUP_ID = 0;
     public static final int NAV_VIEW_SECOND_GROUP_ID = 1;
     public static final int NAV_VIEW_THIRD_GROUP_ID = 2;

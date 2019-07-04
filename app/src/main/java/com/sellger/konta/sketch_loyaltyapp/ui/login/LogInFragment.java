@@ -38,11 +38,12 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.Arrays;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.ANONYMOUS_REGISTRATION;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.FACEBOOK_SIGN_IN;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.GOOGLE_SIGN_IN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_DATA_EMPTY_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PHONE;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.NOT_ANONYMOUS_REGISTRATION;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.RC_SIGN_IN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_CONVERSION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.REGISTRATION_NORMAL;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ACCOUNT_AUTH_FAILED;
@@ -63,6 +64,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
     private Button mSignInWithGoogleButton, mSignInWithFacebookButton, mSignInWithPhoneButton;
     private TextView mSignInAnonymously;
+
+    private boolean isAuthInProgress = false;
 
     @Override
     protected int getLayout() {
@@ -135,25 +138,30 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
      */
     @Override
     public void onClick(View view) {
-
         if (checkInternetConnection()) {
-            switch (view.getId()) {
-                case R.id.login_google_button:
-                    googleSignIn();
-                    break;
-                case R.id.login_facebook_button:
-                    facebookSignIn();
-                    break;
-                case R.id.login_phone_button:
-                    navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_PHONE, LAYOUT_DATA_EMPTY_STRING);
-                    break;
-                case R.id.register_guest_text:
-                    if (mFirebaseAuth.getCurrentUser() != null) {
-                        displayToastMessage(TOAST_ACCOUNT_EXISTS);
-                    } else {
-                        anonymousSignIn();
-                    }
-                    break;
+            if (!isAuthInProgress) {
+                switch (view.getId()) {
+                    case R.id.login_google_button:
+                        isAuthInProgress = true;
+                        googleSignIn();
+                        break;
+                    case R.id.login_facebook_button:
+                        isAuthInProgress = true;
+                        facebookSignIn();
+                        break;
+                    case R.id.login_phone_button:
+                        isAuthInProgress = true;
+                        navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_PHONE, LAYOUT_DATA_EMPTY_STRING);
+                        break;
+                    case R.id.register_guest_text:
+                        if (mFirebaseAuth.getCurrentUser() != null) {
+                            displayToastMessage(TOAST_ACCOUNT_EXISTS);
+                        } else {
+                            isAuthInProgress = true;
+                            anonymousSignIn();
+                        }
+                        break;
+                }
             }
         } else {
             displayToastMessage(TOAST_INTERNET_CONNECTION_REQUIRED);
@@ -179,7 +187,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
      */
     private void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, GOOGLE_SIGN_IN);
     }
 
     /**
@@ -241,8 +249,15 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             displayToastMessage(TOAST_AUTH_EMAIL_ALREADY_EXISTS);
                         } else {
-                            // If sign in fails, display a message to the user
-                            displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                // If account with this email already exists, display a message to the user
+                                displayToastMessage(TOAST_AUTH_EMAIL_ALREADY_EXISTS);
+                            } else {
+                                // If sign in fails, display a message to the user
+                                displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
+                            }
+                            // Registration failed, enable buttons to let user choose other option
+                            isAuthInProgress = false;
                         }
                     }
                 });
@@ -260,21 +275,26 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Google
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
+        if (resultCode != 0) {
+            if (requestCode == GOOGLE_SIGN_IN) {
+                // Google
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    GoogleSignInAccount account = task.getResult(ApiException.class);
+                    firebaseAuthWithGoogle(account);
+                } catch (ApiException e) {
+                    // Google Sign In failed, update UI appropriately
+                }
+            } else if (requestCode == FACEBOOK_SIGN_IN) {
+                // Facebook
+                // Pass the activity result back to the Facebook SDK
+                mCallbackFacebookManager.onActivityResult(requestCode, resultCode, data);
             }
+        } else {
+            // Registration aborted, enable buttons to let user choose other option
+            isAuthInProgress = false;
         }
-
-        // Facebook
-        // Pass the activity result back to the Facebook SDK
-        mCallbackFacebookManager.onActivityResult(requestCode, resultCode, data);
     }
 
     /**
@@ -292,6 +312,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                     } else {
                         // If sign in fails, display a message to the user.
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
+                        // Registration failed, enable buttons to let user choose other option
+                        isAuthInProgress = false;
                     }
                 });
     }
@@ -312,7 +334,15 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
                     } else {
-                        displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            // If account with this email already exists, display a message to the user
+                            displayToastMessage(TOAST_AUTH_EMAIL_ALREADY_EXISTS);
+                        } else {
+                            // If sign in fails, display a message to the user
+                            displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
+                        }
+                        // Registration failed, enable buttons to let user choose other option
+                        isAuthInProgress = false;
                     }
                 });
     }
