@@ -30,6 +30,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.instruction.ScanResultFragment;
+import com.sellger.konta.sketch_loyaltyapp.ui.home.HomeFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.myAccount.MyAccountFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment;
 import com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthNumber.LogInPhoneFragment;
@@ -50,6 +51,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_PHONE_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_PHONE_NUM;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_NAME_SCANNER;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_ACCOUNT;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_COUPONS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_HOME;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_LOGIN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SCANNER;
@@ -236,6 +238,12 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                     .commit();
         } else {
             boolean fragmentPopped = getSupportFragmentManager().popBackStackImmediate(fragment.getClass().getSimpleName(), 0);
+            // If user's account is anonymous, limit access to views of app
+            if (fragment instanceof HomeFragment) {
+                if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
+                    presenter.getMenuListToLimitAccess();
+                }
+            }
             if (!fragmentPopped) {
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -300,15 +308,15 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
      * Called from {@link MainActivityPresenter#passDataToNavDrawer(ArrayList, ArrayList, int)} to refactor
      * and set data in NavDrawer view.
      *
-     * @param menuSectionArray    of NavDrawer menu data which is going to be set in first 'section'
+     * @param menuSectionArray    of NavDrawer menu data which is going to be set as first 'section'
      * @param submenuSectionArray of NavDrawer submenu data which is going to be set just below menu data
      * @param homeScreenId        is an int ID of screen which was chosen to be a 'home screen' of the app
      * @param iconNameArray       of strings that contain icon name for every menu item in NavDrawer view
      */
     @Override
-    public void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
-                                   ArrayList<MenuComponent> submenuSectionArray,
-                                   int homeScreenId, String[] iconNameArray) {
+    public void setUpNavigationView(ArrayList<MenuComponent> menuSectionArray,
+                                    ArrayList<MenuComponent> submenuSectionArray,
+                                    int homeScreenId, String[] iconNameArray) {
         Resources resources = this.getResources();
         Menu menu = mNavigationView.getMenu();
         int arrayIndex = 0;
@@ -333,6 +341,39 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
         // Set home screen as checked in NavView
         mNavigationView.getMenu().getItem(homeScreenId).setChecked(true).setCheckable(true);
+
+        // If user's account is anonymous, limit access to views of app
+        if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().isAnonymous()) {
+            presenter.getMenuListToLimitAccess();
+        }
+    }
+
+    /**
+     * Called from {@link MainActivityPresenter#getMenuListToLimitAccess()} to disable some views to
+     * limit access for anonymous user.
+     *
+     * @param menuSectionArray    of NavDrawer menu data which is going to be set as first 'section'
+     * @param submenuSectionArray of NavDrawer submenu data which is going to be set just below menu data
+     */
+    @Override
+    public void limitAccessForAnonymousUser(ArrayList<MenuComponent> menuSectionArray,
+                                            ArrayList<MenuComponent> submenuSectionArray) {
+        int arrayIndex = 0;
+        for (int i = 0; i < menuSectionArray.size(); i++) {
+            if (menuSectionArray.get(i).getType().equals(LAYOUT_TYPE_COUPONS) ||
+                    menuSectionArray.get(i).getType().equals(LAYOUT_TYPE_SCANNER)) {
+                mNavigationView.getMenu().getItem(arrayIndex).setEnabled(false);
+            }
+            arrayIndex++;
+        }
+
+        for (int i = 0; i < submenuSectionArray.size(); i++) {
+            if (submenuSectionArray.get(i).getType().equals(LAYOUT_TYPE_COUPONS) ||
+                    submenuSectionArray.get(i).getType().equals(LAYOUT_TYPE_SCANNER)) {
+                mNavigationView.getMenu().getItem(arrayIndex).setEnabled(false);
+            }
+            arrayIndex++;
+        }
     }
 
     /**
@@ -480,9 +521,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
     /**
      * Called when a view has been clicked.
-     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      */
     @Override
     public void onClick(View view) {

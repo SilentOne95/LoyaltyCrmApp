@@ -25,7 +25,7 @@
     <color name="colorPhoneGreen">#34a853</color>
     <color name="colorPhoneGreenRipple">#217739</color>
 
-    <color name="colorNavViewStateFalse">#5e5e5e</color>
+    <color name="colorNavViewStateEnableFalse">#848484</color>
 
     <color name="colorNetworkSnackbarAvailable">#009e54</color>
     <color name="colorNetworkSnackbarNotAvailable">#3C3737</color>

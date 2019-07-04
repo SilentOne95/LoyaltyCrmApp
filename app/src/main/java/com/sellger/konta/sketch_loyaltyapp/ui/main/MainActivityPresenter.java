@@ -115,6 +115,16 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
     }
 
     /**
+     * Called from {@link MainActivity#setFragment(BaseFragment, String, String)} and
+     * {@link MainActivity#setUpNavigationView(ArrayList, ArrayList, int, String[])} to pass arrays
+     * with NavView items.
+     */
+    @Override
+    public void getMenuListToLimitAccess() {
+        view.limitAccessForAnonymousUser(mMenuArray, mSubmenuArray);
+    }
+
+    /**
      * Called from {@link #requestDataFromServer()} to refactor fetched data.
      *
      * @param menuComponentList of fetched items of {@link MenuComponent}
@@ -236,7 +246,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
             arrayIndex++;
         }
 
-        view.setDataToNavDrawer(menu, submenu, homeScreenId, iconNameArray);
+        view.setUpNavigationView(menu, submenu, homeScreenId, iconNameArray);
     }
 
     /**

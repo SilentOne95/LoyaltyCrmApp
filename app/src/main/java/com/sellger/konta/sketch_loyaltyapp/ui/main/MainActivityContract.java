@@ -15,9 +15,12 @@ public interface MainActivityContract {
 
         void setFragment(BaseFragment fragment, String fragmentTitle, String data);
 
-        void setDataToNavDrawer(ArrayList<MenuComponent> menuSectionArray,
+        void setUpNavigationView(ArrayList<MenuComponent> menuSectionArray,
                                 ArrayList<MenuComponent> submenuSectionArray,
                                 int homeScreenId, String[] iconNameArray);
+
+        void limitAccessForAnonymousUser(ArrayList<MenuComponent> menuSectionArray,
+                                         ArrayList<MenuComponent> submenuSectionArray);
 
         void setDisplayItemChecked(int viewPosition);
 
@@ -31,6 +34,8 @@ public interface MainActivityContract {
         void requestDataFromServer();
 
         void displayHomeScreen(String layoutType);
+
+        void getMenuListToLimitAccess();
 
         String getLayoutType(int groupId, int itemId);
 
