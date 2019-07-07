@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.squareup.picasso.Callback;
@@ -26,6 +27,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_COUPONS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SCANNER;
 import static com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity.PACKAGE_NAME;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -34,6 +37,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private ArrayList<MenuComponent> listOfItems;
     private RecyclerItemClickListener.HomeRetrofitClickListener homeClickListener;
     private int numOfColumns;
+    private boolean isUserAnonymous;
 
     public HomeAdapter(ArrayList<MenuComponent> items,
                        RecyclerItemClickListener.HomeRetrofitClickListener clickListener,
@@ -41,6 +45,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         listOfItems = items;
         homeClickListener = clickListener;
         numOfColumns = columns;
+        isUserAnonymous = FirebaseAuth.getInstance().getCurrentUser().isAnonymous();
     }
 
     @NonNull
@@ -100,7 +105,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         }
 
         if (!TextUtils.isEmpty(currentItem.getImage())) {
-            // TODO: Upload images to server and change "else" image to no_image_available
             int imageId = holder.imageView.getContext()
                     .getResources()
                     .getIdentifier(currentItem.getImage(), "drawable", PACKAGE_NAME);
@@ -110,8 +114,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                     .into(holder.imageView, new Callback() {
                         @Override
                         public void onSuccess() {
-                            DrawableCompat.setTint(holder.imageView.getDrawable(),
-                                    getApplicationContext().getResources().getColor(R.color.colorAccent));
+                            if (shouldViewBeDisabled(currentItem.getType())) {
+                                DrawableCompat.setTint(holder.imageView.getDrawable(),
+                                        getApplicationContext().getResources().getColor(R.color.colorNavViewStateEnableFalse));
+                            } else {
+                                DrawableCompat.setTint(holder.imageView.getDrawable(),
+                                        getApplicationContext().getResources().getColor(R.color.colorAccent));
+                            }
                         }
 
                         @Override
@@ -129,14 +138,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         if (!TextUtils.isEmpty(currentItem.getComponentTitle())) {
             holder.titleView.setText(currentItem.getComponentTitle());
+            if (shouldViewBeDisabled(currentItem.getType())) {
+                holder.titleView.setTextColor(getApplicationContext().getResources().getColor(R.color.colorNavViewStateEnableFalse));
+            }
         } else {
             holder.titleView.setText(DEFAULT_STRING);
         }
 
-        holder.itemView.setOnClickListener(view ->
-                homeClickListener.onItemHomeClick(listOfItems.get(position), position));
+        if (!shouldViewBeDisabled(currentItem.getType())) {
+            holder.itemView.setOnClickListener(view ->
+                    homeClickListener.onItemHomeClick(listOfItems.get(position), position));
+        }
     }
 
     @Override
     public int getItemCount() { return listOfItems.size(); }
+
+    private boolean shouldViewBeDisabled(String currentItemLayoutType) {
+        return isUserAnonymous && (currentItemLayoutType.equals(LAYOUT_TYPE_COUPONS)
+                || currentItemLayoutType.equals(LAYOUT_TYPE_SCANNER));
+    }
 }
