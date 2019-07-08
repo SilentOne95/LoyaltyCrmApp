@@ -27,8 +27,8 @@ public class SettingsPresenter implements SettingsContract.Presenter, ManageTopi
      * and un- / subscribe accordingly depends on button state.
      *
      * @param preferences instance
-     * @param name of push notification topic
-     * @param state of the switch button
+     * @param name        of push notification topic
+     * @param state       of the switch button
      */
     @Override
     public void saveSwitchState(SharedPreferences preferences, String name, boolean state) {
@@ -45,7 +45,7 @@ public class SettingsPresenter implements SettingsContract.Presenter, ManageTopi
      * button state.
      *
      * @param preferences instance
-     * @param name of push notification topic
+     * @param name        of push notification topic
      * @return true / false depends on whether button should be active or not
      */
     @Override

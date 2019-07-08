@@ -3,8 +3,10 @@ package com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.camera;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -77,7 +79,7 @@ public class ScannerCameraFragment extends BaseFragment implements ScannerCamera
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override

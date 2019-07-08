@@ -135,7 +135,7 @@ public class OpeningHoursPresenter implements BottomSheetContract.OpeningHoursPr
             }
         }
 
-        days = new String[] {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
+        days = new String[]{monday, tuesday, wednesday, thursday, friday, saturday, sunday};
 
         passDataToView(days);
     }

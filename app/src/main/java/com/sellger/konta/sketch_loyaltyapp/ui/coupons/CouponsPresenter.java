@@ -80,7 +80,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
     /**
      * Called from {@link #requestDataFromServer()} to refactor fetched data.
      *
-     * @param couponList of fetched items of {@link Coupon}
+     * @param couponList   of fetched items of {@link Coupon}
      * @param numOfColumns that data is going to be displayed in
      */
     private void refactorFetchedData(List<Coupon> couponList, int numOfColumns) {
@@ -142,7 +142,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
     /**
      * Called from {@link #refactorFetchedData(List, int)} to pass refactored data to adapter,
      *
-     * @param couponList of items are going to be displayed using adapter
+     * @param couponList   of items are going to be displayed using adapter
      * @param numOfColumns that data is going to be displayed in
      */
     private void passDataToAdapter(List<Coupon> couponList, int numOfColumns) {

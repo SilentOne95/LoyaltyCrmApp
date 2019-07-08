@@ -175,8 +175,8 @@ public class ContactInfoPresenter implements BottomSheetContract.ContactInfoPres
     /**
      * Called from {@link #formatMarkerData(Marker)} to pass prepared data to view.
      *
-     * @param phoneNumber string of selected marker on map
-     * @param emailAddress string of selected marker on map
+     * @param phoneNumber    string of selected marker on map
+     * @param emailAddress   string of selected marker on map
      * @param websiteAddress string of selected marker on map
      */
     private void passDataToView(String phoneNumber, String emailAddress, String websiteAddress) {

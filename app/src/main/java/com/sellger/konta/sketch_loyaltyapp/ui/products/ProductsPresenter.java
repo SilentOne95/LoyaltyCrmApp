@@ -69,7 +69,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
     /**
      * Called from {@link #requestDataFromServer()} to refactor fetched data.
      *
-     * @param productList of fetched items of {@link Product}
+     * @param productList  of fetched items of {@link Product}
      * @param numOfColumns that data is going to be displayed in
      */
     private void refactorFetchedData(List<Product> productList, int numOfColumns) {
@@ -91,7 +91,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
     /**
      * Called from {@link #refactorFetchedData(List, int)} to pass refactored data to adapter,
      *
-     * @param productList of items are going to be displayed using adapter
+     * @param productList  of items are going to be displayed using adapter
      * @param numOfColumns that data is going to be displayed in
      */
     private void passDataToAdapter(List<Product> productList, int numOfColumns) {

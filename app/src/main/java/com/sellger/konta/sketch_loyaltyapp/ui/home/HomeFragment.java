@@ -1,6 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.home;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -41,7 +42,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private ProgressBar mProgressBar;
 
     @Override
-    protected int getLayout() { return R.layout.fragment_home; }
+    protected int getLayout() {
+        return R.layout.fragment_home;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -83,7 +86,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override
@@ -114,7 +117,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
      * {@link HomeAdapter} with data.
      *
      * @param menuComponentList of items that are going to pass to adapter
-     * @param numOfColumns in which data will be displayed
+     * @param numOfColumns      in which data will be displayed
      */
     @Override
     public void setUpAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
@@ -175,6 +178,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             message = getString(R.string.default_toast_error_message);
         }
 
-        Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

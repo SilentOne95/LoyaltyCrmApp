@@ -300,7 +300,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     }
 
     private void displayAnonymousSignInAlertDialog() {
-        new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.settings_alert_dialog_log_out_style))
+        new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.settings_alert_dialog_accent_style))
                 .setCancelable(true)
                 .setTitle(R.string.login_alert_dialog_title)
                 .setMessage(R.string.login_alert_dialog_message)

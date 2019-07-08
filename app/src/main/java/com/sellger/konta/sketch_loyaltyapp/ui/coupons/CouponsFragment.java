@@ -2,6 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -57,7 +58,9 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     private CouponAdapter adapter;
 
     @Override
-    protected int getLayout() { return R.layout.fragment_coupons; }
+    protected int getLayout() {
+        return R.layout.fragment_coupons;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -96,7 +99,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override
@@ -185,7 +188,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
      * Called from {@link CouponsPresenter#passDataToAdapter(List, int)} to set up adapter
      * {@link CouponAdapter} with data.
      *
-     * @param couponList of items that are going to pass to adapter
+     * @param couponList   of items that are going to pass to adapter
      * @param numOfColumns in which data will be displayed
      */
     @Override
@@ -244,16 +247,16 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
             message = getString(R.string.default_toast_error_message);
         }
 
-        Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     /**
      * Callbacks for changes to the query text.
      * Called when the query text is changed by the user and populate data with {@link CouponAdapter}.
-     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
      *
      * @param newText provided by user
      * @return true if the action was handled by the listener
+     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
      */
     @Override
     public boolean onQueryTextChange(String newText) {

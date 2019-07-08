@@ -248,7 +248,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override
@@ -269,9 +269,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     /**
      * Called when the map is ready to be used. Contains all the necessary options that have to be set up.
-     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback">Google API Doc</a>
      *
      * @param googleMap object instance
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback">Google API Doc</a>
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -406,9 +406,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     /**
      * Implementation of OnCompleteListener that is called when the Task completes.
-     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/tasks/OnCompleteListener">Google API Doc</a>
      *
      * @param task is completed Task object
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/tasks/OnCompleteListener">Google API Doc</a>
      */
     @Override
     public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
@@ -440,12 +440,13 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     /**
      * Callbacks that are called when the client is connected or disconnected from the GoogleApiService.
      * This method will be invoked asynchronously when the connect request has successfully completed.
-     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks">Google API Doc</a>
      *
      * @param bundle of data provided to clients by Google Play services
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks">Google API Doc</a>
      */
     @Override
-    public void onConnected(@Nullable Bundle bundle) { }
+    public void onConnected(@Nullable Bundle bundle) {
+    }
 
     /**
      * Called when the client is temporarily in a disconnected state.
@@ -460,9 +461,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     /**
      * Called when there was an error connecting the client to the service.
-     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.OnConnectionFailedListener">Google API Doc</a>
      *
      * @param connectionResult object
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.OnConnectionFailedListener">Google API Doc</a>
      */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -470,11 +471,12 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     }
 
     // TODO:
+
     /**
      * An interface for receiving a Result from a PendingResult as an asynchronous callback.
-     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/ResultCallback">Google API Doc</a>
      *
      * @param result object
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/common/api/ResultCallback">Google API Doc</a>
      */
     @Override
     public void onResult(@NonNull Result result) {
@@ -515,11 +517,11 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     /**
      * Retrieves the results for location permission.
-     * @see <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback">Google Dev Doc</a>
      *
      * @param requestCode  is an int of permission that was requested
      * @param permissions  that were requested
      * @param grantResults are results for the corresponding permissions which is either granted or denied
+     * @see <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback">Google Dev Doc</a>
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -600,9 +602,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     /**
      * Called when the my location button is clicked.
-     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap.OnMyLocationButtonClickListener">Google API Doc</a>
      *
      * @return either true if the default behavior should not occur or false
+     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap.OnMyLocationButtonClickListener">Google API Doc</a>
      */
     @Override
     public boolean onMyLocationButtonClick() {
@@ -633,8 +635,8 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     /**
      * Called from {@link MapPresenter#passDataToView(String, String, String)} to set data in views.
      *
-     * @param title string of selected marker on map
-     * @param address string of selected marker on map
+     * @param title     string of selected marker on map
+     * @param address   string of selected marker on map
      * @param openHours string of selected marker on map
      */
     @Override
@@ -683,10 +685,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     /**
      * Callbacks for changes to the query text.
      * Called when the query text is changed by the user.
-     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
      *
      * @param newText provided by user
      * @return true if the action was handled by the listener
+     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
      */
     @Override
     public boolean onQueryTextChange(String newText) {
@@ -702,10 +704,10 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     /**
      * Callback interface for selection events on suggestions.
      * Called when a suggestion was clicked.
-     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnSuggestionListener">Android Dev Doc</a>
      *
      * @param position of the clicked item
      * @return false to not override default behavior
+     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnSuggestionListener">Android Dev Doc</a>
      */
     @Override
     public boolean onSuggestionClick(int position) {
@@ -759,9 +761,9 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
 
     /**
      * Called when a view has been clicked.
-     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      */
     @Override
     public void onClick(View view) {

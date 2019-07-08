@@ -3,10 +3,12 @@ package com.sellger.konta.sketch_loyaltyapp.ui.map;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import android.text.TextUtils;
 import android.view.View;
 
@@ -278,8 +280,8 @@ public class MapPresenter implements MapContract.Presenter {
     /**
      * Called from {@link #formatMarkerData(Marker)} to pass prepared data to view.
      *
-     * @param title string of selected marker on map
-     * @param address string of selected marker on map
+     * @param title     string of selected marker on map
+     * @param address   string of selected marker on map
      * @param openHours string of selected marker on map
      */
     private void passDataToView(String title, String address, String openHours) {

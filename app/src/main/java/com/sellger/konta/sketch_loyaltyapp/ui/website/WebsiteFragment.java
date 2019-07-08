@@ -2,8 +2,10 @@ package com.sellger.konta.sketch_loyaltyapp.ui.website;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,7 +31,9 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
     private WebView mWebView;
 
     @Override
-    protected int getLayout() { return R.layout.fragment_website; }
+    protected int getLayout() {
+        return R.layout.fragment_website;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -63,7 +67,7 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override

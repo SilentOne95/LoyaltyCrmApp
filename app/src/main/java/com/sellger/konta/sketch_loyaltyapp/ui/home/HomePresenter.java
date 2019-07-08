@@ -140,7 +140,7 @@ public class HomePresenter implements HomeContract.Presenter {
             if (submenuLocalArray.get(index).getPosition() == position) {
                 sortedSubmenuArray.add(submenuLocalArray.get(index));
 
-                position ++;
+                position++;
                 index = 0;
             } else {
                 index++;
@@ -154,7 +154,7 @@ public class HomePresenter implements HomeContract.Presenter {
      * Called from {@link #refactorFetchedData(List)} to pass refactored data to adapter.
      *
      * @param menuComponentList of items are going to be displayed using adapter
-     * @param numOfColumns that data is going to be displayed in
+     * @param numOfColumns      that data is going to be displayed in
      */
     private void passDataToAdapter(ArrayList<MenuComponent> menuComponentList, int numOfColumns) {
         if (menuComponentList != null) {

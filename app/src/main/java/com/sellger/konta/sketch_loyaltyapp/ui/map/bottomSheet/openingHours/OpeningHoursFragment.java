@@ -1,8 +1,10 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.openingHours;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +31,9 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
     }
 
     @Override
-    protected int getLayout() { return R.layout.fragment_opening_hours; }
+    protected int getLayout() {
+        return R.layout.fragment_opening_hours;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

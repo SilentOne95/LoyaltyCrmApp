@@ -101,9 +101,9 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     /**
      * Called when a view has been clicked.
-     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      */
     @Override
     public void onClick(View view) {
@@ -125,7 +125,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
      * Interface definition for a callback to be invoked when the checked state of a compound button changed.
      *
      * @param buttonView which was clicked
-     * @param isChecked is boolean value depends on whether view is checked or not
+     * @param isChecked  is boolean value depends on whether view is checked or not
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -161,7 +161,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
      * Called from {@link #onClick(View)} to show AlertDialog to user to confirm if want to log out.
      */
     private void showLogOutDialog() {
-        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_log_out_style))
+        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_accent_style))
                 .setCancelable(true)
                 .setTitle(R.string.settings_log_out_alert_title)
                 .setMessage(R.string.settings_log_out_account_alert_message)
@@ -173,7 +173,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     /**
      * Called from {@link #onClick(View)} to show AlertDialog to user to confirm if want to delete account.
      */
-    private void showDeleteAccountDialog(){
+    private void showDeleteAccountDialog() {
         new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_delete_style))
                 .setCancelable(true)
                 .setTitle(R.string.settings_delete_account_alert_title)
@@ -240,7 +240,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
      */
     private void unsubscribeAndUpdateUI() {
         // Remove topics subscriptions
-        String[] topicsList = new String[] {FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
+        String[] topicsList = new String[]{FIRST_TOPIC_NAME, SECOND_TOPIC_NAME, THIRD_TOPIC_NAME};
         for (String topic : topicsList) {
             presenter.unsubscribeFromTopic(topic);
         }
@@ -271,6 +271,6 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 break;
         }
 
-        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

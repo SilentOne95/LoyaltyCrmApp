@@ -1,8 +1,10 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.terms;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,7 +32,9 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
     private WebView mTermsTextView;
 
     @Override
-    protected int getLayout() { return R.layout.fragment_terms_conditions; }
+    protected int getLayout() {
+        return R.layout.fragment_terms_conditions;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -69,7 +73,7 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override

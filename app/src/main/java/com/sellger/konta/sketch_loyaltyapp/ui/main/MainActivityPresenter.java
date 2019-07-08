@@ -153,7 +153,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
         }
 
         // Remove nav view header shade if an account is not anonymous
-        if (mFirebaseAuth.getCurrentUser() != null && !mFirebaseAuth.getCurrentUser().isAnonymous()){
+        if (mFirebaseAuth.getCurrentUser() != null && !mFirebaseAuth.getCurrentUser().isAnonymous()) {
             view.setNavViewHeaderVisibility(NOT_ANONYMOUS_REGISTRATION);
         }
 
@@ -211,7 +211,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
             if (submenuLocalArray.get(index).getPosition() == position) {
                 sortedSubmenuArray.add(submenuLocalArray.get(index));
 
-                position ++;
+                position++;
                 index = 0;
             } else {
                 index++;
@@ -225,12 +225,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * Called from {@link #refactorFetchedData(List)} to prepare data to set in NavView.
      * This method assigns relevant icon to every menu item and pass all data to view.
      *
-     * @param menu is array contains menu items of 'first section'
-     * @param submenu is array contains menu items of 'second section'
+     * @param menu         is array contains menu items of 'first section'
+     * @param submenu      is array contains menu items of 'second section'
      * @param homeScreenId contains id of screen chosen as 'home' screen
      */
     private void passDataToNavDrawer(ArrayList<MenuComponent> menu,
-                                    ArrayList<MenuComponent> submenu, int homeScreenId) {
+                                     ArrayList<MenuComponent> submenu, int homeScreenId) {
         int arraySize = menu.size() + submenu.size();
         int arrayIndex = 0;
         String[] iconNameArray = new String[arraySize];
@@ -297,7 +297,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * with should be opened next, based on ID's assigned to selected menu item in NavView.
      *
      * @param groupId of selected menu item
-     * @param itemId of selected menu item
+     * @param itemId  of selected menu item
      * @return layout type of selected menu item
      */
     @Override
@@ -319,7 +319,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * {@link MainActivity#onMenuItemClick(MenuItem)} to set new fragment based on passed parameter.
      *
      * @param layoutType of screen that should be opened
-     * @param data which is passed to {@link MainActivity#setFragment(BaseFragment, String, String)}
+     * @param data       which is passed to {@link MainActivity#setFragment(BaseFragment, String, String)}
      */
     @Override
     public void displaySelectedScreen(String layoutType, String data) {
@@ -382,7 +382,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      */
     private String getLayoutTitle(String layoutType) {
         String layoutName = "";
-        for(MenuComponent component : mAllMenuItemsArray) {
+        for (MenuComponent component : mAllMenuItemsArray) {
             if (component.getType().equals(layoutType)) {
                 layoutName = component.getComponentTitle();
                 break;
@@ -400,7 +400,9 @@ public class MainActivityPresenter implements MainActivityContract.Presenter,
      * @param data is additional data which can be passed
      */
     @Override
-    public void getSelectedLayoutType(String item, String data) { displaySelectedScreen(item, data); }
+    public void getSelectedLayoutType(String item, String data) {
+        displaySelectedScreen(item, data);
+    }
 
     /**
      * Called from {@link MainActivity#onCreate(Bundle)} to set up Observer which listen which item

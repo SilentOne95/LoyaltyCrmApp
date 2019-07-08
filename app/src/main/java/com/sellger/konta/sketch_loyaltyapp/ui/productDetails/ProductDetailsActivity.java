@@ -23,7 +23,7 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
-public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View{
+public class ProductDetailsActivity extends BaseActivity implements ProductDetailsContract.View {
 
     private static final String TAG = ProductDetailsActivity.class.getSimpleName();
 
@@ -37,7 +37,9 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     private int productId;
 
     @Override
-    protected int getLayout() { return R.layout.activity_product_details; }
+    protected int getLayout() {
+        return R.layout.activity_product_details;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +168,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             message = getString(R.string.default_toast_error_message);
         }
 
-        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

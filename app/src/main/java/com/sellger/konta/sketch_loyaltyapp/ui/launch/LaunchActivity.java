@@ -3,6 +3,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.launch;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.ConnectivityManager;
@@ -34,7 +35,7 @@ public class LaunchActivity extends AppCompatActivity {
     }
 
     private void displayNoInternetAlertDialog() {
-        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_log_out_style))
+        new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.settings_alert_dialog_accent_style))
                 .setCancelable(true)
                 .setMessage(R.string.launcher_alert_dialog_message)
                 .setPositiveButton(R.string.launcher_alert_dialog_confirm, ((dialog, which) -> finish()))

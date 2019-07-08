@@ -4,8 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import androidx.core.content.ContextCompat;
+
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -52,7 +55,9 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     private ImageView mBottomBarcodeView, mSwitchFlipperLeftArrow, mSwitchFlipperRightArrow;
 
     @Override
-    protected int getLayout() { return R.layout.activity_coupon_details; }
+    protected int getLayout() {
+        return R.layout.activity_coupon_details;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,9 +236,9 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
     /**
      * Called when a view has been clicked.
-     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      */
     @Override
     public void onClick(View view) {
@@ -275,6 +280,6 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
             message = getString(R.string.default_toast_error_message);
         }
 
-        Toast.makeText(this, message , Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

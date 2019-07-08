@@ -72,7 +72,7 @@
     </style>
 
     <!-- Settings layout - alert dialog -->
-    <style name="settings_alert_dialog_log_out_style">
+    <style name="settings_alert_dialog_accent_style">
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 

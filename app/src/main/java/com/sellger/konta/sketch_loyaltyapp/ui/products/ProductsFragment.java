@@ -2,6 +2,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.products;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -43,7 +44,9 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     private ProductAdapter mAdapter;
 
     @Override
-    protected int getLayout() { return R.layout.fragment_products; }
+    protected int getLayout() {
+        return R.layout.fragment_products;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -107,7 +110,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
      * Called from {@link ProductsPresenter#passDataToAdapter(List, int)} to set up adapter
      * {@link ProductAdapter} with data.
      *
-     * @param productList of items that are going to pass to adapter
+     * @param productList  of items that are going to pass to adapter
      * @param numOfColumns in which data will be displayed
      */
     @Override
@@ -165,16 +168,16 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
             message = getString(R.string.default_toast_error_message);
         }
 
-        Toast.makeText(getContext(), message , Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     /**
      * Callbacks for changes to the query text.
      * Called when the query text is changed by the user and populate data with {@link ProductAdapter}.
-     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
      *
      * @param newText provided by user
      * @return true if the action was handled by the listener
+     * @see <a href="https://developer.android.com/reference/android/widget/SearchView.OnQueryTextListener">Android Dev Doc</a>
      */
     @Override
     public boolean onQueryTextChange(String newText) {

@@ -1,8 +1,10 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.contact;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,7 +20,9 @@ public class ContactFragment extends BaseFragment implements ContactContract.Vie
     private static final String TAG = ContactFragment.class.getSimpleName();
 
     @Override
-    protected int getLayout() { return R.layout.fragment_contact; }
+    protected int getLayout() {
+        return R.layout.fragment_contact;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -39,12 +43,13 @@ public class ContactFragment extends BaseFragment implements ContactContract.Vie
      * Called from {@link #onCreate(Bundle)} to init all the views.
      */
     @Override
-    public void initViews() { }
+    public void initViews() {
+    }
 
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override

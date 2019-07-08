@@ -4,8 +4,10 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,8 +67,8 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
     /**
      * Called from {@link ContactInfoPresenter#passDataToView(String, String, String)} to populate view.
      *
-     * @param phoneNumber string of selected marker on map
-     * @param emailAddress string of selected marker on map
+     * @param phoneNumber    string of selected marker on map
+     * @param emailAddress   string of selected marker on map
      * @param websiteAddress string of selected marker on map
      */
     @Override
@@ -89,9 +91,9 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
 
     /**
      * Called when a view has been clicked.
-     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      */
     @Override
     public void onClick(View view) {

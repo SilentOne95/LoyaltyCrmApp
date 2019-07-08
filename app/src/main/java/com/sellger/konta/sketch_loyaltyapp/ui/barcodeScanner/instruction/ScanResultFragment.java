@@ -3,6 +3,7 @@ package com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.instruction;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -73,7 +74,7 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override
@@ -88,9 +89,9 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
 
     /**
      * Called when a view has been clicked.
-     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      *
      * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
      */
     @Override
     public void onClick(View view) {
@@ -103,7 +104,7 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
     private void checkCameraPermission() {
         if (getActivity() != null && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[] {Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
         } else {
             navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_CAMERA, LAYOUT_DATA_EMPTY_STRING);
         }
@@ -111,11 +112,11 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
 
     /**
      * Retrieves the results for location permission.
-     * @see <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback">Google Dev Doc</a>
      *
      * @param requestCode  is an int of permission that was requested
      * @param permissions  that were requested
      * @param grantResults are results for the corresponding permissions which is either granted or denied
+     * @see <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback">Google Dev Doc</a>
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

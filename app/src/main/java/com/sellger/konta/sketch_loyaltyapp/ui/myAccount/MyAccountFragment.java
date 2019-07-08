@@ -1,8 +1,10 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.myAccount;
 
 import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +17,7 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.google.zxing.WriterException;
 
-public class MyAccountFragment extends BaseFragment implements MyAccountContract.View{
+public class MyAccountFragment extends BaseFragment implements MyAccountContract.View {
 
     private MyAccountPresenter presenter;
 
@@ -68,7 +70,7 @@ public class MyAccountFragment extends BaseFragment implements MyAccountContract
     /**
      * Initialize the contents of the Activity's standard options menu and sets up items visibility.
      *
-     * @param menu in which you place items
+     * @param menu     in which you place items
      * @param inflater menu inflater
      */
     @Override
