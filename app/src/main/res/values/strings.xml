@@ -11,6 +11,11 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="default_notification_channel_name" translatable="false">Default channel</string>
 
+    <!-- Launcher activity -->
+    <string name="launcher_alert_dialog_message">No internet connection.
+        \nPlease enable internet connection and launch this app once again :)</string>
+    <string name="launcher_alert_dialog_confirm" translatable="false">Ok</string>
+
     <!-- Main activity -->
     <string name="menu_toolbar_my_account_string">My Account</string>
     <string name="menu_toolbar_search_string">Search</string>

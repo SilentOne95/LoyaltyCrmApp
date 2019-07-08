@@ -16,7 +16,7 @@
     </style>
 
     <!-- Launch screen theme. -->
-    <style name="AppTheme.Launcher" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme.Launcher" parent="BaseAppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/layout_launch_screen</item>
     </style>
 

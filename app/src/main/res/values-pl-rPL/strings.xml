@@ -3,6 +3,10 @@
     <!-- App name -->
     <string name="app_name">Sellger</string>
 
+    <!-- Launcher activity -->
+    <string name="launcher_alert_dialog_message">Brak połączenia z internetem.
+        \nProszę włączyć połączenie z inernetem i uruchomić aplikację ponownie :)</string>
+
     <!-- Main activity -->
     <string name="menu_toolbar_my_account_string">Moje konto</string>
     <string name="menu_toolbar_search_string">Szukaj</string>
