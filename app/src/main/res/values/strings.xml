@@ -27,6 +27,13 @@
     <string name="continue_with_phone_text">Continue with Phone</string>
     <string name="continue_as_guest_text">or continue as a guest</string>
 
+    <string name="login_alert_dialog_title">Note</string>
+    <string name="login_alert_dialog_message">You are about to create new anonymous account.
+        \nPlease note, that as anonymous user you won\'t be able to get access to all features of the app,
+        but don\'t worry, you can convert your account to standard one at any time :)</string>
+    <string name="login_alert_dialog_confirm">Continue</string>
+    <string name="login_alert_dialog_decline">Cancel</string>
+
     <!-- Log in 1. step - enter phone number -->
     <string name="verify_your_number_text">Verify your number</string>
     <string name="instruction_provide_number_text">Please enter your number to send a verification code. Operator rates may apply.</string>
@@ -47,7 +54,8 @@
     <string name="verify_error_wrong_type">Wrong format of data</string>
     <string name="verify_error_wrong_data">Wrong prefix or phone number</string>
 
-    <string name="verify_sms_limit_information">You have reached daily sending SMS limit.\n Verification has been processed successfully, click "continue" to go to the main screen.</string>
+    <string name="verify_sms_limit_information">You have reached daily sending SMS limit.\n
+        Verification has been processed successfully, click "continue" to go to the main screen.</string>
     <string name="verify_sms_limit_button_text">Continue</string>
 
     <!-- Fragment home -->

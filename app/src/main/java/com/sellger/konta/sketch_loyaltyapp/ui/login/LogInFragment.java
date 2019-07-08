@@ -1,5 +1,6 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.login;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -158,7 +160,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                             displayToastMessage(TOAST_ACCOUNT_EXISTS);
                         } else {
                             isAuthInProgress = true;
-                            anonymousSignIn();
+                            displayAnonymousSignInAlertDialog();
                         }
                         break;
                 }
@@ -295,6 +297,16 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
             // Registration aborted, enable buttons to let user choose other option
             isAuthInProgress = false;
         }
+    }
+
+    private void displayAnonymousSignInAlertDialog() {
+        new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.settings_alert_dialog_log_out_style))
+                .setCancelable(true)
+                .setTitle(R.string.login_alert_dialog_title)
+                .setMessage(R.string.login_alert_dialog_message)
+                .setPositiveButton(R.string.login_alert_dialog_confirm, (dialog, which) -> anonymousSignIn())
+                .setNegativeButton(R.string.login_alert_dialog_decline, (dialog, which) -> isAuthInProgress = false)
+                .show();
     }
 
     /**

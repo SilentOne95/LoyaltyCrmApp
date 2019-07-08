@@ -19,9 +19,17 @@
     <string name="continue_as_guest_text">albo kontynuuj jako gość</string>
     <string name="sign_up_text">Zarejestruj się</string>
 
+    <string name="login_alert_dialog_title">Uwaga</string>
+    <string name="login_alert_dialog_message">Zaraz utworzysz nowe konto jako gość.
+        \nUtworzenie tego typu konta wiąże się z pewnymi ograniczeniami dotyczącymi dostępu do niektórych
+        funkcjonalności, jednak w każdym momencie możesz przemienić to konto w standardowe z pełnym dostępem :)</string>
+    <string name="login_alert_dialog_confirm">Kontynuuj</string>
+    <string name="login_alert_dialog_decline">Przerwij</string>
+
     <!-- Log in 1. step - enter phone number -->
     <string name="verify_your_number_text">Zweryfikuj numer telefonu</string>
-    <string name="instruction_provide_number_text">Proszę wprowadzić numer telefonu, na który zostanie wysłany specjalny kod do potwierdzenia rejestracji</string>
+    <string name="instruction_provide_number_text">Proszę wprowadzić numer telefonu, na który zostanie
+        wysłany specjalny kod do potwierdzenia rejestracji</string>
     <string name="phone_number_hint">Numer telefonu</string>
     <string name="register_button_text">Wyślij kod</string>
     <string name="terms_link_text">Regulamin &amp; polityka prywatności</string>
@@ -79,7 +87,8 @@
     <string name="bottom_sheet_today_closed_text">Dziś jest zamknięte</string>
     <string name="contact_us_text">W razie jakichkolwiek pytań,\n prosimy o kontakt:</string>
 
-    <string name="verify_sms_limit_information">Osiągnięto dzienny limit wysyłki SMS-ów z kodem weryfikacyjnym.\n Weryfikacja konta przebiegła pomyślnie, kliknij "kontyuuj", aby przejść do ekranu głównego.</string>
+    <string name="verify_sms_limit_information">Osiągnięto dzienny limit wysyłki SMS-ów z kodem weryfikacyjnym.\n
+        Weryfikacja konta przebiegła pomyślnie, kliknij "kontyuuj", aby przejść do ekranu głównego.</string>
     <string name="verify_sms_limit_button_text">Kontynuuj</string>
 
     <!-- Barcode scanner -->
