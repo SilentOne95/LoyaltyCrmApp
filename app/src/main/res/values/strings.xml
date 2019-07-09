@@ -1,6 +1,6 @@
 <resources>
     <!-- App name -->
-    <string name="app_name">Sellger</string>
+    <string name="app_name" translatable="false">Sellger</string>
 
     <!-- Required for Google Auth, Firebase Web ID -->
     <string name="server_client_id" translatable="false">580087034404-j2bkn8b2j0dch9tkrvdcat99ih207ba4.apps.googleusercontent.com</string>
@@ -11,12 +11,13 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="default_notification_channel_name" translatable="false">Default channel</string>
 
-    <!-- Launcher activity -->
+    <!-- Activities -->
+    <!-- Launcher -->
     <string name="launcher_alert_dialog_message">No internet connection.
         \nPlease enable internet connection and launch this app once again :)</string>
     <string name="launcher_alert_dialog_confirm" translatable="false">Ok</string>
 
-    <!-- Main activity -->
+    <!-- Main -->
     <string name="menu_toolbar_my_account_string">My Account</string>
     <string name="menu_toolbar_search_string">Search</string>
     <string name="menu_toolbar_options_string">Options</string>
@@ -24,110 +25,12 @@
     <string name="nav_view_upgrade_acc_text">Sign up with other method to upgrade your account</string>
     <string name="menu_nav_view_settings_text">Settings</string>
 
-    <!-- Log in view -->
-    <string name="sign_up_text">Sign Up</string>
-    <string name="sign_up_sign_in_text">Sign Up / Sign In:</string>
-    <string name="continue_with_google_text">Continue with Google</string>
-    <string name="continue_with_facebook_text">Continue with Facebook</string>
-    <string name="continue_with_phone_text">Continue with Phone</string>
-    <string name="continue_as_guest_text">or continue as a guest</string>
-
-    <string name="login_alert_dialog_title">Note</string>
-    <string name="login_alert_dialog_message">You are about to create new anonymous account.
-        \nPlease note, that as anonymous user you won\'t be able to get access to all features of the app,
-        but don\'t worry, you can convert your account to standard one at any time :)</string>
-    <string name="login_alert_dialog_confirm">Continue</string>
-    <string name="login_alert_dialog_decline">Cancel</string>
-
-    <!-- Log in 1. step - enter phone number -->
-    <string name="verify_your_number_text">Verify your number</string>
-    <string name="instruction_provide_number_text">Please enter your number to send a verification code. Operator rates may apply.</string>
-    <string name="prefix_hint" translatable="false">Prefix</string>
-    <string name="phone_number_hint">Phone number</string>
-    <string name="register_button_text">Register</string>
-    <string name="terms_link_text">Terms of service &amp; privacy policy</string>
-    <string name="more_info_text">More info</string>
-
-    <!-- Log in 2. step - enter code -->
-    <string name="verify_text">Verify</string>
-    <string name="enter_code_text">Enter the verification code sent to the number provided.</string>
-    <string name="code_hint">Code</string>
-    <string name="waiting_info_text">Waiting for code to be delivered</string>
-
-    <string name="verify_error_empty_data">Please enter data</string>
-    <string name="verify_error_empty_number">Please enter phone number</string>
-    <string name="verify_error_wrong_type">Wrong format of data</string>
-    <string name="verify_error_wrong_data">Wrong prefix or phone number</string>
-
-    <string name="verify_sms_limit_information">You have reached daily sending SMS limit.\n
-        Verification has been processed successfully, click "continue" to go to the main screen.</string>
-    <string name="verify_sms_limit_button_text">Continue</string>
-
-    <!-- Fragment home -->
-    <string name="check_offers_text">Check offers!</string>
-    <string name="something_went_wrong_text">Ooops! Something went wrong. \nPlease check your internet connection</string>
-
-    <!-- Fragment coupons and products -->
-    <string name="no_coupons_text">Unfortunately, \nyou do not have active coupons\n :(</string>
-    <string name="no_products_text">Unfortunately, \nyou do not have active products\n :(</string>
-    <string name="try_again_later_text">Try again later</string>
-
-    <!-- Activity Coupon details -->
+    <!-- CouponDetails -->
     <string name="valid_until_text">valid until:</string>
     <string name="price_text">Price:</string>
     <string name="show_my_coupon_text">Show my coupon</string>
     <string name="hide_my_coupon_text">Hide coupon</string>
     <string name="coupon_details_code_text">Promo code:</string>
-
-    <!-- Coupon bottom sheet -->
-    <string name="bottom_coupon_advice_text">Show barcode or text code to any staff member</string>
-
-    <!-- Grid list item -->
-    <string name="button_check_product">Check</string>
-    <string name="button_check_coupon">Check</string>
-    <string name="button_check_details">View details</string>
-
-    <!-- Map bottom sheet -->
-    <string name="bottom_place_title_text" translatable="false">Current place title</string>
-    <string name="bottom_place_address_text" translatable="false">Current place address, postal code, city</string>
-    <string name="bottom_place_open_hours_text" translatable="false">Current place open hours</string>
-
-    <string name="bottom_sheet_today_open_text">Today open:</string>
-    <string name="bottom_sheet_today_open_all_day_text">All day</string>
-    <string name="bottom_sheet_today_closed_text">Today is closed</string>
-
-    <string name="monday_text">Monday</string>
-    <string name="tuesday_text">Tuesday</string>
-    <string name="wednesday_text">Wednesday</string>
-    <string name="thursday_text">Thursday</string>
-    <string name="friday_text">Friday</string>
-    <string name="saturday_text">Saturday</string>
-    <string name="sunday_text">Sunday</string>
-
-    <string name="contact_us_text">In case of any questions,\n please contact us:</string>
-
-    <!-- MenuComponent titles -->
-    <string name="first_fragment">Open hours</string>
-    <string name="second_fragment">Contact info</string>
-
-    <!-- Barcode scanner -->
-    <string name="barcode_scanner_title">Barcode Scanner</string>
-    <string name="barcode_scanner_instruction_text">Instruction</string>
-    <string name="barcode_scanner_instruction_body">1. Click the scan button.\n
-        2. Allow this app to use camera.\n
-        3. Aim the camera at barcode.\n
-        4. Let camera get focus.\n
-        5. You will return to this view as soon as app decode barcode.\n
-        6. You can use displayed code to get a discount on your next order.</string>
-    <string name="barcode_scanner_code_text">YOUR CODE WILL BE DISPLAYED HERE</string>
-    <string name="barcode_scanner_switch_focus_text">Auto Focus</string>
-    <string name="barcode_scanner_switch_flash_text">Flash</string>
-    <string name="barcode_scanner_button_text">Scan</string>
-
-    <!-- Barcode generator -->
-    <string name="barcode_generator_title">Your card</string>
-    <string name="barcode_generator_advice">This barcode represents your club card \n
-        Let cashier scan this to get special promotions and offers</string>
 
     <!-- Settings -->
     <string name="settings_push_notifications_label">Push notifications:</string>
@@ -153,6 +56,115 @@
     <string name="settings_delete_account_alert_confirm">Confirm</string>
     <string name="settings_delete_account_alert_decline">Cancel</string>
 
+    <!-- Fragments -->
+    <!-- LogIn - main view -->
+    <string name="sign_up_text">Sign Up</string>
+    <string name="sign_up_sign_in_text">Sign Up / Sign In:</string>
+    <string name="continue_with_google_text">Continue with Google</string>
+    <string name="continue_with_facebook_text">Continue with Facebook</string>
+    <string name="continue_with_phone_text">Continue with Phone</string>
+    <string name="continue_as_guest_text">or continue as a guest</string>
+
+    <string name="login_alert_dialog_title">Note</string>
+    <string name="login_alert_dialog_message">You are about to create new anonymous account.
+        \nPlease note, that as anonymous user you won\'t be able to get access to all features of the app,
+        but don\'t worry, you can convert your account to standard one at any time :)</string>
+    <string name="login_alert_dialog_confirm">Continue</string>
+    <string name="login_alert_dialog_decline">Cancel</string>
+
+    <!-- LogIn - 1. step: enter phone number -->
+    <string name="verify_your_number_text">Verify your number</string>
+    <string name="instruction_provide_number_text">Please enter your number to send a verification code. Operator rates may apply.</string>
+    <string name="prefix_hint" translatable="false">Prefix</string>
+    <string name="phone_number_hint">Phone number</string>
+    <string name="register_button_text">Register</string>
+    <string name="terms_link_text">Terms of service &amp; privacy policy</string>
+    <string name="more_info_text">More info</string>
+
+    <!-- LogIn - 2. step: enter code -->
+    <string name="verify_text">Verify</string>
+    <string name="enter_code_text">Enter the verification code sent to the number provided.</string>
+    <string name="code_hint">Code</string>
+    <string name="waiting_info_text">Waiting for code to be delivered</string>
+
+    <string name="verify_error_empty_data">Please enter data</string>
+    <string name="verify_error_empty_number">Please enter phone number</string>
+    <string name="verify_error_wrong_type">Wrong format of data</string>
+    <string name="verify_error_wrong_data">Wrong prefix or phone number</string>
+
+    <string name="verify_sms_limit_information">You have reached daily sending SMS limit.\n
+        Verification has been processed successfully, click "continue" to go to the main screen.</string>
+    <string name="verify_sms_limit_button_text">Continue</string>
+
+    <!-- Home -->
+    <string name="check_offers_text">Check offers!</string>
+    <string name="something_went_wrong_text">Ooops! Something went wrong. \nPlease check your internet connection</string>
+
+    <!-- Coupons / Products -->
+    <string name="no_coupons_text">Unfortunately, \nyou do not have active coupons\n :(</string>
+    <string name="no_products_text">Unfortunately, \nyou do not have active products\n :(</string>
+    <string name="try_again_later_text">Try again later</string>
+
+    <!-- Barcode scanner -->
+    <string name="barcode_scanner_title">Barcode Scanner</string>
+    <string name="barcode_scanner_instruction_text">Instruction</string>
+    <string name="barcode_scanner_instruction_body">1. Click the scan button.\n
+        2. Allow this app to use camera.\n
+        3. Aim the camera at barcode.\n
+        4. Let camera get focus.\n
+        5. You will return to this view as soon as app decode barcode.\n
+        6. You can use displayed code to get a discount on your next order.</string>
+    <string name="barcode_scanner_code_text">YOUR CODE WILL BE DISPLAYED HERE</string>
+    <string name="barcode_scanner_switch_focus_text">Auto Focus</string>
+    <string name="barcode_scanner_switch_flash_text">Flash</string>
+    <string name="barcode_scanner_button_text">Scan</string>
+
+    <!-- Barcode generator -->
+    <string name="barcode_generator_title">Your card</string>
+    <string name="barcode_generator_advice">This barcode represents your club card \n
+        Let cashier scan this to get special promotions and offers</string>
+
+    <!-- Other views -->
+    <!-- Coupon BottomSheet -->
+    <string name="bottom_coupon_advice_text">Show barcode or text code to any staff member</string>
+
+    <!-- Map BottomSheet -->
+    <string name="bottom_place_title_text" translatable="false">Current place title</string>
+    <string name="bottom_place_address_text" translatable="false">Current place address, postal code, city</string>
+    <string name="bottom_place_open_hours_text" translatable="false">Current place open hours</string>
+
+    <string name="first_fragment">Open hours</string>
+    <string name="second_fragment">Contact info</string>
+
+    <string name="bottom_sheet_today_open_text">Today open:</string>
+    <string name="bottom_sheet_today_open_all_day_text">All day</string>
+    <string name="bottom_sheet_today_closed_text">Today is closed</string>
+
+    <string name="monday_text">Monday</string>
+    <string name="tuesday_text">Tuesday</string>
+    <string name="wednesday_text">Wednesday</string>
+    <string name="thursday_text">Thursday</string>
+    <string name="friday_text">Friday</string>
+    <string name="saturday_text">Saturday</string>
+    <string name="sunday_text">Sunday</string>
+
+    <string name="contact_us_text">In case of any questions,\n please contact us:</string>
+
+    <!-- Grid list item -->
+    <string name="button_check_product">Check</string>
+    <string name="button_check_coupon">Check</string>
+    <string name="button_check_details">View details</string>
+
+    <!-- Snackbar -->
+    <string name="snackbar_no_network_connection">No internet connection</string>
+    <string name="snackbar_connection_restored">Connection restored</string>
+
+    <!-- No internet connection view -->
+    <string name="no_internet_connection_main_text">Connect to the internet.</string>
+    <string name="no_internet_connection_additional_text">You\'re offline. Check your internet connection.</string>
+    <string name="no_internet_connection_button_text">Refresh</string>
+
+    <!-- Others -->
     <!-- Toast messages -->
     <string name="internet_connection_required">Internet connection is required</string>
     <string name="localization_permission_denied">Localization permission denied</string>
@@ -167,10 +179,6 @@
     <string name="settings_acc_delete_successfully">Account deleted successfully</string>
     <string name="map_connection_suspended">Connection with Google services was suspended</string>
     <string name="map_connection_failed">Connection with Google services failed</string>
-
-    <!-- Snackbar -->
-    <string name="snackbar_no_network_connection">No internet connection</string>
-    <string name="snackbar_connection_restored">Connection restored</string>
 
     <!-- Searchable -->
     <string name="searchview_hint">Search for…</string>

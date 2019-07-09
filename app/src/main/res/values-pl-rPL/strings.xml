@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App name -->
-    <string name="app_name">Sellger</string>
-
-    <!-- Launcher activity -->
+    <!-- Activities -->
+    <!-- Launcher -->
     <string name="launcher_alert_dialog_message">Brak połączenia z internetem.
         \nProszę włączyć połączenie z inernetem i uruchomić aplikację ponownie :)</string>
 
-    <!-- Main activity -->
+    <!-- Main -->
     <string name="menu_toolbar_my_account_string">Moje konto</string>
     <string name="menu_toolbar_search_string">Szukaj</string>
     <string name="menu_toolbar_options_string">Ustawienia</string>
@@ -15,103 +13,12 @@
     <string name="nav_view_upgrade_acc_text">Zarejestruj się, aby uzyskać dostęp do wszystkich promocji</string>
     <string name="menu_nav_view_settings_text">Ustawienia</string>
 
-    <!-- Log in view -->
-    <string name="sign_up_sign_in_text">Wybierz metodę logowania\n korzystając z:</string>
-    <string name="continue_with_google_text">Konta Google</string>
-    <string name="continue_with_facebook_text">Konta Facebook</string>
-    <string name="continue_with_phone_text">Numeru telefonu</string>
-    <string name="continue_as_guest_text">albo kontynuuj jako gość</string>
-    <string name="sign_up_text">Zarejestruj się</string>
-
-    <string name="login_alert_dialog_title">Uwaga</string>
-    <string name="login_alert_dialog_message">Zaraz utworzysz nowe konto jako gość.
-        \nUtworzenie tego typu konta wiąże się z pewnymi ograniczeniami dotyczącymi dostępu do niektórych
-        funkcjonalności, jednak w każdym momencie możesz przemienić to konto w standardowe z pełnym dostępem :)</string>
-    <string name="login_alert_dialog_confirm">Kontynuuj</string>
-    <string name="login_alert_dialog_decline">Przerwij</string>
-
-    <!-- Log in 1. step - enter phone number -->
-    <string name="verify_your_number_text">Zweryfikuj numer telefonu</string>
-    <string name="instruction_provide_number_text">Proszę wprowadzić numer telefonu, na który zostanie
-        wysłany specjalny kod do potwierdzenia rejestracji</string>
-    <string name="phone_number_hint">Numer telefonu</string>
-    <string name="register_button_text">Wyślij kod</string>
-    <string name="terms_link_text">Regulamin &amp; polityka prywatności</string>
-    <string name="more_info_text">Więcej informacji</string>
-
-    <string name="verify_error_empty_data">Proszę wypełnić wskazane pola</string>
-    <string name="verify_error_empty_number">Proszę wprowadzić numer telefonu</string>
-    <string name="verify_error_wrong_type">Sprawdź wprowadzony numer</string>
-    <string name="verify_error_wrong_data">Błędny prefiks lub numer telefonu</string>
-
-    <!-- Log in 2. step - enter code -->
-    <string name="verify_text">Weryfikacja numeru:\n</string>
-    <string name="enter_code_text">Wprowadź numer weryfikacyjny, wysłany na podany numer.</string>
-    <string name="code_hint">Kod</string>
-    <string name="waiting_info_text">Oczekiwanie na dostarczenie kodu</string>
-
-    <!-- Fragment home -->
-    <string name="check_offers_text">Sprawdź najnowsze\n oferty!</string>
-    <string name="something_went_wrong_text">Ups! Coś poszło nie tak.\n Sprawdź połączenie z internetem.</string>
-
-    <!-- Fragment coupons and products -->
-    <string name="no_coupons_text">Niestety nie masz aktywnych kuponów :(</string>
-    <string name="no_products_text">Niestety nie masz aktywnych produktów :(</string>
-    <string name="try_again_later_text">Spróbuj ponownie później</string>
-
-    <!-- Activity Coupon details -->
+    <!-- CouponDetails -->
     <string name="valid_until_text">Aktywne do:</string>
     <string name="price_text">Cena:</string>
     <string name="show_my_coupon_text">Pokaż mój kupon</string>
     <string name="hide_my_coupon_text">Ukryj kupon</string>
     <string name="coupon_details_code_text">Kod promocyjny:</string>
-
-    <!-- Coupon bottom sheet -->
-    <string name="bottom_coupon_advice_text">Pozwól zeskanować lub pokaż kod obsłudze, \naby odebrać ofertę</string>
-
-    <!-- Grid list item -->
-    <string name="button_check_product">Szczegóły</string>
-    <string name="button_check_coupon">Pokaż kod</string>
-    <string name="button_check_details">Szczegóły</string>
-
-    <!-- Map bottom sheet -->
-    <string name="first_fragment">Godziny otwarcia</string>
-    <string name="second_fragment">Kontakt</string>
-
-    <string name="monday_text">Poniedziałek</string>
-    <string name="tuesday_text">Wtorek</string>
-    <string name="wednesday_text">Środa</string>
-    <string name="thursday_text">Czwartek</string>
-    <string name="friday_text">Piątek</string>
-    <string name="saturday_text">Sobota</string>
-    <string name="sunday_text">Niedziela</string>
-
-    <string name="bottom_sheet_today_open_text">Dziś otwarte:</string>
-    <string name="bottom_sheet_today_open_all_day_text">cały dzień</string>
-    <string name="bottom_sheet_today_closed_text">Dziś jest zamknięte</string>
-    <string name="contact_us_text">W razie jakichkolwiek pytań,\n prosimy o kontakt:</string>
-
-    <string name="verify_sms_limit_information">Osiągnięto dzienny limit wysyłki SMS-ów z kodem weryfikacyjnym.\n
-        Weryfikacja konta przebiegła pomyślnie, kliknij "kontyuuj", aby przejść do ekranu głównego.</string>
-    <string name="verify_sms_limit_button_text">Kontynuuj</string>
-
-    <!-- Barcode scanner -->
-    <string name="barcode_scanner_title">Skaner kodów kreskowych</string>
-    <string name="barcode_scanner_instruction_text">Instrukcja</string>
-    <string name="barcode_scanner_instruction_body">1. Kliknij przycisk \"skanuj\".\n
-        2. Zatwierdź zgodę na użycie kamery aparatu.\n
-        3. Nakieruj kamerę na kod kreskowy.\n
-        4. Poczekaj, aż kamera złapie ostrość.\n
-        5. Aplikacja automatycznie powróci do tego widoku, jak tylko kod kreskowy zostanie odszyfrowany.\n
-        6. Twój kod zostanie wyświetlony we wskazanym miejscu.</string>
-    <string name="barcode_scanner_code_text">TWÓJ KOD ZOSTANIE\n WYŚWIETLONY TUTAJ</string>
-    <string name="barcode_scanner_switch_focus_text">Auto focus</string>
-    <string name="barcode_scanner_switch_flash_text">Latarka</string>
-    <string name="barcode_scanner_button_text">Skanuj</string>
-
-    <!-- Barcode generator -->
-    <string name="barcode_generator_title">Twoja karta klienta</string>
-    <string name="barcode_generator_advice">Powyższy kod kreskowy zawiera Twój unikatowy numer klienta.\n\n Pokaż go kasjerowi, aby otrzymać specjalne zniżki lub punkty, które możesz wymienić na nagrody.</string>
 
     <!-- Settings -->
     <string name="settings_push_notifications_label">Powiadomienia push:</string>
@@ -137,6 +44,109 @@
     <string name="settings_delete_account_alert_confirm">Usuń</string>
     <string name="settings_delete_account_alert_decline">Przerwij</string>
 
+    <!-- Fragments -->
+    <!-- LogIn - main view -->
+    <string name="sign_up_sign_in_text">Wybierz metodę logowania\n korzystając z:</string>
+    <string name="continue_with_google_text">Konta Google</string>
+    <string name="continue_with_facebook_text">Konta Facebook</string>
+    <string name="continue_with_phone_text">Numeru telefonu</string>
+    <string name="continue_as_guest_text">albo kontynuuj jako gość</string>
+    <string name="sign_up_text">Zarejestruj się</string>
+
+    <string name="login_alert_dialog_title">Uwaga</string>
+    <string name="login_alert_dialog_message">Zaraz utworzysz nowe konto jako gość.
+        \nUtworzenie tego typu konta wiąże się z pewnymi ograniczeniami dotyczącymi dostępu do niektórych
+        funkcjonalności, jednak w każdym momencie możesz przemienić to konto w standardowe z pełnym dostępem :)</string>
+    <string name="login_alert_dialog_confirm">Kontynuuj</string>
+    <string name="login_alert_dialog_decline">Przerwij</string>
+
+    <!-- LogIn - 1. step: enter phone number -->
+    <string name="verify_your_number_text">Zweryfikuj numer telefonu</string>
+    <string name="instruction_provide_number_text">Proszę wprowadzić numer telefonu, na który zostanie
+        wysłany specjalny kod do potwierdzenia rejestracji</string>
+    <string name="phone_number_hint">Numer telefonu</string>
+    <string name="register_button_text">Wyślij kod</string>
+    <string name="terms_link_text">Regulamin &amp; polityka prywatności</string>
+    <string name="more_info_text">Więcej informacji</string>
+
+    <string name="verify_error_empty_data">Proszę wypełnić wskazane pola</string>
+    <string name="verify_error_empty_number">Proszę wprowadzić numer telefonu</string>
+    <string name="verify_error_wrong_type">Sprawdź wprowadzony numer</string>
+    <string name="verify_error_wrong_data">Błędny prefiks lub numer telefonu</string>
+
+    <!-- LogIn - 2. step: enter code -->
+    <string name="verify_text">Weryfikacja numeru:\n</string>
+    <string name="enter_code_text">Wprowadź numer weryfikacyjny, wysłany na podany numer.</string>
+    <string name="code_hint">Kod</string>
+    <string name="waiting_info_text">Oczekiwanie na dostarczenie kodu</string>
+
+    <!-- Home -->
+    <string name="check_offers_text">Sprawdź najnowsze\n oferty!</string>
+    <string name="something_went_wrong_text">Ups! Coś poszło nie tak.\n Sprawdź połączenie z internetem.</string>
+
+    <!-- Coupons / Products -->
+    <string name="no_coupons_text">Niestety nie masz aktywnych kuponów :(</string>
+    <string name="no_products_text">Niestety nie masz aktywnych produktów :(</string>
+    <string name="try_again_later_text">Spróbuj ponownie później</string>
+
+    <!-- Barcode scanner -->
+    <string name="barcode_scanner_title">Skaner kodów kreskowych</string>
+    <string name="barcode_scanner_instruction_text">Instrukcja</string>
+    <string name="barcode_scanner_instruction_body">1. Kliknij przycisk \"skanuj\".\n
+        2. Zatwierdź zgodę na użycie kamery aparatu.\n
+        3. Nakieruj kamerę na kod kreskowy.\n
+        4. Poczekaj, aż kamera złapie ostrość.\n
+        5. Aplikacja automatycznie powróci do tego widoku, jak tylko kod kreskowy zostanie odszyfrowany.\n
+        6. Twój kod zostanie wyświetlony we wskazanym miejscu.</string>
+    <string name="barcode_scanner_code_text">TWÓJ KOD ZOSTANIE\n WYŚWIETLONY TUTAJ</string>
+    <string name="barcode_scanner_switch_focus_text">Auto focus</string>
+    <string name="barcode_scanner_switch_flash_text">Latarka</string>
+    <string name="barcode_scanner_button_text">Skanuj</string>
+
+    <!-- Barcode generator -->
+    <string name="barcode_generator_title">Twoja karta klienta</string>
+    <string name="barcode_generator_advice">Powyższy kod kreskowy zawiera Twój unikatowy numer klienta.\n\n Pokaż go kasjerowi, aby otrzymać specjalne zniżki lub punkty, które możesz wymienić na nagrody.</string>
+
+    <!-- Other views -->
+    <!-- Coupon BottomSheet -->
+    <string name="bottom_coupon_advice_text">Pozwól zeskanować lub pokaż kod obsłudze, \naby odebrać ofertę</string>
+
+    <!-- Map BottomSheet -->
+    <string name="first_fragment">Godziny otwarcia</string>
+    <string name="second_fragment">Kontakt</string>
+
+    <string name="monday_text">Poniedziałek</string>
+    <string name="tuesday_text">Wtorek</string>
+    <string name="wednesday_text">Środa</string>
+    <string name="thursday_text">Czwartek</string>
+    <string name="friday_text">Piątek</string>
+    <string name="saturday_text">Sobota</string>
+    <string name="sunday_text">Niedziela</string>
+
+    <string name="bottom_sheet_today_open_text">Dziś otwarte:</string>
+    <string name="bottom_sheet_today_open_all_day_text">cały dzień</string>
+    <string name="bottom_sheet_today_closed_text">Dziś jest zamknięte</string>
+    <string name="contact_us_text">W razie jakichkolwiek pytań,\n prosimy o kontakt:</string>
+
+    <string name="verify_sms_limit_information">Osiągnięto dzienny limit wysyłki SMS-ów z kodem weryfikacyjnym.\n
+        Weryfikacja konta przebiegła pomyślnie, kliknij "kontyuuj", aby przejść do ekranu głównego.</string>
+    <string name="verify_sms_limit_button_text">Kontynuuj</string>
+
+    <!-- Grid list item -->
+    <string name="button_check_product">Szczegóły</string>
+    <string name="button_check_coupon">Pokaż kod</string>
+    <string name="button_check_details">Szczegóły</string>
+
+    <!-- Snackbar -->
+    <string name="snackbar_no_network_connection">Brak połączenia z internetem</string>
+    <string name="snackbar_connection_restored">Połączenie zostało przywrócone</string>
+
+    <!-- No internet connection view -->
+    <string name="no_internet_connection_main_text">Połącz się z internetem.</string>
+    <string name="no_internet_connection_additional_text">Jesteś offline. Sprawdź połączenie.</string>
+    <string name="no_internet_connection_button_text">Odśwież</string>
+
+    <!-- Others -->
     <!-- Toast messages -->
     <string name="internet_connection_required">Połączenie z internetem jest wymagane</string>
     <string name="localization_permission_denied">Wyłączono usługi lokalizacyjne</string>
@@ -151,10 +161,6 @@
     <string name="settings_acc_delete_successfully">Konto zostało pomyślnie usunięte</string>
     <string name="map_connection_suspended">Połączenie z serwisem Google zostało zawieszone</string>
     <string name="map_connection_failed">Połączenie z serwisem Google zostało zerwane</string>
-
-    <!-- Snackbar -->
-    <string name="snackbar_no_network_connection">Brak połączenia z internetem</string>
-    <string name="snackbar_connection_restored">Połączenie zostało przywrócone</string>
 
     <!-- Searchable -->
     <string name="searchview_hint">Szukaj…</string>
