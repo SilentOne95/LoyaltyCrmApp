@@ -240,7 +240,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
             boolean fragmentPopped = getSupportFragmentManager().popBackStackImmediate(fragment.getClass().getSimpleName(), 0);
             // If user's account is anonymous, limit access to views of app
             if (fragment instanceof HomeFragment) {
-                if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
+                if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().isAnonymous()) {
                     presenter.getMenuListToLimitAccess();
                 }
             }
@@ -504,7 +504,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         switch (menuItem.getItemId()) {
             case R.id.main_menu_my_account:
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.switch_view_layout);
-                if (mFirebaseAuth.getCurrentUser().isAnonymous()) {
+                if (mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().isAnonymous()) {
                     presenter.displaySelectedScreen(LAYOUT_TYPE_LOGIN, LAYOUT_DATA_EMPTY_STRING);
                 } else if (!(fragment instanceof MyAccountFragment)) {
                     presenter.displaySelectedScreen(LAYOUT_TYPE_ACCOUNT, LAYOUT_DATA_EMPTY_STRING);

@@ -1,6 +1,5 @@
 package com.sellger.konta.sketch_loyaltyapp.base.activity;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
-import com.sellger.konta.sketch_loyaltyapp.service.network.NetworkSchedulerService;
 import com.sellger.konta.sketch_loyaltyapp.utils.CustomSnackbar;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
@@ -27,13 +25,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             presenter.scheduleNetworkJob(this);
         }
-
-        presenter.startNetworkIntentService(getApplicationContext());
     }
 
     protected abstract int getLayout();
 
     public abstract void initViews();
+
+
 
     @Override
     public void displaySnackbar(boolean isNetwork) {
@@ -52,17 +50,5 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
             snackbarTextView.setText(R.string.snackbar_no_network_connection);
             customSnackbar.show();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.startNetworkIntentService(this);
-    }
-
-    @Override
-    protected void onPause() {
-        stopService(new Intent(this, NetworkSchedulerService.class));
-        super.onPause();
     }
 }

@@ -23,6 +23,7 @@ public class BaseActivityPresenter implements BaseActivityContract.Presenter {
     private BaseActivityContract.View view;
 
     private boolean mIsFirstNetworkCallback = true;
+    private boolean scheduled = false;
 
     BaseActivityPresenter(@NonNull BaseActivityContract.View view) {
         this.view = view;
@@ -31,16 +32,25 @@ public class BaseActivityPresenter implements BaseActivityContract.Presenter {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void scheduleNetworkJob(Context context) {
-        JobInfo jobInfo = new JobInfo.Builder(0, new ComponentName(context, NetworkSchedulerService.class))
-                .setRequiresCharging(true)
-                .setMinimumLatency(1000)
-                .setOverrideDeadline(2000)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                .setPersisted(true)
-                .build();
-
         JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        jobScheduler.schedule(jobInfo);
+        for (JobInfo jobInfo : jobScheduler.getAllPendingJobs()) {
+            if (jobInfo.getId() == 0) {
+                scheduled = true;
+                break;
+            }
+        }
+
+        if (!scheduled) {
+            JobInfo jobInfo = new JobInfo.Builder(0, new ComponentName(context, NetworkSchedulerService.class))
+                    .setMinimumLatency(1000)
+                    .setOverrideDeadline(2000)
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                    .setPersisted(true)
+                    .build();
+
+            jobScheduler.schedule(jobInfo);
+            startNetworkIntentService(context);
+        }
     }
 
     @Override
