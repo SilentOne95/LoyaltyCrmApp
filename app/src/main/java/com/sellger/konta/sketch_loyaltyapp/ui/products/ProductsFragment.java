@@ -1,6 +1,8 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.products;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,11 +31,15 @@ import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomItemDecoration;
 
 import java.util.List;
 
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
+
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_REFRESH_NETWORK_CONNECTION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
-public class ProductsFragment extends BaseFragment implements ProductsContract.View, SearchView.OnQueryTextListener {
+public class ProductsFragment extends BaseFragment implements ProductsContract.View, View.OnClickListener,
+        SearchView.OnQueryTextListener {
 
     private static final String TAG = ProductsFragment.class.getSimpleName();
 
@@ -42,6 +49,9 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     private View mEmptyStateView;
     private ProgressBar mProgressBar;
     private ProductAdapter mAdapter;
+
+    private View mNoNetworkView;
+    private CircularProgressButton mRefreshNetworkButton;
 
     @Override
     protected int getLayout() {
@@ -81,6 +91,9 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         mProgressBar = rootView.findViewById(R.id.progress_bar);
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mEmptyStateView = rootView.findViewById(R.id.empty_state_products_container);
+
+        mNoNetworkView = getActivity().findViewById(R.id.no_network_connection_container);
+        mRefreshNetworkButton = getActivity().findViewById(R.id.no_network_connection_button);
     }
 
     @Override
@@ -94,6 +107,16 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         searchView.setQueryHint("Search");
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void changeVisibilityNoNetworkConnectionView(boolean shouldBeVisible) {
+        if (shouldBeVisible) {
+            mNoNetworkView.setVisibility(View.VISIBLE);
+            mRefreshNetworkButton.setOnClickListener(this);
+        } else {
+            mNoNetworkView.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -152,8 +175,12 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
      * Called from {@link ProductsPresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
      */
     @Override
-    public void hideProgressBar() {
-        mProgressBar.setVisibility(View.GONE);
+    public void changeVisibilityProgressBar(boolean shouldBeVisible) {
+        if (shouldBeVisible) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -188,5 +215,43 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
+     */
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.no_network_connection_button) {
+            checkIfNetworkIsAvailableAndGetData();
+        }
+    }
+
+    /**
+     * Called from {@link #onClick(View)} when user what to get data and reload view.
+     */
+    private void checkIfNetworkIsAvailableAndGetData() {
+        mRefreshNetworkButton.startMorphAnimation();
+        new Handler().postDelayed(() -> {
+            if (presenter.isNetworkAvailable(getContext())) {
+                mRefreshNetworkButton.doneLoadingAnimation(Color.rgb(255, 152, 0),
+                        BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_check));
+                presenter.requestDataFromServer();
+
+                changeVisibilityNoNetworkConnectionView(false);
+                changeVisibilityProgressBar(false);
+            } else {
+                mRefreshNetworkButton.revertAnimation(() -> null);
+            }
+        }, DELAY_REFRESH_NETWORK_CONNECTION);
+    }
+
+    @Override
+    public void onDestroyView() {
+        changeVisibilityNoNetworkConnectionView(false);
+        super.onDestroyView();
     }
 }

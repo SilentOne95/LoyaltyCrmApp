@@ -27,4 +27,64 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
+    <!-- TODO: This is new layout for views when internet is not available -->
+    <LinearLayout
+        android:id="@+id/no_network_connection_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/small_value"
+        android:layout_marginTop="@dimen/small_value"
+        android:layout_marginEnd="@dimen/small_value"
+        android:layout_marginBottom="@dimen/small_value"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/no_network_connection_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/big_value"
+            android:contentDescription="@string/app_bar_main_no_network_image_desc"
+            android:src="@drawable/no_network_available" />
+
+        <TextView
+            android:id="@+id/no_network_connection_header_text"
+            style="@style/text_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/small_value"
+            android:text="@string/no_internet_connection_main_text"
+            android:textColor="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/no_network_connection_secondary_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/very_big_value"
+            android:text="@string/no_internet_connection_additional_text"
+            android:textColor="@color/colorNavViewStateEnableFalse" />
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/no_network_connection_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_basic_height"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_corners_accent"
+            android:text="@string/no_internet_connection_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_h4"
+            app:initialCornerAngle="@dimen/rounded_corner_radius"
+            app:spinning_bar_color="@color/colorWhite" />
+
+    </LinearLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

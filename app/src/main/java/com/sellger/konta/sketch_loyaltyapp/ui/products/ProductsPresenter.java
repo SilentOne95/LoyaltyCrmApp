@@ -1,5 +1,8 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.products;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -61,6 +64,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
             @Override
             public void onDataNotAvailable() {
                 hideProgressBar();
+                view.changeVisibilityNoNetworkConnectionView(true);
                 view.displayToastMessage(TOAST_ERROR);
             }
         });
@@ -85,7 +89,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
      * Called from {@link #requestDataFromServer()} to hide progress bar when data is fetched or not.
      */
     private void hideProgressBar() {
-        view.hideProgressBar();
+        view.changeVisibilityProgressBar(false);
     }
 
     /**
@@ -96,5 +100,20 @@ public class ProductsPresenter implements ProductsContract.Presenter {
      */
     private void passDataToAdapter(List<Product> productList, int numOfColumns) {
         view.setUpAdapter(productList, numOfColumns);
+    }
+
+    /**
+     * Called from {@link ProductsFragment#checkIfNetworkIsAvailableAndGetData()} to check
+     * if network connection is active.
+     *
+     * @param context of the app
+     * @return boolean depends on network status
+     */
+    @Override
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }

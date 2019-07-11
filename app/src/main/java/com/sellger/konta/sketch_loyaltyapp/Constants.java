@@ -1,5 +1,7 @@
 package com.sellger.konta.sketch_loyaltyapp;
 
+import java.security.PublicKey;
+
 /**
  * Contains all const variables.
  */
@@ -160,6 +162,7 @@ public final class Constants {
     public static final int DELAY_SET_SMS_CODE = 3000;
     public static final int DELAY_LOGIN_SWITCH_LAYOUT = 2000;
     public static final int DELAY_LOADING_LOGIN_SWITCH_LAYOUT = 4000;
+    public static final int DELAY_REFRESH_NETWORK_CONNECTION = 3000;
 
     // Bundle keys
     public static final String BUNDLE_DATA_STRING = "DATA_STRING";

@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
     private View mNavViewHeaderShadeContainer;
     private Button mNavViewHeaderButton;
+    private View mNoInternetConnectionLayout;
 
     // Field that stores layout type of clicked menu item
     private String mLayoutType = null;
@@ -136,6 +137,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         mToolbar = findViewById(R.id.toolbar);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.nav_view);
+
+        mNoInternetConnectionLayout = findViewById(R.id.no_network_connection_container);
+        mNoInternetConnectionLayout.setVisibility(View.GONE);
 
         View navigationViewHeader = mNavigationView.getHeaderView(0);
         mNavViewHeaderShadeContainer = navigationViewHeader.findViewById(R.id.navigation_view_header_shade_container);

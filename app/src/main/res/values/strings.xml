@@ -200,5 +200,6 @@
     <string name="text_icon_verify_code_desc" translatable="false">Text icon in 2nd step of verification phone num</string>
     <string name="view_flipper_arrow_desc" translatable="false">Arrow image to switch view in view flipper</string>
     <string name="coupon_details_barcode" translatable="false">Generated barcode that contains coupon code</string>
+    <string name="app_bar_main_no_network_image_desc" translatable="false">No internet connection image</string>
 
 </resources>
