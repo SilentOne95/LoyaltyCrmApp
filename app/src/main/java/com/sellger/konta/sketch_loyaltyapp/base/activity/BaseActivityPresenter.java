@@ -23,7 +23,7 @@ public class BaseActivityPresenter implements BaseActivityContract.Presenter {
     private BaseActivityContract.View view;
 
     private boolean mIsFirstNetworkCallback = true;
-    private boolean scheduled = false;
+    private boolean mIsNetworkJobScheduled = false;
 
     BaseActivityPresenter(@NonNull BaseActivityContract.View view) {
         this.view = view;
@@ -35,12 +35,12 @@ public class BaseActivityPresenter implements BaseActivityContract.Presenter {
         JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         for (JobInfo jobInfo : jobScheduler.getAllPendingJobs()) {
             if (jobInfo.getId() == 0) {
-                scheduled = true;
+                mIsNetworkJobScheduled = true;
                 break;
             }
         }
 
-        if (!scheduled) {
+        if (!mIsNetworkJobScheduled) {
             JobInfo jobInfo = new JobInfo.Builder(0, new ComponentName(context, NetworkSchedulerService.class))
                     .setMinimumLatency(1000)
                     .setOverrideDeadline(2000)

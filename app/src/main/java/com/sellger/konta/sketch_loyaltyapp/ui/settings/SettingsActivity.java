@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -41,12 +42,13 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     private static final String TAG = SettingsActivity.class.getSimpleName();
 
     private SettingsPresenter presenter;
+    private SharedPreferences preferences;
 
     private TextView mTermsText, mPrivacyText, mLicensesText;
     private Switch mSwitchFirstTopic, mSwitchSecondTopic, mSwitchThirdTopic;
     private Button mLogOutButton, mDeleteButton;
 
-    private SharedPreferences preferences;
+    private boolean mIsActionProcessing = false;
 
     @Override
     protected int getLayout() {
@@ -165,7 +167,9 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 .setCancelable(true)
                 .setTitle(R.string.settings_log_out_alert_title)
                 .setMessage(R.string.settings_log_out_account_alert_message)
-                .setPositiveButton(R.string.settings_log_out_account_alert_confirm, (dialog, which) -> logOutAccount())
+                .setPositiveButton(R.string.settings_log_out_account_alert_confirm, (dialog, which) -> {
+                    disableUserActionsWhileProcessing();
+                    logOutAccount();})
                 .setNegativeButton(R.string.settings_log_out_account_alert_decline, null)
                 .show();
     }
@@ -178,7 +182,9 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 .setCancelable(true)
                 .setTitle(R.string.settings_delete_account_alert_title)
                 .setMessage(R.string.settings_delete_account_alert_message)
-                .setPositiveButton(R.string.settings_delete_account_alert_confirm, (dialog, which) -> deleteUserAccount())
+                .setPositiveButton(R.string.settings_delete_account_alert_confirm, (dialog, which) -> {
+                    disableUserActionsWhileProcessing();
+                    deleteUserAccount();})
                 .setNegativeButton(R.string.settings_delete_account_alert_decline, null)
                 .show();
     }
@@ -231,7 +237,10 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 displayToastMessage(TOAST_DELETE_SUCCESS);
                 unsubscribeAndUpdateUI();
             }
-        }).addOnFailureListener(task -> displayToastMessage(TOAST_ERROR));
+        }).addOnFailureListener(task -> {
+            enableUserActionsAfterProcessingFailed();
+            displayToastMessage(TOAST_ERROR);
+        });
     }
 
     /**
@@ -247,6 +256,35 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
         // Start MainActivity to show Login layout as current account was deleted
         SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+    }
+
+    /**
+     * Called from {@link #deleteUserAccount()} to enable user touch actions as delete account action
+     * process failed.
+     */
+    private void disableUserActionsWhileProcessing() {
+        mIsActionProcessing = true;
+
+        // Disable user actions while processing log out or delete action
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    /**
+     * Called from {@link #showLogOutDialog()} and {@link #showDeleteAccountDialog()} block user touch
+     * actions to prevent from interrupting Firebase process to complete successfully.
+     */
+    private void enableUserActionsAfterProcessingFailed() {
+        mIsActionProcessing = false;
+
+        // Enable user actions while processing log out or delete action failed
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!mIsActionProcessing) {
+            super.onBackPressed();
+        }
     }
 
     /**
