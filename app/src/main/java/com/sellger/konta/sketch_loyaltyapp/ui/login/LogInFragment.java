@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +68,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     private Button mSignInWithGoogleButton, mSignInWithFacebookButton, mSignInWithPhoneButton;
     private TextView mSignInAnonymously;
 
-    private boolean isAuthInProgress = false;
+    private boolean mIsAuthInProgress = false;
 
     @Override
     protected int getLayout() {
@@ -141,25 +142,25 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     @Override
     public void onClick(View view) {
         if (checkInternetConnection()) {
-            if (!isAuthInProgress) {
+            if (!mIsAuthInProgress) {
                 switch (view.getId()) {
                     case R.id.login_google_button:
-                        isAuthInProgress = true;
+                        handleUserActionsWhileProcessing(mIsAuthInProgress = true);
                         googleSignIn();
                         break;
                     case R.id.login_facebook_button:
-                        isAuthInProgress = true;
+                        handleUserActionsWhileProcessing(mIsAuthInProgress = true);
                         facebookSignIn();
                         break;
                     case R.id.login_phone_button:
-                        isAuthInProgress = true;
+                        handleUserActionsWhileProcessing(mIsAuthInProgress = true);
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_PHONE, LAYOUT_DATA_EMPTY_STRING);
                         break;
                     case R.id.register_guest_text:
                         if (mFirebaseAuth.getCurrentUser() != null) {
                             displayToastMessage(TOAST_ACCOUNT_EXISTS);
                         } else {
-                            isAuthInProgress = true;
+                            handleUserActionsWhileProcessing(mIsAuthInProgress = true);
                             displayAnonymousSignInAlertDialog();
                         }
                         break;
@@ -246,6 +247,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
                         // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
+                        handleUserActionsWhileProcessing(mIsAuthInProgress = false);
                     } else {
                         // Check if user has already used this email with different auth method
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
@@ -258,8 +260,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                                 // If sign in fails, display a message to the user
                                 displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                             }
-                            // Registration failed, enable buttons to let user choose other option
-                            isAuthInProgress = false;
+                            // Registration failed, enable user touch actions
+                            handleUserActionsWhileProcessing(mIsAuthInProgress = false);
                         }
                     }
                 });
@@ -294,8 +296,8 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 mCallbackFacebookManager.onActivityResult(requestCode, resultCode, data);
             }
         } else {
-            // Registration aborted, enable buttons to let user choose other option
-            isAuthInProgress = false;
+            // Registration aborted, enable user touch actions
+            handleUserActionsWhileProcessing(mIsAuthInProgress = false);
         }
     }
 
@@ -305,7 +307,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                 .setTitle(R.string.login_alert_dialog_title)
                 .setMessage(R.string.login_alert_dialog_message)
                 .setPositiveButton(R.string.login_alert_dialog_confirm, (dialog, which) -> anonymousSignIn())
-                .setNegativeButton(R.string.login_alert_dialog_decline, (dialog, which) -> isAuthInProgress = false)
+                .setNegativeButton(R.string.login_alert_dialog_decline, (dialog, which) -> handleUserActionsWhileProcessing(mIsAuthInProgress = false))
                 .show();
     }
 
@@ -321,11 +323,12 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
                         // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, ANONYMOUS_REGISTRATION);
+                        handleUserActionsWhileProcessing(mIsAuthInProgress = false);
                     } else {
                         // If sign in fails, display a message to the user.
                         displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
-                        // Registration failed, enable buttons to let user choose other option
-                        isAuthInProgress = false;
+                        // Registration failed, enable user touch actions
+                        handleUserActionsWhileProcessing(mIsAuthInProgress = false);
                     }
                 });
     }
@@ -345,6 +348,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
 
                         // Open "home" view, pass string to display / hide information about account in nav view header
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_HOME, NOT_ANONYMOUS_REGISTRATION);
+                        handleUserActionsWhileProcessing(mIsAuthInProgress = false);
                     } else {
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             // If account with this email already exists, display a message to the user
@@ -353,10 +357,24 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                             // If sign in fails, display a message to the user
                             displayToastMessage(TOAST_ACCOUNT_AUTH_FAILED);
                         }
-                        // Registration failed, enable buttons to let user choose other option
-                        isAuthInProgress = false;
+                        // Registration failed, enable user touch actions
+                        handleUserActionsWhileProcessing(mIsAuthInProgress = false);
                     }
                 });
+    }
+
+    /**
+     * Called whenever process of logging in / registration has started / ended up to enable / disable user's
+     * touch actions to prevent from breaking off connection with firebase.
+     */
+    private void handleUserActionsWhileProcessing(boolean isActionProcessing) {
+        if (isActionProcessing) {
+            // Disable user actions while processing logging in / registration
+            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        } else {
+            // Enable user actions while processing logging in / registration
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
     }
 
     /**

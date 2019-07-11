@@ -168,8 +168,9 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 .setTitle(R.string.settings_log_out_alert_title)
                 .setMessage(R.string.settings_log_out_account_alert_message)
                 .setPositiveButton(R.string.settings_log_out_account_alert_confirm, (dialog, which) -> {
-                    disableUserActionsWhileProcessing();
-                    logOutAccount();})
+                    handleUserActionsWhileProcessing(mIsActionProcessing = true);
+                    logOutAccount();
+                })
                 .setNegativeButton(R.string.settings_log_out_account_alert_decline, null)
                 .show();
     }
@@ -183,8 +184,9 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 .setTitle(R.string.settings_delete_account_alert_title)
                 .setMessage(R.string.settings_delete_account_alert_message)
                 .setPositiveButton(R.string.settings_delete_account_alert_confirm, (dialog, which) -> {
-                    disableUserActionsWhileProcessing();
-                    deleteUserAccount();})
+                    handleUserActionsWhileProcessing(mIsActionProcessing = true);
+                    deleteUserAccount();
+                })
                 .setNegativeButton(R.string.settings_delete_account_alert_decline, null)
                 .show();
     }
@@ -238,7 +240,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
                 unsubscribeAndUpdateUI();
             }
         }).addOnFailureListener(task -> {
-            enableUserActionsAfterProcessingFailed();
+            handleUserActionsWhileProcessing(mIsActionProcessing = false);
             displayToastMessage(TOAST_ERROR);
         });
     }
@@ -259,25 +261,18 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     }
 
     /**
-     * Called from {@link #deleteUserAccount()} to enable user touch actions as delete account action
-     * process failed.
+     * Called from {@link #showLogOutDialog()}, {@link #showDeleteAccountDialog()} and
+     * {@link #deleteUserAccount()} to enable / disable user touch actions as log out / delete account
+     * action process is running / failed.
      */
-    private void disableUserActionsWhileProcessing() {
-        mIsActionProcessing = true;
-
-        // Disable user actions while processing log out or delete action
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-    }
-
-    /**
-     * Called from {@link #showLogOutDialog()} and {@link #showDeleteAccountDialog()} block user touch
-     * actions to prevent from interrupting Firebase process to complete successfully.
-     */
-    private void enableUserActionsAfterProcessingFailed() {
-        mIsActionProcessing = false;
-
-        // Enable user actions while processing log out or delete action failed
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    private void handleUserActionsWhileProcessing(boolean isActionProcessing) {
+        if (isActionProcessing) {
+            // Disable user actions while processing log out or delete action
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        } else {
+            // Enable user actions while processing log out or delete action failed
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
     }
 
     @Override

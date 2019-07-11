@@ -31,8 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
 
     public abstract void initViews();
 
-
-
     @Override
     public void displaySnackbar(boolean isNetwork) {
         if (isNetwork) {
