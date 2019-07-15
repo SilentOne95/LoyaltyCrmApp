@@ -115,7 +115,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
 
                 @Override
                 public void onDataNotAvailable() {
-                    getMenuFromRemoteDataSource(callback);
+                    callback.onDataNotAvailable();
                 }
             });
         }

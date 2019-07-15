@@ -21,7 +21,7 @@ public interface CouponsContract {
 
     interface Presenter {
 
-        void requestDataFromServer();
+        void requestDataFromServer(Context context);
 
         boolean isNetworkAvailable(Context context);
     }

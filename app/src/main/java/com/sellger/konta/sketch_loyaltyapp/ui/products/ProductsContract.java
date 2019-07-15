@@ -21,7 +21,7 @@ public interface ProductsContract {
 
     interface Presenter {
 
-        void requestDataFromServer();
+        void requestDataFromServer(Context context);
 
         boolean isNetworkAvailable(Context context);
     }

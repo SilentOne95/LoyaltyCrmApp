@@ -89,7 +89,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         initViews();
 
         presenter = new CouponsPresenter(this, Injection.provideLoyaltyRepository(getContext()));
-        presenter.requestDataFromServer();
+        presenter.requestDataFromServer(getContext());
     }
 
     /**
@@ -204,12 +204,11 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
      */
     @Override
     public void changeVisibilityNoNetworkConnectionView(boolean shouldBeVisible) {
-        if (shouldBeVisible && !presenter.isNetworkAvailable(getContext())) {
+        if (shouldBeVisible) {
             mNoNetworkView.setVisibility(View.VISIBLE);
             mRefreshNetworkButton.setOnClickListener(this);
         } else {
             mNoNetworkView.setVisibility(View.GONE);
-            displayToastMessage(TOAST_ERROR);
         }
     }
 
@@ -325,7 +324,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
             if (presenter.isNetworkAvailable(getContext())) {
                 mRefreshNetworkButton.doneLoadingAnimation(Color.rgb(255, 152, 0),
                         BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_check));
-                presenter.requestDataFromServer();
+                presenter.requestDataFromServer(getContext());
 
                 changeVisibilityNoNetworkConnectionView(false);
                 changeVisibilityProgressBar(true);

@@ -300,7 +300,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
                 break;
             default:
                 if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-                    getSupportFragmentManager().popBackStack();
+                    getSupportFragmentManager().popBackStackImmediate();
                 } else {
                     finish();
                 }

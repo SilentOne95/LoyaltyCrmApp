@@ -16,6 +16,7 @@ import java.util.List;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_NUM_OF_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_PRODUCTS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
 public class ProductsPresenter implements ProductsContract.Presenter {
 
@@ -36,7 +37,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
      * Called from {@link ProductsFragment#onCreate(Bundle)} to fetch required data from {@link LoyaltyRepository}.
      */
     @Override
-    public void requestDataFromServer() {
+    public void requestDataFromServer(Context context) {
         loyaltyRepository.getAllProducts(new LoyaltyDataSource.LoadDataCallback() {
             @Override
             public void onDataLoaded(List<?> data) {
@@ -55,7 +56,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
                     @Override
                     public void onDataNotAvailable() {
                         hideProgressBar();
-                        view.changeVisibilityNoNetworkConnectionView(true);
+                        manageViewsDataNotAvailable(context);
                     }
                 });
             }
@@ -63,9 +64,23 @@ public class ProductsPresenter implements ProductsContract.Presenter {
             @Override
             public void onDataNotAvailable() {
                 hideProgressBar();
-                view.changeVisibilityNoNetworkConnectionView(true);
+                manageViewsDataNotAvailable(context);
             }
         });
+    }
+
+    /**
+     * Called from {@link #requestDataFromServer(Context)} whenever data is not available and need to
+     * notify user about this.
+     *
+     * @param context of the app
+     */
+    private void manageViewsDataNotAvailable(Context context) {
+        if (!isNetworkAvailable(context)) {
+            view.changeVisibilityNoNetworkConnectionView(true);
+        } else {
+            view.displayToastMessage(TOAST_ERROR);
+        }
     }
 
     /**

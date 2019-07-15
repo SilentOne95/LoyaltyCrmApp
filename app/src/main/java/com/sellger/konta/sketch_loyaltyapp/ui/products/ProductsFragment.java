@@ -80,7 +80,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
 
         // Setting up presenter
         presenter = new ProductsPresenter(this, Injection.provideLoyaltyRepository(getContext()));
-        presenter.requestDataFromServer();
+        presenter.requestDataFromServer(getContext());
     }
 
     /**
@@ -118,12 +118,11 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
      */
     @Override
     public void changeVisibilityNoNetworkConnectionView(boolean shouldBeVisible) {
-        if (shouldBeVisible && !presenter.isNetworkAvailable(getContext())) {
+        if (shouldBeVisible) {
             mNoNetworkView.setVisibility(View.VISIBLE);
             mRefreshNetworkButton.setOnClickListener(this);
         } else {
             mNoNetworkView.setVisibility(View.GONE);
-            displayToastMessage(TOAST_ERROR);
         }
     }
 
@@ -248,7 +247,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
             if (presenter.isNetworkAvailable(getContext())) {
                 mRefreshNetworkButton.doneLoadingAnimation(Color.rgb(255, 152, 0),
                         BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_check));
-                presenter.requestDataFromServer();
+                presenter.requestDataFromServer(getContext());
 
                 changeVisibilityNoNetworkConnectionView(false);
                 changeVisibilityProgressBar(true);
