@@ -179,14 +179,16 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
     }
 
     /**
-     * Called from {@link ProductsPresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
+     * Called from {@link ProductsPresenter#hideProgressBar()} and {@link #checkIfNetworkIsAvailableAndGetData()}
+     * to inform user whether data is loading or not.
      */
     @Override
     public void changeVisibilityProgressBar(boolean shouldBeVisible) {
-        if (shouldBeVisible) {
+        if (shouldBeVisible && !presenter.isNetworkAvailable(getContext())) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
             mProgressBar.setVisibility(View.GONE);
+            displayToastMessage(TOAST_ERROR);
         }
     }
 

@@ -240,12 +240,17 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         }
     }
 
+    /**
+     * Called from {@link CouponsPresenter#hideProgressBar()} and {@link #checkIfNetworkIsAvailableAndGetData()}
+     * to inform user whether data is loading or not.
+     */
     @Override
     public void changeVisibilityProgressBar(boolean shouldBeVisible) {
-        if (shouldBeVisible) {
+        if (shouldBeVisible && !presenter.isNetworkAvailable(getContext())) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
             mProgressBar.setVisibility(View.GONE);
+            displayToastMessage(TOAST_ERROR);
         }
     }
 
