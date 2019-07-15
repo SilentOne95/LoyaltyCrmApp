@@ -1,5 +1,8 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -72,9 +75,25 @@ public class CouponsPresenter implements CouponsContract.Presenter {
             @Override
             public void onDataNotAvailable() {
                 hideProgressBar();
+                view.changeVisibilityNoNetworkConnectionView(true);
                 view.displayToastMessage(TOAST_ERROR);
             }
         });
+    }
+
+    /**
+     * Called from {@link CouponsFragment#checkIfNetworkIsAvailableAndGetData()} to check
+     * if network connection is active.
+     *
+     * @param context of the app
+     * @return boolean depends on network status
+     */
+    @Override
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
     /**
@@ -136,7 +155,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
      * Called from {@link #requestDataFromServer()} to hide progress bar when data is fetched or not.
      */
     private void hideProgressBar() {
-        view.hideProgressBar();
+        view.changeVisibilityProgressBar(false);
     }
 
     /**

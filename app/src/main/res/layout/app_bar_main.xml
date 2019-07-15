@@ -27,7 +27,6 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
-    <!-- TODO: This is new layout for views when internet is not available -->
     <LinearLayout
         android:id="@+id/no_network_connection_container"
         android:layout_width="wrap_content"

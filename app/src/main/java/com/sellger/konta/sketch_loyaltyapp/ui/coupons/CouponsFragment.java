@@ -1,6 +1,8 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +35,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 import jp.wasabeef.picasso.transformations.GrayscaleTransformation;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -42,20 +46,25 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_CO
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_REFRESH_NETWORK_CONNECTION;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
-public class CouponsFragment extends BaseFragment implements CouponsContract.View, SearchView.OnQueryTextListener {
+public class CouponsFragment extends BaseFragment implements CouponsContract.View, View.OnClickListener,
+        SearchView.OnQueryTextListener {
 
     private static final String TAG = CouponsFragment.class.getSimpleName();
 
     private CouponsPresenter presenter;
 
-    private RecyclerView recyclerView;
-    private View emptyStateView;
-    private ProgressBar progressBar;
-    private int numOfColumns;
-    private CouponAdapter adapter;
+    private RecyclerView mRecyclerView;
+    private View mEmptyStateView;
+    private ProgressBar mProgressBar;
+    private int mNumOfColumns;
+    private CouponAdapter mAdapter;
+
+    private View mNoNetworkView;
+    private CircularProgressButton mRefreshNetworkButton;
 
     @Override
     protected int getLayout() {
@@ -88,12 +97,14 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
      */
     @Override
     public void initViews() {
-        progressBar = rootView.findViewById(R.id.progress_bar);
-        recyclerView = rootView.findViewById(R.id.recycler_view);
-        emptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
+        mProgressBar = rootView.findViewById(R.id.progress_bar);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view);
+        mEmptyStateView = rootView.findViewById(R.id.empty_state_coupons_container);
+        mNoNetworkView = getActivity().findViewById(R.id.no_network_connection_container);
+        mRefreshNetworkButton = getActivity().findViewById(R.id.no_network_connection_button);
 
         // Setting up views
-        emptyStateView.setVisibility(View.GONE);
+        mEmptyStateView.setVisibility(View.GONE);
     }
 
     /**
@@ -129,15 +140,15 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
         @Override
         public void onItemCouponCodeCheckClick(int position, String imageUrl) {
-            ImageView couponImage = recyclerView.getLayoutManager()
+            ImageView couponImage = mRecyclerView.getLayoutManager()
                     .findViewByPosition(position)
                     .findViewById(R.id.grid_item_image);
-            TextView couponCodeText = recyclerView.getLayoutManager()
+            TextView couponCodeText = mRecyclerView.getLayoutManager()
                     .findViewByPosition(position)
                     .findViewById(R.id.grid_item_code_text);
 
             // Blur, gray out and display coupon code on selected image
-            switch (numOfColumns) {
+            switch (mNumOfColumns) {
                 case 1:
                     Picasso.get()
                             .load(imageUrl)
@@ -185,6 +196,23 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
     };
 
     /**
+     * Called from {@link #checkIfNetworkIsAvailableAndGetData()}, {@link #onDestroyView()} and
+     * {@link CouponsPresenter#requestDataFromServer()} to display / hide view to user about potential
+     * network problem.
+     *
+     * @param shouldBeVisible boolean value to determine whether view should be visible or not
+     */
+    @Override
+    public void changeVisibilityNoNetworkConnectionView(boolean shouldBeVisible) {
+        if (shouldBeVisible) {
+            mNoNetworkView.setVisibility(View.VISIBLE);
+            mRefreshNetworkButton.setOnClickListener(this);
+        } else {
+            mNoNetworkView.setVisibility(View.GONE);
+        }
+    }
+
+    /**
      * Called from {@link CouponsPresenter#passDataToAdapter(List, int)} to set up adapter
      * {@link CouponAdapter} with data.
      *
@@ -193,12 +221,12 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
      */
     @Override
     public void setUpAdapter(List<Coupon> couponList, int numOfColumns) {
-        this.numOfColumns = numOfColumns;
+        mNumOfColumns = numOfColumns;
         if (couponList.isEmpty()) {
             setUpEmptyStateView(true);
         } else {
             setUpEmptyStateView(false);
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumns));
 
             CustomItemDecoration itemDecoration;
             if (numOfColumns == 1) {
@@ -206,9 +234,18 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
             } else {
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
             }
-            recyclerView.addItemDecoration(itemDecoration);
-            adapter = new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns);
-            recyclerView.setAdapter(adapter);
+            mRecyclerView.addItemDecoration(itemDecoration);
+            mAdapter = new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns);
+            mRecyclerView.setAdapter(mAdapter);
+        }
+    }
+
+    @Override
+    public void changeVisibilityProgressBar(boolean shouldBeVisible) {
+        if (shouldBeVisible) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
         }
     }
 
@@ -219,20 +256,12 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
      */
     private void setUpEmptyStateView(boolean isNeeded) {
         if (isNeeded) {
-            recyclerView.setVisibility(View.GONE);
-            emptyStateView.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            mEmptyStateView.setVisibility(View.VISIBLE);
         } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyStateView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mEmptyStateView.setVisibility(View.GONE);
         }
-    }
-
-    /**
-     * Called from {@link CouponsPresenter#hideProgressBar()} to hide progress bar when data is fetched or not.
-     */
-    @Override
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
     }
 
     /**
@@ -260,12 +289,50 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
      */
     @Override
     public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
+        mAdapter.getFilter().filter(newText);
         return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param view which was clicked
+     * @see <a href="https://developer.android.com/reference/android/view/View.OnClickListener">Android Dev Doc</a>
+     */
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.no_network_connection_button) {
+            checkIfNetworkIsAvailableAndGetData();
+        }
+    }
+
+    /**
+     * Called from {@link #onClick(View)} when user what to get data and reload view.
+     */
+    private void checkIfNetworkIsAvailableAndGetData() {
+        mRefreshNetworkButton.startMorphAnimation();
+        new Handler().postDelayed(() -> {
+            if (presenter.isNetworkAvailable(getContext())) {
+                mRefreshNetworkButton.doneLoadingAnimation(Color.rgb(255, 152, 0),
+                        BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_check));
+                presenter.requestDataFromServer();
+
+                changeVisibilityNoNetworkConnectionView(false);
+                changeVisibilityProgressBar(true);
+            } else {
+                mRefreshNetworkButton.revertAnimation(() -> null);
+            }
+        }, DELAY_REFRESH_NETWORK_CONNECTION);
+    }
+
+    @Override
+    public void onDestroyView() {
+        changeVisibilityNoNetworkConnectionView(false);
+        super.onDestroyView();
     }
 }

@@ -1,18 +1,20 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.coupons;
 
+import android.content.Context;
+
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public interface CouponsContract {
 
     interface View {
 
+        void changeVisibilityNoNetworkConnectionView(boolean shouldBeVisible);
+
         void setUpAdapter(List<Coupon> couponList, int numOfColumns);
 
-        void hideProgressBar();
+        void changeVisibilityProgressBar(boolean shouldBeVisible);
 
         void displayToastMessage(String message);
     }
@@ -20,5 +22,7 @@ public interface CouponsContract {
     interface Presenter {
 
         void requestDataFromServer();
+
+        boolean isNetworkAvailable(Context context);
     }
 }

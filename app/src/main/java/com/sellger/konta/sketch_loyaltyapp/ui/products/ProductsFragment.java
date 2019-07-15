@@ -109,6 +109,13 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * Called from {@link #checkIfNetworkIsAvailableAndGetData()}, {@link #onDestroyView()} and
+     * {@link ProductsPresenter#requestDataFromServer()} to display / hide view to user about potential
+     * network problem.
+     *
+     * @param shouldBeVisible boolean value to determine whether view should be visible or not
+     */
     @Override
     public void changeVisibilityNoNetworkConnectionView(boolean shouldBeVisible) {
         if (shouldBeVisible) {
@@ -242,7 +249,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
                 presenter.requestDataFromServer();
 
                 changeVisibilityNoNetworkConnectionView(false);
-                changeVisibilityProgressBar(false);
+                changeVisibilityProgressBar(true);
             } else {
                 mRefreshNetworkButton.revertAnimation(() -> null);
             }

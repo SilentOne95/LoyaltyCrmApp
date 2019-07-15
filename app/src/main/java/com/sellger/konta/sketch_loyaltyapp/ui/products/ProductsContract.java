@@ -10,7 +10,7 @@ public interface ProductsContract {
 
     interface View {
 
-        void changeVisibilityNoNetworkConnectionView(boolean shouldBeDisplayed);
+        void changeVisibilityNoNetworkConnectionView(boolean shouldBeVisible);
 
         void setUpAdapter(List<Product> productList, int numOfColumns);
 
