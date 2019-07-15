@@ -118,11 +118,12 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
      */
     @Override
     public void changeVisibilityNoNetworkConnectionView(boolean shouldBeVisible) {
-        if (shouldBeVisible) {
+        if (shouldBeVisible && !presenter.isNetworkAvailable(getContext())) {
             mNoNetworkView.setVisibility(View.VISIBLE);
             mRefreshNetworkButton.setOnClickListener(this);
         } else {
             mNoNetworkView.setVisibility(View.GONE);
+            displayToastMessage(TOAST_ERROR);
         }
     }
 
@@ -184,11 +185,10 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
      */
     @Override
     public void changeVisibilityProgressBar(boolean shouldBeVisible) {
-        if (shouldBeVisible && !presenter.isNetworkAvailable(getContext())) {
+        if (shouldBeVisible) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
             mProgressBar.setVisibility(View.GONE);
-            displayToastMessage(TOAST_ERROR);
         }
     }
 
