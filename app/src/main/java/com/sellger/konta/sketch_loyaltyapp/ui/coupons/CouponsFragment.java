@@ -57,6 +57,8 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
 
     private CouponsPresenter presenter;
 
+    private SearchView mSearchView;
+
     private RecyclerView mRecyclerView;
     private View mEmptyStateView;
     private ProgressBar mProgressBar;
@@ -118,10 +120,9 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         MenuItem searchItem = menu.findItem(R.id.main_menu_search);
         MenuItem optionsItem = menu.findItem(R.id.main_menu_options);
         optionsItem.setVisible(false);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint("Search");
+        mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        mSearchView.setQueryHint(getString(R.string.main_menu_search_hint));
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -237,6 +238,9 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
             mRecyclerView.addItemDecoration(itemDecoration);
             mAdapter = new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns);
             mRecyclerView.setAdapter(mAdapter);
+
+            // Set SearchView listener only when adapter is not null
+            mSearchView.setOnQueryTextListener(this);
         }
     }
 

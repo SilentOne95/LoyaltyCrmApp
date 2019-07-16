@@ -260,7 +260,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        mSearchView.setQueryHint("Search");
+        mSearchView.setQueryHint(getString(R.string.main_menu_search_hint));
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setOnSuggestionListener(this);
 

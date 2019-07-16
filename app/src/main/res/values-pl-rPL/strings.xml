@@ -9,7 +9,7 @@
     <string name="menu_toolbar_my_account_string">Moje konto</string>
     <string name="menu_toolbar_search_string">Szukaj</string>
     <string name="menu_toolbar_options_string">Ustawienia</string>
-    <string name="main_menu_search_hint">Podpowiedź</string>
+    <string name="main_menu_search_hint">Szukaj..</string>
     <string name="nav_view_upgrade_acc_text">Zarejestruj się, aby uzyskać dostęp do wszystkich promocji</string>
     <string name="menu_nav_view_settings_text">Ustawienia</string>
 

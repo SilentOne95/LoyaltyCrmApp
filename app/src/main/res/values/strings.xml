@@ -21,7 +21,7 @@
     <string name="menu_toolbar_my_account_string">My Account</string>
     <string name="menu_toolbar_search_string">Search</string>
     <string name="menu_toolbar_options_string">Options</string>
-    <string name="main_menu_search_hint">Hint</string>
+    <string name="main_menu_search_hint">Search..</string>
     <string name="nav_view_upgrade_acc_text">Sign up with other method to upgrade your account</string>
     <string name="menu_nav_view_settings_text">Settings</string>
 
