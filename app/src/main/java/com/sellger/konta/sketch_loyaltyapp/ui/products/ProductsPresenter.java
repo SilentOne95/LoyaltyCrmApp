@@ -84,7 +84,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
     }
 
     /**
-     * Called from {@link #requestDataFromServer()} to refactor fetched data.
+     * Called from {@link #requestDataFromServer(Context)} to refactor fetched data.
      *
      * @param productList  of fetched items of {@link Product}
      * @param numOfColumns that data is going to be displayed in
@@ -99,7 +99,7 @@ public class ProductsPresenter implements ProductsContract.Presenter {
     }
 
     /**
-     * Called from {@link #requestDataFromServer()} to hide progress bar when data is fetched or not.
+     * Called from {@link #requestDataFromServer(Context)} to hide progress bar when data is fetched or not.
      */
     private void hideProgressBar() {
         view.changeVisibilityProgressBar(false);

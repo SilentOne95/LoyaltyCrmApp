@@ -110,7 +110,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
     }
 
     /**
-     * Called from {@link #requestDataFromServer()} to refactor fetched data.
+     * Called from {@link #requestDataFromServer(Context)} to refactor fetched data.
      *
      * @param couponList   of fetched items of {@link Coupon}
      * @param numOfColumns that data is going to be displayed in
@@ -165,7 +165,7 @@ public class CouponsPresenter implements CouponsContract.Presenter {
     }
 
     /**
-     * Called from {@link #requestDataFromServer()} to hide progress bar when data is fetched or not.
+     * Called from {@link #requestDataFromServer(Context)} to hide progress bar when data is fetched or not.
      */
     private void hideProgressBar() {
         view.changeVisibilityProgressBar(false);

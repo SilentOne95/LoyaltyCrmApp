@@ -123,6 +123,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         mSearchView.setQueryHint(getString(R.string.main_menu_search_hint));
+        mSearchView.setOnQueryTextListener(this);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -238,9 +239,6 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
             mRecyclerView.addItemDecoration(itemDecoration);
             mAdapter = new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns);
             mRecyclerView.setAdapter(mAdapter);
-
-            // Set SearchView listener only when adapter is not null
-            mSearchView.setOnQueryTextListener(this);
         }
     }
 
@@ -297,7 +295,9 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
      */
     @Override
     public boolean onQueryTextChange(String newText) {
-        mAdapter.getFilter().filter(newText);
+        if (mAdapter != null) {
+            mAdapter.getFilter().filter(newText);
+        }
         return false;
     }
 

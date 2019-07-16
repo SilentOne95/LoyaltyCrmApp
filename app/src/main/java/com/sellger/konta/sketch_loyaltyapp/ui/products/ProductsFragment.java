@@ -106,6 +106,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         mSearchView.setQueryHint(getString(R.string.main_menu_search_hint));
+        mSearchView.setOnQueryTextListener(this);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -161,9 +162,6 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
             mRecyclerView.addItemDecoration(itemDecoration);
             mAdapter = new ProductAdapter(productList, recyclerItemClickListener, numOfColumns);
             mRecyclerView.setAdapter(mAdapter);
-
-            // Set SearchView listener only when adapter is not null
-            mSearchView.setOnQueryTextListener(this);
         }
     }
 
@@ -220,7 +218,9 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
      */
     @Override
     public boolean onQueryTextChange(String newText) {
-        mAdapter.getFilter().filter(newText);
+        if (mAdapter != null) {
+            mAdapter.getFilter().filter(newText);
+        }
         return false;
     }
 
