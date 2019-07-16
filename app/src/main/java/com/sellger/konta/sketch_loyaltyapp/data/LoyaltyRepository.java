@@ -106,18 +106,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getMenuFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getMenu(new LoadDataCallback() {
-                @Override
-                public void onDataLoaded(List<?> data) {
-                    refreshCache(TYPE_MENU, data);
-                    callback.onDataLoaded(new ArrayList<>(mCachedMenu.values()));
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getMenuFromLocalDataSource(callback);
         }
     }
 
@@ -136,18 +125,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getProductsFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getAllProducts(new LoadDataCallback() {
-                @Override
-                public void onDataLoaded(List<?> data) {
-                    refreshCache(TYPE_PRODUCT, data);
-                    callback.onDataLoaded(new ArrayList<>(mCachedProduct.values()));
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getProductsFromLocalDataSource(callback);
         }
     }
 
@@ -166,17 +144,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getSingleProductFromRemoteDataSource(id, callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getSingleProduct(id, new GetSingleDataCallback() {
-                @Override
-                public void onDataLoaded(Object object) {
-                    callback.onDataLoaded(object);
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getSingleProductFromLocalDataSource(id, callback);
         }
     }
 
@@ -195,18 +163,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getCouponsFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getAllCoupons(new LoadDataCallback() {
-                @Override
-                public void onDataLoaded(List<?> data) {
-                    refreshCache(TYPE_COUPON, data);
-                    callback.onDataLoaded(new ArrayList<>(mCachedCoupon.values()));
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getCouponsFromLocalDataSource(callback);
         }
     }
 
@@ -225,17 +182,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getSingleCouponFromRemoteDataSource(id, callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getSingleCoupon(id, new GetSingleDataCallback() {
-                @Override
-                public void onDataLoaded(Object object) {
-                    callback.onDataLoaded(object);
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getSingleCouponFromLocalDataSource(id, callback);
         }
     }
 
@@ -254,18 +201,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getMarkersFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getAllMarkers(new LoadDataCallback() {
-                @Override
-                public void onDataLoaded(List<?> data) {
-                    refreshCache(TYPE_MARKER, data);
-                    callback.onDataLoaded(new ArrayList<>(mCachedMarker.values()));
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getMarkersFromLocalDataSource(callback);
         }
     }
 
@@ -284,17 +220,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getSingleMarkerFromRemoteDataSource(id, callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getSingleMarker(id, new GetSingleDataCallback() {
-                @Override
-                public void onDataLoaded(Object object) {
-                    callback.onDataLoaded(object);
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getSingleMarkerFromLocalDataSource(id, callback);
         }
     }
 
@@ -328,18 +254,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getOpenHoursFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getAllOpenHours(new LoadDataCallback() {
-                @Override
-                public void onDataLoaded(List<?> data) {
-                    refreshCache(TYPE_OPEN_HOUR, data);
-                    callback.onDataLoaded(new ArrayList<>(mCachedOpenHour.values()));
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getOpenHoursFromLocalDataSource(callback);
         }
     }
 
@@ -358,17 +273,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getSingleOpenHourFromRemoteDataSource(id, callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getSingleOpenHour(id, new GetSingleDataCallback() {
-                @Override
-                public void onDataLoaded(Object object) {
-                    callback.onDataLoaded(object);
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getSingleOpenHourFromLocalDataSource(id, callback);
         }
     }
 
@@ -387,18 +292,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getPagesFromRemoteDataSource(callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getAllPages(new LoadDataCallback() {
-                @Override
-                public void onDataLoaded(List<?> data) {
-                    refreshCache(TYPE_PAGE, data);
-                    callback.onDataLoaded(new ArrayList<>(mCachedPage.values()));
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getPagesFromLocalDataSource(callback);
         }
     }
 
@@ -417,17 +311,7 @@ public class LoyaltyRepository implements LoyaltyDataSource {
             getSinglePageFromRemoteDataSource(id, callback);
         } else {
             // Query the local storage if available, but if not, query the network
-            mLoyaltyLocalDataSource.getSinglePage(id, new GetSingleDataCallback() {
-                @Override
-                public void onDataLoaded(Object object) {
-                    callback.onDataLoaded(object);
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-                    callback.onDataNotAvailable();
-                }
-            });
+            getSinglePageFromLocalDataSource(id, callback);
         }
     }
 
@@ -481,6 +365,169 @@ public class LoyaltyRepository implements LoyaltyDataSource {
         }
 
         return couponList;
+    }
+
+    /**
+     * Local data source.
+     */
+    private void getMenuFromLocalDataSource(@NonNull final LoadDataCallback callback) {
+        mLoyaltyLocalDataSource.getMenu(new LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_MENU, data);
+                callback.onDataLoaded(new ArrayList<>(mCachedMenu.values()));
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getProductsFromLocalDataSource(@NonNull final LoadDataCallback callback) {
+        mLoyaltyLocalDataSource.getAllProducts(new LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_PRODUCT, data);
+                callback.onDataLoaded(new ArrayList<>(mCachedProduct.values()));
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getSingleProductFromLocalDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyLocalDataSource.getSingleProduct(id, new GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                callback.onDataLoaded(object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getCouponsFromLocalDataSource(@NonNull final LoadDataCallback callback) {
+        mLoyaltyLocalDataSource.getAllCoupons(new LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_COUPON, data);
+                callback.onDataLoaded(new ArrayList<>(mCachedCoupon.values()));
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getSingleCouponFromLocalDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyLocalDataSource.getSingleCoupon(id, new GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                callback.onDataLoaded(object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getMarkersFromLocalDataSource(@NonNull final LoadDataCallback callback) {
+        mLoyaltyLocalDataSource.getAllMarkers(new LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_MARKER, data);
+                callback.onDataLoaded(new ArrayList<>(mCachedMarker.values()));
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getSingleMarkerFromLocalDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyLocalDataSource.getSingleMarker(id, new GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                callback.onDataLoaded(object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getOpenHoursFromLocalDataSource(@NonNull final LoadDataCallback callback) {
+        mLoyaltyLocalDataSource.getAllOpenHours(new LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_OPEN_HOUR, data);
+                callback.onDataLoaded(new ArrayList<>(mCachedOpenHour.values()));
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getSingleOpenHourFromLocalDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyLocalDataSource.getSingleOpenHour(id, new GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                callback.onDataLoaded(object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getPagesFromLocalDataSource(@NonNull final LoadDataCallback callback) {
+        mLoyaltyLocalDataSource.getAllPages(new LoadDataCallback() {
+            @Override
+            public void onDataLoaded(List<?> data) {
+                refreshCache(TYPE_PAGE, data);
+                callback.onDataLoaded(new ArrayList<>(mCachedPage.values()));
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    private void getSinglePageFromLocalDataSource(int id, @NonNull GetSingleDataCallback callback) {
+        mLoyaltyLocalDataSource.getSinglePage(id, new GetSingleDataCallback() {
+            @Override
+            public void onDataLoaded(Object object) {
+                callback.onDataLoaded(object);
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                callback.onDataNotAvailable();
+            }
+        });
     }
 
     /**
