@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sellger.konta.sketch_loyaltyapp">
+    package="com.jemsushi.loyaltyapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -12,13 +12,13 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <permission
-        android:name="com.sellger.konta.sketch_loyaltyapp.permission.MAPS_RECEIVE"
+        android:name="com.jemsushi.loyaltyapp.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.sellger.konta.sketch_loyaltyapp.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.jemsushi.loyaltyapp.permission.MAPS_RECEIVE" />
 
     <application
-        android:name="com.sellger.konta.sketch_loyaltyapp.root.MyApplication"
+        android:name="com.jemsushi.loyaltyapp.root.MyApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -31,22 +31,22 @@
 
         <!-- Services -->
         <service
-            android:name="com.sellger.konta.sketch_loyaltyapp.service.pushNotification.MyFirebaseMessagingService"
+            android:name="com.jemsushi.loyaltyapp.service.pushNotification.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".service.geofencing.GeofenceTransitionsIntentService" />
+        <service android:name="com.jemsushi.loyaltyapp.service.geofencing.GeofenceTransitionsIntentService" />
         <service
-            android:name=".service.network.NetworkSchedulerService"
+            android:name="com.jemsushi.loyaltyapp.service.network.NetworkSchedulerService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <!-- Activities -->
         <activity
-            android:name="com.sellger.konta.sketch_loyaltyapp.ui.launch.LaunchActivity"
+            android:name="com.jemsushi.loyaltyapp.ui.launch.LaunchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity"
+            android:name="com.jemsushi.loyaltyapp.ui.main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.NoActionBar">
@@ -68,28 +68,28 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="com.sellger.konta.sketch_loyaltyapp.ui.couponDetails.CouponDetailsActivity"
+            android:name="com.jemsushi.loyaltyapp.ui.couponDetails.CouponDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity" />
+                android:value="com.jemsushi.loyaltyapp.ui.main.MainActivity" />
         </activity>
         <activity
-            android:name="com.sellger.konta.sketch_loyaltyapp.ui.productDetails.ProductDetailsActivity"
+            android:name="com.jemsushi.loyaltyapp.ui.productDetails.ProductDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity" />
+                android:value="com.jemsushi.loyaltyapp.ui.main.MainActivity" />
         </activity>
         <activity
-            android:name="com.sellger.konta.sketch_loyaltyapp.ui.settings.SettingsActivity"
+            android:name="com.jemsushi.loyaltyapp.ui.settings.SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity" />
+                android:value="com.jemsushi.loyaltyapp.ui.main.MainActivity" />
         </activity>
 
         <!-- Others -->
@@ -126,7 +126,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/logo_icon" />
+            android:resource="@drawable/logo_notification" />
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"

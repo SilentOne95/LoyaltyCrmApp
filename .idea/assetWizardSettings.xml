@@ -45,10 +45,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\png\ic_marker.png" />
-                                      <entry key="outputName" value="ic_marker_accent" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\JemSushi\ic_plus_phone.png" />
+                                      <entry key="outputName" value="ic_plus_phone" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="ff9800" />
+                                      <entry key="themeColor" value="cb1517" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -65,11 +65,18 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="scalingPercent" value="45" />
                                               </map>
                                             </option>
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="foregroundImage" value="C:\Users\konta\Desktop\JemSushi\icon.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -112,6 +119,24 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\JemSushi\notification_logo.png" />
+                                      <entry key="outputName" value="logo_notification" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -121,7 +146,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="outputIconType" value="NOTIFICATION" />
                           </map>
                         </option>
                       </PersistentState>
