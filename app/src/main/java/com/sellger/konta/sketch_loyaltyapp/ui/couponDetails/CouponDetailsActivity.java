@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import android.text.Html;
@@ -44,7 +45,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
     private View mLayoutContainer;
     private ImageView mCouponImage;
     private TextView mCouponMarker, mCouponDate, mCouponTitle, mCouponNewPrice, mCouponBasicPrice, mCouponDescription;
-    private Button showCouponCodeButton;
+    private Button mShowCouponCodeButton;
 
     private int couponId;
 
@@ -95,7 +96,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
         mCouponBasicPrice = findViewById(R.id.old_price_amount_text_view);
         mCouponDescription = findViewById(R.id.coupon_description_text_view);
 
-        showCouponCodeButton = findViewById(R.id.show_coupon_button);
+        mShowCouponCodeButton = findViewById(R.id.show_coupon_button);
 
         // Bottom Sheet
         mBottomSheet = findViewById(R.id.bottom_coupon_details_activity);
@@ -107,10 +108,11 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
 
         // Setting up views
         mLayoutContainer.setVisibility(View.GONE);
-        showCouponCodeButton.setOnClickListener(this);
+        mShowCouponCodeButton.setOnClickListener(this);
 
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        mBottomSheetBehavior.setBottomSheetCallback(mBottomSheetBehaviorCallback);
 
         mSwitchFlipperLeftArrow.setOnClickListener(this);
         mSwitchFlipperLeftArrow.setColorFilter(new PorterDuffColorFilter(
@@ -225,14 +227,33 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
      * Called from {@link #onClick(View)} to change BottomSheetState.
      */
     private void switchBottomSheetState() {
-        if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+        if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            showCouponCodeButton.setText(R.string.hide_my_coupon_text);
         } else {
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-            showCouponCodeButton.setText(R.string.show_my_coupon_text);
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
     }
+
+    /**
+     * Implementation of callback listener that handle BottomSheet state changes.
+     */
+    private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
+        @Override
+        public void onStateChanged(@NonNull View view, int newState) {
+            if (newState == BottomSheetBehavior.STATE_COLLAPSED
+                    && !mShowCouponCodeButton.getText().equals(getText(R.string.show_my_coupon_text))) {
+                mShowCouponCodeButton.setText(R.string.show_my_coupon_text);
+            } else if (newState == BottomSheetBehavior.STATE_EXPANDED
+                    && !mShowCouponCodeButton.getText().equals(getText(R.string.hide_my_coupon_text))){
+                mShowCouponCodeButton.setText(R.string.hide_my_coupon_text);
+            }
+        }
+
+        @Override
+        public void onSlide(@NonNull View view, float v) {
+
+        }
+    };
 
     /**
      * Called when a view has been clicked.

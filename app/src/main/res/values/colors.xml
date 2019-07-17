@@ -18,6 +18,7 @@
 
     <color name="colorText">#939393</color>
     <color name="colorFragmentBackground">#e6e6e6</color>
+    <color name="colorWhiteButtonRippleGrey">#DADADA</color>
 
     <color name="colorFacebookBlue">#3b5998</color>
     <color name="colorFacebookBlueRipple">#2a3f6c</color>
