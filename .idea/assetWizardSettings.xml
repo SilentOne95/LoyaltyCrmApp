@@ -45,10 +45,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\icons\png\ic_marker.png" />
-                                      <entry key="outputName" value="ic_marker_accent" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\Ecommerce\ic_menu_product.png" />
+                                      <entry key="outputName" value="ic_menu_product" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="ff9800" />
+                                      <entry key="themeColor" value="3a95d1" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -65,11 +65,22 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="scalingPercent" value="80" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
+                                      <entry key="foregroundImage" value="C:\Users\konta\Desktop\Ecommerce\Bez-nazwy-1.png" />
+                                      <entry key="foregroundLayerName" value="ic_launcher_foreground" />
+                                      <entry key="outputName" value="logo_notification" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -112,6 +123,25 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                                <entry key="paddingPercent" value="5" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\konta\Desktop\Ecommerce\ic_logo.png" />
+                                      <entry key="outputName" value="logo_notification" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -121,7 +151,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="outputIconType" value="NOTIFICATION" />
                           </map>
                         </option>
                       </PersistentState>

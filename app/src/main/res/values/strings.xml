@@ -1,11 +1,11 @@
 <resources>
     <!-- App name -->
-    <string name="app_name" translatable="false">Sellger</string>
+    <string name="app_name" translatable="false">E-commerce Lab</string>
 
     <!-- Required for Google Auth, Firebase Web ID -->
-    <string name="server_client_id" translatable="false">580087034404-j2bkn8b2j0dch9tkrvdcat99ih207ba4.apps.googleusercontent.com</string>
-    <string name="facebook_app_id" translatable="false">2252363271523504</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb2252363271523504</string>
+    <string name="server_client_id" translatable="false">409127025097-q06j5ekj8gfdup368el0btu8euustjrg.apps.googleusercontent.com</string>
+    <string name="facebook_app_id" translatable="false">2179956972121731</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb2179956972121731</string>
 
     <!-- Firebase // Push Notifications -->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>

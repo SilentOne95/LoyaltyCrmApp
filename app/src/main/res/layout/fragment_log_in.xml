@@ -16,14 +16,14 @@
 
         <ImageView
             android:id="@+id/login_image_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/login_image_logo_height"
-            android:layout_marginTop="@dimen/very_big_value"
+            android:layout_width="@dimen/login_logo_image_width"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_logo_image_margin_top"
             android:adjustViewBounds="true"
             android:contentDescription="@string/log_in_view_logo_desc"
             android:padding="@dimen/small_value"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo_big"
+            android:src="@drawable/logo_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -4,6 +4,6 @@
     <item android:drawable="@drawable/gradient_background_launch"/>
     <item>
         <bitmap android:gravity="center"
-            android:src="@drawable/logo_landscape_white" />
+            android:src="@drawable/logo_launch_screen" />
     </item>
 </layer-list>

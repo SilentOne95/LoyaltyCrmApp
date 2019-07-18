@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomMapFrameLayout xmlns:tools="http://schemas.android.com/tools"
+    <com.ecommercelab.loyaltyapp.utils.utilsMap.CustomMapFrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
