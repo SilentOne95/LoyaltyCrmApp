@@ -153,7 +153,6 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
                         facebookSignIn();
                         break;
                     case R.id.login_phone_button:
-                        handleUserActionsWhileProcessing(mIsAuthInProgress = true);
                         navigationPresenter.getSelectedLayoutType(LAYOUT_TYPE_PHONE, LAYOUT_DATA_EMPTY_STRING);
                         break;
                     case R.id.register_guest_text:
