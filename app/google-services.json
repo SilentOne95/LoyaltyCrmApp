@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "409127025097-n6jbk13ooh384u0pggnk951gj387m5fb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ecommercelab.loyaltyapp",
+            "certificate_hash": "7827d9980785b96c31eab963842eb966d45bd005"
+          }
+        },
+        {
           "client_id": "409127025097-kht91b2f9d59tqttskdgipqt8fael5ar.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
