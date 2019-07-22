@@ -1,25 +1,19 @@
 package com.sellger.konta.sketch_loyaltyapp.ui.productDetails;
 
 import android.os.Bundle;
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
-import com.squareup.picasso.Picasso;
+import com.sellger.konta.sketch_loyaltyapp.databinding.ActivityProductDetailsBinding;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-
-import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.EXTRAS_ELEMENT_ID;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
 
@@ -28,9 +22,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     private static final String TAG = ProductDetailsActivity.class.getSimpleName();
 
     private ProductDetailsPresenter presenter;
+    private ActivityProductDetailsBinding mBinding;
 
-    private ImageView mProductImage;
-    private TextView mProductTitle, mProductPrice, mProductDescription;
     private ProgressBar mProgressBar;
     private View mLayoutContainer;
 
@@ -44,6 +37,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_details);
 
         setTitle("Produkt");
 
@@ -67,12 +61,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     @Override
     public void initViews() {
         mLayoutContainer = findViewById(R.id.layout_container);
-
         mProgressBar = findViewById(R.id.progress_bar);
-        mProductImage = findViewById(R.id.imageView);
-        mProductTitle = findViewById(R.id.product_title_text_view);
-        mProductPrice = findViewById(R.id.price_amount_text_view);
-        mProductDescription = findViewById(R.id.product_description_text_view);
 
         // Setting up views
         mLayoutContainer.setVisibility(View.GONE);
@@ -85,51 +74,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
      */
     @Override
     public void setUpViewWithData(Product product) {
-        if (!TextUtils.isEmpty(product.getImage())) {
-            Picasso.get()
-                    .load(product.getImage())
-                    .error(R.drawable.no_image_available)
-                    .into(mProductImage);
-        } else {
-            Picasso.get()
-                    .load(R.drawable.no_image_available)
-                    .into(mProductImage);
-        }
-
-        if (!TextUtils.isEmpty(product.getTitle())) {
-            mProductTitle.setText(product.getTitle());
-        } else {
-            mProductTitle.setText(DEFAULT_STRING);
-        }
-
-        if (product.getPrice() != null && !product.getPrice().toString().trim().isEmpty()) {
-            mProductPrice.setText(String.valueOf(formatPrice(product.getPrice())).concat(" zł"));
-        } else {
-            mProductPrice.setText(DEFAULT_STRING);
-        }
-
-        if (!TextUtils.isEmpty(product.getDescription())) {
-            mProductDescription.setText(Html.fromHtml(product.getDescription()));
-        } else {
-            mProductDescription.setText(DEFAULT_STRING);
-        }
-    }
-
-    /**
-     * Called from {@link #setUpViewWithData(Product)} to edit price format.
-     *
-     * @param price get from {@link Product} item
-     * @return formatted price form
-     */
-    private String formatPrice(float price) {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        symbols.setGroupingSeparator(' ');
-        DecimalFormat decimalFormat = new DecimalFormat();
-        decimalFormat.setDecimalFormatSymbols(symbols);
-        decimalFormat.setGroupingSize(3);
-        decimalFormat.setMaximumFractionDigits(2);
-
-        return decimalFormat.format(price);
+        mBinding.setProductDetail(product);
     }
 
     /**
