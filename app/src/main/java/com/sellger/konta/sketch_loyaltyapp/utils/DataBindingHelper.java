@@ -60,7 +60,7 @@ public class DataBindingHelper {
      *
      * @param couponCode is string of barcode number
      */
-    @BindingAdapter("bind:imageBitmap")
+    @BindingAdapter({"imageBitmap"})
     public static void setBitmapImage(ImageView imageView, String couponCode) {
         if (couponCode == null) {
             return;
@@ -97,7 +97,7 @@ public class DataBindingHelper {
     }
 
     // Images
-    @BindingAdapter("bind:detailsImage")
+    @BindingAdapter({"detailsImage"})
     public static void setDetailsImage(ImageView imageView, String imageUrl) {
         Picasso.get()
                 .load(imageUrl)

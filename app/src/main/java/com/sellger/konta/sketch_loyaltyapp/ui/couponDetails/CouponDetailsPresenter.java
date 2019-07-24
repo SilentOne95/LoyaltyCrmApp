@@ -62,8 +62,4 @@ public class CouponDetailsPresenter implements CouponDetailsContract.Presenter {
     private void passDataToView(Coupon coupon) {
         view.setUpViewWithData(coupon);
     }
-
-    public void test() {
-        view.displayToastMessage(TOAST_ERROR);
-    }
 }
