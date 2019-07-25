@@ -108,7 +108,7 @@ public class CouponDetailsActivity extends BaseActivity implements CouponDetails
      */
     @Override
     public void setUpViewWithData(Coupon coupon) {
-        mBinding.setCouponDetail(coupon);
+        mBinding.setItem(coupon);
     }
 
     /**

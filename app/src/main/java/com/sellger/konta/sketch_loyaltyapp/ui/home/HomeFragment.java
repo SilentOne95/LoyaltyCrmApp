@@ -138,7 +138,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             } else {
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
             }
+
             mRecyclerView.addItemDecoration(itemDecoration);
+            mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setAdapter(new HomeAdapter(menuComponentList, recyclerItemClickListener, numOfColumns));
         }
     }

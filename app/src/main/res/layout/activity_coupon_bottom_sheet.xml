@@ -6,7 +6,7 @@
         <import type="com.sellger.konta.sketch_loyaltyapp.utils.DataBindingHelper" />
 
         <variable
-            name="couponDetailBottomSheet"
+            name="item"
             type="com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon" />
     </data>
 
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:contentDescription="@string/coupon_details_barcode"
-                    app:imageBitmap="@{couponDetailBottomSheet.couponCode}" />
+                    app:imageBitmap="@{item.couponCode}" />
 
                 <TextView
                     android:id="@+id/bottom_coupon_code_text"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@{couponDetailBottomSheet.couponCode}" />
+                    android:text="@{item.couponCode}" />
 
             </ViewFlipper>
 

@@ -74,7 +74,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
      */
     @Override
     public void setUpViewWithData(Product product) {
-        mBinding.setProductDetail(product);
+        mBinding.setItem(product);
     }
 
     /**

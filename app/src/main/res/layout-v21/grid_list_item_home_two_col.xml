@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/grid_item_home"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/rounded_corners_button_white"
-    android:elevation="@dimen/small_value">
+<layout>
 
-    <ImageView
-        android:id="@+id/grid_item_image"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/grid_item_home_image_height"
-        android:layout_marginTop="@dimen/mid_value"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/grid_list_item_content_desc"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/grid_item_title_text"
-        android:layout_width="wrap_content"
+        <import type="com.sellger.konta.sketch_loyaltyapp.utils.DataBindingHelper" />
+
+        <variable
+            name="item"
+            type="com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/grid_item_home"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mid_value"
-        android:layout_marginBottom="@dimen/mid_value"
-        android:textSize="@dimen/text_size_h3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid_item_image" />
+        android:background="@drawable/rounded_corners_button_white"
+        android:elevation="@dimen/small_value">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/grid_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/grid_item_home_image_height"
+            android:layout_marginTop="@dimen/mid_value"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/grid_list_item_content_desc"
+            android:scaleType="fitCenter"
+            app:itemHomeAdapter="@{item}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/grid_item_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mid_value"
+            android:layout_marginBottom="@dimen/mid_value"
+            android:text="@{item.componentTitle}"
+            android:textSize="@dimen/text_size_h3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grid_item_image"
+            app:setHomeTitleTextColor="@{item}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

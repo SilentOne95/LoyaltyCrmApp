@@ -3,16 +3,21 @@ package com.sellger.konta.sketch_loyaltyapp.utils;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.databinding.BindingAdapter;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.sellger.konta.sketch_loyaltyapp.R;
+import com.sellger.konta.sketch_loyaltyapp.data.entity.MenuComponent;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Product;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -20,10 +25,66 @@ import java.text.DecimalFormatSymbols;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_COUPON_HEIGHT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_COUPONS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SCANNER;
+import static com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity.PACKAGE_NAME;
 
 public class DataBindingHelper {
+
+    // HomeAdapter
+    @BindingAdapter({"itemHomeAdapter"})
+    public static void setIconHomeAdapter(ImageView imageView, MenuComponent item) {
+        int imageId = getApplicationContext()
+                .getResources()
+                .getIdentifier(item.getImage(), "drawable", PACKAGE_NAME);
+
+            Picasso.get()
+                    .load(imageId)
+                    .into(imageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            if (shouldViewBeDisabled(item.getType())) {
+                                DrawableCompat.setTint(imageView.getDrawable(),
+                                        getApplicationContext().getResources().getColor(R.color.colorNavViewStateEnableFalse));
+                            } else {
+                                DrawableCompat.setTint(imageView.getDrawable(),
+                                        getApplicationContext().getResources().getColor(R.color.colorAccent));
+                            }
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
+    }
+
+    /**
+     * Check if user is logged with anonymous account and paint title text if so.
+     */
+    @BindingAdapter({"setHomeTitleTextColor"})
+    public static void setItemHomeAdapterTextColor(TextView textView, MenuComponent item) {
+        if (shouldViewBeDisabled(item.getType())) {
+            textView.setTextColor(getApplicationContext().getResources().getColor(R.color.colorNavViewStateEnableFalse));
+        }
+    }
+
+    /**
+     * Called from {@link #setIconHomeAdapter(ImageView, MenuComponent)} and
+     * {@link #setItemHomeAdapterTextColor(TextView, MenuComponent)} to check if user is logged
+     * anonymously.
+     *
+     * @param currentItemLayoutType string param
+     * @return true if layout type matches criteria, otherwise false
+     */
+    private static boolean shouldViewBeDisabled(String currentItemLayoutType) {
+        return FirebaseAuth.getInstance().getCurrentUser().isAnonymous()
+                && (currentItemLayoutType.equals(LAYOUT_TYPE_COUPONS)
+                || currentItemLayoutType.equals(LAYOUT_TYPE_SCANNER));
+    }
 
     // ProductDetailsActivity & CouponDetailsActivity
     public static String getFormattedPrice(Float price) {

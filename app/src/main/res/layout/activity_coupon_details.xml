@@ -8,7 +8,7 @@
         <import type="com.sellger.konta.sketch_loyaltyapp.utils.DataBindingHelper" />
 
         <variable
-            name="couponDetail"
+            name="item"
             type="com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon" />
     </data>
 
@@ -56,7 +56,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:detailsImage="@{couponDetail.image}" />
+                            app:detailsImage="@{item.image}" />
 
                         <TextView
                             android:id="@+id/discount_marker_text_view"
@@ -66,7 +66,7 @@
                             android:layout_marginEnd="@dimen/big_value"
                             android:background="@drawable/rounded_corners_label_discount"
                             android:gravity="center"
-                            android:text="@{DataBindingHelper.getFormattedReductionAmount(couponDetail.reductionType, couponDetail.reductionAmount)}"
+                            android:text="@{DataBindingHelper.getFormattedReductionAmount(item.reductionType, item.reductionAmount)}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -94,7 +94,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/small_value"
-                            android:text="@{couponDetail.freshTime}"
+                            android:text="@{item.freshTime}"
                             app:layout_constraintBottom_toBottomOf="@+id/valid_until_text_view"
                             app:layout_constraintStart_toEndOf="@+id/valid_until_text_view"
                             app:layout_constraintTop_toTopOf="@+id/valid_until_text_view" />
@@ -105,7 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_value"
-                            android:text="@{couponDetail.title}"
+                            android:text="@{item.title}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/valid_until_text_view" />
 
@@ -125,7 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/small_value"
-                            android:text="@{DataBindingHelper.getFormattedPrice(couponDetail.priceAfter)}"
+                            android:text="@{DataBindingHelper.getFormattedPrice(item.priceAfter)}"
                             app:layout_constraintBottom_toBottomOf="@+id/price_text_view"
                             app:layout_constraintStart_toEndOf="@+id/price_text_view"
                             app:layout_constraintTop_toTopOf="@+id/price_text_view" />
@@ -137,7 +137,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/small_value"
                             android:background="@drawable/strike_through"
-                            android:text="@{DataBindingHelper.getFormattedPrice(couponDetail.price)}"
+                            android:text="@{DataBindingHelper.getFormattedPrice(item.price)}"
                             app:layout_constraintStart_toEndOf="@+id/price_amount_text_view"
                             app:layout_constraintTop_toTopOf="@+id/price_amount_text_view" />
 
@@ -158,7 +158,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/big_value"
-                            android:text="@{Html.fromHtml(couponDetail.description)}"
+                            android:text="@{Html.fromHtml(item.description)}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/show_coupon_button" />
@@ -181,7 +181,7 @@
 
         <include
             layout="@layout/activity_coupon_bottom_sheet"
-            bind:couponDetailBottomSheet="@{couponDetail}" />
+            bind:item="@{item}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

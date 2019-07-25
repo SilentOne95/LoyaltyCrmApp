@@ -8,7 +8,7 @@
         <import type="com.sellger.konta.sketch_loyaltyapp.utils.DataBindingHelper" />
 
         <variable
-            name="productDetail"
+            name="item"
             type="com.sellger.konta.sketch_loyaltyapp.data.entity.Product" />
 
     </data>
@@ -54,7 +54,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:detailsImage="@{productDetail.image}" />
+                        app:detailsImage="@{item.image}" />
 
                 </LinearLayout>
 
@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_value"
-                        android:text="@{productDetail.title}"
+                        android:text="@{item.title}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,7 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/small_value"
-                        android:text="@{DataBindingHelper.getFormattedPrice(productDetail.price)}"
+                        android:text="@{DataBindingHelper.getFormattedPrice(item.price)}"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/price_text_view"
                         app:layout_constraintStart_toEndOf="@+id/price_text_view"
@@ -103,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/big_value"
-                        android:text="@{Html.fromHtml(productDetail.description)}"
+                        android:text="@{Html.fromHtml(item.description)}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/price_text_view" />
