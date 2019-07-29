@@ -160,6 +160,7 @@ public class ProductsFragment extends BaseFragment implements ProductsContract.V
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
             }
             mRecyclerView.addItemDecoration(itemDecoration);
+            mRecyclerView.setHasFixedSize(true);
             mAdapter = new ProductAdapter(productList, recyclerItemClickListener, numOfColumns);
             mRecyclerView.setAdapter(mAdapter);
         }

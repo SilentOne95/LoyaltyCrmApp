@@ -1,7 +1,5 @@
 package com.sellger.konta.sketch_loyaltyapp;
 
-import java.security.PublicKey;
-
 /**
  * Contains all const variables.
  */

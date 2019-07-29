@@ -2,7 +2,9 @@ package com.sellger.konta.sketch_loyaltyapp.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -25,9 +27,16 @@ import java.text.DecimalFormatSymbols;
 import java.util.EnumMap;
 import java.util.Map;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_COUPON_HEIGHT;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BARCODE_WIDTH;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_ONE_COLUMN;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
+import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_COUPONS;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_SCANNER;
 import static com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity.PACKAGE_NAME;
@@ -84,6 +93,45 @@ public class DataBindingHelper {
         return FirebaseAuth.getInstance().getCurrentUser().isAnonymous()
                 && (currentItemLayoutType.equals(LAYOUT_TYPE_COUPONS)
                 || currentItemLayoutType.equals(LAYOUT_TYPE_SCANNER));
+    }
+
+    // ProductAdapter
+    @BindingAdapter({"itemProductAdapter", "itemProgressBar", "itemNumOfColumns"})
+    public static void setIconProductAdapter(ImageView imageView, String imageUrl,
+                                             ProgressBar progressBar, Object numOfColumns) {
+        int imageWidth, imageHeight;
+
+        switch ((Integer) numOfColumns) {
+            case 1:
+                imageWidth = BITMAP_WIDTH_ONE_COLUMN;
+                imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
+                break;
+            case 2:
+                imageWidth = BITMAP_WIDTH_TWO_COLUMNS;
+                imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
+                break;
+            default:
+                imageWidth = BITMAP_WIDTH_ONE_COLUMN;
+                imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
+                break;
+        }
+
+        Picasso.get()
+                .load(imageUrl)
+                .transform(new RoundedCornersTransformation(BITMAP_CORNER_RADIUS, 0))
+                .error(R.drawable.no_image_available)
+                .resize(imageWidth, imageHeight)
+                .into(imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
     }
 
     // ProductDetailsActivity & CouponDetailsActivity
