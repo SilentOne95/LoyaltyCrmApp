@@ -23,7 +23,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
-import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentLogInBinding;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentLogInPhoneBinding;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_PHONE_AUTH_DISMISS_ERROR;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CODE;
@@ -37,7 +37,7 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
 
     private static final String TAG = LogInPhoneFragment.class.getSimpleName();
 
-    private FragmentLogInBinding mBinding;
+    private FragmentLogInPhoneBinding mBinding;
 
     private TextInputLayout mTextInputLayoutPrefix;
     private TextInputEditText mTextInputPrefix;
@@ -79,11 +79,11 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
      */
     @Override
     public void initViews() {
-        mTextInputLayoutPrefix = rootView.findViewById(R.id.register_prefix_input_box);
-        mTextInputPrefix = rootView.findViewById(R.id.register_prefix_input);
-        mTextInputLayoutPhoneNumber = rootView.findViewById(R.id.register_number_input_box);
-        mTextInputPhoneNumber = rootView.findViewById(R.id.register_number_input);
-        mRegisterButton = rootView.findViewById(R.id.register_number_button);
+        mTextInputLayoutPrefix = mBinding.getRoot().findViewById(R.id.register_prefix_input_box);
+        mTextInputPrefix = mBinding.getRoot().findViewById(R.id.register_prefix_input);
+        mTextInputLayoutPhoneNumber = mBinding.getRoot().findViewById(R.id.register_number_input_box);
+        mTextInputPhoneNumber = mBinding.getRoot().findViewById(R.id.register_number_input);
+        mRegisterButton = mBinding.getRoot().findViewById(R.id.register_number_button);
 
         mRegisterButton.setOnClickListener(this);
     }

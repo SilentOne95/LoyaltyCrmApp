@@ -111,12 +111,12 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
      */
     @Override
     public void initViews() {
-        mTextProvidedPhoneNumber = rootView.findViewById(R.id.verify_your_number_text);
-        mTextInputCode = rootView.findViewById(R.id.verify_code_input_text);
-        mTextWaitingForCode = rootView.findViewById(R.id.verify_waiting_for_code_text);
-        mProgressBar = rootView.findViewById(R.id.verify_progress_bar);
-        mTextSmsLimitReached = rootView.findViewById(R.id.verify_sms_limit_reached_text);
-        mCircularProgressButton = rootView.findViewById(R.id.verify_sms_limit_reached_button);
+        mTextProvidedPhoneNumber = mBinding.getRoot().findViewById(R.id.verify_your_number_text);
+        mTextInputCode = mBinding.getRoot().findViewById(R.id.verify_code_input_text);
+        mTextWaitingForCode = mBinding.getRoot().findViewById(R.id.verify_waiting_for_code_text);
+        mProgressBar = mBinding.getRoot().findViewById(R.id.verify_progress_bar);
+        mTextSmsLimitReached = mBinding.getRoot().findViewById(R.id.verify_sms_limit_reached_text);
+        mCircularProgressButton = mBinding.getRoot().findViewById(R.id.verify_sms_limit_reached_button);
 
         mTextSmsLimitReached.setVisibility(View.GONE);
         mCircularProgressButton.setVisibility(View.GONE);

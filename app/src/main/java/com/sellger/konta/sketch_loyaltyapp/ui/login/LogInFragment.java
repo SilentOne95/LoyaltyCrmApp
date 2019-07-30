@@ -133,10 +133,10 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
      */
     @Override
     public void initViews() {
-        mSignInWithGoogleButton = rootView.findViewById(R.id.login_google_button);
-        mSignInWithFacebookButton = rootView.findViewById(R.id.login_facebook_button);
-        mSignInWithPhoneButton = rootView.findViewById(R.id.login_phone_button);
-        mSignInAnonymously = rootView.findViewById(R.id.register_guest_text);
+        mSignInWithGoogleButton = mBinding.getRoot().findViewById(R.id.login_google_button);
+        mSignInWithFacebookButton = mBinding.getRoot().findViewById(R.id.login_facebook_button);
+        mSignInWithPhoneButton = mBinding.getRoot().findViewById(R.id.login_phone_button);
+        mSignInAnonymously = mBinding.getRoot().findViewById(R.id.register_guest_text);
 
         // Button listeners
         mSignInWithGoogleButton.setOnClickListener(this);
