@@ -65,13 +65,14 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
     @Override
     public CouponAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        if (mNumOfColumns == 1) {
-            GridListItemCouponOneColBinding binding;
-            binding = DataBindingUtil.inflate(inflater, R.layout.grid_list_item_coupon_one_col, parent, false);
-            return new CouponAdapter.ViewHolder(binding, mCouponClickListener);
-        } else {
+
+        if (mNumOfColumns == 2) {
             GridListItemCouponTwoColBinding binding;
             binding = DataBindingUtil.inflate(inflater, R.layout.grid_list_item_coupon_two_col, parent, false);
+            return new CouponAdapter.ViewHolder(binding, mCouponClickListener);
+        } else {
+            GridListItemCouponOneColBinding binding;
+            binding = DataBindingUtil.inflate(inflater, R.layout.grid_list_item_coupon_one_col, parent, false);
             return new CouponAdapter.ViewHolder(binding, mCouponClickListener);
         }
     }

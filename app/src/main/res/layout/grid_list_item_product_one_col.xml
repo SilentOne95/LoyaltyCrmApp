@@ -1,95 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/grid_item_product"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/grid_item_shadow"
-    android:clipChildren="false"
-    android:orientation="vertical">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <import type="android.text.Html" />
+
+        <import type="com.sellger.konta.sketch_loyaltyapp.utils.DataBindingHelper" />
+
+        <variable
+            name="numOfColumns"
+            type="Integer" />
+
+        <variable
+            name="item"
+            type="com.sellger.konta.sketch_loyaltyapp.data.entity.Product" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/grid_item_product"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/grid_item_shadow"
+        android:clipChildren="false"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/grid_item_image"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/grid_item_image_height_one_row"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/grid_list_item_content_desc"
-            android:scaleType="fitStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ProgressBar
-            android:id="@+id/progress_bar_product"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/grid_item_image_height_one_row"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/mid_value"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/grid_item_title_text"
-            style="@style/text_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/grid_item_price_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_value"
-            android:text="@string/price_text"
-            android:textSize="@dimen/text_size_h3"
-            app:layout_constraintStart_toStartOf="@+id/grid_item_title_text"
-            app:layout_constraintTop_toBottomOf="@+id/grid_item_title_text" />
-
-        <TextView
-            android:id="@+id/grid_item_price_amount"
-            style="@style/text_default_color_accent_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_value"
-            app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
-            app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
-            app:layout_constraintTop_toTopOf="@+id/grid_item_price_text" />
-
-        <TextView
-            android:id="@+id/grid_item_content_description"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_value"
-            android:maxLines="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/grid_item_view_details_button"
-            style="@style/button_color_accent"
-            android:layout_width="@dimen/grid_item_button_details_width_one_row"
-            android:layout_height="@dimen/grid_item_height_one_row"
-            android:layout_marginTop="@dimen/big_value"
-            android:text="@string/button_check_product"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description"
-            app:layout_constraintVertical_bias="1" />
+            <ImageView
+                android:id="@+id/grid_item_image"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/grid_item_image_height_one_row"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/grid_list_item_content_desc"
+                android:scaleType="fitStart"
+                app:itemImageNumOfColumns="@{numOfColumns}"
+                app:itemImageProgressBar="@{progressBarProduct}"
+                app:itemImageUrlAdapter="@{item.image}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ProgressBar
+                android:id="@+id/progress_bar_product"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/grid_item_image_height_one_row"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/mid_value"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/grid_item_title_text"
+                style="@style/text_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.title}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/grid_item_price_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_value"
+                android:text="@string/price_text"
+                android:textSize="@dimen/text_size_h3"
+                app:layout_constraintStart_toStartOf="@+id/grid_item_title_text"
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_title_text" />
+
+            <TextView
+                android:id="@+id/grid_item_price_amount"
+                style="@style/text_default_color_accent_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_value"
+                android:text="@{DataBindingHelper.getFormattedPrice(item.price)}"
+                app:layout_constraintBottom_toBottomOf="@+id/grid_item_price_text"
+                app:layout_constraintStart_toEndOf="@+id/grid_item_price_text"
+                app:layout_constraintTop_toTopOf="@+id/grid_item_price_text" />
+
+            <TextView
+                android:id="@+id/grid_item_content_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_value"
+                android:maxLines="4"
+                android:text="@{Html.fromHtml(item.shortDescription)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text" />
+
+            <Button
+                android:id="@+id/grid_item_view_details_button"
+                style="@style/button_color_accent"
+                android:layout_width="@dimen/grid_item_button_details_width_one_row"
+                android:layout_height="@dimen/grid_item_height_one_row"
+                android:layout_marginTop="@dimen/small_value"
+                android:text="@string/button_check_product"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/grid_item_content_description"
+                app:layout_constraintVertical_bias="1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</layout>

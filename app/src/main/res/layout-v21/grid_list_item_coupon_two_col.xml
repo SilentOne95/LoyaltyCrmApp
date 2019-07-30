@@ -38,9 +38,9 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/grid_list_item_content_desc"
                 android:scaleType="fitStart"
-                app:itemImageUrlAdapter="@{item.image}"
-                app:itemImageProgressBar="@{progressBarCoupon}"
                 app:itemImageNumOfColumns="@{numOfColumns}"
+                app:itemImageProgressBar="@{progressBarCoupon}"
+                app:itemImageUrlAdapter="@{item.image}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -58,11 +58,11 @@
                 android:id="@+id/grid_item_discount_marker"
                 style="@style/text_regular_color_white_bold"
                 android:layout_width="@dimen/discount_marker_width_two_rows"
-                android:text="@{item.image}"
                 android:layout_height="@dimen/discount_marker_height_two_rows"
                 android:layout_marginEnd="@dimen/mid_value"
                 android:background="@drawable/rounded_corners_label_discount"
                 android:gravity="center"
+                android:text="@{DataBindingHelper.getFormattedReductionAmount(item.reductionType, item.reductionAmount)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,7 +73,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_value"
                 android:padding="@dimen/small_value"
+                android:text="@{item.couponCode}"
                 android:textAllCaps="true"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/grid_item_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +93,7 @@
                 android:id="@+id/grid_item_coupon_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{item.title}"
                 android:textSize="@dimen/text_size_h3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -111,6 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/very_small_value"
+                android:text="@{DataBindingHelper.getFormattedPrice(item.priceAfter)}"
                 app:layout_constraintStart_toStartOf="@+id/grid_item_coupon_description_text"
                 app:layout_constraintTop_toBottomOf="@+id/grid_item_price_text" />
 
@@ -121,6 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/very_small_value"
                 android:background="@drawable/strike_through"
+                android:text="@{DataBindingHelper.getFormattedPrice(item.price)}"
                 app:layout_constraintStart_toEndOf="@+id/grid_item_price_amount"
                 app:layout_constraintTop_toTopOf="@+id/grid_item_price_amount" />
 
@@ -130,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_value"
                 android:maxLines="3"
+                android:text="@{Html.fromHtml(item.shortDescription)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/grid_item_price_amount" />
