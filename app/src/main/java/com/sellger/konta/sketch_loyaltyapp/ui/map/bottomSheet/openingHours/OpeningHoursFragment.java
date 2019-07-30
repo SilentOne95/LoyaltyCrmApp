@@ -4,8 +4,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +16,7 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentOpeningHoursBinding;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
@@ -22,6 +26,7 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
     private static final String TAG = OpeningHoursFragment.class.getSimpleName();
 
     private OpeningHoursPresenter presenter;
+    private FragmentOpeningHoursBinding mBinding;
 
     private TextView mMondayHours, mTuesdayHours, mWednesdayHours, mThursdayHours, mFridayHours,
             mSaturdayHours, mSundayHours;
@@ -33,6 +38,13 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
     @Override
     protected int getLayout() {
         return R.layout.fragment_opening_hours;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_opening_hours, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -52,13 +64,13 @@ public class OpeningHoursFragment extends BaseFragment implements BottomSheetCon
      */
     @Override
     public void initViews() {
-        mMondayHours = rootView.findViewById(R.id.monday_hours_text);
-        mTuesdayHours = rootView.findViewById(R.id.tuesday_hours_text);
-        mWednesdayHours = rootView.findViewById(R.id.wednesday_hours_text);
-        mThursdayHours = rootView.findViewById(R.id.thursday_hours_text);
-        mFridayHours = rootView.findViewById(R.id.friday_hours_text);
-        mSaturdayHours = rootView.findViewById(R.id.saturday_hours_text);
-        mSundayHours = rootView.findViewById(R.id.sunday_hours_text);
+        mMondayHours = mBinding.getRoot().findViewById(R.id.monday_hours_text);
+        mTuesdayHours = mBinding.getRoot().findViewById(R.id.tuesday_hours_text);
+        mWednesdayHours = mBinding.getRoot().findViewById(R.id.wednesday_hours_text);
+        mThursdayHours = mBinding.getRoot().findViewById(R.id.thursday_hours_text);
+        mFridayHours = mBinding.getRoot().findViewById(R.id.friday_hours_text);
+        mSaturdayHours = mBinding.getRoot().findViewById(R.id.saturday_hours_text);
+        mSundayHours = mBinding.getRoot().findViewById(R.id.sunday_hours_text);
     }
 
     /**

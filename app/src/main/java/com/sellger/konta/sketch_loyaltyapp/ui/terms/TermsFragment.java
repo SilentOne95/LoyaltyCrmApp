@@ -4,11 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentTermsConditionsBinding;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
@@ -26,6 +30,7 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
     private static final String TAG = TermsFragment.class.getSimpleName();
 
     private TermsPresenter presenter;
+    private FragmentTermsConditionsBinding mBinding;
 
     private ProgressBar mProgressBar;
     private View mLayoutContainer;
@@ -34,6 +39,13 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
     @Override
     protected int getLayout() {
         return R.layout.fragment_terms_conditions;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_terms_conditions, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -63,9 +75,9 @@ public class TermsFragment extends BaseFragment implements TermsContract.View {
      */
     @Override
     public void initViews() {
-        mLayoutContainer = rootView.findViewById(R.id.layout_container);
-        mProgressBar = rootView.findViewById(R.id.progress_bar);
-        mTermsTextView = rootView.findViewById(R.id.terms_webview);
+        mLayoutContainer = mBinding.getRoot().findViewById(R.id.layout_container);
+        mProgressBar = mBinding.getRoot().findViewById(R.id.progress_bar);
+        mTermsTextView = mBinding.getRoot().findViewById(R.id.terms_webview);
 
         mLayoutContainer.setVisibility(View.GONE);
     }

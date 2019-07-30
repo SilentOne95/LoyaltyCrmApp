@@ -24,16 +24,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.widget.SearchView;
 
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,7 @@ import com.sellger.konta.sketch_loyaltyapp.adapter.CustomCursorAdapter;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Marker;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentGoogleMapBinding;
 import com.sellger.konta.sketch_loyaltyapp.service.geofencing.GeofenceTransitionsIntentService;
 import com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomClusterRenderer;
 import com.sellger.konta.sketch_loyaltyapp.R;
@@ -105,6 +109,7 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     private static final String TAG = GoogleMapFragment.class.getSimpleName();
 
     private MapPresenter presenter;
+    private FragmentGoogleMapBinding mBinding;
 
     private SearchView mSearchView;
 
@@ -133,6 +138,13 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
     @Override
     protected int getLayout() {
         return R.layout.fragment_google_map;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_google_map, container, false);
+        return mBinding.getRoot();
     }
 
     @SuppressLint("RestrictedApi")
@@ -210,17 +222,17 @@ public class GoogleMapFragment extends BaseFragment implements OnMapReadyCallbac
      */
     @Override
     public void initViews() {
-        mPanelPeekHeight = rootView.findViewById(R.id.bottom_sheet_peek);
-        mBottomSheet = rootView.findViewById(R.id.map_bottom_sheet);
-        mViewPager = rootView.findViewById(R.id.view_pager);
-        mTabLayout = rootView.findViewById(R.id.tabs);
+        mPanelPeekHeight = mBinding.getRoot().findViewById(R.id.bottom_sheet_peek);
+        mBottomSheet = mBinding.getRoot().findViewById(R.id.map_bottom_sheet);
+        mViewPager = mBinding.getRoot().findViewById(R.id.view_pager);
+        mTabLayout = mBinding.getRoot().findViewById(R.id.tabs);
 
-        mFab = rootView.findViewById(R.id.fab);
+        mFab = mBinding.getRoot().findViewById(R.id.fab);
 
         // BottomSheet PeekHeight Panel
-        mPanelPlaceTitle = rootView.findViewById(R.id.bottom_sheet_icon_title);
-        mPanelAddress = rootView.findViewById(R.id.bottom_sheet_place_address);
-        mPanelTodayOpenHours = rootView.findViewById(R.id.bottom_sheet_place_hours);
+        mPanelPlaceTitle = mBinding.getRoot().findViewById(R.id.bottom_sheet_icon_title);
+        mPanelAddress = mBinding.getRoot().findViewById(R.id.bottom_sheet_place_address);
+        mPanelTodayOpenHours = mBinding.getRoot().findViewById(R.id.bottom_sheet_place_hours);
 
         // Setting up views
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);

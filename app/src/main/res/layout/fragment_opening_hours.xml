@@ -1,172 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.map.bottomSheet.openingHours.OpeningHoursFragment">
+<layout>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="@dimen/vertical_divider_width"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/very_big_value"
-        android:layout_marginBottom="@dimen/very_big_value"
-        android:background="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/monday_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mid_value"
-        android:text="@string/monday_text"
-        app:layout_constraintBottom_toTopOf="@+id/tuesday_text"
-        app:layout_constraintEnd_toStartOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="item"
+            type="com.sellger.konta.sketch_loyaltyapp.data.entity.Marker" />
+    </data>
 
-    <TextView
-        android:id="@+id/tuesday_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tuesday_text"
-        app:layout_constraintBottom_toTopOf="@+id/wednesday_text"
-        app:layout_constraintEnd_toStartOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monday_text" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.map.bottomSheet.openingHours.OpeningHoursFragment">
 
-    <TextView
-        android:id="@+id/wednesday_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/wednesday_text"
-        app:layout_constraintBottom_toTopOf="@+id/thursday_text"
-        app:layout_constraintEnd_toStartOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tuesday_text" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="@dimen/vertical_divider_width"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/very_big_value"
+            android:layout_marginBottom="@dimen/very_big_value"
+            android:background="@color/colorBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/thursday_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/thursday_text"
-        app:layout_constraintBottom_toTopOf="@+id/friday_text"
-        app:layout_constraintEnd_toStartOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wednesday_text" />
+        <TextView
+            android:id="@+id/monday_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mid_value"
+            android:text="@string/monday_text"
+            app:layout_constraintBottom_toTopOf="@+id/tuesday_text"
+            app:layout_constraintEnd_toStartOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/friday_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/friday_text"
-        app:layout_constraintBottom_toTopOf="@+id/saturday_text"
-        app:layout_constraintEnd_toStartOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thursday_text" />
+        <TextView
+            android:id="@+id/tuesday_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tuesday_text"
+            app:layout_constraintBottom_toTopOf="@+id/wednesday_text"
+            app:layout_constraintEnd_toStartOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/monday_text" />
 
-    <TextView
-        android:id="@+id/saturday_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/saturday_text"
-        app:layout_constraintBottom_toTopOf="@+id/sunday_text"
-        app:layout_constraintEnd_toStartOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/friday_text" />
+        <TextView
+            android:id="@+id/wednesday_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wednesday_text"
+            app:layout_constraintBottom_toTopOf="@+id/thursday_text"
+            app:layout_constraintEnd_toStartOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tuesday_text" />
 
-    <TextView
-        android:id="@+id/sunday_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/mid_value"
-        android:text="@string/sunday_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saturday_text" />
+        <TextView
+            android:id="@+id/thursday_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thursday_text"
+            app:layout_constraintBottom_toTopOf="@+id/friday_text"
+            app:layout_constraintEnd_toStartOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wednesday_text" />
 
-    <TextView
-        android:id="@+id/monday_hours_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mid_value"
-        app:layout_constraintBottom_toTopOf="@+id/tuesday_hours_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/friday_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friday_text"
+            app:layout_constraintBottom_toTopOf="@+id/saturday_text"
+            app:layout_constraintEnd_toStartOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thursday_text" />
 
-    <TextView
-        android:id="@+id/tuesday_hours_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/wednesday_hours_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/monday_hours_text" />
+        <TextView
+            android:id="@+id/saturday_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/saturday_text"
+            app:layout_constraintBottom_toTopOf="@+id/sunday_text"
+            app:layout_constraintEnd_toStartOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/friday_text" />
 
-    <TextView
-        android:id="@+id/wednesday_hours_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/thursday_hours_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/tuesday_hours_text" />
+        <TextView
+            android:id="@+id/sunday_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/mid_value"
+            android:text="@string/sunday_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/saturday_text" />
 
-    <TextView
-        android:id="@+id/thursday_hours_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/friday_hours_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/wednesday_hours_text" />
+        <TextView
+            android:id="@+id/monday_hours_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mid_value"
+            app:layout_constraintBottom_toTopOf="@+id/tuesday_hours_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/friday_hours_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/saturday_hours_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/thursday_hours_text" />
+        <TextView
+            android:id="@+id/tuesday_hours_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/wednesday_hours_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/monday_hours_text" />
 
-    <TextView
-        android:id="@+id/saturday_hours_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/sunday_hours_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/friday_hours_text" />
+        <TextView
+            android:id="@+id/wednesday_hours_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/thursday_hours_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/tuesday_hours_text" />
 
-    <TextView
-        android:id="@+id/sunday_hours_text"
-        style="@style/text_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/mid_value"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/divider"
-        app:layout_constraintTop_toBottomOf="@+id/saturday_hours_text" />
+        <TextView
+            android:id="@+id/thursday_hours_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/friday_hours_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/wednesday_hours_text" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/friday_hours_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/saturday_hours_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/thursday_hours_text" />
+
+        <TextView
+            android:id="@+id/saturday_hours_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/sunday_hours_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/friday_hours_text" />
+
+        <TextView
+            android:id="@+id/sunday_hours_text"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/mid_value"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/saturday_hours_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

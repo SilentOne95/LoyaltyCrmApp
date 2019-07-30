@@ -5,12 +5,15 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 
@@ -20,6 +23,7 @@ import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentLogInBinding;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DELAY_PHONE_AUTH_DISMISS_ERROR;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.LAYOUT_TYPE_CODE;
@@ -32,6 +36,8 @@ import static com.sellger.konta.sketch_loyaltyapp.Constants.PHONE_WRONG_TYPE;
 public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContract.View, View.OnClickListener {
 
     private static final String TAG = LogInPhoneFragment.class.getSimpleName();
+
+    private FragmentLogInBinding mBinding;
 
     private TextInputLayout mTextInputLayoutPrefix;
     private TextInputEditText mTextInputPrefix;
@@ -48,6 +54,13 @@ public class LogInPhoneFragment extends BaseFragment implements LogInPhoneContra
     @Override
     protected int getLayout() {
         return R.layout.fragment_log_in_phone;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_log_in_phone, container, false);
+        return mBinding.getRoot();
     }
 
     @Override

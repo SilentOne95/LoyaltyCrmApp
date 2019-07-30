@@ -7,18 +7,22 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentScanResultBinding;
 import com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_DATA_STRING;
@@ -31,12 +35,21 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
 
     private static final String TAG = CouponsFragment.class.getSimpleName();
 
+    private FragmentScanResultBinding mBinding;
+
     private TextView mScanResultTextView;
     private Button mScanButton;
 
     @Override
     protected int getLayout() {
         return R.layout.fragment_scan_result;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_scan_result, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -65,8 +78,8 @@ public class ScanResultFragment extends BaseFragment implements ScanResultContra
      */
     @Override
     public void initViews() {
-        mScanResultTextView = rootView.findViewById(R.id.barcode_scanner_scan_result_text_view);
-        mScanButton = rootView.findViewById(R.id.barcode_scanner_scan_button);
+        mScanResultTextView = mBinding.getRoot().findViewById(R.id.barcode_scanner_scan_result_text_view);
+        mScanButton = mBinding.getRoot().findViewById(R.id.barcode_scanner_scan_button);
 
         mScanButton.setOnClickListener(this);
     }

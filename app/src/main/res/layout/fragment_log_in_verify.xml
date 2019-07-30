@@ -1,153 +1,157 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorFragmentBackground"
-    android:orientation="vertical"
-    android:padding="@dimen/layout_container_padding"
-    tools:context=".ui.login.phoneAuthCode.LogInVerifyFragment">
+<layout>
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/grid_item_shadow"
-        android:orientation="vertical">
+        android:background="@color/colorFragmentBackground"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_container_padding"
+        tools:context=".ui.login.phoneAuthCode.LogInVerifyFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/verify_number_container"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/small_value">
+            android:background="@drawable/grid_item_shadow"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/verify_code_text_container"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/verify_number_container"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/register_number_container_height"
-                android:background="@drawable/rounded_corners_accent"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/small_value">
+
+                <LinearLayout
+                    android:id="@+id/verify_code_text_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/register_number_container_height"
+                    android:background="@drawable/rounded_corners_accent"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/verify_your_number_text"
+                        style="@style/text_default_color_white_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/mid_value"
+                        android:layout_marginTop="@dimen/big_value"
+                        android:layout_marginEnd="@dimen/mid_value"
+                        android:layout_marginBottom="@dimen/mid_value"
+                        android:gravity="center"
+                        android:text="@string/verify_text" />
+
+                    <TextView
+                        android:id="@+id/verify_code_instruction_text"
+                        style="@style/text_regular_color_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/mid_value"
+                        android:layout_marginTop="@dimen/small_value"
+                        android:layout_marginEnd="@dimen/mid_value"
+                        android:gravity="center"
+                        android:text="@string/enter_code_text" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/verify_phone_icon_image"
+                    android:layout_width="@dimen/register_icon_image_size"
+                    android:layout_height="@dimen/register_icon_image_size"
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginTop="@dimen/verify_phone_icon_image_margin_top"
+                    android:layout_marginEnd="@dimen/small_value"
+                    android:contentDescription="@string/text_icon_verify_code_desc"
+                    android:src="@drawable/ic_circle_message"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/verify_code_input_box"
+                    style="@style/text_input_layout_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginTop="@dimen/register_phone_margin_top"
+                    android:layout_marginEnd="@dimen/small_value"
+                    app:hintTextAppearance="@style/login_edittext_label_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/verify_code_text_container">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/verify_code_input_text"
+                        style="@style/text_input_edit_text_style"
+                        android:layout_width="@dimen/verify_code_input_box_width"
+                        android:layout_height="wrap_content"
+                        android:textCursorDrawable="@drawable/edittext_cursor_style" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/verify_your_number_text"
-                    style="@style/text_default_color_white_bold"
-                    android:layout_width="match_parent"
+                    android:id="@+id/verify_waiting_for_code_text"
+                    style="@style/text_regular_color_accent_bold"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/mid_value"
-                    android:layout_marginTop="@dimen/big_value"
-                    android:layout_marginEnd="@dimen/mid_value"
-                    android:layout_marginBottom="@dimen/mid_value"
-                    android:gravity="center"
-                    android:text="@string/verify_text" />
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginTop="@dimen/very_big_value"
+                    android:layout_marginEnd="@dimen/small_value"
+                    android:text="@string/waiting_info_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/verify_code_input_box" />
+
+                <ProgressBar
+                    android:id="@+id/verify_progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginTop="@dimen/mid_value"
+                    android:layout_marginEnd="@dimen/small_value"
+                    android:layout_marginBottom="@dimen/small_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/verify_waiting_for_code_text" />
 
                 <TextView
-                    android:id="@+id/verify_code_instruction_text"
-                    style="@style/text_regular_color_white"
-                    android:layout_width="match_parent"
+                    android:id="@+id/verify_sms_limit_reached_text"
+                    style="@style/text_regular_color_accent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/mid_value"
-                    android:layout_marginTop="@dimen/small_value"
-                    android:layout_marginEnd="@dimen/mid_value"
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginTop="@dimen/very_big_value"
+                    android:layout_marginEnd="@dimen/small_value"
                     android:gravity="center"
-                    android:text="@string/enter_code_text" />
+                    android:text="@string/verify_sms_limit_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/verify_code_input_box" />
 
-            </LinearLayout>
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                    android:id="@+id/verify_sms_limit_reached_button"
+                    android:layout_width="@dimen/verify_continue_button_width"
+                    android:layout_height="@dimen/verify_continue_button_height"
+                    android:layout_marginTop="@dimen/very_big_value"
+                    android:background="@drawable/rounded_corners_accent"
+                    android:gravity="center"
+                    android:text="@string/verify_sms_limit_button_text"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_h4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/verify_sms_limit_reached_text"
+                    app:spinning_bar_color="@color/colorWhite" />
 
-            <ImageView
-                android:id="@+id/verify_phone_icon_image"
-                android:layout_width="@dimen/register_icon_image_size"
-                android:layout_height="@dimen/register_icon_image_size"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/verify_phone_icon_image_margin_top"
-                android:layout_marginEnd="@dimen/small_value"
-                android:contentDescription="@string/text_icon_verify_code_desc"
-                android:src="@drawable/ic_circle_message"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/verify_code_input_box"
-                style="@style/text_input_layout_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/register_phone_margin_top"
-                android:layout_marginEnd="@dimen/small_value"
-                app:hintTextAppearance="@style/login_edittext_label_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verify_code_text_container">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/verify_code_input_text"
-                    style="@style/text_input_edit_text_style"
-                    android:layout_width="@dimen/verify_code_input_box_width"
-                    android:layout_height="wrap_content"
-                    android:textCursorDrawable="@drawable/edittext_cursor_style" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/verify_waiting_for_code_text"
-                style="@style/text_regular_color_accent_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/very_big_value"
-                android:layout_marginEnd="@dimen/small_value"
-                android:text="@string/waiting_info_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verify_code_input_box" />
-
-            <ProgressBar
-                android:id="@+id/verify_progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/mid_value"
-                android:layout_marginEnd="@dimen/small_value"
-                android:layout_marginBottom="@dimen/small_value"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verify_waiting_for_code_text" />
-
-            <TextView
-                android:id="@+id/verify_sms_limit_reached_text"
-                style="@style/text_regular_color_accent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/very_big_value"
-                android:layout_marginEnd="@dimen/small_value"
-                android:gravity="center"
-                android:text="@string/verify_sms_limit_information"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verify_code_input_box" />
-
-            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-                android:id="@+id/verify_sms_limit_reached_button"
-                android:layout_width="@dimen/verify_continue_button_width"
-                android:layout_height="@dimen/verify_continue_button_height"
-                android:layout_marginTop="@dimen/very_big_value"
-                android:background="@drawable/rounded_corners_accent"
-                android:gravity="center"
-                android:text="@string/verify_sms_limit_button_text"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_h4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verify_sms_limit_reached_text"
-                app:spinning_bar_color="@color/colorWhite" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</layout>

@@ -1,211 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorFragmentBackground"
-    android:orientation="vertical"
-    android:padding="@dimen/layout_container_padding"
-    tools:context=".ui.settings.SettingsActivity">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/grid_item_shadow">
+        android:background="@color/colorFragmentBackground"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_container_padding"
+        tools:context=".ui.settings.SettingsActivity">
 
-        <TextView
-            android:id="@+id/settings_label_notification"
-            style="@style/text_default_color_accent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/mid_value"
-            android:layout_marginTop="@dimen/mid_value"
-            android:paddingBottom="@dimen/small_value"
-            android:layout_marginBottom="@dimen/small_value"
-            android:drawableStart="@drawable/ic_bell"
-            android:drawablePadding="@dimen/small_value"
-            android:text="@string/settings_push_notifications_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/grid_item_shadow">
 
-        <TextView
-            android:id="@+id/settings_notification_one"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingTop="@dimen/small_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:paddingBottom="@dimen/small_value"
-            android:text="@string/settings_notification_topic_news"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_label_notification" />
+            <TextView
+                android:id="@+id/settings_label_notification"
+                style="@style/text_default_color_accent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mid_value"
+                android:layout_marginTop="@dimen/mid_value"
+                android:layout_marginBottom="@dimen/small_value"
+                android:drawableStart="@drawable/ic_bell"
+                android:drawablePadding="@dimen/small_value"
+                android:paddingBottom="@dimen/small_value"
+                android:text="@string/settings_push_notifications_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Switch
-            android:id="@+id/settings_notification_switch_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:theme="@style/switch_style"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_notification_one"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/settings_notification_one" />
+            <TextView
+                android:id="@+id/settings_notification_one"
+                style="@style/text_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingTop="@dimen/small_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:paddingBottom="@dimen/small_value"
+                android:text="@string/settings_notification_topic_news"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_label_notification" />
 
-        <TextView
-            android:id="@+id/settings_notification_two"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingTop="@dimen/small_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:paddingBottom="@dimen/small_value"
-            android:text="@string/settings_notification_topic_offers"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_notification_one" />
+            <Switch
+                android:id="@+id/settings_notification_switch_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:theme="@style/switch_style"
+                app:layout_constraintBottom_toBottomOf="@+id/settings_notification_one"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/settings_notification_one" />
 
-        <Switch
-            android:id="@+id/settings_notification_switch_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:theme="@style/switch_style"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_notification_two"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/settings_notification_two" />
+            <TextView
+                android:id="@+id/settings_notification_two"
+                style="@style/text_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingTop="@dimen/small_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:paddingBottom="@dimen/small_value"
+                android:text="@string/settings_notification_topic_offers"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_notification_one" />
 
-        <TextView
-            android:id="@+id/settings_notification_three"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingTop="@dimen/small_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:paddingBottom="@dimen/small_value"
-            android:text="@string/settings_notification_topic_discount"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_notification_two" />
+            <Switch
+                android:id="@+id/settings_notification_switch_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:theme="@style/switch_style"
+                app:layout_constraintBottom_toBottomOf="@+id/settings_notification_two"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/settings_notification_two" />
 
-        <Switch
-            android:id="@+id/settings_notification_switch_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:theme="@style/switch_style"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_notification_three"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/settings_notification_three" />
+            <TextView
+                android:id="@+id/settings_notification_three"
+                style="@style/text_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingTop="@dimen/small_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:paddingBottom="@dimen/small_value"
+                android:text="@string/settings_notification_topic_discount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_notification_two" />
 
-        <TextView
-            android:id="@+id/settings_label_terms"
-            style="@style/text_default_color_accent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/mid_value"
-            android:layout_marginTop="@dimen/mid_value"
-            android:paddingBottom="@dimen/small_value"
-            android:drawableStart="@drawable/ic_lock"
-            android:drawablePadding="@dimen/small_value"
-            android:text="@string/settings_terms_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_notification_three" />
+            <Switch
+                android:id="@+id/settings_notification_switch_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:theme="@style/switch_style"
+                app:layout_constraintBottom_toBottomOf="@+id/settings_notification_three"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/settings_notification_three" />
 
-        <TextView
-            android:id="@+id/settings_terms_one"
-            style="@style/text_link_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingTop="@dimen/small_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:paddingBottom="@dimen/small_value"
-            android:text="@string/settings_terms_conditions_link"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_label_terms" />
+            <TextView
+                android:id="@+id/settings_label_terms"
+                style="@style/text_default_color_accent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mid_value"
+                android:layout_marginTop="@dimen/mid_value"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="@dimen/small_value"
+                android:paddingBottom="@dimen/small_value"
+                android:text="@string/settings_terms_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_notification_three" />
 
-        <TextView
-            android:id="@+id/settings_terms_two"
-            style="@style/text_link_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingTop="@dimen/small_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:paddingBottom="@dimen/small_value"
-            android:text="@string/settings_terms_privacy_link"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_terms_one" />
+            <TextView
+                android:id="@+id/settings_terms_one"
+                style="@style/text_link_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingTop="@dimen/small_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:paddingBottom="@dimen/small_value"
+                android:text="@string/settings_terms_conditions_link"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_label_terms" />
 
-        <TextView
-            android:id="@+id/settings_terms_three"
-            style="@style/text_link_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/mid_value"
-            android:paddingTop="@dimen/small_value"
-            android:paddingEnd="@dimen/mid_value"
-            android:paddingBottom="@dimen/small_value"
-            android:text="@string/settings_terms_licenses_link"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_terms_two" />
+            <TextView
+                android:id="@+id/settings_terms_two"
+                style="@style/text_link_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingTop="@dimen/small_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:paddingBottom="@dimen/small_value"
+                android:text="@string/settings_terms_privacy_link"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_terms_one" />
 
-        <TextView
-            android:id="@+id/settings_label_log_out"
-            style="@style/text_default_color_accent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/mid_value"
-            android:layout_marginTop="@dimen/mid_value"
-            android:drawableStart="@drawable/ic_log_out_account"
-            android:drawablePadding="@dimen/small_value"
-            android:text="@string/settings_log_out_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_terms_three" />
+            <TextView
+                android:id="@+id/settings_terms_three"
+                style="@style/text_link_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/mid_value"
+                android:paddingTop="@dimen/small_value"
+                android:paddingEnd="@dimen/mid_value"
+                android:paddingBottom="@dimen/small_value"
+                android:text="@string/settings_terms_licenses_link"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_terms_two" />
 
-        <Button
-            android:id="@+id/settings_log_out_button"
-            style="@style/button_color_accent"
-            android:layout_width="@dimen/button_basic_width"
-            android:layout_height="@dimen/button_basic_height"
-            android:layout_marginEnd="@dimen/mid_value"
-            android:text="@string/settings_log_out_button"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_label_log_out"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/settings_label_log_out" />
+            <TextView
+                android:id="@+id/settings_label_log_out"
+                style="@style/text_default_color_accent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mid_value"
+                android:layout_marginTop="@dimen/mid_value"
+                android:drawableStart="@drawable/ic_log_out_account"
+                android:drawablePadding="@dimen/small_value"
+                android:text="@string/settings_log_out_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings_terms_three" />
 
-        <TextView
-            android:id="@+id/settings_label_delete_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/mid_value"
-            android:layout_marginBottom="@dimen/mid_value"
-            android:drawableStart="@drawable/ic_delete_account"
-            android:drawablePadding="@dimen/small_value"
-            android:text="@string/settings_account_label"
-            android:textColor="@color/colorErrorInput"
-            android:textSize="@dimen/text_size_h3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/settings_log_out_button"
+                style="@style/button_color_accent"
+                android:layout_width="@dimen/button_basic_width"
+                android:layout_height="@dimen/button_basic_height"
+                android:layout_marginEnd="@dimen/mid_value"
+                android:text="@string/settings_log_out_button"
+                app:layout_constraintBottom_toBottomOf="@+id/settings_label_log_out"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/settings_label_log_out" />
 
-        <Button
-            android:id="@+id/settings_delete_button"
-            android:layout_width="@dimen/button_basic_width"
-            android:layout_height="@dimen/button_basic_height"
-            android:layout_marginEnd="@dimen/mid_value"
-            android:background="@drawable/rounded_corners_button_red"
-            android:text="@string/settings_delete_button"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_h4"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_label_delete_account"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/settings_label_delete_account" />
+            <TextView
+                android:id="@+id/settings_label_delete_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mid_value"
+                android:layout_marginBottom="@dimen/mid_value"
+                android:drawableStart="@drawable/ic_delete_account"
+                android:drawablePadding="@dimen/small_value"
+                android:text="@string/settings_account_label"
+                android:textColor="@color/colorErrorInput"
+                android:textSize="@dimen/text_size_h3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/settings_delete_button"
+                android:layout_width="@dimen/button_basic_width"
+                android:layout_height="@dimen/button_basic_height"
+                android:layout_marginEnd="@dimen/mid_value"
+                android:background="@drawable/rounded_corners_button_red"
+                android:text="@string/settings_delete_button"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_h4"
+                app:layout_constraintBottom_toBottomOf="@+id/settings_label_delete_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/settings_label_delete_account" />
 
-</LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -7,10 +7,13 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentLogInVerifyBinding;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,6 +53,7 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     private static final String TAG = LogInVerifyFragment.class.getSimpleName();
 
     private LogInVerifyPresenter presenter;
+    private FragmentLogInVerifyBinding mBinding;
 
     private TextInputEditText mTextInputCode;
     private TextView mTextWaitingForCode, mTextProvidedPhoneNumber, mTextSmsLimitReached;
@@ -67,6 +72,13 @@ public class LogInVerifyFragment extends BaseFragment implements LogInVerifyCont
     @Override
     protected int getLayout() {
         return R.layout.fragment_log_in_verify;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_log_in_verify, container, false);
+        return mBinding.getRoot();
     }
 
     @Override

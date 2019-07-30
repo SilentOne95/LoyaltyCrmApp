@@ -1,173 +1,177 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorFragmentBackground"
-    android:orientation="vertical"
-    android:padding="@dimen/layout_container_padding"
-    tools:context=".ui.login.phoneAuthNumber.LogInPhoneFragment">
+<layout>
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/grid_item_shadow"
-        android:orientation="vertical">
+        android:background="@color/colorFragmentBackground"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_container_padding"
+        tools:context=".ui.login.phoneAuthNumber.LogInPhoneFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/register_number_container"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/small_value">
+            android:background="@drawable/grid_item_shadow"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/verify_number_text_container"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/register_number_container"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/register_number_container_height"
-                android:background="@drawable/rounded_corners_accent"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/small_value">
 
-                <TextView
-                    android:id="@+id/verify_number_text"
-                    style="@style/text_default_color_white_bold"
+                <LinearLayout
+                    android:id="@+id/verify_number_text_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/mid_value"
-                    android:layout_marginTop="@dimen/big_value"
-                    android:layout_marginEnd="@dimen/mid_value"
-                    android:layout_marginBottom="@dimen/mid_value"
-                    android:gravity="center"
-                    android:text="@string/verify_your_number_text" />
+                    android:layout_height="@dimen/register_number_container_height"
+                    android:background="@drawable/rounded_corners_accent"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/verify_number_instruction_text"
-                    style="@style/text_regular_color_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/mid_value"
-                    android:layout_marginTop="@dimen/small_value"
-                    android:layout_marginEnd="@dimen/mid_value"
-                    android:gravity="center"
-                    android:text="@string/instruction_provide_number_text" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/register_input_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_input_container_margin_top"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verify_number_text_container">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/register_prefix_input_box"
-                    style="@style/text_input_layout_style"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/big_value"
-                    android:layout_marginEnd="@dimen/mid_value"
-                    android:layout_weight="2"
-                    app:errorEnabled="true"
-                    app:errorTextAppearance="@style/login_edittext_error_appearance"
-                    app:hintTextAppearance="@style/login_edittext_label_color">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/register_prefix_input"
-                        style="@style/text_input_edit_text_style"
+                    <TextView
+                        android:id="@+id/verify_number_text"
+                        style="@style/text_default_color_white_bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_plus_phone"
-                        android:drawablePadding="@dimen/very_small_value"
-                        android:hint="@string/prefix_hint"
-                        android:textCursorDrawable="@drawable/edittext_cursor_style" />
+                        android:layout_marginStart="@dimen/mid_value"
+                        android:layout_marginTop="@dimen/big_value"
+                        android:layout_marginEnd="@dimen/mid_value"
+                        android:layout_marginBottom="@dimen/mid_value"
+                        android:gravity="center"
+                        android:text="@string/verify_your_number_text" />
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/register_number_input_box"
-                    style="@style/text_input_layout_style"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/big_value"
-                    android:layout_weight="5"
-                    app:errorEnabled="true"
-                    app:errorTextAppearance="@style/login_edittext_error_appearance"
-                    app:hintTextAppearance="@style/login_edittext_label_color">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/register_number_input"
-                        style="@style/text_input_edit_text_style"
+                    <TextView
+                        android:id="@+id/verify_number_instruction_text"
+                        style="@style/text_regular_color_white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/phone_number_hint"
-                        android:textCursorDrawable="@drawable/edittext_cursor_style" />
+                        android:layout_marginStart="@dimen/mid_value"
+                        android:layout_marginTop="@dimen/small_value"
+                        android:layout_marginEnd="@dimen/mid_value"
+                        android:gravity="center"
+                        android:text="@string/instruction_provide_number_text" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/register_input_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/register_input_container_margin_top"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/verify_number_text_container">
 
-            <ImageView
-                android:id="@+id/register_phone_icon_image"
-                android:layout_width="@dimen/register_icon_image_size"
-                android:layout_height="@dimen/register_icon_image_size"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/register_number_icon_image_margin_top"
-                android:layout_marginEnd="@dimen/small_value"
-                android:contentDescription="@string/phone_icon_verify_code_desc"
-                android:src="@drawable/ic_circle_phone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/register_prefix_input_box"
+                        style="@style/text_input_layout_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/big_value"
+                        android:layout_marginEnd="@dimen/mid_value"
+                        android:layout_weight="2"
+                        app:errorEnabled="true"
+                        app:errorTextAppearance="@style/login_edittext_error_appearance"
+                        app:hintTextAppearance="@style/login_edittext_label_color">
 
-            <Button
-                android:id="@+id/register_number_button"
-                style="@style/button_color_accent"
-                android:layout_width="@dimen/button_basic_width"
-                android:layout_height="@dimen/button_basic_height"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/very_big_value"
-                android:layout_marginEnd="@dimen/small_value"
-                android:text="@string/register_button_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_input_container" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/register_prefix_input"
+                            style="@style/text_input_edit_text_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_plus_phone"
+                            android:drawablePadding="@dimen/very_small_value"
+                            android:hint="@string/prefix_hint"
+                            android:textCursorDrawable="@drawable/edittext_cursor_style" />
 
-            <TextView
-                android:id="@+id/terms_privacy_policy_link_text"
-                style="@style/text_link_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginTop="@dimen/register_phone_margin_top"
-                android:layout_marginEnd="@dimen/small_value"
-                android:padding="@dimen/small_value"
-                android:text="@string/terms_link_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_number_button" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/more_info_link_text"
-                style="@style/text_link_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/small_value"
-                android:layout_marginEnd="@dimen/small_value"
-                android:padding="@dimen/small_value"
-                android:text="@string/more_info_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/terms_privacy_policy_link_text" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/register_number_input_box"
+                        style="@style/text_input_layout_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/big_value"
+                        android:layout_weight="5"
+                        app:errorEnabled="true"
+                        app:errorTextAppearance="@style/login_edittext_error_appearance"
+                        app:hintTextAppearance="@style/login_edittext_label_color">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/register_number_input"
+                            style="@style/text_input_edit_text_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/phone_number_hint"
+                            android:textCursorDrawable="@drawable/edittext_cursor_style" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/register_phone_icon_image"
+                    android:layout_width="@dimen/register_icon_image_size"
+                    android:layout_height="@dimen/register_icon_image_size"
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginTop="@dimen/register_number_icon_image_margin_top"
+                    android:layout_marginEnd="@dimen/small_value"
+                    android:contentDescription="@string/phone_icon_verify_code_desc"
+                    android:src="@drawable/ic_circle_phone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/register_number_button"
+                    style="@style/button_color_accent"
+                    android:layout_width="@dimen/button_basic_width"
+                    android:layout_height="@dimen/button_basic_height"
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginTop="@dimen/very_big_value"
+                    android:layout_marginEnd="@dimen/small_value"
+                    android:text="@string/register_button_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_input_container" />
+
+                <TextView
+                    android:id="@+id/terms_privacy_policy_link_text"
+                    style="@style/text_link_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginTop="@dimen/register_phone_margin_top"
+                    android:layout_marginEnd="@dimen/small_value"
+                    android:padding="@dimen/small_value"
+                    android:text="@string/terms_link_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_number_button" />
+
+                <TextView
+                    android:id="@+id/more_info_link_text"
+                    style="@style/text_link_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_value"
+                    android:layout_marginEnd="@dimen/small_value"
+                    android:padding="@dimen/small_value"
+                    android:text="@string/more_info_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/terms_privacy_policy_link_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</layout>

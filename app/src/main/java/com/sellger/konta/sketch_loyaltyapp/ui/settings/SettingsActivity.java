@@ -14,6 +14,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.databinding.DataBindingUtil;
+
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.activity.BaseActivity;
+import com.sellger.konta.sketch_loyaltyapp.databinding.ActivitySettingsBinding;
 import com.sellger.konta.sketch_loyaltyapp.ui.main.MainActivity;
 
 import java.util.List;
@@ -43,6 +46,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
 
     private SettingsPresenter presenter;
     private SharedPreferences preferences;
+    private ActivitySettingsBinding mBinding;
 
     private TextView mTermsText, mPrivacyText, mLicensesText;
     private Switch mSwitchFirstTopic, mSwitchSecondTopic, mSwitchThirdTopic;
@@ -58,6 +62,7 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_settings);
 
         setTitle("Ustawienia");
 

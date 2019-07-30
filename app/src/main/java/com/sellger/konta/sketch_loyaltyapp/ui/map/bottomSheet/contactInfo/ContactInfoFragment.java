@@ -7,14 +7,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentContactInfoBinding;
 import com.sellger.konta.sketch_loyaltyapp.ui.map.bottomSheet.BottomSheetContract;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
@@ -26,6 +30,7 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
     private static final String TAG = ContactInfoFragment.class.getSimpleName();
 
     private ContactInfoPresenter presenter;
+    private FragmentContactInfoBinding mBinding;
 
     private TextView mPhoneTextView, mEmailTextView, mWebsiteTextView;
     private View mPhoneContainer, mEmailContainer, mWebsiteContainer;
@@ -37,6 +42,13 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
     @Override
     protected int getLayout() {
         return R.layout.fragment_contact_info;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_contact_info, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -56,12 +68,12 @@ public class ContactInfoFragment extends BaseFragment implements BottomSheetCont
      */
     @Override
     public void initViews() {
-        mPhoneTextView = rootView.findViewById(R.id.contact_info_phone_view);
-        mEmailTextView = rootView.findViewById(R.id.contact_info_email_view);
-        mWebsiteTextView = rootView.findViewById(R.id.contact_info_website_view);
-        mPhoneContainer = rootView.findViewById(R.id.contact_phone_container);
-        mEmailContainer = rootView.findViewById(R.id.contact_email_container);
-        mWebsiteContainer = rootView.findViewById(R.id.contact_website_container);
+        mPhoneTextView = mBinding.getRoot().findViewById(R.id.contact_info_phone_view);
+        mEmailTextView = mBinding.getRoot().findViewById(R.id.contact_info_email_view);
+        mWebsiteTextView = mBinding.getRoot().findViewById(R.id.contact_info_website_view);
+        mPhoneContainer = mBinding.getRoot().findViewById(R.id.contact_phone_container);
+        mEmailContainer = mBinding.getRoot().findViewById(R.id.contact_email_container);
+        mWebsiteContainer = mBinding.getRoot().findViewById(R.id.contact_website_container);
     }
 
     /**

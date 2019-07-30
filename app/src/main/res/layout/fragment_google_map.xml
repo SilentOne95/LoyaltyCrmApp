@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomMapFrameLayout xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <data>
+
+        <variable
+            name="item"
+            type="com.sellger.konta.sketch_loyaltyapp.data.entity.Marker" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.map.GoogleMapFragment" />
+        android:layout_height="match_parent">
 
-    <!-- Map bottom sheet layout with shadow -->
-    <View
-        android:id="@+id/shadow"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/mid_value"
-        android:background="@drawable/shape_gradient"
-        app:layout_anchor="@id/map_bottom_sheet" />
+        <com.sellger.konta.sketch_loyaltyapp.utils.utilsMap.CustomMapFrameLayout xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.map.GoogleMapFragment" />
 
-    <include layout="@layout/map_bottom_sheet" />
+        <!-- Map bottom sheet layout with shadow -->
+        <View
+            android:id="@+id/shadow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mid_value"
+            android:background="@drawable/shape_gradient"
+            app:layout_anchor="@id/map_bottom_sheet" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/mid_value"
-        android:background="@color/colorWhite"
-        android:src="@drawable/ic_route"
-        android:scaleType="centerInside"
-        app:layout_anchor="@+id/map_bottom_sheet"
-        app:layout_anchorGravity="top|end" />
+        <include layout="@layout/map_bottom_sheet" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mid_value"
+            android:background="@color/colorWhite"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_route"
+            app:layout_anchor="@+id/map_bottom_sheet"
+            app:layout_anchorGravity="top|end" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

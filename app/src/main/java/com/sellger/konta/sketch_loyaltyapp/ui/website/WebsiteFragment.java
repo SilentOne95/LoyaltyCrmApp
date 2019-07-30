@@ -5,11 +5,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -18,6 +21,7 @@ import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.base.fragment.BaseFragment;
 import com.sellger.konta.sketch_loyaltyapp.data.Injection;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Page;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentWebsiteBinding;
 
 import static com.sellger.konta.sketch_loyaltyapp.Constants.BUNDLE_TITLE_STRING;
 import static com.sellger.konta.sketch_loyaltyapp.Constants.TOAST_ERROR;
@@ -27,12 +31,20 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
     private static final String TAG = WebsiteFragment.class.getSimpleName();
 
     private WebsitePresenter presenter;
+    private FragmentWebsiteBinding mBinding;
 
     private WebView mWebView;
 
     @Override
     protected int getLayout() {
         return R.layout.fragment_website;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_website, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -61,7 +73,7 @@ public class WebsiteFragment extends BaseFragment implements WebsiteContract.Vie
      */
     @Override
     public void initViews() {
-        mWebView = rootView.findViewById(R.id.webview);
+        mWebView = mBinding.getRoot().findViewById(R.id.webview);
     }
 
     /**

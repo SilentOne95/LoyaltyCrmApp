@@ -8,10 +8,13 @@ import android.net.NetworkInfo;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,6 +40,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.sellger.konta.sketch_loyaltyapp.databinding.FragmentLogInBinding;
 
 import java.util.Arrays;
 
@@ -60,6 +64,7 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     private static final String TAG = LogInFragment.class.getSimpleName();
 
     private LogInPresenter presenter;
+    private FragmentLogInBinding mBinding;
 
     private FirebaseAuth mFirebaseAuth;
     private GoogleSignInClient mGoogleSignInClient;
@@ -73,6 +78,13 @@ public class LogInFragment extends BaseFragment implements LogInContract.View, V
     @Override
     protected int getLayout() {
         return R.layout.fragment_log_in;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_log_in, container, false);
+        return mBinding.getRoot();
     }
 
     @Override

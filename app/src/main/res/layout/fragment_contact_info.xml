@@ -1,100 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorFragmentBackground"
-    tools:context=".ui.map.bottomSheet.contactInfo.ContactInfoFragment">
+<layout>
 
-    <TextView
-        android:id="@+id/contact_us_text"
-        style="@style/text_regular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/mid_value"
-        android:background="@color/colorWhite"
-        android:gravity="center"
-        android:padding="@dimen/small_value"
-        android:text="@string/contact_us_text"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <LinearLayout
-        android:id="@+id/contact_phone_container"
+        <variable
+            name="item"
+            type="com.sellger.konta.sketch_loyaltyapp.data.entity.Marker" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_value"
-        android:layout_marginEnd="@dimen/small_value"
-        android:background="@drawable/grid_item_shadow"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/contact_email_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_us_text">
+        android:layout_height="match_parent"
+        android:background="@color/colorFragmentBackground"
+        tools:context=".ui.map.bottomSheet.contactInfo.ContactInfoFragment">
 
         <TextView
-            android:id="@+id/contact_info_phone_view"
+            android:id="@+id/contact_us_text"
             style="@style/text_regular"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_phone"
-            android:drawablePadding="@dimen/mid_value"
-            android:gravity="center_vertical"
-            android:padding="@dimen/mid_value" />
+            android:layout_marginBottom="@dimen/mid_value"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:padding="@dimen/small_value"
+            android:text="@string/contact_us_text"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/contact_email_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_value"
-        android:layout_marginEnd="@dimen/small_value"
-        android:background="@drawable/grid_item_shadow"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/contact_website_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_phone_container">
-
-        <TextView
-            android:id="@+id/contact_info_email_view"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/contact_phone_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_mail"
-            android:drawablePadding="@dimen/mid_value"
-            android:gravity="center_vertical"
-            android:padding="@dimen/mid_value" />
+            android:layout_marginStart="@dimen/small_value"
+            android:layout_marginEnd="@dimen/small_value"
+            android:background="@drawable/grid_item_shadow"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/contact_email_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contact_us_text">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/contact_info_phone_view"
+                style="@style/text_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="@dimen/mid_value"
+                android:gravity="center_vertical"
+                android:padding="@dimen/mid_value" />
 
-    <LinearLayout
-        android:id="@+id/contact_website_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_value"
-        android:layout_marginEnd="@dimen/small_value"
-        android:background="@drawable/grid_item_shadow"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_email_container">
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/contact_info_website_view"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/contact_email_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_website"
-            android:drawablePadding="@dimen/mid_value"
-            android:gravity="center_vertical"
-            android:padding="@dimen/mid_value" />
+            android:layout_marginStart="@dimen/small_value"
+            android:layout_marginEnd="@dimen/small_value"
+            android:background="@drawable/grid_item_shadow"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/contact_website_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contact_phone_container">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/contact_info_email_view"
+                style="@style/text_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_mail"
+                android:drawablePadding="@dimen/mid_value"
+                android:gravity="center_vertical"
+                android:padding="@dimen/mid_value" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contact_website_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_value"
+            android:layout_marginEnd="@dimen/small_value"
+            android:background="@drawable/grid_item_shadow"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contact_email_container">
+
+            <TextView
+                android:id="@+id/contact_info_website_view"
+                style="@style/text_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_website"
+                android:drawablePadding="@dimen/mid_value"
+                android:gravity="center_vertical"
+                android:padding="@dimen/mid_value" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
