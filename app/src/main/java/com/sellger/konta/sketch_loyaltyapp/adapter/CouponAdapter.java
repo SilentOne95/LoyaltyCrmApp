@@ -1,236 +1,131 @@
 package com.sellger.konta.sketch_loyaltyapp.adapter;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.sellger.konta.sketch_loyaltyapp.R;
 import com.sellger.konta.sketch_loyaltyapp.data.entity.Coupon;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.sellger.konta.sketch_loyaltyapp.databinding.GridListItemCouponOneColBinding;
+import com.sellger.konta.sketch_loyaltyapp.databinding.GridListItemCouponTwoColBinding;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
-
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_CORNER_RADIUS;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_ONE_COLUMN;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_HEIGHT_TWO_COLUMNS;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_ONE_COLUMN;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.BITMAP_WIDTH_TWO_COLUMNS;
-import static com.sellger.konta.sketch_loyaltyapp.Constants.DEFAULT_STRING;
-
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> implements Filterable {
 
-    private List<Coupon> listOfItems, listOfItemsHelper;
-    private RecyclerItemClickListener.CouponRetrofitClickListener couponClickListener;
-    private int numOfColumns;
+    private List<Coupon> mListOfItems, mListOfItemsHelper;
+    private RecyclerItemClickListener.CouponRetrofitClickListener mCouponClickListener;
+    private int mNumOfColumns;
 
     public CouponAdapter(List<Coupon> items,
-                         RecyclerItemClickListener.CouponRetrofitClickListener clickListener,
-                         int columns) {
-        listOfItems = items;
-        listOfItemsHelper = new ArrayList<>(listOfItems);
-        couponClickListener = clickListener;
-        numOfColumns = columns;
+                          RecyclerItemClickListener.CouponRetrofitClickListener clickListener,
+                          int columns) {
+        mListOfItems = items;
+        mCouponClickListener = clickListener;
+        mNumOfColumns = columns;
+        mListOfItemsHelper = new ArrayList<>(mListOfItems);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private Object mBinding;
+
+        ViewHolder(GridListItemCouponOneColBinding binding, RecyclerItemClickListener.CouponRetrofitClickListener listener) {
+            super(binding.getRoot());
+            mBinding = binding;
+            mCouponClickListener = listener;
+        }
+
+        ViewHolder(GridListItemCouponTwoColBinding binding, RecyclerItemClickListener.CouponRetrofitClickListener listener) {
+            super(binding.getRoot());
+            mBinding = binding;
+            mCouponClickListener = listener;
+        }
+
+        public void bind(@NonNull Coupon coupon) {
+            if (mNumOfColumns == 2) {
+                GridListItemCouponTwoColBinding binding = (GridListItemCouponTwoColBinding) mBinding;
+                binding.setItem(coupon);
+                binding.setNumOfColumns(mNumOfColumns);
+                binding.executePendingBindings();
+            } else {
+                GridListItemCouponOneColBinding binding = (GridListItemCouponOneColBinding) mBinding;
+                binding.setItem(coupon);
+                binding.setNumOfColumns(mNumOfColumns);
+                binding.executePendingBindings();
+            }
+        }
     }
 
     @NonNull
     @Override
     public CouponAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
-
-        switch (numOfColumns) {
-            case 1:
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.grid_list_item_coupon_one_col, parent, false);
-                break;
-            case 2:
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.grid_list_item_coupon_two_col, parent, false);
-                break;
-            default:
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.grid_list_item_coupon_one_col, parent, false);
-                break;
-        }
-
-        return new ViewHolder(view);
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ImageView imageView;
-        private TextView titleView, codeText, descriptionText, discountMarker, basicPrice, newPrice;
-        private Button checkCodeButton, showDetailsButton;
-        private ProgressBar progressBar;
-
-        ViewHolder(@NonNull final View view) {
-            super(view);
-            imageView = view.findViewById(R.id.grid_item_image);
-            discountMarker = view.findViewById(R.id.grid_item_discount_marker);
-            titleView = view.findViewById(R.id.grid_item_coupon_title);
-            codeText = view.findViewById(R.id.grid_item_code_text);
-            basicPrice = view.findViewById(R.id.grid_item_old_price_amount);
-            newPrice = view.findViewById(R.id.grid_item_price_amount);
-            descriptionText = view.findViewById(R.id.grid_item_coupon_description_text);
-            showDetailsButton = view.findViewById(R.id.grid_item_show_details_button);
-            showDetailsButton.setOnClickListener(this);
-            checkCodeButton = view.findViewById(R.id.grid_item_show_code_button);
-            checkCodeButton.setOnClickListener(this);
-            progressBar = view.findViewById(R.id.progress_bar_coupon);
-        }
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.grid_item_show_details_button:
-                    couponClickListener.onItemCouponDetailsClick(listOfItems
-                            .get(getAdapterPosition()).getId());
-                    break;
-                case R.id.grid_item_show_code_button:
-                    couponClickListener.onItemCouponCodeCheckClick(getAdapterPosition(),
-                            listOfItems.get(getAdapterPosition()).getImage());
-                    break;
-            }
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        if (mNumOfColumns == 1) {
+            GridListItemCouponOneColBinding binding;
+            binding = DataBindingUtil.inflate(inflater, R.layout.grid_list_item_coupon_one_col, parent, false);
+            return new CouponAdapter.ViewHolder(binding, mCouponClickListener);
+        } else {
+            GridListItemCouponTwoColBinding binding;
+            binding = DataBindingUtil.inflate(inflater, R.layout.grid_list_item_coupon_two_col, parent, false);
+            return new CouponAdapter.ViewHolder(binding, mCouponClickListener);
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final Coupon currentItem = listOfItems.get(position);
-        int cornerRadius = BITMAP_CORNER_RADIUS, imageWidth, imageHeight;
+    public void onBindViewHolder(@NonNull CouponAdapter.ViewHolder holder, int position) {
+        holder.bind(mListOfItems.get(position));
 
-        switch (numOfColumns) {
-            case 1:
-                imageWidth = BITMAP_WIDTH_ONE_COLUMN;
-                imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
-                break;
-            case 2:
-                imageWidth = BITMAP_WIDTH_TWO_COLUMNS;
-                imageHeight = BITMAP_HEIGHT_TWO_COLUMNS;
-                break;
-            default:
-                imageWidth = BITMAP_WIDTH_ONE_COLUMN;
-                imageHeight = BITMAP_HEIGHT_ONE_COLUMN;
-                break;
-        }
+        if (mNumOfColumns == 2) {
+            GridListItemCouponTwoColBinding binding = (GridListItemCouponTwoColBinding) holder.mBinding;
+            binding.getRoot().findViewById(R.id.grid_item_show_details_button)
+                    .setOnClickListener(view ->
+                            mCouponClickListener.onItemCouponDetailsClick(mListOfItems.get(position).getId()));
 
-        if (!TextUtils.isEmpty(currentItem.getImage())) {
-            Picasso.get()
-                    .load(currentItem.getImage())
-                    .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .error(R.drawable.no_image_available)
-                    .resize(imageWidth, imageHeight)
-                    .into(holder.imageView, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            holder.progressBar.setVisibility(View.GONE);
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-                            holder.progressBar.setVisibility(View.GONE);
-                        }
-                    });
+            binding.getRoot().findViewById(R.id.grid_item_show_code_button)
+                    .setOnClickListener(view ->
+                            mCouponClickListener.onItemCouponCodeCheckClick(position,
+                                    mListOfItems.get(position).getImage()));
         } else {
-            holder.progressBar.setVisibility(View.GONE);
+            GridListItemCouponOneColBinding binding = (GridListItemCouponOneColBinding) holder.mBinding;
+            binding.getRoot().findViewById(R.id.grid_item_show_details_button)
+                    .setOnClickListener(view ->
+                            mCouponClickListener.onItemCouponDetailsClick(mListOfItems.get(position).getId()));
 
-            Picasso.get()
-                    .load(R.drawable.no_image_available)
-                    .transform(new RoundedCornersTransformation(cornerRadius, 0))
-                    .resize(imageWidth, imageHeight)
-                    .into(holder.imageView);
+            binding.getRoot().findViewById(R.id.grid_item_show_code_button)
+                    .setOnClickListener(view ->
+                            mCouponClickListener.onItemCouponCodeCheckClick(position,
+                                    mListOfItems.get(position).getImage()));
         }
-
-        if (currentItem.getReductionAmount() != null && !currentItem.getReductionAmount().trim().isEmpty()) {
-            if (currentItem.getReductionType().equals("percent")) {
-                holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("%"));
-            } else {
-                holder.discountMarker.setText("-".concat(currentItem.getReductionAmount()).concat("zł"));
-            }
-        } else {
-            holder.discountMarker.setText(DEFAULT_STRING);
-        }
-
-        if (!TextUtils.isEmpty(currentItem.getTitle())) {
-            holder.titleView.setText(currentItem.getTitle());
-        } else {
-            holder.titleView.setText(DEFAULT_STRING);
-        }
-
-        holder.codeText.setVisibility(View.GONE);
-        if (!TextUtils.isEmpty(currentItem.getCouponCode())) {
-            holder.codeText.setText(currentItem.getCouponCode());
-        } else {
-            holder.codeText.setText(DEFAULT_STRING);
-        }
-
-        if (currentItem.getPrice() != null && !currentItem.getPrice().toString().trim().isEmpty()) {
-            holder.basicPrice.setText(String.valueOf(formatPrice(currentItem.getPrice())).concat("zł"));
-        } else {
-            holder.basicPrice.setText(DEFAULT_STRING);
-        }
-
-        if (currentItem.getPriceAfter() != null && !currentItem.getPriceAfter().toString().trim().isEmpty()) {
-            holder.newPrice.setText(String.valueOf(formatPrice(currentItem.getPriceAfter())).concat("zł"));
-        } else {
-            holder.newPrice.setText(DEFAULT_STRING);
-        }
-
-        if (!TextUtils.isEmpty(currentItem.getShortDescription())) {
-            holder.descriptionText.setText(Html.fromHtml(currentItem.getShortDescription()));
-        } else {
-            holder.descriptionText.setText(DEFAULT_STRING);
-        }
-    }
-
-    private String formatPrice(float price) {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-        symbols.setGroupingSeparator(' ');
-        DecimalFormat decimalFormat = new DecimalFormat();
-        decimalFormat.setDecimalFormatSymbols(symbols);
-        decimalFormat.setGroupingSize(3);
-        decimalFormat.setMaximumFractionDigits(2);
-
-        return decimalFormat.format(price);
     }
 
     @Override
     public int getItemCount() {
-        return listOfItems.size();
+        return mListOfItems.size();
     }
 
     @Override
     public Filter getFilter() {
-        return couponFilter;
+        return productFilter;
     }
 
-    private Filter couponFilter = new Filter() {
+    private Filter productFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Coupon> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(listOfItemsHelper);
+                filteredList.addAll(mListOfItemsHelper);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Coupon coupon : listOfItemsHelper) {
-                    if (coupon.getTitle().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(coupon);
+                for (Coupon product : mListOfItemsHelper) {
+                    if (product.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(product);
                     }
                 }
             }
@@ -243,8 +138,8 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            listOfItems.clear();
-            listOfItems.addAll((List) results.values);
+            mListOfItems.clear();
+            mListOfItems.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };

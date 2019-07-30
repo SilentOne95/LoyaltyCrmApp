@@ -96,8 +96,8 @@ public class DataBindingHelper {
     }
 
     // ProductAdapter
-    @BindingAdapter({"itemProductAdapter", "itemProgressBar", "itemNumOfColumns"})
-    public static void setIconProductAdapter(ImageView imageView, String imageUrl,
+    @BindingAdapter({"itemImageUrlAdapter", "itemImageProgressBar", "itemImageNumOfColumns"})
+    public static void setImageAdapter(ImageView imageView, String imageUrl,
                                              ProgressBar progressBar, Object numOfColumns) {
         int imageWidth, imageHeight;
 

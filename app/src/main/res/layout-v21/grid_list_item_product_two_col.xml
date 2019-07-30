@@ -37,9 +37,9 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/grid_list_item_content_desc"
                 android:scaleType="fitStart"
-                app:itemProductAdapter="@{item.image}"
-                app:itemProgressBar="@{progressBarProduct}"
-                app:itemNumOfColumns="@{numOfColumns}"
+                app:itemImageUrlAdapter="@{item.image}"
+                app:itemImageProgressBar="@{progressBarProduct}"
+                app:itemImageNumOfColumns="@{numOfColumns}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

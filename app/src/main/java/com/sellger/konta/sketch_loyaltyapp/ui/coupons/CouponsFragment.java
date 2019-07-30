@@ -237,6 +237,7 @@ public class CouponsFragment extends BaseFragment implements CouponsContract.Vie
                 itemDecoration = new CustomItemDecoration(getContext(), R.dimen.small_value);
             }
             mRecyclerView.addItemDecoration(itemDecoration);
+            mRecyclerView.setHasFixedSize(true);
             mAdapter = new CouponAdapter(couponList, recyclerItemClickListener, numOfColumns);
             mRecyclerView.setAdapter(mAdapter);
         }
