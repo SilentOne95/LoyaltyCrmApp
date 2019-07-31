@@ -90,14 +90,6 @@ dependencies {
     // Phone prefix and number verification library
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.10.15'
 
-    // Room components
-    implementation 'androidx.room:room-runtime:2.1.0'
-    annotationProcessor 'androidx.room:room-compiler:2.1.0'
-
-    // Lifecycle components
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
-
     // Firebase Crashlytics
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
@@ -107,8 +99,20 @@ dependencies {
     // Progress Button library
     implementation 'br.com.simplepass:loading-button-android:2.1.4'
 
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.23.2'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.23.2'
+    // Android Jetpack
+    // Room
+    implementation 'androidx.room:room-runtime:2.1.0'
+    annotationProcessor 'androidx.room:room-compiler:2.1.0'
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment:2.1.0-beta02"
+    implementation "androidx.navigation:navigation-ui:2.1.0-beta02"
+
+    // Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
+
+
     testImplementation 'junit:junit:4.12'
 }
 
