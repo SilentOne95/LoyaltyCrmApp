@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.login.LogInFragment"
+        tools:layout="@layout/fragment_log_in">
+
+        <action
+            android:id="@+id/logIn_to_logInPhone"
+            app:destination="@id/logInPhoneFragment" />
+        <action
+            android:id="@+id/logIn_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInPhoneFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthNumber.LogInPhoneFragment"
+        tools:layout="@layout/fragment_log_in_phone">
+
+        <action
+            android:id="@+id/logInPhone_to_logInVerify"
+            app:destination="@id/logInVerifyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInVerifyFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.login.phoneAuthCode.LogInVerifyFragment"
+        tools:layout="@layout/fragment_log_in_verify">
+
+        <action
+            android:id="@+id/logInVerifyFragment_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.home.HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/home_to_products"
+            app:destination="@id/productsFragment" />
+        <action
+            android:id="@+id/home_to_coupons"
+            app:destination="@id/couponsFragment" />
+        <action
+            android:id="@+id/home_to_map"
+            app:destination="@id/googleMapFragment" />
+        <action
+            android:id="@+id/home_to_contact"
+            app:destination="@id/contactFragment" />
+        <action
+            android:id="@+id/home_to_scanner"
+            app:destination="@id/scanResultFragment" />
+        <action
+            android:id="@+id/home_to_terms"
+            app:destination="@id/termsFragment" />
+        <action
+            android:id="@+id/home_to_website"
+            app:destination="@id/websiteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.products.ProductsFragment"
+        tools:layout="@layout/fragment_products" />
+
+    <fragment
+        android:id="@+id/couponsFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.coupons.CouponsFragment"
+        tools:layout="@layout/fragment_coupons" />
+    <fragment
+        android:id="@+id/googleMapFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.map.GoogleMapFragment"
+        tools:layout="@layout/fragment_google_map" />
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.contact.ContactFragment"
+        android:label="fragment_contact"
+        tools:layout="@layout/fragment_contact" />
+    <fragment
+        android:id="@+id/scanResultFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.instruction.ScanResultFragment"
+        tools:layout="@layout/fragment_scan_result">
+
+        <action
+            android:id="@+id/scanResult_to_scannerCamera"
+            app:destination="@id/scannerCameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scannerCameraFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.barcodeScanner.camera.ScannerCameraFragment"
+        tools:layout="@layout/fragment_scanner_camera" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.terms.TermsFragment"
+        tools:layout="@layout/fragment_terms_conditions" />
+    <fragment
+        android:id="@+id/websiteFragment"
+        android:name="com.sellger.konta.sketch_loyaltyapp.ui.website.WebsiteFragment"
+        tools:layout="@layout/fragment_website" />
+
+</navigation>
